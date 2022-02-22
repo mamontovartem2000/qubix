@@ -1,0 +1,116 @@
+﻿using ME.ECS;
+using Photon.Pun;
+using Project.Features.Player.Views;
+using UnityEngine;
+
+namespace Project.Features {
+    #region usage
+    using Components; using Modules; using Systems; using Features; using Markers;
+    using Player.Components; using Player.Modules; using Player.Systems; using Player.Markers;
+    
+    namespace Player.Components {}
+    namespace Player.Modules {}
+    namespace Player.Systems {}
+    namespace Player.Markers {}
+    
+    #if ECS_COMPILE_IL2CPP_OPTIONS
+    [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
+     Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
+     Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
+    #endif
+    #endregion
+    public sealed class PlayerFeature : Feature
+    {
+        public PlayerView PlayerView;
+        
+        public GlobalEvent PassLocalPlayer;
+        public GlobalEvent HealthChangedEvent;
+        
+        private ViewId _playerViewID;
+        
+        private RPCId _onPlayerConnected;
+
+        private Filter _playerFilter;
+
+        private int _playerIndex;
+
+        private SceneBuilderFeature _builder;
+        
+        protected override void OnConstruct()
+        {
+            _playerViewID = world.RegisterViewSource(PlayerView);
+            
+            world.GetFeature(out _builder);
+            
+            this.AddSystem<PlayerMovementSystem>();
+            this.AddModule<PlayerConnectionModule>();
+            var net = world.GetModule<NetworkModule>();
+
+            net.RegisterObject(this);
+            _onPlayerConnected = net.RegisterRPC(new System.Action<int>(PlayerJoined_RPC).Method);
+
+            Filter.Create("Player Filter")
+                .With<PlayerTag>()
+                .Push(ref _playerFilter);
+        }
+
+        protected override void OnDeconstruct() {}
+        public void OnLocalPlayerConnected(int id)
+        {
+            _playerIndex = id;
+            var net = world.GetModule<NetworkModule>();
+            net.RPC(this, _onPlayerConnected, id);
+        }
+        private void PlayerJoined_RPC(int id)
+        {
+            var player = new Entity("Player");
+            
+            player.Set(new PlayerTag {PlayerID = id, FaceDirection = Vector3.forward});
+            player.InstantiateView(_playerViewID);
+            
+            player.Set(new PlayerHealth {Value = world.GetRandomRange(0,100)});
+            player.Set(new PlayerScore {Value = 0});
+            
+            Vector3 playerPosition = Vector3.zero;
+            
+            switch (id)
+            {
+                case 1:
+                    playerPosition = new Vector3(-11f, 0.5f, -8f);
+                    break;
+                case 2:
+                    playerPosition = new Vector3(12f, 0.5f, 7f);
+                    break;
+                case 3:
+                    playerPosition = new Vector3(-11f, 0.5f, -8f);
+                    break;
+                case 4:
+                    playerPosition = new Vector3(12f, 0.5f, 7f);
+                    break;
+            }
+
+            player.SetPosition(playerPosition);
+            player.Set(new PlayerMoveTarget {Value = playerPosition});
+            
+            _builder.Move(player, _builder.PosToIndex(playerPosition), _builder.PosToIndex(playerPosition));
+
+            PassLocalPlayer.Execute(player);
+            HealthChangedEvent.Execute(player);
+        }
+        
+        public Entity GetActivePlayer()
+        {
+            foreach (var player in _playerFilter)
+            {
+                if (_playerIndex == player.Read<PlayerTag>().PlayerID)
+                {
+                    return player;
+                }
+            }
+            return Entity.Empty;
+        }
+    }
+    
+   
+
+}
