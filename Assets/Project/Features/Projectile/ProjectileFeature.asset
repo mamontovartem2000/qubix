@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3bd50abb97a1784ca5fcdfd50c0de10, type: 3}
+  m_Name: ProjectileFeature
+  m_EditorClassIdentifier: 
+  editorComment: 
+  BulletView: {fileID: 7648317194336597871, guid: f9bb129c115603542bfd408b6eab6fa4, type: 3}
+  RocketView: {fileID: -6012725972906667946, guid: 805fee4785de0434aa073adc1ca5a7bd, type: 3}
+  BulletConfig: {fileID: 11400000, guid: 98371d6235bf4a7468dd87cdc29f73f7, type: 2}
+  RocketConfig: {fileID: 11400000, guid: 720cda0791c39514581424728cbc2ee9, type: 2}

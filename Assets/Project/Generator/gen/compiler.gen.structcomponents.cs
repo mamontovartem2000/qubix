@@ -17,11 +17,15 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerMovementSpeed>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerMoveTarget>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerScore>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerShot>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerShouldRotate>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerTag>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.HealthTag>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MineTag>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.WalkableCheck>(false, true, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileDamage>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileDirection>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileShouldDie>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileSpeed>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
 
         }
 
@@ -40,11 +44,15 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerMovementSpeed>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerMoveTarget>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerScore>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerShot>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerShouldRotate>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerTag>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.HealthTag>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MineTag>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.WalkableCheck>(false, true, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileDamage>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileDirection>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileShouldDie>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileSpeed>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
 
             ComponentsInitializerWorld.Setup(ComponentsInitializerWorldGen.Init);
             CoreComponentsInitializer.Init(ref structComponentsContainer);
@@ -58,11 +66,15 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerMovementSpeed>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerMoveTarget>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerScore>(false);
+            structComponentsContainer.Validate<Project.Features.Player.Components.PlayerShot>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerShouldRotate>(true);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerTag>(false);
-            structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.HealthTag>(true);
-            structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.MineTag>(true);
-            structComponentsContainer.ValidateCopyable<Project.Features.SceneBuilder.Components.WalkableCheck>(false);
+            structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileDamage>(false);
+            structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileDirection>(false);
+            structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileShouldDie>(true);
+            structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileSpeed>(false);
+            structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileTag>(false);
+            structComponentsContainer.ValidateCopyable<Project.Features.SceneBuilder.Components.MapComponents>(false);
 
         }
 
@@ -81,11 +93,15 @@ namespace ME.ECS {
             entity.ValidateData<Project.Features.Player.Components.PlayerMovementSpeed>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerMoveTarget>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerScore>(false);
+            entity.ValidateData<Project.Features.Player.Components.PlayerShot>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerShouldRotate>(true);
             entity.ValidateData<Project.Features.Player.Components.PlayerTag>(false);
-            entity.ValidateData<Project.Features.SceneBuilder.Components.HealthTag>(true);
-            entity.ValidateData<Project.Features.SceneBuilder.Components.MineTag>(true);
-            entity.ValidateDataCopyable<Project.Features.SceneBuilder.Components.WalkableCheck>(false);
+            entity.ValidateData<Project.Features.Projectile.Components.ProjectileDamage>(false);
+            entity.ValidateData<Project.Features.Projectile.Components.ProjectileDirection>(false);
+            entity.ValidateData<Project.Features.Projectile.Components.ProjectileShouldDie>(true);
+            entity.ValidateData<Project.Features.Projectile.Components.ProjectileSpeed>(false);
+            entity.ValidateData<Project.Features.Projectile.Components.ProjectileTag>(false);
+            entity.ValidateDataCopyable<Project.Features.SceneBuilder.Components.MapComponents>(false);
 
         }
 

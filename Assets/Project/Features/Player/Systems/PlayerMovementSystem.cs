@@ -118,10 +118,11 @@ namespace Project.Features.Player.Systems
                             ? entity.Read<PlayerTag>().FaceDirection
                             : -entity.Read<PlayerTag>().FaceDirection;
 
-                        // Vector3 newPosition = entity.GetPosition() + direction;
-                        
-                        if (!_builder.CheckWalkable(entity.GetPosition(), direction)) return;
-                        _builder.Move(entity, _builder.PosToIndex( entity.GetPosition()), _builder.PosToIndex(entity.GetPosition() + direction));
+                        if (!_builder.IsFree(entity.GetPosition(), direction)) return;
+
+                        _builder.MoveTo(
+                            _builder.PositionToIndex( entity.GetPosition()),
+                            _builder.PositionToIndex(entity.GetPosition() + direction));
 
                         entity.Set(new PlayerMovementSpeed {Value = entity.Read<PlayerIsMoving>().Forward ? 4 : 2});
                         entity.Set(new PlayerMoveTarget {Value = entity.GetPosition() + direction});

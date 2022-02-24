@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Photon.Pun;
 using Project.Features.Player.Views;
+using Project.Features.SceneBuilder.Components;
 using UnityEngine;
 
 namespace Project.Features {
@@ -72,27 +73,13 @@ namespace Project.Features {
             player.Set(new PlayerScore {Value = 0});
             
             Vector3 playerPosition = Vector3.zero;
-            
-            switch (id)
-            {
-                case 1:
-                    playerPosition = new Vector3(-11f, 0.5f, -8f);
-                    break;
-                case 2:
-                    playerPosition = new Vector3(12f, 0.5f, 7f);
-                    break;
-                case 3:
-                    playerPosition = new Vector3(-11f, 0.5f, -8f);
-                    break;
-                case 4:
-                    playerPosition = new Vector3(12f, 0.5f, 7f);
-                    break;
-            }
 
+            playerPosition = _builder.GetRandomSpawnPosition();
+                //_builder.IndexToPosition(world.GetRandomRange(0, world.GetSharedData<MapComponents>().WalkableMap.Count));
             player.SetPosition(playerPosition);
             player.Set(new PlayerMoveTarget {Value = playerPosition});
             
-            _builder.Move(player, _builder.PosToIndex(playerPosition), _builder.PosToIndex(playerPosition));
+            _builder.MoveTo(_builder.PositionToIndex(playerPosition), _builder.PositionToIndex(playerPosition));
 
             PassLocalPlayer.Execute(player);
             HealthChangedEvent.Execute(player);
@@ -107,10 +94,8 @@ namespace Project.Features {
                     return player;
                 }
             }
+            
             return Entity.Empty;
         }
     }
-    
-   
-
 }

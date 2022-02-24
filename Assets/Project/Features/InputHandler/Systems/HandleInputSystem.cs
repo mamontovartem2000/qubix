@@ -33,10 +33,10 @@ namespace Project.Features.InputHandler.Systems
     public sealed class HandleInputSystem : ISystem, IAdvanceTick, IUpdate
     {
         public World world { get; set; }
-
+        
         private InputHandlerFeature feature;
         private Filter _playerFilter;
-        
+
         void ISystemBase.OnConstruct()
         {
             var network = world.GetModule<NetworkModule>();
@@ -175,12 +175,12 @@ namespace Project.Features.InputHandler.Systems
             {
                 case Button.Left:
                 {
-                    // Debug.Log("Left Pressed RPC");
+                    entity.Set(new PlayerShot {Ammo = AmmoType.Bullet, SpawnPoint = entity.Read<PlayerTag>().FaceDirection}, ComponentLifetime.NotifyAllSystems);
                 }
                     break;
                 case Button.Right:
                 {
-                    // Debug.Log("Right Pressed RPC");
+                    entity.Set(new PlayerShot {Ammo = AmmoType.Rocket, SpawnPoint = entity.Read<PlayerTag>().FaceDirection}, ComponentLifetime.NotifyAllSystems);
                 }
                     break;
             }

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using ME.ECS;
+﻿using ME.ECS;
+using ME.ECS.Collections;
 using Project.Features.SceneBuilder.Views;
 using UnityEngine;
 
@@ -47,98 +47,137 @@ namespace Project.Features
     {
         public TextAsset Map;
         public TileView TileView;
-        public MineMono MineView;
-        public HealthMono HealthView;
+        private int Width, Height;
 
-        public GlobalEvent HealthCollision;
-        public GlobalEvent MineCollision;
-        
-        private List<Vector3> _walkable = new List<Vector3>();
-        //new shit
-        public int width;
-        private ViewId _tileID, _mineID, _healthID;
-        
+        private ViewId _tileID;
+        private const int EMPTY_TILE = 0, SIMPLE_TILE = 1;
+
+        private Entity _init;
+
         protected override void OnConstruct()
         {
-            _tileID = world.RegisterViewSource(TileView);
-            _mineID = world.RegisterViewSource(MineView);
-            _healthID = world.RegisterViewSource(HealthView);
-
-            this.AddSystem<SpawnMineSystem>();
-            
-            var w = 26;
-            var h = 18;
-
-            width = w;
-            
-            var strings = Map.text.Split(System.Environment.NewLine.ToCharArray());
-            var map = PoolArray<byte>.Spawn(w * h);
-            for (var i = 0; i < strings.Length; i++)
-            {
-                if (strings[i] != string.Empty)
-                {
-                    var pos = JsonUtility.FromJson<TilePosition>(strings[i]).Position;
-                    _walkable.Add(pos);
-                }
-            }
-            
-            world.SetSharedData(new WalkableCheck{Buffer = map});
-            foreach (var pos in _walkable)
-            {
-                var tile = new Entity("tile");
-                tile.InstantiateView(_tileID);
-                tile.SetPosition(pos);
-            }
+            PrepareMap();
         }
 
         protected override void OnDeconstruct() { }
 
-        public void Move(Entity entity, int from, int to)
+        private void PrepareMap()
         {
-            world.GetSharedData<WalkableCheck>().Buffer[from] = 1;
-            world.GetSharedData<WalkableCheck>().Buffer[to] = 0;
+            _init = new Entity("init");
+            _tileID = world.RegisterViewSource(TileView);
+            
+            GetDimensions();
+
+            Debug.Log($"w: {Width}, h: {Height}");
+            
+            var size = Width * Height;
+            var map = PoolArray<byte>.Spawn(size);
+
+            ConvertToByte(Map, map);
+            world.SetSharedData(new MapComponents {WalkableMap = map});
+            
+            DrawMap(map);
         }
 
-        public int PosToIndex(Vector3 vec)
+        private void DrawMap(BufferArray<byte> source)
+        {
+            for (var i = 0; i < source.Count; i++)
+            {
+                if (source[i] == 1)
+                {
+                    var entity = new Entity("tile");
+                    entity.InstantiateView(_tileID);
+                    entity.SetPosition(IndexToPosition(i));
+                }
+            }
+        }
+
+        private void GetDimensions()
+        {
+            var omg = Map.text.Split('\n');
+
+            Height = omg.Length;
+            Width = omg[0].Length - 1;
+        }
+        
+        private void ConvertToByte(TextAsset source, BufferArray<byte> target)
+        {
+            var result = new byte[Width * Height];
+            var bytes = source.text;
+            var byteIndex = 0;
+
+            var lines = bytes.Split('\n');
+
+            foreach (var l in lines)
+            {
+                for (int i = 0; i < l.Length; i++)
+                {
+                    switch (l[i])
+                    {
+                        case '0' :
+                            result[byteIndex] = 0;
+                            byteIndex++;
+                            break;
+                        case '1' :
+                            result[byteIndex] = 1;
+                            byteIndex++;
+                            break;
+                    }
+                }
+            }
+
+            for (int j = 0; j < result.Length; j++)
+            {
+                target[j] = result[j];
+            }
+        }
+
+        public void MoveTo(int moveFrom, int moveTo)
+        {
+            world.GetSharedData<MapComponents>().WalkableMap[moveFrom] = SIMPLE_TILE;
+            world.GetSharedData<MapComponents>().WalkableMap[moveTo] = EMPTY_TILE;
+        }
+        
+        public int PositionToIndex(Vector3 vec)
         {
             var x = Mathf.RoundToInt(vec.x);
             var y = Mathf.RoundToInt(vec.z);
 
-            return y * width + x;
+            return y * Width + x;
+        }
+
+        public Vector3 IndexToPosition(int index)
+        {
+            var x = index % Width;
+            var y = Mathf.FloorToInt(index / (float)Width);
+            
+            return new Vector3(x, 0, y);
         }
         
-        public bool CheckWalkable(Vector3 pos, Vector3 dir)
+        public bool IsFree(Vector3 position, Vector3 direction)
         {
-            // var fromIndex = PosToIndex(pos);
-            var toIndex = PosToIndex(pos + dir);
-
-            return world.ReadSharedData<WalkableCheck>().Buffer[toIndex] == 1;
+            var toIndex = PositionToIndex(position + direction);
+            
+            if (toIndex < 0 || toIndex >= Width * Height) return false;
+            
+            return world.ReadSharedData<MapComponents>().WalkableMap[toIndex] == 1;
         }
 
-        public void SpawnMine()
+        public Vector3 GetRandomSpawnPosition()
         {
-            var entity = new Entity("mine");
-            entity.InstantiateView(_mineID);
-            entity.SetPosition(_walkable[world.GetRandomRange(0, _walkable.Count)]);
-            entity.Set(new MineTag());
-        }
+            var position = Vector3.zero;
+            var rnd = 0;
 
-        public void SpawnHealth()
-        {
-            var entity = new Entity("health");
-            entity.InstantiateView(_healthID);
-            entity.SetPosition(_walkable[world.GetRandomRange(0, _walkable.Count)]);
-            entity.Set(new HealthTag());
-        }
-    }
-    
-    public class TilePosition
-    {
-        public Vector3 Position;
-
-        public TilePosition(Vector3 p)
-        {
-            Position = p;
+            while (!IsFree(position, Vector3.zero))
+            {
+                rnd = world.GetRandomRange(0, Width * Height);
+                position = IndexToPosition(rnd);
+                Debug.Log("failed");
+            }
+            
+            Debug.Log("succeded");
+            
+            return position;
         }
     }
 }

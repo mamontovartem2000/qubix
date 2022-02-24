@@ -1,6 +1,9 @@
 ﻿using ME.ECS;
 
-namespace Project.Features.Player.Systems {
+namespace Project.Features.Projectile.Systems {
+    #region usage
+
+    
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -12,16 +15,15 @@ namespace Project.Features.Player.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class PlayerShootSystem : ISystemFilter {
+    #endregion
+    public sealed class ProjectileMovementSystem : ISystemFilter {
         
-        private PlayerFeature feature;
-        
+        private ProjectileFeature feature;
         public World world { get; set; }
         
-        void ISystemBase.OnConstruct() {
-            
+        void ISystemBase.OnConstruct() 
+        {
             this.GetFeature(out this.feature);
-            
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -31,14 +33,20 @@ namespace Project.Features.Player.Systems {
         int ISystemFilter.jobsBatchCount => 64;
         #endif
         Filter ISystemFilter.filter { get; set; }
-        Filter ISystemFilter.CreateFilter() {
-            
-            return Filter.Create("Filter-PlayerShootSystem").Push();
-            
+        Filter ISystemFilter.CreateFilter() 
+        {
+            return Filter.Create("Filter-ProjectileMovementSystem")
+                .With<ProjectileTag>()
+                .Push();
         }
-    
-        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) {}
-    
+
+        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
+        {
+            var direction = entity.Read<ProjectileDirection>().Value;
+            var speed = entity.Read<ProjectileSpeed>().Value;
+
+            var newPosition = entity.GetPosition() + direction * speed * deltaTime;
+            entity.SetPosition(newPosition);
+        }
     }
-    
 }

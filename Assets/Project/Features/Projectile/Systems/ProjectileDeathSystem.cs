@@ -1,6 +1,6 @@
 ﻿using ME.ECS;
 
-namespace Project.Features.Player.Systems {
+namespace Project.Features.Projectile.Systems {
     #region usage
 
     
@@ -16,17 +16,14 @@ namespace Project.Features.Player.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class PlayerHealthSystem : ISystemFilter {
-        
-        private PlayerFeature feature;
-        
+    public sealed class ProjectileDeathSystem : ISystemFilter 
+    {
+        private ProjectileFeature feature;
         public World world { get; set; }
-        
-        void ISystemBase.OnConstruct() {
-            
+        void ISystemBase.OnConstruct() 
+        {
             this.GetFeature(out this.feature);
         }
-        
         void ISystemBase.OnDeconstruct() {}
         
         #if !CSHARP_8_OR_NEWER
@@ -35,19 +32,13 @@ namespace Project.Features.Player.Systems {
         #endif
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
-            
-            return Filter.Create("Filter-PlayerHealthSystem")
-                .With<PlayerHealth>()
+            return Filter.Create("Filter-ProjectileDeathSystem")
+                .With<ProjectileShouldDie>()
                 .Push();
-            
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var currentHealth = entity.Read<PlayerHealth>().Value;
-
-            if (currentHealth > 0) return;
-            
             entity.Destroy();
         }
     }

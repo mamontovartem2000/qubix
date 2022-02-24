@@ -40,4 +40,16 @@ namespace Project.Features.Player.Components
     {
         public int Value;
     }
+
+    public struct PlayerShot : IComponent
+    {
+        public AmmoType Ammo;
+        public Vector3 SpawnPoint;
+    }
+}
+
+public enum AmmoType
+{
+    Bullet,
+    Rocket
 }
