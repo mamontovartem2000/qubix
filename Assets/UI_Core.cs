@@ -41,6 +41,8 @@ public class UI_Core : MonoBehaviour
     {
         if (entity != Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer()) return;
         
+        Debug.Log("health event");
+        
             var fill = entity.Read<PlayerHealth>().Value / 100;
             _healthbar.fillAmount = fill;
             _healthbar.color = Color.Lerp(Color.red, Color.green, fill);

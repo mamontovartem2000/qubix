@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Photon.Pun;
+using Project.Features.CollisionHandler.Components;
 using Project.Features.Player.Views;
 using Project.Features.SceneBuilder.Components;
 using UnityEngine;
@@ -44,7 +45,12 @@ namespace Project.Features {
             world.GetFeature(out _builder);
             
             this.AddSystem<PlayerMovementSystem>();
+            this.AddSystem<PlayerHealthSystem>();
+            this.AddSystem<ApplyDamageSystem>();
+            
             this.AddModule<PlayerConnectionModule>();
+            
+            
             var net = world.GetModule<NetworkModule>();
 
             net.RegisterObject(this);
@@ -69,13 +75,12 @@ namespace Project.Features {
             player.Set(new PlayerTag {PlayerID = id, FaceDirection = Vector3.forward});
             player.InstantiateView(_playerViewID);
             
-            player.Set(new PlayerHealth {Value = world.GetRandomRange(0,100)});
+            player.Set(new PlayerHealth {Value = 100});
             player.Set(new PlayerScore {Value = 0});
             
             Vector3 playerPosition = Vector3.zero;
 
             playerPosition = _builder.GetRandomSpawnPosition();
-                //_builder.IndexToPosition(world.GetRandomRange(0, world.GetSharedData<MapComponents>().WalkableMap.Count));
             player.SetPosition(playerPosition);
             player.Set(new PlayerMoveTarget {Value = playerPosition});
             

@@ -60,14 +60,7 @@ namespace Project.Features.Player.Systems
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var current = entity.Read<PlayerTag>().FaceDirection;
-            var currentHealth = entity.Read<PlayerHealth>().Value;
 
-            if (currentHealth <= 0)
-            {
-                entity.Destroy();
-                return;
-            }
-            
             //Y Axis rotation;
             var targetAngle = Mathf.Atan2(current.x, current.z) * Mathf.Rad2Deg;
             var angle = Mathf.SmoothDampAngle(entity.GetRotation().eulerAngles.y, targetAngle, ref _smoothTurn,

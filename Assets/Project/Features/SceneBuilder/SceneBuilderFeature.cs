@@ -68,7 +68,7 @@ namespace Project.Features
             
             GetDimensions();
 
-            Debug.Log($"w: {Width}, h: {Height}");
+//            Debug.Log($"w: {Width}, h: {Height}");
             
             var size = Width * Height;
             var map = PoolArray<byte>.Spawn(size);
@@ -172,10 +172,7 @@ namespace Project.Features
             {
                 rnd = world.GetRandomRange(0, Width * Height);
                 position = IndexToPosition(rnd);
-                Debug.Log("failed");
             }
-            
-            Debug.Log("succeded");
             
             return position;
         }

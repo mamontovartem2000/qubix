@@ -16,6 +16,7 @@ MonoBehaviour:
   structComponents:
   - id: 0
   - id: 1
+  - id: 2
   removeStructComponents: []
   templates: []
   references:
@@ -28,3 +29,7 @@ MonoBehaviour:
       type: {class: ProjectileSpeed, ns: Project.Features.Projectile.Components, asm: Project}
       data:
         Value: 10
+    00000002:
+      type: {class: ProjectileType, ns: Project.Features.Projectile.Components, asm: Project}
+      data:
+        Type: 0

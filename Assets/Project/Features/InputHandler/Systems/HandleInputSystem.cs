@@ -175,12 +175,12 @@ namespace Project.Features.InputHandler.Systems
             {
                 case Button.Left:
                 {
-                    entity.Set(new PlayerShot {Ammo = AmmoType.Bullet, SpawnPoint = entity.Read<PlayerTag>().FaceDirection}, ComponentLifetime.NotifyAllSystems);
+                    entity.Set(new PlayerShot {Ammo = AmmoType.Bullet, SpawnPoint = entity.Read<PlayerTag>().FaceDirection}, ComponentLifetime.NotifyAllSystemsBelow);
                 }
                     break;
                 case Button.Right:
                 {
-                    entity.Set(new PlayerShot {Ammo = AmmoType.Rocket, SpawnPoint = entity.Read<PlayerTag>().FaceDirection}, ComponentLifetime.NotifyAllSystems);
+                    entity.Set(new PlayerShot {Ammo = AmmoType.Rocket, SpawnPoint = entity.Read<PlayerTag>().FaceDirection}, ComponentLifetime.NotifyAllSystemsBelow);
                 }
                     break;
             }

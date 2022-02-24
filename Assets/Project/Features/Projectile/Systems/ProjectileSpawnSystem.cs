@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
+using Project.Features.CollisionHandler.Components;
 using Project.Features.Player.Components;
 using UnityEngine;
 

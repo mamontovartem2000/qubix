@@ -7,6 +7,11 @@ namespace Project.Features.Projectile.Components {
         public int ActorID;
     }
 
+    public struct ProjectileType : IComponent
+    {
+        public ProjectileBase Type;
+    }
+
     public struct ProjectileSpeed : IComponent
     {
         public float Value;
@@ -23,4 +28,9 @@ namespace Project.Features.Projectile.Components {
     }
     
     public struct ProjectileShouldDie : IComponent {}
+}
+
+public enum ProjectileBase
+{
+    Bullet, Rocket
 }
