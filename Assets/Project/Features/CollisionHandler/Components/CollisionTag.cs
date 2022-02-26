@@ -12,4 +12,9 @@ namespace Project.Features.CollisionHandler.Components
     {
         public float Value;
     }
+
+    public struct PortalTag : IComponent
+    {
+        public int PortalID;
+    }
 }

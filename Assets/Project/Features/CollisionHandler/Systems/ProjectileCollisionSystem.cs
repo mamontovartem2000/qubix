@@ -19,17 +19,13 @@ namespace Project.Features.CollisionHandler.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class DetectCollisionSystem : ISystemFilter
+    public sealed class ProjectileCollisionSystem : ISystemFilter 
     {
-        private Filter _playerFilter;
         private CollisionHandlerFeature feature;
         public World world { get; set; }
-
-        void ISystemBase.OnConstruct() {
+        void ISystemBase.OnConstruct() 
+        {
             this.GetFeature(out this.feature);
-            Filter.Create("PlayerFilter")
-                .With<PlayerTag>()
-                .Push(ref _playerFilter);
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -40,29 +36,22 @@ namespace Project.Features.CollisionHandler.Systems {
         #endif
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
-            return Filter.Create("Filter-DetectCollisionSystem")
-                .With<ProjectileTag>()
+            return Filter.Create("Filter-ProcessCollisionSystem")
+                .With<CollisionTag>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            foreach (var player in _playerFilter)
+            if (entity.Read<CollisionTag>().Collision.Has<ProjectileTag>())
             {
-                var playerId = player.Read<PlayerTag>().PlayerID;
-                var projectileId = entity.Read<ProjectileTag>().ActorID;
-                
-                var playerPos = player.GetPosition();
+                entity.Set(new ApplyDamage {Value = entity.Read<CollisionTag>().Collision.Read<ProjectileDamage>().Value}, ComponentLifetime.NotifyAllSystems);
+                entity.Get<CollisionTag>().Collision.Destroy();
+            }
 
-                if (playerId != projectileId)
-                {
-                    if ((entity.GetPosition() - playerPos).sqrMagnitude <= 1f)
-                    {
-                        Debug.Log("yeet");
-                        
-                        player.Set(new CollisionTag {Collision = entity});
-                    }
-                }
+            if (entity.Read<CollisionTag>().Collision.Has<PortalTag>())
+            {
+                entity.Set(new TeleportPlayer {CurrentID = entity.Read<CollisionTag>().Collision.Read<PortalTag>().PortalID});
             }
         }
     }

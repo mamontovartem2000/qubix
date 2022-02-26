@@ -1,7 +1,5 @@
 ﻿using ME.ECS;
 using Project.Features.Player.Components;
-using Project.Features.Projectile.Components;
-using UnityEngine;
 
 namespace Project.Features.CollisionHandler.Systems {
     #region usage
@@ -19,12 +17,11 @@ namespace Project.Features.CollisionHandler.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class ProcessCollisionSystem : ISystemFilter 
-    {
+    public sealed class DetectPortalCollisionSystem : ISystemFilter {
+        
         private CollisionHandlerFeature feature;
         public World world { get; set; }
-        void ISystemBase.OnConstruct() 
-        {
+        void ISystemBase.OnConstruct() {
             this.GetFeature(out this.feature);
         }
         
@@ -36,18 +33,16 @@ namespace Project.Features.CollisionHandler.Systems {
         #endif
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
-            return Filter.Create("Filter-ProcessCollisionSystem")
-                .With<CollisionTag>()
+            return Filter.Create("Filter-DetectPortalCollisionSystem")
+                .With<TeleportPlayer>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<CollisionTag>().Collision.Has<ProjectileTag>())
-            {
-                entity.Set(new ApplyDamage {Value = entity.Read<CollisionTag>().Collision.Read<ProjectileDamage>().Value}, ComponentLifetime.NotifyAllSystems);
-                entity.Remove<CollisionTag>();
-            }
+            
         }
+    
     }
+    
 }

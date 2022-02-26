@@ -11,6 +11,7 @@ namespace ME.ECS {
 
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.ApplyDamage>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerCollided>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerHasStopped>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
@@ -22,6 +23,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerShot>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerShouldRotate>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.TeleportPlayer>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileDamage>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileDirection>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileShouldDie>(true, false, false, false, false, false, false);
@@ -41,6 +43,7 @@ namespace ME.ECS {
 
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.ApplyDamage>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerCollided>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerHasStopped>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
@@ -52,6 +55,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerShot>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerShouldRotate>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.TeleportPlayer>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileDamage>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileDirection>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileShouldDie>(true, false, false, false, false, false, false);
@@ -66,6 +70,7 @@ namespace ME.ECS {
 
             structComponentsContainer.Validate<Project.Features.CollisionHandler.Components.ApplyDamage>(false);
             structComponentsContainer.Validate<Project.Features.CollisionHandler.Components.CollisionTag>(false);
+            structComponentsContainer.Validate<Project.Features.CollisionHandler.Components.PortalTag>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerCollided>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerHasStopped>(true);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerHealth>(false);
@@ -77,6 +82,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerShot>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerShouldRotate>(true);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerTag>(false);
+            structComponentsContainer.Validate<Project.Features.Player.Components.TeleportPlayer>(false);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileDamage>(false);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileDirection>(false);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileShouldDie>(true);
@@ -96,6 +102,7 @@ namespace ME.ECS {
 
             entity.ValidateData<Project.Features.CollisionHandler.Components.ApplyDamage>(false);
             entity.ValidateData<Project.Features.CollisionHandler.Components.CollisionTag>(false);
+            entity.ValidateData<Project.Features.CollisionHandler.Components.PortalTag>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerCollided>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerHasStopped>(true);
             entity.ValidateData<Project.Features.Player.Components.PlayerHealth>(false);
@@ -107,6 +114,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Features.Player.Components.PlayerShot>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerShouldRotate>(true);
             entity.ValidateData<Project.Features.Player.Components.PlayerTag>(false);
+            entity.ValidateData<Project.Features.Player.Components.TeleportPlayer>(false);
             entity.ValidateData<Project.Features.Projectile.Components.ProjectileDamage>(false);
             entity.ValidateData<Project.Features.Projectile.Components.ProjectileDirection>(false);
             entity.ValidateData<Project.Features.Projectile.Components.ProjectileShouldDie>(true);

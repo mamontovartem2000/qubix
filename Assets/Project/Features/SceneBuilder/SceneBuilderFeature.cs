@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.Collections;
+using Project.Features.CollisionHandler.Components;
 using Project.Features.SceneBuilder.Views;
 using UnityEngine;
 
@@ -47,10 +48,11 @@ namespace Project.Features
     {
         public TextAsset Map;
         public TileView TileView;
+        public PortalView PortalView;
         private int Width, Height;
 
-        private ViewId _tileID;
-        private const int EMPTY_TILE = 0, SIMPLE_TILE = 1;
+        private ViewId _tileID, _portalID;
+        private const int EMPTY_TILE = 0, SIMPLE_TILE = 1, PORTAL_TILE = 2;
 
         private Entity _init;
 
@@ -59,35 +61,52 @@ namespace Project.Features
             PrepareMap();
         }
 
-        protected override void OnDeconstruct() { }
+        protected override void OnDeconstruct()
+        {
+        }
 
         private void PrepareMap()
         {
             _init = new Entity("init");
             _tileID = world.RegisterViewSource(TileView);
-            
+            _portalID = world.RegisterViewSource(PortalView);
+
             GetDimensions();
 
-//            Debug.Log($"w: {Width}, h: {Height}");
-            
+            Debug.Log($"w: {Width}, h: {Height}");
+
             var size = Width * Height;
             var map = PoolArray<byte>.Spawn(size);
 
             ConvertToByte(Map, map);
             world.SetSharedData(new MapComponents {WalkableMap = map});
-            
+
             DrawMap(map);
         }
 
         private void DrawMap(BufferArray<byte> source)
         {
+            var portalIndex = 0;
             for (var i = 0; i < source.Count; i++)
             {
-                if (source[i] == 1)
+                switch (source[i])
                 {
-                    var entity = new Entity("tile");
-                    entity.InstantiateView(_tileID);
-                    entity.SetPosition(IndexToPosition(i));
+                    case 1:
+                    {
+                        var entity = new Entity("tile");
+                        entity.InstantiateView(_tileID);
+                        entity.SetPosition(IndexToPosition(i));
+                        break;
+                    }
+                    case 2:
+                    {
+                        var entity = new Entity("tile");
+                        entity.InstantiateView(_portalID);
+                        entity.SetPosition(IndexToPosition(i));
+                        entity.Set(new PortalTag {PortalID = portalIndex});
+                        portalIndex++;
+                        break;
+                    }
                 }
             }
         }
@@ -99,7 +118,7 @@ namespace Project.Features
             Height = omg.Length;
             Width = omg[0].Length - 1;
         }
-        
+
         private void ConvertToByte(TextAsset source, BufferArray<byte> target)
         {
             var result = new byte[Width * Height];
@@ -114,12 +133,16 @@ namespace Project.Features
                 {
                     switch (l[i])
                     {
-                        case '0' :
+                        case '0':
                             result[byteIndex] = 0;
                             byteIndex++;
                             break;
-                        case '1' :
+                        case '1':
                             result[byteIndex] = 1;
+                            byteIndex++;
+                            break;
+                        case '2':
+                            result[byteIndex] = 2;
                             byteIndex++;
                             break;
                     }
@@ -137,7 +160,7 @@ namespace Project.Features
             world.GetSharedData<MapComponents>().WalkableMap[moveFrom] = SIMPLE_TILE;
             world.GetSharedData<MapComponents>().WalkableMap[moveTo] = EMPTY_TILE;
         }
-        
+
         public int PositionToIndex(Vector3 vec)
         {
             var x = Mathf.RoundToInt(vec.x);
@@ -149,17 +172,17 @@ namespace Project.Features
         public Vector3 IndexToPosition(int index)
         {
             var x = index % Width;
-            var y = Mathf.FloorToInt(index / (float)Width);
-            
+            var y = Mathf.FloorToInt(index / (float) Width);
+
             return new Vector3(x, 0, y);
         }
-        
+
         public bool IsFree(Vector3 position, Vector3 direction)
         {
             var toIndex = PositionToIndex(position + direction);
-            
+
             if (toIndex < 0 || toIndex >= Width * Height) return false;
-            
+
             return world.ReadSharedData<MapComponents>().WalkableMap[toIndex] == 1;
         }
 
@@ -173,8 +196,13 @@ namespace Project.Features
                 rnd = world.GetRandomRange(0, Width * Height);
                 position = IndexToPosition(rnd);
             }
-            
+
             return position;
         }
-    }
+
+        public Vector3 GetRandomPortalPosition(Vector3 pos)
+        {
+            return Vector3.zero;
+        }
+}
 }

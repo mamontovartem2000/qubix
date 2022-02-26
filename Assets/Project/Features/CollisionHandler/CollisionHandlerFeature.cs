@@ -25,8 +25,8 @@ namespace Project.Features {
         
         protected override void OnConstruct()
         {
-            this.AddSystem<DetectCollisionSystem>();
-            this.AddSystem<ProcessCollisionSystem>();
+            this.AddSystem<DetectProjectileCollisionSystem>();
+            this.AddSystem<ProjectileCollisionSystem>();
         }
 
         protected override void OnDeconstruct() {}

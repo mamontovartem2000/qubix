@@ -93,7 +93,9 @@ namespace Project.Features.Projectile.Systems
         private void SpawnProjectile(Vector3 point, Vector3 direction, ViewId viewId, int id, DataConfig config)
         {
             var entity = new Entity("projectile");
+            
             entity.InstantiateView(viewId);
+            
             entity.SetPosition(point);
             entity.SetRotation(Quaternion.Euler(direction));
 

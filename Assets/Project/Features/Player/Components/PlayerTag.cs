@@ -46,6 +46,11 @@ namespace Project.Features.Player.Components
         public AmmoType Ammo;
         public Vector3 SpawnPoint;
     }
+
+    public struct TeleportPlayer : IComponent
+    {
+        public int CurrentID;
+    }
 }
 
 public enum AmmoType
