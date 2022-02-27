@@ -124,6 +124,11 @@ namespace Project.Features.Player.Systems
             }
             else
             {
+                if (entity.Has<TeleportPlayer>())
+                {
+                    entity.Remove<TeleportPlayer>();
+                }
+
                 entity.SetPosition(Vector3.MoveTowards(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value,
                     entity.Read<PlayerMovementSpeed>().Value * deltaTime));
             }

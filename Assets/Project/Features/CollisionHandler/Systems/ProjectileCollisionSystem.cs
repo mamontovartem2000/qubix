@@ -48,11 +48,6 @@ namespace Project.Features.CollisionHandler.Systems {
                 entity.Set(new ApplyDamage {Value = entity.Read<CollisionTag>().Collision.Read<ProjectileDamage>().Value}, ComponentLifetime.NotifyAllSystems);
                 entity.Get<CollisionTag>().Collision.Destroy();
             }
-
-            if (entity.Read<CollisionTag>().Collision.Has<PortalTag>())
-            {
-                entity.Set(new TeleportPlayer {CurrentID = entity.Read<CollisionTag>().Collision.Read<PortalTag>().PortalID});
-            }
         }
     }
 }

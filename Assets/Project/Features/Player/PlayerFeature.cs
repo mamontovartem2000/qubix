@@ -1,4 +1,5 @@
-﻿using ME.ECS;
+﻿using System.Collections.Generic;
+using ME.ECS;
 using Photon.Pun;
 using Project.Features.CollisionHandler.Components;
 using Project.Features.Player.Views;
@@ -24,18 +25,13 @@ namespace Project.Features {
     public sealed class PlayerFeature : Feature
     {
         public PlayerView PlayerView;
-        
         public GlobalEvent PassLocalPlayer;
         public GlobalEvent HealthChangedEvent;
         
         private ViewId _playerViewID;
-        
         private RPCId _onPlayerConnected;
-
         private Filter _playerFilter;
-
         private int _playerIndex;
-
         private SceneBuilderFeature _builder;
         
         protected override void OnConstruct()
@@ -47,6 +43,7 @@ namespace Project.Features {
             this.AddSystem<PlayerMovementSystem>();
             this.AddSystem<PlayerHealthSystem>();
             this.AddSystem<ApplyDamageSystem>();
+            this.AddSystem<PlayerPortalSystem>();
             
             this.AddModule<PlayerConnectionModule>();
             
@@ -77,10 +74,9 @@ namespace Project.Features {
             
             player.Set(new PlayerHealth {Value = 100});
             player.Set(new PlayerScore {Value = 0});
-            
-            Vector3 playerPosition = Vector3.zero;
 
-            playerPosition = _builder.GetRandomSpawnPosition();
+            var playerPosition = _builder.GetRandomSpawnPosition();
+            
             player.SetPosition(playerPosition);
             player.Set(new PlayerMoveTarget {Value = playerPosition});
             
@@ -88,6 +84,7 @@ namespace Project.Features {
 
             PassLocalPlayer.Execute(player);
             HealthChangedEvent.Execute(player);
+            
         }
         
         public Entity GetActivePlayer()

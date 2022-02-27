@@ -15,10 +15,7 @@ public class UI_Core : MonoBehaviour
 
     [SerializeField] private Image _healthbar; 
     [SerializeField] private TextMeshProUGUI _scoreText;
-    // [SerializeField] private TextMeshProUGUI _healthTest;
     
-    private Entity _player;
-
     void Start() {
         this.PassLocalPlayer.Subscribe(this.PassLocalPlayerCallback);
         
@@ -41,7 +38,7 @@ public class UI_Core : MonoBehaviour
     {
         if (entity != Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer()) return;
         
-        Debug.Log("health event");
+        // Debug.Log("health event");
         
             var fill = entity.Read<PlayerHealth>().Value / 100;
             _healthbar.fillAmount = fill;
@@ -50,15 +47,10 @@ public class UI_Core : MonoBehaviour
 
     private void ChangeScoreCallback(in Entity entity)
     {
-        // if(_player.IsAlive() && _player == entity)
-            // _scoreText.SetText(entity.Read<PlayerScore>().Value.ToString());
     }
     
     private void PassLocalPlayerCallback(in Entity entity)
     {
-        _player = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer();
-        // if (entity.Read<PlayerTag>().PlayerID == PhotonNetwork.LocalPlayer.ActorNumber)
-        //     _player = entity;
-        // //_healthTest.SetText(entity.Read<PlayerTag>().PlayerID.ToString());
+        // _player = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer();
     }
 }

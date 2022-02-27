@@ -24,8 +24,10 @@ namespace Project.Features.CollisionHandler.Systems {
         private CollisionHandlerFeature feature;
         public World world { get; set; }
 
-        void ISystemBase.OnConstruct() {
+        void ISystemBase.OnConstruct() 
+        {
             this.GetFeature(out this.feature);
+        
             Filter.Create("PlayerFilter")
                 .With<PlayerTag>()
                 .Push(ref _playerFilter);

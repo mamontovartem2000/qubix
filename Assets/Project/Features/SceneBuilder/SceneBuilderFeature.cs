@@ -1,6 +1,5 @@
 ﻿using ME.ECS;
 using ME.ECS.Collections;
-using Project.Features.CollisionHandler.Components;
 using Project.Features.SceneBuilder.Views;
 using UnityEngine;
 
@@ -47,9 +46,12 @@ namespace Project.Features
     public sealed class SceneBuilderFeature : Feature
     {
         public TextAsset Map;
+        // public TextAsset HeightMap;
+        
         public TileView TileView;
         public PortalView PortalView;
-        private int Width, Height;
+        
+        private int Width, Height, PortalCount;
 
         private ViewId _tileID, _portalID;
         private const int EMPTY_TILE = 0, SIMPLE_TILE = 1, PORTAL_TILE = 2;
@@ -61,9 +63,7 @@ namespace Project.Features
             PrepareMap();
         }
 
-        protected override void OnDeconstruct()
-        {
-        }
+        protected override void OnDeconstruct() {}
 
         private void PrepareMap()
         {
@@ -73,20 +73,27 @@ namespace Project.Features
 
             GetDimensions();
 
-            Debug.Log($"w: {Width}, h: {Height}");
+            // Debug.Log($"w: {Width}, h: {Height}");
 
             var size = Width * Height;
             var map = PoolArray<byte>.Spawn(size);
 
-            ConvertToByte(Map, map);
-            world.SetSharedData(new MapComponents {WalkableMap = map});
+            ConvertMap(Map, map);
+
+            var portals = PoolArray<Vector3>.Spawn(PortalCount);
+
+            foreach (var p in portals)
+            {
+                Debug.Log($"{p}");
+            }
+            
+            world.SetSharedData(new MapComponents {WalkableMap = map, PortalsMap = portals});
 
             DrawMap(map);
         }
 
         private void DrawMap(BufferArray<byte> source)
         {
-            var portalIndex = 0;
             for (var i = 0; i < source.Count; i++)
             {
                 switch (source[i])
@@ -103,8 +110,6 @@ namespace Project.Features
                         var entity = new Entity("tile");
                         entity.InstantiateView(_portalID);
                         entity.SetPosition(IndexToPosition(i));
-                        entity.Set(new PortalTag {PortalID = portalIndex});
-                        portalIndex++;
                         break;
                     }
                 }
@@ -118,20 +123,21 @@ namespace Project.Features
             Height = omg.Length;
             Width = omg[0].Length - 1;
         }
-
-        private void ConvertToByte(TextAsset source, BufferArray<byte> target)
+        
+        private void ConvertMap(TextAsset source, BufferArray<byte> target)
         {
             var result = new byte[Width * Height];
+            
             var bytes = source.text;
             var byteIndex = 0;
 
             var lines = bytes.Split('\n');
 
-            foreach (var l in lines)
+            foreach (var line in lines)
             {
-                for (int i = 0; i < l.Length; i++)
+                for (int i = 0; i < line.Length; i++)
                 {
-                    switch (l[i])
+                    switch (line[i])
                     {
                         case '0':
                             result[byteIndex] = 0;
@@ -144,6 +150,7 @@ namespace Project.Features
                         case '2':
                             result[byteIndex] = 2;
                             byteIndex++;
+                            PortalCount++;
                             break;
                     }
                 }
@@ -160,7 +167,6 @@ namespace Project.Features
             world.GetSharedData<MapComponents>().WalkableMap[moveFrom] = SIMPLE_TILE;
             world.GetSharedData<MapComponents>().WalkableMap[moveTo] = EMPTY_TILE;
         }
-
         public int PositionToIndex(Vector3 vec)
         {
             var x = Mathf.RoundToInt(vec.x);
@@ -168,13 +174,12 @@ namespace Project.Features
 
             return y * Width + x;
         }
-
-        public Vector3 IndexToPosition(int index)
+        private Vector3 IndexToPosition(int index)
         {
             var x = index % Width;
             var y = Mathf.FloorToInt(index / (float) Width);
 
-            return new Vector3(x, 0, y);
+            return new Vector3(x, 0f, y);
         }
 
         public bool IsFree(Vector3 position, Vector3 direction)
@@ -183,26 +188,36 @@ namespace Project.Features
 
             if (toIndex < 0 || toIndex >= Width * Height) return false;
 
-            return world.ReadSharedData<MapComponents>().WalkableMap[toIndex] == 1;
+            var result = world.ReadSharedData<MapComponents>().WalkableMap[toIndex] == SIMPLE_TILE ||
+                         world.ReadSharedData<MapComponents>().WalkableMap[toIndex] == PORTAL_TILE;
+            return result;
         }
 
         public Vector3 GetRandomSpawnPosition()
         {
             var position = Vector3.zero;
-            var rnd = 0;
 
             while (!IsFree(position, Vector3.zero))
             {
-                rnd = world.GetRandomRange(0, Width * Height);
+                var rnd = world.GetRandomRange(0, Width * Height);
                 position = IndexToPosition(rnd);
             }
 
             return position;
         }
-
-        public Vector3 GetRandomPortalPosition(Vector3 pos)
+        
+        public Vector3 GetRandomPortalPosition(Vector3 vec)
         {
-            return Vector3.zero;
+            var portal = vec;
+
+            while (portal == vec)
+            {
+                portal = world.GetSharedData<MapComponents>().PortalsMap[world.GetRandomRange(0, world.GetSharedData<MapComponents>().PortalsMap.Count)];
+                Debug.Log($"failure at {portal}, trying again");
+            }
+
+            Debug.Log($"success at {portal}, moving player");
+            return portal;
         }
-}
+    }
 }
