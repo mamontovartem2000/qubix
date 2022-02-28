@@ -46,10 +46,12 @@ namespace Project.Features
     public sealed class SceneBuilderFeature : Feature
     {
         public TextAsset Map;
-        // public TextAsset HeightMap;
         
         public TileView TileView;
         public PortalView PortalView;
+        
+        public MineView MineView;
+        public HealthView HealthView;
         
         private int Width, Height, PortalCount;
 
@@ -68,27 +70,20 @@ namespace Project.Features
         private void PrepareMap()
         {
             _init = new Entity("init");
+            
             _tileID = world.RegisterViewSource(TileView);
             _portalID = world.RegisterViewSource(PortalView);
 
             GetDimensions();
 
-            // Debug.Log($"w: {Width}, h: {Height}");
-
             var size = Width * Height;
             var map = PoolArray<byte>.Spawn(size);
-
-            ConvertMap(Map, map);
-
             var portals = PoolArray<Vector3>.Spawn(PortalCount);
 
-            foreach (var p in portals)
-            {
-                Debug.Log($"{p}");
-            }
-            
-            world.SetSharedData(new MapComponents {WalkableMap = map, PortalsMap = portals});
+            ConvertMap(Map, map, portals);
 
+            world.SetSharedData(new MapComponents {WalkableMap = map, PortalsMap = portals});
+            
             DrawMap(map);
         }
 
@@ -122,15 +117,28 @@ namespace Project.Features
 
             Height = omg.Length;
             Width = omg[0].Length - 1;
+
+            foreach (var line in omg)
+            {
+                for (int i = 0; i < line.Length; i++)
+                {
+                    if (line[i] == '2')
+                    {
+                        PortalCount++;
+                    }
+                }
+            }
         }
-        
-        private void ConvertMap(TextAsset source, BufferArray<byte> target)
+
+        private void ConvertMap(TextAsset source, BufferArray<byte> walkable, BufferArray<Vector3> portals)
         {
-            var result = new byte[Width * Height];
+            var walkableResult = new byte[Width * Height];
+            var portalsResult = new Vector3[PortalCount];
             
             var bytes = source.text;
             var byteIndex = 0;
-
+            var portalIndex = 0;
+            
             var lines = bytes.Split('\n');
 
             foreach (var line in lines)
@@ -140,25 +148,31 @@ namespace Project.Features
                     switch (line[i])
                     {
                         case '0':
-                            result[byteIndex] = 0;
+                            walkableResult[byteIndex] = 0;
                             byteIndex++;
                             break;
                         case '1':
-                            result[byteIndex] = 1;
+                            walkableResult[byteIndex] = 1;
                             byteIndex++;
                             break;
                         case '2':
-                            result[byteIndex] = 2;
+                            walkableResult[byteIndex] = 2;
+                            portalsResult[portalIndex] = IndexToPosition(byteIndex);
                             byteIndex++;
-                            PortalCount++;
+                            portalIndex++;
                             break;
                     }
                 }
             }
-
-            for (int j = 0; j < result.Length; j++)
+            
+            for (int j = 0; j < walkableResult.Length; j++)
             {
-                target[j] = result[j];
+                walkable[j] = walkableResult[j];
+            }
+
+            for (int j = 0; j < portalsResult.Length; j++)
+            {
+                portals[j] = portalsResult[j];
             }
         }
 
@@ -208,16 +222,15 @@ namespace Project.Features
         
         public Vector3 GetRandomPortalPosition(Vector3 vec)
         {
-            var portal = vec;
-
-            while (portal == vec)
+            var pos = vec;
+            
+            while (pos == vec)
             {
-                portal = world.GetSharedData<MapComponents>().PortalsMap[world.GetRandomRange(0, world.GetSharedData<MapComponents>().PortalsMap.Count)];
-                Debug.Log($"failure at {portal}, trying again");
+                pos = world.GetSharedData<MapComponents>()
+                    .PortalsMap[world.GetRandomRange(0, world.GetSharedData<MapComponents>().PortalsMap.Count)];
             }
 
-            Debug.Log($"success at {portal}, moving player");
-            return portal;
+            return pos;
         }
     }
 }

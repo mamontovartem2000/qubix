@@ -30,7 +30,10 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileSpeed>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileType>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.CollectibleTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.HealthCollectible>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MineCollectible>(true, false, false, false, false, false, false);
 
         }
 
@@ -62,7 +65,10 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileSpeed>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileType>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.CollectibleTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.HealthCollectible>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MineCollectible>(true, false, false, false, false, false, false);
 
             ComponentsInitializerWorld.Setup(ComponentsInitializerWorldGen.Init);
             CoreComponentsInitializer.Init(ref structComponentsContainer);
@@ -89,7 +95,10 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileSpeed>(false);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileTag>(false);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileType>(false);
+            structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.CollectibleTag>(true);
+            structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.HealthCollectible>(true);
             structComponentsContainer.ValidateCopyable<Project.Features.SceneBuilder.Components.MapComponents>(false);
+            structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.MineCollectible>(true);
 
         }
 
@@ -121,7 +130,10 @@ namespace ME.ECS {
             entity.ValidateData<Project.Features.Projectile.Components.ProjectileSpeed>(false);
             entity.ValidateData<Project.Features.Projectile.Components.ProjectileTag>(false);
             entity.ValidateData<Project.Features.Projectile.Components.ProjectileType>(false);
+            entity.ValidateData<Project.Features.SceneBuilder.Components.CollectibleTag>(true);
+            entity.ValidateData<Project.Features.SceneBuilder.Components.HealthCollectible>(true);
             entity.ValidateDataCopyable<Project.Features.SceneBuilder.Components.MapComponents>(false);
+            entity.ValidateData<Project.Features.SceneBuilder.Components.MineCollectible>(true);
 
         }
 

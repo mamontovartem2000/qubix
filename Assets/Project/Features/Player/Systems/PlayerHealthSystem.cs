@@ -48,6 +48,10 @@ namespace Project.Features.Player.Systems {
 
             if (currentHealth > 0) return;
             
+
+            var respawn = new Entity("respawn");
+            // respawn.Set(new PlayerToRespawn {Value = entity.Read<PlayerTag>().PlayerID, Timer = 10f});
+
             entity.Destroy();
         }
     }

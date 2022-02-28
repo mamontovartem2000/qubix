@@ -1,5 +1,4 @@
 ﻿using ME.ECS;
-using Project.Features.Projectile.Components;
 
 namespace Project.Features.CollisionHandler.Components 
 {

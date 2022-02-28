@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 349952671292927438}
-  - component: {fileID: -2505824532654415183}
-  - component: {fileID: 5195318849118659635}
+  - component: {fileID: 3272475653697646624}
   m_Layer: 0
-  m_Name: HealthMono
+  m_Name: HealthParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2505824532654415183
+--- !u!114 &3272475653697646624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,30 +41,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 7064765020600913170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33f6c509e6a07974fbf6a848dc91cba8, type: 3}
+  m_Script: {fileID: 11500000, guid: 66ab8f8b626559d4ca4332ff181902d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleSystemSimulation:
-    particleItems: []
-    settings:
-      simulationType: 1
-      minSimulationTime: 0.2
-      minEndingTime: 0.1
-      halfEnding: 0.5
-    hasElements: 0
-    hasDefault: 1
---- !u!114 &5195318849118659635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7064765020600913170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81bda4b2d0d612d4abed585abebf1cea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: -1575363525578481128, guid: 1685f0adc17f6724eb396625dfeb32a8, type: 3}
+        meshRenderer: {fileID: 3974565575723625174}
+        meshFilter: {fileID: 114041291741785146}
+        material: {fileID: -2400404728525148765, guid: 1685f0adc17f6724eb396625dfeb32a8, type: 3}
+        localPosition: {x: -4.35, y: -8, z: -10.85}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 5, y: 5, z: 5}
 --- !u!1 &7250574120493117953
 GameObject:
   m_ObjectHideFlags: 0

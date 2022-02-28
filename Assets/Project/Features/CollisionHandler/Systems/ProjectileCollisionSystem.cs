@@ -45,6 +45,7 @@ namespace Project.Features.CollisionHandler.Systems {
         {
             if (entity.Read<CollisionTag>().Collision.Has<ProjectileTag>())
             {
+                
                 entity.Set(new ApplyDamage {Value = entity.Read<CollisionTag>().Collision.Read<ProjectileDamage>().Value}, ComponentLifetime.NotifyAllSystems);
                 entity.Get<CollisionTag>().Collision.Destroy();
             }

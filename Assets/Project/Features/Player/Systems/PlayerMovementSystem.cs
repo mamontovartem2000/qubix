@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Features.SceneBuilder.Components;
 using UnityEngine;
 
 namespace Project.Features.Player.Systems
@@ -61,12 +62,22 @@ namespace Project.Features.Player.Systems
         {
             var current = entity.Read<PlayerTag>().FaceDirection;
 
-            //Y Axis rotation;
-            var targetAngle = Mathf.Atan2(current.x, current.z) * Mathf.Rad2Deg;
-            var angle = Mathf.SmoothDampAngle(entity.GetRotation().eulerAngles.y, targetAngle, ref _smoothTurn,
-                0.5f * deltaTime);
+            entity.SetTimer(1488, 3f);
+            entity.RemoveTimer(1488);
+
+            var irr = entity.ReadTimer(1488);
+
+            if (irr < 0)
+            {
+                //death;
+            }
             
-            entity.SetRotation(Quaternion.Euler(0f, angle, 0f));
+            // Y Axis rotation;
+             var targetAngle = Mathf.Atan2(current.x, current.z) * Mathf.Rad2Deg;
+             var angle = Mathf.SmoothDampAngle(entity.GetRotation().eulerAngles.y, targetAngle, ref _smoothTurn,
+                 0.5f * deltaTime);
+            
+             entity.SetRotation(Quaternion.Euler(0f, angle, 0f));
             
             if (Vector3.Distance(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value) <= 0)
             {
@@ -125,10 +136,8 @@ namespace Project.Features.Player.Systems
             else
             {
                 if (entity.Has<TeleportPlayer>())
-                {
                     entity.Remove<TeleportPlayer>();
-                }
-
+                
                 entity.SetPosition(Vector3.MoveTowards(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value,
                     entity.Read<PlayerMovementSpeed>().Value * deltaTime));
             }

@@ -47,17 +47,19 @@ namespace Project.Features.Player.Systems {
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             if(entity.Has<TeleportPlayer>()) return;
-
+            
             foreach (var pos in world.GetSharedData<MapComponents>().PortalsMap)
             {
                 if (pos == entity.GetPosition())
                 {
                     var newPos = _builder.GetRandomPortalPosition(entity.GetPosition());
+                    entity.Set(new TeleportPlayer());
+                    
                     _builder.MoveTo(_builder.PositionToIndex(entity.GetPosition()), _builder.PositionToIndex(newPos));
 
-                    entity.Set(new TeleportPlayer());
                     entity.SetPosition(newPos);
                     entity.Get<PlayerMoveTarget>().Value = newPos;
+                    return;
                 }
             }
         }

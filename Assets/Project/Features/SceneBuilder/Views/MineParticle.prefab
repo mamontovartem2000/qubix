@@ -123,15 +123,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 6703433272642540592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4372d4b183aad9846a0e705d1b0532a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 198ab7c5a1a82434ea4395b7196affa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleSystemSimulation:
-    particleItems: []
-    settings:
-      simulationType: 1
-      minSimulationTime: 0.2
-      minEndingTime: 0.1
-      halfEnding: 0.5
-    hasElements: 0
-    hasDefault: 1
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: -5523277661179574252, guid: 857eaeaa71436fd49bf19811f1112490, type: 3}
+        meshRenderer: {fileID: 3406368517902359768}
+        meshFilter: {fileID: 2892558453123654847}
+        material: {fileID: 2100000, guid: d114cde0600508c4f9eed72b935654e6, type: 2}
+        localPosition: {x: 0, y: 0.1, z: 0}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 0.9, y: 0.2, z: 0.9}
