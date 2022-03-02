@@ -51,6 +51,12 @@ namespace Project.Features.Player.Components
     {
         public int CurrentID;
     }
+
+    public struct DeadBody : IComponent
+    {
+        public int ActorID;
+        public float Time;
+    }
 }
 
 public enum AmmoType

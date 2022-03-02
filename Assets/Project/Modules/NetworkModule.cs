@@ -391,8 +391,11 @@ namespace Project.Modules
                 Photon.Realtime.TypedLobby.Default);
         }
 
+        private int _playerCount;
+
         public void LateUpdate()
         {
+            _playerCount = Worlds.current.GetFeature<SceneBuilderFeature>().PlayerCount;
             this.UpdateTime();
 
             var world = ME.ECS.Worlds.currentWorld;
@@ -403,7 +406,7 @@ namespace Project.Modules
                 {
                     // Here we are check if all required players connected to the game
                     // So we could start the game sending the special message
-                    if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == 1) //change this to 4 before apply for tests
+                    if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == _playerCount) //change this to 4 before apply for tests
                     {
                         this.timeSyncedConnected = true;
                         world.AddMarker(new NetworkPlayerConnectedTimeSynced {ActorID = PhotonNetwork.LocalPlayer.ActorNumber});

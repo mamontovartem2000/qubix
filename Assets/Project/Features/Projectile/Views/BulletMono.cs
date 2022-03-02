@@ -1,5 +1,4 @@
 ﻿using ME.ECS;
-using UnityEngine;
 
 namespace Project.Features.Projectile.Views 
 {
@@ -10,11 +9,10 @@ namespace Project.Features.Projectile.Views
         public override void OnInitialize() {}
         public override void OnDeInitialize() {}
         public override void ApplyStateJob(UnityEngine.Jobs.TransformAccess transform, float deltaTime, bool immediately) {}
-        
         public override void ApplyState(float deltaTime, bool immediately)
         {
-            transform.position = entity.GetPosition();
             transform.forward = entity.GetRotation().eulerAngles;
+            transform.position = entity.GetPosition();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 
-namespace Project.Features.Projectile.Systems {
+namespace Project.Features.Projectile.Systems 
+{
     #region usage
 
     
@@ -16,10 +17,11 @@ namespace Project.Features.Projectile.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class ProjectileMovementSystem : ISystemFilter {
-        
-        private ProjectileFeature feature;
+    public sealed class ProjectileMovementSystem : ISystemFilter 
+    {
         public World world { get; set; }
+
+        private ProjectileFeature feature;
         
         void ISystemBase.OnConstruct() 
         {
@@ -27,7 +29,6 @@ namespace Project.Features.Projectile.Systems {
         }
         
         void ISystemBase.OnDeconstruct() {}
-        
         #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;

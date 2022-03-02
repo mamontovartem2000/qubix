@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 
-namespace Project.Features.Projectile.Systems {
+namespace Project.Features.Projectile.Systems 
+{
     #region usage
 
     
@@ -18,20 +19,23 @@ namespace Project.Features.Projectile.Systems {
     #endregion
     public sealed class ProjectileDeathSystem : ISystemFilter 
     {
-        private ProjectileFeature feature;
         public World world { get; set; }
+
+        private ProjectileFeature feature;
+        
         void ISystemBase.OnConstruct() 
         {
             this.GetFeature(out this.feature);
         }
-        void ISystemBase.OnDeconstruct() {}
         
+        void ISystemBase.OnDeconstruct() {}
         #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;
         #endif
         Filter ISystemFilter.filter { get; set; }
-        Filter ISystemFilter.CreateFilter() {
+        Filter ISystemFilter.CreateFilter() 
+        {
             return Filter.Create("Filter-ProjectileDeathSystem")
                 .With<ProjectileShouldDie>()
                 .Push();

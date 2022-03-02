@@ -1,6 +1,5 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
-using Project.Features.CollisionHandler.Components;
 using Project.Features.Player.Components;
 using UnityEngine;
 
@@ -43,50 +42,52 @@ namespace Project.Features.Projectile.Systems
         Filter ISystemFilter.CreateFilter() 
         {
             return Filter.Create("Filter-ProjectileSpawnSystem")
-                .With<PlayerTag>()
+                .With<PlayerShot>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Has<PlayerShot>())
-            {
-                var ammo = entity.Read<PlayerShot>().Ammo;
-                var actorID = entity.Read<PlayerTag>().PlayerID;
-                    
-                var spawnPoint = entity.Read<PlayerTag>().FaceDirection + entity.GetPosition() + entity.Read<PlayerShot>().SpawnPoint;
-                var direction = entity.Read<PlayerTag>().FaceDirection;
+            // Debug.Log(entity.Read<PlayerTag>().PlayerID);
 
-                if (direction == Vector3.forward)
-                {
-                    _leftOffset = new Vector3(-0.515f, 0.5f, -1.5f);
-                    _rightOffset = new Vector3(0.515f, 0.5f, -1.5f);
-                }
-                else if (direction == Vector3.left)
-                {
-                    _leftOffset = new Vector3(1.5f, 0.5f, -0.515f);
-                    _rightOffset = new Vector3(1.5f, 0.5f, 0.515f);
-                }
-                else if (direction == Vector3.back)
-                {
-                    _leftOffset = new Vector3(0.515f, 0.5f, 1.5f);
-                    _rightOffset = new Vector3(-0.515f, 0.5f, 1.5f);
-                }
-                else if (direction == Vector3.right)
-                {
-                    _leftOffset = new Vector3(-1.5f, 0.5f, 0.515f);
-                    _rightOffset = new Vector3(-1.5f, 0.5f, -0.515f);
-                }
-                
-                switch (ammo)
-                {
-                    case AmmoType.Bullet:
-                        SpawnProjectile(spawnPoint + _leftOffset, direction, feature.GetBulletViewID(), actorID, feature.BulletConfig);
-                        break;
-                    case  AmmoType.Rocket:
-                        SpawnProjectile(spawnPoint + _rightOffset, direction, feature.GetRocketViewID(), actorID, feature.RocketConfig);
-                        break;
-                }
+            var ammo = entity.Read<PlayerShot>().Ammo;
+            var actorID = entity.Read<PlayerTag>().PlayerID;
+
+            var spawnPoint = entity.Read<PlayerTag>().FaceDirection + entity.GetPosition() +
+                             entity.Read<PlayerShot>().SpawnPoint;
+            var direction = entity.Read<PlayerTag>().FaceDirection;
+
+            if (direction == Vector3.forward)
+            {
+                _leftOffset = new Vector3(-0.515f, 0.5f, -1.5f);
+                _rightOffset = new Vector3(0.515f, 0.5f, -1.5f);
+            }
+            else if (direction == Vector3.left)
+            {
+                _leftOffset = new Vector3(1.5f, 0.5f, -0.515f);
+                _rightOffset = new Vector3(1.5f, 0.5f, 0.515f);
+            }
+            else if (direction == Vector3.back)
+            {
+                _leftOffset = new Vector3(0.515f, 0.5f, 1.5f);
+                _rightOffset = new Vector3(-0.515f, 0.5f, 1.5f);
+            }
+            else if (direction == Vector3.right)
+            {
+                _leftOffset = new Vector3(-1.5f, 0.5f, 0.515f);
+                _rightOffset = new Vector3(-1.5f, 0.5f, -0.515f);
+            }
+
+            switch (ammo)
+            {
+                case AmmoType.Bullet:
+                    SpawnProjectile(spawnPoint + _leftOffset, direction, feature.GetBulletViewID(), actorID,
+                        feature.BulletConfig);
+                    break;
+                case AmmoType.Rocket:
+                    SpawnProjectile(spawnPoint + _rightOffset, direction, feature.GetRocketViewID(), actorID,
+                        feature.RocketConfig);
+                    break;
             }
         }
 
@@ -101,6 +102,8 @@ namespace Project.Features.Projectile.Systems
 
             entity.Set(new ProjectileTag {ActorID = id});
             entity.Set(new ProjectileDirection {Value = direction});
+
+            entity.SetTimer(0, 5f);
             
             config.Apply(entity);
         }

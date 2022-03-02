@@ -42,17 +42,20 @@ namespace Project.Features.Player.Systems {
             
         }
 
+        private bool _isActive;
+        private int _count;
+        
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var currentHealth = entity.Read<PlayerHealth>().Value;
 
             if (currentHealth > 0) return;
-            
 
-            var respawn = new Entity("respawn");
-            // respawn.Set(new PlayerToRespawn {Value = entity.Read<PlayerTag>().PlayerID, Timer = 10f});
-
+            var deadBody = new Entity("deadBody");
+            deadBody.Set(new DeadBody {ActorID = entity.Read<PlayerTag>().PlayerID, Time = 2f});
             entity.Destroy();
+
+            _count = _isActive ? 1 : 0;
         }
     }
 }

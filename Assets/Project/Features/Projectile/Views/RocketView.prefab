@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1491319136505712443}
   - component: {fileID: -6012725972906667946}
+  - component: {fileID: 5944391523055322356}
   m_Layer: 0
   m_Name: RocketView
   m_TagString: Untagged
@@ -33,6 +34,39 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-6012725972906667946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9073667887109261368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fa26f9c50aa9894caf03b2a82e83866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 1988216149656743765, guid: 30f1e2355f4f6ab44aa2636937ce3a66, type: 3}
+        meshRenderer: {fileID: 38980607994572412}
+        meshFilter: {fileID: 2841362217271941814}
+        material: {fileID: 2100000, guid: 409bf720e9924426b9f253cf037a8f4e, type: 2}
+        localPosition: {x: 0, y: 0, z: 0}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 1, y: 1, z: 1}
+--- !u!114 &5944391523055322356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,5 +159,15 @@ PrefabInstance:
 --- !u!4 &1207334636955030803 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 30f1e2355f4f6ab44aa2636937ce3a66, type: 3}
+  m_PrefabInstance: {fileID: 1678691514714665720}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &2841362217271941814 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: -5754084199372789682, guid: 30f1e2355f4f6ab44aa2636937ce3a66, type: 3}
+  m_PrefabInstance: {fileID: 1678691514714665720}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &38980607994572412 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 30f1e2355f4f6ab44aa2636937ce3a66, type: 3}
   m_PrefabInstance: {fileID: 1678691514714665720}
   m_PrefabAsset: {fileID: 0}

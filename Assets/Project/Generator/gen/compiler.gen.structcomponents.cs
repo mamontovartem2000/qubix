@@ -12,6 +12,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.ApplyDamage>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.DeadBody>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerCollided>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerHasStopped>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
@@ -31,9 +32,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileType>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.CollectibleTag>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.HealthCollectible>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MineCollectible>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.PowerUpTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.TrapTag>(false, false, false, false, false, false, false);
 
         }
 
@@ -47,6 +48,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.ApplyDamage>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.DeadBody>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerCollided>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerHasStopped>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
@@ -66,9 +68,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileType>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.CollectibleTag>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.HealthCollectible>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MineCollectible>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.PowerUpTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.TrapTag>(false, false, false, false, false, false, false);
 
             ComponentsInitializerWorld.Setup(ComponentsInitializerWorldGen.Init);
             CoreComponentsInitializer.Init(ref structComponentsContainer);
@@ -77,6 +79,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Features.CollisionHandler.Components.ApplyDamage>(false);
             structComponentsContainer.Validate<Project.Features.CollisionHandler.Components.CollisionTag>(false);
             structComponentsContainer.Validate<Project.Features.CollisionHandler.Components.PortalTag>(false);
+            structComponentsContainer.Validate<Project.Features.Player.Components.DeadBody>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerCollided>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerHasStopped>(true);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerHealth>(false);
@@ -96,9 +99,9 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileTag>(false);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileType>(false);
             structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.CollectibleTag>(true);
-            structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.HealthCollectible>(true);
             structComponentsContainer.ValidateCopyable<Project.Features.SceneBuilder.Components.MapComponents>(false);
-            structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.MineCollectible>(true);
+            structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.PowerUpTag>(false);
+            structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.TrapTag>(false);
 
         }
 
@@ -112,6 +115,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Features.CollisionHandler.Components.ApplyDamage>(false);
             entity.ValidateData<Project.Features.CollisionHandler.Components.CollisionTag>(false);
             entity.ValidateData<Project.Features.CollisionHandler.Components.PortalTag>(false);
+            entity.ValidateData<Project.Features.Player.Components.DeadBody>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerCollided>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerHasStopped>(true);
             entity.ValidateData<Project.Features.Player.Components.PlayerHealth>(false);
@@ -131,9 +135,9 @@ namespace ME.ECS {
             entity.ValidateData<Project.Features.Projectile.Components.ProjectileTag>(false);
             entity.ValidateData<Project.Features.Projectile.Components.ProjectileType>(false);
             entity.ValidateData<Project.Features.SceneBuilder.Components.CollectibleTag>(true);
-            entity.ValidateData<Project.Features.SceneBuilder.Components.HealthCollectible>(true);
             entity.ValidateDataCopyable<Project.Features.SceneBuilder.Components.MapComponents>(false);
-            entity.ValidateData<Project.Features.SceneBuilder.Components.MineCollectible>(true);
+            entity.ValidateData<Project.Features.SceneBuilder.Components.PowerUpTag>(false);
+            entity.ValidateData<Project.Features.SceneBuilder.Components.TrapTag>(false);
 
         }
 

@@ -33,21 +33,22 @@ namespace Project.Features {
         private Filter _playerFilter;
         private int _playerIndex;
         private SceneBuilderFeature _builder;
-        
+
         protected override void OnConstruct()
         {
             _playerViewID = world.RegisterViewSource(PlayerView);
-            
+
             world.GetFeature(out _builder);
-            
-            this.AddSystem<PlayerMovementSystem>();
-            this.AddSystem<PlayerHealthSystem>();
-            this.AddSystem<ApplyDamageSystem>();
-            this.AddSystem<PlayerPortalSystem>();
-            
-            this.AddModule<PlayerConnectionModule>();
-            
-            
+
+            AddSystem<PlayerMovementSystem>();
+            AddSystem<PlayerHealthSystem>();
+            AddSystem<ApplyDamageSystem>();
+            AddSystem<PlayerPortalSystem>();
+            AddSystem<PlayerRespawnSystem>();
+
+            AddModule<PlayerConnectionModule>();
+
+
             var net = world.GetModule<NetworkModule>();
 
             net.RegisterObject(this);
@@ -84,7 +85,11 @@ namespace Project.Features {
 
             PassLocalPlayer.Execute(player);
             HealthChangedEvent.Execute(player);
-            
+        }
+
+        public void RespawnPlayer(int id)
+        {
+            PlayerJoined_RPC(id);
         }
         
         public Entity GetActivePlayer()

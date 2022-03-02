@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9088948784623590903}
   - component: {fileID: 7648317194336597871}
+  - component: {fileID: 1755693559033907185}
   m_Layer: 0
   m_Name: BulletView
   m_TagString: Untagged
@@ -33,6 +34,39 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7648317194336597871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2656959333601977725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a789946165c99fa45a54e52644c4301d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: -591256033219733473, guid: 3b0b5af2675de914a87c76303d3efb32, type: 3}
+        meshRenderer: {fileID: 6573070920282826217}
+        meshFilter: {fileID: 8997288689863790883}
+        material: {fileID: 5200753494579969130, guid: 1685f0adc17f6724eb396625dfeb32a8, type: 3}
+        localPosition: {x: 0, y: 0, z: 0}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 1, y: 1, z: 1}
+--- !u!114 &1755693559033907185
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

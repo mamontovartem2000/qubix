@@ -23,12 +23,14 @@ namespace Project.Features {
     #endregion
     public sealed class ProjectileFeature : Feature
     {
+        // public BulletParticle BulletView;
         public BulletMono BulletView;
+        // public RocketParticle RocketView;
         public RocketMono RocketView;
 
         public DataConfig BulletConfig;
         public DataConfig RocketConfig;
-
+        
         private ViewId _bulletID, _rocketID;
         
         protected override void OnConstruct()
@@ -36,6 +38,7 @@ namespace Project.Features {
             this.AddSystem<ProjectileSpawnSystem>();
             this.AddSystem<ProjectileMovementSystem>();
             this.AddSystem<ProjectileDeathSystem>();
+            AddSystem<ProjectileLifeTimeSystem>();
 
             _bulletID = world.RegisterViewSource(BulletView);
             _rocketID = world.RegisterViewSource(RocketView);

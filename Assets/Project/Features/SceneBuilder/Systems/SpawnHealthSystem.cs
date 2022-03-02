@@ -30,7 +30,7 @@ namespace Project.Features.SceneBuilder.Systems {
             this.GetFeature(out this.feature);
 
             Filter.Create("health-filter")
-                .With<HealthCollectible>()
+                .With<PowerUpTag>()
                 .Push(ref _healthFilter);
 
             _healthID = world.RegisterViewSource(feature.HealthView);
@@ -43,9 +43,10 @@ namespace Project.Features.SceneBuilder.Systems {
             if (_healthFilter.Count < 4)
             {
                 var entity = new Entity("health");
-                entity.Set(new HealthCollectible());
-                entity.SetPosition(feature.GetRandomSpawnPosition());
+
+                entity.Set(new PowerUpTag {Type = PowerUpType.Health});
                 
+                entity.SetPosition(feature.GetRandomSpawnPosition());
                 entity.InstantiateView(_healthID);
             }
         }

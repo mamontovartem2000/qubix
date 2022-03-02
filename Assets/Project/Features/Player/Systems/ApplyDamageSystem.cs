@@ -1,4 +1,5 @@
-﻿using ME.ECS;
+﻿using ExitGames.Client.Photon.StructWrapping;
+using ME.ECS;
 using Project.Features.CollisionHandler.Components;
 
 namespace Project.Features.Player.Systems {
@@ -43,11 +44,12 @@ namespace Project.Features.Player.Systems {
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            entity.Get<PlayerHealth>().Value -= entity.Read<ApplyDamage>().Value;
+            entity.Get<ApplyDamage>().ApplyTo.Get<PlayerHealth>().Value -= entity.Get<ApplyDamage>().Damage;
+            feature.HealthChangedEvent.Execute(entity.Get<ApplyDamage>().ApplyTo);
             
-            feature.HealthChangedEvent.Execute(entity);
-            
-            entity.Remove<ApplyDamage>();
+            // entity.Get<CollisionTag>().Player.Get<PlayerHealth>().Value -= entity.Read<ApplyDamage>().Value;
+            // entity.Get<PlayerHealth>().Value -= entity.Read<ApplyDamage>().Value;
+            // entity.Remove<ApplyDamage>();
         }
     
     }

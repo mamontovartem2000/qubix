@@ -5,11 +5,13 @@ namespace Project.Features.CollisionHandler.Components
     public struct CollisionTag : IComponent
     {
         public Entity Collision;
+        public Entity Player;
     }
 
     public struct ApplyDamage : IComponent
     {
-        public float Value;
+        public float Damage;
+        public Entity ApplyTo;
     }
 
     public struct PortalTag : IComponent

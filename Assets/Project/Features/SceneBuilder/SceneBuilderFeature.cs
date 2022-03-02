@@ -6,9 +6,6 @@ using UnityEngine;
 namespace Project.Features
 {
     #region usage
-
-
-
     using Components;
     using Modules;
     using Systems;
@@ -46,12 +43,13 @@ namespace Project.Features
     public sealed class SceneBuilderFeature : Feature
     {
         public TextAsset Map;
+        public int PlayerCount;
         
         public TileView TileView;
         public PortalView PortalView;
         
-        public MineView MineView;
-        public HealthView HealthView;
+        public MineMono MineView;
+        public HealthMono HealthView;
         
         private int Width, Height, PortalCount;
 
@@ -62,6 +60,9 @@ namespace Project.Features
 
         protected override void OnConstruct()
         {
+            AddSystem<SpawnHealthSystem>();
+            AddSystem<SpawnMineSystem>();
+            
             PrepareMap();
         }
 
