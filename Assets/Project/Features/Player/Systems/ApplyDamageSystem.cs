@@ -18,25 +18,25 @@ namespace Project.Features.Player.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class ApplyDamageSystem : ISystemFilter {
-        
-        private PlayerFeature feature;
-        
+    public sealed class ApplyDamageSystem : ISystemFilter 
+    {
         public World world { get; set; }
-        
-        void ISystemBase.OnConstruct() {
+
+        private PlayerFeature feature;
+
+        void ISystemBase.OnConstruct() 
+        {
             this.GetFeature(out this.feature);
         }
         
         void ISystemBase.OnDeconstruct() {}
-        
         #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;
         #endif
         Filter ISystemFilter.filter { get; set; }
-        Filter ISystemFilter.CreateFilter() {
-            
+        Filter ISystemFilter.CreateFilter() 
+        {
             return Filter.Create("Filter-ApplyDamageSystem")
                 .With<ApplyDamage>()
                 .Push();
@@ -46,12 +46,6 @@ namespace Project.Features.Player.Systems {
         {
             entity.Get<ApplyDamage>().ApplyTo.Get<PlayerHealth>().Value -= entity.Get<ApplyDamage>().Damage;
             feature.HealthChangedEvent.Execute(entity.Get<ApplyDamage>().ApplyTo);
-            
-            // entity.Get<CollisionTag>().Player.Get<PlayerHealth>().Value -= entity.Read<ApplyDamage>().Value;
-            // entity.Get<PlayerHealth>().Value -= entity.Read<ApplyDamage>().Value;
-            // entity.Remove<ApplyDamage>();
         }
-    
     }
-    
 }

@@ -57,6 +57,8 @@ namespace Project.Features.Player.Components
         public int ActorID;
         public float Time;
     }
+    
+    public struct RespawnTag : IComponent {}
 }
 
 public enum AmmoType

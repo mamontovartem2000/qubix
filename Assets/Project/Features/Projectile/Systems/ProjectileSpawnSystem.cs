@@ -48,8 +48,6 @@ namespace Project.Features.Projectile.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            // Debug.Log(entity.Read<PlayerTag>().PlayerID);
-
             var ammo = entity.Read<PlayerShot>().Ammo;
             var actorID = entity.Read<PlayerTag>().PlayerID;
 
@@ -81,12 +79,21 @@ namespace Project.Features.Projectile.Systems
             switch (ammo)
             {
                 case AmmoType.Bullet:
+                    if(entity.Has<BulletCooldown>()) break;
+                    
                     SpawnProjectile(spawnPoint + _leftOffset, direction, feature.GetBulletViewID(), actorID,
                         feature.BulletConfig);
+                    entity.Set(new BulletCooldown {Cooldown = 0.2f});
+                    
                     break;
+                
                 case AmmoType.Rocket:
+                    if(entity.Has<RocketCooldown>()) break;
+                    
                     SpawnProjectile(spawnPoint + _rightOffset, direction, feature.GetRocketViewID(), actorID,
                         feature.RocketConfig);
+                    entity.Set(new RocketCooldown() {Cooldown = 0.4f});
+                    
                     break;
             }
         }

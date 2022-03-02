@@ -1,28 +1,39 @@
+using System;
 using ME.ECS;
-using Photon.Pun;
-using Project.Features.Player.Components;
+using Project.Features;
 using UnityEngine;
 
 public class CameraFollowScript : MonoBehaviour
 {
-    public GlobalEvent TestEvent;
+    [SerializeField] private GlobalEvent _playerPassEvent;
     [SerializeField] private Vector3 _offset;
-    private Entity _player;
     
+    private Entity _player;
+
     private void Start()
     {
-        this.TestEvent.Subscribe(ThisTestEventCallback);
-    }
-
-    private void ThisTestEventCallback(in Entity entity)
-    {
-        if(entity.Read<PlayerTag>().PlayerID == PhotonNetwork.LocalPlayer.ActorNumber)
-            _player = entity;
+        _playerPassEvent.Subscribe(SetPlayer);
     }
 
     private void Update()
     {
         if (_player.IsAlive())
             transform.position = _player.GetPosition() + _offset;
+    }
+
+    private void SetPlayer(in Entity entity)
+    {
+        if(!CheckLocalPlayer(entity)) return;
+        _player = entity;
+    }
+    
+    private bool CheckLocalPlayer(in Entity entity)
+    {
+        return entity == Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer();
+    }
+
+    private void OnDestroy()
+    {
+        _playerPassEvent.Unsubscribe(SetPlayer);
     }
 }

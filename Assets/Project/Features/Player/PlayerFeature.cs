@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using ME.ECS;
-using Photon.Pun;
-using Project.Features.CollisionHandler.Components;
+﻿using ME.ECS;
 using Project.Features.Player.Views;
-using Project.Features.SceneBuilder.Components;
+using Project.Features.Projectile.Components;
 using UnityEngine;
 
 namespace Project.Features {
@@ -25,8 +22,12 @@ namespace Project.Features {
     public sealed class PlayerFeature : Feature
     {
         public PlayerView PlayerView;
+
         public GlobalEvent PassLocalPlayer;
         public GlobalEvent HealthChangedEvent;
+        public GlobalEvent RespawnEvent;
+        public GlobalEvent VictoryEvent;
+        public GlobalEvent DefeatEvent;
         
         private ViewId _playerViewID;
         private RPCId _onPlayerConnected;
@@ -45,9 +46,10 @@ namespace Project.Features {
             AddSystem<ApplyDamageSystem>();
             AddSystem<PlayerPortalSystem>();
             AddSystem<PlayerRespawnSystem>();
-
+            AddSystem<BulletCooldownSystem>();
+            AddSystem<RocketCooldownSystem>();
+            
             AddModule<PlayerConnectionModule>();
-
 
             var net = world.GetModule<NetworkModule>();
 
@@ -84,7 +86,6 @@ namespace Project.Features {
             _builder.MoveTo(_builder.PositionToIndex(playerPosition), _builder.PositionToIndex(playerPosition));
 
             PassLocalPlayer.Execute(player);
-            HealthChangedEvent.Execute(player);
         }
 
         public void RespawnPlayer(int id)

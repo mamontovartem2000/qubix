@@ -22,7 +22,7 @@ namespace Project.Features {
     public sealed class CollisionHandlerFeature : Feature
     {
         public GlobalEvent DamageEvent;
-        
+        public GlobalEvent ScoreEvent;
         protected override void OnConstruct()
         {
             AddSystem<RegisterProjectileCollisionSystem>();

@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using UnityEngine;
 
 namespace Project.Features.Player.Systems {
     #region usage
@@ -16,17 +17,19 @@ namespace Project.Features.Player.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class PlayerHealthSystem : ISystemFilter {
-        
-        private PlayerFeature feature;
-        
+    public sealed class PlayerHealthSystem : ISystemFilter 
+    {
         public World world { get; set; }
         
+        private PlayerFeature feature;
+        private SceneBuilderFeature _builder;
+
         void ISystemBase.OnConstruct() {
             
-            this.GetFeature(out this.feature);
+            this.GetFeature(out feature);
+            world.GetFeature(out _builder);
         }
-        
+
         void ISystemBase.OnDeconstruct() {}
         
         #if !CSHARP_8_OR_NEWER
@@ -34,17 +37,13 @@ namespace Project.Features.Player.Systems {
         int ISystemFilter.jobsBatchCount => 64;
         #endif
         Filter ISystemFilter.filter { get; set; }
-        Filter ISystemFilter.CreateFilter() {
-            
+        Filter ISystemFilter.CreateFilter() 
+        {
             return Filter.Create("Filter-PlayerHealthSystem")
                 .With<PlayerHealth>()
                 .Push();
-            
         }
 
-        private bool _isActive;
-        private int _count;
-        
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var currentHealth = entity.Read<PlayerHealth>().Value;
@@ -52,10 +51,13 @@ namespace Project.Features.Player.Systems {
             if (currentHealth > 0) return;
 
             var deadBody = new Entity("deadBody");
-            deadBody.Set(new DeadBody {ActorID = entity.Read<PlayerTag>().PlayerID, Time = 2f});
-            entity.Destroy();
+            deadBody.Set(new DeadBody {ActorID = entity.Read<PlayerTag>().PlayerID, Time = 5.5f});
+            _builder.MoveTo(_builder.PositionToIndex(entity.GetPosition()), 0);
 
-            _count = _isActive ? 1 : 0;
+            feature.RespawnEvent.Run(entity);
+            entity.Get<PlayerScore>().Value -= 5;
+
+            entity.Destroy();
         }
     }
 }

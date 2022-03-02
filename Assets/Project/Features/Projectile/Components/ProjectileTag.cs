@@ -28,6 +28,16 @@ namespace Project.Features.Projectile.Components {
     }
     
     public struct ProjectileShouldDie : IComponent {}
+
+    public struct BulletCooldown : IComponent
+    {
+        public float Cooldown;
+    }
+
+    public struct RocketCooldown : IComponent
+    {
+        public float Cooldown;
+    }
 }
 
 public enum ProjectileBase

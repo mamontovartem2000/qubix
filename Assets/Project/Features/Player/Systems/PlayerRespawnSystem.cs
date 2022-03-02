@@ -44,8 +44,6 @@ namespace Project.Features.Player.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            Debug.Log(entity.Get<DeadBody>().Time);
-
             if (entity.Read<DeadBody>().Time - deltaTime > 0)
             {
                 entity.Get<DeadBody>().Time -= deltaTime;
