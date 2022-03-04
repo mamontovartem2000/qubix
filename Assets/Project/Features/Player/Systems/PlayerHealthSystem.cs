@@ -21,17 +21,17 @@ namespace Project.Features.Player.Systems {
     {
         public World world { get; set; }
         
-        private PlayerFeature feature;
+        private PlayerFeature _feature;
         private SceneBuilderFeature _builder;
-
+        private EventsFeature _events;
         void ISystemBase.OnConstruct() {
             
-            this.GetFeature(out feature);
+            this.GetFeature(out _feature);
             world.GetFeature(out _builder);
+            world.GetFeature(out _events);
         }
 
         void ISystemBase.OnDeconstruct() {}
-        
         #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;
@@ -50,13 +50,22 @@ namespace Project.Features.Player.Systems {
 
             if (currentHealth > 0) return;
 
+            if (entity.Has<LastHit>())
+            {
+                entity.Get<LastHit>().Enemy.Get<PlayerScore>().Value += 5;
+                _events.ScoreChanged.Execute(entity.Read<LastHit>().Enemy);
+            }
+            
+            var scoreHolder = new Entity("scoreHolder");
+            scoreHolder.Set(new ScoreHolder {ActorID = entity.Read<PlayerTag>().PlayerID, ScoreAmount = entity.Read<PlayerScore>().Value});
+            
             var deadBody = new Entity("deadBody");
             deadBody.Set(new DeadBody {ActorID = entity.Read<PlayerTag>().PlayerID, Time = 5.5f});
+            
             _builder.MoveTo(_builder.PositionToIndex(entity.GetPosition()), 0);
-
-            feature.RespawnEvent.Run(entity);
-            entity.Get<PlayerScore>().Value -= 5;
-
+            
+            _events.Respawn.Run(entity);
+            
             entity.Destroy();
         }
     }

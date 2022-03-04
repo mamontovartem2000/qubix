@@ -1,6 +1,7 @@
 ﻿using ExitGames.Client.Photon.StructWrapping;
 using ME.ECS;
 using Project.Features.CollisionHandler.Components;
+using UnityEngine;
 
 namespace Project.Features.Player.Systems {
     #region usage
@@ -21,12 +22,13 @@ namespace Project.Features.Player.Systems {
     public sealed class ApplyDamageSystem : ISystemFilter 
     {
         public World world { get; set; }
-
-        private PlayerFeature feature;
+        
+        private PlayerFeature _feature;
+        private EventsFeature _events;
 
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this.feature);
+            this.GetFeature(out _feature);
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -45,7 +47,9 @@ namespace Project.Features.Player.Systems {
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             entity.Get<ApplyDamage>().ApplyTo.Get<PlayerHealth>().Value -= entity.Get<ApplyDamage>().Damage;
-            feature.HealthChangedEvent.Execute(entity.Get<ApplyDamage>().ApplyTo);
+            entity.Get<ApplyDamage>().ApplyTo.Get<LastHit>().Enemy = entity.Read<ApplyDamage>().From;
+            
+            _events.HealthChanged.Execute(entity.Get<ApplyDamage>().ApplyTo);
         }
     }
 }

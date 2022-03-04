@@ -15,6 +15,7 @@ namespace Project.Features.SceneBuilder.Components
             ArrayUtils.Copy(other.WalkableMap, ref WalkableMap);
             ArrayUtils.Copy(other.PortalsMap, ref PortalsMap);
             ArrayUtils.Copy(other.HeightMap,ref HeightMap);
+            ArrayUtils.Copy(other.HeightMap,ref HeightMap);
         }
         
         void IStructCopyable<MapComponents>.OnRecycle() 

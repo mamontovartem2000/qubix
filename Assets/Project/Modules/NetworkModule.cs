@@ -2,6 +2,7 @@ using ME.ECS;
 using Photon.Pun;
 using Project.Features;
 using Project.Markers;
+using UnityEngine;
 
 namespace Project.Modules
 {
@@ -399,6 +400,7 @@ namespace Project.Modules
             this.UpdateTime();
 
             var world = ME.ECS.Worlds.currentWorld;
+
             if (this.timeSynced == true && this.timeSyncedConnected == false)
             {
                 var networkModule = world.GetModule<NetworkModule>();

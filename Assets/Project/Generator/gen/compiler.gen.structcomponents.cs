@@ -13,6 +13,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.DeadBody>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.LastHit>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerCollided>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerHasStopped>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
@@ -24,7 +25,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerShot>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerShouldRotate>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.RegainScore>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.RespawnTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.ScoreHolder>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.TeleportPlayer>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.BulletCooldown>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileDamage>(false, false, false, false, false, false, false);
@@ -52,6 +55,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.DeadBody>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.LastHit>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerCollided>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerHasStopped>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
@@ -63,7 +67,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerShot>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerShouldRotate>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.RegainScore>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.RespawnTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.ScoreHolder>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.TeleportPlayer>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.BulletCooldown>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileDamage>(false, false, false, false, false, false, false);
@@ -86,6 +92,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Features.CollisionHandler.Components.CollisionTag>(false);
             structComponentsContainer.Validate<Project.Features.CollisionHandler.Components.PortalTag>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.DeadBody>(false);
+            structComponentsContainer.Validate<Project.Features.Player.Components.LastHit>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerCollided>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerHasStopped>(true);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerHealth>(false);
@@ -97,7 +104,9 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerShot>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerShouldRotate>(true);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerTag>(false);
+            structComponentsContainer.Validate<Project.Features.Player.Components.RegainScore>(true);
             structComponentsContainer.Validate<Project.Features.Player.Components.RespawnTag>(true);
+            structComponentsContainer.Validate<Project.Features.Player.Components.ScoreHolder>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.TeleportPlayer>(false);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.BulletCooldown>(false);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileDamage>(false);
@@ -125,6 +134,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Features.CollisionHandler.Components.CollisionTag>(false);
             entity.ValidateData<Project.Features.CollisionHandler.Components.PortalTag>(false);
             entity.ValidateData<Project.Features.Player.Components.DeadBody>(false);
+            entity.ValidateData<Project.Features.Player.Components.LastHit>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerCollided>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerHasStopped>(true);
             entity.ValidateData<Project.Features.Player.Components.PlayerHealth>(false);
@@ -136,7 +146,9 @@ namespace ME.ECS {
             entity.ValidateData<Project.Features.Player.Components.PlayerShot>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerShouldRotate>(true);
             entity.ValidateData<Project.Features.Player.Components.PlayerTag>(false);
+            entity.ValidateData<Project.Features.Player.Components.RegainScore>(true);
             entity.ValidateData<Project.Features.Player.Components.RespawnTag>(true);
+            entity.ValidateData<Project.Features.Player.Components.ScoreHolder>(false);
             entity.ValidateData<Project.Features.Player.Components.TeleportPlayer>(false);
             entity.ValidateData<Project.Features.Projectile.Components.BulletCooldown>(false);
             entity.ValidateData<Project.Features.Projectile.Components.ProjectileDamage>(false);

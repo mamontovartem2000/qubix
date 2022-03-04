@@ -46,7 +46,7 @@ namespace Project.Features
         public int PlayerCount;
         
         public TileView TileView;
-        public PortalView PortalView;
+        public PortalMono PortalView;
         
         public MineMono MineView;
         public HealthMono HealthView;

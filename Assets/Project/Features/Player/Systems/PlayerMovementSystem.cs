@@ -62,16 +62,6 @@ namespace Project.Features.Player.Systems
         {
             var current = entity.Read<PlayerTag>().FaceDirection;
 
-            // entity.SetTimer(1488, 3f);
-            // entity.RemoveTimer(1488);
-
-            // var irr = entity.ReadTimer(1488);
-            //
-            // if (irr < 0)
-            // {
-            //     //death;
-            // }
-            
             // Y Axis rotation;
              var targetAngle = Mathf.Atan2(current.x, current.z) * Mathf.Rad2Deg;
              var angle = Mathf.SmoothDampAngle(entity.GetRotation().eulerAngles.y, targetAngle, ref _smoothTurn,

@@ -24,12 +24,14 @@ namespace Project.Features.CollisionHandler.Systems
     {
         public World world { get; set; }
         
-        private CollisionHandlerFeature feature;
+        private CollisionHandlerFeature _feature;
+        private EventsFeature _events;
+        
         private Filter _powerUpFilter;
 
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this.feature);
+            this.GetFeature(out _feature);
 
             Filter.Create("powerup-filter")
                 .With<PowerUpTag>()
@@ -59,7 +61,7 @@ namespace Project.Features.CollisionHandler.Systems
                     collision.Set(new ApplyDamage {ApplyTo = entity, Damage = -5f}, ComponentLifetime.NotifyAllSystems);
                     
                     entity.Get<PlayerScore>().Value += 2;
-                    feature.ScoreEvent.Execute(entity);
+                    _events.ScoreChanged.Execute(entity);
                     
                     collectible.Destroy();
                 }

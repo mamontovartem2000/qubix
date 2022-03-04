@@ -23,9 +23,11 @@ namespace Project.Features.Player.Systems
         public World world { get; set; }
     
         private PlayerFeature feature;
+        private CollisionHandlerFeature _coll;
         void ISystemBase.OnConstruct() 
         {
             this.GetFeature(out this.feature);
+            world.GetFeature(out _coll);
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -51,6 +53,8 @@ namespace Project.Features.Player.Systems
             else
             {
                 feature.RespawnPlayer(entity.Read<DeadBody>().ActorID);
+
+                    
                 entity.Destroy();
             }
         }

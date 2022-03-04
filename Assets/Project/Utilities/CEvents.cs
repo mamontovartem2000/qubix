@@ -1,7 +1,5 @@
-﻿using System;
-using ME.ECS;
+﻿using ME.ECS;
 using Project.Features;
-using UnityEngine;
 
 namespace Project.Utilities
 {
@@ -11,10 +9,12 @@ namespace Project.Utilities
         public static bool CheckLocalPlayer(in Entity entity)
         {
             var result = entity == Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer();
-            
-            // Debug.Log(result);
-            
             return result;
+        }
+        
+        public static int CheckIndexByLength(int index, int length)
+        {
+            return index < length ? index : index - length;
         }
     }
 }

@@ -24,12 +24,14 @@ namespace Project.Features.CollisionHandler.Systems {
         public World world { get; set; }
 
         private Filter _playerFilter;
-        private CollisionHandlerFeature feature;
+        private CollisionHandlerFeature _feature;
+        private PlayerFeature _playerFeature;
 
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this.feature);
-        
+            this.GetFeature(out this._feature);
+            world.GetFeature(out _playerFeature);
+            
             Filter.Create("PlayerFilter")
                 .With<PlayerTag>()
                 .Push(ref _playerFilter);
@@ -60,7 +62,7 @@ namespace Project.Features.CollisionHandler.Systems {
                     if (playerId == projectileId) return;
 
                     var collision = new Entity("collision");
-                    collision.Set(new ApplyDamage {Damage = entity.Read<ProjectileDamage>().Value, ApplyTo = player},ComponentLifetime.NotifyAllSystems);
+                    collision.Set(new ApplyDamage {Damage = entity.Read<ProjectileDamage>().Value, ApplyTo = player, From = _playerFeature.GetPlayerByID(projectileId)},ComponentLifetime.NotifyAllSystems);
                     entity.Set(new ProjectileShouldDie(), ComponentLifetime.NotifyAllSystems);
 
                     // collision.Set(new CollisionTag {Collision = entity, Player = player}, ComponentLifetime.NotifyAllSystems);

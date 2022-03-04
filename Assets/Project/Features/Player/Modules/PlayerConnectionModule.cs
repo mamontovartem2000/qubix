@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Photon.Pun;
 using Project.Markers;
+using UnityEngine;
 
 namespace Project.Features.Player.Modules {
     #region usage
@@ -15,11 +16,12 @@ namespace Project.Features.Player.Modules {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class PlayerConnectionModule : IModule, IUpdate {
-        
-        private PlayerFeature feature;
+    public sealed class PlayerConnectionModule : IModule, IUpdate 
+    {
         public World world { get; set; }
-        
+    
+        private PlayerFeature feature;
+
         void IModuleBase.OnConstruct() 
         {
             this.feature = this.world.GetFeature<PlayerFeature>();
@@ -29,9 +31,19 @@ namespace Project.Features.Player.Modules {
 
         void IUpdate.Update(in float deltaTime)
         {
+            if (world.GetMarker(out NetworkSetActivePlayer nsap))
+            {
+                feature.OnLocalPlayerConnected(nsap.Player.ActorNumber);
+            }
+            
             if (world.GetMarker(out NetworkPlayerConnectedTimeSynced npc))
             {
-                feature.OnLocalPlayerConnected(npc.ActorID);
+                feature.OnGameStarted(npc.ActorID);
+            }
+
+            if (world.GetMarker(out NetworkPlayerDisconnected npd))
+            {
+                feature.OnLocalPlayerDisconnected(npd.Player.ActorNumber);
             }
         }
     }

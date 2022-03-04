@@ -21,8 +21,6 @@ namespace Project.Features {
     #endregion
     public sealed class CollisionHandlerFeature : Feature
     {
-        public GlobalEvent DamageEvent;
-        public GlobalEvent ScoreEvent;
         protected override void OnConstruct()
         {
             AddSystem<RegisterProjectileCollisionSystem>();

@@ -12,6 +12,7 @@ namespace Project.Features.CollisionHandler.Components
     {
         public float Damage;
         public Entity ApplyTo;
+        public Entity From;
     }
 
     public struct PortalTag : IComponent

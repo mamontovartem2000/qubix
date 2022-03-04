@@ -7,6 +7,7 @@ namespace Project.Features.Player.Components
     {
         public int PlayerID;
         public Vector3 FaceDirection;
+        public Material Material;
     }
 
     public struct PlayerScore : IComponent
@@ -57,8 +58,21 @@ namespace Project.Features.Player.Components
         public int ActorID;
         public float Time;
     }
+
+    public struct LastHit : IComponent
+    {
+        public Entity Enemy;
+    }
     
     public struct RespawnTag : IComponent {}
+
+    public struct ScoreHolder : IComponent
+    {
+        public int ActorID;
+        public int ScoreAmount;
+    }
+    
+    public struct RegainScore : IComponent {}
 }
 
 public enum AmmoType
