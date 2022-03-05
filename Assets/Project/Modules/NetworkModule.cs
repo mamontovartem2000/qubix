@@ -318,7 +318,7 @@ namespace Project.Modules
 
                 world.AddMarker(new NetworkSetActivePlayer()
                 {
-                    Player = Photon.Pun.PhotonNetwork.LocalPlayer
+                    ActorID = PhotonNetwork.LocalPlayer.ActorNumber
                 });
             }
         }
@@ -380,7 +380,7 @@ namespace Project.Modules
                 var world = ME.ECS.Worlds.currentWorld;
                 world.AddMarker(new NetworkPlayerDisconnected()
                 {
-                    Player = otherPlayer
+                    ActorID = otherPlayer.ActorNumber
                 });
             }
         }
@@ -411,7 +411,7 @@ namespace Project.Modules
                     if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == _playerCount) //change this to 4 before apply for tests
                     {
                         this.timeSyncedConnected = true;
-                        world.AddMarker(new NetworkPlayerConnectedTimeSynced {ActorID = PhotonNetwork.LocalPlayer.ActorNumber});
+                        world.AddMarker(new NetworkPlayerConnectedTimeSynced());
                         //world.GetFeature<PlayerFeature>().OnLocalPlayerConnected(PhotonNetwork.LocalPlayer.ActorNumber);
                     }
                 }

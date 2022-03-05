@@ -1,16 +1,14 @@
 ﻿using ME.ECS;
 using Project.Features.Projectile.Components;
 
-namespace Project.Features.Player.Systems 
+namespace Project.Features.Projectile.Systems 
 {
     #region usage
 
     
 
     #pragma warning disable
-    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
-    using Components; using Modules; using Systems; using Markers;
-    #pragma warning restore
+#pragma warning restore
     
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
@@ -18,16 +16,16 @@ namespace Project.Features.Player.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class BulletCooldownSystem : ISystemFilter 
+    public sealed class RightWeaponCooldownSystem : ISystemFilter 
     {
         public World world { get; set; }
         
-        private PlayerFeature feature;
+        private PlayerFeature _feature;
+
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this.feature);
+            this.GetFeature(out _feature);
         }
-        
         void ISystemBase.OnDeconstruct() {}
         #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
@@ -36,20 +34,20 @@ namespace Project.Features.Player.Systems
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() 
         {
-            return Filter.Create("Filter-FiringCooldownSystem")
-                .With<BulletCooldown>()
+            return Filter.Create("Filter-RocketCooldownSystem")
+                .With<RightWeaponCooldown>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<BulletCooldown>().Cooldown - deltaTime > 0)
+            if (entity.Read<RightWeaponCooldown>().Value - deltaTime > 0)
             {
-                entity.Get<BulletCooldown>().Cooldown -= deltaTime;
+                entity.Get<RightWeaponCooldown>().Value -= deltaTime;
             }
             else
             {
-                entity.Remove<BulletCooldown>();
+                entity.Remove<RightWeaponCooldown>();
             }
         }
     }

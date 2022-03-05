@@ -8,6 +8,7 @@ namespace Project.Features.SceneBuilder.Components
     {
         public BufferArray<byte> WalkableMap;
         public BufferArray<Vector3> PortalsMap;
+        public BufferArray<Vector3> AmmoMap;
         public BufferArray<float> HeightMap;
 
         void IStructCopyable<MapComponents>.CopyFrom(in MapComponents other) 
@@ -15,7 +16,7 @@ namespace Project.Features.SceneBuilder.Components
             ArrayUtils.Copy(other.WalkableMap, ref WalkableMap);
             ArrayUtils.Copy(other.PortalsMap, ref PortalsMap);
             ArrayUtils.Copy(other.HeightMap,ref HeightMap);
-            ArrayUtils.Copy(other.HeightMap,ref HeightMap);
+            ArrayUtils.Copy(other.AmmoMap,ref AmmoMap);
         }
         
         void IStructCopyable<MapComponents>.OnRecycle() 
@@ -23,6 +24,7 @@ namespace Project.Features.SceneBuilder.Components
             PoolArray<byte>.Recycle(ref WalkableMap);
             PoolArray<Vector3>.Recycle(ref PortalsMap);
             PoolArray<float>.Recycle(ref HeightMap);
+            PoolArray<Vector3>.Recycle(ref AmmoMap);
         }
     }
 }

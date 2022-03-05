@@ -19,4 +19,9 @@ namespace Project.Features.CollisionHandler.Components
     {
         public int PortalID;
     }
+    
+    public struct PlayerCollided : IComponent
+    {
+        public int Value;
+    }
 }

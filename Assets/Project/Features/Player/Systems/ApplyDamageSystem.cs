@@ -24,7 +24,6 @@ namespace Project.Features.Player.Systems {
         public World world { get; set; }
         
         private PlayerFeature _feature;
-        private EventsFeature _events;
 
         void ISystemBase.OnConstruct() 
         {
@@ -49,7 +48,7 @@ namespace Project.Features.Player.Systems {
             entity.Get<ApplyDamage>().ApplyTo.Get<PlayerHealth>().Value -= entity.Get<ApplyDamage>().Damage;
             entity.Get<ApplyDamage>().ApplyTo.Get<LastHit>().Enemy = entity.Read<ApplyDamage>().From;
             
-            _events.HealthChanged.Execute(entity.Get<ApplyDamage>().ApplyTo);
+            world.GetFeature<EventsFeature>().HealthChanged.Execute(entity.Get<ApplyDamage>().ApplyTo);
         }
     }
 }

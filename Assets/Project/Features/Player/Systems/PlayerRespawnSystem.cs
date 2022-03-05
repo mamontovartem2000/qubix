@@ -46,17 +46,23 @@ namespace Project.Features.Player.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<DeadBody>().Time - deltaTime > 0)
+            ref var smth = ref entity.Get<DeadBody>();
+            smth.Time -= deltaTime;
+            
+            if(smth.Time <= 0)
             {
-                entity.Get<DeadBody>().Time -= deltaTime;
-            }
-            else
-            {
-                feature.RespawnPlayer(entity.Read<DeadBody>().ActorID);
-
-                    
+                var newPlayer = feature.RespawnPlayer(smth.ActorID);
+                newPlayer.SetAs<PlayerScore>(entity);
                 entity.Destroy();
             }
+            
+            //
+            // if (entity.Read<DeadBody>().Time - deltaTime > 0)
+            // {
+            //     entity.Get<DeadBody>().Time -= deltaTime;
+            // }
+            // else
+            // {
         }
     }
 }

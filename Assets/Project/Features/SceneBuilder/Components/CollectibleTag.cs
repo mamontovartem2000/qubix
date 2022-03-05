@@ -4,23 +4,19 @@ namespace Project.Features.SceneBuilder.Components {
 
     public struct CollectibleTag : IComponent {}
 
-    public struct PowerUpTag : IComponent
-    {
-        public PowerUpType Type;
-    }
+    public struct HealPoweUpTag : IComponent {}
 
-    public struct TrapTag : IComponent
-    {
-        public TrapType Type;
-    }
-
-    public enum PowerUpType
-    {
-        Health
-    }
+    public struct MineTag : IComponent {}
     
-    public enum TrapType
-    {
-        Mine
-    }
+    public struct RocketAmmoTag : IComponent {}
+
+    // public enum PowerUpType
+    // {
+    //     Health, RocketGun
+    // }
+    //
+    // public enum TrapType
+    // {
+    //     Mine
+    // }
 }

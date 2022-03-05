@@ -33,17 +33,17 @@ namespace Project.Features.Player.Modules {
         {
             if (world.GetMarker(out NetworkSetActivePlayer nsap))
             {
-                feature.OnLocalPlayerConnected(nsap.Player.ActorNumber);
+                feature.OnLocalPlayerConnected(nsap.ActorID);
             }
             
             if (world.GetMarker(out NetworkPlayerConnectedTimeSynced npc))
             {
-                feature.OnGameStarted(npc.ActorID);
+                feature.OnGameStarted();
             }
 
             if (world.GetMarker(out NetworkPlayerDisconnected npd))
             {
-                feature.OnLocalPlayerDisconnected(npd.Player.ActorNumber);
+                feature.OnLocalPlayerDisconnected(npd.ActorID);
             }
         }
     }

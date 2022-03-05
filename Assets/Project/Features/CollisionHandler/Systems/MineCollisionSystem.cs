@@ -2,8 +2,7 @@
 using Project.Features.Player.Components;
 using Project.Features.SceneBuilder.Components;
 
-namespace Project.Features.CollisionHandler.Systems 
-{
+namespace Project.Features.CollisionHandler.Systems {
     #region usage
 
     
@@ -20,22 +19,20 @@ namespace Project.Features.CollisionHandler.Systems
     #endif
 
     #endregion
-    public sealed class RegisterPowerUpCollisionSystem : ISystemFilter 
+
+    public sealed class MineCollisionSystem : ISystemFilter 
     {
         public World world { get; set; }
         
         private CollisionHandlerFeature _feature;
-        private EventsFeature _events;
+        private Filter _trapFilter;
         
-        private Filter _powerUpFilter;
-
         void ISystemBase.OnConstruct() 
         {
             this.GetFeature(out _feature);
-
-            Filter.Create("powerup-filter")
-                .With<PowerUpTag>()
-                .Push(ref _powerUpFilter);
+            Filter.Create("trap-filter")
+                .With<MineTag>()
+                .Push(ref _trapFilter);
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -46,26 +43,26 @@ namespace Project.Features.CollisionHandler.Systems
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() 
         {
-            return Filter.Create("Filter-RegisterPointCollisionSystem")
+            return Filter.Create("Filter-RegisterTrapCollisionSystem")
                 .With<PlayerTag>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            foreach (var collectible in _powerUpFilter)
+            foreach (var collectible in _trapFilter)
             {
                 if (entity.GetPosition() == collectible.GetPosition())
                 {
-                    var collision = new Entity("collision");
-                    collision.Set(new ApplyDamage {ApplyTo = entity, Damage = -5f}, ComponentLifetime.NotifyAllSystems);
+                    if (entity.Has<LastHit>()) entity.Remove<LastHit>();
                     
-                    entity.Get<PlayerScore>().Value += 2;
-                    _events.ScoreChanged.Execute(entity);
+                    var collision = new Entity("collision");
+                    collision.Set(new ApplyDamage {ApplyTo = entity, Damage = 10f}, ComponentLifetime.NotifyAllSystems);
                     
                     collectible.Destroy();
                 }
             }   
         }
+    
     }
 }

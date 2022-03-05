@@ -14,57 +14,43 @@ namespace Project.Features.Player.Components
     {
         public int Value;
     }
-    public struct PlayerMoveTarget : IComponent
-    {
-        public Vector3 Value;
-    }
-    public struct PlayerMovementSpeed : IComponent
-    {
-        public float Value;
-    }
-    public struct PlayerIsMoving : IComponent
-    {
-        public bool Forward;
-    }
+    
     public struct PlayerIsRotating : IComponent
     {
         public bool Clockwise;
     }
-    public struct PlayerHealth : IComponent
-    {
-        public float Value;
-    }
-    public struct PlayerHasStopped : IComponent {}
-    public struct PlayerShouldRotate : IComponent{}
 
-    public struct PlayerCollided : IComponent
+    public struct LeftWeapon : IComponent
     {
-        public int Value;
+        public AmmoType Type;
+        public int MaxAmmo;
+        public int Ammo;
+        public float Cooldown;
+        public float ReloadTime;
     }
 
-    public struct PlayerShot : IComponent
+    public struct LeftWeaponReload : IComponent
     {
-        public AmmoType Ammo;
-        public Vector3 SpawnPoint;
-    }
-
-    public struct TeleportPlayer : IComponent
-    {
-        public int CurrentID;
-    }
-
-    public struct DeadBody : IComponent
-    {
-        public int ActorID;
         public float Time;
     }
 
-    public struct LastHit : IComponent
+    // public struct RightWeaponReload : IComponent
+    // {
+    //     public float Time;
+    // }
+
+    public struct RightWeapon : IComponent
     {
-        public Entity Enemy;
+        public AmmoType Type;
+        public int MaxAmmo;
+        public int Ammo;
+        public float Cooldown;
+        public float ReloadTime;
     }
     
-    public struct RespawnTag : IComponent {}
+    public struct LeftWeaponShot : IComponent {}
+    
+    public struct RightWeaponShot : IComponent {}
 
     public struct ScoreHolder : IComponent
     {
@@ -78,5 +64,7 @@ namespace Project.Features.Player.Components
 public enum AmmoType
 {
     Bullet,
-    Rocket
+    Rocket,
+    Rifle,
+    Shotgun
 }

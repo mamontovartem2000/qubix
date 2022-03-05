@@ -19,7 +19,7 @@ namespace Project.Features.CollisionHandler.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class RegisterProjectileCollisionSystem : ISystemFilter
+    public sealed class ProjectileCollisionSystem : ISystemFilter
     {
         public World world { get; set; }
 
@@ -29,7 +29,7 @@ namespace Project.Features.CollisionHandler.Systems {
 
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this._feature);
+            this.GetFeature(out _feature);
             world.GetFeature(out _playerFeature);
             
             Filter.Create("PlayerFilter")
@@ -64,9 +64,6 @@ namespace Project.Features.CollisionHandler.Systems {
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {Damage = entity.Read<ProjectileDamage>().Value, ApplyTo = player, From = _playerFeature.GetPlayerByID(projectileId)},ComponentLifetime.NotifyAllSystems);
                     entity.Set(new ProjectileShouldDie(), ComponentLifetime.NotifyAllSystems);
-
-                    // collision.Set(new CollisionTag {Collision = entity, Player = player}, ComponentLifetime.NotifyAllSystems);
-                    // player.Set(new CollisionTag {Collision = entity}, ComponentLifetime.NotifyAllSystems);
                 }
             }
         }

@@ -20,20 +20,20 @@ namespace Project.Features.SceneBuilder.Systems {
     {
         public World world { get; set; }
         
-        private SceneBuilderFeature feature;
+        private SceneBuilderFeature _feature;
 
         private Filter _healthFilter;
         private ViewId _healthID;
         
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this.feature);
+            this.GetFeature(out _feature);
 
             Filter.Create("health-filter")
-                .With<PowerUpTag>()
+                .With<HealPoweUpTag>()
                 .Push(ref _healthFilter);
 
-            _healthID = world.RegisterViewSource(feature.HealthView);
+            _healthID = world.RegisterViewSource(_feature.HealthView);
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -44,9 +44,9 @@ namespace Project.Features.SceneBuilder.Systems {
             {
                 var entity = new Entity("health");
 
-                entity.Set(new PowerUpTag {Type = PowerUpType.Health});
+                entity.Set(new HealPoweUpTag());
                 
-                entity.SetPosition(feature.GetRandomSpawnPosition());
+                entity.SetPosition(_feature.GetRandomSpawnPosition());
                 entity.InstantiateView(_healthID);
             }
         }

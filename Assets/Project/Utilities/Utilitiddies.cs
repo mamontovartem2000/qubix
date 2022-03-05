@@ -12,7 +12,7 @@ namespace Project.Utilities
             return result;
         }
         
-        public static int CheckIndexByLength(int index, int length)
+        public static int SafeCheckIndexByLength(int index, int length)
         {
             return index < length ? index : index - length;
         }

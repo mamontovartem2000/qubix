@@ -1,16 +1,14 @@
 ﻿using ME.ECS;
 using Project.Features.Projectile.Components;
 
-namespace Project.Features.Player.Systems 
+namespace Project.Features.Projectile.Systems 
 {
     #region usage
 
     
 
     #pragma warning disable
-    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
-    using Components; using Modules; using Systems; using Markers;
-    #pragma warning restore
+#pragma warning restore
     
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
@@ -18,15 +16,14 @@ namespace Project.Features.Player.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class RocketCooldownSystem : ISystemFilter 
+    public sealed class LeftWeapomCooldownSystem : ISystemFilter 
     {
         public World world { get; set; }
         
-        private PlayerFeature feature;
-
+        private PlayerFeature _feature;
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this.feature);
+            this.GetFeature(out this._feature);
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -37,20 +34,20 @@ namespace Project.Features.Player.Systems
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() 
         {
-            return Filter.Create("Filter-RocketCooldownSystem")
-                .With<RocketCooldown>()
+            return Filter.Create("Filter-FiringCooldownSystem")
+                .With<LeftWeaponCooldown>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<RocketCooldown>().Cooldown - deltaTime > 0)
+            if (entity.Read<LeftWeaponCooldown>().Value - deltaTime > 0)
             {
-                entity.Get<RocketCooldown>().Cooldown -= deltaTime;
+                entity.Get<LeftWeaponCooldown>().Value -= deltaTime;
             }
             else
             {
-                entity.Remove<RocketCooldown>();
+                entity.Remove<LeftWeaponCooldown>();
             }
         }
     }

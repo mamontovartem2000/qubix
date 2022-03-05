@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Features.Player.Views;
 using Project.Features.Projectile.Components;
+using Project.Features.Projectile.Systems;
 using Project.Utilities;
 using UnityEngine;
 
@@ -64,9 +65,8 @@ namespace Project.Features {
             AddSystem<ApplyDamageSystem>();
             AddSystem<PlayerPortalSystem>();
             AddSystem<PlayerRespawnSystem>();
-            AddSystem<BulletCooldownSystem>();
-            AddSystem<RocketCooldownSystem>();
-            AddSystem<RegainScoreSystem>();
+            AddSystem<LeftWeapomCooldownSystem>();
+            AddSystem<RightWeaponCooldownSystem>();
         }
         private void CreateFilters()
         {
@@ -82,7 +82,6 @@ namespace Project.Features {
         {
             net.RegisterObject(this);
 
-            _onPlayerConnected = net.RegisterRPC(new System.Action<int>(PlayerConnected_RPC).Method);
             _onPlayerDisconnected = net.RegisterRPC(new System.Action<int>(PlayerDisconnected_RPC).Method);
             _onGameStarted = net.RegisterRPC(new System.Action<int>(GameStarted_RPC).Method);
         }
@@ -90,36 +89,33 @@ namespace Project.Features {
         private void GameStarted_RPC(int id)
         {
             Debug.Log($"GameStarted with player {id}");
-            
-            var player = new Entity("Player");
-
-            player.Set(new PlayerTag {PlayerID = id, FaceDirection = Vector3.forward, 
-                Material = Materials[Utilitiddies.CheckIndexByLength(_playerIndex, Materials.Length)]});
-            
-            player.InstantiateView(_playerViewID);
-
-            player.Set(new PlayerHealth {Value = 100});
-
-            var playerPosition = _builder.GetRandomSpawnPosition();
-            
-            player.SetPosition(playerPosition);
-            player.Set(new PlayerMoveTarget {Value = playerPosition});
-            player.Set(new RegainScore(), ComponentLifetime.NotifyAllSystems);
-            
-            _builder.MoveTo(_builder.PositionToIndex(playerPosition), _builder.PositionToIndex(playerPosition));
-            _events.PassLocalPlayer.Execute(player);
+            CreatePlayer(id);
         }
 
-        private void PlayerConnected_RPC(int id)
+        private Entity CreatePlayer(int id)
+        {
+            var player = new Entity("Player");
+            player.InstantiateView(_playerViewID);
+
+            player.Set(new PlayerTag {PlayerID = id, FaceDirection = Vector3.forward, 
+                Material = Materials[Utilitiddies.SafeCheckIndexByLength(_playerIndex, Materials.Length)]});
+
+            player.Set(new PlayerHealth {Value = 1});
+            player.SetPosition(_builder.GetRandomSpawnPosition());
+            player.Set(new PlayerMoveTarget {Value = player.GetPosition()});
+            player.Set(new LeftWeapon {Type = AmmoType.Bullet, Cooldown = 0.2f, Ammo = 20, MaxAmmo = 20, ReloadTime = 1.2f});
+            player.Set(new RightWeapon {Type = AmmoType.Rocket, Cooldown = 0.4f, Ammo = 10, MaxAmmo = 10});
+            
+            _builder.MoveTo(_builder.PositionToIndex(player.GetPosition()), _builder.PositionToIndex(player.GetPosition()));
+            _events.PassLocalPlayer.Execute(player);
+
+            return player;
+        }
+        
+        public void OnLocalPlayerConnected(int id)
         {
             _playerIndex = id;
             Debug.Log($"PlayerConnected with player {id}");
-        }
-
-        public void OnLocalPlayerConnected(int id)
-        {
-            var net = world.GetModule<NetworkModule>();
-            net.RPC(this, _onPlayerConnected, id);
         }
 
         public void OnLocalPlayerDisconnected(int id)
@@ -128,10 +124,10 @@ namespace Project.Features {
             net.RPC(this, _onPlayerDisconnected, id);
         }
 
-        public void OnGameStarted(int id)
+        public void OnGameStarted()
         {
             var net = world.GetModule<NetworkModule>();
-            net.RPC(this, _onGameStarted, id);
+            net.RPC(this, _onGameStarted, _playerIndex);
         }
 
         private void PlayerDisconnected_RPC(int id)
@@ -158,9 +154,10 @@ namespace Project.Features {
             }
         }
 
-        public void RespawnPlayer(int id)
+        public Entity RespawnPlayer(int id)
         {
-            OnGameStarted(id);
+            // GameStarted_RPC(id);
+            return CreatePlayer(id);
         }
         
         public Entity GetActivePlayer()

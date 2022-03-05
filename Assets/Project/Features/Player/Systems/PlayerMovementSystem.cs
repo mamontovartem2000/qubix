@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Features.Projectile.Components;
 using Project.Features.SceneBuilder.Components;
 using UnityEngine;
 

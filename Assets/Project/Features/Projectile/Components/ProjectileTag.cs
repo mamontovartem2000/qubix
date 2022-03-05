@@ -29,14 +29,14 @@ namespace Project.Features.Projectile.Components {
     
     public struct ProjectileShouldDie : IComponent {}
 
-    public struct BulletCooldown : IComponent
+    public struct LeftWeaponCooldown : IComponent
     {
-        public float Cooldown;
+        public float Value;
     }
 
-    public struct RocketCooldown : IComponent
+    public struct RightWeaponCooldown : IComponent
     {
-        public float Cooldown;
+        public float Value;
     }
 }
 

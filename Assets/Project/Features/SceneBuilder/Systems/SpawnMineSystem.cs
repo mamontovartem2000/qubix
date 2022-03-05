@@ -32,7 +32,7 @@ namespace Project.Features.SceneBuilder.Systems
             this.GetFeature(out this.feature);
 
             Filter.Create("mine-filter")
-                .With<TrapTag>()
+                .With<MineTag>()
                 .Push(ref _mineFilter);
 
             _mineID = world.RegisterViewSource(feature.MineView);
@@ -46,7 +46,7 @@ namespace Project.Features.SceneBuilder.Systems
             {
                 var entity = new Entity("health");
 
-                entity.Set(new TrapTag {Type = TrapType.Mine});
+                entity.Set(new MineTag());
                 
                 entity.SetPosition(feature.GetRandomSpawnPosition());
                 entity.InstantiateView(_mineID);

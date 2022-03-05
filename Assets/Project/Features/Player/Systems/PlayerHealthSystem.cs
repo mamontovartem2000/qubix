@@ -50,21 +50,20 @@ namespace Project.Features.Player.Systems {
 
             if (currentHealth > 0) return;
 
-            if (entity.Has<LastHit>())
+            if (entity.Has<LastHit>() && entity.Get<LastHit>().Enemy.IsAlive())
             {
                 entity.Get<LastHit>().Enemy.Get<PlayerScore>().Value += 5;
                 _events.ScoreChanged.Execute(entity.Read<LastHit>().Enemy);
             }
             
-            var scoreHolder = new Entity("scoreHolder");
-            scoreHolder.Set(new ScoreHolder {ActorID = entity.Read<PlayerTag>().PlayerID, ScoreAmount = entity.Read<PlayerScore>().Value});
-            
             var deadBody = new Entity("deadBody");
             deadBody.Set(new DeadBody {ActorID = entity.Read<PlayerTag>().PlayerID, Time = 5.5f});
+            entity.Get<PlayerScore>().Value -= 5;
+
+            deadBody.SetAs<PlayerScore>(entity); //(entity.Read<PlayerScore>());
             
             _builder.MoveTo(_builder.PositionToIndex(entity.GetPosition()), 0);
-            
-            _events.Respawn.Run(entity);
+            _events.Respawn.Execute(entity);
             
             entity.Destroy();
         }

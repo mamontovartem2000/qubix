@@ -23,9 +23,10 @@ namespace Project.Features {
     {
         protected override void OnConstruct()
         {
-            AddSystem<RegisterProjectileCollisionSystem>();
-            AddSystem<RegisterPowerUpCollisionSystem>();
-            AddSystem<RegisterTrapCollisionSystem>();
+            AddSystem<ProjectileCollisionSystem>();
+            AddSystem<HealthCollisionSystem>();
+            AddSystem<MineCollisionSystem>();
+            AddSystem<AmmoCollisionSystem>();
         }
 
         protected override void OnDeconstruct() {}

@@ -1,8 +1,8 @@
 ﻿using ME.ECS;
 using Project.Features.Player.Components;
-using Project.Features.SceneBuilder.Components;
 
-namespace Project.Features.CollisionHandler.Systems {
+namespace Project.Features.Projectile.Systems 
+{
     #region usage
 
     
@@ -17,53 +17,36 @@ namespace Project.Features.CollisionHandler.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-
     #endregion
-
-    public sealed class RegisterTrapCollisionSystem : ISystemFilter 
+    public sealed class RightWeaponReloadSystem : ISystemFilter 
     {
         public World world { get; set; }
         
-        private CollisionHandlerFeature feature;
+        private ProjectileFeature _feature;
 
-        private Filter _trapFilter;
-        
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this.feature);
-            Filter.Create("trap-filter")
-                .With<TrapTag>()
-                .Push(ref _trapFilter);
+            this.GetFeature(out _feature);
         }
         
         void ISystemBase.OnDeconstruct() {}
-#if !CSHARP_8_OR_NEWER
+        #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;
-#endif
+        #endif
         Filter ISystemFilter.filter { get; set; }
+        
         Filter ISystemFilter.CreateFilter() 
         {
-            return Filter.Create("Filter-RegisterTrapCollisionSystem")
-                .With<PlayerTag>()
+            return Filter.Create("Filter-RightWeaponReloadSystem")
+                .With<RightWeapon>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            foreach (var collectible in _trapFilter)
-            {
-                if (entity.GetPosition() == collectible.GetPosition())
-                {
-                    if (entity.Has<LastHit>()) entity.Remove<LastHit>();
-                    
-                    var collision = new Entity("collision");
-                    collision.Set(new ApplyDamage {ApplyTo = entity, Damage = 10f}, ComponentLifetime.NotifyAllSystems);
-                    
-                    collectible.Destroy();
-                }
-            }   
+            if (entity.Read<RightWeapon>().Ammo > 0) return;
+            world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity);
         }
-    
     }
 }

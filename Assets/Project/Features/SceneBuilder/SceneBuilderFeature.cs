@@ -1,4 +1,5 @@
-﻿using ME.ECS;
+﻿using ExitGames.Client.Photon.StructWrapping;
+using ME.ECS;
 using ME.ECS.Collections;
 using Project.Features.SceneBuilder.Views;
 using UnityEngine;
@@ -47,14 +48,17 @@ namespace Project.Features
         
         public TileView TileView;
         public PortalMono PortalView;
+        public AmmoTileMono AmmoTileView;
         
         public MineMono MineView;
         public HealthMono HealthView;
+        public RocketAmmoMono RocketAmmoView;
         
-        private int Width, Height, PortalCount;
+        private int Width, Height, PortalCount, AmmoCount;
 
-        private ViewId _tileID, _portalID;
-        private const int EMPTY_TILE = 0, SIMPLE_TILE = 1, PORTAL_TILE = 2;
+        private ViewId _tileID, _portalID, _ammoID;
+        
+        private const int EMPTY_TILE = 0, SIMPLE_TILE = 1, PORTAL_TILE = 2, AMMO_TILE = 3;
 
         private Entity _init;
 
@@ -62,6 +66,7 @@ namespace Project.Features
         {
             AddSystem<SpawnHealthSystem>();
             AddSystem<SpawnMineSystem>();
+            AddSystem<SpawnRocketSystem>();
             
             PrepareMap();
         }
@@ -127,6 +132,11 @@ namespace Project.Features
                     {
                         PortalCount++;
                     }
+
+                    if (line[i] == '3')
+                    {
+                        AmmoCount++;
+                    }
                 }
             }
         }
@@ -135,10 +145,12 @@ namespace Project.Features
         {
             var walkableResult = new byte[Width * Height];
             var portalsResult = new Vector3[PortalCount];
+            var ammoResult = new Vector3[AmmoCount];
             
             var bytes = source.text;
             var byteIndex = 0;
             var portalIndex = 0;
+            var ammoIndex = 0;
             
             var lines = bytes.Split('\n');
 
@@ -161,6 +173,12 @@ namespace Project.Features
                             portalsResult[portalIndex] = IndexToPosition(byteIndex);
                             byteIndex++;
                             portalIndex++;
+                            break;
+                        case '3':
+                            walkableResult[byteIndex] = 3;
+                            ammoResult[ammoIndex] = IndexToPosition(byteIndex);
+                            byteIndex++;
+                            ammoIndex++;
                             break;
                     }
                 }
@@ -203,8 +221,11 @@ namespace Project.Features
 
             if (toIndex < 0 || toIndex >= Width * Height) return false;
 
-            var result = world.ReadSharedData<MapComponents>().WalkableMap[toIndex] == SIMPLE_TILE ||
-                         world.ReadSharedData<MapComponents>().WalkableMap[toIndex] == PORTAL_TILE;
+            // var result = world.ReadSharedData<MapComponents>().WalkableMap[toIndex] == SIMPLE_TILE ||
+            //              world.ReadSharedData<MapComponents>().WalkableMap[toIndex] == PORTAL_TILE;
+
+            var result = world.ReadSharedData<MapComponents>().WalkableMap[toIndex] != 0;
+            
             return result;
         }
 

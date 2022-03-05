@@ -28,6 +28,11 @@ namespace Project.Features {
         public GlobalEvent Defeat;
         public GlobalEvent Victory;
         public GlobalEvent Respawn;
+
+        public GlobalEvent leftWeaponFired;
+        public GlobalEvent rightWeaponFired;
+        public GlobalEvent LeftweaponDepleted;
+        public GlobalEvent RightWeaponDepleted;
             
         protected override void OnConstruct() {}
         protected override void OnDeconstruct() {}
