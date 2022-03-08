@@ -23,11 +23,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerIsRotating>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerScore>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerTag>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.RegainScore>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.RespawnTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.RightWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.RightWeaponShot>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.ScoreHolder>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.LeftWeaponCooldown>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.MovementComponents>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.PlayerHasStopped>(true, false, false, false, false, false, false);
@@ -43,10 +41,13 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileType>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.RightWeaponCooldown>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.TeleportPlayer>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.AmmoTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.AmmoTileTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.CollectibleTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.HealPoweUpTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MineTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.RifleAmmoTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.RocketAmmoTag>(true, false, false, false, false, false, false);
 
         }
@@ -72,11 +73,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerIsRotating>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerScore>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.PlayerTag>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.RegainScore>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.RespawnTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.RightWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.RightWeaponShot>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Features.Player.Components.ScoreHolder>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.LeftWeaponCooldown>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.MovementComponents>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.PlayerHasStopped>(true, false, false, false, false, false, false);
@@ -92,10 +91,13 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.ProjectileType>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.RightWeaponCooldown>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Projectile.Components.TeleportPlayer>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.AmmoTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.AmmoTileTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.CollectibleTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.HealPoweUpTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MineTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.RifleAmmoTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.RocketAmmoTag>(true, false, false, false, false, false, false);
 
             ComponentsInitializerWorld.Setup(ComponentsInitializerWorldGen.Init);
@@ -116,11 +118,9 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerIsRotating>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerScore>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.PlayerTag>(false);
-            structComponentsContainer.Validate<Project.Features.Player.Components.RegainScore>(true);
             structComponentsContainer.Validate<Project.Features.Player.Components.RespawnTag>(true);
             structComponentsContainer.Validate<Project.Features.Player.Components.RightWeapon>(false);
             structComponentsContainer.Validate<Project.Features.Player.Components.RightWeaponShot>(true);
-            structComponentsContainer.Validate<Project.Features.Player.Components.ScoreHolder>(false);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.LeftWeaponCooldown>(false);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.MovementComponents>(true);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.PlayerHasStopped>(true);
@@ -136,10 +136,13 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Features.Projectile.Components.ProjectileType>(false);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.RightWeaponCooldown>(false);
             structComponentsContainer.Validate<Project.Features.Projectile.Components.TeleportPlayer>(false);
+            structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.AmmoTag>(false);
+            structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.AmmoTileTag>(false);
             structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.CollectibleTag>(true);
             structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.HealPoweUpTag>(true);
             structComponentsContainer.ValidateCopyable<Project.Features.SceneBuilder.Components.MapComponents>(false);
             structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.MineTag>(true);
+            structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.RifleAmmoTag>(true);
             structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.RocketAmmoTag>(true);
 
         }
@@ -165,11 +168,9 @@ namespace ME.ECS {
             entity.ValidateData<Project.Features.Player.Components.PlayerIsRotating>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerScore>(false);
             entity.ValidateData<Project.Features.Player.Components.PlayerTag>(false);
-            entity.ValidateData<Project.Features.Player.Components.RegainScore>(true);
             entity.ValidateData<Project.Features.Player.Components.RespawnTag>(true);
             entity.ValidateData<Project.Features.Player.Components.RightWeapon>(false);
             entity.ValidateData<Project.Features.Player.Components.RightWeaponShot>(true);
-            entity.ValidateData<Project.Features.Player.Components.ScoreHolder>(false);
             entity.ValidateData<Project.Features.Projectile.Components.LeftWeaponCooldown>(false);
             entity.ValidateData<Project.Features.Projectile.Components.MovementComponents>(true);
             entity.ValidateData<Project.Features.Projectile.Components.PlayerHasStopped>(true);
@@ -185,10 +186,13 @@ namespace ME.ECS {
             entity.ValidateData<Project.Features.Projectile.Components.ProjectileType>(false);
             entity.ValidateData<Project.Features.Projectile.Components.RightWeaponCooldown>(false);
             entity.ValidateData<Project.Features.Projectile.Components.TeleportPlayer>(false);
+            entity.ValidateData<Project.Features.SceneBuilder.Components.AmmoTag>(false);
+            entity.ValidateData<Project.Features.SceneBuilder.Components.AmmoTileTag>(false);
             entity.ValidateData<Project.Features.SceneBuilder.Components.CollectibleTag>(true);
             entity.ValidateData<Project.Features.SceneBuilder.Components.HealPoweUpTag>(true);
             entity.ValidateDataCopyable<Project.Features.SceneBuilder.Components.MapComponents>(false);
             entity.ValidateData<Project.Features.SceneBuilder.Components.MineTag>(true);
+            entity.ValidateData<Project.Features.SceneBuilder.Components.RifleAmmoTag>(true);
             entity.ValidateData<Project.Features.SceneBuilder.Components.RocketAmmoTag>(true);
 
         }

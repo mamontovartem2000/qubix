@@ -26,7 +26,7 @@ public class RespawnPanelController : MonoBehaviour
 
     private void Deactivate(in Entity entity)
     {
-        Debug.Log($"Deactivate, player: {Utilitiddies.CheckLocalPlayer(entity)}");
+        // Debug.Log($"Deactivate, player: {Utilitiddies.CheckLocalPlayer(entity)}");
 
         if(!Utilitiddies.CheckLocalPlayer(entity)) return;
 

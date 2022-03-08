@@ -22,7 +22,7 @@ namespace Project.Features.Player.Components
 
     public struct LeftWeapon : IComponent
     {
-        public AmmoType Type;
+        public WeaponType Type;
         public int MaxAmmo;
         public int Ammo;
         public float Cooldown;
@@ -34,36 +34,22 @@ namespace Project.Features.Player.Components
         public float Time;
     }
 
-    // public struct RightWeaponReload : IComponent
-    // {
-    //     public float Time;
-    // }
-
     public struct RightWeapon : IComponent
     {
-        public AmmoType Type;
-        public int MaxAmmo;
-        public int Ammo;
+        public WeaponType Type;
+        public int MaxCount;
+        public int Count;
         public float Cooldown;
-        public float ReloadTime;
     }
     
     public struct LeftWeaponShot : IComponent {}
     
     public struct RightWeaponShot : IComponent {}
-
-    public struct ScoreHolder : IComponent
-    {
-        public int ActorID;
-        public int ScoreAmount;
-    }
-    
-    public struct RegainScore : IComponent {}
 }
 
-public enum AmmoType
+public enum WeaponType
 {
-    Bullet,
+    Gun,
     Rocket,
     Rifle,
     Shotgun

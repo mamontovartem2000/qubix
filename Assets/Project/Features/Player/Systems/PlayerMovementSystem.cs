@@ -113,7 +113,7 @@ namespace Project.Features.Player.Systems
                             ? entity.Read<PlayerTag>().FaceDirection
                             : -entity.Read<PlayerTag>().FaceDirection;
 
-                        if (!_builder.IsFree(entity.GetPosition(), direction)) return;
+                        if (!_builder.IsWalkable(entity.GetPosition(), direction)) return;
 
                         _builder.MoveTo(
                             _builder.PositionToIndex( entity.GetPosition()),

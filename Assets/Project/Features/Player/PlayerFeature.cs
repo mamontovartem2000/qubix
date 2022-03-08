@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Photon.Pun;
 using Project.Features.Player.Views;
 using Project.Features.Projectile.Components;
 using Project.Features.Projectile.Systems;
@@ -28,11 +29,12 @@ namespace Project.Features {
         public Material[] Materials;
         
         private ViewId _playerViewID;
-        private RPCId _onGameStarted, _onPlayerDisconnected;
+        private RPCId _onGameStarted, _onPlayerDisconnected, _onPlayerReady, _onPlayerConnected;
         
         private Filter _playerFilter, _deadFilter;
         
         private int _playerIndex;
+        private bool _ready;
         
         private SceneBuilderFeature _builder;
         
@@ -52,7 +54,6 @@ namespace Project.Features {
         {
             world.GetFeature(out _builder);
         }
-
         private void AddModules()
         {
             AddModule<PlayerConnectionModule>();
@@ -77,53 +78,28 @@ namespace Project.Features {
                 .With<DeadBody>()
                 .Push(ref _deadFilter);
         }
+        
+        //Register and create RPC below
         private void RegisterRPCs(NetworkModule net)
         {
             net.RegisterObject(this);
 
             _onPlayerDisconnected = net.RegisterRPC(new System.Action<int>(PlayerDisconnected_RPC).Method);
             _onGameStarted = net.RegisterRPC(new System.Action<int>(GameStarted_RPC).Method);
-        }
-
-        private void GameStarted_RPC(int id)
-        {
-            Debug.Log($"GameStarted with player {id}");
-            CreatePlayer(id);
-        }
-
-        private Entity CreatePlayer(int id)
-        {
-            var player = new Entity("Player");
-            player.InstantiateView(_playerViewID);
-
-            player.Set(new PlayerTag {PlayerID = id, FaceDirection = Vector3.forward, 
-                Material = Materials[Utilitiddies.SafeCheckIndexByLength(_playerIndex, Materials.Length)]});
-
-            player.Set(new PlayerHealth {Value = 1});
-            player.SetPosition(_builder.GetRandomSpawnPosition());
-            player.Set(new PlayerMoveTarget {Value = player.GetPosition()});
-            player.Set(new LeftWeapon {Type = AmmoType.Bullet, Cooldown = 0.2f, Ammo = 20, MaxAmmo = 20, ReloadTime = 1.2f});
-            player.Set(new RightWeapon {Type = AmmoType.Rocket, Cooldown = 0.4f, Ammo = 10, MaxAmmo = 10});
-            
-            _builder.MoveTo(_builder.PositionToIndex(player.GetPosition()), _builder.PositionToIndex(player.GetPosition()));
-            world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(player);
-
-            return player;
+            _onPlayerReady = net.RegisterRPC(new System.Action<int>(PlayerReady_RPC).Method);
+            _onPlayerConnected = net.RegisterRPC(new System.Action<int>(PlayerConnected_RPC).Method);
         }
         
-        public void OnLocalPlayerConnected(int id)
-        {
-            _playerIndex = id;
-        }
-
-        public bool _ready;
-
         public void OnPlayerReady(int id)
         {
-            if (id == _playerIndex)
-            {
-                world.GetSharedData<MapComponents>().PlayerStatus[_playerIndex - 1] = true;
-            }
+            var net = world.GetModule<NetworkModule>();
+            net.RPC(this, _onPlayerReady, id);
+        }
+
+        public void OnGameStarted()
+        {
+            var net = world.GetModule<NetworkModule>();
+            net.RPC(this, _onGameStarted, _playerIndex);
         }
         
         public void OnLocalPlayerDisconnected(int id)
@@ -132,15 +108,32 @@ namespace Project.Features {
             net.RPC(this, _onPlayerDisconnected, id);
         }
 
-        public void OnGameStarted()
+        private void OnPlayerConnected(int id)
         {
             var net = world.GetModule<NetworkModule>();
-            net.RPC(this, _onGameStarted, _playerIndex);
+            net.RPC(this, _onPlayerConnected, id);
+        }
+        
+        //Define RPC logic here
+        private void GameStarted_RPC(int id)
+        {
+            Debug.Log($"GameStarted");
+            CreatePlayer(id);
         }
 
+        private void PlayerConnected_RPC(int id)
+        {
+            Debug.Log($"player {id} has index of {_playerIndex}, localplayer: {PhotonNetwork.LocalPlayer.ActorNumber}");
+        }
+        
+        private void PlayerReady_RPC(int id)
+        {
+            world.GetSharedData<MapComponents>().PlayerStatus[id - 1] = true;
+        }
+        
         private void PlayerDisconnected_RPC(int id)
         {
-            Debug.Log($"PlayerDisconnected with player {id}");
+            Debug.Log($"Player {id} disconnected");
 
             var toDestroy = GetPlayerByID(id);
 
@@ -156,10 +149,32 @@ namespace Project.Features {
             {
                 toDestroy.Destroy();
             }
-            else
-            {
-                Debug.Log("empty entity");                
-            }
+        }
+        
+        private Entity CreatePlayer(int id)
+        {
+            var player = new Entity("Player");
+            player.InstantiateView(_playerViewID);
+
+            player.Set(new PlayerTag {PlayerID = id, FaceDirection = Vector3.forward, 
+                Material = Materials[Utilitiddies.SafeCheckIndexByLength(_playerIndex, Materials.Length)]});
+
+            player.Set(new PlayerHealth {Value = 1});
+            player.SetPosition(_builder.GetRandomSpawnPosition());
+            player.Set(new PlayerMoveTarget {Value = player.GetPosition()});
+            player.Set(new LeftWeapon {Type = WeaponType.Gun, Cooldown = 0.2f, Ammo = 20, MaxAmmo = 20, ReloadTime = 1.2f});
+            player.Set(new RightWeapon {Type = WeaponType.Rocket, Cooldown = 0.4f, Count = 10, MaxCount = 10});
+            
+            _builder.MoveTo(_builder.PositionToIndex(player.GetPosition()), _builder.PositionToIndex(player.GetPosition()));
+            world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(player);
+
+            return player;
+        }
+        
+        public void OnLocalPlayerConnected(int id)
+        {
+            _playerIndex = id;
+            OnPlayerConnected(id);
         }
 
         public Entity RespawnPlayer(int id)
@@ -193,18 +208,11 @@ namespace Project.Features {
             return Entity.Empty;
         }
 
-        public int GetPlayerID() => _playerIndex;
-
-        public bool PlayerIsReady(int index)
+        public int GetPlayerID()
         {
-            if (index == _playerIndex)
-            {
-                return _ready;
-            }
-
-            return false;
+            return _playerIndex;
         }
-        
+
         protected override void OnDeconstruct() {}
     }
 }

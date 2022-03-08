@@ -14,7 +14,7 @@ namespace Project.Features.SceneBuilder.Views {
 
         public override void OnInitialize() 
         {
-            _portal.DORotate(new Vector3(0f, 180f, 0f), 2f, RotateMode.LocalAxisAdd).SetEase(Ease.Linear).SetLoops(-1);
+            //_portal.DORotate(new Vector3(0f, 180f, 0f), 2f, RotateMode.LocalAxisAdd).SetEase(Ease.Linear).SetLoops(-1);
         }
         
         public override void OnDeInitialize() {}

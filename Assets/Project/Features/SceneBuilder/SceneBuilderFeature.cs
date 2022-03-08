@@ -1,5 +1,4 @@
-﻿using ExitGames.Client.Photon.StructWrapping;
-using ME.ECS;
+﻿using ME.ECS;
 using ME.ECS.Collections;
 using Project.Features.SceneBuilder.Views;
 using UnityEngine;
@@ -43,7 +42,7 @@ namespace Project.Features
 
     public sealed class SceneBuilderFeature : Feature
     {
-        public TextAsset Map;
+        public TextAsset SourceMap;
         public int PlayerCount;
         
         public TileView TileView;
@@ -53,10 +52,11 @@ namespace Project.Features
         public MineMono MineView;
         public HealthMono HealthView;
         public RocketAmmoMono RocketAmmoView;
+        public RifleAmmoMono RifleAmmoView;
         
         private int Width, Height, PortalCount, AmmoCount;
 
-        private ViewId _tileID, _portalID, _ammoID;
+        private ViewId _tileID, _portalTileID, _ammoTileID;
         
         private const int EMPTY_TILE = 0, SIMPLE_TILE = 1, PORTAL_TILE = 2, AMMO_TILE = 3;
 
@@ -66,7 +66,7 @@ namespace Project.Features
         {
             AddSystem<SpawnHealthSystem>();
             AddSystem<SpawnMineSystem>();
-            AddSystem<SpawnRocketSystem>();
+            AddSystem<SpawnAmmoSystem>();
             
             PrepareMap();
         }
@@ -78,18 +78,20 @@ namespace Project.Features
             _init = new Entity("init");
             
             _tileID = world.RegisterViewSource(TileView);
-            _portalID = world.RegisterViewSource(PortalView);
+            _portalTileID = world.RegisterViewSource(PortalView);
+            _ammoTileID = world.RegisterViewSource(AmmoTileView);
 
             GetDimensions();
 
             var size = Width * Height;
             var map = PoolArray<byte>.Spawn(size);
             var portals = PoolArray<Vector3>.Spawn(PortalCount);
+            var ammos = PoolArray<Vector3>.Spawn(AmmoCount);
             var players = PoolArray<bool>.Spawn(PlayerCount);
 
-            ConvertMap(Map, map, portals);
+            ConvertMap(SourceMap, map, portals, ammos);
 
-            world.SetSharedData(new MapComponents {WalkableMap = map, PortalsMap = portals, PlayerStatus = players});
+            world.SetSharedData(new MapComponents {WalkableMap = map, PortalsMap = portals, AmmoMap = ammos, PlayerStatus = players});
             
             DrawMap(map);
         }
@@ -109,9 +111,18 @@ namespace Project.Features
                     }
                     case 2:
                     {
-                        var entity = new Entity("tile");
-                        entity.InstantiateView(_portalID);
+                        var entity = new Entity("portal-tile");
+                        entity.InstantiateView(_portalTileID);
                         entity.SetPosition(IndexToPosition(i));
+                        break;
+                    }
+                    case 3:
+                    {
+                        var entity = new Entity("ammo-tile");
+                        entity.InstantiateView(_ammoTileID);
+                        entity.SetPosition(IndexToPosition(i));
+
+                        entity.Set(new AmmoTileTag {Spawned = false, TimerDefault = 8, Timer = 8});
                         break;
                     }
                 }
@@ -120,7 +131,7 @@ namespace Project.Features
 
         private void GetDimensions()
         {
-            var omg = Map.text.Split('\n');
+            var omg = SourceMap.text.Split('\n');
 
             Height = omg.Length;
             Width = omg[0].Length - 1;
@@ -142,7 +153,7 @@ namespace Project.Features
             }
         }
 
-        private void ConvertMap(TextAsset source, BufferArray<byte> walkable, BufferArray<Vector3> portals)
+        private void ConvertMap(TextAsset source, BufferArray<byte> walkable, BufferArray<Vector3> portals, BufferArray<Vector3> ammos)
         {
             var walkableResult = new byte[Width * Height];
             var portalsResult = new Vector3[PortalCount];
@@ -194,6 +205,11 @@ namespace Project.Features
             {
                 portals[j] = portalsResult[j];
             }
+            
+            for (int j = 0; j < portalsResult.Length; j++)
+            {
+                ammos[j] = ammoResult[j];
+            }
         }
 
         public void MoveTo(int moveFrom, int moveTo)
@@ -216,25 +232,21 @@ namespace Project.Features
             return new Vector3(x, 0f, y);
         }
 
-        public bool IsFree(Vector3 position, Vector3 direction)
+        public bool IsWalkable(Vector3 position, Vector3 direction)
         {
-            var toIndex = PositionToIndex(position + direction);
+            return world.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(position + direction)] != 0;
+        }
 
-            if (toIndex < 0 || toIndex >= Width * Height) return false;
-
-            // var result = world.ReadSharedData<MapComponents>().WalkableMap[toIndex] == SIMPLE_TILE ||
-            //              world.ReadSharedData<MapComponents>().WalkableMap[toIndex] == PORTAL_TILE;
-
-            var result = world.ReadSharedData<MapComponents>().WalkableMap[toIndex] != 0;
-            
-            return result;
+        public bool IsFree(Vector3 position)
+        {
+            return world.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(position)] == 1;
         }
 
         public Vector3 GetRandomSpawnPosition()
         {
             var position = Vector3.zero;
 
-            while (!IsFree(position, Vector3.zero))
+            while (!IsFree(position))
             {
                 var rnd = world.GetRandomRange(0, Width * Height);
                 position = IndexToPosition(rnd);

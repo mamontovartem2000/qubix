@@ -84,16 +84,16 @@ namespace Project.Features.Projectile.Systems
                 //     
                 //     break;
 
-                case AmmoType.Rocket:
+                case WeaponType.Rocket:
                 {
                     if (entity.Has<RightWeaponCooldown>()) break;
 
-                    if (entity.Get<RightWeapon>().Ammo > 0)
+                    if (entity.Get<RightWeapon>().Count > 0)
                     {
                         _feature.SpawnProjectile(spawnPoint, direction, _feature.GetRocketViewID(), actorID, _feature.RocketConfig);
                         entity.Set(new RightWeaponCooldown {Value = cooldown});
 
-                        entity.Get<RightWeapon>().Ammo -= 1;
+                        entity.Get<RightWeapon>().Count -= 1;
                         world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity);
                     }
                     else

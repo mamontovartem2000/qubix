@@ -21,13 +21,13 @@ namespace Project.Features.Player.Systems {
     #endregion
     public sealed class PlayerPortalSystem : ISystemFilter 
     {
-        private PlayerFeature feature;
+        private PlayerFeature _feature;
         private SceneBuilderFeature _builder;
         
         public World world { get; set; }
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this.feature);
+            this.GetFeature(out this._feature);
             world.GetFeature(out _builder);
         }
         

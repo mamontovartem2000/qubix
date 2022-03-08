@@ -7,16 +7,23 @@ namespace Project.Features.SceneBuilder.Components {
     public struct HealPoweUpTag : IComponent {}
 
     public struct MineTag : IComponent {}
-    
-    public struct RocketAmmoTag : IComponent {}
 
-    // public enum PowerUpType
-    // {
-    //     Health, RocketGun
-    // }
-    //
-    // public enum TrapType
-    // {
-    //     Mine
-    // }
+    public struct RocketAmmoTag : IComponent {}
+    public struct RifleAmmoTag : IComponent {}
+
+    public struct AmmoTag : IComponent
+    {
+        public WeaponType WeaponType;
+        public int MaxAmmoCount;
+        public int AmmoCount;
+        public float WeaponCooldown;
+    }
+    
+    public struct AmmoTileTag : IComponent
+    {
+        public Entity SpawnedAmmo;
+        public bool Spawned;
+        public float Timer;
+        public float TimerDefault;
+    }
 }

@@ -75,7 +75,7 @@ namespace Project.Features.Projectile.Systems
 
             switch (ammo)
             {
-                case AmmoType.Bullet:
+                case WeaponType.Gun:
                 {
                     if(entity.Has<LeftWeaponCooldown>()) break;
 

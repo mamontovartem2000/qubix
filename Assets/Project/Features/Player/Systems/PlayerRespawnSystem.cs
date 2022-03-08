@@ -53,7 +53,7 @@ namespace Project.Features.Player.Systems
             {
                 var newPlayer = feature.RespawnPlayer(deadbody.ActorID);
                 
-                Debug.Log($"dead: {deadbody.ActorID}, new: {newPlayer.Read<PlayerTag>().PlayerID}");
+                // Debug.Log($"dead: {deadbody.ActorID}, new: {newPlayer.Read<PlayerTag>().PlayerID}");
                 
                 newPlayer.SetAs<PlayerScore>(entity);
                 entity.Destroy();

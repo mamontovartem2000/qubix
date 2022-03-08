@@ -93,9 +93,9 @@ public class UICore : MonoBehaviour
     {
         if(!Utilitiddies.CheckLocalPlayer(entity)) return;
         
-        var fill = (float)entity.Read<RightWeapon>().Ammo / entity.Read<RightWeapon>().MaxAmmo;
+        var fill = (float)entity.Read<RightWeapon>().Count / entity.Read<RightWeapon>().MaxCount;
         _rightWeaponAmmoImage.fillAmount = fill;
-        _rightWeaponAmmoText.SetText(entity.Read<RightWeapon>().Ammo.ToString());
+        _rightWeaponAmmoText.SetText(entity.Read<RightWeapon>().Count.ToString());
     }
 
     private void ReloadLeft(in Entity entity)

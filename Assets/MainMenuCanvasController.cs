@@ -7,6 +7,7 @@ using UnityEngine;
 public class MainMenuCanvasController : MonoBehaviour
 {
     [SerializeField] private GlobalEvent _deactivateEvent;
+    [SerializeField] private GameObject _button;
     private void Start()
     {
         _deactivateEvent.Subscribe(DeactivateMenu);
@@ -15,6 +16,7 @@ public class MainMenuCanvasController : MonoBehaviour
     public void SetPlayerReady()
     {
         Worlds.current.AddMarker(new NetworkPlayerReady {ActorID = Worlds.current.GetFeature<PlayerFeature>().GetPlayerID()});
+        _button.SetActive(false);
     }
 
     private void DeactivateMenu(in Entity entity)

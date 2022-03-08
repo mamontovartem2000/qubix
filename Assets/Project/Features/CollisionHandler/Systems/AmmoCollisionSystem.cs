@@ -32,7 +32,7 @@ namespace Project.Features.CollisionHandler.Systems
             this.GetFeature(out _feature);
             
             Filter.Create("trap-filter")
-                .With<RocketAmmoTag>()
+                .With<AmmoTag>()
                 .Push(ref _ammoFilter);
         }
         void ISystemBase.OnDeconstruct() {}
@@ -50,13 +50,29 @@ namespace Project.Features.CollisionHandler.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            foreach (var collectible in _ammoFilter)
+            foreach (var ammoEntity in _ammoFilter)
             {
-                if (entity.GetPosition() == collectible.GetPosition())
+                if (entity.GetPosition() == ammoEntity.GetPosition())
                 {
-                    entity.Get<RightWeapon>().Ammo += 10;
-                    world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity);
-                    collectible.Destroy();
+                    ref var ammo = ref ammoEntity.Get<AmmoTag>();
+
+                    if (entity.Has<RightWeapon>())
+                    {
+                        ref var weapon = ref entity.Get<RightWeapon>();
+
+                        if (weapon.Type == ammo.WeaponType)
+                        {
+                            weapon.Count = weapon.Count + ammo.AmmoCount < weapon.MaxCount ? weapon.Count + ammo.AmmoCount : weapon.MaxCount;
+                            world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity);
+                            ammoEntity.Destroy();
+                        }
+                    }
+                    else
+                    {
+                        entity.Set(new RightWeapon {Type = ammo.WeaponType, MaxCount = ammo.MaxAmmoCount, Count = ammo.AmmoCount, Cooldown = ammo.WeaponCooldown});
+                        world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity);
+                        ammoEntity.Destroy();
+                    }
                 }
             }   
         }

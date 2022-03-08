@@ -9,8 +9,6 @@ namespace Project.Modules
 {
     #region usage
 
-
-
     using TState = ProjectState;
 
     /// <summary>
@@ -29,6 +27,7 @@ namespace Project.Modules
     {
         private int orderId;
         private PhotonTransporter photonTransporter;
+
         public ME.ECS.Network.ISerializer GetSerializer()
         {
             return this.serializer;
@@ -296,7 +295,7 @@ namespace Project.Modules
 
             if (Photon.Pun.PhotonNetwork.InRoom == true)
             {
-                UnityEngine.Debug.Log("OnJoinedRoom. IsMaster: " + Photon.Pun.PhotonNetwork.IsMasterClient);
+                // UnityEngine.Debug.Log("OnJoinedRoom. IsMaster: " + Photon.Pun.PhotonNetwork.IsMasterClient);
 
                 var world = ME.ECS.Worlds.currentWorld;
                 var networkModule = world.GetModule<NetworkModule>();
@@ -317,10 +316,7 @@ namespace Project.Modules
                 this.timeSynced = false;
                 this.UpdateTime();
 
-                world.AddMarker(new NetworkSetActivePlayer()
-                {
-                    ActorID = PhotonNetwork.LocalPlayer.ActorNumber
-                });
+                world.AddMarker(new NetworkSetActivePlayer {ActorID = PhotonNetwork.LocalPlayer.ActorNumber});
             }
         }
 
@@ -396,30 +392,13 @@ namespace Project.Modules
         public void LateUpdate()
         {
             this.UpdateTime();
-
             var world = ME.ECS.Worlds.currentWorld;
-
-            var array = world.ReadSharedData<MapComponents>().PlayerStatus;
-            
-            for (var i = 0; i < array.Count; i++)
-            {
-                Debug.Log($"player {i} ready : {array[i]}");
-            }
-
+            if (this.timeSynced == true && this.timeSyncedConnected == false)
             {
                 var networkModule = world.GetModule<NetworkModule>();
                 if (((ME.ECS.Network.INetworkModuleBase) networkModule).GetRPCOrder() > 0)
                 {
-                    // // Here we are check if all required players connected to the game
-                    // // So we could start the game sending the special message
-                    // if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == _playerCount) //change this to 4 before apply for tests
-                    // {
-                    //     this.timeSyncedConnected = true;
-                    //     world.AddMarker(new NetworkPlayerConnectedTimeSynced());
-                    //     //world.GetFeature<PlayerFeature>().OnLocalPlayerConnected(PhotonNetwork.LocalPlayer.ActorNumber);
-                    // }
-
-                    if (PlayersAreReady())
+                    if (AllPlayersReady())
                     {
                         this.timeSyncedConnected = true;
                         world.AddMarker(new NetworkPlayerConnectedTimeSynced());
@@ -428,7 +407,7 @@ namespace Project.Modules
             }
         }
 
-        private bool PlayersAreReady()
+        private bool AllPlayersReady()
         {
             foreach (var player in Worlds.current.ReadSharedData<MapComponents>().PlayerStatus)
             {
@@ -438,7 +417,7 @@ namespace Project.Modules
                     return false;
                 }
             }
-
+        
             Debug.Log("all players are ready, starting the game");
             return true;
         }

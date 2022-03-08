@@ -24,7 +24,7 @@ public class CameraFollowScript : MonoBehaviour
 
     private void SetPlayer(in Entity entity)
     {
-        Debug.Log(Utilitiddies.CheckLocalPlayer(entity));
+        // Debug.Log(Utilitiddies.CheckLocalPlayer(entity));
         
         if(!Utilitiddies.CheckLocalPlayer(entity)) return;
         _player = entity;
