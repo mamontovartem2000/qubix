@@ -85,10 +85,11 @@ namespace Project.Features
             var size = Width * Height;
             var map = PoolArray<byte>.Spawn(size);
             var portals = PoolArray<Vector3>.Spawn(PortalCount);
+            var players = PoolArray<bool>.Spawn(PlayerCount);
 
             ConvertMap(Map, map, portals);
 
-            world.SetSharedData(new MapComponents {WalkableMap = map, PortalsMap = portals});
+            world.SetSharedData(new MapComponents {WalkableMap = map, PortalsMap = portals, PlayerStatus = players});
             
             DrawMap(map);
         }

@@ -2,6 +2,7 @@
 using Project.Features.Player.Views;
 using Project.Features.Projectile.Components;
 using Project.Features.Projectile.Systems;
+using Project.Features.SceneBuilder.Components;
 using Project.Utilities;
 using UnityEngine;
 
@@ -27,14 +28,13 @@ namespace Project.Features {
         public Material[] Materials;
         
         private ViewId _playerViewID;
-        private RPCId _onGameStarted, _onPlayerConnected, _onPlayerDisconnected;
+        private RPCId _onGameStarted, _onPlayerDisconnected;
         
         private Filter _playerFilter, _deadFilter;
         
         private int _playerIndex;
         
         private SceneBuilderFeature _builder;
-        private EventsFeature _events;
         
         protected override void OnConstruct()
         {
@@ -51,7 +51,6 @@ namespace Project.Features {
         private void GetFeatures()
         {
             world.GetFeature(out _builder);
-            world.GetFeature(out _events);
         }
 
         private void AddModules()
@@ -107,7 +106,7 @@ namespace Project.Features {
             player.Set(new RightWeapon {Type = AmmoType.Rocket, Cooldown = 0.4f, Ammo = 10, MaxAmmo = 10});
             
             _builder.MoveTo(_builder.PositionToIndex(player.GetPosition()), _builder.PositionToIndex(player.GetPosition()));
-            _events.PassLocalPlayer.Execute(player);
+            world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(player);
 
             return player;
         }
@@ -115,9 +114,18 @@ namespace Project.Features {
         public void OnLocalPlayerConnected(int id)
         {
             _playerIndex = id;
-            Debug.Log($"PlayerConnected with player {id}");
         }
 
+        public bool _ready;
+
+        public void OnPlayerReady(int id)
+        {
+            if (id == _playerIndex)
+            {
+                world.GetSharedData<MapComponents>().PlayerStatus[_playerIndex - 1] = true;
+            }
+        }
+        
         public void OnLocalPlayerDisconnected(int id)
         {
             var net = world.GetModule<NetworkModule>();
@@ -156,7 +164,6 @@ namespace Project.Features {
 
         public Entity RespawnPlayer(int id)
         {
-            // GameStarted_RPC(id);
             return CreatePlayer(id);
         }
         
@@ -184,6 +191,18 @@ namespace Project.Features {
             }
             
             return Entity.Empty;
+        }
+
+        public int GetPlayerID() => _playerIndex;
+
+        public bool PlayerIsReady(int index)
+        {
+            if (index == _playerIndex)
+            {
+                return _ready;
+            }
+
+            return false;
         }
         
         protected override void OnDeconstruct() {}

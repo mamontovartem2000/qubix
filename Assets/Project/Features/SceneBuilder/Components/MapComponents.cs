@@ -10,6 +10,7 @@ namespace Project.Features.SceneBuilder.Components
         public BufferArray<Vector3> PortalsMap;
         public BufferArray<Vector3> AmmoMap;
         public BufferArray<float> HeightMap;
+        public BufferArray<bool> PlayerStatus;
 
         void IStructCopyable<MapComponents>.CopyFrom(in MapComponents other) 
         {
@@ -17,6 +18,7 @@ namespace Project.Features.SceneBuilder.Components
             ArrayUtils.Copy(other.PortalsMap, ref PortalsMap);
             ArrayUtils.Copy(other.HeightMap,ref HeightMap);
             ArrayUtils.Copy(other.AmmoMap,ref AmmoMap);
+            ArrayUtils.Copy(other.PlayerStatus, ref PlayerStatus);
         }
         
         void IStructCopyable<MapComponents>.OnRecycle() 
@@ -25,6 +27,7 @@ namespace Project.Features.SceneBuilder.Components
             PoolArray<Vector3>.Recycle(ref PortalsMap);
             PoolArray<float>.Recycle(ref HeightMap);
             PoolArray<Vector3>.Recycle(ref AmmoMap);
+            PoolArray<bool>.Recycle(ref PlayerStatus);
         }
     }
 }

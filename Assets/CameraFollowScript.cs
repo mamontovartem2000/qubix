@@ -1,6 +1,7 @@
 using System;
 using ME.ECS;
 using Project.Features;
+using Project.Utilities;
 using UnityEngine;
 
 public class CameraFollowScript : MonoBehaviour
@@ -23,15 +24,12 @@ public class CameraFollowScript : MonoBehaviour
 
     private void SetPlayer(in Entity entity)
     {
-        if(!CheckLocalPlayer(entity)) return;
+        Debug.Log(Utilitiddies.CheckLocalPlayer(entity));
+        
+        if(!Utilitiddies.CheckLocalPlayer(entity)) return;
         _player = entity;
     }
     
-    private bool CheckLocalPlayer(in Entity entity)
-    {
-        return entity == Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer();
-    }
-
     private void OnDestroy()
     {
         _playerPassEvent.Unsubscribe(SetPlayer);

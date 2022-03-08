@@ -45,6 +45,11 @@ namespace Project.Features.Player.Modules {
             {
                 feature.OnLocalPlayerDisconnected(npd.ActorID);
             }
+
+            if (world.GetMarker(out NetworkPlayerReady npr))
+            {
+                feature.OnPlayerReady(npr.ActorID);
+            }
         }
     }
 }

@@ -23,12 +23,10 @@ namespace Project.Features.Player.Systems {
         
         private PlayerFeature _feature;
         private SceneBuilderFeature _builder;
-        private EventsFeature _events;
         void ISystemBase.OnConstruct() {
             
             this.GetFeature(out _feature);
             world.GetFeature(out _builder);
-            world.GetFeature(out _events);
         }
 
         void ISystemBase.OnDeconstruct() {}
@@ -53,17 +51,17 @@ namespace Project.Features.Player.Systems {
             if (entity.Has<LastHit>() && entity.Get<LastHit>().Enemy.IsAlive())
             {
                 entity.Get<LastHit>().Enemy.Get<PlayerScore>().Value += 5;
-                _events.ScoreChanged.Execute(entity.Read<LastHit>().Enemy);
+                world.GetFeature<EventsFeature>().ScoreChanged.Execute(entity.Read<LastHit>().Enemy);
             }
             
             var deadBody = new Entity("deadBody");
             deadBody.Set(new DeadBody {ActorID = entity.Read<PlayerTag>().PlayerID, Time = 5.5f});
             entity.Get<PlayerScore>().Value -= 5;
 
-            deadBody.SetAs<PlayerScore>(entity); //(entity.Read<PlayerScore>());
+            deadBody.SetAs<PlayerScore>(entity);
             
             _builder.MoveTo(_builder.PositionToIndex(entity.GetPosition()), 0);
-            _events.Respawn.Execute(entity);
+            world.GetFeature<EventsFeature>().Respawn.Run(entity);
             
             entity.Destroy();
         }

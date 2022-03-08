@@ -1,6 +1,7 @@
 using ME.ECS;
 using Photon.Pun;
 using Project.Features;
+using Project.Features.SceneBuilder.Components;
 using Project.Markers;
 using UnityEngine;
 
@@ -392,30 +393,54 @@ namespace Project.Modules
                 Photon.Realtime.TypedLobby.Default);
         }
 
-        private int _playerCount;
-
         public void LateUpdate()
         {
-            _playerCount = Worlds.current.GetFeature<SceneBuilderFeature>().PlayerCount;
             this.UpdateTime();
 
             var world = ME.ECS.Worlds.currentWorld;
 
-            if (this.timeSynced == true && this.timeSyncedConnected == false)
+            var array = world.ReadSharedData<MapComponents>().PlayerStatus;
+            
+            for (var i = 0; i < array.Count; i++)
+            {
+                Debug.Log($"player {i} ready : {array[i]}");
+            }
+
             {
                 var networkModule = world.GetModule<NetworkModule>();
                 if (((ME.ECS.Network.INetworkModuleBase) networkModule).GetRPCOrder() > 0)
                 {
-                    // Here we are check if all required players connected to the game
-                    // So we could start the game sending the special message
-                    if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == _playerCount) //change this to 4 before apply for tests
+                    // // Here we are check if all required players connected to the game
+                    // // So we could start the game sending the special message
+                    // if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == _playerCount) //change this to 4 before apply for tests
+                    // {
+                    //     this.timeSyncedConnected = true;
+                    //     world.AddMarker(new NetworkPlayerConnectedTimeSynced());
+                    //     //world.GetFeature<PlayerFeature>().OnLocalPlayerConnected(PhotonNetwork.LocalPlayer.ActorNumber);
+                    // }
+
+                    if (PlayersAreReady())
                     {
                         this.timeSyncedConnected = true;
                         world.AddMarker(new NetworkPlayerConnectedTimeSynced());
-                        //world.GetFeature<PlayerFeature>().OnLocalPlayerConnected(PhotonNetwork.LocalPlayer.ActorNumber);
                     }
                 }
             }
+        }
+
+        private bool PlayersAreReady()
+        {
+            foreach (var player in Worlds.current.ReadSharedData<MapComponents>().PlayerStatus)
+            {
+                if (!player)
+                {
+                    Debug.Log("not all players are ready");
+                    return false;
+                }
+            }
+
+            Debug.Log("all players are ready, starting the game");
+            return true;
         }
     }
 }
