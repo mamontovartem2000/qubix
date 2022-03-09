@@ -6,7 +6,8 @@ namespace Project.Features {
     
 
     using Components; using Modules; using Systems; using Features; using Markers;
-    using InputHandler.Components; using InputHandler.Modules; using InputHandler.Systems; using InputHandler.Markers;
+    using InputHandler.Components;
+    using InputHandler.Systems; using InputHandler.Markers;
     
     namespace InputHandler.Components {}
     namespace InputHandler.Modules {}

@@ -49,6 +49,11 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MineTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.RifleAmmoTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.RocketAmmoTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Weapon.Components.FiringCooldown>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Weapon.Components.Magazine>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Weapon.Components.ProjectileTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Weapon.Components.Realod>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Weapon.Components.WeaponTag>(false, false, false, false, false, false, false);
 
         }
 
@@ -99,6 +104,11 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.MineTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.RifleAmmoTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.RocketAmmoTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Weapon.Components.FiringCooldown>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Weapon.Components.Magazine>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Weapon.Components.ProjectileTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Weapon.Components.Realod>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Weapon.Components.WeaponTag>(false, false, false, false, false, false, false);
 
             ComponentsInitializerWorld.Setup(ComponentsInitializerWorldGen.Init);
             CoreComponentsInitializer.Init(ref structComponentsContainer);
@@ -144,6 +154,11 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.MineTag>(true);
             structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.RifleAmmoTag>(true);
             structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.RocketAmmoTag>(true);
+            structComponentsContainer.Validate<Project.Features.Weapon.Components.FiringCooldown>(false);
+            structComponentsContainer.Validate<Project.Features.Weapon.Components.Magazine>(false);
+            structComponentsContainer.Validate<Project.Features.Weapon.Components.ProjectileTag>(true);
+            structComponentsContainer.Validate<Project.Features.Weapon.Components.Realod>(false);
+            structComponentsContainer.Validate<Project.Features.Weapon.Components.WeaponTag>(false);
 
         }
 
@@ -194,6 +209,11 @@ namespace ME.ECS {
             entity.ValidateData<Project.Features.SceneBuilder.Components.MineTag>(true);
             entity.ValidateData<Project.Features.SceneBuilder.Components.RifleAmmoTag>(true);
             entity.ValidateData<Project.Features.SceneBuilder.Components.RocketAmmoTag>(true);
+            entity.ValidateData<Project.Features.Weapon.Components.FiringCooldown>(false);
+            entity.ValidateData<Project.Features.Weapon.Components.Magazine>(false);
+            entity.ValidateData<Project.Features.Weapon.Components.ProjectileTag>(true);
+            entity.ValidateData<Project.Features.Weapon.Components.Realod>(false);
+            entity.ValidateData<Project.Features.Weapon.Components.WeaponTag>(false);
 
         }
 

@@ -39,7 +39,7 @@ namespace Project.Features.SceneBuilder.Systems
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() 
         {
-            return Filter.Create("Filter-SpawnAmmoSystem1")
+            return Filter.Create("Filter-SpawnAmmoSystem")
                 .With<AmmoTileTag>()
                 .Push();
         }
@@ -48,7 +48,7 @@ namespace Project.Features.SceneBuilder.Systems
         {
             ref var spawner = ref entity.Get<AmmoTileTag>();
             
-            if(spawner.SpawnedAmmo != Entity.Empty || spawner.SpawnedAmmo.IsAlive()) return;
+            if(spawner.Spawned) return;
 
             if (spawner.Timer - deltaTime > 0)
             {
@@ -72,7 +72,7 @@ namespace Project.Features.SceneBuilder.Systems
 
                 ammo.SetPosition(entity.GetPosition());
 
-                spawner.SpawnedAmmo = ammo;
+                spawner.Spawned = true;
                 spawner.Timer = spawner.TimerDefault;
             }
         }

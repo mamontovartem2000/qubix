@@ -7,7 +7,8 @@ using Project.Features.SceneBuilder.Components;
 using Project.Utilities;
 using UnityEngine;
 
-namespace Project.Features {
+namespace Project.Features 
+{
     #region usage
     using Components; using Modules; using Systems; using Features; using Markers;
     using Player.Components; using Player.Modules; using Player.Systems; using Player.Markers;
@@ -27,7 +28,7 @@ namespace Project.Features {
     {
         public PlayerView PlayerView;
         public Material[] Materials;
-        
+
         private ViewId _playerViewID;
         private RPCId _onGameStarted, _onPlayerDisconnected, _onPlayerReady, _onPlayerConnected;
         

@@ -20,11 +20,11 @@ namespace Project.Features.Player.Modules {
     {
         public World world { get; set; }
     
-        private PlayerFeature feature;
+        private PlayerFeature _feature;
 
         void IModuleBase.OnConstruct() 
         {
-            this.feature = this.world.GetFeature<PlayerFeature>();
+            world.GetFeature(out _feature);
         }
         
         void IModuleBase.OnDeconstruct() {}
@@ -33,22 +33,22 @@ namespace Project.Features.Player.Modules {
         {
             if (world.GetMarker(out NetworkSetActivePlayer nsap))
             {
-                feature.OnLocalPlayerConnected(nsap.ActorID);
+                _feature.OnLocalPlayerConnected(nsap.ActorID);
             }
             
             if (world.GetMarker(out NetworkPlayerConnectedTimeSynced npc))
             {
-                feature.OnGameStarted();
+                _feature.OnGameStarted();
             }
-
+            
             if (world.GetMarker(out NetworkPlayerDisconnected npd))
             {
-                feature.OnLocalPlayerDisconnected(npd.ActorID);
+                _feature.OnLocalPlayerDisconnected(npd.ActorID);
             }
-
+            
             if (world.GetMarker(out NetworkPlayerReady npr))
             {
-                feature.OnPlayerReady(npr.ActorID);
+                _feature.OnPlayerReady(npr.ActorID);
             }
         }
     }

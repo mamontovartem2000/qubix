@@ -295,7 +295,7 @@ namespace Project.Modules
 
             if (Photon.Pun.PhotonNetwork.InRoom == true)
             {
-                // UnityEngine.Debug.Log("OnJoinedRoom. IsMaster: " + Photon.Pun.PhotonNetwork.IsMasterClient);
+                UnityEngine.Debug.Log("OnJoinedRoom. IsMaster: " + Photon.Pun.PhotonNetwork.IsMasterClient);
 
                 var world = ME.ECS.Worlds.currentWorld;
                 var networkModule = world.GetModule<NetworkModule>();

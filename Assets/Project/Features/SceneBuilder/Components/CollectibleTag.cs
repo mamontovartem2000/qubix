@@ -21,7 +21,6 @@ namespace Project.Features.SceneBuilder.Components {
     
     public struct AmmoTileTag : IComponent
     {
-        public Entity SpawnedAmmo;
         public bool Spawned;
         public float Timer;
         public float TimerDefault;
