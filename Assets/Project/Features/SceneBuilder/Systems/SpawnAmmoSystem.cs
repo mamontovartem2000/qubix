@@ -57,7 +57,6 @@ namespace Project.Features.SceneBuilder.Systems
             else
             {
                 var rnd = world.GetRandomRange(0, 10);
-
                 var ammo = new Entity("ammo");
 
                 if (rnd % 2 == 0)
@@ -67,7 +66,7 @@ namespace Project.Features.SceneBuilder.Systems
                 }
                 else
                 {
-                    ammo.Set(new AmmoTag {WeaponType = WeaponType.Rifle, MaxAmmoCount = 4, AmmoCount = 2, WeaponCooldown = 4f});
+                    ammo.Set(new AmmoTag {WeaponType = WeaponType.Rifle, MaxAmmoCount = 2, AmmoCount = 4, WeaponCooldown = 4f});
                     ammo.InstantiateView(_rifleID);
                 }
 

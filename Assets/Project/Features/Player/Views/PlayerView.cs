@@ -1,4 +1,5 @@
-﻿using ME.ECS;
+﻿using System;
+using ME.ECS;
 using Project.Features.Player.Components;
 using Project.Utilities;
 using UnityEngine;
@@ -10,7 +11,8 @@ namespace Project.Features.Player.Views {
     public class PlayerView : MonoBehaviourView
     {
         public Renderer[] Parts;
-        public GameObject _RightWeapon;
+        public GameObject Rocket;
+        public GameObject Rifle;
         
         public override bool applyStateJob => true;
 
@@ -28,7 +30,32 @@ namespace Project.Features.Player.Views {
         {
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetRotation();
-            _RightWeapon.SetActive(entity.Has<RightWeapon>());
+            
+            if (entity.Has<RightWeapon>())
+            {
+                var type = entity.Read<RightWeapon>().Type;
+
+                switch (type)
+                {
+                    case WeaponType.Gun:
+                        break;
+                    case WeaponType.Rocket:
+                        Rocket.SetActive(true);
+                        break;
+                    case WeaponType.Rifle:
+                        Rifle.SetActive(true);
+                        break;
+                    case WeaponType.Shotgun:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            else
+            {
+                Rocket.SetActive(false);
+                Rifle.SetActive(false);
+            }
         }
     }
 }

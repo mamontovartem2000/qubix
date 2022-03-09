@@ -49,6 +49,8 @@ namespace Project.Features.Projectile.Systems
             var weapon = entity.Read<LeftWeapon>();
             var player = entity.Read<PlayerTag>();
 
+            if(entity.Has<LeftWeaponCooldown>()) return;
+
             var actorID = player.PlayerID;
             var direction = player.FaceDirection;
 
@@ -77,30 +79,17 @@ namespace Project.Features.Projectile.Systems
             {
                 case WeaponType.Gun:
                 {
-                    if(entity.Has<LeftWeaponCooldown>()) break;
 
                     if (entity.Get<LeftWeapon>().Ammo > 0)
                     {
-                        _feature.SpawnProjectile(spawnPoint, direction, _feature.GetBulletViewID(), actorID, _feature.BulletConfig);
+                        _feature.SpawnProjectile(spawnPoint, direction, _feature.GetBulletViewID(), actorID, _feature.GunConfig);
                         entity.Set(new LeftWeaponCooldown {Value = cooldown});
                         entity.Get<LeftWeapon>().Ammo -= 1;
                         world.GetFeature<EventsFeature>().leftWeaponFired.Execute(entity);
                     }
                 }
-                    
                     break;
-                
-                // case AmmoType.Rocket:
-                //     if(entity.Has<RightWeaponCooldown>()) break;
-                //     
-                //     SpawnProjectile(spawnPoint + _offset, direction, _feature.GetRocketViewID(), actorID,
-                //         _feature.RocketConfig);
-                //     entity.Set(new RightWeaponCooldown() {Value = 0.4f});
-                //     
-                //     break;
             }
         }
-        
-        
     }
 }

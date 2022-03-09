@@ -27,8 +27,9 @@ namespace Project.Features {
         public BulletMono BulletView;
         public RocketMono RocketView;
 
-        public DataConfig BulletConfig;
+        public DataConfig GunConfig;
         public DataConfig RocketConfig;
+        public DataConfig RifleConfig;
         
         private ViewId _bulletID, _rocketID;
         

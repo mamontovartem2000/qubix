@@ -49,6 +49,8 @@ namespace Project.Features.Projectile.Systems
             var weapon = entity.Read<RightWeapon>();
             var player = entity.Read<PlayerTag>();
 
+            if (entity.Has<RightWeaponCooldown>()) return;
+
             var actorID = player.PlayerID;
             var direction = player.FaceDirection;
 
@@ -70,37 +72,34 @@ namespace Project.Features.Projectile.Systems
             }
 
             var spawnPoint = entity.GetPosition() + _offset;
-            var ammo = weapon.Type;
-            var cooldown = weapon.Cooldown;
+            var weaponType = weapon.Type;
 
-            switch (ammo)
+            switch (weaponType)
             {
-                // case AmmoType.Bullet:
-                //     if(entity.Has<LeftWeaponCooldown>()) break;
-                //     
-                //     SpawnProjectile(spawnPoint + _offset, direction, _feature.GetBulletViewID(), actorID,
-                //         _feature.BulletConfig);
-                //     entity.Set(new LeftWeaponCooldown {Value = 0.2f});
-                //     
-                //     break;
-
                 case WeaponType.Rocket:
                 {
-                    if (entity.Has<RightWeaponCooldown>()) break;
-
                     if (entity.Get<RightWeapon>().Count > 0)
                     {
                         _feature.SpawnProjectile(spawnPoint, direction, _feature.GetRocketViewID(), actorID, _feature.RocketConfig);
-                        entity.Set(new RightWeaponCooldown {Value = cooldown});
+                        entity.Set(new RightWeaponCooldown {Value = entity.Read<RightWeapon>().Cooldown});
 
                         entity.Get<RightWeapon>().Count -= 1;
                         world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity);
                     }
-                    else
-                    {
-                        //deplete
-                    }
                 }
+                    break;
+
+                case WeaponType.Rifle :
+                {
+                    if (entity.Get<RightWeapon>().Count > 0)
+                    {
+                        _feature.SpawnProjectile(spawnPoint, direction, _feature.GetBulletViewID(), actorID, _feature.RifleConfig);
+                        entity.Set(new RightWeaponCooldown {Value = entity.Read<RightWeapon>().Cooldown});
+
+                        entity.Get<RightWeapon>().Count -= 1;
+                        world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity);
+                    }
+                }               
                     break;
             }
         }

@@ -16,7 +16,7 @@ namespace Project.Features.Projectile.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class LeftWeapomCooldownSystem : ISystemFilter 
+    public sealed class LeftWeaponCooldownSystem : ISystemFilter 
     {
         public World world { get; set; }
         

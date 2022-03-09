@@ -46,7 +46,9 @@ namespace Project.Features.Projectile.Systems
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             if (entity.Read<RightWeapon>().Count > 0) return;
+
             world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity);
+            entity.Remove<RightWeapon>();
         }
     }
 }

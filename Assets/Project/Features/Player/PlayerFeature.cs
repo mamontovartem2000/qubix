@@ -65,8 +65,9 @@ namespace Project.Features {
             AddSystem<ApplyDamageSystem>();
             AddSystem<PlayerPortalSystem>();
             AddSystem<PlayerRespawnSystem>();
-            AddSystem<LeftWeapomCooldownSystem>();
+            AddSystem<LeftWeaponCooldownSystem>();
             AddSystem<RightWeaponCooldownSystem>();
+            AddSystem<RightWeaponReloadSystem>();
         }
         private void CreateFilters()
         {
@@ -159,11 +160,11 @@ namespace Project.Features {
             player.Set(new PlayerTag {PlayerID = id, FaceDirection = Vector3.forward, 
                 Material = Materials[Utilitiddies.SafeCheckIndexByLength(_playerIndex, Materials.Length)]});
 
-            player.Set(new PlayerHealth {Value = 1});
+            player.Set(new PlayerHealth {Value = 100});
             player.SetPosition(_builder.GetRandomSpawnPosition());
             player.Set(new PlayerMoveTarget {Value = player.GetPosition()});
             player.Set(new LeftWeapon {Type = WeaponType.Gun, Cooldown = 0.2f, Ammo = 20, MaxAmmo = 20, ReloadTime = 1.2f});
-            player.Set(new RightWeapon {Type = WeaponType.Rocket, Cooldown = 0.4f, Count = 10, MaxCount = 10});
+            //player.Set(new RightWeapon {Type = WeaponType.Rocket, Cooldown = 0.4f, Count = 10, MaxCount = 10});
             
             _builder.MoveTo(_builder.PositionToIndex(player.GetPosition()), _builder.PositionToIndex(player.GetPosition()));
             world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(player);
