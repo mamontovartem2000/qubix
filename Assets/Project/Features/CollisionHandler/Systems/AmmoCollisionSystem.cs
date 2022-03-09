@@ -64,6 +64,8 @@ namespace Project.Features.CollisionHandler.Systems
                         {
                             weapon.Count = weapon.Count + ammo.AmmoCount < weapon.MaxCount ? weapon.Count + ammo.AmmoCount : weapon.MaxCount;
                             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity);
+                            ammo.Spawner.Get<AmmoTileTag>().Spawned = false;
+                        
                             ammoEntity.Destroy();
                         }
                     }
@@ -71,6 +73,8 @@ namespace Project.Features.CollisionHandler.Systems
                     {
                         entity.Set(new RightWeapon {Type = ammo.WeaponType, MaxCount = ammo.MaxAmmoCount, Count = ammo.AmmoCount, Cooldown = ammo.WeaponCooldown});
                         world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity);
+                        ammo.Spawner.Get<AmmoTileTag>().Spawned = false;
+
                         ammoEntity.Destroy();
                     }
                 }

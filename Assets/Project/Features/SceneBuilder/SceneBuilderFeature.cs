@@ -64,6 +64,7 @@ namespace Project.Features
 
         protected override void OnConstruct()
         {
+           
             AddSystem<SpawnHealthSystem>();
             AddSystem<SpawnMineSystem>();
             AddSystem<SpawnAmmoSystem>();
