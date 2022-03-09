@@ -13,7 +13,8 @@ namespace Project.Features.Player.Views {
         public Renderer[] Parts;
         public GameObject Rocket;
         public GameObject Rifle;
-        
+
+        public ParticleSystem[] Muzzles;
         public override bool applyStateJob => true;
 
         public override void OnInitialize()
@@ -30,6 +31,11 @@ namespace Project.Features.Player.Views {
         {
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetRotation();
+            
+            if (entity.Has<LeftWeaponShot>() && !entity.Has<LeftWeaponReload>())
+            {
+                ShotFired();
+            }
             
             if (entity.Has<RightWeapon>())
             {
@@ -55,6 +61,14 @@ namespace Project.Features.Player.Views {
             {
                 Rocket.SetActive(false);
                 Rifle.SetActive(false);
+            }
+        }
+
+        private void ShotFired()
+        {
+            foreach (var part in Muzzles)
+            {
+                part.Play();
             }
         }
     }

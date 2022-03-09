@@ -93,7 +93,7 @@ namespace Project.Features.Projectile.Systems
                 {
                     if (entity.Get<RightWeapon>().Count > 0)
                     {
-                        _feature.SpawnProjectile(spawnPoint, direction, _feature.GetBulletViewID(), actorID, _feature.RifleConfig);
+                        _feature.SpawnProjectile(spawnPoint, direction, _feature.GetSniperBulletID(), actorID, _feature.RifleConfig);
                         entity.Set(new RightWeaponCooldown {Value = entity.Read<RightWeapon>().Cooldown});
 
                         entity.Get<RightWeapon>().Count -= 1;

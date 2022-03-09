@@ -61,12 +61,12 @@ namespace Project.Features.SceneBuilder.Systems
 
                 if (rnd % 2 == 0)
                 {
-                    ammo.Set(new AmmoTag {WeaponType = WeaponType.Rocket, MaxAmmoCount = 10, AmmoCount = 5, WeaponCooldown = 0.5f});
+                    ammo.Set(new AmmoTag {WeaponType = WeaponType.Rocket, MaxAmmoCount = 10, AmmoCount = 5, WeaponCooldown = 0.5f, Spawner = entity});
                     ammo.InstantiateView(_rocketID);
                 }
                 else
                 {
-                    ammo.Set(new AmmoTag {WeaponType = WeaponType.Rifle, MaxAmmoCount = 2, AmmoCount = 4, WeaponCooldown = 4f});
+                    ammo.Set(new AmmoTag {WeaponType = WeaponType.Rifle, MaxAmmoCount = 4, AmmoCount = 2, WeaponCooldown = 4f, Spawner = entity});
                     ammo.InstantiateView(_rifleID);
                 }
 

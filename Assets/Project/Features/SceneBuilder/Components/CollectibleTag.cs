@@ -13,6 +13,7 @@ namespace Project.Features.SceneBuilder.Components {
 
     public struct AmmoTag : IComponent
     {
+        public Entity Spawner;
         public WeaponType WeaponType;
         public int MaxAmmoCount;
         public int AmmoCount;

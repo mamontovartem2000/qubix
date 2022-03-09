@@ -69,14 +69,12 @@ namespace Project.Features
             AddSystem<SpawnAmmoSystem>();
 
             PrepareMap();
-            ChangeColorGlowingMaterial();
+            // ChangeColorGlowingMaterial();
         }
 
         private void ChangeColorGlowingMaterial()
         {
-            Debug.Log("ChangeColor");
             var rnd = world.GetRandomRange(0, 6);
-            Debug.Log("_______________" + rnd);
             switch (rnd)
             {
                 case 1:

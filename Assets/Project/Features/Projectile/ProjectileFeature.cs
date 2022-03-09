@@ -26,17 +26,19 @@ namespace Project.Features {
     {
         public BulletMono BulletView;
         public RocketMono RocketView;
+        public SniperBulletMono SniperBulletView;
 
         public DataConfig GunConfig;
         public DataConfig RocketConfig;
         public DataConfig RifleConfig;
-        
-        private ViewId _bulletID, _rocketID;
+
+        private ViewId _bulletID, _rocketID, _sniperBulletID;
         
         protected override void OnConstruct()
         {
             _bulletID = world.RegisterViewSource(BulletView);
             _rocketID = world.RegisterViewSource(RocketView);
+            _sniperBulletID = world.RegisterViewSource(SniperBulletView);
 
             AddSystem<LeftWeaponFiringSystem>();
             AddSystem<RightWeaponFiringSystem>();
@@ -58,6 +60,11 @@ namespace Project.Features {
         public ViewId GetRocketViewID()
         {
             return _rocketID;
+        }
+
+        public ViewId GetSniperBulletID()
+        {
+            return _sniperBulletID;
         }
         
         public void SpawnProjectile(Vector3 point, Vector3 direction, ViewId viewId, int id, DataConfig config)
