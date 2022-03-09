@@ -44,20 +44,20 @@ namespace Project.Features
     {
         public TextAsset SourceMap;
         public int PlayerCount;
-        
+        public Material _glowMat;
         public TileView TileView;
         public PortalMono PortalView;
         public AmmoTileMono AmmoTileView;
-        
+
         public MineMono MineView;
         public HealthMono HealthView;
         public RocketAmmoMono RocketAmmoView;
         public RifleAmmoMono RifleAmmoView;
-        
+
         private int Width, Height, PortalCount, AmmoCount;
 
         private ViewId _tileID, _portalTileID, _ammoTileID;
-        
+
         private const int EMPTY_TILE = 0, SIMPLE_TILE = 1, PORTAL_TILE = 2, AMMO_TILE = 3;
 
         private Entity _init;
@@ -67,16 +67,51 @@ namespace Project.Features
             AddSystem<SpawnHealthSystem>();
             AddSystem<SpawnMineSystem>();
             AddSystem<SpawnAmmoSystem>();
-            
+
             PrepareMap();
+            ChangeColorGlowingMaterial();
         }
 
-        protected override void OnDeconstruct() {}
+        private void ChangeColorGlowingMaterial()
+        {
+            Debug.Log("ChangeColor");
+            var rnd = world.GetRandomRange(0, 6);
+            Debug.Log("_______________" + rnd);
+            switch (rnd)
+            {
+                case 1:
+                    Debug.Log("1");
+                    _glowMat.SetColor("_EmissionColor", Color.blue);
+                    break;
+                case 2:
+                    Debug.Log("2");
+                    _glowMat.SetColor("_EmissionColor", Color.cyan);
+                    break;
+                case 3:
+                    Debug.Log("3");
+                    _glowMat.SetColor("_EmissionColor", Color.green);
+                    break;
+                case 4:
+                    Debug.Log("4");
+                    _glowMat.SetColor("_EmissionColor", Color.magenta);
+                    break;
+                case 5:
+                    Debug.Log("5");
+                    _glowMat.SetColor("_EmissionColor", Color.red);
+                    break;
+                case 6:
+                    Debug.Log("6");
+                    _glowMat.SetColor("_EmissionColor", Color.yellow);
+                    break;
+            }
+        }
+
+        protected override void OnDeconstruct() { }
 
         private void PrepareMap()
         {
             _init = new Entity("init");
-            
+
             _tileID = world.RegisterViewSource(TileView);
             _portalTileID = world.RegisterViewSource(PortalView);
             _ammoTileID = world.RegisterViewSource(AmmoTileView);
@@ -91,8 +126,8 @@ namespace Project.Features
 
             ConvertMap(SourceMap, map, portals, ammos);
 
-            world.SetSharedData(new MapComponents {WalkableMap = map, PortalsMap = portals, AmmoMap = ammos, PlayerStatus = players});
-            
+            world.SetSharedData(new MapComponents { WalkableMap = map, PortalsMap = portals, AmmoMap = ammos, PlayerStatus = players });
+
             DrawMap(map);
         }
 
@@ -103,28 +138,28 @@ namespace Project.Features
                 switch (source[i])
                 {
                     case 1:
-                    {
-                        var entity = new Entity("tile");
-                        entity.InstantiateView(_tileID);
-                        entity.SetPosition(IndexToPosition(i));
-                        break;
-                    }
+                        {
+                            var entity = new Entity("tile");
+                            entity.InstantiateView(_tileID);
+                            entity.SetPosition(IndexToPosition(i));
+                            break;
+                        }
                     case 2:
-                    {
-                        var entity = new Entity("portal-tile");
-                        entity.InstantiateView(_portalTileID);
-                        entity.SetPosition(IndexToPosition(i));
-                        break;
-                    }
+                        {
+                            var entity = new Entity("portal-tile");
+                            entity.InstantiateView(_portalTileID);
+                            entity.SetPosition(IndexToPosition(i));
+                            break;
+                        }
                     case 3:
-                    {
-                        var entity = new Entity("ammo-tile");
-                        entity.InstantiateView(_ammoTileID);
-                        entity.SetPosition(IndexToPosition(i));
+                        {
+                            var entity = new Entity("ammo-tile");
+                            entity.InstantiateView(_ammoTileID);
+                            entity.SetPosition(IndexToPosition(i));
 
-                        entity.Set(new AmmoTileTag {Spawned = false, TimerDefault = 8, Timer = 8});
-                        break;
-                    }
+                            entity.Set(new AmmoTileTag { Spawned = false, TimerDefault = 8, Timer = 8 });
+                            break;
+                        }
                 }
             }
         }
@@ -158,12 +193,12 @@ namespace Project.Features
             var walkableResult = new byte[Width * Height];
             var portalsResult = new Vector3[PortalCount];
             var ammoResult = new Vector3[AmmoCount];
-            
+
             var bytes = source.text;
             var byteIndex = 0;
             var portalIndex = 0;
             var ammoIndex = 0;
-            
+
             var lines = bytes.Split('\n');
 
             foreach (var line in lines)
@@ -195,7 +230,7 @@ namespace Project.Features
                     }
                 }
             }
-            
+
             for (int j = 0; j < walkableResult.Length; j++)
             {
                 walkable[j] = walkableResult[j];
@@ -205,7 +240,7 @@ namespace Project.Features
             {
                 portals[j] = portalsResult[j];
             }
-            
+
             for (int j = 0; j < portalsResult.Length; j++)
             {
                 ammos[j] = ammoResult[j];
@@ -227,7 +262,7 @@ namespace Project.Features
         private Vector3 IndexToPosition(int index)
         {
             var x = index % Width;
-            var y = Mathf.FloorToInt(index / (float) Width);
+            var y = Mathf.FloorToInt(index / (float)Width);
 
             return new Vector3(x, 0f, y);
         }
@@ -254,11 +289,11 @@ namespace Project.Features
 
             return position;
         }
-        
+
         public Vector3 GetRandomPortalPosition(Vector3 vec)
         {
             var pos = vec;
-            
+
             while (pos == vec)
             {
                 pos = world.GetSharedData<MapComponents>()
