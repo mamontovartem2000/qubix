@@ -69,36 +69,34 @@ namespace Project.Features
             AddSystem<SpawnAmmoSystem>();
 
             PrepareMap();
-            // ChangeColorGlowingMaterial();
+        }
+        
+        protected override void InjectFilter(ref FilterBuilder builder)
+        {
+            builder.WithoutShared<GamePaused>();
         }
 
-        private void ChangeColorGlowingMaterial()
+        public void ChangeColorGlowingMaterial()
         {
-            var rnd = world.GetRandomRange(0, 6);
+            var rnd = world.GetRandomRange(1, 6);
             switch (rnd)
             {
                 case 1:
-                    Debug.Log("1");
                     _glowMat.SetColor("_EmissionColor", Color.blue);
                     break;
                 case 2:
-                    Debug.Log("2");
                     _glowMat.SetColor("_EmissionColor", Color.cyan);
                     break;
                 case 3:
-                    Debug.Log("3");
                     _glowMat.SetColor("_EmissionColor", Color.green);
                     break;
                 case 4:
-                    Debug.Log("4");
                     _glowMat.SetColor("_EmissionColor", Color.magenta);
                     break;
                 case 5:
-                    Debug.Log("5");
                     _glowMat.SetColor("_EmissionColor", Color.red);
                     break;
                 case 6:
-                    Debug.Log("6");
                     _glowMat.SetColor("_EmissionColor", Color.yellow);
                     break;
             }

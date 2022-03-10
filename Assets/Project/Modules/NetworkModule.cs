@@ -308,10 +308,10 @@ namespace Project.Modules
                     Photon.Pun.PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable()
                     {
                         {"t", serverTime},
-                        {"cc", 1}
+                        {"cc", 1},
                     });
                 }
-
+                
                 this.timeSyncedConnected = false;
                 this.timeSynced = false;
                 this.UpdateTime();
@@ -385,7 +385,7 @@ namespace Project.Modules
         public override void OnRoomListUpdate(System.Collections.Generic.List<Photon.Realtime.RoomInfo> roomList)
         {
             Photon.Pun.PhotonNetwork.JoinOrCreateRoom(this.roomName,
-                new Photon.Realtime.RoomOptions() {MaxPlayers = 16, PublishUserId = true},
+                new Photon.Realtime.RoomOptions() {MaxPlayers = 16, PublishUserId = true, CustomRoomPropertiesForLobby = new [] {"seed"}},
                 Photon.Realtime.TypedLobby.Default);
         }
 
@@ -398,28 +398,15 @@ namespace Project.Modules
                 var networkModule = world.GetModule<NetworkModule>();
                 if (((ME.ECS.Network.INetworkModuleBase) networkModule).GetRPCOrder() > 0)
                 {
-                    if (AllPlayersReady())
+                    // Here we are check if all required players connected to the game
+                    // So we could start the game sending the special message
+                    if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == world.GetFeature<SceneBuilderFeature>().PlayerCount) 
                     {
                         this.timeSyncedConnected = true;
                         world.AddMarker(new NetworkPlayerConnectedTimeSynced());
                     }
                 }
             }
-        }
-
-        private bool AllPlayersReady()
-        {
-            foreach (var player in Worlds.current.ReadSharedData<MapComponents>().PlayerStatus)
-            {
-                if (!player)
-                {
-                    Debug.Log("not all players are ready");
-                    return false;
-                }
-            }
-        
-            Debug.Log("all players are ready, starting the game");
-            return true;
         }
     }
 }

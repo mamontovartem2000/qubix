@@ -28,6 +28,11 @@ namespace Project.Features {
             AddSystem<MineCollisionSystem>();
             AddSystem<AmmoCollisionSystem>();
         }
+        
+        protected override void InjectFilter(ref FilterBuilder builder)
+        {
+            builder.WithoutShared<GamePaused>();
+        }
 
         protected override void OnDeconstruct() {}
     }

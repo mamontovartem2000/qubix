@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using UnityEngine.Serialization;
 
 namespace Project.Features {
     #region usage
@@ -21,9 +22,11 @@ namespace Project.Features {
     #endregion
     public sealed class EventsFeature : Feature
     {
-        public GlobalEvent PassLocalPlayer;
+        // public GlobalEvent PassLocalPlayer;
+        public GlobalEvent OnTimeSynced;
         public GlobalEvent HealthChanged;
         public GlobalEvent ScoreChanged;
+        public GlobalEvent AllPlayersReady;
         
         public GlobalEvent Defeat;
         public GlobalEvent Victory;

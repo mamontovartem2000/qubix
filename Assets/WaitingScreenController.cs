@@ -21,11 +21,14 @@ public class WaitingScreenController : MonoBehaviour
 
     private void Deactivate(in Entity entity)
     {
-        if(!Utilitiddies.CheckLocalPlayer(entity)) return;
+        _background.DOFade(0.0f, 0.3f).SetEase(Ease.Linear);
+        _popup.DOFade(0f, 0.3f).SetEase(Ease.Linear);
+        _text.DOFade(0, 0.3f).SetEase(Ease.Linear).OnComplete(TurnOff);
+    }
 
-        _background.DOFade(0.0f, 1f).SetEase(Ease.Linear);
-        _popup.DOFade(0f, 1f).SetEase(Ease.Linear);
-        _text.DOFade(0, 1f).SetEase(Ease.Linear);
+    private void TurnOff()
+    {
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()

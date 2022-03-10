@@ -50,6 +50,11 @@ namespace Project.Features {
             AddSystem<ProjectileLifeTimeSystem>();
         }
 
+        protected override void InjectFilter(ref FilterBuilder builder)
+        {
+            builder.WithoutShared<GamePaused>();
+        }
+        
         protected override void OnDeconstruct() {}
 
         public ViewId GetBulletViewID()

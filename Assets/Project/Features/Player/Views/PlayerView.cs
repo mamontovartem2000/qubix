@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using ME.ECS;
 using Project.Features.Player.Components;
 using Project.Utilities;
@@ -19,6 +20,8 @@ namespace Project.Features.Player.Views {
 
         public override void OnInitialize()
         {
+            transform.DORotate(new Vector3(0f, 360f, 0f), 5f, RotateMode.LocalAxisAdd).SetEase(Ease.Linear).SetLoops(-1);
+
             foreach (var part in Parts)
             {
                 part.sharedMaterial = entity.Read<PlayerTag>().Material;
@@ -31,6 +34,16 @@ namespace Project.Features.Player.Views {
         {
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetRotation();
+            
+            foreach (var part in Parts)
+            {
+                part.sharedMaterial = entity.Read<PlayerTag>().Material;
+            }
+            
+            if (!entity.Has<PlayerDisplay>())
+            {
+                transform.DOKill();
+            }
             
             if (entity.Has<LeftWeaponShot>() && !entity.Has<LeftWeaponReload>())
             {

@@ -45,10 +45,15 @@ namespace Project.Features.Player.Modules {
             {
                 _feature.OnLocalPlayerDisconnected(npd.ActorID);
             }
-            
-            if (world.GetMarker(out NetworkPlayerReady npr))
+
+            if (world.GetMarker(out SelectColorMarker scm))
             {
-                _feature.OnPlayerReady(npr.ActorID);
+                _feature.OnselectColor(scm.ActorID, scm.ColorID);
+            }
+
+            if (world.GetMarker(out PlayerReadyMarker prm))
+            {
+                _feature.OnPlayerReady(prm.ActorID);
             }
         }
     }

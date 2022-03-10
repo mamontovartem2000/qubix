@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 
-namespace Project.Features {
+namespace Project.Features 
+{
     #region usage
 
     
@@ -20,16 +21,17 @@ namespace Project.Features {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class InputHandlerFeature : Feature {
-
+    public sealed class InputHandlerFeature : Feature 
+    {
         protected override void OnConstruct()
         {
-            this.AddModule<HandlePlayerInput>();
-            this.AddSystem<HandleInputSystem>();
+            AddModule<HandlePlayerInput>();
+            AddSystem<HandleInputSystem>();
         }
-
-        protected override void OnDeconstruct() {
-            
+        protected override void InjectFilter(ref FilterBuilder builder)
+        {
+            builder.WithoutShared<GamePaused>();
         }
+        protected override void OnDeconstruct() {}
     }
 }

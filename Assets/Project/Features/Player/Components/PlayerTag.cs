@@ -9,6 +9,8 @@ namespace Project.Features.Player.Components
         public Vector3 FaceDirection;
         public Material Material;
     }
+    
+    public struct PlayerDisplay : IComponent {}
 
     public struct PlayerScore : IComponent
     {
