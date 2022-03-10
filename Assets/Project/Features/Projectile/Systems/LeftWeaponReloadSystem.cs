@@ -55,6 +55,7 @@ namespace Project.Features.Projectile.Systems
                 {
                     entity.Get<LeftWeapon>().Ammo = entity.Get<LeftWeapon>().MaxAmmo;
                     entity.Remove<LeftWeaponReload>();
+                    world.GetFeature<EventsFeature>().leftWeaponFired.Execute(entity);
                 }
             }
             else
