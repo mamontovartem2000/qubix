@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Features.Components;
 using Project.Features.Player.Components;
+using Project.Features.Player.Markers;
 using Project.Features.SceneBuilder.Components;
 using Project.Utilities;
 using UnityEngine;
@@ -22,18 +23,19 @@ namespace Project.Features.GameState.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class GameOverSystem : ISystem, IAdvanceTick, IUpdate 
+    public sealed class GameStartSystem : ISystem, IAdvanceTick, IUpdate 
     {
         public World world { get; set; }
         
-        private GameStateFeature feature;
+        private GameStateFeature _feature;
         private Filter _playerFilter;
         
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this.feature);
+            this.GetFeature(out this._feature);
             Filter.Create("Player Filter")
                 .With<PlayerTag>()
+                .WithShared<GamePaused>()
                 .Push(ref _playerFilter);
         }
         
@@ -41,10 +43,19 @@ namespace Project.Features.GameState.Systems
 
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
-
+            if(!world.HasSharedData<GamePaused>()) return;
+            
             if (AllPlayersReady())
             {
                 world.GetFeature<EventsFeature>().AllPlayersReady.Execute(world.GetFeature<PlayerFeature>().GetActivePlayer());
+                world.RemoveSharedData<GamePaused>();
+
+                foreach (var player in _playerFilter)
+                {
+                    player.Remove<PlayerDisplay>();
+                }
+                
+                world.AddMarker(new GameStartedMarker());
             }
             
 //            if(timer != 0) return;

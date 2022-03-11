@@ -14,4 +14,9 @@ namespace Project.Features.Player.Markers {
     {
         public int ActorID;
     }
+
+    public struct GameStartedMarker : IMarker
+    {
+        public int ActorID;
+    }
 }

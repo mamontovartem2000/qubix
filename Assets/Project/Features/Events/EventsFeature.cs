@@ -27,6 +27,8 @@ namespace Project.Features {
         public GlobalEvent HealthChanged;
         public GlobalEvent ScoreChanged;
         public GlobalEvent AllPlayersReady;
+        public GlobalEvent OnGameStarted;
+        
         
         public GlobalEvent Defeat;
         public GlobalEvent Victory;

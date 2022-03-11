@@ -15,7 +15,8 @@ public class MainMenuCanvasController : MonoBehaviour
 
     [SerializeField] private Image[] _images;
     [SerializeField] private TextMeshProUGUI[] _texts;
-    
+    [SerializeField] private GameObject _display;
+
     private void Start()
     {
         _activateEvent.Subscribe(ActivateMenu);
@@ -34,12 +35,12 @@ public class MainMenuCanvasController : MonoBehaviour
         
         foreach (var image in _images)
         {
-            image.DOFade(0.5f, 0.5f).SetEase(Ease.Linear);
+            image.DOFade(0f, 0.5f).SetEase(Ease.Linear);
         }
 
         foreach (var text in _texts)
         {
-            text.DOFade(0.5f, 0.5f).SetEase(Ease.Linear);
+            text.DOFade(0f, 0.5f).SetEase(Ease.Linear);
         }
     }
 

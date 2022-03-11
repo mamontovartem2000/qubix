@@ -31,7 +31,7 @@ namespace Project.Features
         public Material[] Materials;
 
         private ViewId _playerViewID;
-        private RPCId _onGameStarted, _onPlayerDisconnected, _onSelectColor, _onPlayerReady;
+        private RPCId _onGameStarted, _onPlayerDisconnected, _onSelectColor, _onPlayerReady, _onGameStartedComplete;
         
         private Filter _playerFilter, _deadFilter;
         
@@ -42,7 +42,7 @@ namespace Project.Features
         protected override void OnConstruct()
         {
             GetFeatures();
-            //AddSystems();
+            AddSystems();
             AddModules();
             CreateFilters();
 
@@ -90,6 +90,7 @@ namespace Project.Features
             _onGameStarted = net.RegisterRPC(new System.Action<int>(GameStarted_RPC).Method);
             _onSelectColor = net.RegisterRPC(new System.Action<int, int>(SelectColor_RPC).Method);
             _onPlayerReady = net.RegisterRPC(new System.Action<int>(PlayerReady_RPC).Method);
+            _onGameStartedComplete = net.RegisterRPC(new System.Action(StartGame_RPC).Method);
         }
         
         public void OnGameStarted()
@@ -114,6 +115,12 @@ namespace Project.Features
         {
             var net = world.GetModule<NetworkModule>();
             net.RPC(this, _onPlayerReady, id);
+        }
+
+        public void OnGameStartedComplete()
+        {
+            var net = world.GetModule<NetworkModule>();
+            net.RPC(this, _onGameStartedComplete);
         }
 
         //Define RPC logic here
@@ -220,16 +227,21 @@ namespace Project.Features
             return Entity.Empty;
         }
 
-        public int GetPlayerID()
-        {
-            return _playerIndex;
-        }
-
-        // protected override void InjectFilter(ref FilterBuilder builder)
-        // {
-        //     builder.WithoutShared<GamePaused>();
-        // }
         
         protected override void OnDeconstruct() {}
+
+        public void StartGame_RPC()
+        {
+            var activePlayer = GetActivePlayer();
+
+            var pos = _builder.GetRandomSpawnPosition();
+            Debug.Log(pos);
+            
+            activePlayer.SetPosition(_builder.GetRandomSpawnPosition());
+            _builder.MoveTo(_builder.PositionToIndex(activePlayer.GetPosition()), _builder.PositionToIndex(activePlayer.GetPosition()));
+            activePlayer.Get<PlayerMoveTarget>().Value = activePlayer.GetPosition();
+            activePlayer.Remove<PlayerDisplay>();
+            world.GetFeature<EventsFeature>().OnGameStarted.Execute(activePlayer);
+        }
     }
 }

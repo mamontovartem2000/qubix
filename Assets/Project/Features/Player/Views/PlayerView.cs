@@ -33,8 +33,7 @@ namespace Project.Features.Player.Views {
         public override void ApplyState(float deltaTime, bool immediately)
         {
             transform.position = entity.GetPosition();
-            transform.rotation = entity.GetRotation();
-            
+
             foreach (var part in Parts)
             {
                 part.sharedMaterial = entity.Read<PlayerTag>().Material;
@@ -43,6 +42,7 @@ namespace Project.Features.Player.Views {
             if (!entity.Has<PlayerDisplay>())
             {
                 transform.DOKill();
+                transform.rotation = entity.GetRotation();
             }
             
             if (entity.Has<LeftWeaponShot>() && !entity.Has<LeftWeaponReload>())

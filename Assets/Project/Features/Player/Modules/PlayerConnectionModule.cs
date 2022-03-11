@@ -55,6 +55,11 @@ namespace Project.Features.Player.Modules {
             {
                 _feature.OnPlayerReady(prm.ActorID);
             }
+
+            if (world.GetMarker(out GameStartedMarker gsm))
+            {
+                _feature.OnGameStartedComplete();
+            }
         }
     }
 }

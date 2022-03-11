@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activateEvent: {fileID: 11400000, guid: 6b8bf6999e76c844390717830c7b0007, type: 2}
-  _deactivateEvent: {fileID: 11400000, guid: be33c7913ada15040b7dd81a291611ed, type: 2}
+  _deactivateEvent: {fileID: 11400000, guid: 2a007bed3644b424baaa3da5a0f475b9, type: 2}
   _background: {fileID: 1944601729}
   _popup: {fileID: 1571858004}
   _text: {fileID: 956752690}
@@ -8585,6 +8585,7 @@ MonoBehaviour:
   - {fileID: 1515050195}
   - {fileID: 1901267446}
   - {fileID: 1663120747}
+  _display: {fileID: 486910778}
 --- !u!223 &1753564209
 Canvas:
   m_ObjectHideFlags: 0
@@ -11327,7 +11328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1472ceaa366804481d6ebb20fdcf87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPassEvent: {fileID: 11400000, guid: be33c7913ada15040b7dd81a291611ed, type: 2}
+  _playerPassEvent: {fileID: 11400000, guid: 20ba952d6d439c74eac78ba0751ff9be, type: 2}
   _offset: {x: -6, y: 10, z: -6}
 --- !u!45 &2203115479106424817
 Skybox:

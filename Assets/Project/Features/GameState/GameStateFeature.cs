@@ -25,7 +25,7 @@ namespace Project.Features
 
         protected override void OnConstruct()
         {
-	        AddSystem<GameOverSystem>();
+	        AddSystem<GameStartSystem>();
         }
 
         protected override void OnDeconstruct() 
