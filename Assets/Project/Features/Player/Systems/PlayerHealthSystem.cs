@@ -50,13 +50,14 @@ namespace Project.Features.Player.Systems {
 
             if (entity.Has<LastHit>() && entity.Get<LastHit>().Enemy.IsAlive())
             {
-                entity.Get<LastHit>().Enemy.Get<PlayerScore>().Value += 5;
-                world.GetFeature<EventsFeature>().ScoreChanged.Execute(entity.Read<LastHit>().Enemy);
+                entity.Get<LastHit>().Enemy.Get<PlayerScore>().Kills += 1;
+                world.GetFeature<EventsFeature>().Kill.Execute(entity.Get<LastHit>().Enemy);
+                Debug.Log($"shit: {entity.Get<LastHit>().Enemy}");
             }
             
             var deadBody = new Entity("deadBody");
             deadBody.Set(new DeadBody {ActorID = entity.Read<PlayerTag>().PlayerID, Time = 5.5f});
-            entity.Get<PlayerScore>().Value -= 5;
+            entity.Get<PlayerScore>().Deaths += 1;
 
             deadBody.SetAs<PlayerScore>(entity);
             

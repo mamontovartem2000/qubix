@@ -105,7 +105,7 @@ namespace Project.Features
             net.RPC(this, _onPlayerDisconnected, id);
         }
 
-        public void OnselectColor(int actorID, int colorID)
+        public void OnSelectColor(int actorID, int colorID)
         {
             var net = world.GetModule<NetworkModule>();
             net.RPC(this, _onSelectColor, actorID, colorID);
@@ -135,7 +135,7 @@ namespace Project.Features
             Debug.Log($"GameStarted");
             CreatePlayer(id);
             
-            world.GetFeature<EventsFeature>().OnTimeSynced.Execute(GetPlayerByID(id));
+            // world.GetFeature<EventsFeature>().OnTimeSynced.Execute(GetPlayerByID(id));
             world.SetSharedData(new GamePaused());
         }
 
@@ -161,25 +161,35 @@ namespace Project.Features
 
         private void SelectColor_RPC(int actorID, int colorID)
         {
-            if(actorID != _playerIndex) return;
-            // Debug.Log($"actor: {actorID}, color: {colorID}, material: {_playerIndex * colorID}");
-            
+            if(actorID != GetPlayerByID(actorID).Get<PlayerTag>().PlayerID) return;
             GetPlayerByID(actorID).Get<PlayerTag>().Material = Materials[_playerIndex * colorID];
         }
-        
+
+        private bool _initialised;
+
         private Entity CreatePlayer(int id)
         {
             var player = new Entity("Player");
             player.InstantiateView(_playerViewID);
 
             player.Set(new PlayerTag {PlayerID = id, FaceDirection = Vector3.forward, Material = Materials[1 * _playerIndex]});
-            player.Set(new PlayerHealth {Value = 100});
-            player.SetPosition(new Vector3(-20f, -20f, -20f));
+            player.Set(new PlayerHealth {Value = 1});
             
+            if (_initialised)
+            {
+                player.SetPosition(_builder.GetRandomSpawnPosition());
+            }
+            else
+            {
+                player.SetPosition(new Vector3(-20f, -20f, -20f) * id);
+                player.Set(new PlayerDisplay());
+                player.Set(new Initialized());
+                _initialised = true;
+            }
+
+            world.GetFeature<EventsFeature>().OnTimeSynced.Execute(player);
             player.Set(new PlayerMoveTarget {Value = player.GetPosition()});
             player.Set(new LeftWeapon {Type = WeaponType.Gun, Cooldown = 0.2f, Ammo = 20, MaxAmmo = 20, ReloadTime = 1.2f});
-            player.Set(new PlayerDisplay());
-            world.GetFeature<EventsFeature>().OnTimeSynced.Execute(player);
 
             return player;
         }
@@ -194,11 +204,14 @@ namespace Project.Features
             return CreatePlayer(id);
         }
 
-        public void PlayerReady_RPC(int id)
+        private void PlayerReady_RPC(int id)
         {
-            if(id != _playerIndex) return;
+            Debug.Log($"beforecall {id}, status: {world.GetSharedData<MapComponents>().PlayerStatus[id -1]}");
 
-            world.GetSharedData<MapComponents>().PlayerStatus[_playerIndex -1] = true;
+            if(id != GetPlayerByID(id).Read<PlayerTag>().PlayerID) return;
+            world.GetSharedData<MapComponents>().PlayerStatus[id -1] = true;
+
+            Debug.Log($"aftercall {id}, status: {world.GetSharedData<MapComponents>().PlayerStatus[id -1]}");
         }
         
         public Entity GetActivePlayer()
@@ -228,20 +241,24 @@ namespace Project.Features
         }
 
         
-        protected override void OnDeconstruct() {}
-
-        public void StartGame_RPC()
+        private void StartGame_RPC()
         {
             var activePlayer = GetActivePlayer();
 
-            var pos = _builder.GetRandomSpawnPosition();
-            Debug.Log(pos);
-            
             activePlayer.SetPosition(_builder.GetRandomSpawnPosition());
             _builder.MoveTo(_builder.PositionToIndex(activePlayer.GetPosition()), _builder.PositionToIndex(activePlayer.GetPosition()));
             activePlayer.Get<PlayerMoveTarget>().Value = activePlayer.GetPosition();
             activePlayer.Remove<PlayerDisplay>();
+            world.RemoveSharedData<GamePaused>();
             world.GetFeature<EventsFeature>().OnGameStarted.Execute(activePlayer);
+            _builder.TimerEntity.Set(new GameTimer {Value = 150f});
         }
+
+        public void ForceStart()
+        {
+            StartGame_RPC();
+        }
+
+        protected override void OnDeconstruct() {}
     }
 }

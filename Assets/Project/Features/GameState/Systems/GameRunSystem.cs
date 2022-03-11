@@ -1,12 +1,9 @@
 ﻿using ME.ECS;
-using UnityEngine;
+using Project.Features.Components;
 
-namespace Project.Features.Player.Systems 
+namespace Project.Features.GameState.Systems 
 {
-    #region usage
-
-    
-
+#region usage
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
     using Components; using Modules; using Systems; using Markers;
@@ -18,42 +15,37 @@ namespace Project.Features.Player.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class PlayerRespawnSystem : ISystemFilter 
+    public sealed class GameRunSystem : ISystemFilter 
     {
+        private GameStateFeature _feature;
         public World world { get; set; }
-    
-        private PlayerFeature feature;
-        private CollisionHandlerFeature _coll;
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this.feature);
-            world.GetFeature(out _coll);
+            this.GetFeature(out _feature);
         }
         
         void ISystemBase.OnDeconstruct() {}
-        #if !CSHARP_8_OR_NEWER
+        #if !CSHARP_8_OR_NEWER 
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;
         #endif
         Filter ISystemFilter.filter { get; set; }
-
         Filter ISystemFilter.CreateFilter() 
         {
-            return Filter.Create("Filter-PlayerRespawnSystem")
-                .With<DeadBody>()
+            return Filter.Create("Filter-GameRunSystem")
+                .With<GameTimer>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var deadbody = ref entity.Get<DeadBody>();
-            deadbody.Time -= deltaTime;
-            
-            if(deadbody.Time <= 0)
+            if (entity.Get<GameTimer>().Value - deltaTime > 0)
             {
-                var newPlayer = feature.RespawnPlayer(deadbody.ActorID);
-                newPlayer.SetAs<PlayerScore>(entity);
-                entity.Destroy();
+                entity.Get<GameTimer>().Value -= deltaTime;
+            }
+            else
+            {
+                world.GetFeature<EventsFeature>().OnGameFinished.Execute();
             }
         }
     }

@@ -60,7 +60,7 @@ namespace Project.Features
 
         private const int EMPTY_TILE = 0, SIMPLE_TILE = 1, PORTAL_TILE = 2, AMMO_TILE = 3;
 
-        private Entity _init;
+        public Entity TimerEntity;
 
         protected override void OnConstruct()
         {
@@ -106,7 +106,7 @@ namespace Project.Features
 
         private void PrepareMap()
         {
-            _init = new Entity("init");
+            TimerEntity = new Entity("init");
 
             _tileID = world.RegisterViewSource(TileView);
             _portalTileID = world.RegisterViewSource(PortalView);

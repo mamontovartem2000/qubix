@@ -1,6 +1,7 @@
 using DG.Tweening;
 using ME.ECS;
 using Project.Features;
+using Project.Features.Components;
 using Project.Features.Player.Components;
 using Project.Features.Player.Markers;
 using Project.Utilities;
@@ -48,15 +49,18 @@ public class MainMenuCanvasController : MonoBehaviour
     {
         var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
         Worlds.current.AddMarker(new PlayerReadyMarker {ActorID = id});
-        
-        Debug.Log($"pressed, id {id}");
     }
 
     private void ActivateMenu(in Entity entity)
     {
-
         if(!Utilitiddies.CheckLocalPlayer(entity)) return;
+        
         gameObject.SetActive(true);
+
+        if (entity.Has<Initialized>())
+        {
+            _display.transform.position = entity.GetPosition() + new Vector3(0f, 1.5f, -1f);
+        }
     }
 
     private void OnDestroy()

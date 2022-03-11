@@ -15,12 +15,13 @@ MonoBehaviour:
   editorComment: 
   OnTimeSynced: {fileID: 11400000, guid: dcae1a2e4e5571247bf0879ae4aad27a, type: 2}
   HealthChanged: {fileID: 11400000, guid: d981a0237b4bd2f418c141529b5bd7ce, type: 2}
-  ScoreChanged: {fileID: 11400000, guid: 566c87e66461fee4697dadcde7c14f99, type: 2}
   AllPlayersReady: {fileID: 11400000, guid: 2a007bed3644b424baaa3da5a0f475b9, type: 2}
   OnGameStarted: {fileID: 11400000, guid: 20ba952d6d439c74eac78ba0751ff9be, type: 2}
   Defeat: {fileID: 11400000, guid: e029b1e20c48df345a2ad42f0b515b41, type: 2}
   Victory: {fileID: 11400000, guid: fed7a3d8f10424d46a54c9e176a3902e, type: 2}
+  OnGameFinished: {fileID: 11400000, guid: 4dec39c4813f049498b1875bd14495ae, type: 2}
   Respawn: {fileID: 11400000, guid: 6b8bf6999e76c844390717830c7b0007, type: 2}
+  Kill: {fileID: 11400000, guid: 770d56ac32075d543881417a5d09fe59, type: 2}
   leftWeaponFired: {fileID: 11400000, guid: 1bdb23a7a10d9ff44974bf7fe250001d, type: 2}
   rightWeaponFired: {fileID: 11400000, guid: f288ad3abdd826f46b4abfd5a9f0fedc, type: 2}
   LeftweaponDepleted: {fileID: 11400000, guid: 79cdabb3b24a9b84ca598ee7a2d359fe, type: 2}

@@ -14,7 +14,8 @@ namespace Project.Features.Player.Components
 
     public struct PlayerScore : IComponent
     {
-        public int Value;
+        public int Kills;
+        public int Deaths;
     }
     
     public struct PlayerIsRotating : IComponent

@@ -15,7 +15,6 @@ public class UICore : MonoBehaviour
     [SerializeField] private GlobalEvent _defeatScreenEvent;
 
     [SerializeField] private GlobalEvent _healthChangedEvent;
-    [SerializeField] private GlobalEvent _scoreChangeEvent;
 
     [SerializeField] private GlobalEvent _leftWeaponFired;
     [SerializeField] private GlobalEvent _rightWeaponFired;
@@ -24,7 +23,6 @@ public class UICore : MonoBehaviour
     
     [Header("Health and Score References")]
     [SerializeField] private Image _healthbar;
-    [SerializeField] private TextMeshProUGUI _scoreText;
 
     [Header("Screens References")]
     [SerializeField] private GameObject _victoryScreen;
@@ -44,7 +42,6 @@ public class UICore : MonoBehaviour
         _healthChangedEvent.Subscribe(HealthChanged);
         _victoryScreenEvent.Subscribe(ToggleWinScreen);
         _defeatScreenEvent.Subscribe(ToggleLoseScreen);
-        _scoreChangeEvent.Subscribe(ChangeScore);
         _leftWeaponFired.Subscribe(ChangeLeftAmmo);
         _rightWeaponFired.Subscribe(ChangeRightAmmo);
         _leftWeaponDepleted.Subscribe(ReloadLeft);
@@ -57,13 +54,6 @@ public class UICore : MonoBehaviour
         var fill = entity.Read<PlayerHealth>().Value / 100;
         _healthbar.fillAmount = fill;
         _healthbar.color = Color.Lerp(Color.red, Color.green, fill);
-    }
-
-    private void ChangeScore(in Entity entity)
-    {
-        if(!Utilitiddies.CheckLocalPlayer(entity)) return;
-        
-        _scoreText.SetText(entity.Read<PlayerScore>().Value.ToString());
     }
 
     private void ToggleWinScreen(in Entity entity)
@@ -111,8 +101,7 @@ public class UICore : MonoBehaviour
     {
         _healthChangedEvent.Unsubscribe(HealthChanged);
         _victoryScreenEvent.Unsubscribe(HealthChanged);
-        _defeatScreenEvent.Unsubscribe(HealthChanged);;
-        _scoreChangeEvent.Unsubscribe(ChangeScore);
+        _defeatScreenEvent.Unsubscribe(HealthChanged);
         _leftWeaponFired.Unsubscribe(ChangeLeftAmmo);
         _rightWeaponFired.Unsubscribe(ChangeRightAmmo);
         _leftWeaponDepleted.Unsubscribe(ReloadLeft);

@@ -44,21 +44,19 @@ namespace Project.Features.GameState.Systems
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
             if(!world.HasSharedData<GamePaused>()) return;
-            
-            if (AllPlayersReady())
-            {
-                world.GetFeature<EventsFeature>().AllPlayersReady.Execute(world.GetFeature<PlayerFeature>().GetActivePlayer());
-                world.RemoveSharedData<GamePaused>();
 
-                foreach (var player in _playerFilter)
-                {
-                    player.Remove<PlayerDisplay>();
-                }
-                
-                world.AddMarker(new GameStartedMarker());
-            }
+            if (!AllPlayersReady()) return;
             
-//            if(timer != 0) return;
+            world.GetFeature<EventsFeature>().AllPlayersReady.Execute(world.GetFeature<PlayerFeature>().GetActivePlayer());
+            world.GetFeature<PlayerFeature>().ForceStart();
+
+            // foreach (var player in _playerFilter)
+            // {
+            //     player.Remove<PlayerDisplay>();
+            // }
+            
+
+            //            if(timer != 0) return;
 
             // Entity winner = default;
             //
@@ -119,10 +117,10 @@ namespace Project.Features.GameState.Systems
             foreach (var player in world.ReadSharedData<MapComponents>().PlayerStatus)
             {
                 if (!player) return false;
-                Debug.Log("Not all players are ready");
+                // Debug.Log("Not all players are ready");
             }
             
-            Debug.Log("All players are ready, starting the game");
+            // Debug.Log("All players are ready, starting the game");
             return true;
         }
         

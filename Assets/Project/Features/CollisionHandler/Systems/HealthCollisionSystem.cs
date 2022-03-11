@@ -59,9 +59,6 @@ namespace Project.Features.CollisionHandler.Systems
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = entity, Damage = -5f}, ComponentLifetime.NotifyAllSystems);
                     
-                    entity.Get<PlayerScore>().Value += 2;
-                    world.GetFeature<EventsFeature>().ScoreChanged.Execute(entity);
-                    
                     collectible.Destroy();
                 }
             }   

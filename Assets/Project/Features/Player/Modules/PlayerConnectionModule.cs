@@ -48,7 +48,7 @@ namespace Project.Features.Player.Modules {
 
             if (world.GetMarker(out SelectColorMarker scm))
             {
-                _feature.OnselectColor(scm.ActorID, scm.ColorID);
+                _feature.OnSelectColor(scm.ActorID, scm.ColorID);
             }
 
             if (world.GetMarker(out PlayerReadyMarker prm))

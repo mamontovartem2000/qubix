@@ -45,7 +45,7 @@ namespace Project.Features.Player.Systems {
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            entity.Get<ApplyDamage>().ApplyTo.Get<PlayerHealth>().Value -= entity.Get<ApplyDamage>().Damage;
+            entity.Get< ApplyDamage>().ApplyTo.Get<PlayerHealth>().Value -= entity.Get<ApplyDamage>().Damage;
             entity.Get<ApplyDamage>().ApplyTo.Get<LastHit>().Enemy = entity.Read<ApplyDamage>().From;
             
             world.GetFeature<EventsFeature>().HealthChanged.Execute(entity.Get<ApplyDamage>().ApplyTo);
