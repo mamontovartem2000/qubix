@@ -8,23 +8,44 @@ using Project.Features.SceneBuilder.Components;
 using Project.Utilities;
 using UnityEngine;
 
-namespace Project.Features 
+namespace Project.Features
 {
     #region usage
-    using Components; using Modules; using Systems; using Features; using Markers;
-    using Player.Components; using Player.Modules; using Player.Systems; using Player.Markers;
-    
-    namespace Player.Components {}
-    namespace Player.Modules {}
-    namespace Player.Systems {}
-    namespace Player.Markers {}
-    
-    #if ECS_COMPILE_IL2CPP_OPTIONS
+
+    using Components;
+    using Modules;
+    using Systems;
+    using Features;
+    using Markers;
+    using Player.Components;
+    using Player.Modules;
+    using Player.Systems;
+    using Player.Markers;
+
+    namespace Player.Components
+    {
+    }
+
+    namespace Player.Modules
+    {
+    }
+
+    namespace Player.Systems
+    {
+    }
+
+    namespace Player.Markers
+    {
+    }
+
+#if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
+#endif
+
     #endregion
+
     public sealed class PlayerFeature : Feature
     {
         public PlayerView PlayerView;
@@ -32,13 +53,13 @@ namespace Project.Features
 
         private ViewId _playerViewID;
         private RPCId _onGameStarted, _onPlayerDisconnected, _onSelectColor, _onPlayerReady, _onGameStartedComplete;
-        
+
         private Filter _playerFilter, _deadFilter;
-        
+
         private int _playerIndex;
-        
+
         private SceneBuilderFeature _builder;
-        
+
         protected override void OnConstruct()
         {
             GetFeatures();
@@ -55,10 +76,12 @@ namespace Project.Features
         {
             world.GetFeature(out _builder);
         }
+
         private void AddModules()
         {
             AddModule<PlayerConnectionModule>();
         }
+
         private void AddSystems()
         {
             AddSystem<PlayerMovementSystem>();
@@ -70,6 +93,7 @@ namespace Project.Features
             AddSystem<RightWeaponCooldownSystem>();
             AddSystem<RightWeaponReloadSystem>();
         }
+
         private void CreateFilters()
         {
             Filter.Create("Player Filter")
@@ -80,7 +104,7 @@ namespace Project.Features
                 .With<DeadBody>()
                 .Push(ref _deadFilter);
         }
-        
+
         //Register and create RPC below
         private void RegisterRPCs(NetworkModule net)
         {
@@ -92,13 +116,13 @@ namespace Project.Features
             _onPlayerReady = net.RegisterRPC(new System.Action<int>(PlayerReady_RPC).Method);
             _onGameStartedComplete = net.RegisterRPC(new System.Action(StartGame_RPC).Method);
         }
-        
+
         public void OnGameStarted()
         {
             var net = world.GetModule<NetworkModule>();
             net.RPC(this, _onGameStarted, _playerIndex);
         }
-        
+
         public void OnLocalPlayerDisconnected(int id)
         {
             var net = world.GetModule<NetworkModule>();
@@ -126,15 +150,15 @@ namespace Project.Features
         //Define RPC logic here
         private void GameStarted_RPC(int id)
         {
-            if(GetPlayerByID(id).IsAlive()) return;
+            if (GetPlayerByID(id).IsAlive()) return;
 
             var seed = PhotonNetwork.MasterClient.UserId;
             this.world.SetSeed(MathUtils.GetHash(seed));
             _builder.ChangeColorGlowingMaterial();
-            
+
             Debug.Log($"GameStarted");
             CreatePlayer(id);
-            
+
             // world.GetFeature<EventsFeature>().OnTimeSynced.Execute(GetPlayerByID(id));
             world.SetSharedData(new GamePaused());
         }
@@ -150,9 +174,9 @@ namespace Project.Features
                 if (deadBody.Read<DeadBody>().ActorID == id)
                 {
                     deadBody.Destroy();
-                }    
+                }
             }
-            
+
             if (toDestroy != Entity.Empty)
             {
                 toDestroy.Destroy();
@@ -161,39 +185,43 @@ namespace Project.Features
 
         private void SelectColor_RPC(int actorID, int colorID)
         {
-            if(actorID != GetPlayerByID(actorID).Get<PlayerTag>().PlayerID) return;
+            if (actorID != GetPlayerByID(actorID).Get<PlayerTag>().PlayerID) return;
             GetPlayerByID(actorID).Get<PlayerTag>().Material = Materials[_playerIndex * colorID];
         }
 
-        private bool _initialised;
+        private bool _initialised = false;
 
         private Entity CreatePlayer(int id)
         {
             var player = new Entity("Player");
             player.InstantiateView(_playerViewID);
 
-            player.Set(new PlayerTag {PlayerID = id, FaceDirection = Vector3.forward, Material = Materials[1 * _playerIndex]});
+            player.Set(new PlayerTag {PlayerID = id, FaceDirection = Vector3.forward,Material = Materials[1 * id]});
             player.Set(new PlayerHealth {Value = 1});
             
             if (_initialised)
             {
                 player.SetPosition(_builder.GetRandomSpawnPosition());
+                player.Set(new PlayerMoveTarget {Value = player.GetPosition()});
+                player.Set(new LeftWeapon {Type = WeaponType.Gun, Cooldown = 0.2f, Ammo = 20, MaxAmmo = 20, ReloadTime = 1.2f});
+                _builder.MoveTo(_builder.PositionToIndex(player.GetPosition()), _builder.PositionToIndex(player.GetPosition()));
             }
             else
             {
                 player.SetPosition(new Vector3(-20f, -20f, -20f) * id);
+                
                 player.Set(new PlayerDisplay());
                 player.Set(new Initialized());
+                world.GetFeature<EventsFeature>().OnTimeSynced.Execute(player);
                 _initialised = true;
             }
 
-            world.GetFeature<EventsFeature>().OnTimeSynced.Execute(player);
-            player.Set(new PlayerMoveTarget {Value = player.GetPosition()});
             player.Set(new LeftWeapon {Type = WeaponType.Gun, Cooldown = 0.2f, Ammo = 20, MaxAmmo = 20, ReloadTime = 1.2f});
-
+            world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(player);
+            player.Set(new PlayerMoveTarget {Value = player.GetPosition()});
             return player;
         }
-        
+
         public void OnLocalPlayerConnected(int id)
         {
             _playerIndex = id;
@@ -206,14 +234,10 @@ namespace Project.Features
 
         private void PlayerReady_RPC(int id)
         {
-            Debug.Log($"beforecall {id}, status: {world.GetSharedData<MapComponents>().PlayerStatus[id -1]}");
-
-            if(id != GetPlayerByID(id).Read<PlayerTag>().PlayerID) return;
-            world.GetSharedData<MapComponents>().PlayerStatus[id -1] = true;
-
-            Debug.Log($"aftercall {id}, status: {world.GetSharedData<MapComponents>().PlayerStatus[id -1]}");
+            if (id != GetPlayerByID(id).Read<PlayerTag>().PlayerID) return;
+            world.GetSharedData<MapComponents>().PlayerStatus[id - 1] = true;
         }
-        
+
         public Entity GetActivePlayer()
         {
             foreach (var player in _playerFilter)
@@ -223,7 +247,7 @@ namespace Project.Features
                     return player;
                 }
             }
-            
+
             return Entity.Empty;
         }
 
@@ -236,11 +260,11 @@ namespace Project.Features
                     return player;
                 }
             }
-            
+
             return Entity.Empty;
         }
 
-        
+
         private void StartGame_RPC()
         {
             var activePlayer = GetActivePlayer();
@@ -259,6 +283,8 @@ namespace Project.Features
             StartGame_RPC();
         }
 
-        protected override void OnDeconstruct() {}
+        protected override void OnDeconstruct()
+        {
+        }
     }
 }

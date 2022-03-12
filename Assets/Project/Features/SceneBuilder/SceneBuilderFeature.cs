@@ -252,7 +252,7 @@ namespace Project.Features
         {
             var x = Mathf.RoundToInt(vec.x);
             var y = Mathf.RoundToInt(vec.z);
-
+            
             return y * Width + x;
         }
         private Vector3 IndexToPosition(int index)

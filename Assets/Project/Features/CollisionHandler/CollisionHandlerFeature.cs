@@ -1,4 +1,6 @@
 ﻿using ME.ECS;
+using Project.Features.CollisionHandler.Views;
+using UnityEngine;
 
 namespace Project.Features {
     #region usage
@@ -21,12 +23,24 @@ namespace Project.Features {
     #endregion
     public sealed class CollisionHandlerFeature : Feature
     {
+        public MineExlosionMono MineVFX;
+        public DeathMono DeathVFX;
+        public RocketExplosionMono RocketVFX;
+
+        public ViewId _mineID, _deathID, _rocketId;
+        public float _mineTimer, _deathTimer;
+        
         protected override void OnConstruct()
         {
             AddSystem<ProjectileCollisionSystem>();
             AddSystem<HealthCollisionSystem>();
             AddSystem<MineCollisionSystem>();
             AddSystem<AmmoCollisionSystem>();
+            AddSystem<ExplosionSystem>();
+
+            _mineID = world.RegisterViewSource(MineVFX);
+            _deathID = world.RegisterViewSource(DeathVFX);
+            _rocketId = world.RegisterViewSource(RocketVFX);
         }
         
         protected override void InjectFilter(ref FilterBuilder builder)
@@ -34,6 +48,14 @@ namespace Project.Features {
             builder.WithoutShared<GamePaused>();
         }
 
+        public void SpawnVFX(Vector3 position, ViewId id, float time)
+        {
+            var vfx = new Entity("vfx");
+            vfx.InstantiateView(id);
+            vfx.SetPosition(position);
+            vfx.Get<ExplosionTag>().Value = time;
+        }
+        
         protected override void OnDeconstruct() {}
     }
 }

@@ -58,7 +58,8 @@ namespace Project.Features.CollisionHandler.Systems {
                     
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = entity, Damage = 10f}, ComponentLifetime.NotifyAllSystems);
-                    
+
+                    _feature.SpawnVFX(entity.GetPosition(), _feature._mineID, _feature._mineTimer);                    
                     collectible.Destroy();
                 }
             }   

@@ -27,13 +27,13 @@ namespace Project.Features {
         public GlobalEvent HealthChanged;
         public GlobalEvent AllPlayersReady;
         public GlobalEvent OnGameStarted;
-        
+        public GlobalEvent PassLocalPlayer;
         
         public GlobalEvent Defeat;
         public GlobalEvent Victory;
         public GlobalEvent OnGameFinished;
-        public GlobalEvent Respawn;
-        public GlobalEvent Kill;
+        public GlobalEvent PlayerDeath;
+        public GlobalEvent PlayerKill;
 
         public GlobalEvent leftWeaponFired;
         public GlobalEvent rightWeaponFired;

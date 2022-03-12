@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: CollisionHandlerFeature
   m_EditorClassIdentifier: 
   editorComment: 
-  DamageEvent: {fileID: 11400000, guid: d981a0237b4bd2f418c141529b5bd7ce, type: 2}
-  ScoreEvent: {fileID: 11400000, guid: 566c87e66461fee4697dadcde7c14f99, type: 2}
+  MineVFX: {fileID: -2189062879659532947, guid: 48f421ab6156a7343883819f08fd1178, type: 3}
+  DeathVFX: {fileID: 3164495714841560054, guid: 67956fb05321d6043ba155b47c2566b3, type: 3}
+  RocketVFX: {fileID: -2865807280830581962, guid: 84d19c688c7e1fc4baf1991011a268a2, type: 3}
+  _mineTimer: 3
+  _deathTimer: 3

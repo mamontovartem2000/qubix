@@ -1,4 +1,6 @@
 ﻿using ME.ECS;
+using Project.Features.Projectile.Components;
+using Project.Features.SceneBuilder.Components;
 using UnityEngine;
 
 namespace Project.Features.Player.Systems {
@@ -23,10 +25,13 @@ namespace Project.Features.Player.Systems {
         
         private PlayerFeature _feature;
         private SceneBuilderFeature _builder;
+        private CollisionHandlerFeature _coll;
+        
         void ISystemBase.OnConstruct() {
             
             this.GetFeature(out _feature);
             world.GetFeature(out _builder);
+            world.GetFeature(out _coll);
         }
 
         void ISystemBase.OnDeconstruct() {}
@@ -51,9 +56,11 @@ namespace Project.Features.Player.Systems {
             if (entity.Has<LastHit>() && entity.Get<LastHit>().Enemy.IsAlive())
             {
                 entity.Get<LastHit>().Enemy.Get<PlayerScore>().Kills += 1;
-                world.GetFeature<EventsFeature>().Kill.Execute(entity.Get<LastHit>().Enemy);
+                world.GetFeature<EventsFeature>().PlayerKill.Execute(entity.Get<LastHit>().Enemy);
                 Debug.Log($"shit: {entity.Get<LastHit>().Enemy}");
             }
+            
+            _coll.SpawnVFX(entity.GetPosition(), _coll._deathID, _coll._deathTimer);
             
             var deadBody = new Entity("deadBody");
             deadBody.Set(new DeadBody {ActorID = entity.Read<PlayerTag>().PlayerID, Time = 5.5f});
@@ -61,8 +68,9 @@ namespace Project.Features.Player.Systems {
 
             deadBody.SetAs<PlayerScore>(entity);
             
-            _builder.MoveTo(_builder.PositionToIndex(entity.GetPosition()), 0);
-            world.GetFeature<EventsFeature>().Respawn.Run(entity);
+            _builder.MoveTo(_builder.PositionToIndex(entity.Read<PlayerMoveTarget>().Value), 0);
+
+            world.GetFeature<EventsFeature>().PlayerDeath.Run(entity);
             
             entity.Destroy();
         }

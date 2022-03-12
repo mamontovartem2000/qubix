@@ -1,11 +1,8 @@
 ﻿using ME.ECS;
 
-namespace Project.Features.Projectile.Systems 
+namespace Project.Features.CollisionHandler.Systems 
 {
     #region usage
-
-    
-
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
     using Components; using Modules; using Systems; using Markers;
@@ -17,17 +14,13 @@ namespace Project.Features.Projectile.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
-    public sealed class ProjectileDeathSystem : ISystemFilter 
+    public sealed class ExplosionSystem : ISystemFilter 
     {
         public World world { get; set; }
-
-        private ProjectileFeature _feature;
-        private CollisionHandlerFeature _coll;
-        
+        private CollisionHandlerFeature _feature;
         void ISystemBase.OnConstruct() 
         {
             this.GetFeature(out _feature);
-            world.GetFeature(out _coll);
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -38,22 +31,21 @@ namespace Project.Features.Projectile.Systems
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() 
         {
-            return Filter.Create("Filter-ProjectileDeathSystem")
-                .With<ProjectileShouldDie>()
+            return Filter.Create("Filter-ExplosionSystem")
+                .With<ExplosionTag>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Has<ProjectileType>())
+            if (entity.Get<ExplosionTag>().Value - deltaTime > 0)
             {
-                if(entity.Read<ProjectileType>().Type == ProjectileBase.Rocket)
-                {
-                    _coll.SpawnVFX(entity.GetPosition(), _coll._rocketId, _coll._deathTimer);
-                }
+                entity.Get<ExplosionTag>().Value -= deltaTime;
             }
-            
-            entity.Destroy();
+            else
+            {
+                entity.Destroy();
+            }            
         }
     }
 }
