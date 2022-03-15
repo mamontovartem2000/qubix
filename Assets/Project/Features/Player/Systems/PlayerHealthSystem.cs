@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Features.Components;
 using Project.Features.Projectile.Components;
 using Project.Features.SceneBuilder.Components;
 using UnityEngine;
@@ -44,6 +45,7 @@ namespace Project.Features.Player.Systems {
         {
             return Filter.Create("Filter-PlayerHealthSystem")
                 .With<PlayerHealth>()
+                .WithoutShared<GameFinished>()
                 .Push();
         }
 
@@ -57,7 +59,6 @@ namespace Project.Features.Player.Systems {
             {
                 entity.Get<LastHit>().Enemy.Get<PlayerScore>().Kills += 1;
                 world.GetFeature<EventsFeature>().PlayerKill.Execute(entity.Get<LastHit>().Enemy);
-                Debug.Log($"shit: {entity.Get<LastHit>().Enemy}");
             }
             
             _coll.SpawnVFX(entity.GetPosition(), _coll._deathID, _coll._deathTimer);

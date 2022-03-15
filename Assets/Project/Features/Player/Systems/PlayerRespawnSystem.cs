@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Features.Components;
 using UnityEngine;
 
 namespace Project.Features.Player.Systems 
@@ -41,6 +42,7 @@ namespace Project.Features.Player.Systems
         {
             return Filter.Create("Filter-PlayerRespawnSystem")
                 .With<DeadBody>()
+                .WithoutShared<GameFinished>()
                 .Push();
         }
 

@@ -46,20 +46,20 @@ namespace Project.Features.Player.Modules {
                 _feature.OnLocalPlayerDisconnected(npd.ActorID);
             }
 
-            if (world.GetMarker(out SelectColorMarker scm))
-            {
-                _feature.OnSelectColor(scm.ActorID, scm.ColorID);
-            }
+            // if (world.GetMarker(out SelectColorMarker scm))
+            // {
+            //     _feature.OnSelectColor(scm.ActorID, scm.ColorID);
+            // }
 
-            if (world.GetMarker(out PlayerReadyMarker prm))
-            {
-                _feature.OnPlayerReady(prm.ActorID);
-            }
+            // if (world.GetMarker(out PlayerReadyMarker prm))
+            // {
+            //     _feature.OnPlayerReady(prm.ActorID);
+            // }
 
-            if (world.GetMarker(out GameStartedMarker gsm))
-            {
-                _feature.OnGameStartedComplete();
-            }
+            // if (world.GetMarker(out GameStartedMarker gsm))
+            // {
+            //     _feature.OnGameStartedComplete();
+            // }
         }
     }
 }

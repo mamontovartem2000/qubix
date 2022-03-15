@@ -31,6 +31,8 @@ namespace Project.Features {
         
         public GlobalEvent Defeat;
         public GlobalEvent Victory;
+        public GlobalEvent Draw;
+        
         public GlobalEvent OnGameFinished;
         public GlobalEvent PlayerDeath;
         public GlobalEvent PlayerKill;

@@ -3,8 +3,6 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 using ME.ECS;
-using Project.Features;
-using Project.Features.Player.Components;
 using Project.Utilities;
 using TMPro;
 using UnityEngine.UI;
@@ -35,8 +33,9 @@ public class RespawnPanelController : MonoBehaviour
  
     private void Activate(in Entity entity)
     {
-        Debug.Log($"Activate, player: {Utilitiddies.CheckLocalPlayer(entity)}");
         if(!Utilitiddies.CheckLocalPlayer(entity)) return;
+
+        Debug.Log($"Activate, player: {Utilitiddies.CheckLocalPlayer(entity)}");
 
         _background.DOFade(0.5f, 0.5f).SetEase(Ease.Linear);
         _popup.DOFade(1f, 1f).SetEase(Ease.Linear);

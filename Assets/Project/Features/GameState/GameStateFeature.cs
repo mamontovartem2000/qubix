@@ -27,6 +27,7 @@ namespace Project.Features
         {
 	        AddSystem<GameStartSystem>();
 	        AddSystem<GameRunSystem>();
+	        AddSystem<GameFinishedSystem>();
         }
 
         protected override void OnDeconstruct() 

@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Features.Components;
+using UnityEngine;
 
 namespace Project.Features.GameState.Systems 
 {
@@ -46,6 +47,8 @@ namespace Project.Features.GameState.Systems
             else
             {
                 world.GetFeature<EventsFeature>().OnGameFinished.Execute();
+                world.SetSharedData(new GameFinished {Timer = 2f});
+                world.SetSharedData(new GamePaused());
             }
         }
     }

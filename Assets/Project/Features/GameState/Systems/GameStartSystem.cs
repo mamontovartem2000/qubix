@@ -44,70 +44,15 @@ namespace Project.Features.GameState.Systems
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
             if(!world.HasSharedData<GamePaused>()) return;
-
+            if(world.HasSharedData<GameFinished>()) return;
             if (!AllPlayersReady()) return;
             
             world.GetFeature<EventsFeature>().AllPlayersReady.Execute(world.GetFeature<PlayerFeature>().GetActivePlayer());
-            world.GetFeature<PlayerFeature>().ForceStart();
-
-            // foreach (var player in _playerFilter)
-            // {
-            //     player.Remove<PlayerDisplay>();
-            // }
-            
+            // world.GetFeature<PlayerFeature>().ForceStart();
 
             //            if(timer != 0) return;
 
-            // Entity winner = default;
-            //
-            // var maxScore = int.MinValue;
-            // var winCounter = 0;
-            //
-            // foreach (var player in _playerFilter)
-            // {
-            //     var score = player.Read<PlayerScore>().Value;
-            //     
-            //     if (score > maxScore)
-            //     {
-            //         maxScore = score;
-            //         winner = player;
-            //     }
-            // }
-            //
-            // foreach (var player in _playerFilter)
-            // {
-            //     var score = player.Read<PlayerScore>().Value;
-            //     
-            //     if (score == maxScore && player != winner)
-            //     {
-            //         winCounter++;
-            //     }
-            //
-            //     if (score < maxScore)
-            //     {
-            //         //add to loser list
-            //     }
-            // }
-            //
-            // if (winCounter == 0)
-            // {
-            //     if (Utilitiddies.CheckLocalPlayer(winner))
-            //     {
-            //         //show win screen
-            //         world.SetSharedData(new GamePaused());
-            //     }
-            //     else
-            //     {
-            //         //show lose screen
-            //
-            //     }
-            // }
-            // else
-            // {
-            //     //TODO: add more time, bool _last = true;
-            //     //delete losers entity
-            //     //if(_last) draw screen
-            // }
+            
         }
         
         void IUpdate.Update(in float deltaTime) {}

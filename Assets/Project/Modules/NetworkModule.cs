@@ -403,7 +403,7 @@ namespace Project.Modules
                     if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == world.GetFeature<SceneBuilderFeature>().PlayerCount) 
                     {
                         this.timeSyncedConnected = true;
-                        world.AddMarker(new NetworkPlayerConnectedTimeSynced());
+                        world.AddMarker(new NetworkPlayerConnectedTimeSynced {ActorID = PhotonNetwork.LocalPlayer.ActorNumber});
                     }
                 }
             }

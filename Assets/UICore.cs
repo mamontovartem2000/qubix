@@ -13,6 +13,7 @@ public class UICore : MonoBehaviour
     [Header("Events References")]
     [SerializeField] private GlobalEvent _victoryScreenEvent;
     [SerializeField] private GlobalEvent _defeatScreenEvent;
+    [SerializeField] private GlobalEvent _drawScreenEvent;
 
     [SerializeField] private GlobalEvent _healthChangedEvent;
 
@@ -27,6 +28,7 @@ public class UICore : MonoBehaviour
     [Header("Screens References")]
     [SerializeField] private GameObject _victoryScreen;
     [SerializeField] private GameObject _defeatScreen;
+    [SerializeField] private GameObject _drawScreen;
 
     [Header("Weapon References")]
     [SerializeField] private Image _leftWeaponAmmoImage;
@@ -42,6 +44,7 @@ public class UICore : MonoBehaviour
         _healthChangedEvent.Subscribe(HealthChanged);
         _victoryScreenEvent.Subscribe(ToggleWinScreen);
         _defeatScreenEvent.Subscribe(ToggleLoseScreen);
+        _drawScreenEvent.Subscribe(ToggleDrawScreen);
         _leftWeaponFired.Subscribe(ChangeLeftAmmo);
         _rightWeaponFired.Subscribe(ChangeRightAmmo);
         _leftWeaponDepleted.Subscribe(ReloadLeft);
@@ -68,6 +71,13 @@ public class UICore : MonoBehaviour
         if(!Utilitiddies.CheckLocalPlayer(entity)) return;
         
         _defeatScreen.SetActive(true);
+    }
+    
+    private void ToggleDrawScreen(in Entity entity)
+    {
+        if(!Utilitiddies.CheckLocalPlayer(entity)) return;
+        
+        _drawScreen.SetActive(true);
     }
 
     private void ChangeLeftAmmo(in Entity entity)
@@ -100,8 +110,9 @@ public class UICore : MonoBehaviour
     private void OnDestroy() 
     {
         _healthChangedEvent.Unsubscribe(HealthChanged);
-        _victoryScreenEvent.Unsubscribe(HealthChanged);
-        _defeatScreenEvent.Unsubscribe(HealthChanged);
+        _victoryScreenEvent.Unsubscribe(ToggleWinScreen);
+        _defeatScreenEvent.Unsubscribe(ToggleLoseScreen);
+        _drawScreenEvent.Subscribe(ToggleDrawScreen);
         _leftWeaponFired.Unsubscribe(ChangeLeftAmmo);
         _rightWeaponFired.Unsubscribe(ChangeRightAmmo);
         _leftWeaponDepleted.Unsubscribe(ReloadLeft);

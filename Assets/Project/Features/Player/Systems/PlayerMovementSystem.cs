@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Features.Components;
 using Project.Features.Projectile.Components;
 using Project.Features.SceneBuilder.Components;
 using UnityEngine;
@@ -54,6 +55,7 @@ namespace Project.Features.Player.Systems
         {
             return Filter.Create("Filter-PlayerMovementSystem")
                 .With<PlayerTag>()
+                .WithoutShared<GameFinished>()
                 .Push();
         }
 

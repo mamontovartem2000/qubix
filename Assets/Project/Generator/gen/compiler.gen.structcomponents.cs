@@ -13,6 +13,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.ExplosionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Components.EndGame>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Components.GameFinished>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Components.GamePaused>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Components.GameTimer>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Components.Initialized>(true, false, false, false, false, false, false);
@@ -67,6 +69,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.ExplosionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Components.EndGame>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Features.Components.GameFinished>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Components.GamePaused>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Components.GameTimer>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Features.Components.Initialized>(true, false, false, false, false, false, false);
@@ -116,6 +120,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Features.CollisionHandler.Components.CollisionTag>(false);
             structComponentsContainer.Validate<Project.Features.CollisionHandler.Components.ExplosionTag>(false);
             structComponentsContainer.Validate<Project.Features.CollisionHandler.Components.PortalTag>(false);
+            structComponentsContainer.Validate<Project.Features.Components.EndGame>(false);
+            structComponentsContainer.Validate<Project.Features.Components.GameFinished>(false);
             structComponentsContainer.Validate<Project.Features.Components.GamePaused>(true);
             structComponentsContainer.Validate<Project.Features.Components.GameTimer>(false);
             structComponentsContainer.Validate<Project.Features.Components.Initialized>(true);
@@ -170,6 +176,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Features.CollisionHandler.Components.CollisionTag>(false);
             entity.ValidateData<Project.Features.CollisionHandler.Components.ExplosionTag>(false);
             entity.ValidateData<Project.Features.CollisionHandler.Components.PortalTag>(false);
+            entity.ValidateData<Project.Features.Components.EndGame>(false);
+            entity.ValidateData<Project.Features.Components.GameFinished>(false);
             entity.ValidateData<Project.Features.Components.GamePaused>(true);
             entity.ValidateData<Project.Features.Components.GameTimer>(false);
             entity.ValidateData<Project.Features.Components.Initialized>(true);

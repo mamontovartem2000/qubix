@@ -14,5 +14,8 @@ namespace Project.Markers
         public int ActorID;
     }
 
-    public struct NetworkPlayerConnectedTimeSynced : IMarker {}
+    public struct NetworkPlayerConnectedTimeSynced : IMarker
+    {
+        public int ActorID;
+    }
 }
