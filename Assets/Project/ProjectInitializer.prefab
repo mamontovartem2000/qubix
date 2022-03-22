@@ -94,6 +94,8 @@ MonoBehaviour:
       name: ME_ECS_COLLECT_WEAK_REFERENCES
     - enabled: 0
       name: FILTERS_STORAGE_ARCHETYPES
+    - enabled: 0
+      name: FIXED_POINT_MATH
   - name: Release
     isDirty: 0
     configurationType: 1
@@ -136,6 +138,8 @@ MonoBehaviour:
       name: VIEWS_REGISTER_VIEW_SOURCE_CHECK_STATE
     - enabled: 0
       name: FILTERS_STORAGE_ARCHETYPES
+    - enabled: 0
+      name: FIXED_POINT_MATH
   selectedConfiguration: Debug
   featuresList:
     features: []
@@ -146,31 +150,38 @@ MonoBehaviour:
         features:
         - enabled: 1
           feature: {fileID: 11400000, guid: 7e90eadb9bb4ff241bcbfbb4d2c49dd8, type: 2}
-          innerFeatures: []
+          innerFeatures:
+            innerFeatures: []
     - folderCaption: Core
       features:
         features:
         - enabled: 1
           feature: {fileID: 11400000, guid: 7913e320b2a3b8845867bb3551246ebe, type: 2}
-          innerFeatures: []
+          innerFeatures:
+            innerFeatures: []
         - enabled: 1
           feature: {fileID: 11400000, guid: 3fc1e1dd221103046abd1ff5d010fedd, type: 2}
-          innerFeatures: []
+          innerFeatures:
+            innerFeatures: []
         - enabled: 1
           feature: {fileID: 11400000, guid: 6d0646a8848ab9642ac3e752d4691453, type: 2}
-          innerFeatures: []
+          innerFeatures:
+            innerFeatures: []
         - enabled: 1
           feature: {fileID: 11400000, guid: b6add260d24620b49a0c28a4e32ee49b, type: 2}
-          innerFeatures: []
+          innerFeatures:
+            innerFeatures: []
     - folderCaption: Mechanics
       features:
         features:
         - enabled: 1
           feature: {fileID: 11400000, guid: caf180edb5d2d3f4d8991962a6bffb22, type: 2}
-          innerFeatures: []
+          innerFeatures:
+            innerFeatures: []
         - enabled: 1
           feature: {fileID: 11400000, guid: 85849b1f113fa2e48aa9e5cbe11c4018, type: 2}
-          innerFeatures: []
+          innerFeatures:
+            innerFeatures: []
   worldSettings:
     useJobsForSystems: 1
     useJobsForViews: 1
@@ -184,7 +195,7 @@ MonoBehaviour:
       unityParticlesProviderDisableJobs: 0
   worldDebugSettings:
     createGameObjectsRepresentation: 0
-    collectStatistic: 1
+    collectStatistic: 0
     statisticsObject: {fileID: 0}
     showViewsOnScene: 1
     viewsSettings:

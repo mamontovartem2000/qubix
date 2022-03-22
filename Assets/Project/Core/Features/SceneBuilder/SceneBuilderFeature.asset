@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8c0eae44b51b348953e624f2016fff, type: 3}
+  m_Name: SceneBuilderFeature
+  m_EditorClassIdentifier: 
+  editorComment: 
+  SourceMap: {fileID: 4900000, guid: 7fae354e9b75a83468edc56b869dc0c9, type: 3}
+  PlayerCount: 1
+  _glowMat: {fileID: 2100000, guid: 409cbc245fbb8904a8a288b43884619e, type: 2}
+  TileView: {fileID: 7126320284530346377, guid: b952ab5919f8ec74fb0366fa55fd849d, type: 3}
+  PortalView: {fileID: 3021905953997455152, guid: a480a62406b7b0b458cb44d425b1ed43, type: 3}
+  AmmoTileView: {fileID: 3420869295189199152, guid: 45b676bd683444d44af324c8d2033b7e, type: 3}
+  MineView: {fileID: 2051153988241122521, guid: 5b79bf9b4f3e289499df26941a66f929, type: 3}
+  HealthView: {fileID: -2505824532654415183, guid: dfc15477f965abb418a93edb73b6cd6c, type: 3}
+  RocketAmmoView: {fileID: 8773886339598676565, guid: 387be634ca9348f498cea830703a8748, type: 3}
+  RifleAmmoView: {fileID: -1429158626847169483, guid: 2c45ebfd793c85741a37cb287d960d15, type: 3}

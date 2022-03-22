@@ -1,9 +1,6 @@
 using ME.ECS;
 using Photon.Pun;
-using Project.Features;
-using Project.Features.SceneBuilder.Components;
 using Project.Markers;
-using UnityEngine;
 
 namespace Project.Modules
 {
@@ -25,8 +22,8 @@ namespace Project.Modules
 
     public class NetworkModule : ME.ECS.Network.NetworkModule<TState>
     {
-        private int orderId;
-        private PhotonTransporter photonTransporter;
+        private int _orderId;
+        private PhotonTransporter _photonTransporter;
 
         public ME.ECS.Network.ISerializer GetSerializer()
         {
@@ -46,27 +43,27 @@ namespace Project.Modules
 
         public void SetOrderId(int orderId)
         {
-            this.orderId = orderId;
+            this._orderId = orderId;
         }
 
         public void AddToQueue(byte[] bytes)
         {
-            this.photonTransporter.AddToQueue(bytes);
+            this._photonTransporter.AddToQueue(bytes);
         }
 
         public void AddToSystemQueue(byte[] bytes)
         {
-            this.photonTransporter.AddToSystemQueue(bytes);
+            this._photonTransporter.AddToSystemQueue(bytes);
         }
 
         public void SetRoomName(string name)
         {
-            this.photonTransporter.SetRoomName(name);
+            this._photonTransporter.SetRoomName(name);
         }
 
         public void SetRoom(Photon.Realtime.Room room)
         {
-            this.photonTransporter.SetRoom(room);
+            this._photonTransporter.SetRoom(room);
         }
 
         protected override void OnInitialize()
@@ -76,7 +73,7 @@ namespace Project.Modules
             instance.SetTransporter(tr);
             instance.SetSerializer(new FSSerializer());
 
-            this.photonTransporter = tr;
+            this._photonTransporter = tr;
 
             this.SetRoomName("TestRoom");
         }
@@ -400,7 +397,7 @@ namespace Project.Modules
                 {
                     // Here we are check if all required players connected to the game
                     // So we could start the game sending the special message
-                    if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == world.GetFeature<SceneBuilderFeature>().PlayerCount) 
+                    if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == 1) 
                     {
                         this.timeSyncedConnected = true;
                         world.AddMarker(new NetworkPlayerConnectedTimeSynced {ActorID = PhotonNetwork.LocalPlayer.ActorNumber});
