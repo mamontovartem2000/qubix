@@ -1,0 +1,352 @@
+Using pre-set license
+Built from '2020.3/release' branch; Version is '2020.3.27f1 (e759542391ea) revision 15161684'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19044) 64bit Professional' Language: 'ru' Physical Memory: 32701 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.27f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Projects/qubix
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+62933
+Successfully changed project path to: C:/Projects/qubix
+C:/Projects/qubix
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 111.96 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.27f1 (e759542391ea)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.27f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Projects/qubix/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 2060 (ID=0x1f03)
+    Vendor:   
+    VRAM:     12087 MB
+    Driver:   30.0.15.1123
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.27f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.27f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.27f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56932
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.27f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.27f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.27f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.002417 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 107.90 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.584 seconds
+Domain Reload Profiling:
+	ReloadAssembly (585ms)
+		BeginReloadAssembly (57ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (464ms)
+			LoadAssemblies (56ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (133ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (26ms)
+			SetupLoadedEditorAssemblies (217ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (108ms)
+				BeforeProcessingInitializeOnLoad (12ms)
+				ProcessInitializeOnLoadAttributes (69ms)
+				ProcessInitializeOnLoadMethodAttributes (23ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.008627 seconds.
+ASSEMBLY OVERRIDES: * override found for Unity assembly UnityEngine.UIElementsModule.dll (override path Library/ScriptAssemblies/UnityEngine.UIElementsModule.dll)
+ASSEMBLY OVERRIDES: * override found for Unity assembly UnityEditor.UIElementsModule.dll (override path Library/ScriptAssemblies/UnityEditor.UIElementsModule.dll)
+Begin MonoManager ReloadAssembly
+ASSEMBLY OVERRIDES: * override found for Unity assembly UnityEngine.UIElementsModule.dll (override path Library/ScriptAssemblies/UnityEngine.UIElementsModule.dll)
+ASSEMBLY OVERRIDES: * override found for Unity assembly UnityEditor.UIElementsModule.dll (override path Library/ScriptAssemblies/UnityEditor.UIElementsModule.dll)
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 87.35 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+ASSEMBLY OVERRIDES: * override found for Unity assembly UnityEngine.UIElementsModule.dll (override path Library/ScriptAssemblies/UnityEngine.UIElementsModule.dll)
+ASSEMBLY OVERRIDES: * override found for Unity assembly UnityEditor.UIElementsModule.dll (override path Library/ScriptAssemblies/UnityEditor.UIElementsModule.dll)
+ASSEMBLY OVERRIDES: * override found for Unity assembly UnityEngine.UIElementsModule.dll (override path Library/ScriptAssemblies/UnityEngine.UIElementsModule.dll)
+ASSEMBLY OVERRIDES: * override found for Unity assembly UnityEditor.UIElementsModule.dll (override path Library/ScriptAssemblies/UnityEditor.UIElementsModule.dll)
+ASSEMBLY OVERRIDES: * override found for Unity assembly UnityEngine.UIElementsModule.dll (override path Library/ScriptAssemblies/UnityEngine.UIElementsModule.dll)
+ASSEMBLY OVERRIDES: * override found for Unity assembly UnityEditor.UIElementsModule.dll (override path Library/ScriptAssemblies/UnityEditor.UIElementsModule.dll)
+Mono: successfully reloaded assembly
+- Completed reload, in  3.303 seconds
+Domain Reload Profiling:
+	ReloadAssembly (3304ms)
+		BeginReloadAssembly (128ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (16ms)
+		EndReloadAssembly (3125ms)
+			LoadAssemblies (111ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (1488ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (95ms)
+			SetupLoadedEditorAssemblies (1105ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (87ms)
+				BeforeProcessingInitializeOnLoad (119ms)
+				ProcessInitializeOnLoadAttributes (842ms)
+				ProcessInitializeOnLoadMethodAttributes (47ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 1.19 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5851 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 255.1 MB.
+System memory in use after: 255.4 MB.
+
+Unloading 158 unused Assets to reduce memory usage. Loaded Objects now: 6161.
+Total: 4.735100 ms (FindLiveObjects: 0.395700 ms CreateObjectMapping: 0.291100 ms MarkObjects: 3.549200 ms  DeleteObjects: 0.498200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  path: Assets/Dima/Materials/bridge_30.mat
+  artifactKey: Guid(500c9649db041804cb508dd4c60c382f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Materials/bridge_30.mat using Guid(500c9649db041804cb508dd4c60c382f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9cad2560141c3b0a4e35e2160efc09f') in 0.181512 seconds 
+  Import took 0.190617 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000247 seconds.
+  path: Assets/Dima/Materials/Player/Damaged/Damaged_11.mat
+  artifactKey: Guid(b96ea124da8b8a74b9c5c7cbc16258f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Materials/Player/Damaged/Damaged_11.mat using Guid(b96ea124da8b8a74b9c5c7cbc16258f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd67dd4c4d656391a35e67f875d2f082d') in 0.017268 seconds 
+  Import took 0.025551 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000246 seconds.
+  path: Assets/Dima/Materials/bridge.mat
+  artifactKey: Guid(3f5c0d93f5136c1449a2597b042a95a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Materials/bridge.mat using Guid(3f5c0d93f5136c1449a2597b042a95a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a3f1a774caaa1e443f65f6152eaf675c') in 0.015781 seconds 
+  Import took 0.024597 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.889227 seconds.
+  path: Assets/Project/Visuals/Materials/VertexLitDiffuseRoundedSquare.mat
+  artifactKey: Guid(569ecce896a7eb84f922b02c3fd2c307) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Project/Visuals/Materials/VertexLitDiffuseRoundedSquare.mat using Guid(569ecce896a7eb84f922b02c3fd2c307) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b05cc1ae05f3f4b6f94eed35af43579') in 0.258704 seconds 
+  Import took 0.268355 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000293 seconds.
+  path: Assets/Project/Visuals/VertexUnlitGlowRoundedSquare.mat
+  artifactKey: Guid(0fb592b94e5629d4bb347af3bb99ee88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Project/Visuals/VertexUnlitGlowRoundedSquare.mat using Guid(0fb592b94e5629d4bb347af3bb99ee88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ec4c0dd79b48b4dd961f0e16474c656') in 0.027782 seconds 
+  Import took 0.035956 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000235 seconds.
+  path: Assets/Project/Visuals/Materials/VertexUnlitGlowRoundedSquare.mat
+  artifactKey: Guid(a1bc200c72ac7ee4cb0e1e043e5411a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Project/Visuals/Materials/VertexUnlitGlowRoundedSquare.mat using Guid(a1bc200c72ac7ee4cb0e1e043e5411a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '82b80059a20eb76d53bd29edd2499952') in 0.010664 seconds 
+  Import took 0.019021 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 681.714745 seconds.
+  path: Assets/Project/Visuals/Materials/SparkParticle.mat
+  artifactKey: Guid(188bbd7714ed53b4ab47e30ee1f8c00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Project/Visuals/Materials/SparkParticle.mat using Guid(188bbd7714ed53b4ab47e30ee1f8c00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '61e85ee98833965cd6048974da7cb350') in 0.017799 seconds 
+  Import took 0.028640 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.328904 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Runtime/Materials/ParticlesUnlit.mat
+  artifactKey: Guid(e823cd5b5d27c0f4b8256e7c12ee3e6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Runtime/Materials/ParticlesUnlit.mat using Guid(e823cd5b5d27c0f4b8256e7c12ee3e6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7709cb6c35a4a2aa2005507f44a985b0') in 0.013934 seconds 
+  Import took 0.023773 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 676.893602 seconds.
+  path: Assets/Dima/Textures/Bridge 30 256/bridge_30_BaseMap.tga
+  artifactKey: Guid(d2808e6584ee7bd40be181578ef83b8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/Bridge 30 256/bridge_30_BaseMap.tga using Guid(d2808e6584ee7bd40be181578ef83b8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe9dddffa9a4420eee3ce17aef00cd75') in 0.020667 seconds 
+  Import took 0.032344 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000283 seconds.
+  path: Assets/Dima/Textures/Bridge 256/bridge_MetallicMap.tga
+  artifactKey: Guid(9762804cbb422da40abd881c8e60654a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/Bridge 256/bridge_MetallicMap.tga using Guid(9762804cbb422da40abd881c8e60654a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71791777aac979a6522221ad00946df7') in 0.024926 seconds 
+  Import took 0.035099 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000239 seconds.
+  path: Assets/Dima/Textures/Bridge 30 256/bridge_30_Normal.tga
+  artifactKey: Guid(9fc7782ab5cb6b841a55c807f5bc1ef2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/Bridge 30 256/bridge_30_Normal.tga using Guid(9fc7782ab5cb6b841a55c807f5bc1ef2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '493118e3480daae3aec041be8b23c31c') in 0.013516 seconds 
+  Import took 0.023987 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000268 seconds.
+  path: Assets/Dima/Textures/Bridge 256/bridge_Normal.tga
+  artifactKey: Guid(487f9140fcdc80e47876d8f6e17d387b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/Bridge 256/bridge_Normal.tga using Guid(487f9140fcdc80e47876d8f6e17d387b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4294e01400ed3daa3446dd67f5d8befa') in 0.011845 seconds 
+  Import took 0.021567 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000297 seconds.
+  path: Assets/Dima/Textures/Bridge 256/bridge_Emission.tga
+  artifactKey: Guid(4ed1c439b2368084fb5600265b906a75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/Bridge 256/bridge_Emission.tga using Guid(4ed1c439b2368084fb5600265b906a75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7833bc0a5135f1ae4e5d4d4c819ad56f') in 0.015989 seconds 
+  Import took 0.025401 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000314 seconds.
+  path: Assets/Dima/Textures/Bridge 30 256/bridge_30_Emission.tga
+  artifactKey: Guid(4439ad68911dc164e88541ccf1d8b7ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/Bridge 30 256/bridge_30_Emission.tga using Guid(4439ad68911dc164e88541ccf1d8b7ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17957ebb0803bbb29f492785b694d2aa') in 0.010742 seconds 
+  Import took 0.020520 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000251 seconds.
+  path: Assets/Dima/Textures/Bridge 256/bridge_BaseMap.tga
+  artifactKey: Guid(5bed3d7586ead2f43847838195c89d83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/Bridge 256/bridge_BaseMap.tga using Guid(5bed3d7586ead2f43847838195c89d83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3143f67eaa1e3c1c762022bb12c15f90') in 0.017110 seconds 
+  Import took 0.026078 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 287.907518 seconds.
+  path: Assets/Dima/Textures/Bridge 30 256/bridge_30_BaseMap.tga
+  artifactKey: Guid(d2808e6584ee7bd40be181578ef83b8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/Bridge 30 256/bridge_30_BaseMap.tga using Guid(d2808e6584ee7bd40be181578ef83b8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '74a0273afb36f70e14bf5597f9394042') in 0.013850 seconds 
+  Import took 0.024741 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000248 seconds.
+  path: Assets/Dima/Textures/Bridge 30 256/bridge_30_MetallicMap.tga
+  artifactKey: Guid(5d8b1477f30bec04caeda4c70a0586e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/Bridge 30 256/bridge_30_MetallicMap.tga using Guid(5d8b1477f30bec04caeda4c70a0586e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33cdd925e1f3a6b7f1cc9ba73c39e734') in 0.016098 seconds 
+  Import took 0.026947 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000241 seconds.
+  path: Assets/Dima/Textures/Player 256/Damaged/test/cube_base_2022_uv_body_AlbedoTransparency.tga
+  artifactKey: Guid(c7f744b31a2f1414bb999a1348e6cb65) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/Player 256/Damaged/test/cube_base_2022_uv_body_AlbedoTransparency.tga using Guid(c7f744b31a2f1414bb999a1348e6cb65) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90cc09f09559d9f0ace83645414ef782') in 0.012760 seconds 
+  Import took 0.023044 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000290 seconds.
+  path: Assets/Dima/Textures/Bridge 30 256/bridge_30_Normal.tga
+  artifactKey: Guid(9fc7782ab5cb6b841a55c807f5bc1ef2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/Bridge 30 256/bridge_30_Normal.tga using Guid(9fc7782ab5cb6b841a55c807f5bc1ef2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1bdcfec055f5dca038d2a44edf049dde') in 0.012842 seconds 
+  Import took 0.022439 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000322 seconds.
+  path: Assets/Dima/Textures/Bridge 30 256/bridge_30_Emission.tga
+  artifactKey: Guid(4439ad68911dc164e88541ccf1d8b7ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/Bridge 30 256/bridge_30_Emission.tga using Guid(4439ad68911dc164e88541ccf1d8b7ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd63204b2dbde065c5fd3021d6b9f590f') in 0.010788 seconds 
+  Import took 0.020172 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2030.401437 seconds.
+  path: Assets/Dima/Textures/UV_Tile 256/tile_Albedo.tga
+  artifactKey: Guid(14f9ad4e34cd26c4db3e58505f0d0b20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/UV_Tile 256/tile_Albedo.tga using Guid(14f9ad4e34cd26c4db3e58505f0d0b20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'acd306e94ae82d70b826b7976feee9a0') in 0.011778 seconds 
+  Import took 0.022040 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.550443 seconds.
+  path: Assets/Dima/Textures/UV_Tile 256/tile_Emmision.tga
+  artifactKey: Guid(abe91ae49ec1ceb419a1fa97b0961595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/UV_Tile 256/tile_Emmision.tga using Guid(abe91ae49ec1ceb419a1fa97b0961595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4291f0d5a99f71741a3ab5103d696e56') in 0.010738 seconds 
+  Import took 0.020155 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.866874 seconds.
+  path: Assets/Dima/Textures/UV_Tile 256/tile_Normal.tga
+  artifactKey: Guid(62c491941a11fee48bdfd269affc956e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/UV_Tile 256/tile_Normal.tga using Guid(62c491941a11fee48bdfd269affc956e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f9dafe1d34e1f017ba3bd65a574b3396') in 0.012945 seconds 
+  Import took 0.022164 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 383.168176 seconds.
+  path: Assets/Dima/Textures/UV_Tile 256/tile_Normal.tga
+  artifactKey: Guid(62c491941a11fee48bdfd269affc956e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/UV_Tile 256/tile_Normal.tga using Guid(62c491941a11fee48bdfd269affc956e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3288ba74ac498bae4b1c9dfb2f7fcb9a') in 0.015195 seconds 
+  Import took 0.025894 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.233864 seconds.
+  path: Assets/Dima/Textures/UV_Tile 256/tile_Normal.tga
+  artifactKey: Guid(62c491941a11fee48bdfd269affc956e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dima/Textures/UV_Tile 256/tile_Normal.tga using Guid(62c491941a11fee48bdfd269affc956e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '47fdda766e7b363d895c4fe729ec6e11') in 0.015205 seconds 
+  Import took 0.025000 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
