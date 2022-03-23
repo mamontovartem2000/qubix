@@ -52,7 +52,9 @@ namespace Project.Features.Projectile.Systems
             if(entity.Has<LeftWeaponCooldown>()) return;
 
             var actorID = player.PlayerID;
-            var direction = player.FaceDirection;
+            //var direction = player.FaceDirection;
+            var direction = Vector3.zero;
+
 
             if (direction == Vector3.forward)
             {

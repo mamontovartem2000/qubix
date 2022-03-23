@@ -15,6 +15,7 @@ namespace Project.Features
     using SceneBuilder.Modules;
     using SceneBuilder.Systems;
     using SceneBuilder.Markers;
+    using Project.Utilities;
 
     namespace SceneBuilder.Components
     {
@@ -42,25 +43,30 @@ namespace Project.Features
 
     public sealed class SceneBuilderFeature : Feature
     {
-        public TextAsset SourceMap;
-        public int PlayerCount;
-        public Material _glowMat;
-        public TileView TileView;
-        public PortalMono PortalView;
-        public AmmoTileMono AmmoTileView;
+        [Header("General")]
+        [SerializeField] private TextAsset _sourceMap;
+        [SerializeField] private int _playerCount;
 
+        [Header("Tiles")]
+        [SerializeField] private TileView _tileView;
+        [SerializeField] private PortalMono _portalView;
+        [SerializeField] private AmmoTileMono _ammoTileView;
         public MineMono MineView;
         public HealthMono HealthView;
         public RocketAmmoMono RocketAmmoView;
         public RifleAmmoMono RifleAmmoView;
 
-        private int Width, Height, PortalCount, AmmoCount;
+        public int PlayerCount => _playerCount;
+
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+
 
         private ViewId _tileID, _portalTileID, _ammoTileID;
 
         private const int EMPTY_TILE = 0, SIMPLE_TILE = 1, PORTAL_TILE = 2, AMMO_TILE = 3;
 
-        public Entity TimerEntity;
+        public Entity TimerEntity { get; private set; }
 
         protected override void OnConstruct()
         {
@@ -69,62 +75,42 @@ namespace Project.Features
             AddSystem<SpawnAmmoSystem>();
 
             PrepareMap();
-        }
-        
-        protected override void InjectFilter(ref FilterBuilder builder)
-        {
-            builder.WithoutShared<GamePaused>();
-        }
-
-        public void ChangeColorGlowingMaterial()
-        {
-            var rnd = world.GetRandomRange(1, 6);
-            switch (rnd)
-            {
-                case 1:
-                    _glowMat.SetColor("_EmissionColor", Color.blue);
-                    break;
-                case 2:
-                    _glowMat.SetColor("_EmissionColor", Color.cyan);
-                    break;
-                case 3:
-                    _glowMat.SetColor("_EmissionColor", Color.green);
-                    break;
-                case 4:
-                    _glowMat.SetColor("_EmissionColor", Color.magenta);
-                    break;
-                case 5:
-                    _glowMat.SetColor("_EmissionColor", Color.red);
-                    break;
-                case 6:
-                    _glowMat.SetColor("_EmissionColor", Color.yellow);
-                    break;
-            }
-        }
+        }      
 
         protected override void OnDeconstruct() { }
 
         private void PrepareMap()
         {
-            TimerEntity = new Entity("init");
+            TimerEntity = new Entity("Init");
 
-            _tileID = world.RegisterViewSource(TileView);
-            _portalTileID = world.RegisterViewSource(PortalView);
-            _ammoTileID = world.RegisterViewSource(AmmoTileView);
+            _tileID = world.RegisterViewSource(_tileView);
+            _portalTileID = world.RegisterViewSource(_portalView);
+            _ammoTileID = world.RegisterViewSource(_ammoTileView);
 
-            GetDimensions();
+            //GetDimensions_new(out int portalCount, out int ammoCount);
+            GetDimensions(out int portalCount, out int ammoCount);
+
 
             var size = Width * Height;
             var map = PoolArray<byte>.Spawn(size);
-            var portals = PoolArray<Vector3>.Spawn(PortalCount);
-            var ammos = PoolArray<Vector3>.Spawn(AmmoCount);
-            var players = PoolArray<bool>.Spawn(PlayerCount);
+            var portals = PoolArray<Vector3>.Spawn(portalCount);
+            var ammos = PoolArray<Vector3>.Spawn(ammoCount);
+            var players = PoolArray<bool>.Spawn(_playerCount);
 
-            ConvertMap(SourceMap, map, portals, ammos);
+            ConvertMap(_sourceMap, map, portals, ammos);
 
             world.SetSharedData(new MapComponents { WalkableMap = map, PortalsMap = portals, AmmoMap = ammos, PlayerStatus = players });
 
             DrawMap(map);
+        }
+
+        private void ParseMap()
+        {
+            string data = string.Empty;
+            GameMapRemoteData map = ParceUtils.CreateFromJSON<UniversalData<GameMapRemoteData>>(data).data;
+
+            //GetDimensions_new(map);
+
         }
 
         private void DrawMap(BufferArray<byte> source)
@@ -160,9 +146,32 @@ namespace Project.Features
             }
         }
 
-        private void GetDimensions()
+        private void GetDimensions_new(out int portalCount, out int ammoCount)
         {
-            var omg = SourceMap.text.Split('\n');
+            GameMapRemoteData mapData = new GameMapRemoteData(_sourceMap);
+            portalCount = 0;
+            ammoCount = 0;
+
+            byte[] mapInByte = mapData.bytes;
+
+            Height = mapData.offset;
+            Width = mapInByte.Length / mapData.offset;
+
+            for (int i = 0; i < mapInByte.Length; i++)
+            {
+                if (mapInByte[i] == '2')
+                    portalCount++;
+                else if (mapInByte[i] == '3')
+                    ammoCount++;
+            }
+        }
+
+        private void GetDimensions(out int portalCount, out int ammoCount)
+        {
+            portalCount = 0;
+            ammoCount = 0;
+
+            var omg = _sourceMap.text.Split('\n');
 
             Height = omg.Length;
             Width = omg[0].Length - 1;
@@ -173,12 +182,12 @@ namespace Project.Features
                 {
                     if (line[i] == '2')
                     {
-                        PortalCount++;
+                        portalCount++;
                     }
 
                     if (line[i] == '3')
                     {
-                        AmmoCount++;
+                        ammoCount++;
                     }
                 }
             }
@@ -187,8 +196,8 @@ namespace Project.Features
         private void ConvertMap(TextAsset source, BufferArray<byte> walkable, BufferArray<Vector3> portals, BufferArray<Vector3> ammos)
         {
             var walkableResult = new byte[Width * Height];
-            var portalsResult = new Vector3[PortalCount];
-            var ammoResult = new Vector3[AmmoCount];
+            var portalsResult = new Vector3[portals.Length];
+            var ammoResult = new Vector3[ammos.Length];
 
             var bytes = source.text;
             var byteIndex = 0;

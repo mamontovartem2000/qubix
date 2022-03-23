@@ -1,15 +1,10 @@
 ﻿using ME.ECS;
 
-namespace Project.Features.SceneBuilder.Components {
-
-    public struct CollectibleTag : IComponent {}
-
+namespace Project.Features.SceneBuilder.Components 
+{
     public struct HealPoweUpTag : IComponent {}
 
     public struct MineTag : IComponent {}
-
-    public struct RocketAmmoTag : IComponent {}
-    public struct RifleAmmoTag : IComponent {}
 
     public struct AmmoTag : IComponent
     {

@@ -1,7 +1,6 @@
 ﻿using ME.ECS;
 using Project.Features.Player.Views;
 using Project.Features.Projectile.Components;
-using Project.Features.Projectile.Systems;
 using Project.Utilities;
 using UnityEngine;
 
@@ -9,7 +8,8 @@ namespace Project.Features {
     #region usage
     using Components; using Modules; using Systems; using Features; using Markers;
     using Player.Components; using Player.Modules; using Player.Systems; using Player.Markers;
-    
+    using ME.ECS.DataConfigs;
+
     namespace Player.Components {}
     namespace Player.Modules {}
     namespace Player.Systems {}
@@ -23,14 +23,14 @@ namespace Project.Features {
     #endregion
     public sealed class PlayerFeature : Feature
     {
+        [SerializeField] private DataConfig _defaultPlayerConfig;
+
         public PlayerView PlayerView;
         public Material[] Materials;
         
         private ViewId _playerViewID;
-        private RPCId _onGameStarted, _onPlayerConnected, _onPlayerDisconnected;
-        
-        private Filter _playerFilter, _deadFilter;
-        
+        private RPCId _onGameStarted, _onPlayerDisconnected;     
+        private Filter _playerFilter, _deadFilter;       
         private int _playerIndex;
         
         private SceneBuilderFeature _builder;
@@ -61,20 +61,19 @@ namespace Project.Features {
         private void AddSystems()
         {
             AddSystem<PlayerMovementSystem>();
+            AddSystem<PlayerRotationSystem>();      
             AddSystem<PlayerHealthSystem>();
             AddSystem<ApplyDamageSystem>();
             AddSystem<PlayerPortalSystem>();
             AddSystem<PlayerRespawnSystem>();
-            AddSystem<LeftWeaponCooldownSystem>();
-            AddSystem<RightWeaponCooldownSystem>();
         }
         private void CreateFilters()
         {
-            Filter.Create("Player Filter")
+            Filter.Create("Players Filter")
                 .With<PlayerTag>()
                 .Push(ref _playerFilter);
 
-            Filter.Create("dead-filter")
+            Filter.Create("Dead Filter")
                 .With<DeadBody>()
                 .Push(ref _deadFilter);
         }
@@ -97,21 +96,20 @@ namespace Project.Features {
             var player = new Entity("Player");
             player.InstantiateView(_playerViewID);
 
-            player.Set(new PlayerTag {PlayerID = id, FaceDirection = Vector3.forward, 
-                Material = Materials[Utilitiddies.SafeCheckIndexByLength(_playerIndex, Materials.Length)]});
-
-            player.Set(new PlayerHealth {Value = 100});
+            _defaultPlayerConfig.Apply(in player);
+            player.Get<PlayerTag>().PlayerID = id;
             player.SetPosition(_builder.GetRandomSpawnPosition());
-            player.Set(new PlayerMoveTarget {Value = player.GetPosition()});
-            player.Set(new LeftWeapon {Type = WeaponType.Gun, Cooldown = 0.2f, Ammo = 20, MaxAmmo = 20, ReloadTime = 1.2f});
-            
+            player.Get<PlayerMoveTarget>().Value = player.GetPosition();
+
+            player.Set(new PlayerMaterial { Material = Materials[Utilitiddies.SafeCheckIndexByLength(_playerIndex, Materials.Length)] });          
+         
             _builder.MoveTo(_builder.PositionToIndex(player.GetPosition()), _builder.PositionToIndex(player.GetPosition()));
             _events.OnTimeSynced.Execute(player);
             _events.PassLocalPlayer.Execute(player);
 
             world.RemoveSharedData<GamePaused>();
             
-            if (!_builder.TimerEntity.Has<GameTimer>())
+            if (!_builder.TimerEntity.Has<GameTimer>()) //TODO: Это зачем?
             {
                 _builder.TimerEntity.Set(new GameTimer {Value = 150f});
             }
@@ -163,7 +161,6 @@ namespace Project.Features {
 
         public Entity RespawnPlayer(int id)
         {
-            // GameStarted_RPC(id);
             return CreatePlayer(id);
         }
         
@@ -176,7 +173,7 @@ namespace Project.Features {
                     return player;
                 }
             }
-            
+
             return Entity.Empty;
         }
 

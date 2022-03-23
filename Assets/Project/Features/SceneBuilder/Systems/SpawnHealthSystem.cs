@@ -42,9 +42,9 @@ namespace Project.Features.SceneBuilder.Systems {
         {
             if (_healthFilter.Count < 4)
             {
-                var entity = new Entity("health");
+                var entity = new Entity("Healing");
 
-                entity.Set(new HealPoweUpTag());
+                entity.Set(new HealPoweUpTag());      
                 
                 entity.SetPosition(_feature.GetRandomSpawnPosition());
                 entity.InstantiateView(_healthID);

@@ -26,7 +26,7 @@ namespace Project.Features.SceneBuilder.Systems
         
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this._feature);
+            this.GetFeature(out _feature);
             _rocketID = world.RegisterViewSource(_feature.RocketAmmoView);
             _rifleID = world.RegisterViewSource(_feature.RifleAmmoView);
         }
@@ -57,7 +57,7 @@ namespace Project.Features.SceneBuilder.Systems
             else
             {
                 var rnd = world.GetRandomRange(0, 10);
-                var ammo = new Entity("ammo");
+                var ammo = new Entity("Ammo");
 
                 if (rnd % 2 == 0)
                 {

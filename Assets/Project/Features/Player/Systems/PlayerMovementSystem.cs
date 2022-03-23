@@ -1,7 +1,6 @@
 ﻿using ME.ECS;
 using Project.Features.Components;
 using Project.Features.Projectile.Components;
-using Project.Features.SceneBuilder.Components;
 using UnityEngine;
 
 namespace Project.Features.Player.Systems
@@ -11,14 +10,14 @@ namespace Project.Features.Player.Systems
 
 
 #pragma warning disable
+    using Components;
+    using Markers;
+    using Modules;
     using Project.Components;
+    using Project.Markers;
     using Project.Modules;
     using Project.Systems;
-    using Project.Markers;
-    using Components;
-    using Modules;
     using Systems;
-    using Markers;
 
 #pragma warning restore
 
@@ -33,14 +32,14 @@ namespace Project.Features.Player.Systems
     public sealed class PlayerMovementSystem : ISystemFilter
     {
         private PlayerFeature feature;
-        private SceneBuilderFeature _builder;
+        private SceneBuilderFeature _scene;
         
         public World world { get; set; }
 
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out this.feature);
-            world.GetFeature(out _builder);
+            world.GetFeature(out _scene);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -63,43 +62,16 @@ namespace Project.Features.Player.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var current = entity.Read<PlayerTag>().FaceDirection;
+            var current = entity.Read<FaceDirection>().Value;
 
             // Y Axis rotation;
-             var targetAngle = Mathf.Atan2(current.x, current.z) * Mathf.Rad2Deg;
-             var angle = Mathf.SmoothDampAngle(entity.GetRotation().eulerAngles.y, targetAngle, ref _smoothTurn,
-                 0.5f * deltaTime);
+            var targetAngle = Mathf.Atan2(current.x, current.z) * Mathf.Rad2Deg;
+            var angle = Mathf.SmoothDampAngle(entity.GetRotation().eulerAngles.y, targetAngle, ref _smoothTurn, 0.5f * deltaTime);
             
-             entity.SetRotation(Quaternion.Euler(0f, angle, 0f));
+            entity.SetRotation(Quaternion.Euler(0f, angle, 0f));
             
             if (Vector3.Distance(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value) <= 0)
-            {
-                if (entity.Has<PlayerIsRotating>())
-                {
-                    if (current == Vector3.forward)
-                    {
-                        entity.Get<PlayerTag>().FaceDirection =
-                            entity.Read<PlayerIsRotating>().Clockwise ? Vector3.right : Vector3.left;
-                    }
-                    else if (current == Vector3.left)
-                    {
-                        entity.Get<PlayerTag>().FaceDirection =
-                            entity.Read<PlayerIsRotating>().Clockwise ? Vector3.forward : Vector3.back;
-                    }
-                    else if (current == Vector3.back)
-                    {
-                        entity.Get<PlayerTag>().FaceDirection =
-                            entity.Read<PlayerIsRotating>().Clockwise ? Vector3.left : Vector3.right;
-                    }
-                    else if (current == Vector3.right)
-                    {
-                        entity.Get<PlayerTag>().FaceDirection =
-                            entity.Read<PlayerIsRotating>().Clockwise ? Vector3.back : Vector3.forward;
-                    }
-
-                    entity.Remove<PlayerIsRotating>();
-                }
-                
+            {               
                 if (entity.Has<PlayerHasStopped>())
                 {
                     if (entity.Has<PlayerIsMoving>())
@@ -111,17 +83,17 @@ namespace Project.Features.Player.Systems
                 {
                     if (entity.Has<PlayerIsMoving>())
                     {
-                        var direction = entity.Read<PlayerIsMoving>().Forward
-                            ? entity.Read<PlayerTag>().FaceDirection
-                            : -entity.Read<PlayerTag>().FaceDirection;
+                        Vector3 faceDirection = entity.Read<FaceDirection>().Value;
 
-                        if (!_builder.IsWalkable(entity.GetPosition(), direction)) return;
+                        var direction = entity.Read<PlayerIsMoving>().Forward ? faceDirection : -faceDirection;
 
-                        _builder.MoveTo(
-                            _builder.PositionToIndex( entity.GetPosition()),
-                            _builder.PositionToIndex(entity.GetPosition() + direction));
+                        if (!_scene.IsWalkable(entity.GetPosition(), direction)) return;
 
-                        entity.Set(new PlayerMovementSpeed {Value = entity.Read<PlayerIsMoving>().Forward ? 4 : 2});
+                        _scene.MoveTo(
+                            _scene.PositionToIndex( entity.GetPosition()),
+                            _scene.PositionToIndex(entity.GetPosition() + direction));
+
+                        entity.Set(new PlayerMovementSpeed {Value = entity.Read<PlayerIsMoving>().Forward ? 4 : 2}); //TODO: Вынести скорость в инспектор 
                         entity.Set(new PlayerMoveTarget {Value = entity.GetPosition() + direction});
                     }
                 }
