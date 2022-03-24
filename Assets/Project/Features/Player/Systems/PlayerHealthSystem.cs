@@ -16,6 +16,7 @@ namespace Project.Features.Player.Systems
     using Project.Markers;
     using Project.Modules;
     using Project.Systems;
+    using Project.Utilities;
     using Systems;
 #pragma warning restore
 
@@ -75,7 +76,7 @@ namespace Project.Features.Player.Systems
             entity.Get<PlayerScore>().Deaths += 1;
             deadBody.SetAs<PlayerScore>(entity);
             
-            _scene.MoveTo(_scene.PositionToIndex(entity.Read<PlayerMoveTarget>().Value), 0);
+            _scene.ReleaseTheCell(entity.Read<PlayerMoveTarget>().Value);
             world.GetFeature<EventsFeature>().PlayerDeath.Run(entity);      
             entity.Destroy();
         }

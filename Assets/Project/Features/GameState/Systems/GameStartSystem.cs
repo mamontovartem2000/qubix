@@ -59,11 +59,11 @@ namespace Project.Features.GameState.Systems
 
         private bool AllPlayersReady()
         {
-            foreach (var player in world.ReadSharedData<MapComponents>().PlayerStatus)
-            {
-                if (!player) return false;
-                // Debug.Log("Not all players are ready");
-            }
+            //foreach (var player in world.ReadSharedData<MapComponents>().PlayerStatus)
+            //{
+            //    if (!player) return false;
+            //    // Debug.Log("Not all players are ready");
+            //}
             
             // Debug.Log("All players are ready, starting the game");
             return true;

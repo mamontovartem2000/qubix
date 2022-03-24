@@ -17,6 +17,7 @@ namespace Project.Features.Player.Systems
     using Project.Markers;
     using Project.Modules;
     using Project.Systems;
+    using Project.Utilities;
     using Systems;
 
 #pragma warning restore
@@ -31,14 +32,14 @@ namespace Project.Features.Player.Systems
 
     public sealed class PlayerMovementSystem : ISystemFilter
     {
-        private PlayerFeature feature;
+        private PlayerFeature _feature;
         private SceneBuilderFeature _scene;
         
         public World world { get; set; }
 
         void ISystemBase.OnConstruct()
         {
-            this.GetFeature(out this.feature);
+            this.GetFeature(out this._feature);
             world.GetFeature(out _scene);
         }
 
@@ -87,11 +88,10 @@ namespace Project.Features.Player.Systems
 
                         var direction = entity.Read<PlayerIsMoving>().Forward ? faceDirection : -faceDirection;
 
-                        if (!_scene.IsWalkable(entity.GetPosition(), direction)) return;
+                        if (!SceneUtils.IsWalkable(entity.GetPosition(), direction)) return;
 
-                        _scene.MoveTo(
-                            _scene.PositionToIndex( entity.GetPosition()),
-                            _scene.PositionToIndex(entity.GetPosition() + direction));
+                        Vector3 positon = entity.GetPosition();
+                        _scene.Move(positon, positon + direction);
 
                         entity.Set(new PlayerMovementSpeed {Value = entity.Read<PlayerIsMoving>().Forward ? 4 : 2}); //TODO: Вынести скорость в инспектор 
                         entity.Set(new PlayerMoveTarget {Value = entity.GetPosition() + direction});
@@ -102,7 +102,7 @@ namespace Project.Features.Player.Systems
             {
                 if (entity.Has<TeleportPlayer>())
                     entity.Remove<TeleportPlayer>();
-                
+
                 entity.SetPosition(Vector3.MoveTowards(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value,
                     entity.Read<PlayerMovementSpeed>().Value * deltaTime));
             }

@@ -27,18 +27,35 @@ namespace Project.Utilities
         public GameMapRemoteData(TextAsset _sourceMap)
         {
             var omg = _sourceMap.text.Split('\n');
-            offset = omg.Length;
+            offset = omg[0].Length - 1;
             List<byte> sd = new List<byte>();
 
             foreach (var line in omg)
             {
-                for (int i = 0; i < line.Length; i++)
+                for (int i = 0; i < offset; i++)
                 {
-                    sd.Add(Convert.ToByte(line[i]));
+                    var num = Convert.ToByte(char.GetNumericValue(line[i]));
+                    sd.Add(num);
                 }
             }
 
             bytes = sd.ToArray();
+
+            //int count = 0;
+            //string df = string.Empty;
+
+            //for (int i = 0; i < bytes.Length; i++)
+            //{
+            //    count++;
+            //    df += bytes[i].ToString();
+
+            //    if (count == offset)
+            //    {
+            //        count = 0;
+            //        df += "\n";
+            //    }
+            //}
+            //Debug.Log(df);
         }
     }
 }

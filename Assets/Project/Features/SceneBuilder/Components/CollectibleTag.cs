@@ -21,4 +21,7 @@ namespace Project.Features.SceneBuilder.Components
         public float Timer;
         public float TimerDefault;
     }
+
+    public struct PortalTag : IComponent { }
+
 }

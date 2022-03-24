@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Project.Features.Player.Views
 {
-
     using ME.ECS.Views.Providers;
 
     public class PlayerView : MonoBehaviourView
@@ -20,7 +19,7 @@ namespace Project.Features.Player.Views
         {
             foreach (var part in Parts)
             {
-                part.sharedMaterial = entity.Read<PlayerMaterial>().Material;
+                //part.sharedMaterial = entity.Read<PlayerMaterial>().Material;
             }
         }
 
@@ -31,49 +30,10 @@ namespace Project.Features.Player.Views
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetRotation();
 
-            foreach (var part in Parts)
-            {
-                part.sharedMaterial = entity.Read<PlayerMaterial>().Material;
-            }
-
-            //if (entity.Has<LeftWeaponShot>() && !entity.Has<LeftWeaponReload>())
+            //foreach (var part in Parts)
             //{
-            //    ShotFired();
-            //}
-
-            //if (entity.Has<RightWeapon>())
-            //{
-            //    var type = entity.Read<RightWeapon>().Type;
-
-            //    switch (type)
-            //    {
-            //        case WeaponType.Gun:
-            //            break;
-            //        case WeaponType.Rocket:
-            //            Rocket.SetActive(true);
-            //            break;
-            //        case WeaponType.Rifle:
-            //            Rifle.SetActive(true);
-            //            break;
-            //        case WeaponType.Shotgun:
-            //            break;
-            //        default:
-            //            throw new ArgumentOutOfRangeException();
-            //    }
-            //}
-            //else
-            //{
-            //    Rocket.SetActive(false);
-            //    Rifle.SetActive(false);
-            //}
-        }
-
-        private void ShotFired()
-        {
-            foreach (var part in Muzzles)
-            {
-                part.Play();
-            }
+            //    part.sharedMaterial = entity.Read<PlayerMaterial>().Material;
+            //}         
         }
     }
 }

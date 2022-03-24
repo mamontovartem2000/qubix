@@ -13,25 +13,10 @@ namespace Project.Features.Player.Components
         public Vector3 Value;
     }
 
-    public struct PlayerMaterial : IComponent
-    {
-        public Material Material;
-    }
-
     public struct PlayerScore : IComponent
     {
         public int Kills;
         public int Deaths;
-
-        public void IncreaseDeathsCount()
-        {
-            Deaths++;
-        }
-
-        public void IncreaseKillsCount()
-        {
-            Kills++;
-        }
     }
 
     public struct PlayerIsRotating : IComponent

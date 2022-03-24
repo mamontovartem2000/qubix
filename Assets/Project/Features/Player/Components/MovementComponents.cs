@@ -19,9 +19,6 @@ namespace Project.Features.Projectile.Components
     }
     
     public struct PlayerHasStopped : IComponent {}
-    
-    public struct TeleportPlayer : IComponent
-    {
-        public int CurrentID;
-    } 
+
+    public struct TeleportPlayer : IComponent {}
 }

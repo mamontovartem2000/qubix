@@ -21,12 +21,12 @@ namespace Project.Features {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
+
     public sealed class PlayerFeature : Feature
     {
         [SerializeField] private DataConfig _defaultPlayerConfig;
 
         public PlayerView PlayerView;
-        public Material[] Materials;
         
         private ViewId _playerViewID;
         private RPCId _onGameStarted, _onPlayerDisconnected;     
@@ -64,9 +64,9 @@ namespace Project.Features {
             AddSystem<PlayerRotationSystem>();      
             AddSystem<PlayerHealthSystem>();
             AddSystem<ApplyDamageSystem>();
-            AddSystem<PlayerPortalSystem>();
             AddSystem<PlayerRespawnSystem>();
         }
+
         private void CreateFilters()
         {
             Filter.Create("Players Filter")
@@ -77,6 +77,7 @@ namespace Project.Features {
                 .With<DeadBody>()
                 .Push(ref _deadFilter);
         }
+
         private void RegisterRPCs(NetworkModule net)
         {
             net.RegisterObject(this);
@@ -98,18 +99,16 @@ namespace Project.Features {
 
             _defaultPlayerConfig.Apply(in player);
             player.Get<PlayerTag>().PlayerID = id;
-            player.SetPosition(_builder.GetRandomSpawnPosition());
+            player.SetPosition(SceneUtils.GetRandomSpawnPosition());
             player.Get<PlayerMoveTarget>().Value = player.GetPosition();
-
-            player.Set(new PlayerMaterial { Material = Materials[Utilitiddies.SafeCheckIndexByLength(_playerIndex, Materials.Length)] });          
          
-            _builder.MoveTo(_builder.PositionToIndex(player.GetPosition()), _builder.PositionToIndex(player.GetPosition()));
+            _builder.TakeTheCell(player.GetPosition());
             _events.OnTimeSynced.Execute(player);
             _events.PassLocalPlayer.Execute(player);
 
             world.RemoveSharedData<GamePaused>();
             
-            if (!_builder.TimerEntity.Has<GameTimer>()) //TODO: Это зачем?
+            if (!_builder.TimerEntity.Has<GameTimer>())
             {
                 _builder.TimerEntity.Set(new GameTimer {Value = 150f});
             }
