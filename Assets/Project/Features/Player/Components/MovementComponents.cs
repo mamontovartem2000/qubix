@@ -8,9 +8,23 @@ namespace Project.Features.Projectile.Components
         public Vector3 Value;
     }
 
+    public struct Moving : IComponent
+    {
+        public int Direction;
+        public int LastDirection;
+        public Vector3 LastMapCell;
+
+        public void ChangeDirection(int dir)
+        {
+            LastDirection = Direction;
+            Direction += dir;
+        }
+    }
+
     public struct PlayerMovementSpeed : IComponent
     {
-        public float Value;
+        public float Forward;
+        public float Backward;
     }
 
     public struct PlayerIsMoving : IComponent

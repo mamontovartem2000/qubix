@@ -18,6 +18,7 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
+  - id: 4
   removeStructComponents: []
   templates: []
   references:
@@ -38,3 +39,8 @@ MonoBehaviour:
       type: {class: PlayerTag, ns: Project.Features.Player.Components, asm: Project}
       data:
         PlayerID: -1
+    00000004:
+      type: {class: PlayerMovementSpeed, ns: Project.Core.Features.Player.Components, asm: Project.Core}
+      data:
+        Forward: 3
+        Backward: 1.5

@@ -9,6 +9,7 @@ namespace ME.ECS {
             CoreComponentsInitializer.InitTypeId();
 
 
+<<<<<<< Updated upstream
             WorldUtilities.InitComponentTypeId<LeftWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<LeftWeaponReload>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<LeftWeaponShot>(true, false, false, false, false, false, false);
@@ -49,6 +50,37 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.PortalTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<RightWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<RightWeaponShot>(true, false, false, false, false, false, false);
+=======
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamageOneShot>(true, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.EndGame>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameFinished>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GamePaused>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameTimer>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.Initialized>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.DeadBody>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.FaceDirection>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.LastHit>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.Moving>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerHasStopped>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerIsMoving>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerIsRotating>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerMovementSpeed>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerMoveTarget>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerScore>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.TeleportPlayer>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.AmmoTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.AmmoTileTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.HealPoweUpTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MineTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.PortalTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.ExplosionTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
+>>>>>>> Stashed changes
 
         }
 
@@ -59,6 +91,7 @@ namespace ME.ECS {
             CoreComponentsInitializer.InitTypeId();
 
 
+<<<<<<< Updated upstream
             WorldUtilities.InitComponentTypeId<LeftWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<LeftWeaponReload>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<LeftWeaponShot>(true, false, false, false, false, false, false);
@@ -99,11 +132,43 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Features.SceneBuilder.Components.PortalTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<RightWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<RightWeaponShot>(true, false, false, false, false, false, false);
+=======
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamageOneShot>(true, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.EndGame>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameFinished>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GamePaused>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameTimer>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.Initialized>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.DeadBody>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.FaceDirection>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.LastHit>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.Moving>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerHasStopped>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerIsMoving>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerIsRotating>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerMovementSpeed>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerMoveTarget>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerScore>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.TeleportPlayer>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.AmmoTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.AmmoTileTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.HealPoweUpTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MineTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.PortalTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.ExplosionTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
+>>>>>>> Stashed changes
 
             ComponentsInitializerWorld.Setup(ComponentsInitializerWorldGen.Init);
             CoreComponentsInitializer.Init(ref structComponentsContainer);
 
 
+<<<<<<< Updated upstream
             structComponentsContainer.Validate<LeftWeapon>(false);
             structComponentsContainer.Validate<LeftWeaponReload>(false);
             structComponentsContainer.Validate<LeftWeaponShot>(true);
@@ -144,6 +209,37 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Features.SceneBuilder.Components.PortalTag>(true);
             structComponentsContainer.Validate<RightWeapon>(false);
             structComponentsContainer.Validate<RightWeaponShot>(true);
+=======
+            structComponentsContainer.Validate<Project.Common.Components.ApplyDamage>(false);
+            structComponentsContainer.ValidateOneShot<Project.Common.Components.ApplyDamageOneShot>(true);
+            structComponentsContainer.Validate<Project.Core.Features.GameState.Components.EndGame>(false);
+            structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GameFinished>(false);
+            structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GamePaused>(true);
+            structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GameTimer>(false);
+            structComponentsContainer.Validate<Project.Core.Features.GameState.Components.Initialized>(true);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.DeadBody>(false);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.FaceDirection>(false);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.LastHit>(false);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.Moving>(false);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerHasStopped>(true);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerHealth>(false);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerIsMoving>(false);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerIsRotating>(false);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerMovementSpeed>(false);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerMoveTarget>(false);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerScore>(false);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerTag>(false);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.TeleportPlayer>(true);
+            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.AmmoTag>(false);
+            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.AmmoTileTag>(false);
+            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.HealPoweUpTag>(true);
+            structComponentsContainer.ValidateCopyable<Project.Core.Features.SceneBuilder.Components.MapComponents>(false);
+            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.MineTag>(true);
+            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.PortalTag>(true);
+            structComponentsContainer.Validate<Project.Mechanics.Features.CollisionHandler.Components.CollisionTag>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Features.CollisionHandler.Components.ExplosionTag>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Features.CollisionHandler.Components.PortalTag>(false);
+>>>>>>> Stashed changes
 
         }
 
@@ -154,6 +250,7 @@ namespace ME.ECS {
         public static void Init(Entity entity) {
 
 
+<<<<<<< Updated upstream
             entity.ValidateData<LeftWeapon>(false);
             entity.ValidateData<LeftWeaponReload>(false);
             entity.ValidateData<LeftWeaponShot>(true);
@@ -194,6 +291,37 @@ namespace ME.ECS {
             entity.ValidateData<Project.Features.SceneBuilder.Components.PortalTag>(true);
             entity.ValidateData<RightWeapon>(false);
             entity.ValidateData<RightWeaponShot>(true);
+=======
+            entity.ValidateData<Project.Common.Components.ApplyDamage>(false);
+            entity.ValidateDataOneShot<Project.Common.Components.ApplyDamageOneShot>(true);
+            entity.ValidateData<Project.Core.Features.GameState.Components.EndGame>(false);
+            entity.ValidateData<Project.Core.Features.GameState.Components.GameFinished>(false);
+            entity.ValidateData<Project.Core.Features.GameState.Components.GamePaused>(true);
+            entity.ValidateData<Project.Core.Features.GameState.Components.GameTimer>(false);
+            entity.ValidateData<Project.Core.Features.GameState.Components.Initialized>(true);
+            entity.ValidateData<Project.Core.Features.Player.Components.DeadBody>(false);
+            entity.ValidateData<Project.Core.Features.Player.Components.FaceDirection>(false);
+            entity.ValidateData<Project.Core.Features.Player.Components.LastHit>(false);
+            entity.ValidateData<Project.Core.Features.Player.Components.Moving>(false);
+            entity.ValidateData<Project.Core.Features.Player.Components.PlayerHasStopped>(true);
+            entity.ValidateData<Project.Core.Features.Player.Components.PlayerHealth>(false);
+            entity.ValidateData<Project.Core.Features.Player.Components.PlayerIsMoving>(false);
+            entity.ValidateData<Project.Core.Features.Player.Components.PlayerIsRotating>(false);
+            entity.ValidateData<Project.Core.Features.Player.Components.PlayerMovementSpeed>(false);
+            entity.ValidateData<Project.Core.Features.Player.Components.PlayerMoveTarget>(false);
+            entity.ValidateData<Project.Core.Features.Player.Components.PlayerScore>(false);
+            entity.ValidateData<Project.Core.Features.Player.Components.PlayerTag>(false);
+            entity.ValidateData<Project.Core.Features.Player.Components.TeleportPlayer>(true);
+            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.AmmoTag>(false);
+            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.AmmoTileTag>(false);
+            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.HealPoweUpTag>(true);
+            entity.ValidateDataCopyable<Project.Core.Features.SceneBuilder.Components.MapComponents>(false);
+            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.MineTag>(true);
+            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.PortalTag>(true);
+            entity.ValidateData<Project.Mechanics.Features.CollisionHandler.Components.CollisionTag>(false);
+            entity.ValidateData<Project.Mechanics.Features.CollisionHandler.Components.ExplosionTag>(false);
+            entity.ValidateData<Project.Mechanics.Features.CollisionHandler.Components.PortalTag>(false);
+>>>>>>> Stashed changes
 
         }
 

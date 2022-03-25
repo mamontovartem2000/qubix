@@ -65,6 +65,7 @@ namespace Project.Features {
             AddSystem<PlayerHealthSystem>();
             AddSystem<ApplyDamageSystem>();
             AddSystem<PlayerRespawnSystem>();
+            AddSystem<HandleInputSystem>();
         }
 
         private void CreateFilters()

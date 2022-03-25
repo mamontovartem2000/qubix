@@ -1,6 +1,11 @@
 ﻿using ME.ECS;
+<<<<<<< Updated upstream:Assets/Project/Features/Player/Systems/PlayerMovementSystem.cs
 using Project.Features.Components;
 using Project.Features.Projectile.Components;
+=======
+using Project.Core.Features.Player.Components;
+using Project.Core.Features.SceneBuilder;
+>>>>>>> Stashed changes:Assets/Project/Core/Features/Player/Systems/PlayerMovementSystem.cs
 using UnityEngine;
 
 namespace Project.Features.Player.Systems
@@ -32,15 +37,16 @@ namespace Project.Features.Player.Systems
 
     public sealed class PlayerMovementSystem : ISystemFilter
     {
+        public World world { get; set; }
+        
         private PlayerFeature _feature;
         private SceneBuilderFeature _scene;
-        
-        public World world { get; set; }
+
 
         void ISystemBase.OnConstruct()
         {
-            this.GetFeature(out this._feature);
-            world.GetFeature(out _scene);
+            this.GetFeature(out _feature);
+            this.GetFeature(out _scene);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -55,57 +61,47 @@ namespace Project.Features.Player.Systems
         {
             return Filter.Create("Filter-PlayerMovementSystem")
                 .With<PlayerTag>()
-                .WithoutShared<GameFinished>()
+                .With<Moving>()
                 .Push();
         }
 
-        private float _smoothTurn;
-
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var current = entity.Read<FaceDirection>().Value;
+            int movingDir = entity.Read<Moving>().Direction;
+            Vector3 positon = entity.GetPosition();
 
-            // Y Axis rotation;
-            var targetAngle = Mathf.Atan2(current.x, current.z) * Mathf.Rad2Deg;
-            var angle = Mathf.SmoothDampAngle(entity.GetRotation().eulerAngles.y, targetAngle, ref _smoothTurn, 0.5f * deltaTime);
-            
-            entity.SetRotation(Quaternion.Euler(0f, angle, 0f));
-            
-            if (Vector3.Distance(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value) <= 0)
-            {               
-                if (entity.Has<PlayerHasStopped>())
-                {
-                    if (entity.Has<PlayerIsMoving>())
-                    {
-                        entity.Remove<PlayerIsMoving>();
-                    }
-                }
-                else
-                {
-                    if (entity.Has<PlayerIsMoving>())
-                    {
-                        Vector3 faceDirection = entity.Read<FaceDirection>().Value;
+            float speed = 0;
+            if (movingDir == 1)
+                speed = entity.Read<PlayerMovementSpeed>().Forward;
+            else
+                speed = entity.Read<PlayerMovementSpeed>().Backward;
 
-                        var direction = entity.Read<PlayerIsMoving>().Forward ? faceDirection : -faceDirection;
 
-                        if (!SceneUtils.IsWalkable(entity.GetPosition(), direction)) return;
+            if (movingDir != 0)
+            {
+                Vector3 faceDirection = entity.Read<FaceDirection>().Value;
 
-                        Vector3 positon = entity.GetPosition();
-                        _scene.Move(positon, positon + direction);
-
-                        entity.Set(new PlayerMovementSpeed {Value = entity.Read<PlayerIsMoving>().Forward ? 4 : 2}); //TODO: Вынести скорость в инспектор 
-                        entity.Set(new PlayerMoveTarget {Value = entity.GetPosition() + direction});
-                    }
-                }
+                if (!SceneUtils.IsWalkable(entity.GetPosition(), faceDirection * movingDir)) return;     
+                
+                entity.SetPosition(Vector3.MoveTowards(positon, positon + faceDirection * movingDir, speed * deltaTime));       
             }
             else
             {
-                if (entity.Has<TeleportPlayer>())
-                    entity.Remove<TeleportPlayer>();
+                //TODO: Возможно надо округлять в другу сторону, если игрок успел уйти на миллиметр с центра и остановился.
+                int lastDir = entity.Read<Moving>().LastDirection;
+                Vector3 target = Vector3.zero;
 
-                entity.SetPosition(Vector3.MoveTowards(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value,
-                    entity.Read<PlayerMovementSpeed>().Value * deltaTime));
+                if (lastDir == 1)
+                    target = Vector3Int.CeilToInt(positon);
+                else if (lastDir == -1)
+                    target = Vector3Int.FloorToInt(positon);
+
+                entity.SetPosition(Vector3.MoveTowards(positon, target, speed * deltaTime));
             }
+
+            Vector3 posCell = Vector3Int.FloorToInt(positon);
+            Vector3 targetCell = Vector3Int.CeilToInt(positon);
+            _scene.Move(posCell, targetCell);
         }
     }
 }

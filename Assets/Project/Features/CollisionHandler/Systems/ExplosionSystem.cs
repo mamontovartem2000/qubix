@@ -3,16 +3,22 @@
 namespace Project.Features.CollisionHandler.Systems 
 {
     #region usage
+<<<<<<< Updated upstream:Assets/Project/Features/CollisionHandler/Systems/ExplosionSystem.cs
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
     using Components; using Modules; using Systems; using Markers;
     #pragma warning restore
     
     #if ECS_COMPILE_IL2CPP_OPTIONS
+=======
+    using Components;
+    using UnityEngine;
+#if ECS_COMPILE_IL2CPP_OPTIONS
+>>>>>>> Stashed changes:Assets/Project/Mechanics/Features/CollisionHandler/Systems/ExplosionSystem.cs
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
+#endif
     #endregion
     public sealed class ExplosionSystem : ISystemFilter 
     {
