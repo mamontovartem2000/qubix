@@ -1,194 +1,220 @@
 ﻿using System;
+using Codice.CM.Common;
 using ME.ECS;
 using Project.Core.Features.Player.Components;
 using Project.Input.InputHandler;
 using Project.Input.InputHandler.Markers;
 using Project.Modules;
-using Key = Project.Input.InputHandler.Markers.Key;
+using UnityEngine;
 
 namespace Project.Core.Features.Player.Systems
 {
-    #region usage
+	#region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
+	#endregion
 
-    #endregion
+	public sealed class HandleInputSystem : ISystem, IUpdate
+	{
+		public World world { get; set; }
 
-    public sealed class HandleInputSystem : ISystem, IUpdate
-    {
-        public World world { get; set; }
-        
-        private InputHandlerFeature _feature;
-        private Filter _playerFilter;
+		private InputHandlerFeature _feature;
+		private Filter _playerFilter;
 
-        void ISystemBase.OnConstruct()
-        {
-            var network = world.GetModule<NetworkModule>();
-            network.RegisterObject(this);
-            
-            RegisterRPCs(network);
+		private RPCId _forward, _backward, _left, _right, _mouseLeft, _mouseRight;
 
-            this.GetFeature(out this._feature);
+		void ISystemBase.OnConstruct()
+		{
+			this.GetFeature(out _feature);
+			
+			var net = world.GetModule<NetworkModule>();
+			net.RegisterObject(this);
+			RegisterRPSs(net);
 
-            Filter.Create("Filter-Players")
-                .With<PlayerTag>()
-                .Push(ref _playerFilter);
-        }
+			Filter.Create("Filter-Players")
+				.With<PlayerTag>()
+				.Push(ref _playerFilter);
+		}
 
-        void ISystemBase.OnDeconstruct(){}
+		private void RegisterRPSs(NetworkModule net)
+		{
+			_forward = net.RegisterRPC(new Action<ForwardMarker>(ForwardKey_RPC).Method);
+			_backward = net.RegisterRPC(new Action<BackwardMarker>(BackwardKey_RPC).Method);
+			_left = net.RegisterRPC(new Action<LeftMarker>(LeftKey_RPC).Method);
+			_right = net.RegisterRPC(new Action<RightMarker>(RightKey_RPC).Method);
+			_mouseLeft = net.RegisterRPC(new Action<MouseLeftMarker>(LeftMouse_RPC).Method);
+			_mouseRight = net.RegisterRPC(new Action<MouseRightMarker>(RightMouse_RPC).Method);
+		}
 
-        void IUpdate.Update(in float deltaTime)
-        {
-            if (world.GetMarker(out KeyPressedMarker keyPressed))
-            {
-                var net = world.GetModule<NetworkModule>();
-                net.RPC(this, _keyPressed, keyPressed);
-            }
+		void ISystemBase.OnDeconstruct() {}
 
-            if (world.GetMarker(out KeyReleasedMarker keyReleased))
-            {
-                var net = world.GetModule<NetworkModule>();
-                net.RPC(this, _keyReleased, keyReleased);
-            }
-            
-            if (world.GetMarker(out ButtonPressedMarker buttonPressed))
-            {
-                var net = world.GetModule<NetworkModule>();
-                net.RPC(this, _buttonPressed, buttonPressed);
-            }
+		void IUpdate.Update(in float deltaTime)
+		{ 
+			if(world.GetMarker(out ForwardMarker fm))
+			{
+				var net = world.GetModule<NetworkModule>();
+				net.RPC(this, _forward, fm);
+			}
 
-            if (world.GetMarker(out ButtonReleasedMarker buttonReleased))
-            {
-                var net = world.GetModule<NetworkModule>();
-                net.RPC(this, _buttonReleased, buttonReleased);
-            }
-        }
-        
-        private Entity GetEntityByID(int actorID)
-        {
-            foreach (var entity in _playerFilter)
-            {
-                if (entity.Read<PlayerTag>().PlayerID == actorID)
-                {
-                    return entity;
-                }
-            }
-    
-            return Entity.Empty;
-        }
+			if (world.GetMarker(out BackwardMarker bm))
+			{
+				var net = world.GetModule<NetworkModule>();
+				net.RPC(this, _backward, bm);
+			}
+			
+			if (world.GetMarker(out LeftMarker lm))
+			{
+				var net = world.GetModule<NetworkModule>();
+				net.RPC(this, _left, lm);
+			}
+			
+			if (world.GetMarker(out RightMarker rm))
+			{
+				var net = world.GetModule<NetworkModule>();
+				net.RPC(this, _right, rm);
+			}
+			
+			if (world.GetMarker(out MouseLeftMarker mlm))
+			{
+				var net = world.GetModule<NetworkModule>();
+				net.RPC(this, _mouseLeft, mlm);
+			}
+			
+			if (world.GetMarker(out MouseRightMarker mrm))
+			{
+				var net = world.GetModule<NetworkModule>();
+				net.RPC(this, _mouseRight, mrm);
+			}
+		}
+		private void ForwardKey_RPC(ForwardMarker fm)
+		{
 
-        private RPCId _keyPressed, _keyReleased;
-        private RPCId _buttonPressed, _buttonReleased;
-        
-        private void RegisterRPCs(NetworkModule net)
-        {
-            _keyPressed = net.RegisterRPC(new Action<KeyPressedMarker>(KeyPressed_RPC).Method);
-            _keyReleased = net.RegisterRPC(new Action<KeyReleasedMarker>(KeyReleased_RPC).Method);
-            _buttonPressed = net.RegisterRPC(new Action<ButtonPressedMarker>(ButtonPressed_RPC).Method);
-            _buttonReleased = net.RegisterRPC(new Action<ButtonReleasedMarker>(ButtonReleased_RPC).Method);
-        }
+			foreach (var entity in _playerFilter)
+			{
+				if(entity.Read<PlayerTag>().PlayerID != fm.ActorID) return;
+				
+				switch (fm.State)
+				{
+					case InputState.Pressed:
+					{
+						entity.Get<PlayerMoveTarget>().Value += entity.Read<PlayerTag>().FaceDirection;
+						break;
+					}
+					case InputState.Released:
+					{
+						entity.Get<PlayerMoveTarget>().Value -= entity.Read<PlayerTag>().FaceDirection;
+						break;
+					}
+				}
+			}
+		}
 
-        private void KeyPressed_RPC(KeyPressedMarker kpm)
-        {
-            var entity = GetEntityByID(kpm.ActorID);
-            
-            if(!entity.IsAlive()) return;
+		private void BackwardKey_RPC(BackwardMarker bm)
+		{
+			foreach (var entity in _playerFilter)
+			{
+				if (entity.Read<PlayerTag>().PlayerID != bm.ActorID) return;
 
-            switch (kpm.Key)
-            {
-                case Key.Forward:
-                {
-                    entity.Set(new PlayerIsMoving {Forward = true});
-                    
-                    if (entity.Has<PlayerHasStopped>())
-                    {
-                        entity.Remove<PlayerHasStopped>();
-                    }
-                }
-                    break;
-                case Key.Backward:
-                {
-                    entity.Set(new PlayerIsMoving {Forward = false});
+				switch (bm.State)
+				{
+					case InputState.Pressed:
+					{
+						entity.Get<PlayerMoveTarget>().Value -= entity.Read<PlayerTag>().FaceDirection;
+						break;
+					}
+					case InputState.Released:
+					{
+						entity.Get<PlayerMoveTarget>().Value += entity.Read<PlayerTag>().FaceDirection;
+						break;
+					}
+				}
+			}
+		}
 
-                    if (entity.Has<PlayerHasStopped>())
-                    {
-                        entity.Remove<PlayerHasStopped>();
-                    }
-                }
-                    break;
-                case Key.Left:
-                {
-                    entity.Set(new PlayerIsRotating {Clockwise = false});
-                }
-                    break;
-                case Key.Right:
-                {
-                    entity.Set(new PlayerIsRotating {Clockwise = true});
-                }
-                    break;
-            }
-        }
-        
-        private void KeyReleased_RPC(KeyReleasedMarker krm)
-        {
-            var entity = GetEntityByID(krm.ActorID);
-            if(!entity.IsAlive()) return;
+		private void LeftKey_RPC(LeftMarker lm)
+		{
+			foreach (var entity in _playerFilter)
+			{
+				if (entity.Read<PlayerTag>().PlayerID != lm.ActorID) return;
 
-            switch (krm.Key)
-            {
-                case Key.Forward:
-                {
-                    entity.Set(new PlayerHasStopped());
-                }
-                    break;
-                case Key.Backward:
-                {
-                    entity.Set(new PlayerHasStopped());
-                }
-                    break;
-            }
-        }
-        
-        private void ButtonPressed_RPC(ButtonPressedMarker bpm)
-        {
-            var entity = GetEntityByID(bpm.ActorID);
-            if(!entity.IsAlive()) return;
+				switch (lm.State)
+				{
+					case InputState.Pressed:
+					{
+						break;
+					}
+					case InputState.Released:
+					{
+						break;
+					}
+				}
+			}
+		}
+		private void RightKey_RPC(RightMarker rm)
+		{
+			foreach (var entity in _playerFilter)
+			{
+				if (entity.Read<PlayerTag>().PlayerID != rm.ActorID) return;
 
-            switch (bpm.Button)
-            {
-                case Button.Left:
-                {
-                    entity.Set(new LeftWeaponShot());
-                }
-                    break;
-                case Button.Right:
-                {
-                    entity.Set(new RightWeaponShot());
-                }
-                    break;
-            }
-        }
-        private void ButtonReleased_RPC(ButtonReleasedMarker brm)
-        {
-            var entity = GetEntityByID(brm.ActorID);
-            if(!entity.IsAlive()) return;
+				switch (rm.State)
+				{
+					case InputState.Pressed:
+					{
+						break;
+					}
+					case InputState.Released:
+					{
+						break;
+					}
+				}
+			}
+		}
 
-            switch (brm.Button)
-            {
-                case Button.Left:
-                {
-                    entity.Remove<LeftWeaponShot>();
-                }
-                    break;
-                case Button.Right:
-                {
-                    entity.Remove<RightWeaponShot>();
-                }
-                    break;
-            }
-        }
-    }
+		private void LeftMouse_RPC(MouseLeftMarker mlm)
+		{
+			foreach (var entity in _playerFilter)
+			{
+				if (entity.Read<PlayerTag>().PlayerID != mlm.ActorID) return;
+
+				switch (mlm.State)
+				{
+					case InputState.Pressed:
+					{
+						entity.Set(new LeftWeaponShot());
+						break;
+					}
+					case InputState.Released:
+					{
+						entity.Remove<LeftWeaponShot>();
+						break;
+					}
+				}
+			}
+		}
+
+		private void RightMouse_RPC(MouseRightMarker mrm)
+		{
+			foreach (var entity in _playerFilter)
+			{
+				if (entity.Read<PlayerTag>().PlayerID != mrm.ActorID) return;
+
+				switch (mrm.State)
+				{
+					case InputState.Pressed:
+					{
+						entity.Set(new RightWeaponShot());
+						break;
+					}
+					case InputState.Released:
+					{
+						entity.Remove<RightWeaponShot>();
+						break;
+					}
+				}
+			}
+		}
+	}
 }

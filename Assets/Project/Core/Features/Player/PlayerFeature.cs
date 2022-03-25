@@ -62,6 +62,7 @@ namespace Project.Core.Features.Player {
             AddSystem<ApplyDamageSystem>();
             AddSystem<PlayerPortalSystem>();
             AddSystem<PlayerRespawnSystem>();
+            AddSystem<HandleInputSystem>();
             // AddSystem<LeftWeaponCooldownSystem>();
             // AddSystem<RightWeaponCooldownSystem>();
         }
@@ -100,7 +101,8 @@ namespace Project.Core.Features.Player {
             player.Set(new PlayerHealth {Value = 100});
             player.SetPosition(_builder.GetRandomSpawnPosition());
             player.Set(new PlayerMoveTarget {Value = player.GetPosition()});
-            player.Set(new LeftWeapon {Type = WeaponType.Gun, Cooldown = 0.2f, Ammo = 20, MaxAmmo = 20, ReloadTime = 1.2f});
+            player.Set(new PlayerMovementSpeed {Value = 4f});
+            //player.Set(new LeftWeapon {Type = WeaponType.Gun, Cooldown = 0.2f, Ammo = 20, MaxAmmo = 20, ReloadTime = 1.2f});
             
             _builder.MoveTo(_builder.PositionToIndex(player.GetPosition()), _builder.PositionToIndex(player.GetPosition()));
             _events.OnTimeSynced.Execute(player);

@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Input.InputHandler.Modules;
 
 namespace Project.Input.InputHandler 
 {
@@ -18,7 +19,7 @@ namespace Project.Input.InputHandler
     {
         protected override void OnConstruct()
         {
-	        // AddModule<HandlePlayerInput>();
+	        AddModule<HandlePlayerInput>();
         }
         protected override void OnDeconstruct() {}
     }
