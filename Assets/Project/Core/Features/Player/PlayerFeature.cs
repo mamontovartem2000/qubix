@@ -1,5 +1,5 @@
 ﻿using ME.ECS;
-using Project.Common;
+using ME.ECS.DataConfigs;
 using Project.Core.Features.Events;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.Player.Components;
@@ -18,16 +18,16 @@ namespace Project.Core.Features.Player {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     #endregion
+
     public sealed class PlayerFeature : Feature
     {
+        [SerializeField] private DataConfig _defaultPlayerConfig;
+
         public PlayerView PlayerView;
-        public Material[] Materials;
         
         private ViewId _playerViewID;
-        private RPCId _onGameStarted, _onPlayerConnected, _onPlayerDisconnected;
-        
-        private Filter _playerFilter, _deadFilter;
-        
+        private RPCId _onGameStarted, _onPlayerDisconnected;     
+        private Filter _playerFilter, _deadFilter;       
         private int _playerIndex;
         
         private SceneBuilderFeature _builder;
@@ -39,7 +39,7 @@ namespace Project.Core.Features.Player {
             AddSystems();
             AddModules();
             CreateFilters();
-            
+
             RegisterRPCs(world.GetModule<NetworkModule>());
 
             _playerViewID = world.RegisterViewSource(PlayerView);
@@ -58,24 +58,23 @@ namespace Project.Core.Features.Player {
         private void AddSystems()
         {
             AddSystem<PlayerMovementSystem>();
+            AddSystem<PlayerRotationSystem>();      
             AddSystem<PlayerHealthSystem>();
             AddSystem<ApplyDamageSystem>();
-            AddSystem<PlayerPortalSystem>();
             AddSystem<PlayerRespawnSystem>();
-            AddSystem<HandleInputSystem>();
-            // AddSystem<LeftWeaponCooldownSystem>();
-            // AddSystem<RightWeaponCooldownSystem>();
         }
+
         private void CreateFilters()
         {
-            Filter.Create("Player Filter")
+            Filter.Create("Players Filter")
                 .With<PlayerTag>()
                 .Push(ref _playerFilter);
 
-            Filter.Create("dead-filter")
+            Filter.Create("Dead Filter")
                 .With<DeadBody>()
                 .Push(ref _deadFilter);
         }
+
         private void RegisterRPCs(NetworkModule net)
         {
             net.RegisterObject(this);
@@ -95,16 +94,12 @@ namespace Project.Core.Features.Player {
             var player = new Entity("Player");
             player.InstantiateView(_playerViewID);
 
-            player.Set(new PlayerTag {PlayerID = id, FaceDirection = Vector3.forward, 
-                Material = Materials[Utilitiddies.SafeCheckIndexByLength(_playerIndex, Materials.Length)]});
-
-            player.Set(new PlayerHealth {Value = 100});
-            player.SetPosition(_builder.GetRandomSpawnPosition());
-            player.Set(new PlayerMoveTarget {Value = player.GetPosition()});
-            player.Set(new PlayerMovementSpeed {Value = 4f});
-            //player.Set(new LeftWeapon {Type = WeaponType.Gun, Cooldown = 0.2f, Ammo = 20, MaxAmmo = 20, ReloadTime = 1.2f});
-            
-            _builder.MoveTo(_builder.PositionToIndex(player.GetPosition()), _builder.PositionToIndex(player.GetPosition()));
+            _defaultPlayerConfig.Apply(in player);
+            player.Get<PlayerTag>().PlayerID = id;
+            player.SetPosition(SceneUtils.GetRandomSpawnPosition());
+            player.Get<PlayerMoveTarget>().Value = player.GetPosition();
+         
+            _builder.TakeTheCell(player.GetPosition());
             _events.OnTimeSynced.Execute(player);
             _events.PassLocalPlayer.Execute(player);
 
@@ -162,7 +157,6 @@ namespace Project.Core.Features.Player {
 
         public Entity RespawnPlayer(int id)
         {
-            // GameStarted_RPC(id);
             return CreatePlayer(id);
         }
         
@@ -175,7 +169,7 @@ namespace Project.Core.Features.Player {
                     return player;
                 }
             }
-            
+
             return Entity.Empty;
         }
 

@@ -9,32 +9,32 @@ namespace Project.Core.Features.SceneBuilder.Systems
 
      #pragma warning disable
 #pragma warning restore
-    
-    #if ECS_COMPILE_IL2CPP_OPTIONS
+
+#if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
+#endif
     #endregion
 
     public sealed class SpawnMineSystem : ISystem, IAdvanceTick, IUpdate 
-    {
+    {        
         public World world { get; set; }
 
-        private SceneBuilderFeature feature;
+        private SceneBuilderFeature _scene;
 
         private Filter _mineFilter;
         private ViewId _mineID;
 
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this.feature);
+            this.GetFeature(out _scene);
 
             Filter.Create("mine-filter")
                 .With<MineTag>()
                 .Push(ref _mineFilter);
 
-            _mineID = world.RegisterViewSource(feature.MineView);
+            _mineID = world.RegisterViewSource(_scene.MineView);
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -43,11 +43,11 @@ namespace Project.Core.Features.SceneBuilder.Systems
         {
             if (_mineFilter.Count < 8)
             {
-                var entity = new Entity("health");
+                var entity = new Entity("Mine");
 
                 entity.Set(new MineTag());
                 
-                entity.SetPosition(feature.GetRandomSpawnPosition());
+                entity.SetPosition(SceneUtils.GetRandomSpawnPosition());
                 entity.InstantiateView(_mineID);
             }
         }

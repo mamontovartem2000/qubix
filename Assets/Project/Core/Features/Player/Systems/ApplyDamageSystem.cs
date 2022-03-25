@@ -2,15 +2,21 @@
 using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Core.Features.Player.Components;
-using UnityEngine;
 
-namespace Project.Core.Features.Player.Systems {
+namespace Project.Core.Features.Player.Systems
+{
     #region usage
-    #if ECS_COMPILE_IL2CPP_OPTIONS
+
+
+
+#pragma warning disable
+#pragma warning restore
+
+#if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
+#endif
     #endregion
     public sealed class ApplyDamageSystem : ISystemFilter 
     {
@@ -38,18 +44,12 @@ namespace Project.Core.Features.Player.Systems {
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            entity.Get< ApplyDamage>().ApplyTo.Get<PlayerHealth>().Value -= entity.Get<ApplyDamage>().Damage;
-            entity.Get<ApplyDamage>().ApplyTo.Get<LastHit>().Enemy = entity.Read<ApplyDamage>().From;
+            var apply = entity.Read<ApplyDamage>();
 
-            entity.Set(new ApplyDamage(), ComponentLifetime.NotifyAllSystems);
+            apply.ApplyTo.Get<PlayerHealth>().Value -= apply.Damage;
+            apply.ApplyTo.Get<LastHit>().Enemy = apply.From;
             
-            var booooool = entity.Has<ApplyDamage>();
-            Debug.Log(booooool); // false
-            
-            entity.Set(new ApplyDamage(), ComponentLifetime.NotifyAllSystemsBelow);
-
-            
-            world.GetFeature<EventsFeature>().HealthChanged.Execute(entity.Get<ApplyDamage>().ApplyTo);
+            world.GetFeature<EventsFeature>().HealthChanged.Execute(apply.ApplyTo);
         }
     }
 }

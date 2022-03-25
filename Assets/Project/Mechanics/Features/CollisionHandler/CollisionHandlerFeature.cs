@@ -7,11 +7,6 @@ using UnityEngine;
 
 namespace Project.Mechanics.Features.CollisionHandler {
     #region usage
-    namespace CollisionHandler.Components {}
-    namespace CollisionHandler.Modules {}
-    namespace CollisionHandler.Systems {}
-    namespace CollisionHandler.Markers {}
-    
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
@@ -29,10 +24,8 @@ namespace Project.Mechanics.Features.CollisionHandler {
         
         protected override void OnConstruct()
         {
-            AddSystem<ProjectileCollisionSystem>();
             AddSystem<HealthCollisionSystem>();
             AddSystem<MineCollisionSystem>();
-            AddSystem<AmmoCollisionSystem>();
             AddSystem<ExplosionSystem>();
 
             _mineID = world.RegisterViewSource(MineVFX);

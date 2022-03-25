@@ -1,13 +1,14 @@
 ﻿using ME.ECS;
 using Project.Markers;
 
-namespace Project.Core.Features.Player.Modules {
+namespace Project.Core.Features.Player.Modules
+{
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
+#endif
     #endregion
     public sealed class PlayerConnectionModule : IModule, IUpdate 
     {

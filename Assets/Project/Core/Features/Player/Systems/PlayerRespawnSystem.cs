@@ -2,28 +2,23 @@
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.Player.Components;
 
-namespace Project.Core.Features.Player.Systems 
+namespace Project.Core.Features.Player.Systems
 {
     #region usage
-    #pragma warning disable
-#pragma warning restore
-    
-    #if ECS_COMPILE_IL2CPP_OPTIONS
+#if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
+#endif
     #endregion
     public sealed class PlayerRespawnSystem : ISystemFilter 
     {
         public World world { get; set; }
     
-        private PlayerFeature feature;
-        // private CollisionHandlerFeature _coll;
+        private PlayerFeature _feature;
         void ISystemBase.OnConstruct() 
         {
-            this.GetFeature(out this.feature);
-            // world.GetFeature(out _coll);
+            this.GetFeature(out _feature);
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -48,7 +43,7 @@ namespace Project.Core.Features.Player.Systems
             
             if(deadbody.Time <= 0)
             {
-                var newPlayer = feature.RespawnPlayer(deadbody.ActorID);
+                var newPlayer = _feature.RespawnPlayer(deadbody.ActorID);
                 newPlayer.SetAs<PlayerScore>(entity);
                 entity.Destroy();
             }

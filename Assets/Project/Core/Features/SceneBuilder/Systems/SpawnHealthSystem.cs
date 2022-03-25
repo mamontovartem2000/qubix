@@ -8,12 +8,12 @@ namespace Project.Core.Features.SceneBuilder.Systems {
 
     #pragma warning disable
 #pragma warning restore
-    
-    #if ECS_COMPILE_IL2CPP_OPTIONS
+
+#if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
+#endif
     #endregion
     public sealed class SpawnHealthSystem : ISystem, IAdvanceTick, IUpdate 
     {
@@ -41,11 +41,11 @@ namespace Project.Core.Features.SceneBuilder.Systems {
         {
             if (_healthFilter.Count < 4)
             {
-                var entity = new Entity("health");
+                var entity = new Entity("Healing");
 
-                entity.Set(new HealPoweUpTag());
+                entity.Set(new HealPoweUpTag());      
                 
-                entity.SetPosition(_feature.GetRandomSpawnPosition());
+                entity.SetPosition(SceneUtils.GetRandomSpawnPosition());
                 entity.InstantiateView(_healthID);
             }
         }

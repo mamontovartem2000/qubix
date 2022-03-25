@@ -4,27 +4,25 @@ using Project.Core.Features.GameState.Components;
 using Project.Core.Features.Player.Components;
 using Project.Core.Features.SceneBuilder;
 
-namespace Project.Core.Features.Player.Systems {
+namespace Project.Core.Features.Player.Systems
+{
     #region usage
-    #if ECS_COMPILE_IL2CPP_OPTIONS
+#pragma warning disable
+#pragma warning restore
+
+#if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
+#endif
     #endregion
     public sealed class PlayerHealthSystem : ISystemFilter 
     {
         public World world { get; set; }
-        
-        private PlayerFeature _feature;
-        private SceneBuilderFeature _builder;
-        // private CollisionHandlerFeature _coll;
+        private SceneBuilderFeature _scene;
         
         void ISystemBase.OnConstruct() {
-            
-            this.GetFeature(out _feature);
-            world.GetFeature(out _builder);
-            // world.GetFeature(out _coll);
+            world.GetFeature(out _scene);
         }
 
         void ISystemBase.OnDeconstruct() {}
@@ -47,24 +45,24 @@ namespace Project.Core.Features.Player.Systems {
 
             if (currentHealth > 0) return;
 
-            if (entity.Has<LastHit>() && entity.Get<LastHit>().Enemy.IsAlive())
+            if (entity.Has<LastHit>())
             {
-                entity.Get<LastHit>().Enemy.Get<PlayerScore>().Kills += 1;
-                world.GetFeature<EventsFeature>().PlayerKill.Execute(entity.Get<LastHit>().Enemy);
+                Entity enemy = entity.Read<LastHit>().Enemy;
+
+                if (enemy.IsAlive())
+                {
+                    enemy.Get<PlayerScore>().Kills += 1;
+                    world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
+                }           
             }
-            
-            // _coll.SpawnVFX(entity.GetPosition(), _coll._deathID, _coll._deathTimer);
             
             var deadBody = new Entity("deadBody");
             deadBody.Set(new DeadBody {ActorID = entity.Read<PlayerTag>().PlayerID, Time = 5.5f});
             entity.Get<PlayerScore>().Deaths += 1;
-
             deadBody.SetAs<PlayerScore>(entity);
             
-            _builder.MoveTo(_builder.PositionToIndex(entity.Read<PlayerMoveTarget>().Value), 0);
-
-            world.GetFeature<EventsFeature>().PlayerDeath.Run(entity);
-            
+            _scene.ReleaseTheCell(entity.Read<PlayerMoveTarget>().Value);
+            world.GetFeature<EventsFeature>().PlayerDeath.Run(entity);      
             entity.Destroy();
         }
     }

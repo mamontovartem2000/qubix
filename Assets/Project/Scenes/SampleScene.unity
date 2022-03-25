@@ -9272,7 +9272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1753564206
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11392,6 +11392,18 @@ PrefabInstance:
     - target: {fileID: 4958016069329523290, guid: ee41962d3fe947140b1e9eb6eb7777cc, type: 3}
       propertyPath: configurations.Array.data[1].defines.Array.data[19].name
       value: FIXED_POINT_MATH
+      objectReference: {fileID: 0}
+    - target: {fileID: 4958016069329523290, guid: ee41962d3fe947140b1e9eb6eb7777cc, type: 3}
+      propertyPath: featuresListCategories.items.Array.data[2].features.features.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4958016069329523290, guid: ee41962d3fe947140b1e9eb6eb7777cc, type: 3}
+      propertyPath: featuresListCategories.items.Array.data[2].features.features.Array.data[0].feature
+      value: 
+      objectReference: {fileID: 11400000, guid: 85849b1f113fa2e48aa9e5cbe11c4018, type: 2}
+    - target: {fileID: 4958016069329523290, guid: ee41962d3fe947140b1e9eb6eb7777cc, type: 3}
+      propertyPath: featuresListCategories.items.Array.data[2].features.features.Array.data[1].feature
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6009573824331432541, guid: ee41962d3fe947140b1e9eb6eb7777cc, type: 3}
       propertyPath: m_Name

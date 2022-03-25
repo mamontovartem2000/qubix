@@ -1,21 +1,14 @@
 ﻿using ME.ECS;
-using Project.Core.Features.Player.Components;
 
-namespace Project.Core.Features.SceneBuilder.Components {
-
-    public struct CollectibleTag : IComponent {}
-
+namespace Project.Core.Features.SceneBuilder.Components 
+{
     public struct HealPoweUpTag : IComponent {}
 
     public struct MineTag : IComponent {}
 
-    public struct RocketAmmoTag : IComponent {}
-    public struct RifleAmmoTag : IComponent {}
-
     public struct AmmoTag : IComponent
     {
         public Entity Spawner;
-        public WeaponType WeaponType;
         public int MaxAmmoCount;
         public int AmmoCount;
         public float WeaponCooldown;
@@ -27,4 +20,7 @@ namespace Project.Core.Features.SceneBuilder.Components {
         public float Timer;
         public float TimerDefault;
     }
+
+    public struct PortalTag : IComponent { }
+
 }

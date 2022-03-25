@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: SceneBuilderFeature
   m_EditorClassIdentifier: 
   editorComment: 
-  SourceMap: {fileID: 4900000, guid: 7fae354e9b75a83468edc56b869dc0c9, type: 3}
-  PlayerCount: 1
-  _glowMat: {fileID: 2100000, guid: 409cbc245fbb8904a8a288b43884619e, type: 2}
-  TileView: {fileID: 7126320284530346377, guid: b952ab5919f8ec74fb0366fa55fd849d, type: 3}
-  PortalView: {fileID: 3021905953997455152, guid: a480a62406b7b0b458cb44d425b1ed43, type: 3}
-  AmmoTileView: {fileID: 3420869295189199152, guid: 45b676bd683444d44af324c8d2033b7e, type: 3}
+  _sourceMap: {fileID: 4900000, guid: 7fae354e9b75a83468edc56b869dc0c9, type: 3}
+  _playerCount: 1
+  _tileView: {fileID: 7126320284530346377, guid: b952ab5919f8ec74fb0366fa55fd849d, type: 3}
+  _portalView: {fileID: 3021905953997455152, guid: a480a62406b7b0b458cb44d425b1ed43, type: 3}
+  _ammoTileView: {fileID: 3420869295189199152, guid: 45b676bd683444d44af324c8d2033b7e, type: 3}
   MineView: {fileID: 2051153988241122521, guid: 5b79bf9b4f3e289499df26941a66f929, type: 3}
   HealthView: {fileID: -2505824532654415183, guid: dfc15477f965abb418a93edb73b6cd6c, type: 3}
   RocketAmmoView: {fileID: 8773886339598676565, guid: 387be634ca9348f498cea830703a8748, type: 3}

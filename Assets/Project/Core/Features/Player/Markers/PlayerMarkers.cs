@@ -2,8 +2,6 @@
 
 namespace Project.Core.Features.Player.Markers {
     
-    public struct PlayerMarkers : IMarker {}
-
     public struct SelectColorMarker : IMarker
     {
         public int ActorID;
@@ -11,11 +9,6 @@ namespace Project.Core.Features.Player.Markers {
     }
 
     public struct PlayerReadyMarker : IMarker
-    {
-        public int ActorID;
-    }
-
-    public struct GameStartedMarker : IMarker
     {
         public int ActorID;
     }
