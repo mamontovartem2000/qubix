@@ -6,6 +6,7 @@ namespace Project.Core.Features
 {
     public static class SceneUtils
     {
+        public const float ItemRadius = 0.2f; 
         private static int _width, _height;
 
         public static void SetWidthAndHeight(int width, int height)
@@ -46,6 +47,11 @@ namespace Project.Core.Features
         public static bool IsWalkable(Vector3 position, Vector3 direction)
         {
             return Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(position + direction)] != 0;
+        }
+
+        public static bool IsWalkable(Vector3 target)
+        {
+            return Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(target)] != 0;
         }
 
         public static bool IsFree(Vector3 position)

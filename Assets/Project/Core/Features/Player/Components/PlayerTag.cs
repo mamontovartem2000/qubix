@@ -22,5 +22,8 @@ namespace Project.Core.Features.Player.Components
     public struct PlayerIsRotating : IComponent
     {
         public bool Clockwise;
+        public bool Busy;
     }
+
+
 }

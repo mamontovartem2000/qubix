@@ -19,7 +19,8 @@ namespace Project.Core.Features.Player.Systems
     public sealed class PlayerRotationSystem : ISystemFilter
     {
         private PlayerFeature _feature;
-
+        private float _currentVelocity;
+        private float _smoothTurn = 0.05f;
         public World world { get; set; }
 
         void ISystemBase.OnConstruct()
@@ -44,26 +45,58 @@ namespace Project.Core.Features.Player.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
         {
-            if (Vector3.Distance(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value) > 0)
-                return;
+            if (!entity.Read<PlayerIsRotating>().Busy)
+            {
+                if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude > 0.05f)
+                    return;
 
-            var faceDirection = entity.Read<FaceDirection>().Value;
-            bool clockwiseRotation = entity.Read<PlayerIsRotating>().Clockwise;
-            Vector3 buffer = Vector3.zero;
+                var faceDirection = entity.Read<FaceDirection>().Value;
+                bool clockwiseRotation = entity.Read<PlayerIsRotating>().Clockwise;
+                Vector3 buffer = Vector3.zero;
 
-            if (faceDirection == Vector3.forward)
-                buffer = clockwiseRotation ? Vector3.right : Vector3.left;
-            else if (faceDirection == Vector3.left)
-                buffer = clockwiseRotation ? Vector3.forward : Vector3.back;
-            else if (faceDirection == Vector3.back)
-                buffer = clockwiseRotation ? Vector3.left : Vector3.right;
-            else if (faceDirection == Vector3.right)
-                buffer = clockwiseRotation ? Vector3.back : Vector3.forward;
+                if (faceDirection == Vector3.forward)
+                    buffer = clockwiseRotation ? Vector3.right : Vector3.left;
+                else if (faceDirection == Vector3.left)
+                    buffer = clockwiseRotation ? Vector3.forward : Vector3.back;
+                else if (faceDirection == Vector3.back)
+                    buffer = clockwiseRotation ? Vector3.left : Vector3.right;
+                else if (faceDirection == Vector3.right)
+                    buffer = clockwiseRotation ? Vector3.back : Vector3.forward;
 
-            if (buffer != Vector3.zero)
-                entity.Get<FaceDirection>().Value = buffer;
+                if (buffer != Vector3.zero)
+                    entity.Get<FaceDirection>().Value = buffer;
+             
+                entity.Get<PlayerIsRotating>().Busy = true;
+            }
+                     
+            entity.SetRotation(Quaternion.RotateTowards(entity.GetRotation(), Quaternion.LookRotation(entity.Read<FaceDirection>().Value), 40f));
 
-            entity.Remove<PlayerIsRotating>();
+            if (entity.GetRotation() == Quaternion.LookRotation(entity.Read<FaceDirection>().Value))
+            {
+                //Debug.Log("End Rotation");
+                entity.Remove<PlayerIsRotating>();
+            }
+
+            //Debug.Log($"{entity.GetRotation()}, look {Quaternion.LookRotation(entity.Get<FaceDirection>().Value)} ");
+
+            #region AnotherRotation
+            //var current = entity.Read<FaceDirection>().Value;
+            //var targetAngle = Mathf.Atan2(current.x, current.z) * Mathf.Rad2Deg;
+            //var angle = Mathf.SmoothDampAngle(entity.GetRotation().eulerAngles.y, targetAngle, ref _currentVelocity, _smoothTurn);
+
+            //entity.SetRotation(Quaternion.Euler(0f, angle, 0f));
+
+            //Debug.Log($"face {angle}, vrot {targetAngle}");
+
+            //if (targetAngle < 0)
+            //    targetAngle += 360;
+
+            //if (Mathf.Round(angle) == targetAngle)
+            //{
+            //    Debug.Log("End Rotation");
+            //    entity.Remove<PlayerIsRotating>();
+            //}
+            #endregion         
         }
     }
 }

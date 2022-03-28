@@ -57,11 +57,13 @@ namespace Project.Core.Features.Player {
         }
         private void AddSystems()
         {
-            AddSystem<PlayerMovementSystem>();
             AddSystem<PlayerRotationSystem>();      
+            AddSystem<PlayerMovementSystem>();
             AddSystem<PlayerHealthSystem>();
             AddSystem<ApplyDamageSystem>();
             AddSystem<PlayerRespawnSystem>();
+            AddSystem<HandleInputSystem>();         
+
         }
 
         private void CreateFilters()

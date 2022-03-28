@@ -53,7 +53,7 @@ namespace Project.Core.Features.SceneBuilder.Systems
                 {
                     if (player.Has<TeleportPlayer>()) continue;
 
-                    if (player.GetPosition() == portals[i].GetPosition())
+                    if ((player.GetPosition() - portals[i].GetPosition()).sqrMagnitude <= SceneUtils.ItemRadius)
                     {
                         Vector3 newPosition = Vector3.zero;
                         var rndIndex = i;
@@ -64,7 +64,11 @@ namespace Project.Core.Features.SceneBuilder.Systems
                                 continue;
 
                             newPosition = portals[rndIndex].GetPosition();
-                            //if (_scene.IsFree(newPosition))
+
+                            Debug.Log(SceneUtils.IsFree(newPosition));
+
+                            //TODO: Проверить свободен ли целевой портал
+                            //if (SceneUtils.IsFree(newPosition))
                                 break;
                         }
 

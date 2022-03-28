@@ -39,58 +39,47 @@ namespace Project.Core.Features.Player.Systems
         Filter ISystemFilter.CreateFilter()
         {
             return Filter.Create("Filter-PlayerMovementSystem")
-                .With<PlayerTag>()
                 .WithoutShared<GameFinished>()
+                .With<MoveInput>()
                 .Push();
         }
 
-        private float _smoothTurn;
-
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var current = entity.Read<FaceDirection>().Value;
+            int movingDir = entity.Read<MoveInput>().Value;
+            Vector3 positon = entity.GetPosition();        
 
-            // Y Axis rotation;
-            var targetAngle = Mathf.Atan2(current.x, current.z) * Mathf.Rad2Deg;
-            var angle = Mathf.SmoothDampAngle(entity.GetRotation().eulerAngles.y, targetAngle, ref _smoothTurn, 0.5f * deltaTime);
-            
-            entity.SetRotation(Quaternion.Euler(0f, angle, 0f));
-            
-            if (Vector3.Distance(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value) <= 0)
-            {               
-                if (entity.Has<PlayerHasStopped>())
-                {
-                    if (entity.Has<PlayerIsMoving>())
-                    {
-                        entity.Remove<PlayerIsMoving>();
-                    }
-                }
-                else
-                {
-                    if (entity.Has<PlayerIsMoving>())
-                    {
-                        Vector3 faceDirection = entity.Read<FaceDirection>().Value;
-
-                        var direction = entity.Read<PlayerIsMoving>().Forward ? faceDirection : -faceDirection;
-
-                        if (!SceneUtils.IsWalkable(entity.GetPosition(), direction)) return;
-
-                        Vector3 positon = entity.GetPosition();
-                        _scene.Move(positon, positon + direction);
-
-                        entity.Set(new PlayerMovementSpeed {Value = entity.Read<PlayerIsMoving>().Forward ? 4 : 2}); //TODO: Вынести скорость в инспектор 
-                        entity.Set(new PlayerMoveTarget {Value = entity.GetPosition() + direction});
-                    }
-                }
-            }
-            else
+            if (movingDir != 0)
             {
-                if (entity.Has<TeleportPlayer>())
-                    entity.Remove<TeleportPlayer>();
+                if ((entity.Read<PlayerMoveTarget>().Value - positon).sqrMagnitude <= 0.05f)
+                {
+                    entity.SetPosition(Vector3Int.CeilToInt(entity.Read<PlayerMoveTarget>().Value));
+                    Vector3 faceDirection = entity.Read<FaceDirection>().Value;
+                    Vector3 newTarget = entity.Read<PlayerMoveTarget>().Value + faceDirection * movingDir;
 
-                entity.SetPosition(Vector3.MoveTowards(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value,
-                    entity.Read<PlayerMovementSpeed>().Value * deltaTime));
+                    if (SceneUtils.IsWalkable(newTarget))
+                    {
+                        _scene.Move(entity.Read<PlayerMoveTarget>().Value, newTarget);
+                        entity.Get<PlayerMoveTarget>().Value = newTarget;
+
+                        if (entity.Has<TeleportPlayer>())
+                        {
+                            if (entity.Read<TeleportPlayer>().NeedDelete)
+                                entity.Remove<TeleportPlayer>();
+                            else
+                                entity.Get<TeleportPlayer>().NeedDelete = true;
+                        }                      
+                    }
+                }
             }
+
+            float speed = 0;
+            if (movingDir == 1)
+                speed = entity.Read<PlayerMovementSpeed>().Forward;
+            else
+                speed = entity.Read<PlayerMovementSpeed>().Backward;
+
+            entity.SetPosition(Vector3.MoveTowards(positon, entity.Read<PlayerMoveTarget>().Value, speed * deltaTime));          
         }
     }
 }

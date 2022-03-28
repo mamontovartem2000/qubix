@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core.Features;
 using Project.Core.Features.Player.Components;
 using Project.Core.Features.SceneBuilder.Components;
 using Project.Mechanics.Features.CollisionHandler.Components;
@@ -52,7 +53,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
         {
             foreach (var collectible in _trapFilter)
             {
-                if (entity.GetPosition() == collectible.GetPosition())
+                if ((entity.GetPosition() - collectible.GetPosition()).sqrMagnitude <= SceneUtils.ItemRadius)
                 {
                     if (entity.Has<LastHit>()) entity.Remove<LastHit>();
                     

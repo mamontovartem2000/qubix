@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core.Features;
 using Project.Core.Features.Player.Components;
 using Project.Core.Features.SceneBuilder.Components;
 
@@ -47,7 +48,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         {
             foreach (var collectible in _powerUpFilter)
             {
-                if (entity.GetPosition() == collectible.GetPosition())
+                if ((entity.GetPosition() - collectible.GetPosition()).sqrMagnitude <= SceneUtils.ItemRadius)
                 {
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = entity, Damage = -5f}, ComponentLifetime.NotifyAllSystems);

@@ -8,17 +8,19 @@ namespace Project.Core.Features.Player.Components
         public Vector3 Value;
     }
 
+    public struct MoveInput : IComponent
+    {
+        public int Value;
+    }
+
     public struct PlayerMovementSpeed : IComponent
     {
-        public float Value;
+        public float Forward;
+        public float Backward;
     }
 
-    public struct PlayerIsMoving : IComponent
+    public struct TeleportPlayer : IComponent 
     {
-        public bool Forward;
+        public bool NeedDelete;
     }
-    
-    public struct PlayerHasStopped : IComponent {}
-
-    public struct TeleportPlayer : IComponent {}
 }
