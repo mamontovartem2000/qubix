@@ -332,7 +332,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.8116399, b: 0, a: 1}
+      maxColor: {r: 0, g: 0.6807933, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5072,28 +5072,28 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.6083915
-        inSlope: -1.6153123
-        outSlope: -1.6153123
+        value: 0.13286704
+        inSlope: 0.35605913
+        outSlope: 0.35605913
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.1204334
+        inWeight: 0.0830556
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.93442965, b: 0, a: 1}
-      key1: {r: 0.6313726, g: 0.18045408, b: 0, a: 0.7254902}
+      key0: {r: 0, g: 1, b: 0.9003706, a: 1}
+      key1: {r: 1, g: 0, b: 0.75357676, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 13878
-      ctime1: 56476
+      ctime0: 13493
+      ctime1: 52814
       ctime2: 0
       ctime3: 0
       ctime4: 0
@@ -5145,7 +5145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4756455660725340242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.041, z: 3.111}
+  m_LocalPosition: {x: 0, y: 0, z: 3.111}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4756455659214863930}
@@ -5341,7 +5341,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.24117199, b: 0, a: 1}
+      maxColor: {r: 0, g: 0.76249933, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
