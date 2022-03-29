@@ -80,6 +80,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LockDirection"",
+                    ""type"": ""Button"",
+                    ""id"": ""1bcd488e-e814-4dc2-a647-aa3bbf08514e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -258,6 +267,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""RightShoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d80e3009-150e-450b-a8bb-76d67082a242"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""LockDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -300,6 +320,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_RotateLeft = m_Player.FindAction("RotateLeft", throwIfNotFound: true);
         m_Player_MoveForward = m_Player.FindAction("MoveForward", throwIfNotFound: true);
         m_Player_MoveBackward = m_Player.FindAction("MoveBackward", throwIfNotFound: true);
+        m_Player_LockDirection = m_Player.FindAction("LockDirection", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -365,6 +386,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RotateLeft;
     private readonly InputAction m_Player_MoveForward;
     private readonly InputAction m_Player_MoveBackward;
+    private readonly InputAction m_Player_LockDirection;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -375,6 +397,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @RotateLeft => m_Wrapper.m_Player_RotateLeft;
         public InputAction @MoveForward => m_Wrapper.m_Player_MoveForward;
         public InputAction @MoveBackward => m_Wrapper.m_Player_MoveBackward;
+        public InputAction @LockDirection => m_Wrapper.m_Player_LockDirection;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -402,6 +425,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @MoveBackward.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveBackward;
                 @MoveBackward.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveBackward;
                 @MoveBackward.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveBackward;
+                @LockDirection.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLockDirection;
+                @LockDirection.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLockDirection;
+                @LockDirection.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLockDirection;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -424,6 +450,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @MoveBackward.started += instance.OnMoveBackward;
                 @MoveBackward.performed += instance.OnMoveBackward;
                 @MoveBackward.canceled += instance.OnMoveBackward;
+                @LockDirection.started += instance.OnLockDirection;
+                @LockDirection.performed += instance.OnLockDirection;
+                @LockDirection.canceled += instance.OnLockDirection;
             }
         }
     }
@@ -454,5 +483,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnRotateLeft(InputAction.CallbackContext context);
         void OnMoveForward(InputAction.CallbackContext context);
         void OnMoveBackward(InputAction.CallbackContext context);
+        void OnLockDirection(InputAction.CallbackContext context);
     }
 }

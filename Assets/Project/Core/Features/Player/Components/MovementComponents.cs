@@ -23,4 +23,6 @@ namespace Project.Core.Features.Player.Components
     {
         public bool NeedDelete;
     }
+
+    public struct LockDirection : IComponent { }
 }

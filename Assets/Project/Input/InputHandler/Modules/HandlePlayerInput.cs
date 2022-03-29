@@ -1,19 +1,18 @@
 ﻿using ME.ECS;
 using Project.Input.InputHandler.Markers;
-using UnityEngine.InputSystem;
 
 namespace Project.Input.InputHandler.Modules
 {
-	#region usage
+    #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
 
-	#endregion
+    #endregion
 
-	public sealed class HandlePlayerInput : IModule, IUpdate
+    public sealed class HandlePlayerInput : IModule, IUpdate
 	{
 		private PlayerInput _input;
 		private InputHandlerFeature _feature;
@@ -41,6 +40,9 @@ namespace Project.Input.InputHandler.Modules
 
 			_input.Player.RightShoot.started += ctx => world.AddMarker(new MouseRightMarker {ActorID = 1, State = InputState.Pressed});
 			_input.Player.RightShoot.canceled += ctx => world.AddMarker(new MouseRightMarker {ActorID = 1, State = InputState.Released});
+
+			_input.Player.LockDirection.started += ctx => world.AddMarker(new LockDirectionMarker { ActorID = 1, State = InputState.Pressed });
+			_input.Player.LockDirection.canceled += ctx => world.AddMarker(new LockDirectionMarker { ActorID = 1, State = InputState.Released });
 		}
 
 		void IModuleBase.OnDeconstruct() {}

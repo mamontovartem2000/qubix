@@ -25,5 +25,5 @@ namespace Project.Core.Features.Player.Components
         public bool Busy;
     }
 
-
+    public struct NeedWeapon : IComponentOneShot { }
 }

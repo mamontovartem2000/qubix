@@ -32,7 +32,7 @@ namespace Project.Core.Features.Player {
         
         private SceneBuilderFeature _builder;
         private EventsFeature _events;
-        
+
         protected override void OnConstruct()
         {
             GetFeatures();
@@ -105,6 +105,7 @@ namespace Project.Core.Features.Player {
             _events.OnTimeSynced.Execute(player);
             _events.PassLocalPlayer.Execute(player);
 
+            player.SetOneShot<NeedWeapon>();
             world.RemoveSharedData<GamePaused>();
             
             if (!_builder.TimerEntity.Has<GameTimer>())

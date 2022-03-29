@@ -1,5 +1,5 @@
 {
-    "name": "GrimActions",
+    "name": "PlayerInput",
     "maps": [
         {
             "name": "Player",
@@ -54,6 +54,15 @@
                     "name": "MoveBackward",
                     "type": "Button",
                     "id": "fe49bb1e-6193-4239-bb2b-05feceea1bb2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LockDirection",
+                    "type": "Button",
+                    "id": "1bcd488e-e814-4dc2-a647-aa3bbf08514e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -234,6 +243,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "RightShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d80e3009-150e-450b-a8bb-76d67082a242",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "LockDirection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

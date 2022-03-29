@@ -1,35 +1,29 @@
-﻿using System;
-using Codice.CM.Common;
-using ME.ECS;
+﻿using ME.ECS;
+using Project.Common.Components;
 using Project.Core.Features.Player.Components;
-using Project.Input.InputHandler;
 using Project.Input.InputHandler.Markers;
 using Project.Modules;
-using UnityEngine;
+using System;
 
 namespace Project.Core.Features.Player.Systems
 {
-	#region usage
+    #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-	#endregion
+    #endregion
 
-	public sealed class HandleInputSystem : ISystem, IUpdate
+    public sealed class HandleInputSystem : ISystem, IUpdate
 	{
 		public World world { get; set; }
+		private Filter _playerFilter, _projectileFilter, _weaponFilter;
 
-		private InputHandlerFeature _feature;
-		private Filter _playerFilter;
-
-		private RPCId _forward, _backward, _left, _right, _mouseLeft, _mouseRight;
+		private RPCId _forward, _backward, _left, _right, _mouseLeft, _mouseRight, _lockDirection;
 
 		void ISystemBase.OnConstruct()
 		{
-			this.GetFeature(out _feature);
-			
 			var net = world.GetModule<NetworkModule>();
 			net.RegisterObject(this);
 			RegisterRPSs(net);
@@ -37,7 +31,15 @@ namespace Project.Core.Features.Player.Systems
 			Filter.Create("Filter-Players")
 				.With<PlayerTag>()
 				.Push(ref _playerFilter);
-		}
+
+            Filter.Create("Weapon-Filter")
+                .With<WeaponTag>()
+                .Push(ref _weaponFilter);
+
+            Filter.Create("Projectile_Filter")
+                .With<ProjectileTag>()
+                .Push(ref _projectileFilter);
+        }
 
 		private void RegisterRPSs(NetworkModule net)
 		{
@@ -47,6 +49,7 @@ namespace Project.Core.Features.Player.Systems
 			_right = net.RegisterRPC(new Action<RightMarker>(RightKey_RPC).Method);
 			_mouseLeft = net.RegisterRPC(new Action<MouseLeftMarker>(LeftMouse_RPC).Method);
 			_mouseRight = net.RegisterRPC(new Action<MouseRightMarker>(RightMouse_RPC).Method);
+			_lockDirection = net.RegisterRPC(new Action<LockDirectionMarker>(SpaceKey_RPC).Method);
 		}
 
 		void ISystemBase.OnDeconstruct() {}
@@ -88,10 +91,15 @@ namespace Project.Core.Features.Player.Systems
 				var net = world.GetModule<NetworkModule>();
 				net.RPC(this, _mouseRight, mrm);
 			}
+
+			if (world.GetMarker(out LockDirectionMarker sm))
+			{
+				var net = world.GetModule<NetworkModule>();
+				net.RPC(this, _lockDirection, sm);
+			}
 		}
 		private void ForwardKey_RPC(ForwardMarker fm)
 		{
-
 			foreach (var entity in _playerFilter)
 			{
 				if(entity.Read<PlayerTag>().PlayerID != fm.ActorID) return;
@@ -179,45 +187,69 @@ namespace Project.Core.Features.Player.Systems
 
 		private void LeftMouse_RPC(MouseLeftMarker mlm)
 		{
-			foreach (var entity in _playerFilter)
+			foreach (var entity in _weaponFilter)
 			{
-				if (entity.Read<PlayerTag>().PlayerID != mlm.ActorID) return;
-
 				switch (mlm.State)
 				{
-					//case InputState.Pressed:
-					//{
-					//	entity.Set(new LeftWeaponShot());
-					//	break;
-					//}
-					//case InputState.Released:
-					//{
-					//	entity.Remove<LeftWeaponShot>();
-					//	break;
-					//}
-				}
+                    case InputState.Pressed:
+                        {
+							if (entity.Read<WeaponTag>().Hand == WeaponHand.Left)
+								entity.Set(new WeaponShot());
+							break;
+                        }
+                    case InputState.Released:
+                        {
+							if (entity.Read<WeaponTag>().Hand == WeaponHand.Left)
+								entity.Remove<WeaponShot>();
+							break;
+                        }
+                }
 			}
 		}
 
 		private void RightMouse_RPC(MouseRightMarker mrm)
 		{
-			foreach (var entity in _playerFilter)
+			foreach (var entity in _weaponFilter)
 			{
-				if (entity.Read<PlayerTag>().PlayerID != mrm.ActorID) return;
+				
 
 				switch (mrm.State)
 				{
-					//case InputState.Pressed:
-					//{
-					//	entity.Set(new RightWeaponShot());
-					//	break;
-					//}
-					//case InputState.Released:
-					//{
-					//	entity.Remove<RightWeaponShot>();
-					//	break;
-					//}
+					case InputState.Pressed:
+						{
+							if (entity.Read<WeaponTag>().Hand == WeaponHand.Right)
+								entity.Set(new WeaponShot());
+							break;
+						}
+					case InputState.Released:
+						{
+							if (entity.Read<WeaponTag>().Hand == WeaponHand.Right)
+								entity.Remove<WeaponShot>();
+							break;
+						}
 				}
+			}
+		}
+
+		private void SpaceKey_RPC(LockDirectionMarker sm)
+		{
+			foreach (var entity in _playerFilter)
+			{
+				if (entity.Read<PlayerTag>().PlayerID != sm.ActorID) return;
+
+				switch (sm.State)
+				{
+                    case InputState.Pressed:
+                        {
+                            entity.Set(new LockDirection());
+                            break;
+                        }
+                    case InputState.Released:
+                        {
+                            entity.Remove<LockDirection>();
+                            break;
+                        }
+                }
 			}
 		}
 	}

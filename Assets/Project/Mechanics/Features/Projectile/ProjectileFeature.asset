@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5a8c794f7ad004aa274124d57a7a72, type: 3}
+  m_Name: ProjectileFeature
+  m_EditorClassIdentifier: 
+  editorComment: "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+  BulletView: {fileID: 4698044041573030637, guid: 01c67cf989cde6942a0b7a75f8344e8c, type: 3}
+  RocketView: {fileID: -2155023549563592803, guid: c216041d0c544a046aa2801c430d5fb7, type: 3}
+  SniperBulletView: {fileID: -9216074656394220674, guid: 0079b727c4c9b7349834d3f20cf7c362, type: 3}
+  FireFlameView: {fileID: -7976058576004002981, guid: 98a7781055c1cbd4592110bda9effa3c, type: 3}
+  LaserSwordPartView: {fileID: -4266136298507874975, guid: a120c3c76b4171541afbf4c863650c73, type: 3}
+  AutoRifleBulletConfig: {fileID: 11400000, guid: ec756d1067019944983fc98e87ff95c1, type: 2}
+  RocketLauncherConfig: {fileID: 11400000, guid: ec756d1067019944983fc98e87ff95c1, type: 2}
+  SniperRifleConfig: {fileID: 11400000, guid: ec756d1067019944983fc98e87ff95c1, type: 2}
+  FireFlameConfig: {fileID: 11400000, guid: ec756d1067019944983fc98e87ff95c1, type: 2}
+  LaserSwordPartConfig: {fileID: 11400000, guid: ec756d1067019944983fc98e87ff95c1, type: 2}
