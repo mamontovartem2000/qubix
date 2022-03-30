@@ -1,8 +1,7 @@
 ﻿using ME.ECS;
 
-namespace Dima.Scripts
+namespace Assets.Dima.Scripts
 {
-
     using ME.ECS.Views.Providers;
 
     public class BarrelMono : MonoBehaviourView

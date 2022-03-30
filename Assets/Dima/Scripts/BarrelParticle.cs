@@ -1,8 +1,7 @@
 ﻿using ME.ECS;
 
-namespace Dima.Scripts
+namespace Assets.Dima.Scripts
 {
-
     using ME.ECS.Views.Providers;
 
     public class BarrelParticle : ParticleViewSource<ApplyBarrelParticleStateParticle> { }
@@ -10,6 +9,7 @@ namespace Dima.Scripts
     [System.Serializable]
     public class ApplyBarrelParticleStateParticle : ParticleView<ApplyBarrelParticleStateParticle>
     {
+
         public override void OnInitialize() { }
         public override void OnDeInitialize() { }
         public override void ApplyStateJob(float deltaTime, bool immediately)
