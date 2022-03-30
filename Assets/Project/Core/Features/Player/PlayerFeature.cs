@@ -57,7 +57,6 @@ namespace Project.Core.Features.Player {
         }
         private void AddSystems()
         {
-            AddSystem<PlayerRotationSystem>();      
             AddSystem<PlayerMovementSystem>();
             AddSystem<PlayerHealthSystem>();
             AddSystem<ApplyDamageSystem>();

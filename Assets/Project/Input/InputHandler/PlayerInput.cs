@@ -46,7 +46,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""RotateRight"",
+                    ""name"": ""MoveRight"",
                     ""type"": ""Button"",
                     ""id"": ""61fdd554-208b-4947-9fb9-c45473a2cfd3"",
                     ""expectedControlType"": ""Button"",
@@ -55,7 +55,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""RotateLeft"",
+                    ""name"": ""MoveLeft"",
                     ""type"": ""Button"",
                     ""id"": ""0a8d29c0-69ee-4582-9861-0b6c51058952"",
                     ""expectedControlType"": ""Button"",
@@ -132,7 +132,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
-                    ""action"": ""RotateRight"",
+                    ""action"": ""MoveRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -143,7 +143,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
-                    ""action"": ""RotateRight"",
+                    ""action"": ""MoveRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -154,7 +154,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
-                    ""action"": ""RotateLeft"",
+                    ""action"": ""MoveLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -165,7 +165,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
-                    ""action"": ""RotateLeft"",
+                    ""action"": ""MoveLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -242,7 +242,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""RotateLeft"",
+                    ""action"": ""MoveLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -253,7 +253,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""RotateRight"",
+                    ""action"": ""MoveRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -316,8 +316,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_LeftShoot = m_Player.FindAction("LeftShoot", throwIfNotFound: true);
         m_Player_RightShoot = m_Player.FindAction("RightShoot", throwIfNotFound: true);
-        m_Player_RotateRight = m_Player.FindAction("RotateRight", throwIfNotFound: true);
-        m_Player_RotateLeft = m_Player.FindAction("RotateLeft", throwIfNotFound: true);
+        m_Player_MoveRight = m_Player.FindAction("MoveRight", throwIfNotFound: true);
+        m_Player_MoveLeft = m_Player.FindAction("MoveLeft", throwIfNotFound: true);
         m_Player_MoveForward = m_Player.FindAction("MoveForward", throwIfNotFound: true);
         m_Player_MoveBackward = m_Player.FindAction("MoveBackward", throwIfNotFound: true);
         m_Player_LockDirection = m_Player.FindAction("LockDirection", throwIfNotFound: true);
@@ -382,8 +382,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_LeftShoot;
     private readonly InputAction m_Player_RightShoot;
-    private readonly InputAction m_Player_RotateRight;
-    private readonly InputAction m_Player_RotateLeft;
+    private readonly InputAction m_Player_MoveRight;
+    private readonly InputAction m_Player_MoveLeft;
     private readonly InputAction m_Player_MoveForward;
     private readonly InputAction m_Player_MoveBackward;
     private readonly InputAction m_Player_LockDirection;
@@ -393,8 +393,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @LeftShoot => m_Wrapper.m_Player_LeftShoot;
         public InputAction @RightShoot => m_Wrapper.m_Player_RightShoot;
-        public InputAction @RotateRight => m_Wrapper.m_Player_RotateRight;
-        public InputAction @RotateLeft => m_Wrapper.m_Player_RotateLeft;
+        public InputAction @MoveRight => m_Wrapper.m_Player_MoveRight;
+        public InputAction @MoveLeft => m_Wrapper.m_Player_MoveLeft;
         public InputAction @MoveForward => m_Wrapper.m_Player_MoveForward;
         public InputAction @MoveBackward => m_Wrapper.m_Player_MoveBackward;
         public InputAction @LockDirection => m_Wrapper.m_Player_LockDirection;
@@ -413,12 +413,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @RightShoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightShoot;
                 @RightShoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightShoot;
                 @RightShoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightShoot;
-                @RotateRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateRight;
-                @RotateRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateRight;
-                @RotateRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateRight;
-                @RotateLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateLeft;
-                @RotateLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateLeft;
-                @RotateLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateLeft;
+                @MoveRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveRight;
+                @MoveRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveRight;
+                @MoveRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveRight;
+                @MoveLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveLeft;
+                @MoveLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveLeft;
+                @MoveLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveLeft;
                 @MoveForward.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveForward;
                 @MoveForward.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveForward;
                 @MoveForward.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveForward;
@@ -438,12 +438,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @RightShoot.started += instance.OnRightShoot;
                 @RightShoot.performed += instance.OnRightShoot;
                 @RightShoot.canceled += instance.OnRightShoot;
-                @RotateRight.started += instance.OnRotateRight;
-                @RotateRight.performed += instance.OnRotateRight;
-                @RotateRight.canceled += instance.OnRotateRight;
-                @RotateLeft.started += instance.OnRotateLeft;
-                @RotateLeft.performed += instance.OnRotateLeft;
-                @RotateLeft.canceled += instance.OnRotateLeft;
+                @MoveRight.started += instance.OnMoveRight;
+                @MoveRight.performed += instance.OnMoveRight;
+                @MoveRight.canceled += instance.OnMoveRight;
+                @MoveLeft.started += instance.OnMoveLeft;
+                @MoveLeft.performed += instance.OnMoveLeft;
+                @MoveLeft.canceled += instance.OnMoveLeft;
                 @MoveForward.started += instance.OnMoveForward;
                 @MoveForward.performed += instance.OnMoveForward;
                 @MoveForward.canceled += instance.OnMoveForward;
@@ -479,8 +479,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     {
         void OnLeftShoot(InputAction.CallbackContext context);
         void OnRightShoot(InputAction.CallbackContext context);
-        void OnRotateRight(InputAction.CallbackContext context);
-        void OnRotateLeft(InputAction.CallbackContext context);
+        void OnMoveRight(InputAction.CallbackContext context);
+        void OnMoveLeft(InputAction.CallbackContext context);
         void OnMoveForward(InputAction.CallbackContext context);
         void OnMoveBackward(InputAction.CallbackContext context);
         void OnLockDirection(InputAction.CallbackContext context);

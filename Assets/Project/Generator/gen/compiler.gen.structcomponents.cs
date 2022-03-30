@@ -22,7 +22,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.DeadBody>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.FaceDirection>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.LastHit>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.LockDirection>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.LockTarget>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.MoveInput>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.NeedWeapon>(true, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
@@ -79,7 +79,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.DeadBody>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.FaceDirection>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.LastHit>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.LockDirection>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.LockTarget>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.MoveInput>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.NeedWeapon>(true, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
@@ -131,7 +131,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.DeadBody>(false);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.FaceDirection>(false);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.LastHit>(false);
-            structComponentsContainer.Validate<Project.Core.Features.Player.Components.LockDirection>(true);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.LockTarget>(true);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.MoveInput>(false);
             structComponentsContainer.ValidateOneShot<Project.Core.Features.Player.Components.NeedWeapon>(true);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerHealth>(false);
@@ -188,7 +188,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Core.Features.Player.Components.DeadBody>(false);
             entity.ValidateData<Project.Core.Features.Player.Components.FaceDirection>(false);
             entity.ValidateData<Project.Core.Features.Player.Components.LastHit>(false);
-            entity.ValidateData<Project.Core.Features.Player.Components.LockDirection>(true);
+            entity.ValidateData<Project.Core.Features.Player.Components.LockTarget>(true);
             entity.ValidateData<Project.Core.Features.Player.Components.MoveInput>(false);
             entity.ValidateDataOneShot<Project.Core.Features.Player.Components.NeedWeapon>(true);
             entity.ValidateData<Project.Core.Features.Player.Components.PlayerHealth>(false);

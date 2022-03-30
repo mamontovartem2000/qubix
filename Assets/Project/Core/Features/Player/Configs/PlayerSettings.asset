@@ -43,9 +43,9 @@ MonoBehaviour:
     00000004:
       type: {class: PlayerMovementSpeed, ns: Project.Core.Features.Player.Components, asm: Project.Core}
       data:
-        Forward: 4
-        Backward: 2
+        Value: 4
     00000005:
       type: {class: MoveInput, ns: Project.Core.Features.Player.Components, asm: Project.Core}
       data:
-        Value: 0
+        Value: {x: 0, y: 0}
+        Axis: 0

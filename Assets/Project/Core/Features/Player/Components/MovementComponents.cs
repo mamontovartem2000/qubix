@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Input.InputHandler.Markers;
 using UnityEngine;
 
 namespace Project.Core.Features.Player.Components 
@@ -10,13 +11,13 @@ namespace Project.Core.Features.Player.Components
 
     public struct MoveInput : IComponent
     {
-        public int Value;
+        public Vector2Int Value;
+        public MovementAxis Axis;
     }
 
     public struct PlayerMovementSpeed : IComponent
     {
-        public float Forward;
-        public float Backward;
+        public float Value;
     }
 
     public struct TeleportPlayer : IComponent 
@@ -24,5 +25,5 @@ namespace Project.Core.Features.Player.Components
         public bool NeedDelete;
     }
 
-    public struct LockDirection : IComponent { }
+    public struct LockTarget : IComponent { }
 }

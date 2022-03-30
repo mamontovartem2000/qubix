@@ -3,26 +3,31 @@
 namespace Project.Input.InputHandler.Markers
 {
     public enum InputState { Pressed, Released }
+    public enum MovementAxis {Horizontal, Vertical}
 
     public struct ForwardMarker : IMarker
     {
         public int ActorID;
         public InputState State;
+        public MovementAxis Axis;
     }
     public struct BackwardMarker : IMarker
     {
         public int ActorID;
         public InputState State;
+        public MovementAxis Axis;
     }
     public struct LeftMarker : IMarker
     {
         public int ActorID;
         public InputState State;
+        public MovementAxis Axis;
     }
     public struct RightMarker : IMarker
     {
         public int ActorID;
         public InputState State;
+        public MovementAxis Axis;
     }
     public struct MouseLeftMarker : IMarker
     {

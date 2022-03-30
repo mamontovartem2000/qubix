@@ -103,17 +103,19 @@ namespace Project.Core.Features.Player.Systems
 			foreach (var entity in _playerFilter)
 			{
 				if(entity.Read<PlayerTag>().PlayerID != fm.ActorID) return;
-				
+
+				entity.Get<MoveInput>().Axis = fm.Axis;
+
 				switch (fm.State)
 				{
 					case InputState.Pressed:
 					{
-							entity.Get<MoveInput>().Value += 1;
+							entity.Get<MoveInput>().Value.y += 1;
 							break;
 					}
 					case InputState.Released:
 					{
-							entity.Get<MoveInput>().Value -= 1;
+							entity.Get<MoveInput>().Value.y -= 1;
 							break;
 					}
 				}
@@ -126,16 +128,18 @@ namespace Project.Core.Features.Player.Systems
 			{
 				if (entity.Read<PlayerTag>().PlayerID != bm.ActorID) return;
 
+				entity.Get<MoveInput>().Axis = bm.Axis;
+
 				switch (bm.State)
 				{
 					case InputState.Pressed:
 					{
-							entity.Get<MoveInput>().Value -= 1;
+							entity.Get<MoveInput>().Value.y -= 1;
 							break;
 					}
 					case InputState.Released:
 					{
-							entity.Get<MoveInput>().Value += 1;
+							entity.Get<MoveInput>().Value.y += 1;
 							break;
 					}
 				}
@@ -148,19 +152,35 @@ namespace Project.Core.Features.Player.Systems
 			{
 				if (entity.Read<PlayerTag>().PlayerID != lm.ActorID) return;
 
+				entity.Get<MoveInput>().Axis = lm.Axis;
+
 				switch (lm.State)
 				{
 					case InputState.Pressed:
 					{
-							if (!entity.Has<PlayerIsRotating>() || !entity.Read<PlayerIsRotating>().Busy)
-								entity.Get<PlayerIsRotating>().Clockwise = false;
-							break;
+						entity.Get<MoveInput>().Value.x -= 1;
+						break;
 					}
 					case InputState.Released:
 					{
-							break;
+						entity.Get<MoveInput>().Value.x += 1;
+						break;
 					}
 				}
+
+				// switch (lm.State)
+				// {
+				// 	case InputState.Pressed:
+				// 	{
+				// 			if (!entity.Has<PlayerIsRotating>() || !entity.Read<PlayerIsRotating>().Busy)
+				// 				entity.Get<PlayerIsRotating>().Clockwise = false;
+				// 			break;
+				// 	}
+				// 	case InputState.Released:
+				// 	{
+				// 			break;
+				// 	}
+				// }
 			}
 		}
 		private void RightKey_RPC(RightMarker rm)
@@ -169,19 +189,35 @@ namespace Project.Core.Features.Player.Systems
 			{
 				if (entity.Read<PlayerTag>().PlayerID != rm.ActorID) return;
 
+				entity.Get<MoveInput>().Axis = rm.Axis;
+
 				switch (rm.State)
 				{
 					case InputState.Pressed:
-						{
-							if (!entity.Has<PlayerIsRotating>() || !entity.Read<PlayerIsRotating>().Busy)
-								entity.Get<PlayerIsRotating>().Clockwise = true;
-							break;
-						}
+					{
+						entity.Get<MoveInput>().Value.x += 1;
+						break;
+					}
 					case InputState.Released:
 					{
-							break;
+						entity.Get<MoveInput>().Value.x -= 1;
+						break;
 					}
 				}
+
+				// switch (rm.State)
+				// {
+				// 	case InputState.Pressed:
+				// 		{
+				// 			if (!entity.Has<PlayerIsRotating>() || !entity.Read<PlayerIsRotating>().Busy)
+				// 				entity.Get<PlayerIsRotating>().Clockwise = true;
+				// 			break;
+				// 		}
+				// 	case InputState.Released:
+				// 	{
+				// 			break;
+				// 	}
+				// }
 			}
 		}
 
@@ -191,19 +227,19 @@ namespace Project.Core.Features.Player.Systems
 			{
 				switch (mlm.State)
 				{
-                    case InputState.Pressed:
-                        {
-							if (entity.Read<WeaponTag>().Hand == WeaponHand.Left)
-								entity.Set(new WeaponShot());
-							break;
-                        }
-                    case InputState.Released:
-                        {
-							if (entity.Read<WeaponTag>().Hand == WeaponHand.Left)
-								entity.Remove<WeaponShot>();
-							break;
-                        }
-                }
+					case InputState.Pressed:
+					{
+						if (entity.Read<WeaponTag>().Hand == WeaponHand.Left)
+							entity.Set(new WeaponShot());
+						break;
+					}
+					case InputState.Released:
+					{
+						if (entity.Read<WeaponTag>().Hand == WeaponHand.Left)
+							entity.Remove<WeaponShot>();
+						break;
+					}
+				}
 			}
 		}
 
@@ -211,22 +247,20 @@ namespace Project.Core.Features.Player.Systems
 		{
 			foreach (var entity in _weaponFilter)
 			{
-				
-
 				switch (mrm.State)
 				{
 					case InputState.Pressed:
-						{
-							if (entity.Read<WeaponTag>().Hand == WeaponHand.Right)
-								entity.Set(new WeaponShot());
-							break;
-						}
+					{
+						if (entity.Read<WeaponTag>().Hand == WeaponHand.Right)
+							entity.Set(new WeaponShot());
+						break;
+					}
 					case InputState.Released:
-						{
-							if (entity.Read<WeaponTag>().Hand == WeaponHand.Right)
-								entity.Remove<WeaponShot>();
-							break;
-						}
+					{
+						if (entity.Read<WeaponTag>().Hand == WeaponHand.Right)
+							entity.Remove<WeaponShot>();
+						break;
+					}
 				}
 			}
 		}
@@ -239,17 +273,17 @@ namespace Project.Core.Features.Player.Systems
 
 				switch (sm.State)
 				{
-                    case InputState.Pressed:
-                        {
-                            entity.Set(new LockDirection());
-                            break;
-                        }
-                    case InputState.Released:
-                        {
-                            entity.Remove<LockDirection>();
-                            break;
-                        }
-                }
+					case InputState.Pressed:
+					{
+						entity.Set(new LockTarget());
+						break;
+					}
+					case InputState.Released:
+					{
+						entity.Remove<LockTarget>();
+						break;
+					}
+				}
 			}
 		}
 	}
