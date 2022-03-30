@@ -22,6 +22,9 @@ namespace Project.Modules
 
     public class NetworkModule : ME.ECS.Network.NetworkModule<TState>
     {
+        public bool FakeConnect = true;
+        public int PlayerCount = 1;
+
         private int _orderId;
         private PhotonTransporter _photonTransporter;
 
@@ -68,14 +71,22 @@ namespace Project.Modules
 
         protected override void OnInitialize()
         {
-            var tr = new PhotonTransporter(this.world.id);
-            var instance = (ME.ECS.Network.INetworkModuleBase) this;
-            instance.SetTransporter(tr);
-            instance.SetSerializer(new FSSerializer());
+            if (FakeConnect)
+            {
+                Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorID = 1 });
+                Worlds.currentWorld.AddMarker(new NetworkPlayerConnectedTimeSynced { ActorID = 1 });
+            }
+            else
+            {
+                var tr = new PhotonTransporter(this.world.id);
+                var instance = (ME.ECS.Network.INetworkModuleBase)this;
+                instance.SetTransporter(tr);
+                instance.SetSerializer(new FSSerializer());
 
-            this._photonTransporter = tr;
+                this._photonTransporter = tr;
 
-            this.SetRoomName("TestRoom");
+                this.SetRoomName("TestRoom");
+            }          
         }
     }
 
@@ -308,12 +319,12 @@ namespace Project.Modules
                         {"cc", 1},
                     });
                 }
-                
+
                 this.timeSyncedConnected = false;
                 this.timeSynced = false;
                 this.UpdateTime();
 
-                world.AddMarker(new NetworkSetActivePlayer {ActorID = PhotonNetwork.LocalPlayer.ActorNumber});
+                world.AddMarker(new NetworkSetActivePlayer { ActorID = PhotonNetwork.LocalPlayer.ActorNumber });
             }
         }
 
@@ -325,7 +336,7 @@ namespace Project.Modules
             var networkModule = world.GetModule<NetworkModule>();
             if ((networkModule as ME.ECS.Network.INetworkModuleBase).GetRPCOrder() == 0)
             {
-                var orderId = (int) Photon.Pun.PhotonNetwork.CurrentRoom.CustomProperties["cc"];
+                var orderId = (int)Photon.Pun.PhotonNetwork.CurrentRoom.CustomProperties["cc"];
                 networkModule.SetOrderId(orderId);
             }
         }
@@ -339,7 +350,7 @@ namespace Project.Modules
                 // Set current time since start from master client
                 var world = ME.ECS.Worlds.currentWorld;
                 var serverTime = Photon.Pun.PhotonNetwork.Time;
-                var gameStartTime = serverTime - (double) Photon.Pun.PhotonNetwork.CurrentRoom.CustomProperties["t"];
+                var gameStartTime = serverTime - (double)Photon.Pun.PhotonNetwork.CurrentRoom.CustomProperties["t"];
 
                 world.SetTimeSinceStart(gameStartTime);
                 this.timeSynced = true;
@@ -354,7 +365,7 @@ namespace Project.Modules
             {
                 var world = ME.ECS.Worlds.currentWorld;
                 var props = Photon.Pun.PhotonNetwork.CurrentRoom.CustomProperties;
-                props["cc"] = (int) props["cc"] + 1;
+                props["cc"] = (int)props["cc"] + 1;
                 Photon.Pun.PhotonNetwork.CurrentRoom.SetCustomProperties(props);
 
                 // Send all history events to client
@@ -382,7 +393,7 @@ namespace Project.Modules
         public override void OnRoomListUpdate(System.Collections.Generic.List<Photon.Realtime.RoomInfo> roomList)
         {
             Photon.Pun.PhotonNetwork.JoinOrCreateRoom(this.roomName,
-                new Photon.Realtime.RoomOptions() {MaxPlayers = 16, PublishUserId = true, CustomRoomPropertiesForLobby = new [] {"seed"}},
+                new Photon.Realtime.RoomOptions() { MaxPlayers = 16, PublishUserId = true, CustomRoomPropertiesForLobby = new[] { "seed" } },
                 Photon.Realtime.TypedLobby.Default);
         }
 
@@ -393,14 +404,14 @@ namespace Project.Modules
             if (this.timeSynced == true && this.timeSyncedConnected == false)
             {
                 var networkModule = world.GetModule<NetworkModule>();
-                if (((ME.ECS.Network.INetworkModuleBase) networkModule).GetRPCOrder() > 0)
+                if (((ME.ECS.Network.INetworkModuleBase)networkModule).GetRPCOrder() > 0)
                 {
                     // Here we are check if all required players connected to the game
                     // So we could start the game sending the special message
-                    if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == 1) 
+                    if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == networkModule.PlayerCount)
                     {
                         this.timeSyncedConnected = true;
-                        world.AddMarker(new NetworkPlayerConnectedTimeSynced {ActorID = PhotonNetwork.LocalPlayer.ActorNumber});
+                        world.AddMarker(new NetworkPlayerConnectedTimeSynced { ActorID = PhotonNetwork.LocalPlayer.ActorNumber });
                     }
                 }
             }
