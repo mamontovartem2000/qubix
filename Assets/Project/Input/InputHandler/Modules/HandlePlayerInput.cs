@@ -46,6 +46,12 @@ namespace Project.Input.InputHandler.Modules
 
 			_input.Player.LockDirection.started += ctx => world.AddMarker(new LockDirectionMarker { ActorID = 1, State = InputState.Pressed });
 			_input.Player.LockDirection.canceled += ctx => world.AddMarker(new LockDirectionMarker { ActorID = 1, State = InputState.Released });
+
+			_input.Player.Skill1.performed += ctx => world.AddMarker(new SkillOneMarker {ActorID = 1});
+			_input.Player.Skill2.performed += ctx => world.AddMarker(new SkillTwoMarker {ActorID = 1});
+			_input.Player.Skill3.performed += ctx => world.AddMarker(new SkillThreeMarker {ActorID = 1});
+			_input.Player.Skill4.performed += ctx => world.AddMarker(new SkillFourMarker {ActorID = 1});
+
 		}
 
 		private void ForwardReleased()

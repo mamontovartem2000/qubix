@@ -44,4 +44,21 @@ namespace Project.Input.InputHandler.Markers
         public int ActorID;
         public InputState State;
     }
+
+    public struct SkillOneMarker : IMarker
+    {
+        public int ActorID;
+    }
+    public struct SkillTwoMarker : IMarker
+    {
+        public int ActorID;
+    }
+    public struct SkillThreeMarker : IMarker
+    {
+        public int ActorID;
+    }
+    public struct SkillFourMarker : IMarker
+    {
+        public int ActorID;
+    }
 }

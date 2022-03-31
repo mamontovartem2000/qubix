@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
+using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.Player.Components;
@@ -95,11 +96,14 @@ namespace Project.Core.Features.Player {
             var player = new Entity("Player");
             player.InstantiateView(_playerViewID);
 
+            var firstSkill = new Entity("FirstSkill");
+
             _defaultPlayerConfig.Apply(in player);
+            
             player.Get<PlayerTag>().PlayerID = id;
             player.SetPosition(SceneUtils.GetRandomSpawnPosition());
             player.Get<PlayerMoveTarget>().Value = player.GetPosition();
-         
+
             _builder.TakeTheCell(player.GetPosition());
             _events.OnTimeSynced.Execute(player);
             _events.PassLocalPlayer.Execute(player);

@@ -47,7 +47,7 @@ namespace Project.Core.Features.Player.Systems
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 				var moveAmount = entity.Read<MoveInput>().Axis == MovementAxis.Horizontal ? entity.Read<MoveInput>().Value.x : entity.Read<MoveInput>().Value.y;
-				var direction = entity.Read<MoveInput>().Axis == MovementAxis.Vertical ? Vector3.forward : Vector3.right;
+				var direction = entity.Read<MoveInput>().Axis == MovementAxis.Vertical ? Vector3.right : Vector3.back;
 				
 				entity.SetRotation(Quaternion.RotateTowards(entity.GetRotation(), Quaternion.LookRotation(entity.Read<FaceDirection>().Value), 40f));
 

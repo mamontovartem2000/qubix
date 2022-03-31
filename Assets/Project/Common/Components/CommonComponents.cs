@@ -9,6 +9,18 @@ namespace Project.Common.Components
         public Entity From;
     }
 
-    public struct ApplyDamageOneShot : IComponentOneShot { }
+    public struct FirstSkillTag : IComponent
+    {
+        
+    }
 
+    public struct SecondSkillTag : IComponent
+    {
+        
+    }
+
+    public struct ThirdSkillTag : IComponent
+    {
+        
+    }
 }

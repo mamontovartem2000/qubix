@@ -10,8 +10,10 @@ namespace ME.ECS {
 
 
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamageOneShot>(true, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.FirstSkillTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondSkillTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ThirdSkillTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponShot>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.EndGame>(false, false, false, false, false, false, false);
@@ -49,6 +51,11 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileLaserIsntActive>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileSpeed>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileSpeedModifier>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ActiveSkill>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ChannelSkill>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.PassiveSkill>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.SkillComponents>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ToggleSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponAmmo>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponAmmoDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponCooldown>(false, false, false, false, false, false, false);
@@ -67,8 +74,10 @@ namespace ME.ECS {
 
 
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamageOneShot>(true, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.FirstSkillTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondSkillTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ThirdSkillTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponShot>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.EndGame>(false, false, false, false, false, false, false);
@@ -106,6 +115,11 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileLaserIsntActive>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileSpeed>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileSpeedModifier>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ActiveSkill>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ChannelSkill>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.PassiveSkill>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.SkillComponents>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ToggleSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponAmmo>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponAmmoDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponCooldown>(false, false, false, false, false, false, false);
@@ -119,8 +133,10 @@ namespace ME.ECS {
 
 
             structComponentsContainer.Validate<Project.Common.Components.ApplyDamage>(false);
-            structComponentsContainer.ValidateOneShot<Project.Common.Components.ApplyDamageOneShot>(true);
+            structComponentsContainer.Validate<Project.Common.Components.FirstSkillTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.SecondSkillTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.ThirdSkillTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.WeaponShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.WeaponTag>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.EndGame>(false);
@@ -158,6 +174,11 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Mechanics.Features.Projectile.Components.ProjectileLaserIsntActive>(true);
             structComponentsContainer.Validate<Project.Mechanics.Features.Projectile.Components.ProjectileSpeed>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.Projectile.Components.ProjectileSpeedModifier>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.ActiveSkill>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.ChannelSkill>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.PassiveSkill>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.SkillComponents>(true);
+            structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.ToggleSkill>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.Weapon.Components.WeaponAmmo>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.Weapon.Components.WeaponAmmoDefault>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.Weapon.Components.WeaponCooldown>(false);
@@ -176,8 +197,10 @@ namespace ME.ECS {
 
 
             entity.ValidateData<Project.Common.Components.ApplyDamage>(false);
-            entity.ValidateDataOneShot<Project.Common.Components.ApplyDamageOneShot>(true);
+            entity.ValidateData<Project.Common.Components.FirstSkillTag>(true);
             entity.ValidateData<Project.Common.Components.ProjectileTag>(true);
+            entity.ValidateData<Project.Common.Components.SecondSkillTag>(true);
+            entity.ValidateData<Project.Common.Components.ThirdSkillTag>(true);
             entity.ValidateData<Project.Common.Components.WeaponShot>(true);
             entity.ValidateData<Project.Common.Components.WeaponTag>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.EndGame>(false);
@@ -215,6 +238,11 @@ namespace ME.ECS {
             entity.ValidateData<Project.Mechanics.Features.Projectile.Components.ProjectileLaserIsntActive>(true);
             entity.ValidateData<Project.Mechanics.Features.Projectile.Components.ProjectileSpeed>(false);
             entity.ValidateData<Project.Mechanics.Features.Projectile.Components.ProjectileSpeedModifier>(false);
+            entity.ValidateData<Project.Mechanics.Features.Skills.Components.ActiveSkill>(false);
+            entity.ValidateData<Project.Mechanics.Features.Skills.Components.ChannelSkill>(false);
+            entity.ValidateData<Project.Mechanics.Features.Skills.Components.PassiveSkill>(false);
+            entity.ValidateData<Project.Mechanics.Features.Skills.Components.SkillComponents>(true);
+            entity.ValidateData<Project.Mechanics.Features.Skills.Components.ToggleSkill>(false);
             entity.ValidateData<Project.Mechanics.Features.Weapon.Components.WeaponAmmo>(false);
             entity.ValidateData<Project.Mechanics.Features.Weapon.Components.WeaponAmmoDefault>(false);
             entity.ValidateData<Project.Mechanics.Features.Weapon.Components.WeaponCooldown>(false);
