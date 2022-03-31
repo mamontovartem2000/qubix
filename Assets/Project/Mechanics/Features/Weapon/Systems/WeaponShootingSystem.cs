@@ -31,20 +31,17 @@ namespace Project.Mechanics.Features.Weapon.Systems
 
     public sealed class WeaponShootingSystem : ISystemFilter
     {
-        private Filter _projectileFilter;
         private WeaponFeature _feature;
         private ProjectileFeature _projectileFeature;
         private PlayerFeature _playerFeature;
+        private bool _laserActive = false;
+        
         public World world { get; set; }
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out this._feature);
             world.GetFeature(out _projectileFeature);
             world.GetFeature(out _playerFeature);
-
-            Filter.Create("Projectile_Filter")
-                .With<ProjectileTag>()
-                .Push(ref _projectileFilter);
         }
         void ISystemBase.OnDeconstruct() { }
 
@@ -63,36 +60,28 @@ namespace Project.Mechanics.Features.Weapon.Systems
         }
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            entity.Get<WeaponAmmo>().Value--;
-
             var spread = entity.Read<WeaponSpread>().Value;
             spread = new Vector3(world.GetRandomRange(-spread.x, spread.x), spread.y, world.GetRandomRange(-spread.z, spread.z));
 
             var direction = spread;
 
+            entity.Get<WeaponAmmo>().Value--;
             if (entity.Read<WeaponTag>().Hand == WeaponHand.Left)
             {
                 direction += _feature.LeftDestinationPoint.GetPosition() - entity.GetPosition();
                 _projectileFeature.SpawnProjectile(entity, direction, _feature.CurrentLeft);
             }
-            else
+            else if(entity.Read<WeaponTag>().Hand == WeaponHand.Right)
             {
                 direction += _feature.RightDestinationPoint.GetPosition() - entity.GetPosition();
                 _projectileFeature.SpawnProjectile(entity, direction, _feature.CurrentRight);
             }
 
+
             entity.Get<WeaponCooldown>().Value = entity.Read<WeaponCooldownDefault>().Value;
             if (entity.Get<WeaponAmmo>().Value < 1)
             {
                 entity.Get<WeaponReloadTime>().Value = entity.Read<WeaponReloadTimeDefault>().Value;
-                foreach (var projectile in _projectileFilter)
-                {
-                    if (projectile.Has<ProjectileIsLaser>())
-                    {
-                        projectile.Get<ProjectileSpeed>().Value *= -1;
-                        projectile.Get<LifeTime>().Value = projectile.Read<LifeTimeDefault>().Value - projectile.Get<LifeTime>().Value;
-                    }
-                }
             }
         }
     }

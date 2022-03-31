@@ -26,89 +26,20 @@ namespace Project.Mechanics.Features.Weapon
 
     public sealed class WeaponFeature : Feature
     {
-        public WeaponMono AutoRifleView, RocketLauncherView, SniperRifleView, FireThrowerView, LaserSwordView;
-        public DataConfig AutoRifleConfig, RocketLauncherConfig, SniperRifleConfig, FireThrowerConfig, LaserSwordConfig;
-        public WeaponType CurrentLeft = WeaponType.AutoRifle, CurrentRight = WeaponType.RocketLancher;
+        public WeaponMono AutoRifleView, RocketLauncherView, SniperRifleView, FlamethrowerView, LaserSwordView;
+        public DataConfig AutoRifleConfig, RocketLauncherConfig, SniperRifleConfig, FlamethrowerConfig, LaserSwordConfig;
+        public WeaponType CurrentLeft = WeaponType.AutoRifle, CurrentRight = WeaponType.RocketLauncher;
         public Entity LeftDestinationPoint, RightDestinationPoint;
-        private bool _left = true;
 
         protected override void OnConstruct()
         {           
             AddSystem<WeaponShootingSystem>();
             AddSystem<WeaponCooldownSystem>();
             AddSystem<WeaponReloadSystem>();
-            AddSystem<SpawnPlayerWeapon>();
+            AddSystem<LaserActivateSystem>();
+            AddSystem<SpawnPlayerWeaponSystem>();
         }
 
         protected override void OnDeconstruct() { }
-
-        public void ConstructWeapon(Entity parent, Entity weapon, WeaponType weaponType, float xPos)
-        {
-            if (_left)
-            {
-                weapon.Get<WeaponTag>().Hand = WeaponHand.Left;
-                LeftDestinationPoint = new Entity("destinationPoint");
-                _left = false;
-                LeftDestinationPoint.SetPosition(Vector3.forward + weapon.GetPosition());
-                LeftDestinationPoint.SetParent(weapon);
-            }
-            else
-            {
-                weapon.Get<WeaponTag>().Hand = WeaponHand.Right;
-                RightDestinationPoint = new Entity("destinationPoint");
-                RightDestinationPoint.SetPosition(Vector3.forward + weapon.GetPosition());
-                RightDestinationPoint.SetParent(weapon);
-            }
-
-            var viewId = AutoRifleView;
-            var config = AutoRifleConfig;
-
-            switch (weaponType)
-            {
-                case WeaponType.AutoRifle:
-                    {
-                        viewId = AutoRifleView;
-                        config = AutoRifleConfig;
-                        break;
-                    }
-
-                case WeaponType.RocketLancher:
-                    {
-                        viewId = RocketLauncherView;
-                        config = RocketLauncherConfig;
-                        break;
-                    }
-
-                case WeaponType.SniperRifle:
-                    {
-                        viewId = SniperRifleView;
-                        config = SniperRifleConfig;
-                        break;
-                    }
-
-                case WeaponType.FlameTrower:
-                    {
-                        viewId = FireThrowerView;
-                        config = FireThrowerConfig;
-                        break;
-                    }
-
-                case WeaponType.LaserSword:
-                    {
-                        viewId = LaserSwordView;
-                        config = LaserSwordConfig;
-                        break;
-                    }
-            }
-
-            weapon.SetParent(parent);
-            var weaponView = world.RegisterViewSource(viewId);
-            weapon.InstantiateView(weaponView);
-            weapon.SetLocalPosition(new Vector3(xPos, 0, 0));
-            weapon.SetRotation(Quaternion.LookRotation(Vector3.forward));
-
-            config.Apply(weapon);
-            weapon.Get<WeaponAmmo>().Value = weapon.Read<WeaponAmmoDefault>().Value;
-        }
     }
 }

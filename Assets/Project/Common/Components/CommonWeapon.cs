@@ -8,9 +8,10 @@ namespace Project.Common.Components {
         public WeaponType Gun;
     }
 
-    public struct ProjectileTag : IComponent { }
+    public struct ProjectileTag : IComponent {}
 
-    public struct WeaponShot : IComponent { }
+    public struct WeaponShot : IComponent {}
+    public struct LaserDeactive : IComponent {}
 
     public enum WeaponHand
     {
@@ -20,7 +21,7 @@ namespace Project.Common.Components {
 
     public enum WeaponType
     {
-        RocketLancher,
+        RocketLauncher,
         AutoRifle,
         SniperRifle,
         FlameTrower,

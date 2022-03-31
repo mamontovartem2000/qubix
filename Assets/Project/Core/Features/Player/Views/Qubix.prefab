@@ -220,7 +220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &485656671405999214
 Transform:
   m_ObjectHideFlags: 0
@@ -824,7 +824,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3158869800654514941
 Transform:
   m_ObjectHideFlags: 0
@@ -1035,12 +1035,6 @@ MonoBehaviour:
   - {fileID: 5685929379516200831}
   - {fileID: 6058629321917156261}
   - {fileID: 1240502183006127536}
-  Rocket: {fileID: 2350140084231663687}
-  Rifle: {fileID: 1006192261983395540}
-  Muzzles:
-  - {fileID: 8842540444633134809}
-  - {fileID: 8842540444633134807}
-  - {fileID: 8842540444633134801}
 --- !u!1 &3949079801205383281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,7 +1295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5235341897878991893
 Transform:
   m_ObjectHideFlags: 0

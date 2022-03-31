@@ -59,7 +59,7 @@ namespace Project.Mechanics.Features.Projectile
                         break;
                     }
 
-                case WeaponType.RocketLancher:
+                case WeaponType.RocketLauncher:
                     {
                         viewId = RocketId;
                         config = RocketLauncherConfig;
@@ -95,6 +95,8 @@ namespace Project.Mechanics.Features.Projectile
             entity.SetPosition(gun.GetPosition());
             entity.SetRotation(gun.GetParent().GetRotation());
             config.Apply(entity);
+            if(weapon == WeaponType.LaserSword) 
+                direction = Vector3.forward;
             entity.Get<ProjectileDirection>().Value = direction;
             var projectileSpeedModified = world.GetRandomRange(-entity.Read<ProjectileSpeedModifier>().Value, entity.Read<ProjectileSpeedModifier>().Value);
             entity.Get<ProjectileSpeed>().Value += projectileSpeedModified;

@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: TestConfig
+  m_Name: SniperRifleConfig
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
   - id: 0
   - id: 1
   - id: 2
-  - id: 3
   removeStructComponents: []
   templates: []
   references:
@@ -25,7 +24,7 @@ MonoBehaviour:
     00000000:
       type: {class: WeaponCooldownDefault, ns: Project.Mechanics.Features.Weapon.Components, asm: Project.Mechanics}
       data:
-        Value: 0.3
+        Value: 1
     00000001:
       type: {class: WeaponReloadTimeDefault, ns: Project.Mechanics.Features.Weapon.Components, asm: Project.Mechanics}
       data:
@@ -33,8 +32,4 @@ MonoBehaviour:
     00000002:
       type: {class: WeaponAmmoDefault, ns: Project.Mechanics.Features.Weapon.Components, asm: Project.Mechanics}
       data:
-        Value: 10
-    00000003:
-      type: {class: WeaponSpread, ns: Project.Mechanics.Features.Weapon.Components, asm: Project.Mechanics}
-      data:
-        Value: {x: 0.1, y: 0, z: 0.1}
+        Value: 7

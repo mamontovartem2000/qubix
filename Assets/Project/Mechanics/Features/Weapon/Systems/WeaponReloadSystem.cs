@@ -12,6 +12,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
     using Project.Markers;
     using Project.Modules;
     using Project.Systems;
+    using Common.Components;
     using Systems;
 #pragma warning restore
 

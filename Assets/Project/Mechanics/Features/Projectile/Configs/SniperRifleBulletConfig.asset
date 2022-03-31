@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: AutoRifleBulletConfig
+  m_Name: SniperRifleBulletConfig
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
@@ -23,8 +23,8 @@ MonoBehaviour:
     00000000:
       type: {class: ProjectileSpeed, ns: Project.Mechanics.Features.Projectile.Components, asm: Project.Mechanics}
       data:
-        Value: 35
+        Value: 50
     00000001:
       type: {class: LifeTime, ns: Project.Mechanics.Features.Lifetime.Components, asm: Project.Mechanics}
       data:
-        Value: 2
+        Value: 1
