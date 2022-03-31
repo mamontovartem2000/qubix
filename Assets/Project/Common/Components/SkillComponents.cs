@@ -49,4 +49,24 @@ namespace Project.Mechanics.Features.Skills.Components
         public float Cooldown;
         public RechargeType Recharge;
     }
+    
+    public struct FirstSkillTag : IComponent
+    {
+        public int ActorID;
+    }
+
+    public struct SecondSkillTag : IComponent
+    {
+        public int ActorID;
+    }
+
+    public struct ThirdSkillTag : IComponent
+    {
+        public int ActorID;
+    }
+
+    public struct FourthSkillTag : IComponent
+    {
+        public int ActorID;
+    }
 }

@@ -65,8 +65,6 @@ namespace Project.Core.Features.SceneBuilder.Systems
 
                             newPosition = portals[rndIndex].GetPosition();
 
-                            Debug.Log(SceneUtils.IsFree(newPosition));
-
                             //TODO: Проверить свободен ли целевой портал
                             //if (SceneUtils.IsFree(newPosition))
                                 break;

@@ -8,6 +8,7 @@ using Project.Core.Features.Player.Modules;
 using Project.Core.Features.Player.Systems;
 using Project.Core.Features.Player.Views;
 using Project.Core.Features.SceneBuilder;
+using Project.Mechanics.Components;
 using Project.Modules;
 using UnityEngine;
 
@@ -22,8 +23,9 @@ namespace Project.Core.Features.Player {
 
     public sealed class PlayerFeature : Feature
     {
-        [SerializeField] private DataConfig _defaultPlayerConfig;
-
+        public DataConfig LeftWeaponConfig;
+        public DataConfig RightWeaponConfig;
+        
         public PlayerView PlayerView;
         
         private ViewId _playerViewID;
@@ -63,7 +65,6 @@ namespace Project.Core.Features.Player {
             AddSystem<ApplyDamageSystem>();
             AddSystem<PlayerRespawnSystem>();
             AddSystem<HandleInputSystem>();         
-
         }
 
         private void CreateFilters()
@@ -94,27 +95,51 @@ namespace Project.Core.Features.Player {
         private Entity CreatePlayer(int id)
         {
             var player = new Entity("Player");
-            player.InstantiateView(_playerViewID);
 
-            var firstSkill = new Entity("FirstSkill");
-
-            _defaultPlayerConfig.Apply(in player);
-            
             player.Get<PlayerTag>().PlayerID = id;
+            player.Get<PlayerMovementSpeed>().Value = 4f;
+            var dir = player.Get<FaceDirection>().Value = Vector3.forward;
+            var traj = Vector3.up;
             player.SetPosition(SceneUtils.GetRandomSpawnPosition());
             player.Get<PlayerMoveTarget>().Value = player.GetPosition();
+            
+            var leftWeapon = new Entity("leftWeapon");
+            LeftWeaponConfig.Apply(leftWeapon);
+            leftWeapon.Get<WeaponTag>().ActorID = id;
+            leftWeapon.Get<WeaponTag>().Hand = WeaponHand.Left;
+            leftWeapon.SetParent(player);
+            leftWeapon.SetPosition(player.GetPosition() - new Vector3(0.35f,0,0));
+            
+            var leftAim = new Entity("leftAim");
+            leftAim.SetParent(leftWeapon);
+            leftAim.SetPosition(leftWeapon.GetPosition() + (dir + traj)/2);
+            leftWeapon.Get<WeaponAim>().Aim = leftAim;
+
+            var rightWeapon = new Entity("rightWeapon");
+            RightWeaponConfig.Apply(rightWeapon);
+            rightWeapon.Get<WeaponTag>().ActorID = id;
+            rightWeapon.Get<WeaponTag>().Hand = WeaponHand.Right;
+            rightWeapon.SetParent(player);
+            rightWeapon.SetPosition(player.GetPosition() + new Vector3(0.35f,0,0));
+            
+            var rightAim = new Entity("rightAim");
+            rightAim.SetParent(rightWeapon);
+            rightAim.SetPosition(rightWeapon.GetPosition() + dir/2);
+            rightWeapon.Get<WeaponAim>().Aim = rightAim;
 
             _builder.TakeTheCell(player.GetPosition());
+
             _events.OnTimeSynced.Execute(player);
             _events.PassLocalPlayer.Execute(player);
 
-            player.SetOneShot<NeedWeapon>();
             world.RemoveSharedData<GamePaused>();
-            
+
             if (!_builder.TimerEntity.Has<GameTimer>())
             {
                 _builder.TimerEntity.Set(new GameTimer {Value = 150f});
             }
+
+            player.InstantiateView(_playerViewID);
 
             return player;
         }

@@ -167,20 +167,6 @@ namespace Project.Core.Features.Player.Systems
 						break;
 					}
 				}
-
-				// switch (lm.State)
-				// {
-				// 	case InputState.Pressed:
-				// 	{
-				// 			if (!entity.Has<PlayerIsRotating>() || !entity.Read<PlayerIsRotating>().Busy)
-				// 				entity.Get<PlayerIsRotating>().Clockwise = false;
-				// 			break;
-				// 	}
-				// 	case InputState.Released:
-				// 	{
-				// 			break;
-				// 	}
-				// }
 			}
 		}
 		private void RightKey_RPC(RightMarker rm)
@@ -204,20 +190,6 @@ namespace Project.Core.Features.Player.Systems
 						break;
 					}
 				}
-
-				// switch (rm.State)
-				// {
-				// 	case InputState.Pressed:
-				// 		{
-				// 			if (!entity.Has<PlayerIsRotating>() || !entity.Read<PlayerIsRotating>().Busy)
-				// 				entity.Get<PlayerIsRotating>().Clockwise = true;
-				// 			break;
-				// 		}
-				// 	case InputState.Released:
-				// 	{
-				// 			break;
-				// 	}
-				// }
 			}
 		}
 
@@ -225,6 +197,8 @@ namespace Project.Core.Features.Player.Systems
 		{
 			foreach (var entity in _weaponFilter)
 			{
+				if(mlm.ActorID != entity.Read<WeaponTag>().ActorID) return;
+				
 				switch (mlm.State)
 				{
 					case InputState.Pressed:
@@ -247,6 +221,8 @@ namespace Project.Core.Features.Player.Systems
 		{
 			foreach (var entity in _weaponFilter)
 			{
+				if(mrm.ActorID != entity.Read<WeaponTag>().ActorID) return;
+
 				switch (mrm.State)
 				{
 					case InputState.Pressed:

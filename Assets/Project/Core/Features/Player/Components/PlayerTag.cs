@@ -19,11 +19,5 @@ namespace Project.Core.Features.Player.Components
         public int Deaths;
     }
 
-    public struct PlayerIsRotating : IComponent
-    {
-        public bool Clockwise;
-        public bool Busy;
-    }
-
     public struct NeedWeapon : IComponentOneShot { }
 }

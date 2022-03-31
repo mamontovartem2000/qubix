@@ -4,7 +4,7 @@ namespace Project.Mechanics.Features.Lifetime.Components {
 
     public struct LifeTimeTag : IComponent {}
 
-    public struct LifeTime : IComponent
+    public struct LifeTimeLeft : IComponent
     {
         public float Value;
     }

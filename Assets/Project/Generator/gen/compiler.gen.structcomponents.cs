@@ -10,10 +10,9 @@ namespace ME.ECS {
 
 
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.FirstSkillTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LaserDeactivate>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileTag>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondSkillTag>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.ThirdSkillTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponShot>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.EndGame>(false, false, false, false, false, false, false);
@@ -28,7 +27,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.MoveInput>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.NeedWeapon>(true, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerIsRotating>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerMovementSpeed>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerMoveTarget>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerScore>(false, false, false, false, false, false, false);
@@ -40,11 +38,24 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MineTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.PortalTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.AmmoCapacity>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.AmmoCapacityDefault>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.AutomaticWeapon>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.Cooldown>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.CooldownDefault>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.LinearWeapon>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.MeleeWeapon>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.NeedView>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.ReloadTime>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.ReloadTimeDefault>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.SpreadAmount>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.TrajectoryWeapon>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.WeaponAim>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.ExplosionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Lifetime.Components.LifeTime>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Lifetime.Components.LifeTimeDefault>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Lifetime.Components.LifeTimeLeft>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Lifetime.Components.LifeTimeTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileDirection>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileIsLaser>(true, false, false, false, false, false, false);
@@ -53,16 +64,13 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileSpeedModifier>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ActiveSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ChannelSkill>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.FirstSkillTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.FourthSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.PassiveSkill>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.SecondSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.SkillComponents>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ThirdSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ToggleSkill>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponAmmo>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponAmmoDefault>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponCooldown>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponCooldownDefault>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponReloadTime>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponReloadTimeDefault>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponSpread>(false, false, false, false, false, false, false);
 
         }
 
@@ -74,10 +82,9 @@ namespace ME.ECS {
 
 
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.FirstSkillTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LaserDeactivate>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileTag>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondSkillTag>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.ThirdSkillTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponShot>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.EndGame>(false, false, false, false, false, false, false);
@@ -92,7 +99,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.MoveInput>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.NeedWeapon>(true, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerIsRotating>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerMovementSpeed>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerMoveTarget>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerScore>(false, false, false, false, false, false, false);
@@ -104,11 +110,24 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MineTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.PortalTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.AmmoCapacity>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.AmmoCapacityDefault>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.AutomaticWeapon>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.Cooldown>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.CooldownDefault>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.LinearWeapon>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.MeleeWeapon>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.NeedView>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.ReloadTime>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.ReloadTimeDefault>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.SpreadAmount>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.TrajectoryWeapon>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Components.WeaponAim>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.ExplosionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Lifetime.Components.LifeTime>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Lifetime.Components.LifeTimeDefault>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Lifetime.Components.LifeTimeLeft>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Lifetime.Components.LifeTimeTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileDirection>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileIsLaser>(true, false, false, false, false, false, false);
@@ -117,26 +136,22 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileSpeedModifier>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ActiveSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ChannelSkill>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.FirstSkillTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.FourthSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.PassiveSkill>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.SecondSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.SkillComponents>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ThirdSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Skills.Components.ToggleSkill>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponAmmo>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponAmmoDefault>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponCooldown>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponCooldownDefault>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponReloadTime>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponReloadTimeDefault>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Weapon.Components.WeaponSpread>(false, false, false, false, false, false, false);
 
             ComponentsInitializerWorld.Setup(ComponentsInitializerWorldGen.Init);
             CoreComponentsInitializer.Init(ref structComponentsContainer);
 
 
             structComponentsContainer.Validate<Project.Common.Components.ApplyDamage>(false);
-            structComponentsContainer.Validate<Project.Common.Components.FirstSkillTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.LaserDeactivate>(true);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileTag>(true);
-            structComponentsContainer.Validate<Project.Common.Components.SecondSkillTag>(true);
-            structComponentsContainer.Validate<Project.Common.Components.ThirdSkillTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.Trajectory>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.WeaponTag>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.EndGame>(false);
@@ -151,7 +166,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.MoveInput>(false);
             structComponentsContainer.ValidateOneShot<Project.Core.Features.Player.Components.NeedWeapon>(true);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerHealth>(false);
-            structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerIsRotating>(false);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerMovementSpeed>(false);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerMoveTarget>(false);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerScore>(false);
@@ -163,11 +177,24 @@ namespace ME.ECS {
             structComponentsContainer.ValidateCopyable<Project.Core.Features.SceneBuilder.Components.MapComponents>(false);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.MineTag>(true);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.PortalTag>(true);
+            structComponentsContainer.Validate<Project.Mechanics.Components.AmmoCapacity>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Components.AmmoCapacityDefault>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Components.AutomaticWeapon>(true);
+            structComponentsContainer.Validate<Project.Mechanics.Components.Cooldown>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Components.CooldownDefault>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Components.LinearWeapon>(true);
+            structComponentsContainer.Validate<Project.Mechanics.Components.MeleeWeapon>(true);
+            structComponentsContainer.Validate<Project.Mechanics.Components.NeedView>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Components.ReloadTime>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Components.ReloadTimeDefault>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Components.SpreadAmount>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Components.TrajectoryWeapon>(true);
+            structComponentsContainer.Validate<Project.Mechanics.Components.WeaponAim>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.CollisionHandler.Components.CollisionTag>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.CollisionHandler.Components.ExplosionTag>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.CollisionHandler.Components.PortalTag>(false);
-            structComponentsContainer.Validate<Project.Mechanics.Features.Lifetime.Components.LifeTime>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.Lifetime.Components.LifeTimeDefault>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Features.Lifetime.Components.LifeTimeLeft>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.Lifetime.Components.LifeTimeTag>(true);
             structComponentsContainer.Validate<Project.Mechanics.Features.Projectile.Components.ProjectileDirection>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.Projectile.Components.ProjectileIsLaser>(true);
@@ -176,16 +203,13 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Mechanics.Features.Projectile.Components.ProjectileSpeedModifier>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.ActiveSkill>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.ChannelSkill>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.FirstSkillTag>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.FourthSkillTag>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.PassiveSkill>(false);
+            structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.SecondSkillTag>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.SkillComponents>(true);
+            structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.ThirdSkillTag>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.Skills.Components.ToggleSkill>(false);
-            structComponentsContainer.Validate<Project.Mechanics.Features.Weapon.Components.WeaponAmmo>(false);
-            structComponentsContainer.Validate<Project.Mechanics.Features.Weapon.Components.WeaponAmmoDefault>(false);
-            structComponentsContainer.Validate<Project.Mechanics.Features.Weapon.Components.WeaponCooldown>(false);
-            structComponentsContainer.Validate<Project.Mechanics.Features.Weapon.Components.WeaponCooldownDefault>(false);
-            structComponentsContainer.Validate<Project.Mechanics.Features.Weapon.Components.WeaponReloadTime>(false);
-            structComponentsContainer.Validate<Project.Mechanics.Features.Weapon.Components.WeaponReloadTimeDefault>(false);
-            structComponentsContainer.Validate<Project.Mechanics.Features.Weapon.Components.WeaponSpread>(false);
 
         }
 
@@ -197,10 +221,9 @@ namespace ME.ECS {
 
 
             entity.ValidateData<Project.Common.Components.ApplyDamage>(false);
-            entity.ValidateData<Project.Common.Components.FirstSkillTag>(true);
+            entity.ValidateData<Project.Common.Components.LaserDeactivate>(true);
             entity.ValidateData<Project.Common.Components.ProjectileTag>(true);
-            entity.ValidateData<Project.Common.Components.SecondSkillTag>(true);
-            entity.ValidateData<Project.Common.Components.ThirdSkillTag>(true);
+            entity.ValidateData<Project.Common.Components.Trajectory>(false);
             entity.ValidateData<Project.Common.Components.WeaponShot>(true);
             entity.ValidateData<Project.Common.Components.WeaponTag>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.EndGame>(false);
@@ -215,7 +238,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Core.Features.Player.Components.MoveInput>(false);
             entity.ValidateDataOneShot<Project.Core.Features.Player.Components.NeedWeapon>(true);
             entity.ValidateData<Project.Core.Features.Player.Components.PlayerHealth>(false);
-            entity.ValidateData<Project.Core.Features.Player.Components.PlayerIsRotating>(false);
             entity.ValidateData<Project.Core.Features.Player.Components.PlayerMovementSpeed>(false);
             entity.ValidateData<Project.Core.Features.Player.Components.PlayerMoveTarget>(false);
             entity.ValidateData<Project.Core.Features.Player.Components.PlayerScore>(false);
@@ -227,11 +249,24 @@ namespace ME.ECS {
             entity.ValidateDataCopyable<Project.Core.Features.SceneBuilder.Components.MapComponents>(false);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.MineTag>(true);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.PortalTag>(true);
+            entity.ValidateData<Project.Mechanics.Components.AmmoCapacity>(false);
+            entity.ValidateData<Project.Mechanics.Components.AmmoCapacityDefault>(false);
+            entity.ValidateData<Project.Mechanics.Components.AutomaticWeapon>(true);
+            entity.ValidateData<Project.Mechanics.Components.Cooldown>(false);
+            entity.ValidateData<Project.Mechanics.Components.CooldownDefault>(false);
+            entity.ValidateData<Project.Mechanics.Components.LinearWeapon>(true);
+            entity.ValidateData<Project.Mechanics.Components.MeleeWeapon>(true);
+            entity.ValidateData<Project.Mechanics.Components.NeedView>(false);
+            entity.ValidateData<Project.Mechanics.Components.ReloadTime>(false);
+            entity.ValidateData<Project.Mechanics.Components.ReloadTimeDefault>(false);
+            entity.ValidateData<Project.Mechanics.Components.SpreadAmount>(false);
+            entity.ValidateData<Project.Mechanics.Components.TrajectoryWeapon>(true);
+            entity.ValidateData<Project.Mechanics.Components.WeaponAim>(false);
             entity.ValidateData<Project.Mechanics.Features.CollisionHandler.Components.CollisionTag>(false);
             entity.ValidateData<Project.Mechanics.Features.CollisionHandler.Components.ExplosionTag>(false);
             entity.ValidateData<Project.Mechanics.Features.CollisionHandler.Components.PortalTag>(false);
-            entity.ValidateData<Project.Mechanics.Features.Lifetime.Components.LifeTime>(false);
             entity.ValidateData<Project.Mechanics.Features.Lifetime.Components.LifeTimeDefault>(false);
+            entity.ValidateData<Project.Mechanics.Features.Lifetime.Components.LifeTimeLeft>(false);
             entity.ValidateData<Project.Mechanics.Features.Lifetime.Components.LifeTimeTag>(true);
             entity.ValidateData<Project.Mechanics.Features.Projectile.Components.ProjectileDirection>(false);
             entity.ValidateData<Project.Mechanics.Features.Projectile.Components.ProjectileIsLaser>(true);
@@ -240,16 +275,13 @@ namespace ME.ECS {
             entity.ValidateData<Project.Mechanics.Features.Projectile.Components.ProjectileSpeedModifier>(false);
             entity.ValidateData<Project.Mechanics.Features.Skills.Components.ActiveSkill>(false);
             entity.ValidateData<Project.Mechanics.Features.Skills.Components.ChannelSkill>(false);
+            entity.ValidateData<Project.Mechanics.Features.Skills.Components.FirstSkillTag>(false);
+            entity.ValidateData<Project.Mechanics.Features.Skills.Components.FourthSkillTag>(false);
             entity.ValidateData<Project.Mechanics.Features.Skills.Components.PassiveSkill>(false);
+            entity.ValidateData<Project.Mechanics.Features.Skills.Components.SecondSkillTag>(false);
             entity.ValidateData<Project.Mechanics.Features.Skills.Components.SkillComponents>(true);
+            entity.ValidateData<Project.Mechanics.Features.Skills.Components.ThirdSkillTag>(false);
             entity.ValidateData<Project.Mechanics.Features.Skills.Components.ToggleSkill>(false);
-            entity.ValidateData<Project.Mechanics.Features.Weapon.Components.WeaponAmmo>(false);
-            entity.ValidateData<Project.Mechanics.Features.Weapon.Components.WeaponAmmoDefault>(false);
-            entity.ValidateData<Project.Mechanics.Features.Weapon.Components.WeaponCooldown>(false);
-            entity.ValidateData<Project.Mechanics.Features.Weapon.Components.WeaponCooldownDefault>(false);
-            entity.ValidateData<Project.Mechanics.Features.Weapon.Components.WeaponReloadTime>(false);
-            entity.ValidateData<Project.Mechanics.Features.Weapon.Components.WeaponReloadTimeDefault>(false);
-            entity.ValidateData<Project.Mechanics.Features.Weapon.Components.WeaponSpread>(false);
 
         }
 

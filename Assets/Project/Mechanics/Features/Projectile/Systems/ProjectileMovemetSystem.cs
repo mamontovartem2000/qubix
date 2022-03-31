@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.Projectile.Systems
 {
@@ -44,11 +45,17 @@ namespace Project.Mechanics.Features.Projectile.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var direction = entity.Read<ProjectileDirection>().Value;
+            ref var direction = ref entity.Get<ProjectileDirection>().Value;
             var speed = entity.Read<ProjectileSpeed>().Value;
 
-            var newPosition = entity.GetLocalPosition() + direction * speed * deltaTime;
-            entity.SetLocalPosition(newPosition);
+            var newPosition = entity.GetPosition() + direction * speed * deltaTime;
+            entity.SetPosition(newPosition);
+
+            if (entity.Has<Trajectory>())
+            {
+                direction -= new Vector3(0, deltaTime * entity.Read<Trajectory>().Value, 0);
+                Debug.Log(direction);
+            }
         }
     }
 }

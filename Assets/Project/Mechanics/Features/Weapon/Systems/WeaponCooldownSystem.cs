@@ -1,34 +1,22 @@
 ﻿using ME.ECS;
+using Project.Mechanics.Components;
 
 namespace Project.Mechanics.Features.Weapon.Systems
 {
     #region usage
-#pragma warning disable
-    using Components;
-    using Markers;
-    using Modules;
-    using Project.Components;
-    using Project.Markers;
-    using Project.Modules;
-    using Project.Systems;
-    using Systems;
-#pragma warning restore
-
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
     #endregion
-
     public sealed class WeaponCooldownSystem : ISystemFilter
     {
-        private WeaponFeature _feature;
         public World world { get; set; }
-
+        private WeaponFeature _feature;
         void ISystemBase.OnConstruct()
         {
-            this.GetFeature(out this._feature);
+            this.GetFeature(out _feature);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -41,19 +29,19 @@ namespace Project.Mechanics.Features.Weapon.Systems
         Filter ISystemFilter.CreateFilter()
         {
             return Filter.Create("Filter-WeaponCooldownSystem")
-                .With<WeaponCooldown>()
+                .With<Cooldown>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<WeaponCooldown>().Value - deltaTime > 0)
+            if (entity.Read<Cooldown>().Value - deltaTime > 0)
             {
-                entity.Get<WeaponCooldown>().Value -= deltaTime;
+                entity.Get<Cooldown>().Value -= deltaTime;
             }
             else
             {
-                entity.Remove<WeaponCooldown>();
+                entity.Remove<Cooldown>();
             }
         }
     }

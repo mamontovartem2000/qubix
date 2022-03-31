@@ -1,12 +1,8 @@
 ﻿using ME.ECS;
 using ME.ECS.Collections;
+using Project.Common.Views;
 using Project.Core.Features.SceneBuilder.Components;
 using Project.Core.Features.SceneBuilder.Systems;
-using Project.Core.Features.SceneBuilder.Views;
-using Project.Core.Features.SceneBuilder.Views.Health;
-using Project.Core.Features.SceneBuilder.Views.Mine;
-using Project.Core.Features.SceneBuilder.Views.Portal;
-using Project.Core.Features.SceneBuilder.Views.Weapon;
 using UnityEngine;
 
 namespace Project.Core.Features.SceneBuilder
@@ -24,18 +20,14 @@ namespace Project.Core.Features.SceneBuilder
     {
         [Header("General")]
         [SerializeField] private TextAsset _sourceMap;
-        [SerializeField] private int _playerCount;
 
         [Header("Tiles")]
-        [SerializeField] private TileView _tileView;
-        [SerializeField] private PortalMono _portalView;
-        [SerializeField] private AmmoTileMono _ammoTileView;
-        public MineMono MineView;
-        public HealthMono HealthView;
-        public RocketAmmoMono RocketAmmoView;
-        public RifleAmmoMono RifleAmmoView;
+        public TileParticle TileView;
+        public TeleportParticle PortalView;
+        public DispenserParticle DispenserView;
+        public MineParticle MineView;
+        public HealthParticle HealthView;
 
-        public int PlayerCount => _playerCount;
         private int _width, _height;
         private ViewId _tileID, _portalTileID, _ammoTileID;
 
@@ -49,9 +41,9 @@ namespace Project.Core.Features.SceneBuilder
             AddSystem<SpawnMineSystem>();
             AddSystem<PortalsSystem>();
 
-            _tileID = world.RegisterViewSource(_tileView);
-            _portalTileID = world.RegisterViewSource(_portalView);
-            _ammoTileID = world.RegisterViewSource(_ammoTileView);
+            _tileID = world.RegisterViewSource(TileView);
+            _portalTileID = world.RegisterViewSource(PortalView);
+            _ammoTileID = world.RegisterViewSource(DispenserView);
 
             PrepareMap();
         }      
@@ -114,7 +106,7 @@ namespace Project.Core.Features.SceneBuilder
             var size = _width * _height;
             walkableMap = PoolArray<byte>.Spawn(size);
 
-            for (int i = 0; i < mapInByte.Length; i++)
+            for (var i = 0; i < mapInByte.Length; i++)
             {
                 walkableMap[i] = mapInByte[i];
             }

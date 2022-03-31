@@ -1,36 +1,24 @@
 ﻿using ME.ECS;
-using UnityEngine;
+using Project.Mechanics.Components;
 
 namespace Project.Mechanics.Features.Weapon.Systems
 {
     #region usage
-#pragma warning disable
-    using Components;
-    using Markers;
-    using Modules;
-    using Project.Components;
-    using Project.Markers;
-    using Project.Modules;
-    using Project.Systems;
-    using Common.Components;
-    using Systems;
-#pragma warning restore
-
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
     #endregion
-
     public sealed class WeaponReloadSystem : ISystemFilter
     {
-        private WeaponFeature _feature;
         public World world { get; set; }
+        
+        private WeaponFeature _feature;
 
         void ISystemBase.OnConstruct()
         {
-            this.GetFeature(out this._feature);
+            this.GetFeature(out _feature);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -43,20 +31,19 @@ namespace Project.Mechanics.Features.Weapon.Systems
         Filter ISystemFilter.CreateFilter()
         {
             return Filter.Create("Filter-WeaponReloadSystem")
-                .With<WeaponReloadTime>()
+                .With<ReloadTime>()
                 .Push();
         }
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<WeaponReloadTime>().Value - deltaTime > 0)
+            if (entity.Read<ReloadTime>().Value - deltaTime > 0)
             {
-                entity.Get<WeaponReloadTime>().Value -= deltaTime;
+                entity.Get<ReloadTime>().Value -= deltaTime;
             }
             else
             {
-                Debug.Log("ReloadEnded");
-                entity.Remove<WeaponReloadTime>();
-                entity.Get<WeaponAmmo>().Value = entity.Read<WeaponAmmoDefault>().Value;
+                entity.Remove<ReloadTime>();
+                entity.Get<AmmoCapacity>().Value = entity.Read<AmmoCapacityDefault>().Value;
             }
         }
     }
