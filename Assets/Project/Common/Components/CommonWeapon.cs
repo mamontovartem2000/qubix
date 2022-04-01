@@ -17,11 +17,7 @@ namespace Project.Common.Components {
         public float Value;
     }
 
-    public enum WeaponHand
-    {
-        Left,
-        Right
-    }
+   
 
     public enum WeaponType
     {

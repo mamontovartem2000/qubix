@@ -1,16 +1,25 @@
 ﻿using ME.ECS;
+using ME.ECS.DataConfigs;
 using Project.Mechanics.Features.Weapon.Views;
 
-namespace Project.Mechanics.Components
+namespace Project.Common.Components
 {
+    public enum WeaponHand
+    {
+        Left, Right
+    }
     public struct AutomaticWeapon : IComponent {}
     public struct LinearWeapon : IComponent {}
     public struct TrajectoryWeapon : IComponent {}
     public struct MeleeWeapon : IComponent {}
-
     public struct WeaponAim : IComponent
     {
         public Entity Aim;
+    }
+    
+    public struct ProjectileConfig : IComponent
+    {
+        public DataConfig Value;
     }
 
     public struct NeedView : IComponent

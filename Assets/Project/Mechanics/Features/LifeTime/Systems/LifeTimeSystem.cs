@@ -1,5 +1,5 @@
 ﻿using ME.ECS;
-using Project.Mechanics.Features.Lifetime.Components;
+using Project.Common.Components;
 
 namespace Project.Mechanics.Features.Lifetime.Systems
 {

@@ -1,6 +1,6 @@
 ﻿using ME.ECS;
 
-namespace Project.Mechanics.Features.Skills.Components
+namespace Project.Common.Components
 {
     public struct SkillComponents : IComponent {}
 

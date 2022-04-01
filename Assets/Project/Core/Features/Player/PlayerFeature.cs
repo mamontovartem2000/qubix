@@ -8,7 +8,6 @@ using Project.Core.Features.Player.Modules;
 using Project.Core.Features.Player.Systems;
 using Project.Core.Features.Player.Views;
 using Project.Core.Features.SceneBuilder;
-using Project.Mechanics.Components;
 using Project.Modules;
 using UnityEngine;
 
@@ -23,8 +22,8 @@ namespace Project.Core.Features.Player {
 
     public sealed class PlayerFeature : Feature
     {
-        public DataConfig LeftWeaponConfig;
-        public DataConfig RightWeaponConfig;
+        // public DataConfig LeftWeaponConfig;
+        // public DataConfig RightWeaponConfig;
         
         public PlayerView PlayerView;
         
@@ -103,7 +102,12 @@ namespace Project.Core.Features.Player {
             player.SetPosition(SceneUtils.GetRandomSpawnPosition());
             player.Get<PlayerMoveTarget>().Value = player.GetPosition();
             
-            var leftWeapon = new Entity("leftWeapon");
+            ///////////////////////////////// 
+            ///Weapon Construction Section///
+            /////////////////////////////////
+
+            /*
+             var leftWeapon = new Entity("leftWeapon");
             LeftWeaponConfig.Apply(leftWeapon);
             leftWeapon.Get<WeaponTag>().ActorID = id;
             leftWeapon.Get<WeaponTag>().Hand = WeaponHand.Left;
@@ -112,7 +116,7 @@ namespace Project.Core.Features.Player {
             
             var leftAim = new Entity("leftAim");
             leftAim.SetParent(leftWeapon);
-            leftAim.SetPosition(leftWeapon.GetPosition() + (dir + traj)/2);
+            leftAim.SetPosition(leftWeapon.GetPosition() + dir/2);
             leftWeapon.Get<WeaponAim>().Aim = leftAim;
 
             var rightWeapon = new Entity("rightWeapon");
@@ -124,8 +128,9 @@ namespace Project.Core.Features.Player {
             
             var rightAim = new Entity("rightAim");
             rightAim.SetParent(rightWeapon);
-            rightAim.SetPosition(rightWeapon.GetPosition() + dir/2);
+            rightAim.SetPosition(rightWeapon.Has<TrajectoryWeapon>() ? rightWeapon.GetPosition() + (dir+traj)/2 : rightWeapon.GetPosition() + dir/2);
             rightWeapon.Get<WeaponAim>().Aim = rightAim;
+            */
 
             _builder.TakeTheCell(player.GetPosition());
 

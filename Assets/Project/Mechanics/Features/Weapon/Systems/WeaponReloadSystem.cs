@@ -1,5 +1,5 @@
 ﻿using ME.ECS;
-using Project.Mechanics.Components;
+using Project.Common.Components;
 
 namespace Project.Mechanics.Features.Weapon.Systems
 {

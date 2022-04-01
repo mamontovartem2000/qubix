@@ -6,9 +6,19 @@ namespace Project.Common.Components
     {
         public float Damage;
         public Entity ApplyTo;
-        public Entity From;
+        public Entity ApplyFrom;
     }
 
     public struct WeaponShot : IComponent {}
+    
+    public struct LifeTimeLeft : IComponent
+    {
+        public float Value;
+    }
+
+    public struct LifeTimeDefault : IComponent
+    {
+        public float Value;
+    }
 
 }
