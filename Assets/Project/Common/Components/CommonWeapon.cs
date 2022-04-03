@@ -17,6 +17,7 @@ namespace Project.Common.Components {
         public float Value;
     }
 
+
    
 
     public enum WeaponType

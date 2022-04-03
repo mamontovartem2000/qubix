@@ -22,9 +22,10 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LaserDeactivate>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeLeft>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Linear>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearActive>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.NeedView>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, false, false, false, false, false, false);
@@ -46,6 +47,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponShot>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponView>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.EndGame>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameFinished>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GamePaused>(true, false, false, false, false, false, false);
@@ -97,9 +99,10 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LaserDeactivate>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeLeft>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Linear>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearActive>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.NeedView>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, false, false, false, false, false, false);
@@ -121,6 +124,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponShot>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponView>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.EndGame>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameFinished>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GamePaused>(true, false, false, false, false, false, false);
@@ -167,9 +171,10 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.LaserDeactivate>(true);
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeLeft>(false);
+            structComponentsContainer.Validate<Project.Common.Components.Linear>(false);
+            structComponentsContainer.Validate<Project.Common.Components.LinearActive>(true);
             structComponentsContainer.Validate<Project.Common.Components.LinearWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(true);
-            structComponentsContainer.Validate<Project.Common.Components.NeedView>(false);
             structComponentsContainer.Validate<Project.Common.Components.PassiveSkill>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDamage>(false);
@@ -191,6 +196,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.WeaponAim>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.WeaponTag>(false);
+            structComponentsContainer.Validate<Project.Common.Components.WeaponView>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.EndGame>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GameFinished>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GamePaused>(true);
@@ -242,9 +248,10 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.LaserDeactivate>(true);
             entity.ValidateData<Project.Common.Components.LifeTimeDefault>(false);
             entity.ValidateData<Project.Common.Components.LifeTimeLeft>(false);
+            entity.ValidateData<Project.Common.Components.Linear>(false);
+            entity.ValidateData<Project.Common.Components.LinearActive>(true);
             entity.ValidateData<Project.Common.Components.LinearWeapon>(true);
             entity.ValidateData<Project.Common.Components.MeleeWeapon>(true);
-            entity.ValidateData<Project.Common.Components.NeedView>(false);
             entity.ValidateData<Project.Common.Components.PassiveSkill>(false);
             entity.ValidateData<Project.Common.Components.ProjectileConfig>(false);
             entity.ValidateData<Project.Common.Components.ProjectileDamage>(false);
@@ -266,6 +273,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.WeaponAim>(false);
             entity.ValidateData<Project.Common.Components.WeaponShot>(true);
             entity.ValidateData<Project.Common.Components.WeaponTag>(false);
+            entity.ValidateData<Project.Common.Components.WeaponView>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.EndGame>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.GameFinished>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.GamePaused>(true);

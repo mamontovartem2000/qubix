@@ -31,18 +31,18 @@ namespace Project.Mechanics.Features.Weapon.Systems
         Filter ISystemFilter.CreateFilter()
         {
             return Filter.Create("Filter-NewSpawnWeaponSystem")
-                .With<NeedView>()
+                .With<WeaponView>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var view = world.RegisterViewSource(entity.Read<NeedView>().View);
+            var view = world.RegisterViewSource(entity.Read<WeaponView>().View);
             entity.InstantiateView(view);
 
             entity.Get<AmmoCapacity>().Value = entity.Read<AmmoCapacityDefault>().Value;
             
-            entity.Remove<NeedView>();
+            entity.Remove<WeaponView>();
         }
     }
 }

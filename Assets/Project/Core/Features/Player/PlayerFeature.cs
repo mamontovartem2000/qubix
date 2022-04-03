@@ -22,8 +22,8 @@ namespace Project.Core.Features.Player {
 
     public sealed class PlayerFeature : Feature
     {
-        // public DataConfig LeftWeaponConfig;
-        // public DataConfig RightWeaponConfig;
+        public DataConfig LeftWeaponConfig;
+        public DataConfig RightWeaponConfig;
         
         public PlayerView PlayerView;
         
@@ -106,8 +106,7 @@ namespace Project.Core.Features.Player {
             ///Weapon Construction Section///
             /////////////////////////////////
 
-            /*
-             var leftWeapon = new Entity("leftWeapon");
+            var leftWeapon = new Entity("leftWeapon");
             LeftWeaponConfig.Apply(leftWeapon);
             leftWeapon.Get<WeaponTag>().ActorID = id;
             leftWeapon.Get<WeaponTag>().Hand = WeaponHand.Left;
@@ -130,7 +129,6 @@ namespace Project.Core.Features.Player {
             rightAim.SetParent(rightWeapon);
             rightAim.SetPosition(rightWeapon.Has<TrajectoryWeapon>() ? rightWeapon.GetPosition() + (dir+traj)/2 : rightWeapon.GetPosition() + dir/2);
             rightWeapon.Get<WeaponAim>().Aim = rightAim;
-            */
 
             _builder.TakeTheCell(player.GetPosition());
 

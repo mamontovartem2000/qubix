@@ -1,6 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
-using Project.Mechanics.Features.Weapon.Views;
+using ME.ECS.Views.Providers;
 
 namespace Project.Common.Components
 {
@@ -22,9 +22,9 @@ namespace Project.Common.Components
         public DataConfig Value;
     }
 
-    public struct NeedView : IComponent
+    public struct WeaponView : IComponent
     {
-        public WeaponMono View;
+        public MonoBehaviourViewBase View;
     }
 
     public struct ReloadTime : IComponent

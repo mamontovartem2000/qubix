@@ -15,7 +15,10 @@ namespace Project.Mechanics.Features.Weapon
         protected override void OnConstruct()
         {
             AddSystem<NewSpawnWeaponSystem>();
+            
             AddSystem<NewAutomaticFiringSystem>();
+            AddSystem<NewLinearFiringSystem>();
+            
             AddSystem<WeaponCooldownSystem>();
             AddSystem<WeaponReloadSystem>();
         }

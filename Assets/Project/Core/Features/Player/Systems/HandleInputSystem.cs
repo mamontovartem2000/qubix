@@ -204,13 +204,19 @@ namespace Project.Core.Features.Player.Systems
 					case InputState.Pressed:
 					{
 						if (entity.Read<WeaponTag>().Hand == WeaponHand.Left)
+						{
 							entity.Set(new WeaponShot());
+						}
+						
 						break;
 					}
 					case InputState.Released:
 					{
 						if (entity.Read<WeaponTag>().Hand == WeaponHand.Left)
+						{
 							entity.Remove<WeaponShot>();
+							entity.Remove<LinearActive>();
+						}
 						break;
 					}
 				}

@@ -44,7 +44,6 @@ namespace Project.Mechanics.Features.Weapon.Systems
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             ref var ammo = ref entity.Get<AmmoCapacity>().Value;
-
             var dir = entity.Read<WeaponAim>().Aim.GetPosition() - entity.GetPosition();
             
             if (entity.Has<SpreadAmount>())

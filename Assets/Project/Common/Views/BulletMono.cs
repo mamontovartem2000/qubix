@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Common.Components;
 
 namespace Project.Mechanics.Features.Projectile.Views
 {
@@ -6,7 +7,6 @@ namespace Project.Mechanics.Features.Projectile.Views
 
     public class BulletMono : MonoBehaviourView
     {
-
         public override bool applyStateJob => true;
 
         public override void OnInitialize() { }
@@ -18,7 +18,9 @@ namespace Project.Mechanics.Features.Projectile.Views
         public override void ApplyState(float deltaTime, bool immediately)
         {
             transform.position = entity.GetPosition();
-            transform.rotation = entity.GetRotation();
+
+            // if (!entity.Has<Linear>())
+            //     transform.rotation = entity.GetRotation();
         }
     }
 }
