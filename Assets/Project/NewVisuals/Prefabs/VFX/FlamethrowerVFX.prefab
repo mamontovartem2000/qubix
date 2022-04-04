@@ -14454,10 +14454,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6759981836248044851}
-  - component: {fileID: 3901518223338125281}
-  - component: {fileID: 1024245814238370833}
+  - component: {fileID: 5829158183398988048}
+  - component: {fileID: 6907964754353569190}
   m_Layer: 11
-  m_Name: Flamethrower
+  m_Name: FlamethrowerVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14478,7 +14478,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3901518223338125281
+--- !u!114 &5829158183398988048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14487,7 +14487,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7736518169623759536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76037958f718c054f942385768f5ff82, type: 3}
+  m_Script: {fileID: 11500000, guid: 93be920e16d34ce4285340765a2d7901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystemSimulation:
@@ -14502,7 +14502,7 @@ MonoBehaviour:
       halfEnding: 0.5
     hasElements: 1
     hasDefault: 1
---- !u!114 &1024245814238370833
+--- !u!114 &6907964754353569190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14511,7 +14511,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7736518169623759536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8793ad6617e6bbe4cb882b57a3a1743c, type: 3}
+  m_Script: {fileID: 11500000, guid: c4bbcc5ab6c6b7c44bb7af3b0b759174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data:
@@ -14533,8 +14533,8 @@ MonoBehaviour:
         meshFilter: {fileID: 0}
         material: {fileID: 0}
         localPosition: {x: 0, y: 0, z: 0}
-        localRotation: {x: 0, y: -90, z: 0}
-        localScale: {x: 0.4000003, y: 0.39999998, z: 0.4000003}
+        localRotation: {x: 0, y: 270, z: 0}
+        localScale: {x: 0.40000013, y: 0.39999998, z: 0.40000013}
     - itemData:
         psSimulation:
           particleItem:
@@ -14552,8 +14552,8 @@ MonoBehaviour:
         meshFilter: {fileID: 0}
         material: {fileID: 0}
         localPosition: {x: 0, y: 0, z: 0}
-        localRotation: {x: 0, y: -90, z: 0}
-        localScale: {x: 0.4000003, y: 0.39999998, z: 0.4000003}
+        localRotation: {x: 0, y: 270, z: 0}
+        localScale: {x: 0.40000013, y: 0.39999998, z: 0.40000013}
     - itemData:
         psSimulation:
           particleItem:
@@ -14571,5 +14571,5 @@ MonoBehaviour:
         meshFilter: {fileID: 0}
         material: {fileID: 0}
         localPosition: {x: 0, y: 0, z: 0}
-        localRotation: {x: 0, y: -90, z: 0}
-        localScale: {x: 0.4000003, y: 0.39999998, z: 0.4000003}
+        localRotation: {x: 0, y: 270, z: 0}
+        localScale: {x: 0.40000013, y: 0.39999998, z: 0.40000013}
