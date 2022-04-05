@@ -35,9 +35,32 @@ namespace Project.Mechanics.Features.Projectile.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (!entity.Read<Linear>().Value.Has<LinearActive>())
+            ref var del = ref entity.Get<Linear>();
+
+            if (del.StartDelay - deltaTime > 0)
             {
-                entity.Destroy();
+                del.StartDelay -= deltaTime;
+            }
+            else
+            {
+                if (!entity.Has<LinearActive>())
+                {
+                    var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
+                    entity.InstantiateView(view);
+                    entity.Set(new LinearActive());
+                }
+            }
+            
+            if (!entity.GetParent().Has<LinearActive>())
+            {
+                if (del.EndDelay - deltaTime > 0)
+                {
+                    del.EndDelay -= deltaTime;
+                }
+                else
+                {
+                    entity.Destroy();
+                }
             }
         }
     }

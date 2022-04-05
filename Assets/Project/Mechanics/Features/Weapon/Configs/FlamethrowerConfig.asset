@@ -21,7 +21,6 @@ MonoBehaviour:
   - id: 4
   - id: 5
   - id: 6
-  - id: 7
   removeStructComponents: []
   templates: []
   references:
@@ -47,10 +46,8 @@ MonoBehaviour:
       data:
         Value: 999
     00000005:
-      type: {class: LinearWeapon, ns: Project.Common.Components, asm: Project.Common}
-    00000006:
       type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}
-    00000007:
+    00000006:
       type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 0}

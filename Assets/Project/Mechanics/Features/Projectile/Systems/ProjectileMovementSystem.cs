@@ -44,14 +44,6 @@ namespace Project.Mechanics.Features.Projectile.Systems
                 direction -= new Vector3(0, deltaTime * entity.Read<Trajectory>().Value, 0);
             }
 
-            if (entity.Has<Linear>())
-            {
-                if (!entity.Read<Linear>().Value.Has<WeaponShot>())
-                {
-                    speed = -entity.Read<ProjectileSpeed>().Value;
-                }
-            }
-            
             var newPosition = entity.GetPosition() + direction * speed * deltaTime;
             entity.SetPosition(newPosition);
         }

@@ -102,10 +102,6 @@ namespace Project.Core.Features.Player {
             player.SetPosition(SceneUtils.GetRandomSpawnPosition());
             player.Get<PlayerMoveTarget>().Value = player.GetPosition();
             
-            ///////////////////////////////// 
-            ///Weapon Construction Section///
-            /////////////////////////////////
-
             var leftWeapon = new Entity("leftWeapon");
             LeftWeaponConfig.Apply(leftWeapon);
             leftWeapon.Get<WeaponTag>().ActorID = id;

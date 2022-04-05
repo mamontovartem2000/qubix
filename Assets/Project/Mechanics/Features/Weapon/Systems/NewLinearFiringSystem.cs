@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core.Features.Player.Components;
 using Project.Mechanics.Features.Projectile;
 using UnityEngine;
 
@@ -44,8 +45,8 @@ namespace Project.Mechanics.Features.Weapon.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var dir = entity.Read<WeaponAim>().Aim.GetPosition() - entity.GetPosition();
-            _projectile.SpawnLinear(entity, dir);
+            var len = entity.Read<LinearWeapon>().Length;
+            _projectile.SpawnLinear(entity, len, deltaTime);
         }
     }
 }

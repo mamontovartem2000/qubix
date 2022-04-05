@@ -37,9 +37,10 @@ namespace Project.Common.Components
 
 	public struct Linear : IComponent
 	{
-		public Entity Value;
+		public float StartDelay;
+		public float EndDelay;
 	}
-
+	
 	public struct LinearActive : IComponent
 	{
 		

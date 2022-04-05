@@ -40,35 +40,18 @@ namespace Project.Mechanics.Features.Projectile
             entity.Get<ProjectileDirection>().Value = direction;
         }
 
-        public void SpawnLinear(Entity gun, Vector3 direction)
+        public void SpawnLinear(Entity gun, int length, float delay)
         {
-            for (int i = 0; i < 8; i++)
+            for (var i = 1; i < length; i++)
             {
                 var entity = new Entity("laser");
                 gun.Read<ProjectileConfig>().Value.Apply(entity);
-
                 entity.SetParent(gun);
 
-                var newFace = new Vector3(Mathf.Abs(direction.x), Mathf.Abs(direction.y), Mathf.Abs(direction.z)) * i;
-
-                if (direction.x > direction.z)
-                {
-                    newFace = direction * i;
-                    
-                }
-                else
-                {
-                    newFace = direction * i;
-                }
-                // newFace = new Vector3(Mathf.Abs(direction.x), Mathf.Abs(direction.y), Mathf.Abs(direction.z)) * i;
-                Debug.Log($"origin: {direction}, multiplied: {newFace}, added: {entity.GetPosition() + newFace}");
-
-                entity.SetLocalPosition(entity.GetPosition() + newFace);
-
-                var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
-                entity.InstantiateView(view);
-
-                entity.Get<Linear>().Value = gun;
+                entity.SetPosition(gun.GetPosition() + new Vector3(0,0.5f,i/2f));
+                
+                entity.Get<Linear>().StartDelay = delay * i;
+                entity.Get<Linear>().EndDelay = delay * (length - i) ;
                 gun.Set(new LinearActive());
             }
         }

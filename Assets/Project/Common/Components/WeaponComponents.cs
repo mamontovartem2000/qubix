@@ -9,7 +9,11 @@ namespace Project.Common.Components
         Left, Right
     }
     public struct AutomaticWeapon : IComponent {}
-    public struct LinearWeapon : IComponent {}
+
+    public struct LinearWeapon : IComponent
+    {
+        public int Length;
+    }
     public struct TrajectoryWeapon : IComponent {}
     public struct MeleeWeapon : IComponent {}
     public struct WeaponAim : IComponent

@@ -20,6 +20,7 @@ namespace Project.Mechanics.Features.Weapon
             AddSystem<NewLinearFiringSystem>();
             
             AddSystem<WeaponCooldownSystem>();
+            AddSystem<NewLinearReloadSystem>();
             AddSystem<WeaponReloadSystem>();
         }
 
