@@ -9,7 +9,6 @@ namespace Assets.Dima.Scripts
     [System.Serializable]
     public class ApplyBarrelParticleStateParticle : ParticleView<ApplyBarrelParticleStateParticle>
     {
-
         public override void OnInitialize() { }
         public override void OnDeInitialize() { }
         public override void ApplyStateJob(float deltaTime, bool immediately)

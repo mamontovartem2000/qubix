@@ -24,7 +24,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeLeft>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Linear>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearActive>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, false, false, false, false, false, false);
@@ -101,7 +101,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeLeft>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Linear>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearActive>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, false, false, false, false, false, false);
@@ -173,7 +173,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeLeft>(false);
             structComponentsContainer.Validate<Project.Common.Components.Linear>(false);
             structComponentsContainer.Validate<Project.Common.Components.LinearActive>(true);
-            structComponentsContainer.Validate<Project.Common.Components.LinearWeapon>(true);
+            structComponentsContainer.Validate<Project.Common.Components.LinearWeapon>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.PassiveSkill>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileConfig>(false);
@@ -250,7 +250,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.LifeTimeLeft>(false);
             entity.ValidateData<Project.Common.Components.Linear>(false);
             entity.ValidateData<Project.Common.Components.LinearActive>(true);
-            entity.ValidateData<Project.Common.Components.LinearWeapon>(true);
+            entity.ValidateData<Project.Common.Components.LinearWeapon>(false);
             entity.ValidateData<Project.Common.Components.MeleeWeapon>(true);
             entity.ValidateData<Project.Common.Components.PassiveSkill>(false);
             entity.ValidateData<Project.Common.Components.ProjectileConfig>(false);
