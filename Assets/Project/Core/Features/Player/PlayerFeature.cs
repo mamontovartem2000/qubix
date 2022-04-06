@@ -95,7 +95,7 @@ namespace Project.Core.Features.Player {
         {
             var player = new Entity("Player");
 
-            player.Get<PlayerTag>().PlayerID = id;
+            player.Get<PlayerTag>().PlayerID = 1;
             player.Get<PlayerMovementSpeed>().Value = 4f;
             var dir = player.Get<FaceDirection>().Value = Vector3.forward;
             var traj = Vector3.up;
@@ -130,6 +130,9 @@ namespace Project.Core.Features.Player {
 
             _events.OnTimeSynced.Execute(player);
             _events.PassLocalPlayer.Execute(player);
+            
+            _events.leftWeaponFired.Execute(leftWeapon);
+            _events.rightWeaponFired.Execute(rightWeapon);
 
             world.RemoveSharedData<GamePaused>();
 
@@ -145,7 +148,7 @@ namespace Project.Core.Features.Player {
         
         public void OnLocalPlayerConnected(int id)
         {
-            _playerIndex = id;
+            _playerIndex = 1;
             Debug.Log($"PlayerConnected with player {id}");
         }
 

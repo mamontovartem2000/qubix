@@ -23,6 +23,8 @@ namespace Project.Mechanics.Features.Weapon
             AddSystem<WeaponCooldownSystem>();
             AddSystem<NewLinearReloadSystem>();
             AddSystem<WeaponReloadSystem>();
+
+            AddSystem<NewRefreshAmmoUISystem>();
         }
 
         protected override void OnDeconstruct() {}

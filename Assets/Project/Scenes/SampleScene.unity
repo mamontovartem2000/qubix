@@ -8588,6 +8588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1637244097}
   - component: {fileID: 1637244098}
+  - component: {fileID: 1637244099}
   m_Layer: 0
   m_Name: UI_CORE
   m_TagString: Untagged
@@ -8627,17 +8628,31 @@ MonoBehaviour:
   _defeatScreenEvent: {fileID: 11400000, guid: e029b1e20c48df345a2ad42f0b515b41, type: 2}
   _drawScreenEvent: {fileID: 11400000, guid: df580aa49d76e984ab5deedd3ddbea96, type: 2}
   _healthChangedEvent: {fileID: 11400000, guid: d981a0237b4bd2f418c141529b5bd7ce, type: 2}
-  _leftWeaponFired: {fileID: 11400000, guid: 1bdb23a7a10d9ff44974bf7fe250001d, type: 2}
-  _rightWeaponFired: {fileID: 11400000, guid: f288ad3abdd826f46b4abfd5a9f0fedc, type: 2}
-  _leftWeaponDepleted: {fileID: 11400000, guid: 79cdabb3b24a9b84ca598ee7a2d359fe, type: 2}
-  _rightWeaponDepleted: {fileID: 11400000, guid: 3f0cfa2a4c0fb684c8dc9ce48f8470b6, type: 2}
   _healthbar: {fileID: 612152359}
   _victoryScreen: {fileID: 293017928}
   _defeatScreen: {fileID: 1751576820}
   _drawScreen: {fileID: 1763809274}
-  _leftWeaponAmmoImage: {fileID: 328489743}
-  _rightWeaponAmmoImage: {fileID: 281809333}
-  _leftWeaponIcon: {fileID: 1934325169}
+--- !u!114 &1637244099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637244096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb3c0963b47cfdb4eab4d1c63dc18de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftAmmoChanged: {fileID: 11400000, guid: 1bdb23a7a10d9ff44974bf7fe250001d, type: 2}
+  RightAmmoChanged: {fileID: 11400000, guid: f288ad3abdd826f46b4abfd5a9f0fedc, type: 2}
+  RightWeaponDepleted: {fileID: 11400000, guid: 3f0cfa2a4c0fb684c8dc9ce48f8470b6, type: 2}
+  LeftWeaponAmmoImage: {fileID: 328489743}
+  RightWeaponAmmoImage: {fileID: 281809333}
+  LeftWeaponIcon: {fileID: 1934325169}
+  RightWeaponIcon: {fileID: 7651057497411270262}
+  LeftWeaponAmmoText: {fileID: 899250735}
+  RightWeaponAmmoText: {fileID: 275753307}
 --- !u!1 &1653532582
 GameObject:
   m_ObjectHideFlags: 0
@@ -11641,8 +11656,8 @@ MonoBehaviour:
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillClockwise: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1934325170
@@ -12784,13 +12799,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300020, guid: 56d84991286850f428b4e7df0cca7380, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!224 &7651057497411270263

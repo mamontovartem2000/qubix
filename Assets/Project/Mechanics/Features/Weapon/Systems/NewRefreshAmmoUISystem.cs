@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.Events;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.Weapon.Systems
 {
@@ -11,44 +12,44 @@ namespace Project.Mechanics.Features.Weapon.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
     #endregion
-    public sealed class WeaponReloadSystem : ISystemFilter
+    public sealed class NewRefreshAmmoUISystem : ISystemFilter
     {
         public World world { get; set; }
         
         private WeaponFeature _feature;
-
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
         }
 
-        void ISystemBase.OnDeconstruct() { }
-
+        void ISystemBase.OnDeconstruct() {}
 #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;
 #endif
         Filter ISystemFilter.filter { get; set; }
+
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-WeaponReloadSystem")
-                .With<ReloadTime>()
+            return Filter.Create("Filter-NewRefreshAmmoUISystem")
+                .With<LinearWeapon>()
+                .Without<LinearFull>()
                 .Push();
         }
+
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<ReloadTime>().Value - deltaTime > 0)
+            var ammo = entity.Read<AmmoCapacity>().Value;
+            var max = entity.Read<AmmoCapacityDefault>().Value;
+
+            if (ammo != max)
             {
-                entity.Get<ReloadTime>().Value -= deltaTime;
+                world.GetFeature<EventsFeature>().leftWeaponFired.Execute(entity);
             }
             else
             {
-                entity.Remove<ReloadTime>();
-                if (!entity.Has<LinearWeapon>())
-                {
-                    entity.Get<AmmoCapacity>().Value = entity.Read<AmmoCapacityDefault>().Value;
-                    world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity);
-                }
+                entity.Set(new LinearFull());
+                world.GetFeature<EventsFeature>().leftWeaponFired.Execute(entity);
             }
         }
     }

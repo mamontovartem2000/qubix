@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core.Features.Events;
 using Project.Mechanics.Features.Projectile;
 using UnityEngine;
 
@@ -59,6 +60,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
             else
             {
                 entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;
+                world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity);
             }
             
             ammo -= 1;

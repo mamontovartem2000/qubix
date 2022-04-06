@@ -56,7 +56,9 @@ namespace Project.Mechanics.Features.Projectile
                 entity.Get<Linear>().EndDelay = delay * (length - i);
                 gun.Set(new LinearActive());
             }
-            world.GetFeature<EventsFeature>().leftWeaponFired.Execute(gun);
+
+            if (gun.Has<LinearFull>())
+                gun.Remove<LinearFull>();
         }
 
         public void SpawnMelee(Entity gun, int length, float delay)

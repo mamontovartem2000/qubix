@@ -66,7 +66,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
 			}
 			else
 			{
-				if (ammo + 1 < ammoCap)
+				if (ammo < ammoCap)
 				{
 					ammo++;
 				}
