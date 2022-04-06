@@ -19,21 +19,22 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FirstSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FourthSkillTag>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.LaserDeactivate>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeLeft>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Linear>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearActive>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Melee>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamageModifier>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDirection>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileSpeed>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileSpeedModifier>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileView>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTime>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, false, false, false, false, false, false);
@@ -74,8 +75,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.ExplosionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileIsLaser>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileLaserIsntActive>(true, false, false, false, false, false, false);
 
         }
 
@@ -96,21 +95,22 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FirstSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FourthSkillTag>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.LaserDeactivate>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeLeft>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Linear>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearActive>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Melee>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamageModifier>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDirection>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileSpeed>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileSpeedModifier>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileView>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTime>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, false, false, false, false, false, false);
@@ -151,8 +151,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.CollisionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.ExplosionTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.CollisionHandler.Components.PortalTag>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileIsLaser>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Mechanics.Features.Projectile.Components.ProjectileLaserIsntActive>(true, false, false, false, false, false, false);
 
             ComponentsInitializerWorld.Setup(ComponentsInitializerWorldGen.Init);
             CoreComponentsInitializer.Init(ref structComponentsContainer);
@@ -168,21 +166,22 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.CooldownDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.FirstSkillTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.FourthSkillTag>(false);
-            structComponentsContainer.Validate<Project.Common.Components.LaserDeactivate>(true);
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeLeft>(false);
             structComponentsContainer.Validate<Project.Common.Components.Linear>(false);
             structComponentsContainer.Validate<Project.Common.Components.LinearActive>(true);
             structComponentsContainer.Validate<Project.Common.Components.LinearWeapon>(false);
-            structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(true);
+            structComponentsContainer.Validate<Project.Common.Components.Melee>(false);
+            structComponentsContainer.Validate<Project.Common.Components.MeleeActive>(true);
+            structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(false);
             structComponentsContainer.Validate<Project.Common.Components.PassiveSkill>(false);
+            structComponentsContainer.Validate<Project.Common.Components.ProjectileActive>(true);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDamage>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDamageModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDirection>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileSpeed>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileSpeedModifier>(false);
-            structComponentsContainer.Validate<Project.Common.Components.ProjectileTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileView>(false);
             structComponentsContainer.Validate<Project.Common.Components.ReloadTime>(false);
             structComponentsContainer.Validate<Project.Common.Components.ReloadTimeDefault>(false);
@@ -223,8 +222,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Mechanics.Features.CollisionHandler.Components.CollisionTag>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.CollisionHandler.Components.ExplosionTag>(false);
             structComponentsContainer.Validate<Project.Mechanics.Features.CollisionHandler.Components.PortalTag>(false);
-            structComponentsContainer.Validate<Project.Mechanics.Features.Projectile.Components.ProjectileIsLaser>(true);
-            structComponentsContainer.Validate<Project.Mechanics.Features.Projectile.Components.ProjectileLaserIsntActive>(true);
 
         }
 
@@ -245,21 +242,22 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.CooldownDefault>(false);
             entity.ValidateData<Project.Common.Components.FirstSkillTag>(false);
             entity.ValidateData<Project.Common.Components.FourthSkillTag>(false);
-            entity.ValidateData<Project.Common.Components.LaserDeactivate>(true);
             entity.ValidateData<Project.Common.Components.LifeTimeDefault>(false);
             entity.ValidateData<Project.Common.Components.LifeTimeLeft>(false);
             entity.ValidateData<Project.Common.Components.Linear>(false);
             entity.ValidateData<Project.Common.Components.LinearActive>(true);
             entity.ValidateData<Project.Common.Components.LinearWeapon>(false);
-            entity.ValidateData<Project.Common.Components.MeleeWeapon>(true);
+            entity.ValidateData<Project.Common.Components.Melee>(false);
+            entity.ValidateData<Project.Common.Components.MeleeActive>(true);
+            entity.ValidateData<Project.Common.Components.MeleeWeapon>(false);
             entity.ValidateData<Project.Common.Components.PassiveSkill>(false);
+            entity.ValidateData<Project.Common.Components.ProjectileActive>(true);
             entity.ValidateData<Project.Common.Components.ProjectileConfig>(false);
             entity.ValidateData<Project.Common.Components.ProjectileDamage>(false);
             entity.ValidateData<Project.Common.Components.ProjectileDamageModifier>(false);
             entity.ValidateData<Project.Common.Components.ProjectileDirection>(false);
             entity.ValidateData<Project.Common.Components.ProjectileSpeed>(false);
             entity.ValidateData<Project.Common.Components.ProjectileSpeedModifier>(false);
-            entity.ValidateData<Project.Common.Components.ProjectileTag>(true);
             entity.ValidateData<Project.Common.Components.ProjectileView>(false);
             entity.ValidateData<Project.Common.Components.ReloadTime>(false);
             entity.ValidateData<Project.Common.Components.ReloadTimeDefault>(false);
@@ -300,8 +298,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Mechanics.Features.CollisionHandler.Components.CollisionTag>(false);
             entity.ValidateData<Project.Mechanics.Features.CollisionHandler.Components.ExplosionTag>(false);
             entity.ValidateData<Project.Mechanics.Features.CollisionHandler.Components.PortalTag>(false);
-            entity.ValidateData<Project.Mechanics.Features.Projectile.Components.ProjectileIsLaser>(true);
-            entity.ValidateData<Project.Mechanics.Features.Projectile.Components.ProjectileLaserIsntActive>(true);
 
         }
 

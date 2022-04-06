@@ -43,7 +43,10 @@ namespace Project.Mechanics.Features.Weapon.Systems
             else
             {
                 entity.Remove<ReloadTime>();
-                entity.Get<AmmoCapacity>().Value = entity.Read<AmmoCapacityDefault>().Value;
+                if (!entity.Has<LinearWeapon>())
+                {
+                    entity.Get<AmmoCapacity>().Value = entity.Read<AmmoCapacityDefault>().Value;
+                }
             }
         }
     }

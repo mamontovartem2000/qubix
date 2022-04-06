@@ -47,11 +47,12 @@ namespace Project.Mechanics.Features.Projectile.Systems
                 {
                     var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
                     entity.InstantiateView(view);
+                    entity.GetParent().Get<ReloadTime>().Value = entity.GetParent().Read<ReloadTimeDefault>().Value;
                     entity.Set(new LinearActive());
                 }
             }
             
-            if (!entity.GetParent().Has<LinearActive>())
+            if (!entity.GetParent().Has<LinearActive>() || entity.GetParent().Has<MeleeWeapon>())
             {
                 if (del.EndDelay - deltaTime > 0)
                 {

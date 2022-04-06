@@ -18,6 +18,7 @@ namespace Project.Mechanics.Features.Weapon
             
             AddSystem<NewAutomaticFiringSystem>();
             AddSystem<NewLinearFiringSystem>();
+            AddSystem<NewMeleeFiringSystem>();
             
             AddSystem<WeaponCooldownSystem>();
             AddSystem<NewLinearReloadSystem>();

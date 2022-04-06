@@ -90,7 +90,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9193877247605172175}
-  - component: {fileID: 8420858332402498928}
   - component: {fileID: 8420858332402498935}
   m_Layer: 0
   m_Name: Bridge
@@ -114,27 +113,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8420858332402498928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8420858332402498933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d967dc4f52319e40bc3b4c1a374f57e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystemSimulation:
-    particleItems: []
-    settings:
-      simulationType: 1
-      minSimulationTime: 0.2
-      minEndingTime: 0.1
-      halfEnding: 0.5
-    hasElements: 0
-    hasDefault: 1
 --- !u!114 &8420858332402498935
 MonoBehaviour:
   m_ObjectHideFlags: 0

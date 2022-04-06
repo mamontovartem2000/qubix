@@ -1,6 +1,5 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Mechanics.Features.Projectile.Components;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Projectile.Systems
@@ -29,7 +28,7 @@ namespace Project.Mechanics.Features.Projectile.Systems
         Filter ISystemFilter.CreateFilter()
         {
             return Filter.Create("Filter-ProjectileMovementSystem")
-                .With<ProjectileTag>()
+                .With<ProjectileActive>()
                 .Push();
         }
 

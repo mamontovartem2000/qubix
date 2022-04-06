@@ -15,7 +15,11 @@ namespace Project.Common.Components
         public int Length;
     }
     public struct TrajectoryWeapon : IComponent {}
-    public struct MeleeWeapon : IComponent {}
+
+    public struct MeleeWeapon : IComponent
+    {
+        public int Length;
+    }
     public struct WeaponAim : IComponent
     {
         public Entity Aim;

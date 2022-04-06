@@ -97,7 +97,7 @@ namespace Project.Core.Features.SceneBuilder
                 }
 
                 if (entity != Entity.Empty)
-                    entity.SetPosition(SceneUtils.IndexToPosition(i));
+                    entity.SetPosition(SceneUtils.IndexToPosition(i) - new Vector3(0f,0.5f,0f));
             }
         }       
 

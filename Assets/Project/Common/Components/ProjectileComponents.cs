@@ -1,6 +1,5 @@
 ﻿using ME.ECS;
 using ME.ECS.Views.Providers;
-using Project.Mechanics.Features.Projectile.Views;
 using UnityEngine;
 
 namespace Project.Common.Components
@@ -41,8 +40,15 @@ namespace Project.Common.Components
 		public float EndDelay;
 	}
 	
-	public struct LinearActive : IComponent
+	public struct LinearActive : IComponent {}
+
+	public struct Melee : IComponent
 	{
-		
+		public float StartDelay;
+		public float EndDelay;
 	}
+	
+	public struct MeleeActive : IComponent {}
+	
+	public struct ProjectileActive : IComponent {}
 }

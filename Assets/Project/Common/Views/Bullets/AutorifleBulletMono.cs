@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Common.Components;
 
 namespace Project.Common.Views.Bullets
 {
@@ -13,7 +14,8 @@ namespace Project.Common.Views.Bullets
         public override void ApplyState(float deltaTime, bool immediately)
         {
             transform.position = entity.GetPosition();
-            transform.rotation = entity.GetRotation();
+            // transform.rotation = entity.GetRotation();
+            transform.forward = entity.Read<ProjectileDirection>().Value;
         }
     }
 }

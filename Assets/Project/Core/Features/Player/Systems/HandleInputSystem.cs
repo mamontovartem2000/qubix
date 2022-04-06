@@ -18,7 +18,7 @@ namespace Project.Core.Features.Player.Systems
     public sealed class HandleInputSystem : ISystem, IUpdate
 	{
 		public World world { get; set; }
-		private Filter _playerFilter, _projectileFilter, _weaponFilter;
+		private Filter _playerFilter, _weaponFilter;
 
 		private RPCId _forward, _backward, _left, _right, _mouseLeft, _mouseRight, _lockDirection;
 
@@ -35,10 +35,6 @@ namespace Project.Core.Features.Player.Systems
             Filter.Create("Weapon-Filter")
                 .With<WeaponTag>()
                 .Push(ref _weaponFilter);
-
-            Filter.Create("Projectile_Filter")
-                .With<ProjectileTag>()
-                .Push(ref _projectileFilter);
         }
 
 		private void RegisterRPSs(NetworkModule net)

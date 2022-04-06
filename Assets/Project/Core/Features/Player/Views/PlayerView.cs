@@ -1,4 +1,5 @@
-﻿using ME.ECS;
+﻿using DG.Tweening;
+using ME.ECS;
 using ME.ECS.Views.Providers;
 
 namespace Project.Core.Features.Player.Views

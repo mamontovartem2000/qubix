@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
+  m_Name: (6)GrenadeThrowerConfig
+  m_EditorClassIdentifier: 
+  sharedGroupId: 0
+  structComponents:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  - id: 4
+  - id: 5
+  - id: 6
+  removeStructComponents: []
+  templates: []
+  references:
+    version: 1
+    00000000:
+      type: {class: WeaponView, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        View: {fileID: 3326995486286109673, guid: 6b09df0589172b24e9b9aeaf82c1074a, type: 3}
+    00000001:
+      type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}
+    00000002:
+      type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 5
+    00000003:
+      type: {class: AmmoCapacity, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 5
+    00000004:
+      type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 0
+    00000005:
+      type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 0
+    00000006:
+      type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: 08cad25870621044cbd2ea9d9c52b7f3, type: 2}
