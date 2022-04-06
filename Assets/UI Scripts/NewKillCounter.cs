@@ -1,14 +1,16 @@
 using ME.ECS;
+using Project.Core.Features;
+using Project.Core.Features.Player.Components;
 using UnityEngine;
 
-// using TMPro;
+using TMPro;
 
 namespace Project.Common.UI_Scripts
 {
-	public class KillCounter : MonoBehaviour
+	public class NewKillCounter : MonoBehaviour
 	{
 		public GlobalEvent KillEvent;
-		// public TextMeshProUGUI CounterText;
+		public TextMeshProUGUI CounterText;
 
 		private void Start()
 		{
@@ -17,9 +19,8 @@ namespace Project.Common.UI_Scripts
 
 		private void IncreaseCounter(in Entity entity)
 		{
-			// if(!Utilitiddies.CheckLocalPlayer(entity)) return;
-
-			// CounterText.SetText(entity.Read<PlayerScore>().Kills.ToString());
+			if(!SceneUtils.CheckLocalPlayer(entity)) return;
+			CounterText.SetText(entity.Read<PlayerScore>().Kills.ToString());
 		}
 
 		private void OnDestroy()

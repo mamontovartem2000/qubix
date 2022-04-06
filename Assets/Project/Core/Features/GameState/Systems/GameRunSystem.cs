@@ -38,6 +38,7 @@ namespace Project.Core.Features.GameState.Systems
             if (entity.Get<GameTimer>().Value - deltaTime > 0)
             {
                 entity.Get<GameTimer>().Value -= deltaTime;
+                world.GetFeature<EventsFeature>().TimerTick.Execute(entity);
             }
             else
             {

@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WeaponryScript : MonoBehaviour
+public class NewWeaponryScript : MonoBehaviour
 {
     public GlobalEvent LeftAmmoChanged;
     public GlobalEvent RightAmmoChanged;

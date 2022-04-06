@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using ME.ECS.Collections;
 using Project.Common.Views;
+using Project.Core.Features.GameState.Components;
 using Project.Core.Features.SceneBuilder.Components;
 using Project.Core.Features.SceneBuilder.Systems;
 using UnityEngine;
@@ -37,7 +38,6 @@ namespace Project.Core.Features.SceneBuilder
 
         protected override void OnConstruct()
         {
-            // AddSystem<SpawnHealthSystem>();
             AddSystem<NewHealthDispenserSystem>();
             AddSystem<SpawnMineSystem>();
             AddSystem<PortalsSystem>();
@@ -53,7 +53,7 @@ namespace Project.Core.Features.SceneBuilder
 
         private void PrepareMap()
         {
-            TimerEntity = new Entity("Init"); //TODO: Перенести на старт игры
+            // TimerEntity = new Entity("Init"); //TODO: Перенести на старт игры
         
             //GameMapRemoteData mapData = ParceUtils.CreateFromJSON<UniversalData<GameMapRemoteData>>(data).data;
             GameMapRemoteData mapData = new GameMapRemoteData(_sourceMap);
@@ -100,6 +100,9 @@ namespace Project.Core.Features.SceneBuilder
                 if (entity != Entity.Empty)
                     entity.SetPosition(SceneUtils.IndexToPosition(i));
             }
+
+            TimerEntity = new Entity("timer");
+            TimerEntity.Get<GameTimer>().Value = 150;
         }       
 
         private void ConvertMap(byte[] mapInByte, out BufferArray<byte> walkableMap)

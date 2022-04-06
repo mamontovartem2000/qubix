@@ -22,8 +22,8 @@ namespace Project.Modules
 
     public class NetworkModule : ME.ECS.Network.NetworkModule<TState>
     {
-        public bool FakeConnect = true;
-        public int PlayerCount = 1;
+        public bool FakeConnect = false;
+        public int PlayerCount = 2;
 
         private int _orderId;
         private PhotonTransporter _photonTransporter;

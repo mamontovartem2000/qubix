@@ -32,7 +32,7 @@ namespace Project.Core.Features.Player.Modules
             
             if (world.GetMarker(out NetworkPlayerConnectedTimeSynced npc))
             {
-                _feature.OnGameStarted();
+                _feature.OnGameStarted(npc.ActorID);
             }
             
             if (world.GetMarker(out NetworkPlayerDisconnected npd))

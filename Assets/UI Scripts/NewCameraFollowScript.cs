@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Project.Common.UI_Scripts
 {
-    public class CameraFollowScript : MonoBehaviour
+    public class NewCameraFollowScript : MonoBehaviour
     {
         [SerializeField] private GlobalEvent _playerPassEvent;
         [SerializeField] private Vector3 _offset;
@@ -26,7 +26,6 @@ namespace Project.Common.UI_Scripts
         private void SetPlayer(in Entity entity)
         {
             if(!SceneUtils.CheckLocalPlayer(entity)) return;
-            
             _player = entity;
         }
     

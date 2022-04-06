@@ -16,6 +16,8 @@ namespace Project.Core.Features.Events {
         public GlobalEvent AllPlayersReady;
         public GlobalEvent OnGameStarted;
         public GlobalEvent PassLocalPlayer;
+
+        public GlobalEvent TimerTick;
         
         public GlobalEvent Defeat;
         public GlobalEvent Victory;

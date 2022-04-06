@@ -148,7 +148,7 @@ namespace Project.Core.Features.Player {
         
         public void OnLocalPlayerConnected(int id)
         {
-            _playerIndex = 1;
+            _playerIndex = id;
             Debug.Log($"PlayerConnected with player {id}");
         }
 
@@ -158,10 +158,10 @@ namespace Project.Core.Features.Player {
             net.RPC(this, _onPlayerDisconnected, id);
         }
 
-        public void OnGameStarted()
+        public void OnGameStarted(int id)
         {
             var net = world.GetModule<NetworkModule>();
-            net.RPC(this, _onGameStarted, _playerIndex);
+            net.RPC(this, _onGameStarted, id);
         }
 
         private void PlayerDisconnected_RPC(int id)

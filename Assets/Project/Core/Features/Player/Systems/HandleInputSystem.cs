@@ -193,7 +193,11 @@ namespace Project.Core.Features.Player.Systems
 		{
 			foreach (var entity in _weaponFilter)
 			{
-				if(mlm.ActorID != entity.Read<WeaponTag>().ActorID) return;
+				var id = world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order;
+				
+				if(id != entity.GetParent().Read<PlayerTag>().PlayerID) return;
+				
+				// if(mlm.ActorID != entity.Read<WeaponTag>().ActorID) return;
 				
 				switch (mlm.State)
 				{
