@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4986029038959207584}
   - component: {fileID: 4986029038959207587}
   - component: {fileID: 4986029038959207586}
-  - component: {fileID: 8298349292796029032}
   - component: {fileID: 1064278589477409693}
   m_Layer: 0
   m_Name: Stars
@@ -118,8 +117,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
-      minScalar: 3
+      scalar: 2
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -287,7 +286,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.18
+      scalar: 0.06
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4900,29 +4899,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &8298349292796029032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4986029038959207589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7efcbfdf988ca749b2317c18b7e45b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystemSimulation:
-    particleItems:
-    - particleSystem: {fileID: 4986029038959207587}
-    - particleSystem: {fileID: 2204553278129970321}
-    settings:
-      simulationType: 1
-      minSimulationTime: 0.2
-      minEndingTime: 0.1
-      halfEnding: 0.5
-    hasElements: 1
-    hasDefault: 1
 --- !u!114 &1064278589477409693
 MonoBehaviour:
   m_ObjectHideFlags: 0
