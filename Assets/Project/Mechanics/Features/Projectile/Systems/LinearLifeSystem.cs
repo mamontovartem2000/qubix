@@ -45,8 +45,8 @@ namespace Project.Mechanics.Features.Projectile.Systems
             {
                 if (!entity.Has<LinearActive>())
                 {
-                    var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
-                    entity.InstantiateView(view);
+                    // var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
+                    // entity.InstantiateView(view);
                     entity.GetParent().Get<ReloadTime>().Value = entity.GetParent().Read<ReloadTimeDefault>().Value;
                     entity.Set(new LinearActive());
                 }

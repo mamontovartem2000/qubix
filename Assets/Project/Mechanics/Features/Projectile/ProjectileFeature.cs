@@ -1,6 +1,7 @@
 ﻿using Codice.CM.Common;
 using ME.ECS;
 using Project.Common.Components;
+using Project.Core.Features.Events;
 using Project.Mechanics.Features.Projectile.Systems;
 using UnityEngine;
 
@@ -39,6 +40,7 @@ namespace Project.Mechanics.Features.Projectile
             entity.SetRotation(gun.GetParent().GetRotation());
 
             entity.Get<ProjectileDirection>().Value = direction;
+            world.GetFeature<EventsFeature>().rightWeaponFired.Execute(gun);
         }
 
         public void SpawnLinear(Entity gun, int length, float delay)
@@ -54,6 +56,7 @@ namespace Project.Mechanics.Features.Projectile
                 entity.Get<Linear>().EndDelay = delay * (length - i);
                 gun.Set(new LinearActive());
             }
+            world.GetFeature<EventsFeature>().leftWeaponFired.Execute(gun);
         }
 
         public void SpawnMelee(Entity gun, int length, float delay)
@@ -68,6 +71,7 @@ namespace Project.Mechanics.Features.Projectile
                 entity.Get<Melee>().StartDelay = delay;
                 entity.Get<Melee>().EndDelay = delay * 0.2f;
             }
+            world.GetFeature<EventsFeature>().leftWeaponFired.Execute(gun);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using UnityEngine;
 
 namespace Project.Common.Views
 {
@@ -15,7 +16,7 @@ namespace Project.Common.Views
         public override void ApplyStateJob(float deltaTime, bool immediately)
         {
             ref var rootData = ref this.GetRootData();
-            rootData.position = entity.GetPosition();
+            rootData.position = entity.GetPosition() - new Vector3(0f,0.5f,0f);
             rootData.startSize = 1f;
             this.SetRootData(ref rootData);
         }

@@ -51,8 +51,8 @@ namespace Project.Mechanics.Features.Projectile.Systems
             {
                 if (!entity.Has<MeleeActive>())
                 {
-                    var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
-                    entity.InstantiateView(view);
+                    // var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
+                    // entity.InstantiateView(view);
                     entity.Set(new MeleeActive());
                 }
             }

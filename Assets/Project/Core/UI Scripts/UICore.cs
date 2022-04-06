@@ -1,7 +1,9 @@
 using ME.ECS;
+using Project.Common.Components;
+using Project.Core.Features;
+using Project.Core.Features.Player.Components;
 using UnityEngine;
 using UnityEngine.UI;
-
 // using TMPro;
 
 namespace Project.Common.UI_Scripts
@@ -50,50 +52,52 @@ namespace Project.Common.UI_Scripts
 
         private void HealthChanged(in Entity entity)
         {
-            // // if(!Utilitiddies.CheckLocalPlayer(entity)) return;
-            //
-            // var fill = entity.Read<PlayerHealth>().Value / 100;
-            // _healthbar.fillAmount = fill;
-            // _healthbar.color = Color.Lerp(Color.red, Color.green, fill);
+            if(!SceneUtils.CheckLocalPlayer(entity)) return;
+            
+            var fill = entity.Read<PlayerHealth>().Value / 100;
+            _healthbar.fillAmount = fill;
+            _healthbar.color = Color.Lerp(Color.red, Color.green, fill);
         }
 
         private void ToggleWinScreen(in Entity entity)
         {
-            // if(!Utilitiddies.CheckLocalPlayer(entity)) return;
         
             _victoryScreen.SetActive(true);
         }
 
         private void ToggleLoseScreen(in Entity entity)
         {
-            // if(!Utilitiddies.CheckLocalPlayer(entity)) return;
-        
+            if(!SceneUtils.CheckLocalPlayer(entity)) return;
+
             _defeatScreen.SetActive(true);
         }
     
         private void ToggleDrawScreen(in Entity entity)
         {
-            // if(!Utilitiddies.CheckLocalPlayer(entity)) return;
-        
+            if(!SceneUtils.CheckLocalPlayer(entity)) return;
+
             _drawScreen.SetActive(true);
         }
 
         private void ChangeLeftAmmo(in Entity entity)
         {
-            // if(!Utilitiddies.CheckLocalPlayer(entity)) return;
-            //
-            // var fill = (float)entity.Read<LeftWeapon>().Ammo / entity.Read<LeftWeapon>().MaxAmmo;
-            // _leftWeaponAmmoImage.fillAmount = fill;
-            // // _leftWeaponAmmoText.SetText(entity.Read<LeftWeapon>().Ammo.ToString());
+            if(entity.Read<WeaponTag>().Hand != WeaponHand.Left) return;
+            if(!SceneUtils.CheckLocalPlayer(entity.GetParent())) return;
+            if (!entity.Has<LinearWeapon>()) return;
+
+            var fill = (float)entity.Read<AmmoCapacity>().Value / entity.Read<AmmoCapacityDefault>().Value;
+            _leftWeaponAmmoImage.fillAmount = fill;
+            // _leftWeaponAmmoText.SetText(entity.Read<LeftWeapon>().Ammo.ToString());
         }
 
         private void ChangeRightAmmo(in Entity entity)
         {
-            // if(!Utilitiddies.CheckLocalPlayer(entity)) return;
-            //
-            // var fill = (float)entity.Read<RightWeapon>().Count / entity.Read<RightWeapon>().MaxCount;
-            // _rightWeaponAmmoImage.fillAmount = fill;
-            // // _rightWeaponAmmoText.SetText(entity.Read<RightWeapon>().Count.ToString());
+            if(entity.Read<WeaponTag>().Hand != WeaponHand.Left) return;
+            if(!SceneUtils.CheckLocalPlayer(entity.GetParent())) return;
+            
+            var fill = (float)entity.Read<AmmoCapacity>().Value / entity.Read<AmmoCapacityDefault>().Value;
+            _rightWeaponAmmoImage.fillAmount = fill;
+            // _rightWeaponAmmoText.SetText(entity.Read<RightWeapon>().Count.ToString());
         }
 
         private void ReloadLeft(in Entity entity)

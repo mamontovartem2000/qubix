@@ -46,9 +46,9 @@ namespace Project.Core.Features.Player.Systems
         {
             var apply = entity.Read<ApplyDamage>();
 
-            apply.ApplyTo.Get<PlayerHealth>().Value -= apply.Damage;
             apply.ApplyTo.Get<LastHit>().Enemy = apply.ApplyFrom;
-            
+            apply.ApplyTo.Get<PlayerHealth>().Value -= apply.Damage;
+
             world.GetFeature<EventsFeature>().HealthChanged.Execute(apply.ApplyTo);
         }
     }

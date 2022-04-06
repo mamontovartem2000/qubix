@@ -6,20 +6,13 @@ namespace Project.Core.Features.SceneBuilder.Components
 
     public struct MineTag : IComponent {}
 
-    public struct AmmoTag : IComponent
+    public struct DispenserTag : IComponent
     {
-        public Entity Spawner;
-        public int MaxAmmoCount;
-        public int AmmoCount;
-        public float WeaponCooldown;
-    }
-    
-    public struct AmmoTileTag : IComponent
-    {
-        public bool Spawned;
         public float Timer;
         public float TimerDefault;
     }
+    
+    public struct Spawned : IComponent {}
 
     public struct PortalTag : IComponent { }
 

@@ -1,5 +1,7 @@
 using ME.ECS;
+using Project.Core.Features;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Project.Common.UI_Scripts
 {
@@ -23,7 +25,8 @@ namespace Project.Common.UI_Scripts
 
         private void SetPlayer(in Entity entity)
         {
-            // if(!Utilitiddies.CheckLocalPlayer(entity)) return;
+            if(!SceneUtils.CheckLocalPlayer(entity)) return;
+            
             _player = entity;
         }
     

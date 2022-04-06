@@ -51,8 +51,10 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
                 if ((entity.GetPosition() - collectible.GetPosition()).sqrMagnitude <= SceneUtils.ItemRadius)
                 {
                     var collision = new Entity("collision");
-                    collision.Set(new ApplyDamage {ApplyTo = entity, Damage = -5f}, ComponentLifetime.NotifyAllSystems);
-                    
+                    collision.Set(new ApplyDamage {ApplyTo = entity, Damage = -10f}, ComponentLifetime.NotifyAllSystems);
+
+                    if (collectible.GetParent().Has<Spawned>())
+                        collectible.GetParent().Remove<Spawned>();
                     collectible.Destroy();
                 }
             }   

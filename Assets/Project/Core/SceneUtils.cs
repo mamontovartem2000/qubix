@@ -1,4 +1,5 @@
 using ME.ECS;
+using Project.Core.Features.Player;
 using Project.Core.Features.SceneBuilder.Components;
 using UnityEngine;
 
@@ -70,6 +71,11 @@ namespace Project.Core.Features
             }
 
             return position;
+        }
+
+        public static bool CheckLocalPlayer(Entity player)
+        {
+            return player == Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer();
         }
     }
 }

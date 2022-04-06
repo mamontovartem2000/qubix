@@ -37,7 +37,8 @@ namespace Project.Core.Features.SceneBuilder
 
         protected override void OnConstruct()
         {
-            AddSystem<SpawnHealthSystem>();
+            // AddSystem<SpawnHealthSystem>();
+            AddSystem<NewHealthDispenserSystem>();
             AddSystem<SpawnMineSystem>();
             AddSystem<PortalsSystem>();
 
@@ -91,13 +92,13 @@ namespace Project.Core.Features.SceneBuilder
                         {
                             entity = new Entity("Ammo-Tile");
                             entity.InstantiateView(_ammoTileID);
-                            entity.Set(new AmmoTileTag { Spawned = false, TimerDefault = 8, Timer = 8 });
+                            entity.Set(new DispenserTag {TimerDefault = 8, Timer = 8 });
                             break;
                         }
                 }
 
                 if (entity != Entity.Empty)
-                    entity.SetPosition(SceneUtils.IndexToPosition(i) - new Vector3(0f,0.5f,0f));
+                    entity.SetPosition(SceneUtils.IndexToPosition(i));
             }
         }       
 
