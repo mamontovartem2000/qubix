@@ -20,5 +20,8 @@ namespace Project.Common.Components
     {
         public float Value;
     }
+    
+    public struct LeftWeaponShot : IComponent{}
+    public struct RightWeaponShot : IComponent{}
 
 }

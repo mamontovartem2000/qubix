@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Photon.Pun;
 using Project.Input.InputHandler.Markers;
 
 namespace Project.Input.InputHandler.Modules
@@ -26,27 +27,27 @@ namespace Project.Input.InputHandler.Modules
 			_input = new PlayerInput();
 			_input.Enable();
 
-			_input.Player.MoveForward.started += ctx => world.AddMarker(new ForwardMarker {ActorID = 1, State = InputState.Pressed, Axis = MovementAxis.Vertical});
+			_input.Player.MoveForward.started += ctx => ForwardPressed();
 			_input.Player.MoveForward.canceled += ctx => ForwardReleased();
 
-			_input.Player.MoveBackward.started += ctx => world.AddMarker(new BackwardMarker {ActorID = 1, State = InputState.Pressed, Axis = MovementAxis.Vertical});
+			_input.Player.MoveBackward.started += ctx => BackwardPressed();
 			_input.Player.MoveBackward.canceled += ctx => BackwardReleased();
 
-			_input.Player.MoveLeft.started += ctx => world.AddMarker(new LeftMarker {ActorID = 1, State = InputState.Pressed, Axis = MovementAxis.Horizontal});
+			_input.Player.MoveLeft.started += ctx => LeftPressed();
 			_input.Player.MoveLeft.canceled += ctx => LeftReleased();
-			
-			_input.Player.MoveRight.started += ctx => world.AddMarker(new RightMarker {ActorID = 1, State = InputState.Pressed, Axis = MovementAxis.Horizontal});
+
+			_input.Player.MoveRight.started += ctx => RightPressed();
 			_input.Player.MoveRight.canceled += ctx => RightReleased();
 
-			_input.Player.LeftShoot.started += ctx => world.AddMarker(new MouseLeftMarker {ActorID = 1, State = InputState.Pressed});
-			_input.Player.LeftShoot.canceled += ctx => world.AddMarker(new MouseLeftMarker {ActorID = 1, State = InputState.Released});
+			_input.Player.LeftShoot.started += ctx => LeftMousePressed();
+			_input.Player.LeftShoot.canceled += ctx => LeftMouseReleased();
 
-			_input.Player.RightShoot.started += ctx => world.AddMarker(new MouseRightMarker {ActorID = 1, State = InputState.Pressed});
-			_input.Player.RightShoot.canceled += ctx => world.AddMarker(new MouseRightMarker {ActorID = 1, State = InputState.Released});
+			_input.Player.RightShoot.started += ctx => RightMousePressed();
+			_input.Player.RightShoot.canceled += ctx => RightMouseReleased();
 
-			_input.Player.LockDirection.started += ctx => world.AddMarker(new LockDirectionMarker { ActorID = 1, State = InputState.Pressed });
-			_input.Player.LockDirection.canceled += ctx => world.AddMarker(new LockDirectionMarker { ActorID = 1, State = InputState.Released });
-
+			_input.Player.LockDirection.started += ctx => LockDirectionPressed();
+			_input.Player.LockDirection.canceled += ctx => LockDirectionReleased();
+			
 			_input.Player.Skill1.performed += ctx => world.AddMarker(new SkillOneMarker {ActorID = 1});
 			_input.Player.Skill2.performed += ctx => world.AddMarker(new SkillTwoMarker {ActorID = 1});
 			_input.Player.Skill3.performed += ctx => world.AddMarker(new SkillThreeMarker {ActorID = 1});
@@ -54,51 +55,135 @@ namespace Project.Input.InputHandler.Modules
 
 		}
 
+		private void LeftMousePressed()
+		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
+			world.AddMarker(new MouseLeftMarker {ActorID = id, State = InputState.Pressed});
+		}
+		
+		private void LeftMouseReleased()
+		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+
+			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
+			world.AddMarker(new MouseLeftMarker {ActorID = id, State = InputState.Released});
+		}
+		
+		private void RightMousePressed()
+		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+
+			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
+			world.AddMarker(new MouseRightMarker {ActorID = id, State = InputState.Pressed});
+		}
+		
+		private void RightMouseReleased()
+		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+
+			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
+			world.AddMarker(new MouseRightMarker {ActorID = id, State = InputState.Released});
+		}
+		
+		private void LockDirectionPressed()
+		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
+			world.AddMarker(new LockDirectionMarker {ActorID = id, State = InputState.Pressed });
+		}
+		
+		private void LockDirectionReleased()
+		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
+			world.AddMarker(new LockDirectionMarker {ActorID = id, State = InputState.Released });
+		}
+		
+		private void ForwardPressed()
+		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
+			world.AddMarker(new ForwardMarker {ActorID = id, State = InputState.Pressed, Axis = MovementAxis.Vertical});
+		}
 		private void ForwardReleased()
 		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
+			
 			if (_input.Player.MoveLeft.IsPressed() || _input.Player.MoveRight.IsPressed())
 			{
-				world.AddMarker(new ForwardMarker {ActorID = 1, State = InputState.Released, Axis = MovementAxis.Horizontal});
+				world.AddMarker(new ForwardMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Horizontal});
 			}
 			else
 			{
-				world.AddMarker(new ForwardMarker {ActorID = 1, State = InputState.Released, Axis = MovementAxis.Vertical});
+				world.AddMarker(new ForwardMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Vertical});
 			}
+		}
+
+		private void BackwardPressed()
+		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
+			world.AddMarker(new BackwardMarker {ActorID = id, State = InputState.Pressed, Axis = MovementAxis.Vertical});
 		}
 
 		private void BackwardReleased()
 		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
+
 			if (_input.Player.MoveLeft.IsPressed() || _input.Player.MoveRight.IsPressed())
 			{
-				world.AddMarker(new BackwardMarker {ActorID = 1, State = InputState.Released, Axis = MovementAxis.Horizontal});
+				world.AddMarker(new BackwardMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Horizontal});
 			}
 			else
 			{
-				world.AddMarker(new BackwardMarker {ActorID = 1, State = InputState.Released, Axis = MovementAxis.Vertical});
+				world.AddMarker(new BackwardMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Vertical});
 			}
 		}
 
+		private void LeftPressed()
+		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
+
+			world.AddMarker(new LeftMarker {ActorID = id, State = InputState.Pressed, Axis = MovementAxis.Horizontal});	
+		}
+		
 		private void LeftReleased()
 		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
+
 			if (_input.Player.MoveForward.IsPressed() || _input.Player.MoveBackward.IsPressed())
 			{
-				world.AddMarker(new LeftMarker {ActorID = 1, State = InputState.Released, Axis = MovementAxis.Vertical});
+				world.AddMarker(new LeftMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Vertical});
 			}
 			else
 			{
-				world.AddMarker(new LeftMarker {ActorID = 1, State = InputState.Released, Axis = MovementAxis.Horizontal});
+				world.AddMarker(new LeftMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Horizontal});
 			}
 		}
 
+		private void RightPressed()
+		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			
+			world.AddMarker(new RightMarker {ActorID = id, State = InputState.Pressed, Axis = MovementAxis.Horizontal});
+		}
+		
 		private void RightReleased()
 		{
+			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+
 			if (_input.Player.MoveForward.IsPressed() || _input.Player.MoveBackward.IsPressed())
 			{
-				world.AddMarker(new RightMarker {ActorID = 1, State = InputState.Released, Axis = MovementAxis.Vertical});
+				world.AddMarker(new RightMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Vertical});
 			}
 			else
 			{
-				world.AddMarker(new RightMarker {ActorID = 1, State = InputState.Released, Axis = MovementAxis.Horizontal});
+				world.AddMarker(new RightMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Horizontal});
 			}
 		}
 		

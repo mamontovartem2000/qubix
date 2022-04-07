@@ -38,7 +38,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
         {
             return Filter.Create("Filter-NewLinearFiringSystem")
                 .With<LinearWeapon>()
-                .With<WeaponShot>()
+                .With<LeftWeaponShot>()
                 .Without<LinearActive>()
                 .Push();
         }

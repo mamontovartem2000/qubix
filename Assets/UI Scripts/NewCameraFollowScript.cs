@@ -1,7 +1,6 @@
 using ME.ECS;
 using Project.Core.Features;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Project.Common.UI_Scripts
 {

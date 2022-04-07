@@ -36,7 +36,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
         {
             return Filter.Create("Filter-NewAutomaticFiringSystem")
                 .With<AutomaticWeapon>()
-                .With<WeaponShot>()
+                .With<RightWeaponShot>()
                 .Without<ReloadTime>()
                 .Without<Cooldown>()
                 .Push();

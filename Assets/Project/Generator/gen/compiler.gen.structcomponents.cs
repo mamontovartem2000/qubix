@@ -19,6 +19,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FirstSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FourthSkillTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LeftWeaponShot>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeLeft>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Linear>(false, false, false, false, false, false, false);
@@ -39,6 +40,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileView>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTime>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.RightWeaponShot>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillComponents>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpreadAmount>(false, false, false, false, false, false, false);
@@ -96,6 +98,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FirstSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FourthSkillTag>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LeftWeaponShot>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeLeft>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Linear>(false, false, false, false, false, false, false);
@@ -116,6 +119,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileView>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTime>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.RightWeaponShot>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillComponents>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpreadAmount>(false, false, false, false, false, false, false);
@@ -168,6 +172,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.CooldownDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.FirstSkillTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.FourthSkillTag>(false);
+            structComponentsContainer.Validate<Project.Common.Components.LeftWeaponShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeLeft>(false);
             structComponentsContainer.Validate<Project.Common.Components.Linear>(false);
@@ -188,6 +193,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ProjectileView>(false);
             structComponentsContainer.Validate<Project.Common.Components.ReloadTime>(false);
             structComponentsContainer.Validate<Project.Common.Components.ReloadTimeDefault>(false);
+            structComponentsContainer.Validate<Project.Common.Components.RightWeaponShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.SecondSkillTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillComponents>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpreadAmount>(false);
@@ -245,6 +251,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.CooldownDefault>(false);
             entity.ValidateData<Project.Common.Components.FirstSkillTag>(false);
             entity.ValidateData<Project.Common.Components.FourthSkillTag>(false);
+            entity.ValidateData<Project.Common.Components.LeftWeaponShot>(true);
             entity.ValidateData<Project.Common.Components.LifeTimeDefault>(false);
             entity.ValidateData<Project.Common.Components.LifeTimeLeft>(false);
             entity.ValidateData<Project.Common.Components.Linear>(false);
@@ -265,6 +272,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ProjectileView>(false);
             entity.ValidateData<Project.Common.Components.ReloadTime>(false);
             entity.ValidateData<Project.Common.Components.ReloadTimeDefault>(false);
+            entity.ValidateData<Project.Common.Components.RightWeaponShot>(true);
             entity.ValidateData<Project.Common.Components.SecondSkillTag>(false);
             entity.ValidateData<Project.Common.Components.SkillComponents>(true);
             entity.ValidateData<Project.Common.Components.SpreadAmount>(false);

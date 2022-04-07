@@ -36,7 +36,7 @@ namespace Project.Modules
         protected override int GetRPCOrder()
         {
             return PhotonNetwork.LocalPlayer.ActorNumber;
-            //this.orderId;
+            // return this._orderId;
         }
 
         protected override ME.ECS.Network.NetworkType GetNetworkType()
@@ -201,39 +201,6 @@ namespace Project.Modules
         }
     }
 
-    public class FSSerializer : ME.ECS.Network.ISerializer
-    {
-        public byte[] SerializeStorage(ME.ECS.StatesHistory.HistoryStorage historyEvent)
-        {
-            return ME.ECS.Serializer.Serializer.Pack(historyEvent);
-        }
-
-        public ME.ECS.StatesHistory.HistoryStorage DeserializeStorage(byte[] bytes)
-        {
-            return ME.ECS.Serializer.Serializer.Unpack<ME.ECS.StatesHistory.HistoryStorage>(bytes);
-        }
-
-        public byte[] Serialize(ME.ECS.StatesHistory.HistoryEvent historyEvent)
-        {
-            return ME.ECS.Serializer.Serializer.Pack(historyEvent);
-        }
-
-        public ME.ECS.StatesHistory.HistoryEvent Deserialize(byte[] bytes)
-        {
-            return ME.ECS.Serializer.Serializer.Unpack<ME.ECS.StatesHistory.HistoryEvent>(bytes);
-        }
-
-        public byte[] SerializeWorld(ME.ECS.World.WorldState data)
-        {
-            return ME.ECS.Serializer.Serializer.Pack(data);
-        }
-
-        public ME.ECS.World.WorldState DeserializeWorld(byte[] bytes)
-        {
-            return ME.ECS.Serializer.Serializer.Unpack<ME.ECS.World.WorldState>(bytes);
-        }
-    }
-
     public class PhotonReceiver : Photon.Pun.MonoBehaviourPunCallbacks
     {
         public string roomName;
@@ -324,7 +291,7 @@ namespace Project.Modules
                 this.timeSynced = false;
                 this.UpdateTime();
 
-                world.AddMarker(new NetworkSetActivePlayer { ActorID = PhotonNetwork.LocalPlayer.ActorNumber });
+                 world.AddMarker(new NetworkSetActivePlayer { ActorID = PhotonNetwork.LocalPlayer.ActorNumber});
             }
         }
 
@@ -383,17 +350,15 @@ namespace Project.Modules
             if (Photon.Pun.PhotonNetwork.IsMasterClient == true)
             {
                 var world = ME.ECS.Worlds.currentWorld;
-                world.AddMarker(new NetworkPlayerDisconnected()
-                {
-                    ActorID = otherPlayer.ActorNumber
-                });
+                
+                world.AddMarker(new NetworkPlayerDisconnected {ActorID = otherPlayer.ActorNumber});
             }
         }
 
         public override void OnRoomListUpdate(System.Collections.Generic.List<Photon.Realtime.RoomInfo> roomList)
         {
             Photon.Pun.PhotonNetwork.JoinOrCreateRoom(this.roomName,
-                new Photon.Realtime.RoomOptions() { MaxPlayers = 16, PublishUserId = true, CustomRoomPropertiesForLobby = new[] { "seed" } },
+                new Photon.Realtime.RoomOptions() { MaxPlayers = 2, PublishUserId = true, CustomRoomPropertiesForLobby = new[] { "seed" } },
                 Photon.Realtime.TypedLobby.Default);
         }
 
@@ -411,10 +376,43 @@ namespace Project.Modules
                     if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == networkModule.PlayerCount)
                     {
                         this.timeSyncedConnected = true;
-                        world.AddMarker(new NetworkPlayerConnectedTimeSynced { ActorID = PhotonNetwork.LocalPlayer.ActorNumber });
+                        world.AddMarker(new NetworkPlayerConnectedTimeSynced {ActorID = PhotonNetwork.LocalPlayer.ActorNumber});
                     }
                 }
             }
+        }
+    }
+    
+    public class FSSerializer : ME.ECS.Network.ISerializer
+    {
+        public byte[] SerializeStorage(ME.ECS.StatesHistory.HistoryStorage historyEvent)
+        {
+            return ME.ECS.Serializer.Serializer.Pack(historyEvent);
+        }
+
+        public ME.ECS.StatesHistory.HistoryStorage DeserializeStorage(byte[] bytes)
+        {
+            return ME.ECS.Serializer.Serializer.Unpack<ME.ECS.StatesHistory.HistoryStorage>(bytes);
+        }
+
+        public byte[] Serialize(ME.ECS.StatesHistory.HistoryEvent historyEvent)
+        {
+            return ME.ECS.Serializer.Serializer.Pack(historyEvent);
+        }
+
+        public ME.ECS.StatesHistory.HistoryEvent Deserialize(byte[] bytes)
+        {
+            return ME.ECS.Serializer.Serializer.Unpack<ME.ECS.StatesHistory.HistoryEvent>(bytes);
+        }
+
+        public byte[] SerializeWorld(ME.ECS.World.WorldState data)
+        {
+            return ME.ECS.Serializer.Serializer.Pack(data);
+        }
+
+        public ME.ECS.World.WorldState DeserializeWorld(byte[] bytes)
+        {
+            return ME.ECS.Serializer.Serializer.Unpack<ME.ECS.World.WorldState>(bytes);
         }
     }
 }

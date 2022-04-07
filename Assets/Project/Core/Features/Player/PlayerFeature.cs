@@ -95,7 +95,7 @@ namespace Project.Core.Features.Player {
         {
             var player = new Entity("Player");
 
-            player.Get<PlayerTag>().PlayerID = 1;
+            player.Get<PlayerTag>().PlayerID = id;
             player.Get<PlayerMovementSpeed>().Value = 4f;
             var dir = player.Get<FaceDirection>().Value = Vector3.forward;
             var traj = Vector3.up;

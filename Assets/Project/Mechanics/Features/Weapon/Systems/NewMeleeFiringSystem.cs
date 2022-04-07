@@ -36,7 +36,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
         {
             return Filter.Create("Filter-NewMeleeFiringSystem")
                 .With<MeleeWeapon>()
-                .With<WeaponShot>()
+                .With<LeftWeaponShot>()
                 .Without<MeleeActive>()
                 .Push();
         }

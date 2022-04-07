@@ -14,12 +14,14 @@ namespace Project.Input.InputHandler.Markers
     public struct BackwardMarker : IMarker
     {
         public int ActorID;
+
         public InputState State;
         public MovementAxis Axis;
     }
     public struct LeftMarker : IMarker
     {
         public int ActorID;
+
         public InputState State;
         public MovementAxis Axis;
     }
