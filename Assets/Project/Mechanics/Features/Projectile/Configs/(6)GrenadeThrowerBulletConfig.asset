@@ -18,6 +18,7 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
+  - id: 4
   removeStructComponents: []
   templates: []
   references:
@@ -29,10 +30,16 @@ MonoBehaviour:
     00000001:
       type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 10
     00000002:
       type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 20
     00000003:
-      type: {class: ProjectileActive, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 0.8
+    00000004:
+      type: {class: Trajectory, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 1.2

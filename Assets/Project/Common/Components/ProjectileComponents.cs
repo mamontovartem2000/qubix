@@ -49,6 +49,9 @@ namespace Project.Common.Components
 	}
 	
 	public struct MeleeActive : IComponent {}
-	
-	public struct ProjectileActive : IComponent {}
+
+	public struct ProjectileActive : IComponent
+	{
+		public Entity Player;
+	}
 }

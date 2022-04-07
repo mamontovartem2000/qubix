@@ -7,7 +7,9 @@ namespace Project.Core.Features
 {
     public static class SceneUtils
     {
-        public const float ItemRadius = 0.2f; 
+        public const float ItemRadius = 0.2f;
+        public const float PlayerRadius = 0.4f;
+        
         private static int _width, _height;
 
         public static void SetWidthAndHeight(int width, int height)

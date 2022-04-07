@@ -1,8 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 using Project.Core.Features.GameState.Components;
 using Project.Mechanics.Features.CollisionHandler.Components;
 using Project.Mechanics.Features.CollisionHandler.Systems;
-using Project.Mechanics.Features.CollisionHandler.Views;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.CollisionHandler {
@@ -15,12 +15,13 @@ namespace Project.Mechanics.Features.CollisionHandler {
     #endregion
     public sealed class CollisionHandlerFeature : Feature
     {
-        public MineExlosionMono MineVFX;
-        public DeathMono DeathVFX;
-        public RocketExplosionMono RocketVFX;
+        public MonoBehaviourViewBase ExplosionVFX;
+        public MonoBehaviourViewBase PlayerDeathVFX;
+        public MonoBehaviourViewBase HealVFX;
+        public MonoBehaviourViewBase TakeDamageVFX;
 
-        public ViewId _mineID, _deathID, _rocketId;
-        public float _mineTimer, _deathTimer;
+        public ViewId ExplosionID, PlayerDeathID, HealID, TakeDamageID;
+        public float DefaultTimer;
         
         protected override void OnConstruct()
         {
@@ -28,9 +29,10 @@ namespace Project.Mechanics.Features.CollisionHandler {
             AddSystem<MineCollisionSystem>();
             AddSystem<ExplosionSystem>();
 
-            _mineID = world.RegisterViewSource(MineVFX);
-            _deathID = world.RegisterViewSource(DeathVFX);
-            _rocketId = world.RegisterViewSource(RocketVFX);
+            ExplosionID = world.RegisterViewSource(ExplosionVFX);
+            PlayerDeathID = world.RegisterViewSource(PlayerDeathVFX);
+            HealID = world.RegisterViewSource(HealVFX);
+            TakeDamageID = world.RegisterViewSource(TakeDamageVFX);
         }
         
         protected override void InjectFilter(ref FilterBuilder builder)

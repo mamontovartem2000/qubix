@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using UnityEngine;
 
 namespace Assets.Dima.Scripts
 {
@@ -6,6 +7,8 @@ namespace Assets.Dima.Scripts
 
     public class WrenchMono : MonoBehaviourView
     {
+        [SerializeField] private ParticleSystem _ps;
+
         public override bool applyStateJob => true;
         public override void OnInitialize() { }
         public override void OnDeInitialize() { }
@@ -14,6 +17,16 @@ namespace Assets.Dima.Scripts
         {
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetParent().GetRotation();
+        }
+        
+        public void Play()
+        {
+            _ps.Play();
+        }
+
+        public void Stop()
+        {
+            _ps.Stop();
         }
     }
 }

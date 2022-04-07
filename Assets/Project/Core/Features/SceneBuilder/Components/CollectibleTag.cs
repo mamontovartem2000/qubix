@@ -2,7 +2,7 @@
 
 namespace Project.Core.Features.SceneBuilder.Components 
 {
-    public struct HealPoweUpTag : IComponent {}
+    public struct HealthTag : IComponent {}
 
     public struct MineTag : IComponent {}
 

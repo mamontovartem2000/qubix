@@ -30,7 +30,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamageModifier>(false, false, false, false, false, false, false);
@@ -70,7 +70,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.TeleportPlayer>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.HealPoweUpTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.HealthTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MineTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.PortalTag>(true, false, false, false, false, false, false);
@@ -109,7 +109,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamageModifier>(false, false, false, false, false, false, false);
@@ -149,7 +149,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.TeleportPlayer>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.HealPoweUpTag>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.HealthTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapComponents>(false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MineTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.PortalTag>(true, false, false, false, false, false, false);
@@ -183,7 +183,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.MeleeActive>(true);
             structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(false);
             structComponentsContainer.Validate<Project.Common.Components.PassiveSkill>(false);
-            structComponentsContainer.Validate<Project.Common.Components.ProjectileActive>(true);
+            structComponentsContainer.Validate<Project.Common.Components.ProjectileActive>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDamage>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDamageModifier>(false);
@@ -223,7 +223,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerTag>(false);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.TeleportPlayer>(false);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false);
-            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.HealPoweUpTag>(true);
+            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.HealthTag>(true);
             structComponentsContainer.ValidateCopyable<Project.Core.Features.SceneBuilder.Components.MapComponents>(false);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.MineTag>(true);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.PortalTag>(true);
@@ -262,7 +262,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.MeleeActive>(true);
             entity.ValidateData<Project.Common.Components.MeleeWeapon>(false);
             entity.ValidateData<Project.Common.Components.PassiveSkill>(false);
-            entity.ValidateData<Project.Common.Components.ProjectileActive>(true);
+            entity.ValidateData<Project.Common.Components.ProjectileActive>(false);
             entity.ValidateData<Project.Common.Components.ProjectileConfig>(false);
             entity.ValidateData<Project.Common.Components.ProjectileDamage>(false);
             entity.ValidateData<Project.Common.Components.ProjectileDamageModifier>(false);
@@ -302,7 +302,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Core.Features.Player.Components.PlayerTag>(false);
             entity.ValidateData<Project.Core.Features.Player.Components.TeleportPlayer>(false);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false);
-            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.HealPoweUpTag>(true);
+            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.HealthTag>(true);
             entity.ValidateDataCopyable<Project.Core.Features.SceneBuilder.Components.MapComponents>(false);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.MineTag>(true);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.PortalTag>(true);

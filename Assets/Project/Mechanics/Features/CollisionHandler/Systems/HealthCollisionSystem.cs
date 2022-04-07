@@ -27,7 +27,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
             this.GetFeature(out _feature);
 
             Filter.Create("powerup-filter")
-                .With<HealPoweUpTag>()
+                .With<HealthTag>()
                 .Push(ref _powerUpFilter);
         }
         
@@ -55,6 +55,8 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
 
                     if (collectible.GetParent().Has<Spawned>())
                         collectible.GetParent().Remove<Spawned>();
+                    
+                    _feature.SpawnVFX(entity.GetPosition(), _feature.HealID, _feature.DefaultTimer);                    
                     collectible.Destroy();
                 }
             }   

@@ -38,6 +38,8 @@ namespace Project.Mechanics.Features.Projectile
             entity.SetRotation(gun.GetParent().GetRotation());
 
             entity.Get<ProjectileDirection>().Value = direction;
+            entity.Get<ProjectileActive>().Player = gun.GetParent();
+            
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(gun);
         }
 

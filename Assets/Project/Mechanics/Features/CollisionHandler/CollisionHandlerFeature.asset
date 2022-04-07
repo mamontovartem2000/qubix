@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CollisionHandlerFeature
   m_EditorClassIdentifier: 
   editorComment: 
-  MineVFX: {fileID: -2189062879659532947, guid: 48f421ab6156a7343883819f08fd1178, type: 3}
-  DeathVFX: {fileID: 3164495714841560054, guid: 67956fb05321d6043ba155b47c2566b3, type: 3}
-  RocketVFX: {fileID: -2865807280830581962, guid: 84d19c688c7e1fc4baf1991011a268a2, type: 3}
-  _mineTimer: 3
-  _deathTimer: 3
+  ExplosionVFX: {fileID: 511615295811354751, guid: fe2482976a995c64fb7f2397198f3d9d, type: 3}
+  PlayerDeathVFX: {fileID: 3061242489515781670, guid: 02374ff7bce45d4458f66ee2e2359aa3, type: 3}
+  HealVFX: {fileID: 6021477216475121451, guid: 18208a934922161489af81a7ab0d11fa, type: 3}
+  TakeDamageVFX: {fileID: 4184831819711075013, guid: 928af6c64bfafcf4099bc523fb03d1a7, type: 3}
+  DefaultTimer: 3

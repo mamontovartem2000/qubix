@@ -52,7 +52,7 @@ namespace Project.Core.Features.SceneBuilder.Systems
                 var health = new Entity("Health");
                 health.SetParent(entity);
 
-                health.Set(new HealPoweUpTag());
+                health.Set(new HealthTag());
                 health.SetPosition(entity.GetPosition());
 
                 health.InstantiateView(_health);

@@ -29,10 +29,12 @@ MonoBehaviour:
     00000001:
       type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 12
     00000002:
       type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 20
     00000003:
-      type: {class: ProjectileActive, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 0.8
