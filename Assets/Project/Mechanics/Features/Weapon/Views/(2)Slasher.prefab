@@ -25,11 +25,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881059464305208917}
-  m_LocalRotation: {x: -0.013898022, y: -0.007082051, z: -0.7001432, w: 0.7138321}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.5049034, y: 0.49974772, z: -0.48524863, w: 0.50976324}
+  m_LocalPosition: {x: -0.17000009, y: 0.625, z: -0.0030002445}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1882444250737508644}
+  m_Father: {fileID: 3484930324898062878}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -1.705, y: 0.536, z: -88.899}
 --- !u!198 &942836238373308833
@@ -168,7 +168,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.48
+      scalar: 0.48
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4874,6 +4874,7 @@ GameObject:
   - component: {fileID: 3484930324898062878}
   - component: {fileID: 3484930324898062880}
   - component: {fileID: 3484930324898062881}
+  - component: {fileID: 5098889765763146375}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -4891,7 +4892,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4035078445916453645}
   m_Father: {fileID: 4023487806031585772}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4944,6 +4946,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &5098889765763146375
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3484930324898062879}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: daea02e472c753c4b9b3e92bcd70ac83, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4367819265815919446
 GameObject:
   m_ObjectHideFlags: 0
@@ -4954,7 +4975,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4023487806031585772}
   - component: {fileID: 8803681592273465616}
-  - component: {fileID: 275930663}
   m_Layer: 0
   m_Name: (2)Slasher
   m_TagString: Untagged
@@ -4974,7 +4994,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3484930324898062878}
-  - {fileID: 1882444250737508644}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5000,53 +5019,4 @@ MonoBehaviour:
       halfEnding: 0.5
     hasElements: 1
     hasDefault: 1
---- !u!95 &275930663
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4367819265815919446}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: daea02e472c753c4b9b3e92bcd70ac83, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &4532248521568821044
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1882444250737508644}
-  m_Layer: 0
-  m_Name: Trail
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1882444250737508644
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4532248521568821044}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.17000009, y: 0.625, z: -0.0030002445}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4035078445916453645}
-  m_Father: {fileID: 4023487806031585772}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  _anim: {fileID: 5098889765763146375}

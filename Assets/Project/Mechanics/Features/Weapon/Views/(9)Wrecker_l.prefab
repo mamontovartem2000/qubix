@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1452406027
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1452406028}
-  m_Layer: 0
-  m_Name: Trail
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1452406028
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452406027}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.17000009, y: 0.625, z: -0.0030002445}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1613622682}
-  m_Father: {fileID: 57657894777037662}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1613622681
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,11 +25,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613622681}
-  m_LocalRotation: {x: -0.013898022, y: -0.007082051, z: -0.7001432, w: 0.7138321}
-  m_LocalPosition: {x: 0, y: 0.104, z: 0}
+  m_LocalRotation: {x: -0.5049034, y: 0.49974772, z: -0.48524863, w: 0.50976324}
+  m_LocalPosition: {x: -0.17000009, y: 0.729, z: -0.0030002445}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1452406028}
+  m_Father: {fileID: 7568181493810334007}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -1.705, y: 0.536, z: -88.899}
 --- !u!198 &1613622684
@@ -199,7 +168,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.48
+      scalar: 0.48
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4905,6 +4874,7 @@ GameObject:
   - component: {fileID: 7568181493810334007}
   - component: {fileID: 6148585318165228703}
   - component: {fileID: 3538379892354014954}
+  - component: {fileID: 575516389570977822}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -4922,7 +4892,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1613622682}
   m_Father: {fileID: 57657894777037662}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4975,6 +4946,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &575516389570977822
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29412428871581702}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a63625c5fb8dfa2408e5826bfbed0d97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &830640491805473252
 GameObject:
   m_ObjectHideFlags: 0
@@ -4985,7 +4975,6 @@ GameObject:
   m_Component:
   - component: {fileID: 57657894777037662}
   - component: {fileID: 6285051073144073388}
-  - component: {fileID: 182143592}
   m_Layer: 0
   m_Name: (9)Wrecker_l
   m_TagString: Untagged
@@ -5005,7 +4994,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7568181493810334007}
-  - {fileID: 1452406028}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5031,23 +5019,4 @@ MonoBehaviour:
       halfEnding: 0.5
     hasElements: 1
     hasDefault: 1
-  _ps: {fileID: 1613622684}
---- !u!95 &182143592
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830640491805473252}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a63625c5fb8dfa2408e5826bfbed0d97, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  _anim: {fileID: 575516389570977822}

@@ -1,11 +1,14 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
+using Project.Common.Components;
+using UnityEngine;
 
-namespace Assets.Dima.Scripts
+namespace Project.Common.Views.WeaponMonos
 {
-    using ME.ECS.Views.Providers;
-
     public class SlasherMono : MonoBehaviourView
     {
+        [SerializeField] private Animator _anim; 
+        
         public override bool applyStateJob => true;
         public override void OnInitialize() { }
         public override void OnDeInitialize() { }
@@ -14,6 +17,17 @@ namespace Assets.Dima.Scripts
         {
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetParent().GetRotation();
+
+            if (entity.Has<LeftWeaponShot>())
+            {
+                _anim.SetBool("Attack", true);
+                Invoke(nameof(EndAnimation), 1f);
+            }
+        }
+
+        private void EndAnimation()
+        {
+            _anim.SetBool("Attack", false);
         }
     }
 }
