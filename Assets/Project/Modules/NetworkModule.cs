@@ -23,7 +23,7 @@ namespace Project.Modules
     public class NetworkModule : ME.ECS.Network.NetworkModule<TState>
     {
         public bool FakeConnect = false;
-        public int PlayerCount = 1;
+        public int PlayerCount = 4;
 
         private int _orderId;
         private PhotonTransporter _photonTransporter;
@@ -358,7 +358,7 @@ namespace Project.Modules
         public override void OnRoomListUpdate(System.Collections.Generic.List<Photon.Realtime.RoomInfo> roomList)
         {
             Photon.Pun.PhotonNetwork.JoinOrCreateRoom(this.roomName,
-                new Photon.Realtime.RoomOptions() { MaxPlayers = 2, PublishUserId = true, CustomRoomPropertiesForLobby = new[] { "seed" } },
+                new Photon.Realtime.RoomOptions() { MaxPlayers = 4, PublishUserId = true, CustomRoomPropertiesForLobby = new[] { "seed" } },
                 Photon.Realtime.TypedLobby.Default);
         }
 

@@ -57,6 +57,14 @@ namespace Project.Mechanics.Features.Projectile
                 gun.Set(new LinearActive());
             }
 
+            var visual = new Entity("vis");
+            visual.SetParent(gun);
+            visual.Set(new LinearVisual());
+            
+            visual.SetPosition(gun.GetPosition());
+            var view = world.RegisterViewSource(gun.Read<ProjectileView>().Value);
+            visual.InstantiateView(view);
+            
             if (gun.Has<LinearFull>())
                 gun.Remove<LinearFull>();
         }
@@ -72,6 +80,11 @@ namespace Project.Mechanics.Features.Projectile
                 entity.SetPosition(gun.GetPosition() + new Vector3(0f, 0f, 1 + i / 2f));
                 entity.Get<Melee>().StartDelay = delay;
                 entity.Get<Melee>().EndDelay = delay * 0.2f;
+                
+                var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
+                entity.InstantiateView(view);
+                
+                entity.Get<MeleeParent>().Gun = gun;
             }
             world.GetFeature<EventsFeature>().leftWeaponFired.Execute(gun);
         }

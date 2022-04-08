@@ -15,16 +15,11 @@ MonoBehaviour:
   sharedGroupId: 0
   structComponents:
   - id: 0
-  - id: 1
   removeStructComponents: []
   templates: []
   references:
     version: 1
     00000000:
-      type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: {fileID: 5022673654633621757, guid: 24ab087fcfb49da4ca4b198fa046f11e, type: 3}
-    00000001:
       type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 0.4

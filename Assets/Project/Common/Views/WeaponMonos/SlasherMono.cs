@@ -27,7 +27,8 @@ namespace Project.Common.Views.WeaponMonos
 
         private void EndAnimation()
         {
-            _anim.SetBool("Attack", false);
+            if(!entity.Has<LeftWeaponShot>())
+                _anim.SetBool("Attack", false);
         }
     }
 }

@@ -39,16 +39,33 @@ namespace Project.Common.Components
 		public float StartDelay;
 		public float EndDelay;
 	}
-	
-	public struct LinearActive : IComponent {}
+
+	public struct LinearActive : IComponent
+	{
+		public Entity Player;
+	}
+
+	public struct LinearVisual : IComponent
+	{
+		public Entity Parent;
+	}
 
 	public struct Melee : IComponent
 	{
 		public float StartDelay;
 		public float EndDelay;
 	}
-	
-	public struct MeleeActive : IComponent {}
+
+	public struct MeleeFinished : IComponent{}
+	public struct MeleeParent : IComponent
+	{
+		public Entity Gun;
+	}
+
+	public struct MeleeActive : IComponent
+	{
+		public Entity Player;
+	}
 
 	public struct ProjectileActive : IComponent
 	{

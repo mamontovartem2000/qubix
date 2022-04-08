@@ -13,7 +13,7 @@ namespace Assets.Dima.Scripts
         public override void ApplyState(float deltaTime, bool immediately)
         {
             transform.position = entity.GetPosition();
-            transform.rotation = entity.GetRotation();
+            transform.rotation = entity.GetParent().GetParent().GetRotation();
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Project.Common.Views
+namespace Project.Common.Views.VFX
 {
-    using ME.ECS.Views.Providers;
-
     public class PlasmaBeamMono : MonoBehaviourView
     {
         public override bool applyStateJob => true;
@@ -13,7 +12,7 @@ namespace Project.Common.Views
         public override void ApplyState(float deltaTime, bool immediately)
         {
             transform.position = entity.GetPosition();
-            transform.rotation = entity.GetRotation();
+            transform.rotation = entity.GetParent().GetParent().GetRotation();
         }
     }
 }

@@ -51,24 +51,27 @@ namespace Project.Mechanics.Features.Projectile.Systems
             {
                 if (!entity.Has<MeleeActive>())
                 {
-                    // var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
-                    // entity.InstantiateView(view);
-                    entity.Set(new MeleeActive());
+                    entity.SetParent(new Entity(""));
+                    entity.Set(new MeleeActive {Player = entity.Get<MeleeParent>().Gun.GetParent()});
                 }
             }
 
             if (!entity.Has<MeleeActive>()) return;
-            
+
             if (del.EndDelay - deltaTime > 0)
             {
                 del.EndDelay -= deltaTime;
             }
             else
             {
-                if(entity.GetParent().Has<MeleeActive>())
-                    entity.GetParent().Remove<MeleeActive>();
+                if (entity.Has<MeleeFinished>()) return;
+
+                if(entity.Read<MeleeParent>().Gun.Has<MeleeActive>())
+                    entity.Read<MeleeParent>().Gun.Remove<MeleeActive>();
                 
-                entity.Destroy();
+                entity.Remove<MeleeActive>();
+                entity.Set(new MeleeFinished());
+                entity.Get<LifeTimeLeft>().Value = 3f;
             }
         }
     }

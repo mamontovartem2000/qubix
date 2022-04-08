@@ -25,6 +25,7 @@ namespace Project.Mechanics.Features.Weapon
             AddSystem<WeaponReloadSystem>();
 
             AddSystem<NewRefreshAmmoUISystem>();
+            AddSystem<NewLinearVisualsSystem>();
         }
 
         protected override void OnDeconstruct() {}

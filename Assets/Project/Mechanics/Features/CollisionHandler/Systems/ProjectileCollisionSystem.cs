@@ -19,6 +19,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         private CollisionHandlerFeature _feature;
         private Filter _projectileFilter;
         private Filter _meleeFilter;
+        private Filter _linearFilter;
 
         void ISystemBase.OnConstruct()
         {
@@ -30,6 +31,10 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
             Filter.Create("Melee-Filter")
                 .With<MeleeActive>()
                 .Push(ref _meleeFilter);
+           
+            Filter.Create("Linear-Filter")
+                .With<LinearActive>()
+                .Push(ref _linearFilter);
         }
 
         void ISystemBase.OnDeconstruct() {}
@@ -68,23 +73,23 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
                 if ((entity.GetPosition() - melee.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadius)
                 {
                     var damage = melee.Read<ProjectileDamage>().Value;
-                    var from = melee.Read<ProjectileActive>().Player;
+                    var from = melee.Read<MeleeActive>().Player;
                     
-                    if (melee.Read<ProjectileActive>().Player.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
+                    if (melee.Read<MeleeActive>().Player.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
                     
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
                 }
             }
             
-            foreach (var melee in _meleeFilter)
+            foreach (var linear in _linearFilter)
             {
-                if ((entity.GetPosition() - melee.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadius)
+                if ((entity.GetPosition() - linear.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadius)
                 {
-                    var damage = melee.Read<ProjectileDamage>().Value;
-                    var from = melee.Read<ProjectileActive>().Player;
+                    var damage = linear.Read<ProjectileDamage>().Value;
+                    var from = linear.Read<LinearActive>().Player;
                     
-                    if (melee.Read<ProjectileActive>().Player.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
+                    if (linear.Read<LinearActive>().Player.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
                     
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
