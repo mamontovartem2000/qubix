@@ -5,7 +5,8 @@ using Project.Mechanics.Features.CollisionHandler.Components;
 using Project.Mechanics.Features.CollisionHandler.Systems;
 using UnityEngine;
 
-namespace Project.Mechanics.Features.CollisionHandler {
+namespace Project.Mechanics.Features.CollisionHandler 
+{
     #region usage
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
@@ -28,6 +29,7 @@ namespace Project.Mechanics.Features.CollisionHandler {
             AddSystem<HealthCollisionSystem>();
             AddSystem<MineCollisionSystem>();
             AddSystem<ExplosionSystem>();
+            AddSystem<ProjectileCollisionSystem>();
 
             ExplosionID = world.RegisterViewSource(ExplosionVFX);
             PlayerDeathID = world.RegisterViewSource(PlayerDeathVFX);

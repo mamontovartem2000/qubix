@@ -2,7 +2,6 @@
 using Project.Common.Components;
 using Project.Core.Features;
 using Project.Core.Features.Player.Components;
-using Project.Core.Features.SceneBuilder.Components;
 
 namespace Project.Mechanics.Features.CollisionHandler.Systems
 {
@@ -50,11 +49,13 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
             {
                 if ((entity.GetPosition() - player.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadius)
                 {
+                    if (entity.Read<ProjectileActive>().Player.Read<PlayerTag>().PlayerID == player.Read<PlayerTag>().PlayerID) return;
+                    
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
 
                     _feature.SpawnVFX(entity.GetPosition(), _feature.HealID, _feature.DefaultTimer);                    
-                    player.Destroy();
+                    entity.Destroy();
                 }
             }   
         }

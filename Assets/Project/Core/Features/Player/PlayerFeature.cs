@@ -97,6 +97,8 @@ namespace Project.Core.Features.Player {
 
             player.Get<PlayerTag>().PlayerID = id;
             player.Get<PlayerMovementSpeed>().Value = 4f;
+            player.Get<PlayerHealth>().Value = 100;
+            
             var dir = player.Get<FaceDirection>().Value = Vector3.forward;
             var traj = Vector3.up;
             player.SetPosition(SceneUtils.GetRandomSpawnPosition());

@@ -34,6 +34,8 @@ namespace Project.Core.UI_Scripts
  
         private void Activate(in Entity entity)
         {
+            Debug.Log($"incoming: {entity}");
+            
             if (!SceneUtils.CheckLocalPlayer(entity)) return;
 
             _background.DOFade(0.5f, 0.5f).SetEase(Ease.Linear);
