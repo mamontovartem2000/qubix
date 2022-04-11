@@ -15,6 +15,5 @@ namespace Dima.Scripts
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetRotation();
         }
-
     }
 }
