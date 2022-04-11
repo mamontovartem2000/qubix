@@ -29,6 +29,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Melee>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeFinished>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeParent>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, false, false, false, false, false, false);
@@ -111,6 +113,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Melee>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeFinished>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeParent>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, false, false, false, false, false, false);
@@ -188,6 +192,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.LinearWeapon>(false);
             structComponentsContainer.Validate<Project.Common.Components.Melee>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeActive>(false);
+            structComponentsContainer.Validate<Project.Common.Components.MeleeDelay>(false);
+            structComponentsContainer.Validate<Project.Common.Components.MeleeDelayDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeFinished>(true);
             structComponentsContainer.Validate<Project.Common.Components.MeleeParent>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(false);
@@ -270,6 +276,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.LinearWeapon>(false);
             entity.ValidateData<Project.Common.Components.Melee>(false);
             entity.ValidateData<Project.Common.Components.MeleeActive>(false);
+            entity.ValidateData<Project.Common.Components.MeleeDelay>(false);
+            entity.ValidateData<Project.Common.Components.MeleeDelayDefault>(false);
             entity.ValidateData<Project.Common.Components.MeleeFinished>(true);
             entity.ValidateData<Project.Common.Components.MeleeParent>(false);
             entity.ValidateData<Project.Common.Components.MeleeWeapon>(false);
