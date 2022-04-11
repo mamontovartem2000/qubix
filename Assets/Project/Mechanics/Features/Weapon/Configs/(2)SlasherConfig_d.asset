@@ -18,6 +18,8 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
+  - id: 4
+  - id: 5
   removeStructComponents: []
   templates: []
   references:
@@ -35,6 +37,14 @@ MonoBehaviour:
       data:
         Value: {fileID: 11400000, guid: 68fedcc182a5681469b8606376f6a026, type: 2}
     00000003:
-      type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: MeleeDelayDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 1
+        Value: 0.25
+    00000004:
+      type: {class: MeleeDelay, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 0.25
+    00000005:
+      type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 0.75

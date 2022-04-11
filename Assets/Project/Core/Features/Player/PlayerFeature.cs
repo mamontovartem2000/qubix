@@ -107,7 +107,7 @@ namespace Project.Core.Features.Player {
             var leftWeapon = new Entity("leftWeapon");
             LeftWeaponConfig.Apply(leftWeapon);
             leftWeapon.Get<WeaponTag>().ActorID = id;
-            leftWeapon.Get<WeaponTag>().Hand = WeaponHand.Left;
+            // leftWeapon.Get<WeaponTag>().Hand = WeaponHand.Left;
             leftWeapon.SetParent(player);
             leftWeapon.SetPosition(player.GetPosition() - new Vector3(0.35f,0,0));
             
@@ -119,7 +119,7 @@ namespace Project.Core.Features.Player {
             var rightWeapon = new Entity("rightWeapon");
             RightWeaponConfig.Apply(rightWeapon);
             rightWeapon.Get<WeaponTag>().ActorID = id;
-            rightWeapon.Get<WeaponTag>().Hand = WeaponHand.Right;
+            // rightWeapon.Get<WeaponTag>().Hand = WeaponHand.Right;
             rightWeapon.SetParent(player);
             rightWeapon.SetPosition(player.GetPosition() + new Vector3(0.35f,0,0));
             

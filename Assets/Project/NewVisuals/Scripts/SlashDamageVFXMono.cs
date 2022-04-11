@@ -13,7 +13,7 @@ namespace Project.NewVisuals.Scripts
         public override void ApplyState(float deltaTime, bool immediately)
         {
             transform.position = entity.GetPosition();
-            transform.rotation = entity.GetParent().GetRotation();
+            transform.rotation = entity.GetRotation();
         }
     }
 }

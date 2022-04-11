@@ -29,6 +29,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
                 .Push(ref _projectileFilter);
             
             Filter.Create("Melee-Filter")
+                .With<Melee>()
                 .With<MeleeActive>()
                 .Push(ref _meleeFilter);
            
@@ -75,7 +76,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
                     var damage = melee.Read<ProjectileDamage>().Value;
                     var from = melee.Read<MeleeActive>().Player;
                     
-                    if (melee.Read<MeleeActive>().Player.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
+                    if (from.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
                     
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);

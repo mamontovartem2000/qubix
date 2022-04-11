@@ -52,8 +52,9 @@ namespace Project.Common.Components
 
 	public struct Melee : IComponent
 	{
-		public float StartDelay;
-		public float EndDelay;
+		public float LifeTime;
+		// public float StartDelay;
+		// public float EndDelay;
 	}
 
 	public struct MeleeFinished : IComponent{}

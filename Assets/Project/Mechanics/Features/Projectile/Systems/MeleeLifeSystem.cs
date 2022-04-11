@@ -36,42 +36,21 @@ namespace Project.Mechanics.Features.Projectile.Systems
         {
             return Filter.Create("Filter-MeleeLifeSystem")
                 .With<Melee>()
+                .Without<LifeTimeLeft>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var del = ref entity.Get<Melee>();
+            ref var lifeTime = ref entity.Get<Melee>().LifeTime;
 
-            if (del.StartDelay - deltaTime > 0)
+            if (lifeTime - deltaTime > 0)
             {
-                del.StartDelay -= deltaTime;
+                lifeTime -= deltaTime;
             }
             else
             {
-                if (!entity.Has<MeleeActive>())
-                {
-                    entity.SetParent(new Entity(""));
-                    entity.Set(new MeleeActive {Player = entity.Get<MeleeParent>().Gun.GetParent()});
-                }
-            }
-
-            if (!entity.Has<MeleeActive>()) return;
-
-            if (del.EndDelay - deltaTime > 0)
-            {
-                del.EndDelay -= deltaTime;
-            }
-            else
-            {
-                if (entity.Has<MeleeFinished>()) return;
-
-                if(entity.Read<MeleeParent>().Gun.Has<MeleeActive>())
-                    entity.Read<MeleeParent>().Gun.Remove<MeleeActive>();
-                
-                entity.Remove<MeleeActive>();
-                entity.Set(new MeleeFinished());
-                entity.Get<LifeTimeLeft>().Value = 3f;
+                entity.Get<LifeTimeLeft>().Value = 1f;
             }
         }
     }

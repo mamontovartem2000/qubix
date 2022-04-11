@@ -36,10 +36,9 @@ namespace Project.Mechanics.Features.Projectile
 
             entity.SetPosition(gun.GetPosition());
             entity.SetRotation(gun.GetParent().GetRotation());
-
             entity.Get<ProjectileDirection>().Value = direction;
             entity.Get<ProjectileActive>().Player = gun.GetParent();
-            
+
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(gun);
         }
 
@@ -69,23 +68,26 @@ namespace Project.Mechanics.Features.Projectile
                 gun.Remove<LinearFull>();
         }
 
-        public void SpawnMelee(Entity gun, int length, float delay)
+        public void SpawnMelee(Entity gun, int length, Vector3 direction)
         {
+           
+            
             for (var i = 1; i < length; i++)
             {
                 var entity = new Entity("melee");
                 gun.Read<ProjectileConfig>().Value.Apply(entity);
-                entity.SetParent(gun);
-
-                entity.SetPosition(gun.GetPosition() + new Vector3(0f, 0f, 1 + i / 2f));
-                entity.Get<Melee>().StartDelay = delay;
-                entity.Get<Melee>().EndDelay = delay * 0.2f;
                 
                 var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
                 entity.InstantiateView(view);
-                
-                entity.Get<MeleeParent>().Gun = gun;
+                entity.Get<Melee>().LifeTime = 0.1f;
+                entity.SetPosition(gun.GetParent().GetPosition() + (direction * 2) * i);
             }
+
+            if(!gun.Has<LeftWeaponShot>())
+                gun.Remove<MeleeActive>();
+            
+            gun.Get<MeleeDelay>().Value = gun.Read<MeleeDelayDefault>().Value;
+            gun.Get<Cooldown>().Value = gun.Read<CooldownDefault>().Value;
             world.GetFeature<EventsFeature>().leftWeaponFired.Execute(gun);
         }
     }

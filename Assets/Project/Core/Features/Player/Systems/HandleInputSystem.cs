@@ -24,7 +24,7 @@ namespace Project.Core.Features.Player.Systems
 
         private PlayerFeature _feature;
 
-        private Filter _playerFilter, _weaponFilter;
+        private Filter _playerFilter;
 
         private RPCId _forward, _backward, _left, _right, _mouseLeft, _mouseRight, _lockDirection;
 
@@ -38,10 +38,6 @@ namespace Project.Core.Features.Player.Systems
             Filter.Create("Filter-Players")
                 .With<PlayerTag>()
                 .Push(ref _playerFilter);
-
-            Filter.Create("Weapon-Filter")
-                .With<WeaponTag>()
-                .Push(ref _weaponFilter);
         }
         
         
@@ -206,6 +202,7 @@ namespace Project.Core.Features.Player.Systems
                     case InputState.Pressed:
                     {
                         node.Set(new LeftWeaponShot());
+                        node.Set(new MeleeActive());
                         break;
                     }
                     case InputState.Released:

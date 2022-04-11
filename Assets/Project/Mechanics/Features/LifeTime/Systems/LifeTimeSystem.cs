@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.Lifetime.Systems
 {
@@ -40,7 +41,7 @@ namespace Project.Mechanics.Features.Lifetime.Systems
         {
             if (entity.Read<LifeTimeLeft>().Value - deltaTime > 0)
             {
-                entity.Get<LifeTimeLeft>().Value -= deltaTime;
+                entity.Get<LifeTimeLeft>().Value -= deltaTime/2;
             }
             else
             {

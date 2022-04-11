@@ -23,7 +23,7 @@ namespace Project.Modules
     public class NetworkModule : ME.ECS.Network.NetworkModule<TState>
     {
         public bool FakeConnect = false;
-        public int PlayerCount = 4;
+        public int PlayerCount = 2;
 
         private int _orderId;
         private PhotonTransporter _photonTransporter;
@@ -35,7 +35,7 @@ namespace Project.Modules
 
         protected override int GetRPCOrder()
         {
-            return PhotonNetwork.LocalPlayer.ActorNumber;
+            return FakeConnect ? 1 : PhotonNetwork.LocalPlayer.ActorNumber;
             // return this._orderId;
         }
 

@@ -4,24 +4,18 @@ using ME.ECS.Views.Providers;
 
 namespace Project.Common.Components
 {
-    public enum WeaponHand
-    {
-        Left, Right
-    }
     public struct AutomaticWeapon : IComponent {}
-
     public struct LinearWeapon : IComponent
+    {
+        public int Length;
+    }
+    public struct TrajectoryWeapon : IComponent {}
+    public struct MeleeWeapon : IComponent
     {
         public int Length;
     }
     
     public struct LinearFull : IComponent {}
-    public struct TrajectoryWeapon : IComponent {}
-
-    public struct MeleeWeapon : IComponent
-    {
-        public int Length;
-    }
     public struct WeaponAim : IComponent
     {
         public Entity Aim;
@@ -68,6 +62,16 @@ namespace Project.Common.Components
     }
 
     public struct SpreadAmount : IComponent
+    {
+        public float Value;
+    }
+
+    public struct MeleeDelay : IComponent
+    {
+        public float Value;
+    }
+
+    public struct MeleeDelayDefault : IComponent
     {
         public float Value;
     }

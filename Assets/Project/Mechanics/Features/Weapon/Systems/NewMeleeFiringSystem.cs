@@ -46,7 +46,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
             var len = entity.Read<MeleeWeapon>().Length;
             var reload = entity.Read<ReloadTimeDefault>().Value;
 
-            _projectile.SpawnMelee(entity, len, reload);
+            // _projectile.SpawnMelee(entity, len, reload);
             entity.Set(new MeleeActive());
         }
     }
