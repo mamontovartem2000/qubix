@@ -64,4 +64,6 @@ namespace Project.Common.Components
 	{
 		public Entity Parent;
 	}
+	
+	public struct DamageSource : IComponent {}
 }

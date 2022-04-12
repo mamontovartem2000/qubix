@@ -2,6 +2,7 @@
 using Project.Common.Components;
 using Project.Core.Features;
 using Project.Core.Features.Player.Components;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.CollisionHandler.Systems
 {
@@ -25,15 +26,17 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         {
             this.GetFeature(out _feature);
             Filter.Create("Projectile-Filter")
+                .With<DamageSource>()
                 .With<ProjectileActive>()
                 .Push(ref _projectileFilter);
             
             Filter.Create("Melee-Filter")
-                // .With<Melee>()
+                .With<DamageSource>()
                 .With<MeleeActive>()
                 .Push(ref _meleeFilter);
            
             Filter.Create("Linear-Filter")
+                .With<DamageSource>()
                 .With<LinearActive>()
                 .Push(ref _linearFilter);
         }
@@ -77,7 +80,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
                     var from = melee.Read<MeleeActive>().Player;
                     
                     if (from.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
-                    
+
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
                 }

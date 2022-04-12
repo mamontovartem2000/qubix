@@ -17,6 +17,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ChannelSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Cooldown>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FirstSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FourthSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LeftWeaponShot>(true, false, false, false, false, false, false);
@@ -96,6 +97,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ChannelSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Cooldown>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FirstSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FourthSkillTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LeftWeaponShot>(true, false, false, false, false, false, false);
@@ -170,6 +172,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ChannelSkill>(false);
             structComponentsContainer.Validate<Project.Common.Components.Cooldown>(false);
             structComponentsContainer.Validate<Project.Common.Components.CooldownDefault>(false);
+            structComponentsContainer.Validate<Project.Common.Components.DamageSource>(true);
             structComponentsContainer.Validate<Project.Common.Components.FirstSkillTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.FourthSkillTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.LeftWeaponShot>(true);
@@ -249,6 +252,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ChannelSkill>(false);
             entity.ValidateData<Project.Common.Components.Cooldown>(false);
             entity.ValidateData<Project.Common.Components.CooldownDefault>(false);
+            entity.ValidateData<Project.Common.Components.DamageSource>(true);
             entity.ValidateData<Project.Common.Components.FirstSkillTag>(false);
             entity.ValidateData<Project.Common.Components.FourthSkillTag>(false);
             entity.ValidateData<Project.Common.Components.LeftWeaponShot>(true);
