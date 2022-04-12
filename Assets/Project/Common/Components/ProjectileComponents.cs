@@ -9,6 +9,11 @@ namespace Project.Common.Components
 		public MonoBehaviourViewBase Value;
 	}
 	
+	public struct ProjectileDirection : IComponent
+	{
+		public Vector3 Value;
+	}
+	
 	public struct ProjectileSpeed : IComponent
 	{
 		public float Value;
@@ -17,11 +22,6 @@ namespace Project.Common.Components
 	public struct ProjectileSpeedModifier : IComponent
 	{
 		public float Value;
-	}
-
-	public struct ProjectileDirection : IComponent
-	{
-		public Vector3 Value;
 	}
 
 	public struct ProjectileDamage : IComponent
@@ -45,24 +45,6 @@ namespace Project.Common.Components
 		public Entity Player;
 	}
 
-	public struct LinearVisual : IComponent
-	{
-		public Entity Parent;
-	}
-
-	public struct Melee : IComponent
-	{
-		public float LifeTime;
-		// public float StartDelay;
-		// public float EndDelay;
-	}
-
-	public struct MeleeFinished : IComponent{}
-	public struct MeleeParent : IComponent
-	{
-		public Entity Gun;
-	}
-
 	public struct MeleeActive : IComponent
 	{
 		public Entity Player;
@@ -71,5 +53,15 @@ namespace Project.Common.Components
 	public struct ProjectileActive : IComponent
 	{
 		public Entity Player;
+	}
+	
+	public struct Trajectory : IComponent
+	{
+		public float Value;
+	}
+	
+	public struct LinearVisual : IComponent
+	{
+		public Entity Parent;
 	}
 }

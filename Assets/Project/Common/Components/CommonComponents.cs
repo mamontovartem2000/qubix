@@ -9,8 +9,6 @@ namespace Project.Common.Components
         public Entity ApplyFrom;
     }
 
-    public struct WeaponShot : IComponent {}
-    
     public struct LifeTimeLeft : IComponent
     {
         public float Value;

@@ -14,7 +14,6 @@ namespace Project.Common.Components
     {
         public int Length;
     }
-    
     public struct LinearFull : IComponent {}
     public struct WeaponAim : IComponent
     {

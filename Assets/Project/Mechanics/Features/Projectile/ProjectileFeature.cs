@@ -20,8 +20,6 @@ namespace Project.Mechanics.Features.Projectile
         protected override void OnConstruct()
         {
             AddSystem<ProjectileMovementSystem>();
-            AddSystem<LinearLifeSystem>();
-            AddSystem<MeleeLifeSystem>();
         }
 
         protected override void OnDeconstruct() {}
@@ -79,7 +77,7 @@ namespace Project.Mechanics.Features.Projectile
                 
                 var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
                 entity.InstantiateView(view);
-                entity.Get<Melee>().LifeTime = 0.1f;
+                entity.Set( new MeleeActive {Player = gun.GetParent()}, ComponentLifetime.NotifyAllSystems);
                 entity.SetPosition(gun.GetParent().GetPosition() + (direction * 2) * i);
             }
 

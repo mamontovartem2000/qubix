@@ -14,19 +14,17 @@ namespace Project.Mechanics.Features.Weapon
     {
         protected override void OnConstruct()
         {
-            AddSystem<NewSpawnWeaponSystem>();
+            AddSystem<SpawnWeaponSystem>();
             
-            AddSystem<NewAutomaticFiringSystem>();
-            AddSystem<NewLinearFiringSystem>();
+            AddSystem<AutomaticFiringSystem>();
+            AddSystem<LinearFiringSystem>();
             AddSystem<MeleeFiringSystem>();
-            // AddSystem<NewMeleeFiringSystem>();
             
             AddSystem<WeaponCooldownSystem>();
-            AddSystem<NewLinearReloadSystem>();
+            AddSystem<LinearReloadSystem>();
             AddSystem<WeaponReloadSystem>();
 
-            AddSystem<NewRefreshAmmoUISystem>();
-            AddSystem<NewLinearVisualsSystem>();
+            AddSystem<RefreshLinearUISystem>();
         }
 
         protected override void OnDeconstruct() {}

@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 
-namespace Project.Mechanics.Features.Projectile.Systems
+namespace Project.Mechanics.Features.Lifetime.Systems
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS
@@ -14,7 +14,7 @@ namespace Project.Mechanics.Features.Projectile.Systems
     {
         public World world { get; set; }
         
-        private ProjectileFeature _feature;
+        private LifeTimeFeature _feature;
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out this._feature);

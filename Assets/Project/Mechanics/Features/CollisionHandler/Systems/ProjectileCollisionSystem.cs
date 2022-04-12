@@ -29,7 +29,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
                 .Push(ref _projectileFilter);
             
             Filter.Create("Melee-Filter")
-                .With<Melee>()
+                // .With<Melee>()
                 .With<MeleeActive>()
                 .Push(ref _meleeFilter);
            

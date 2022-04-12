@@ -27,12 +27,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearFull>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearVisual>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.Melee>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeFinished>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeParent>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(false, false, false, false, false, false, false);
@@ -54,8 +51,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponShot>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponView>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.EndGame>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameFinished>(false, false, false, false, false, false, false);
@@ -111,12 +106,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearFull>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearVisual>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.Melee>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeFinished>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeParent>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(false, false, false, false, false, false, false);
@@ -138,8 +130,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponShot>(true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponView>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.EndGame>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameFinished>(false, false, false, false, false, false, false);
@@ -190,12 +180,9 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.LinearFull>(true);
             structComponentsContainer.Validate<Project.Common.Components.LinearVisual>(false);
             structComponentsContainer.Validate<Project.Common.Components.LinearWeapon>(false);
-            structComponentsContainer.Validate<Project.Common.Components.Melee>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeActive>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelay>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelayDefault>(false);
-            structComponentsContainer.Validate<Project.Common.Components.MeleeFinished>(true);
-            structComponentsContainer.Validate<Project.Common.Components.MeleeParent>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(false);
             structComponentsContainer.Validate<Project.Common.Components.PassiveSkill>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileActive>(false);
@@ -217,8 +204,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Trajectory>(false);
             structComponentsContainer.Validate<Project.Common.Components.TrajectoryWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.WeaponAim>(false);
-            structComponentsContainer.Validate<Project.Common.Components.WeaponShot>(true);
-            structComponentsContainer.Validate<Project.Common.Components.WeaponTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponView>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.EndGame>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GameFinished>(false);
@@ -274,12 +259,9 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.LinearFull>(true);
             entity.ValidateData<Project.Common.Components.LinearVisual>(false);
             entity.ValidateData<Project.Common.Components.LinearWeapon>(false);
-            entity.ValidateData<Project.Common.Components.Melee>(false);
             entity.ValidateData<Project.Common.Components.MeleeActive>(false);
             entity.ValidateData<Project.Common.Components.MeleeDelay>(false);
             entity.ValidateData<Project.Common.Components.MeleeDelayDefault>(false);
-            entity.ValidateData<Project.Common.Components.MeleeFinished>(true);
-            entity.ValidateData<Project.Common.Components.MeleeParent>(false);
             entity.ValidateData<Project.Common.Components.MeleeWeapon>(false);
             entity.ValidateData<Project.Common.Components.PassiveSkill>(false);
             entity.ValidateData<Project.Common.Components.ProjectileActive>(false);
@@ -301,8 +283,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Trajectory>(false);
             entity.ValidateData<Project.Common.Components.TrajectoryWeapon>(true);
             entity.ValidateData<Project.Common.Components.WeaponAim>(false);
-            entity.ValidateData<Project.Common.Components.WeaponShot>(true);
-            entity.ValidateData<Project.Common.Components.WeaponTag>(false);
             entity.ValidateData<Project.Common.Components.WeaponView>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.EndGame>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.GameFinished>(false);

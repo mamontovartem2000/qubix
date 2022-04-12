@@ -10,7 +10,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
     #endregion
-    public sealed class NewSpawnWeaponSystem : ISystemFilter
+    public sealed class SpawnWeaponSystem : ISystemFilter
     {
         public World world { get; set; }
         private WeaponFeature _feature;
