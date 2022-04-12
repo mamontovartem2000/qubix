@@ -1,6 +1,6 @@
 using ME.ECS;
+using Project.Common.Components;
 using Project.Core.Features;
-using Project.Core.Features.Player.Components;
 using UnityEngine;
 
 using TMPro;

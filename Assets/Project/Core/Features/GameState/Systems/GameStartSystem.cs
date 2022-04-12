@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.Player;
@@ -44,7 +45,7 @@ namespace Project.Core.Features.GameState.Systems
 
 			// entity.SetShared(new PlayerTag(), 0);
 
-			world.GetFeature<EventsFeature>().AllPlayersReady.Execute(world.GetFeature<PlayerFeature>().GetActivePlayer());
+			// world.GetFeature<EventsFeature>().AllPlayersReady.Execute(world.GetFeature<PlayerFeature>().GetActivePlayer());
 			// world.GetFeature<PlayerFeature>().ForceStart();
 
 			//            if(timer != 0) return;

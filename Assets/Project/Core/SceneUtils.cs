@@ -1,4 +1,5 @@
 using ME.ECS;
+using Project.Common.Components;
 using Project.Core.Features.Player;
 using Project.Core.Features.SceneBuilder.Components;
 using UnityEngine;
@@ -77,7 +78,7 @@ namespace Project.Core.Features
 
         public static bool CheckLocalPlayer(Entity player)
         {
-            return player == Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer();
+            return player == Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer(player.Read<PlayerTag>().PlayerID);
         }
     }
 }

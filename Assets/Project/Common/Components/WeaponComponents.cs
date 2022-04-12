@@ -25,7 +25,7 @@ namespace Project.Common.Components
         public DataConfig Value;
     }
 
-    public struct WeaponView : IComponent
+    public struct NeedWeapon : IComponent
     {
         public MonoBehaviourViewBase View;
     }

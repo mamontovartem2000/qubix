@@ -1,8 +1,7 @@
 ﻿using ME.ECS;
-using Project.Core.Features.GameState.Components;
-using Project.Core.Features.Player.Components;
+using Project.Common.Components;
 
-namespace Project.Core.Features.Player.Systems
+namespace Project.Mechanics.Features.Avatar.Systems
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS
@@ -11,41 +10,48 @@ namespace Project.Core.Features.Player.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
     #endregion
-    public sealed class PlayerRespawnSystem : ISystemFilter 
+    public sealed class SpawnPlayerAvatarSystem : ISystemFilter
     {
         public World world { get; set; }
-    
-        private PlayerFeature _feature;
-        void ISystemBase.OnConstruct() 
+        
+        private AvatarFeature _feature;
+        void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
         }
-        
+
         void ISystemBase.OnDeconstruct() {}
-        #if !CSHARP_8_OR_NEWER
+#if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;
-        #endif
+#endif
         Filter ISystemFilter.filter { get; set; }
 
-        Filter ISystemFilter.CreateFilter() 
+        Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-PlayerRespawnSystem")
-                .With<DeadBody>()
-                .WithoutShared<GameFinished>()
+            return Filter.Create("Filter-SpawnPlayerAvatarSystem")
+                .With<NeedAvatar>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var deadbody = ref entity.Get<DeadBody>();
-            deadbody.Time -= deltaTime;
-            
-            if(deadbody.Time <= 0)
+            if (entity.Has<RespawnTime>())
             {
-                var newPlayer = _feature.RespawnPlayer(deadbody.ActorID);
-                newPlayer.SetAs<PlayerScore>(entity);
-                entity.Destroy();
+                ref var time = ref entity.Get<RespawnTime>().Value;
+
+                if (time > 0)
+                {
+                    time -= deltaTime;
+                }
+                else
+                {
+                    entity.Remove<RespawnTime>();
+                }
+            }
+            else
+            {
+                _feature.SpawnPlayerAvatar(entity);
             }
         }
     }

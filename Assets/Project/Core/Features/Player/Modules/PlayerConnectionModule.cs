@@ -30,11 +30,6 @@ namespace Project.Core.Features.Player.Modules
                 _feature.OnLocalPlayerConnected(nsap.ActorID);
             }
             
-            if (world.GetMarker(out NetworkPlayerConnectedTimeSynced npc))
-            {
-                _feature.OnGameStarted(npc.ActorID);
-            }
-            
             if (world.GetMarker(out NetworkPlayerDisconnected npd))
             {
                 _feature.OnLocalPlayerDisconnected(npd.ActorID);
