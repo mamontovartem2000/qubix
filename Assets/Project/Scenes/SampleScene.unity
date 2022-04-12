@@ -368,6 +368,102 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &949177910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 949177914}
+  - component: {fileID: 949177913}
+  - component: {fileID: 949177912}
+  - component: {fileID: 949177911}
+  m_Layer: 0
+  m_Name: Mirror Plane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!64 &949177911
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949177910}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &949177912
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949177910}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9ee1c2f87cb5c4ece8b43bdd2d39d1d6, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &949177913
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949177910}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &949177914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949177910}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 37.97, y: -0.34, z: 14.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &994954906
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1215523213
 Transform:
   m_ObjectHideFlags: 0
@@ -732,18 +828,18 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 32.96973
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 50
-  field of view: 60
+  near clip plane: 0.01
+  far clip plane: 400
+  field of view: 40
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -835,18 +931,18 @@ MonoBehaviour:
   Cull: 0
   CullDistance: 0
   TextureSize: 1
-  ManualSize: 1280
+  ManualSize: 1920
   UseCameraClipPlane: 0
   ClipPlaneOffset: 0
   ReflectLayers:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 4294967295
   DirectLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  MixBlackColor: 0
+  MixBlackColor: 1
   EnableDepthBlur: 1
-  DepthBlurShader: {fileID: 4800000, guid: 9872b8e539142416f857307a76de6e0e, type: 3}
+  DepthBlurShader: {fileID: 4800000, guid: e02cb2d3802ee44a09e3baf03630a245, type: 3}
   DepthBlurCutoff: 30
   DepthBlurIterations: 8
   DepthBlurSurfacePower: 1
@@ -855,7 +951,7 @@ MonoBehaviour:
   EnableSimpleDepth: 1
   SimpleDepthCutoff: 1.18
   Shades:
-  - ObjectToShade: {fileID: 0}
+  - ObjectToShade: {fileID: 949177910}
     MaterialToChange: {fileID: 2100000, guid: 9ee1c2f87cb5c4ece8b43bdd2d39d1d6, type: 2}
   EnableFinalShader: 0
   FinalShader: {fileID: 0}
@@ -966,6 +1062,10 @@ PrefabInstance:
     - target: {fileID: 6007418976307247444, guid: 481493af27defdf418703edf435270ba, type: 3}
       propertyPath: m_Name
       value: UI_CORE
+      objectReference: {fileID: 0}
+    - target: {fileID: 6007418976307247444, guid: 481493af27defdf418703edf435270ba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6007418976307247445, guid: 481493af27defdf418703edf435270ba, type: 3}
       propertyPath: m_RootOrder
