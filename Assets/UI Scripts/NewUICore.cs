@@ -1,8 +1,9 @@
 using ME.ECS;
+using Project.Core;
 using Project.Core.Features;
 using UnityEngine;
 
-namespace Project.Common.UI_Scripts
+namespace UI_Scripts
 {
     public class NewUICore : MonoBehaviour
     {

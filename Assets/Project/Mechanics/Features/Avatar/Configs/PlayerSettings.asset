@@ -17,9 +17,6 @@ MonoBehaviour:
   - id: 0
   - id: 1
   - id: 2
-  - id: 3
-  - id: 4
-  - id: 5
   removeStructComponents: []
   templates: []
   references:
@@ -29,23 +26,10 @@ MonoBehaviour:
       data:
         Value: 100
     00000001:
-      type: {class: FaceDirection, ns: Project.Core.Features.Player.Components, asm: Project.Core}
-      data:
-        Value: {x: 0, y: 0, z: 1}
-    00000002:
-      type: {class: PlayerMoveTarget, ns: Project.Core.Features.Player.Components, asm: Project.Core}
-      data:
-        Value: {x: 0, y: 0, z: 0}
-    00000003:
-      type: {class: PlayerTag, ns: Project.Core.Features.Player.Components, asm: Project.Core}
-      data:
-        PlayerID: -1
-    00000004:
       type: {class: PlayerMovementSpeed, ns: Project.Core.Features.Player.Components, asm: Project.Core}
       data:
         Value: 4
-    00000005:
-      type: {class: MoveInput, ns: Project.Core.Features.Player.Components, asm: Project.Core}
+    00000002:
+      type: {class: NeedAvatar, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {x: 0, y: 0}
-        Axis: 0
+        Value: {fileID: -3097522987580952900, guid: 9ef46558f0964a6498ec928a548ff37d, type: 3}

@@ -1,11 +1,12 @@
 ﻿using ME.ECS;
-using ME.ECS.Views.Providers;
+using ME.ECS.DataConfigs;
 using Project.Common.Components;
-using Project.Core.Features;
+using Project.Core;
 using Project.Core.Features.Player.Components;
 using Project.Mechanics.Features.Avatar.Systems;
+using UnityEngine;
 
-namespace Project.Mechanics.Features
+namespace Project.Mechanics.Features.Avatar
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS
@@ -16,15 +17,13 @@ namespace Project.Mechanics.Features
     #endregion
     public sealed class AvatarFeature : Feature
     {
-        public MonoBehaviourViewBase AvatarView;
-        
-        private ViewId _avatarID;
+        private readonly Vector3 _direction = new Vector3(0f,0f,1f);
+        private readonly Vector3 _trajectory = new Vector3(0f, 1f, 0f);
         
         protected override void OnConstruct()
         {
-            _avatarID = world.RegisterViewSource(AvatarView);
-
             AddSystem<SpawnPlayerAvatarSystem>();
+            AddSystem<PlayerMovementSystem>();
         }
 
         protected override void OnDeconstruct() {}
@@ -32,36 +31,38 @@ namespace Project.Mechanics.Features
         public void SpawnPlayerAvatar(Entity parent)
         {
             var entity = new Entity("avatar");
-
             entity.Get<PlayerEntity>().Value = parent;
             parent.Read<AvatarSettings>().PlayerConfig.Apply(entity);
 
+            var view = world.RegisterViewSource(entity.Read<NeedAvatar>().Value);
+            entity.InstantiateView(view);
+
+            ConstructWeapon(parent.Read<AvatarSettings>().LeftWeaponConfig, entity);
+            ConstructWeapon(parent.Read<AvatarSettings>().RightWeaponConfig, entity);
+
             entity.SetPosition(SceneUtils.GetRandomSpawnPosition());
             entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
+            parent.Get<PlayerAvatar>().Value = entity;
+        }
+
+        private void ConstructWeapon(DataConfig weaponConfig, Entity parent)
+        {
+            var weapon = new Entity("weapon");
+            weaponConfig.Apply(weapon);
             
-            // var leftWeapon = new Entity("leftWeapon");
-            // LeftWeaponConfig.Apply(leftWeapon);
-            // leftWeapon.SetParent(entity);
-            // leftWeapon.SetPosition(entity.GetPosition() - new Vector3(0.35f,0,0));
-            //
-            // var leftAim = new Entity("leftAim");
-            // leftAim.SetParent(leftWeapon);
-            // leftAim.SetPosition(leftWeapon.GetPosition() + dir/2);
-            // leftWeapon.Get<WeaponAim>().Aim = leftAim;
-            //
-            // var rightWeapon = new Entity("rightWeapon");
-            // RightWeaponConfig.Apply(rightWeapon);
-            // rightWeapon.SetParent(entity);
-            // rightWeapon.SetPosition(entity.GetPosition() + new Vector3(0.35f,0,0));
-            //
-            // var rightAim = new Entity("rightAim");
-            // rightAim.SetParent(rightWeapon);
-            // rightAim.SetPosition(rightWeapon.Has<TrajectoryWeapon>() ? rightWeapon.GetPosition() + (dir+traj)/2 : rightWeapon.GetPosition() + dir/2);
-            // rightWeapon.Get<WeaponAim>().Aim = rightAim;
-            //
-            // world.RemoveSharedData<GamePaused>();
-            //
-            // entity.InstantiateView(_avatarID);
+            weapon.SetPosition(weapon.Read<WeaponPosition>().Value);
+            weapon.SetParent(parent);
+
+            var aim = new Entity("aim");
+            aim.SetParent(weapon);
+            
+            // aim.SetPosition(weapon.Has<TrajectoryWeapon>() ? weapon.GetPosition() + (_direction+_trajectory) : weapon.GetPosition() + _direction);
+            aim.SetLocalPosition(weapon.Has<TrajectoryWeapon>() ?_direction+_trajectory: _direction);
+
+            weapon.Get<WeaponAim>().Aim = aim;
+            
+            var view = world.RegisterViewSource(weapon.Read<NeedWeapon>().View);
+            weapon.InstantiateView(view);
         }
     }
 }

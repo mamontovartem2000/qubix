@@ -1,32 +1,38 @@
 using DG.Tweening;
 using ME.ECS;
-using Project.Core.Features;
+using Project.Common.Components;
+using Project.Core;
 using Project.Core.Features.Player.Components;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NewHealthScript : MonoBehaviour
+namespace UI_Scripts
 {
-    public GlobalEvent HealthChangedEvent;
-    public Image Healthbar;
-
-    private void Start()
+    public class NewHealthScript : MonoBehaviour
     {
-        HealthChangedEvent.Subscribe(HealthChanged);
-    }
-    
-    private void HealthChanged(in Entity entity)
-    {
-        if(!SceneUtils.CheckLocalPlayer(entity)) return;
+        public GlobalEvent HealthChangedEvent;
+        public Image Healthbar;
 
-        var fill = entity.Read<PlayerHealth>().Value / 100;
+        private void Start()
+        {
+            HealthChangedEvent.Subscribe(HealthChanged);
+        }
 
-        Healthbar.DOFillAmount(fill, 0.5f);
-        Healthbar.color = Color.Lerp(Color.red, Color.green, fill);
-    }
+        private void HealthChanged(in Entity player)
+        {
+            if(!SceneUtils.CheckLocalPlayer(player)) return;
 
-    private void OnDestroy()
-    {
-        HealthChangedEvent.Unsubscribe(HealthChanged);
+            var entity = player.Read<PlayerAvatar>().Value;
+
+            var fill = entity.Read<PlayerHealth>().Value / 100;
+
+            Healthbar.DOFillAmount(fill, 0.5f);
+            Healthbar.color = Color.Lerp(Color.red, Color.green, fill);
+        }
+
+        private void OnDestroy()
+        {
+            HealthChangedEvent.Unsubscribe(HealthChanged);
+        }
     }
 }

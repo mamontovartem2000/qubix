@@ -45,14 +45,13 @@ namespace Project.Mechanics.Features.Weapon.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			//THE RIGHT WAY!
 			ref var delay = ref entity.Get<MeleeDelay>().Value;
 			var dir = entity.Read<WeaponAim>().Aim.GetPosition() - entity.GetPosition();
+			
+			delay -= deltaTime;
 
-			if (delay - deltaTime > 0)
-			{
-				delay -= deltaTime;
-			}
-			else
+			if (delay <= 0)
 			{
 				_projectile.SpawnMelee(entity, 3, dir);
 			}

@@ -5,6 +5,7 @@ using Project.Input.InputHandler.Markers;
 using Project.Modules;
 using System;
 using ME.ECS.Transform;
+using UnityEngine;
 
 namespace Project.Core.Features.Player.Systems
 {
@@ -39,8 +40,6 @@ namespace Project.Core.Features.Player.Systems
                 .With<PlayerTag>()
                 .Push(ref _playerFilter);
         }
-        
-        
 
         private void RegisterRPSs(NetworkModule net)
         {
@@ -102,9 +101,14 @@ namespace Project.Core.Features.Player.Systems
 
         private void ForwardKey_RPC(ForwardMarker fm)
         {
-            var entity = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            if (!entity.IsAlive()) return;
+            var player = _feature.GetPlayer(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+            // var player = world.GetFeature<PlayerFeature>().GetLocalPlayer(fm.ActorID);
+            
+            // if (!entity.IsAlive()) return;
+            if (!player.Has<PlayerAvatar>()) return;
 
+            ref var entity = ref player.Get<PlayerAvatar>().Value; 
+            
             entity.Get<MoveInput>().Axis = fm.Axis;
 
             switch (fm.State)
@@ -124,8 +128,11 @@ namespace Project.Core.Features.Player.Systems
 
         private void BackwardKey_RPC(BackwardMarker bm)
         {
-            var entity = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            if (!entity.IsAlive()) return;
+            var player = _feature.GetPlayer(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+            // if (!entity.IsAlive()) return;
+            if (!player.Has<PlayerAvatar>()) return;
+
+            ref var entity = ref player.Get<PlayerAvatar>().Value; 
 
             entity.Get<MoveInput>().Axis = bm.Axis;
 
@@ -146,8 +153,11 @@ namespace Project.Core.Features.Player.Systems
 
         private void LeftKey_RPC(LeftMarker lm)
         {
-            var entity = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            if (!entity.IsAlive()) return;
+            var player = _feature.GetPlayer(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+            // if (!entity.IsAlive()) return;
+            if (!player.Has<PlayerAvatar>()) return;
+
+            ref var entity = ref player.Get<PlayerAvatar>().Value; 
 
             entity.Get<MoveInput>().Axis = lm.Axis;
 
@@ -168,8 +178,11 @@ namespace Project.Core.Features.Player.Systems
 
         private void RightKey_RPC(RightMarker rm)
         {
-            var entity = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            if (!entity.IsAlive()) return;
+            var player = _feature.GetPlayer(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+            // if (!entity.IsAlive()) return;
+            if (!player.Has<PlayerAvatar>()) return;
+
+            ref var entity = ref player.Get<PlayerAvatar>().Value; 
 
             entity.Get<MoveInput>().Axis = rm.Axis;
 
@@ -190,8 +203,11 @@ namespace Project.Core.Features.Player.Systems
 
         private void LeftMouse_RPC(MouseLeftMarker mlm)
         {
-            var entity = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            if (!entity.IsAlive()) return;
+            var player = _feature.GetPlayer(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+            // if (!entity.IsAlive()) return;
+            if (!player.Has<PlayerAvatar>()) return;
+
+            ref var entity = ref player.Get<PlayerAvatar>().Value; 
 
             var nodes = entity.Get<Nodes>().items;
 
@@ -217,8 +233,11 @@ namespace Project.Core.Features.Player.Systems
 
         private void RightMouse_RPC(MouseRightMarker mrm)
         {
-            var entity = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            if (!entity.IsAlive()) return;
+            var player = _feature.GetPlayer(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+            // if (!entity.IsAlive()) return;
+            if (!player.Has<PlayerAvatar>()) return;
+
+            ref var entity = ref player.Get<PlayerAvatar>().Value; 
             
             var nodes = entity.Get<Nodes>().items;
 
@@ -242,8 +261,11 @@ namespace Project.Core.Features.Player.Systems
 
         private void SpaceKey_RPC(LockDirectionMarker sm)
         {
-            var entity = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            if (!entity.IsAlive()) return;
+            var player = _feature.GetPlayer(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+            // if (!entity.IsAlive()) return;
+            if (!player.Has<PlayerAvatar>()) return;
+
+            ref var entity = ref player.Get<PlayerAvatar>().Value; 
 
             switch (sm.State)
             {

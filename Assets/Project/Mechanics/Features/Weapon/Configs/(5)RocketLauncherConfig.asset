@@ -13,41 +13,8 @@ MonoBehaviour:
   m_Name: (5)RocketLauncherConfig
   m_EditorClassIdentifier: 
   sharedGroupId: 0
-  structComponents:
-  - id: 0
-  - id: 1
-  - id: 2
-  - id: 3
-  - id: 4
-  - id: 5
-  - id: 6
+  structComponents: []
   removeStructComponents: []
   templates: []
   references:
     version: 1
-    00000000:
-      type: {class: WeaponView, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        View: {fileID: 8892978076922649115, guid: b2197c6a03c203041814c79d6e8a92f1, type: 3}
-    00000001:
-      type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}
-    00000002:
-      type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 6
-    00000003:
-      type: {class: AmmoCapacity, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 6
-    00000004:
-      type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0.7
-    00000005:
-      type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 3
-    00000006:
-      type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: {fileID: 11400000, guid: 110f74af816eef14cbab766e26319d2e, type: 2}

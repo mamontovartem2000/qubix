@@ -1,11 +1,11 @@
 using ME.ECS;
 using Project.Common.Components;
+using Project.Core;
 using Project.Core.Features;
+using TMPro;
 using UnityEngine;
 
-using TMPro;
-
-namespace Project.Common.UI_Scripts
+namespace UI_Scripts
 {
 	public class NewDeathCounter : MonoBehaviour
 	{

@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
+using UnityEngine;
 
 namespace Project.Common.Components
 {
@@ -73,5 +74,10 @@ namespace Project.Common.Components
     public struct MeleeDelayDefault : IComponent
     {
         public float Value;
+    }
+
+    public struct WeaponPosition : IComponent
+    {
+        public Vector3 Value;
     }
 }

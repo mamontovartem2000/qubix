@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Project.Core.Features
+namespace Project.Core
 {
     public class ParceUtils
     {

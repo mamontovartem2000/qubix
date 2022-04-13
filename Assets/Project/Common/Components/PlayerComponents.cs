@@ -1,10 +1,19 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
+using ME.ECS.Views.Providers;
 using UnityEngine;
 
 namespace Project.Common.Components
 {
-    public struct NeedAvatar : IComponent {}
+    public struct NeedAvatar : IComponent
+    {
+        public MonoBehaviourViewBase Value;
+    }
+    
+    public struct PlayerAvatar : IComponent
+    {
+        public Entity Value;
+    }
     
     public struct PlayerTag : IComponent
     {

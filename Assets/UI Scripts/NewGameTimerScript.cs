@@ -1,10 +1,9 @@
 using ME.ECS;
 using Project.Core.Features.GameState.Components;
+using TMPro;
 using UnityEngine;
 
-using TMPro;
-
-namespace Project.Common.UI_Scripts
+namespace UI_Scripts
 {
 	public class NewGameTimerScript : MonoBehaviour
 	{

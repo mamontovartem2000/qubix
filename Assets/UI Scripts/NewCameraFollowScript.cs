@@ -1,8 +1,10 @@
 using ME.ECS;
+using Project.Common.Components;
+using Project.Core;
 using Project.Core.Features;
 using UnityEngine;
 
-namespace Project.Common.UI_Scripts
+namespace UI_Scripts
 {
     public class NewCameraFollowScript : MonoBehaviour
     {
@@ -25,7 +27,7 @@ namespace Project.Common.UI_Scripts
         private void SetPlayer(in Entity entity)
         {
             if(!SceneUtils.CheckLocalPlayer(entity)) return;
-            _player = entity;
+            _player = entity.Read<PlayerAvatar>().Value;
         }
     
         private void OnDestroy()

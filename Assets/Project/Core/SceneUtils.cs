@@ -2,15 +2,17 @@ using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.Player;
 using Project.Core.Features.SceneBuilder.Components;
+using Project.Modules;
 using UnityEngine;
 
-namespace Project.Core.Features
+namespace Project.Core
 {
     public static class SceneUtils
     {
         public const float ItemRadius = 0.2f;
         public const float PlayerRadius = 0.4f;
-        
+        public const float PlayerRadiusSQR = PlayerRadius * PlayerRadius;
+
         private static int _width, _height;
 
         public static void SetWidthAndHeight(int width, int height)
@@ -78,7 +80,8 @@ namespace Project.Core.Features
 
         public static bool CheckLocalPlayer(Entity player)
         {
-            return player == Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer(player.Read<PlayerTag>().PlayerID);
+            Debug.Log(player == Worlds.current.GetFeature<PlayerFeature>().GetPlayer(player.Read<PlayerTag>().PlayerID));
+            return player == Worlds.current.GetFeature<PlayerFeature>().GetPlayer(player.Read<PlayerTag>().PlayerID);
         }
     }
 }

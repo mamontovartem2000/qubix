@@ -23,7 +23,7 @@ namespace Project.Modules
     public class NetworkModule : ME.ECS.Network.NetworkModule<TState>
     {
         public bool FakeConnect = false;
-        public int PlayerCount = 2;
+        public int PlayerCount = 1;
 
         private int _orderId;
         private PhotonTransporter _photonTransporter;
@@ -291,6 +291,8 @@ namespace Project.Modules
                 this.timeSynced = false;
                 this.UpdateTime();
 
+
+                // world.AddMarker(new NetworkSetActivePlayer {ActorID = networkModule.GetCurrentHistoryEvent().order});
                  world.AddMarker(new NetworkSetActivePlayer { ActorID = PhotonNetwork.LocalPlayer.ActorNumber});
             }
         }
@@ -376,6 +378,7 @@ namespace Project.Modules
                     if (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount == networkModule.PlayerCount)
                     {
                         this.timeSyncedConnected = true;
+                        // world.AddMarker(new NetworkPlayerConnectedTimeSynced {ActorID = networkModule.GetCurrentHistoryEvent().order});
                         world.AddMarker(new NetworkPlayerConnectedTimeSynced {ActorID = PhotonNetwork.LocalPlayer.ActorNumber});
                     }
                 }

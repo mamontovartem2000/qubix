@@ -14,8 +14,6 @@ namespace Project.Mechanics.Features.Weapon
     {
         protected override void OnConstruct()
         {
-            AddSystem<SpawnWeaponSystem>();
-            
             AddSystem<AutomaticFiringSystem>();
             AddSystem<LinearFiringSystem>();
             AddSystem<MeleeFiringSystem>();

@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core;
 using Project.Core.Features;
 using Project.Core.Features.Player.Components;
 using UnityEngine;
@@ -58,12 +59,12 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         {
             foreach (var projectile in _projectileFilter)
             {
-                if ((entity.GetPosition() - projectile.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadius)
+                if ((entity.GetPosition() - projectile.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadiusSQR)
                 {
                     var damage = projectile.Read<ProjectileDamage>().Value;
                     var from = projectile.Read<ProjectileActive>().Player;
                     
-                    if (projectile.Read<ProjectileActive>().Player.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
+                    if (projectile.Read<ProjectileActive>().Player.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) continue;
                     
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
@@ -72,33 +73,33 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
                 }
             }
 
-            foreach (var melee in _meleeFilter)
-            {
-                if ((entity.GetPosition() - melee.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadius)
-                {
-                    var damage = melee.Read<ProjectileDamage>().Value;
-                    var from = melee.Read<MeleeActive>().Player;
-                    
-                    if (from.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
-
-                    var collision = new Entity("collision");
-                    collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
-                }
-            }
-            
-            foreach (var linear in _linearFilter)
-            {
-                if ((entity.GetPosition() - linear.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadius)
-                {
-                    var damage = linear.Read<ProjectileDamage>().Value;
-                    var from = linear.Read<LinearActive>().Player;
-                    
-                    if (linear.Read<LinearActive>().Player.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
-                    
-                    var collision = new Entity("collision");
-                    collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
-                }
-            }
+            // foreach (var melee in _meleeFilter)
+            // {
+            //     if ((entity.GetPosition() - melee.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadius)
+            //     {
+            //         var damage = melee.Read<ProjectileDamage>().Value;
+            //         var from = melee.Read<MeleeActive>().Player;
+            //         
+            //         if (from.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
+            //
+            //         var collision = new Entity("collision");
+            //         collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
+            //     }
+            // }
+            //
+            // foreach (var linear in _linearFilter)
+            // {
+            //     if ((entity.GetPosition() - linear.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadius)
+            //     {
+            //         var damage = linear.Read<ProjectileDamage>().Value;
+            //         var from = linear.Read<LinearActive>().Player;
+            //         
+            //         if (linear.Read<LinearActive>().Player.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
+            //         
+            //         var collision = new Entity("collision");
+            //         collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
+            //     }
+            // }
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.Events;
+using Project.Core.Features.Player;
 using Project.Core.Features.Player.Components;
 
-namespace Project.Core.Features.Player.Systems
+namespace Project.Mechanics.Features.Avatar.Systems
 {
     #region usage
 

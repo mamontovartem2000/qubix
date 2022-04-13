@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Project.Common.UI_Scripts
+namespace UI_Scripts
 {
     public class NewWaitingScreen : MonoBehaviour
     {

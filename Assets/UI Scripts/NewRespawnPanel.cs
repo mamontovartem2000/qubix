@@ -1,12 +1,13 @@
 using System.Collections;
 using DG.Tweening;
 using ME.ECS;
+using Project.Core;
 using Project.Core.Features;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Project.Core.UI_Scripts
+namespace UI_Scripts
 {
     public class NewRespawnPanel : MonoBehaviour
     {

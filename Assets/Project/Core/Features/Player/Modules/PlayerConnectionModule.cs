@@ -34,6 +34,11 @@ namespace Project.Core.Features.Player.Modules
             {
                 _feature.OnLocalPlayerDisconnected(npd.ActorID);
             }
+
+            if (world.GetMarker(out NetworkPlayerConnectedTimeSynced npcts))
+            {
+                _feature.OnGameStarted(npcts.ActorID);
+            }
         }
     }
 }

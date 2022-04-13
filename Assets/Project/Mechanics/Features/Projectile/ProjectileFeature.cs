@@ -35,6 +35,7 @@ namespace Project.Mechanics.Features.Projectile
 
             entity.SetPosition(gun.GetPosition());
             entity.SetRotation(gun.GetParent().GetRotation());
+            
             entity.Get<ProjectileDirection>().Value = direction;
             entity.Get<ProjectileActive>().Player = gun.GetParent();
             entity.Set(new DamageSource());
@@ -50,7 +51,9 @@ namespace Project.Mechanics.Features.Projectile
                 gun.Read<ProjectileConfig>().Value.Apply(entity);
                 entity.SetParent(gun);
 
-                entity.SetPosition(gun.GetPosition() + new Vector3(0f, 0f, i / 2f));
+                // entity.SetPosition(gun.GetPosition() + new Vector3(0f, 0f, i / 2f));
+                entity.SetLocalPosition(new Vector3(0f,0f, i/2f)); //<< USE THIS!
+                
                 entity.Get<Linear>().StartDelay = delay * i;
                 entity.Get<Linear>().EndDelay = delay * (length - i);
                 gun.Set(new LinearActive());

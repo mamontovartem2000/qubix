@@ -1,12 +1,14 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core;
 using Project.Core.Features.GameState.Components;
+using Project.Core.Features.Player;
 using Project.Core.Features.Player.Components;
 using Project.Core.Features.SceneBuilder;
 using Project.Input.InputHandler.Markers;
 using UnityEngine;
 
-namespace Project.Core.Features.Player.Systems
+namespace Project.Mechanics.Features.Avatar.Systems
 {
 	#region usage
 
@@ -49,7 +51,7 @@ namespace Project.Core.Features.Player.Systems
 		{
 				var moveAmount = entity.Read<MoveInput>().Axis == MovementAxis.Horizontal ? entity.Read<MoveInput>().Value.x : entity.Read<MoveInput>().Value.y;
 				var direction = entity.Read<MoveInput>().Axis == MovementAxis.Vertical ? Vector3.right : Vector3.back;
-				
+
 				entity.SetRotation(Quaternion.RotateTowards(entity.GetRotation(), Quaternion.LookRotation(entity.Read<FaceDirection>().Value), 40f));
 
 			if (moveAmount != 0)

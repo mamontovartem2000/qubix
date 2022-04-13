@@ -30,7 +30,8 @@ namespace Project.Mechanics.Features.Avatar.Systems
         Filter ISystemFilter.CreateFilter()
         {
             return Filter.Create("Filter-SpawnPlayerAvatarSystem")
-                .With<NeedAvatar>()
+                .With<PlayerTag>()
+                .Without<PlayerAvatar>()
                 .Push();
         }
 

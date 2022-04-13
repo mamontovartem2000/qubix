@@ -13,46 +13,8 @@ MonoBehaviour:
   m_Name: (7)ShotgunConfig
   m_EditorClassIdentifier: 
   sharedGroupId: 0
-  structComponents:
-  - id: 0
-  - id: 1
-  - id: 2
-  - id: 3
-  - id: 4
-  - id: 5
-  - id: 6
-  - id: 7
+  structComponents: []
   removeStructComponents: []
   templates: []
   references:
     version: 1
-    00000000:
-      type: {class: WeaponView, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        View: {fileID: 2525851274780467698, guid: a8b471d0aa86ef740be759be308aff8c, type: 3}
-    00000001:
-      type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}
-    00000002:
-      type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 15
-    00000003:
-      type: {class: AmmoCapacity, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 15
-    00000004:
-      type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0.25
-    00000005:
-      type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 2
-    00000006:
-      type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: {fileID: 11400000, guid: 8754b7e21067e4a41b0a1fa5c6c34b78, type: 2}
-    00000007:
-      type: {class: SpreadAmount, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0

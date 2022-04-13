@@ -5,7 +5,7 @@ using Project.Core.Features.GameState.Components;
 using Project.Core.Features.Player.Components;
 using Project.Core.Features.SceneBuilder;
 
-namespace Project.Core.Features.Player.Systems
+namespace Project.Mechanics.Features.Avatar.Systems
 {
     #region usage
 #pragma warning disable
