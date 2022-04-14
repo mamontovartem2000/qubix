@@ -37,21 +37,12 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Has<RespawnTime>())
+            ref var time = ref entity.Get<RespawnTime>().Value;
+            time -= deltaTime;
+            
+            if(time <= 0)
             {
-                ref var time = ref entity.Get<RespawnTime>().Value;
-
-                if (time > 0)
-                {
-                    time -= deltaTime;
-                }
-                else
-                {
-                    entity.Remove<RespawnTime>();
-                }
-            }
-            else
-            {
+                entity.Remove<RespawnTime>();
                 _feature.SpawnPlayerAvatar(entity);
             }
         }

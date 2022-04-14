@@ -33,7 +33,7 @@ namespace Project.Core.Features.SceneBuilder.Systems
         private void CreateFilters()
         {
             Filter.Create("Filter-Players")
-                .With<PlayerTag>()
+                .With<AvatarTag>()
                 .Push(ref _playerFilter);
 
             Filter.Create("Filter-Portals")

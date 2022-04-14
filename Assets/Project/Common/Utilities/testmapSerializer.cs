@@ -25,12 +25,10 @@ public class testmapSerializer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
             for (int i = 0; i < _tiles.Length; i++)
             {
                 _stringPositions[i] = JsonUtility.ToJson(new TilePosition(_tiles[i].position));
                 _results[i] = _tiles[i].position;
-
 
                 //File.Create(Application.dataPath + "\\map.txt");
                 File.WriteAllLines(Application.dataPath + "\\Resources\\map.txt", _stringPositions);
@@ -48,5 +46,4 @@ public class testmapSerializer : MonoBehaviour
             Position = p;
         }
     }
-
 }

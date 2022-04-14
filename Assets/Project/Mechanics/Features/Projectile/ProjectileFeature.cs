@@ -1,7 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.Events;
-using Project.Core.Features.Player.Components;
 using Project.Mechanics.Features.Projectile.Systems;
 using UnityEngine;
 
@@ -30,17 +29,20 @@ namespace Project.Mechanics.Features.Projectile
             var entity = new Entity("projectile");
             gun.Read<ProjectileConfig>().Value.Apply(entity);
 
+            entity.SetLocalPosition(gun.GetPosition());
+            entity.SetLocalRotation(gun.GetParent().GetRotation());
+            
+            entity.Get<ProjectileDirection>().Value = direction;
+            entity.Get<Owner>().Value = gun.Read<Owner>().Value;
+            
+            entity.Set(new DamageSource());
+
             var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
             entity.InstantiateView(view);
 
-            entity.SetPosition(gun.GetPosition());
-            entity.SetRotation(gun.GetParent().GetRotation());
-            
-            entity.Get<ProjectileDirection>().Value = direction;
-            entity.Get<ProjectileActive>().Player = gun.GetParent();
-            entity.Set(new DamageSource());
+            entity.Set(new ProjectileActive());
 
-            world.GetFeature<EventsFeature>().rightWeaponFired.Execute(gun);
+            world.GetFeature<EventsFeature>().rightWeaponFired.Execute(gun.Get<Owner>().Value);
         }
 
         public void SpawnLinear(Entity gun, int length, float delay)
@@ -49,14 +51,15 @@ namespace Project.Mechanics.Features.Projectile
             {
                 var entity = new Entity("laser");
                 gun.Read<ProjectileConfig>().Value.Apply(entity);
-                entity.SetParent(gun);
 
-                // entity.SetPosition(gun.GetPosition() + new Vector3(0f, 0f, i / 2f));
-                entity.SetLocalPosition(new Vector3(0f,0f, i/2f)); //<< USE THIS!
+                entity.SetParent(gun);
+                entity.SetLocalPosition(new Vector3(0f,0f, i/2f));
                 
                 entity.Get<Linear>().StartDelay = delay * i;
                 entity.Get<Linear>().EndDelay = delay * (length - i);
+                
                 gun.Set(new LinearActive());
+                
                 entity.Set(new DamageSource());
             }
 
@@ -64,7 +67,8 @@ namespace Project.Mechanics.Features.Projectile
             visual.SetParent(gun);
             visual.Set(new LinearVisual());
             
-            visual.SetPosition(gun.GetPosition());
+            visual.SetLocalPosition(gun.GetPosition());
+            
             var view = world.RegisterViewSource(gun.Read<ProjectileView>().Value);
             visual.InstantiateView(view);
             
@@ -79,22 +83,22 @@ namespace Project.Mechanics.Features.Projectile
                 var entity = new Entity("melee");
                 gun.Read<ProjectileConfig>().Value.Apply(entity);
 
+                entity.SetLocalPosition(gun.GetParent().GetPosition() + (direction) * i);
+
+                entity.Get<Owner>().Value = gun.Read<Owner>().Value;
+                entity.Set(new DamageSource(), ComponentLifetime.NotifyAllSystems);
+
                 var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
                 entity.InstantiateView(view);
-
-                entity.Set(new MeleeActive {Player = gun.GetParent()}, ComponentLifetime.NotifyAllSystems);
-                entity.Set(new DamageSource());
-
-                Debug.Log(gun.GetParent().Read<PlayerTag>().PlayerID);
-                entity.SetPosition(gun.GetParent().GetPosition() + (direction * 2) * i);
             }
 
             if(!gun.Has<LeftWeaponShot>())
                 gun.Remove<MeleeActive>();
             
             gun.Get<MeleeDelay>().Value = gun.Read<MeleeDelayDefault>().Value;
-            gun.Get<Cooldown>().Value = gun.Read<CooldownDefault>().Value;
-            world.GetFeature<EventsFeature>().leftWeaponFired.Execute(gun);
+            gun.Get<ReloadTime>().Value = gun.Read<ReloadTimeDefault>().Value;
+            
+            world.GetFeature<EventsFeature>().leftWeaponFired.Execute(gun.Get<Owner>().Value);
         }
     }
 }

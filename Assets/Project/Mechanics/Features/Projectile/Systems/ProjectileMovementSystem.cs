@@ -43,7 +43,7 @@ namespace Project.Mechanics.Features.Projectile.Systems
                 direction -= new Vector3(0, deltaTime * entity.Read<Trajectory>().Value, 0);
             }
 
-            var newPosition = entity.GetPosition() + direction * speed * deltaTime;
+            var newPosition = entity.GetPosition() + direction * (speed * deltaTime);
             entity.SetPosition(newPosition);
         }
     }

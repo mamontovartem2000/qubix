@@ -35,13 +35,10 @@ namespace Project.Mechanics.Features.Lifetime.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var del = ref entity.Get<Linear>();
-
-            if (del.StartDelay - deltaTime > 0)
-            {
-                del.StartDelay -= deltaTime;
-            }
-            else
+            ref var delay = ref entity.Get<Linear>();
+            delay.StartDelay -= deltaTime;
+            
+            if(delay.StartDelay <= 0)
             {
                 if (!entity.Has<LinearActive>())
                 {
@@ -49,14 +46,11 @@ namespace Project.Mechanics.Features.Lifetime.Systems
                     entity.Set(new LinearActive());
                 }
             }
-            
+
             if (!entity.GetParent().Has<LinearActive>() || entity.GetParent().Has<MeleeWeapon>())
             {
-                if (del.EndDelay - deltaTime > 0)
-                {
-                    del.EndDelay -= deltaTime;
-                }
-                else
+                delay.EndDelay -= deltaTime;
+                if (delay.EndDelay <= 0)
                 {
                     entity.Destroy();
                 }

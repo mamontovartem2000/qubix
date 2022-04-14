@@ -5,6 +5,12 @@ using UnityEngine;
 
 namespace Project.Common.Components
 {
+    public struct Owner : IComponent
+    {
+        public Entity Value;
+    }
+    
+    public struct AvatarTag : IComponent {}
     public struct NeedAvatar : IComponent
     {
         public MonoBehaviourViewBase Value;
@@ -36,9 +42,10 @@ namespace Project.Common.Components
         public int Deaths;
     }
 
-    public struct PlayerEntity : IComponent
+    public struct WeaponEntities : IComponent
     {
-        public Entity Value;
+        public Entity LeftWeapon;
+        public Entity RightWeapon;
     }
 
     public struct AvatarSettings : IComponent

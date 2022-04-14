@@ -1,7 +1,8 @@
 using DG.Tweening;
 using ME.ECS;
+using Photon.Pun;
 using Project.Common.Components;
-using Project.Core;
+using Project.Core.Features.Player;
 using Project.Core.Features.Player.Components;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,9 +21,9 @@ namespace UI_Scripts
 
         private void HealthChanged(in Entity player)
         {
-            if(!SceneUtils.CheckLocalPlayer(player)) return;
-
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
             var entity = player.Read<PlayerAvatar>().Value;
+            if(!entity.IsAlive()) return;
 
             var fill = entity.Read<PlayerHealth>().Value / 100;
 

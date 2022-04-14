@@ -19,27 +19,15 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         public World world { get; set; }
         
         private CollisionHandlerFeature _feature;
-        private Filter _projectileFilter;
-        private Filter _meleeFilter;
-        private Filter _linearFilter;
+        private Filter _damageSourceFilter;
 
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
             Filter.Create("Projectile-Filter")
                 .With<DamageSource>()
-                .With<ProjectileActive>()
-                .Push(ref _projectileFilter);
-            
-            Filter.Create("Melee-Filter")
-                .With<DamageSource>()
-                .With<MeleeActive>()
-                .Push(ref _meleeFilter);
-           
-            Filter.Create("Linear-Filter")
-                .With<DamageSource>()
-                .With<LinearActive>()
-                .Push(ref _linearFilter);
+                // .With<ProjectileActive>()
+                .Push(ref _damageSourceFilter);
         }
 
         void ISystemBase.OnDeconstruct() {}
@@ -51,55 +39,29 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         Filter ISystemFilter.CreateFilter()
         {
             return Filter.Create("Filter-ProjectileCollisionSystem")
-                .With<PlayerTag>()
+                .With<AvatarTag>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            foreach (var projectile in _projectileFilter)
+            foreach (var source in _damageSourceFilter)
             {
-                if ((entity.GetPosition() - projectile.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadiusSQR)
+                if ((entity.GetPosition() - source.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadiusSQR)
                 {
-                    var damage = projectile.Read<ProjectileDamage>().Value;
-                    var from = projectile.Read<ProjectileActive>().Player;
-                    
-                    if (projectile.Read<ProjectileActive>().Player.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) continue;
-                    
-                    var collision = new Entity("collision");
-                    collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
+                    var damage = source.Read<ProjectileDamage>().Value;
+                    var from = source.Get<Owner>().Value;
 
-                    projectile.Destroy();
+                    if (from.Read<PlayerTag>().PlayerID != entity.Read<Owner>().Value.Read<PlayerTag>().PlayerID)
+                    {
+                        var collision = new Entity("collision");
+                        collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
+                
+                        if(source.Has<ProjectileActive>())
+                            source.Destroy();
+                    }
                 }
             }
-
-            // foreach (var melee in _meleeFilter)
-            // {
-            //     if ((entity.GetPosition() - melee.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadius)
-            //     {
-            //         var damage = melee.Read<ProjectileDamage>().Value;
-            //         var from = melee.Read<MeleeActive>().Player;
-            //         
-            //         if (from.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
-            //
-            //         var collision = new Entity("collision");
-            //         collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
-            //     }
-            // }
-            //
-            // foreach (var linear in _linearFilter)
-            // {
-            //     if ((entity.GetPosition() - linear.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadius)
-            //     {
-            //         var damage = linear.Read<ProjectileDamage>().Value;
-            //         var from = linear.Read<LinearActive>().Player;
-            //         
-            //         if (linear.Read<LinearActive>().Player.Read<PlayerTag>().PlayerID == entity.Read<PlayerTag>().PlayerID) return;
-            //         
-            //         var collision = new Entity("collision");
-            //         collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
-            //     }
-            // }
         }
     }
 }

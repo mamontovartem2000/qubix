@@ -60,7 +60,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
             else
             {
                 entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;
-                world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity);
+                world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Get<Owner>().Value);
             }
             
             ammo -= 1;

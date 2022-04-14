@@ -1,7 +1,9 @@
 using ME.ECS;
+using Photon.Pun;
 using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features;
+using Project.Core.Features.Player;
 using UnityEngine;
 
 namespace UI_Scripts
@@ -24,10 +26,10 @@ namespace UI_Scripts
                 transform.position = _player.GetPosition() + _offset;
         }
 
-        private void SetPlayer(in Entity entity)
+        private void SetPlayer(in Entity player)
         {
-            if(!SceneUtils.CheckLocalPlayer(entity)) return;
-            _player = entity.Read<PlayerAvatar>().Value;
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
+            _player = player.Read<PlayerAvatar>().Value;
         }
     
         private void OnDestroy()

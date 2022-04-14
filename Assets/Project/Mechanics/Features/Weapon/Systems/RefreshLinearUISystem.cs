@@ -44,12 +44,12 @@ namespace Project.Mechanics.Features.Weapon.Systems
 
             if (ammo != max)
             {
-                world.GetFeature<EventsFeature>().leftWeaponFired.Execute(entity);
+                world.GetFeature<EventsFeature>().leftWeaponFired.Execute(entity.Get<Owner>().Value);
             }
             else
             {
                 entity.Set(new LinearFull());
-                world.GetFeature<EventsFeature>().leftWeaponFired.Execute(entity);
+                world.GetFeature<EventsFeature>().leftWeaponFired.Execute(entity.Get<Owner>().Value);
             }
         }
     }

@@ -37,17 +37,17 @@ namespace Project.Mechanics.Features.Weapon.Systems
         }
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<ReloadTime>().Value - deltaTime > 0)
-            {
-                entity.Get<ReloadTime>().Value -= deltaTime;
-            }
-            else
+            ref var reload = ref entity.Get<ReloadTime>().Value;
+            reload -= deltaTime;
+
+            if(reload <= 0)
             {
                 entity.Remove<ReloadTime>();
+                
                 if (!entity.Has<LinearWeapon>())
                 {
                     entity.Get<AmmoCapacity>().Value = entity.Read<AmmoCapacityDefault>().Value;
-                    world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity);
+                    world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Get<Owner>().Value);
                 }
             }
         }

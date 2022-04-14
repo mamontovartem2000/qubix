@@ -21,7 +21,6 @@ namespace Project.Mechanics.Features.Weapon.Systems
         }
 
         void ISystemBase.OnDeconstruct() { }
-
 #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;
@@ -36,14 +35,11 @@ namespace Project.Mechanics.Features.Weapon.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<Cooldown>().Value - deltaTime > 0)
-            {
-                entity.Get<Cooldown>().Value -= deltaTime;
-            }
-            else
-            {
+            ref var cooldown = ref entity.Get<Cooldown>().Value;
+            cooldown -= deltaTime;
+            
+            if(cooldown <= 0)
                 entity.Remove<Cooldown>();
-            }
         }
     }
 }

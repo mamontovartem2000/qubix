@@ -13,10 +13,10 @@ namespace UI_Scripts
 
 		private void Start()
 		{
-			RunTimerEvent.Subscribe(ChangeTimer);
+			RunTimerEvent.Subscribe(UpdateTimer);
 		}
 
-		private void ChangeTimer(in Entity entity)
+		private void UpdateTimer(in Entity entity)
 		{
 			var mins = entity.Read<GameTimer>().Value / 60;
 			var secs = entity.Read<GameTimer>().Value % 60;
@@ -28,7 +28,7 @@ namespace UI_Scripts
 
 		private void OnDestroy()
 		{
-			RunTimerEvent.Unsubscribe(ChangeTimer);
+			RunTimerEvent.Unsubscribe(UpdateTimer);
 		}
 	}
 }

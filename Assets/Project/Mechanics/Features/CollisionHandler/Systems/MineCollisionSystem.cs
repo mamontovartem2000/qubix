@@ -46,7 +46,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
         Filter ISystemFilter.CreateFilter() 
         {
             return Filter.Create("Filter-RegisterTrapCollisionSystem")
-                .With<PlayerTag>()
+                .With<AvatarTag>()
                 .Push();
         }
 
@@ -56,7 +56,8 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
             {
                 if ((entity.GetPosition() - collectible.GetPosition()).sqrMagnitude <= SceneUtils.ItemRadius)
                 {
-                    if (entity.Has<LastHit>()) entity.Remove<LastHit>();
+                    if (entity.Has<LastHit>())
+                        entity.Remove<LastHit>();
                     
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = entity, Damage = 25f}, ComponentLifetime.NotifyAllSystems);

@@ -61,7 +61,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 					entity.Get<FaceDirection>().Value = direction * moveAmount;
 				}
 
-				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= 0.05f)
+				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= 0.25f)
 				{
 					entity.SetPosition(Vector3Int.CeilToInt(entity.Read<PlayerMoveTarget>().Value));
 					

@@ -1,8 +1,10 @@
 using System.Collections;
 using DG.Tweening;
 using ME.ECS;
+using Photon.Pun;
 using Project.Core;
 using Project.Core.Features;
+using Project.Core.Features.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +28,7 @@ namespace UI_Scripts
 
         private void Deactivate(in Entity entity)
         {
-            if (!SceneUtils.CheckLocalPlayer(entity)) return;
+            //if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
 
             _background.DOFade(0, 0.5f).SetEase(Ease.Linear);
             _popup.DOFade(0, 0.25f).SetEase(Ease.Linear);
@@ -35,9 +37,9 @@ namespace UI_Scripts
  
         private void Activate(in Entity entity)
         {
-            Debug.Log($"incoming: {entity}");
+            Debug.Log($"passed: {entity}, local: {Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)}");
             
-            if (!SceneUtils.CheckLocalPlayer(entity)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
 
             _background.DOFade(0.5f, 0.5f).SetEase(Ease.Linear);
             _popup.DOFade(1f, 1f).SetEase(Ease.Linear);
@@ -58,6 +60,7 @@ namespace UI_Scripts
             _text.SetText($"Respawn in 1...");
             yield return new WaitForSecondsRealtime(1f);
             _text.SetText($"Respawning...");
+            yield return new WaitForSecondsRealtime(1f);
         }
 
         private void OnDestroy()

@@ -15,6 +15,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarSettings>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ChannelSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Cooldown>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, false, false, false, false, false, false);
@@ -36,9 +37,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.NeedAvatar>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.NeedWeapon>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Owner>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerEntity>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerScore>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(false, false, false, false, false, false, false);
@@ -61,6 +62,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.EndGame>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameFinished>(false, false, false, false, false, false, false);
@@ -100,6 +102,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarSettings>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ChannelSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Cooldown>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, false, false, false, false, false, false);
@@ -121,9 +124,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.NeedAvatar>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.NeedWeapon>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Owner>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerEntity>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerScore>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerTag>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(false, false, false, false, false, false, false);
@@ -146,6 +149,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.EndGame>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameFinished>(false, false, false, false, false, false, false);
@@ -180,6 +184,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ApplyDamage>(false);
             structComponentsContainer.Validate<Project.Common.Components.AutomaticWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvatarSettings>(false);
+            structComponentsContainer.Validate<Project.Common.Components.AvatarTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.ChannelSkill>(false);
             structComponentsContainer.Validate<Project.Common.Components.Cooldown>(false);
             structComponentsContainer.Validate<Project.Common.Components.CooldownDefault>(false);
@@ -201,9 +206,9 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(false);
             structComponentsContainer.Validate<Project.Common.Components.NeedAvatar>(false);
             structComponentsContainer.Validate<Project.Common.Components.NeedWeapon>(false);
+            structComponentsContainer.Validate<Project.Common.Components.Owner>(false);
             structComponentsContainer.Validate<Project.Common.Components.PassiveSkill>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerAvatar>(false);
-            structComponentsContainer.Validate<Project.Common.Components.PlayerEntity>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerScore>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileActive>(false);
@@ -226,6 +231,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Trajectory>(false);
             structComponentsContainer.Validate<Project.Common.Components.TrajectoryWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.WeaponAim>(false);
+            structComponentsContainer.Validate<Project.Common.Components.WeaponEntities>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponPosition>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.EndGame>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GameFinished>(false);
@@ -265,6 +271,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ApplyDamage>(false);
             entity.ValidateData<Project.Common.Components.AutomaticWeapon>(true);
             entity.ValidateData<Project.Common.Components.AvatarSettings>(false);
+            entity.ValidateData<Project.Common.Components.AvatarTag>(true);
             entity.ValidateData<Project.Common.Components.ChannelSkill>(false);
             entity.ValidateData<Project.Common.Components.Cooldown>(false);
             entity.ValidateData<Project.Common.Components.CooldownDefault>(false);
@@ -286,9 +293,9 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.MeleeWeapon>(false);
             entity.ValidateData<Project.Common.Components.NeedAvatar>(false);
             entity.ValidateData<Project.Common.Components.NeedWeapon>(false);
+            entity.ValidateData<Project.Common.Components.Owner>(false);
             entity.ValidateData<Project.Common.Components.PassiveSkill>(false);
             entity.ValidateData<Project.Common.Components.PlayerAvatar>(false);
-            entity.ValidateData<Project.Common.Components.PlayerEntity>(false);
             entity.ValidateData<Project.Common.Components.PlayerScore>(false);
             entity.ValidateData<Project.Common.Components.PlayerTag>(false);
             entity.ValidateData<Project.Common.Components.ProjectileActive>(false);
@@ -311,6 +318,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Trajectory>(false);
             entity.ValidateData<Project.Common.Components.TrajectoryWeapon>(true);
             entity.ValidateData<Project.Common.Components.WeaponAim>(false);
+            entity.ValidateData<Project.Common.Components.WeaponEntities>(false);
             entity.ValidateData<Project.Common.Components.WeaponPosition>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.EndGame>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.GameFinished>(false);

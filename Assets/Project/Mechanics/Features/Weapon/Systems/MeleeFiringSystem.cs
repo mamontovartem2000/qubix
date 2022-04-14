@@ -24,10 +24,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
 			this.GetFeature(out _feature);
 			world.GetFeature(out _projectile);
 		}
-
-		void ISystemBase.OnDeconstruct()
-		{
-		}
+		void ISystemBase.OnDeconstruct() {}
 #if !CSHARP_8_OR_NEWER
 		bool ISystemFilter.jobs => false;
 		int ISystemFilter.jobsBatchCount => 64;
@@ -39,13 +36,13 @@ namespace Project.Mechanics.Features.Weapon.Systems
 			return Filter.Create("Filter-MeleeFiringSystem")
 				.With<MeleeWeapon>()
 				.With<MeleeActive>()
-				.Without<Cooldown>()
+				.Without<ReloadTime>()
 				.Push();
 		}
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			//THE RIGHT WAY!
+			Debug.Log("yeet");
 			ref var delay = ref entity.Get<MeleeDelay>().Value;
 			var dir = entity.Read<WeaponAim>().Aim.GetPosition() - entity.GetPosition();
 			

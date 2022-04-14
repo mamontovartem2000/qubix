@@ -50,7 +50,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
             apply.ApplyTo.Get<LastHit>().Enemy = apply.ApplyFrom;
             apply.ApplyTo.Get<PlayerHealth>().Value -= apply.Damage;
 
-            world.GetFeature<EventsFeature>().HealthChanged.Execute(apply.ApplyTo);
+            world.GetFeature<EventsFeature>().HealthChanged.Execute(apply.ApplyTo.Read<Owner>().Value);
         }
     }
 }

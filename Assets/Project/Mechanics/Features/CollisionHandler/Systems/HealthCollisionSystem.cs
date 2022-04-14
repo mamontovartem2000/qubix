@@ -41,7 +41,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         Filter ISystemFilter.CreateFilter() 
         {
             return Filter.Create("Filter-RegisterPointCollisionSystem")
-                .With<PlayerTag>()
+                .With<AvatarTag>()
                 .Push();
         }
 

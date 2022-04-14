@@ -54,7 +54,6 @@ namespace Project.Core.Features.Player
             player.Set(new PlayerTag {PlayerID = id});
             PlayerConfig.Apply(player);
             
-            world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(player);
         }
 
         public void OnLocalPlayerDisconnected(int id)

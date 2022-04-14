@@ -1,8 +1,10 @@
 using DG.Tweening;
 using ME.ECS;
+using Photon.Pun;
 using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features;
+using Project.Core.Features.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,36 +31,37 @@ namespace UI_Scripts
             LeftAmmoChanged.Subscribe(RefreshLeftAmmo);
             RightAmmoChanged.Subscribe(RefreshRightAmmo);
             RightWeaponDepleted.Subscribe(ReloadRightWeapon);
-        
         }
 
         private void RefreshLeftAmmo(in Entity player)
         {
-            if (!SceneUtils.CheckLocalPlayer(player)) return;
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
 
             var entity = player.Read<PlayerAvatar>().Value;
             if (!entity.Has<LinearWeapon>()) return;
             
-
             var fill = (float)entity.Read<AmmoCapacity>().Value / entity.Read<AmmoCapacityDefault>().Value;
          
             LeftWeaponAmmoImage.fillAmount = fill;
             LeftWeaponAmmoText.SetText((fill * 100).ToString("###") + "%");
         }
 
-        private void RefreshRightAmmo(in Entity entity)
+        private void RefreshRightAmmo(in Entity player)
         {
-            if (!SceneUtils.CheckLocalPlayer(entity)) return;
-        
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
+
+            var entity = player.Read<PlayerAvatar>().Value;
             var fill = (float)entity.Read<AmmoCapacity>().Value / entity.Read<AmmoCapacityDefault>().Value;
          
             RightWeaponAmmoImage.fillAmount = fill;
             RightWeaponAmmoText.SetText(entity.Read<AmmoCapacity>().Value.ToString());
         }
     
-        private void ReloadRightWeapon(in Entity entity)
+        private void ReloadRightWeapon(in Entity player)
         {
-            if (!SceneUtils.CheckLocalPlayer(entity)) return;
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
+            
+            var entity = player.Read<PlayerAvatar>().Value;
 
             var time = entity.Read<ReloadTimeDefault>().Value;
         

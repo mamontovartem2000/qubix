@@ -39,14 +39,11 @@ namespace Project.Mechanics.Features.Lifetime.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<LifeTimeLeft>().Value - deltaTime > 0)
-            {
-                entity.Get<LifeTimeLeft>().Value -= deltaTime/2;
-            }
-            else
-            {
+            ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
+            lifeTime -= deltaTime;
+            
+            if(lifeTime <= 0)
                 entity.Destroy();
-            }
         }
     }
 }

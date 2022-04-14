@@ -1,7 +1,9 @@
 using ME.ECS;
+using Photon.Pun;
 using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features;
+using Project.Core.Features.Player;
 using TMPro;
 using UnityEngine;
 
@@ -14,18 +16,19 @@ namespace UI_Scripts
 
 		private void Start()
 		{
-			DeathEvent.Subscribe(IncreaseCounter);
+			DeathEvent.Subscribe(UpdateCounter);
 		}
 
-		private void IncreaseCounter(in Entity entity)
+		private void UpdateCounter(in Entity entity)
 		{
-			if(!SceneUtils.CheckLocalPlayer(entity)) return;
+			if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
+
 			CounterText.SetText(entity.Read<PlayerScore>().Deaths.ToString());
 		}
 
 		private void OnDestroy()
 		{
-			DeathEvent.Unsubscribe(IncreaseCounter);
+			DeathEvent.Unsubscribe(UpdateCounter);
 		}
 	}
 }

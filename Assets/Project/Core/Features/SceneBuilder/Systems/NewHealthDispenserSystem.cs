@@ -42,12 +42,9 @@ namespace Project.Core.Features.SceneBuilder.Systems
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             ref var dispenser = ref entity.Get<DispenserTag>();
-            
-            if (dispenser.Timer - deltaTime > 0)
-            {
-                dispenser.Timer -= deltaTime;
-            }
-            else
+            dispenser.Timer -= deltaTime;
+
+            if (dispenser.Timer <= 0)
             {
                 var health = new Entity("Health");
                 health.SetParent(entity);

@@ -2,8 +2,11 @@
 using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Core.Features.GameState.Components;
+using Project.Core.Features.Player;
 using Project.Core.Features.Player.Components;
 using Project.Core.Features.SceneBuilder;
+using Project.Modules;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar.Systems
 {
@@ -42,28 +45,28 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var currentHealth = entity.Read<PlayerHealth>().Value;
+            var health = entity.Read<PlayerHealth>().Value;
+            if(health > 0) return;
 
-            if (currentHealth > 0) return;
+            // if (entity.Has<LastHit>())
+            // {
+            //     ref var enemy = ref entity.Get<LastHit>().Enemy;
+            //     enemy.Get<PlayerScore>().Kills += 1;
+            //
+            //     world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
+            // }
 
-            if (entity.Has<LastHit>())
-            {
-                Entity enemy = entity.Read<LastHit>().Enemy;
-
-                if (enemy.IsAlive())
-                {
-                    enemy.Get<PlayerScore>().Kills += 1;
-                    world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
-                }           
-            }
+            ref var player = ref entity.Get<Owner>().Value;
+            // var player = world.GetFeature<PlayerFeature>().GetPlayer(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+            Debug.Log(player);
             
-            var deadBody = new Entity("deadBody");
-            deadBody.Set(new DeadBody {ActorID = entity.Read<PlayerTag>().PlayerID, Time = 5.5f});
-            entity.Get<PlayerScore>().Deaths += 1;
-            deadBody.SetAs<PlayerScore>(entity);
+            player.Get<PlayerScore>().Deaths += 1;
+            player.Get<RespawnTime>().Value = 5f;
+            player.Remove<PlayerAvatar>();
             
+            world.GetFeature<EventsFeature>().PlayerDeath.Execute(player);      
             _scene.ReleaseTheCell(entity.Read<PlayerMoveTarget>().Value);
-            world.GetFeature<EventsFeature>().PlayerDeath.Run(entity);      
+
             entity.Destroy();
         }
     }

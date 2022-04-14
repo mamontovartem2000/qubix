@@ -2,6 +2,7 @@
 using ME.ECS.DataConfigs;
 using Project.Common.Components;
 using Project.Core;
+using Project.Core.Features.Events;
 using Project.Core.Features.Player.Components;
 using Project.Mechanics.Features.Avatar.Systems;
 using UnityEngine;
@@ -22,47 +23,55 @@ namespace Project.Mechanics.Features.Avatar
         
         protected override void OnConstruct()
         {
+            AddSystem<ApplyDamageSystem>();
+            AddSystem<PlayerHealthSystem>();
             AddSystem<SpawnPlayerAvatarSystem>();
             AddSystem<PlayerMovementSystem>();
         }
 
         protected override void OnDeconstruct() {}
         
-        public void SpawnPlayerAvatar(Entity parent)
+        public void SpawnPlayerAvatar(Entity owner)
         {
             var entity = new Entity("avatar");
-            entity.Get<PlayerEntity>().Value = parent;
-            parent.Read<AvatarSettings>().PlayerConfig.Apply(entity);
+            owner.Read<AvatarSettings>().PlayerConfig.Apply(entity);
 
             var view = world.RegisterViewSource(entity.Read<NeedAvatar>().Value);
             entity.InstantiateView(view);
 
-            ConstructWeapon(parent.Read<AvatarSettings>().LeftWeaponConfig, entity);
-            ConstructWeapon(parent.Read<AvatarSettings>().RightWeaponConfig, entity);
+            entity.Get<Owner>().Value = owner;
+
+            entity.Get<WeaponEntities>().LeftWeapon = ConstructWeapon(owner.Read<AvatarSettings>().LeftWeaponConfig, entity);
+            entity.Get<WeaponEntities>().RightWeapon = ConstructWeapon(owner.Read<AvatarSettings>().RightWeaponConfig, entity);
 
             entity.SetPosition(SceneUtils.GetRandomSpawnPosition());
             entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
-            parent.Get<PlayerAvatar>().Value = entity;
+            entity.Set(new AvatarTag());
+
+            owner.Get<PlayerAvatar>().Value = entity;
+            world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(owner);
         }
 
-        private void ConstructWeapon(DataConfig weaponConfig, Entity parent)
+        private Entity ConstructWeapon(DataConfig weaponConfig, Entity parent)
         {
             var weapon = new Entity("weapon");
             weaponConfig.Apply(weapon);
-            
-            weapon.SetPosition(weapon.Read<WeaponPosition>().Value);
             weapon.SetParent(parent);
+            
+            weapon.SetLocalPosition(weapon.Read<WeaponPosition>().Value);
 
             var aim = new Entity("aim");
             aim.SetParent(weapon);
-            
-            // aim.SetPosition(weapon.Has<TrajectoryWeapon>() ? weapon.GetPosition() + (_direction+_trajectory) : weapon.GetPosition() + _direction);
-            aim.SetLocalPosition(weapon.Has<TrajectoryWeapon>() ?_direction+_trajectory: _direction);
+            aim.SetLocalPosition(weapon.Has<TrajectoryWeapon>() ?_direction +_trajectory: _direction);
 
             weapon.Get<WeaponAim>().Aim = aim;
             
             var view = world.RegisterViewSource(weapon.Read<NeedWeapon>().View);
             weapon.InstantiateView(view);
+            
+            weapon.Get<Owner>().Value = parent.Get<Owner>().Value;
+            
+            return weapon;
         }
     }
 }
