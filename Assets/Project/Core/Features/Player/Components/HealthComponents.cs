@@ -13,8 +13,8 @@ namespace Project.Core.Features.Player.Components
         public float Time;
     }
 
-    public struct LastHit : IComponent
+    public struct DamagedBy : IComponent
     {
-        public Entity Enemy;
+        public Entity Value;
     }
 }

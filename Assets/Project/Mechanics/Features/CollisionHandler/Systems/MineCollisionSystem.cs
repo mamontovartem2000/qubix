@@ -5,6 +5,7 @@ using Project.Core.Features;
 using Project.Core.Features.Player.Components;
 using Project.Core.Features.SceneBuilder.Components;
 using Project.Mechanics.Features.CollisionHandler.Components;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.CollisionHandler.Systems {
     #region usage
@@ -56,8 +57,8 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
             {
                 if ((entity.GetPosition() - collectible.GetPosition()).sqrMagnitude <= SceneUtils.ItemRadius)
                 {
-                    if (entity.Has<LastHit>())
-                        entity.Remove<LastHit>();
+                    if (entity.Has<DamagedBy>())
+                        entity.Remove<DamagedBy>();
                     
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = entity, Damage = 25f}, ComponentLifetime.NotifyAllSystems);

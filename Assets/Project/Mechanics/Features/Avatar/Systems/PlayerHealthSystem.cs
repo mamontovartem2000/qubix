@@ -48,17 +48,14 @@ namespace Project.Mechanics.Features.Avatar.Systems
             var health = entity.Read<PlayerHealth>().Value;
             if(health > 0) return;
 
-            // if (entity.Has<LastHit>())
-            // {
-            //     ref var enemy = ref entity.Get<LastHit>().Enemy;
-            //     enemy.Get<PlayerScore>().Kills += 1;
-            //
-            //     world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
-            // }
+            if (entity.Get<Owner>().Value.Has<DamagedBy>())
+            {
+                ref var enemy = ref entity.Get<Owner>().Value.Get<DamagedBy>().Value;
+                enemy.Get<PlayerScore>().Kills += 1;
+                world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
+            }
 
             ref var player = ref entity.Get<Owner>().Value;
-            // var player = world.GetFeature<PlayerFeature>().GetPlayer(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            Debug.Log(player);
             
             player.Get<PlayerScore>().Deaths += 1;
             player.Get<RespawnTime>().Value = 5f;

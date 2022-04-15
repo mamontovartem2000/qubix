@@ -42,7 +42,6 @@ namespace Project.Mechanics.Features.Weapon.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			Debug.Log("yeet");
 			ref var delay = ref entity.Get<MeleeDelay>().Value;
 			var dir = entity.Read<WeaponAim>().Aim.GetPosition() - entity.GetPosition();
 			

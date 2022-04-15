@@ -18,6 +18,7 @@ namespace Project.Common.Views.WeaponMonos
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetParent().GetRotation();
 
+            if (!entity.IsAlive()) return;
             if (entity.Has<LeftWeaponShot>())
             {
                 _anim.SetBool("Attack", true);
@@ -27,7 +28,7 @@ namespace Project.Common.Views.WeaponMonos
 
         private void EndAnimation()
         {
-            if(!entity.Has<LeftWeaponShot>())
+            if (!entity.Has<LeftWeaponShot>())
                 _anim.SetBool("Attack", false);
         }
     }

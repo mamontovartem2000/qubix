@@ -13,6 +13,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacity>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacityDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamageOneShot>(false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarSettings>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, false, false, false, false, false, false);
@@ -69,8 +70,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GamePaused>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameTimer>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.Initialized>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.DamagedBy>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.DeadBody>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.LastHit>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.LockTarget>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.MoveInput>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
@@ -100,6 +101,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacity>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacityDefault>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamageOneShot>(false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarSettings>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, false, false, false, false, false, false);
@@ -156,8 +158,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GamePaused>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameTimer>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.Initialized>(true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.DamagedBy>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.DeadBody>(false, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.LastHit>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.LockTarget>(true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.MoveInput>(false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.Player.Components.PlayerHealth>(false, false, false, false, false, false, false);
@@ -182,6 +184,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.AmmoCapacity>(false);
             structComponentsContainer.Validate<Project.Common.Components.AmmoCapacityDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.ApplyDamage>(false);
+            structComponentsContainer.ValidateOneShot<Project.Common.Components.ApplyDamageOneShot>(false);
             structComponentsContainer.Validate<Project.Common.Components.AutomaticWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvatarSettings>(false);
             structComponentsContainer.Validate<Project.Common.Components.AvatarTag>(true);
@@ -238,8 +241,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GamePaused>(true);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GameTimer>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.Initialized>(true);
+            structComponentsContainer.Validate<Project.Core.Features.Player.Components.DamagedBy>(false);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.DeadBody>(false);
-            structComponentsContainer.Validate<Project.Core.Features.Player.Components.LastHit>(false);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.LockTarget>(true);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.MoveInput>(false);
             structComponentsContainer.Validate<Project.Core.Features.Player.Components.PlayerHealth>(false);
@@ -269,6 +272,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.AmmoCapacity>(false);
             entity.ValidateData<Project.Common.Components.AmmoCapacityDefault>(false);
             entity.ValidateData<Project.Common.Components.ApplyDamage>(false);
+            entity.ValidateDataOneShot<Project.Common.Components.ApplyDamageOneShot>(false);
             entity.ValidateData<Project.Common.Components.AutomaticWeapon>(true);
             entity.ValidateData<Project.Common.Components.AvatarSettings>(false);
             entity.ValidateData<Project.Common.Components.AvatarTag>(true);
@@ -325,8 +329,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Core.Features.GameState.Components.GamePaused>(true);
             entity.ValidateData<Project.Core.Features.GameState.Components.GameTimer>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.Initialized>(true);
+            entity.ValidateData<Project.Core.Features.Player.Components.DamagedBy>(false);
             entity.ValidateData<Project.Core.Features.Player.Components.DeadBody>(false);
-            entity.ValidateData<Project.Core.Features.Player.Components.LastHit>(false);
             entity.ValidateData<Project.Core.Features.Player.Components.LockTarget>(true);
             entity.ValidateData<Project.Core.Features.Player.Components.MoveInput>(false);
             entity.ValidateData<Project.Core.Features.Player.Components.PlayerHealth>(false);

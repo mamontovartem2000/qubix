@@ -10,7 +10,7 @@ namespace Project.Core
     public static class SceneUtils
     {
         public const float ItemRadius = 0.2f;
-        public const float PlayerRadius = 0.4f;
+        public const float PlayerRadius = 0.6f;
         public const float PlayerRadiusSQR = PlayerRadius * PlayerRadius;
 
         private static int _width, _height;

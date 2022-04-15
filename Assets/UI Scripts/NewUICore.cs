@@ -1,9 +1,8 @@
 using ME.ECS;
 using Photon.Pun;
-using Project.Core;
-using Project.Core.Features;
 using Project.Core.Features.Player;
 using UnityEngine;
+using TMPro;
 
 namespace UI_Scripts
 {
@@ -47,6 +46,28 @@ namespace UI_Scripts
             _victoryScreenEvent.Unsubscribe(ToggleWinScreen);
             _defeatScreenEvent.Unsubscribe(ToggleLoseScreen);
             _drawScreenEvent.Subscribe(ToggleDrawScreen);
+        }
+
+        private void Update()
+        {
+            // ShowStats();
+        }
+
+        public TextMeshProUGUI ServerAdress;
+        public TextMeshProUGUI CurrentCluster;
+        public TextMeshProUGUI CloudRegion;
+        public TextMeshProUGUI RoomName;
+        public TextMeshProUGUI MaxPlayers;
+        public TextMeshProUGUI ActorNumber;
+
+        private void ShowStats()
+        {
+            ServerAdress.SetText("Server Adress: " + PhotonNetwork.ServerAddress);
+            CurrentCluster.SetText("Current Cluster: " + PhotonNetwork.CurrentCluster);
+            CloudRegion.SetText("Cloud Region: " + PhotonNetwork.CloudRegion);
+            RoomName.SetText("Room Name: " + PhotonNetwork.CurrentRoom.Name);
+            MaxPlayers.SetText("Max Players: " + PhotonNetwork.CurrentRoom.MaxPlayers);
+            ActorNumber.SetText("Actor Number: " + PhotonNetwork.LocalPlayer.ActorNumber);
         }
     }
 }

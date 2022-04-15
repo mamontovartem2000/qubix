@@ -1,8 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core;
-using Project.Core.Features;
-using Project.Core.Features.Player.Components;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.CollisionHandler.Systems
@@ -19,15 +17,14 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         public World world { get; set; }
         
         private CollisionHandlerFeature _feature;
-        private Filter _damageSourceFilter;
+        private Filter _playerFilter;
 
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
             Filter.Create("Projectile-Filter")
-                .With<DamageSource>()
-                // .With<ProjectileActive>()
-                .Push(ref _damageSourceFilter);
+                .With<AvatarTag>()
+                .Push(ref _playerFilter);
         }
 
         void ISystemBase.OnDeconstruct() {}
@@ -39,26 +36,27 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         Filter ISystemFilter.CreateFilter()
         {
             return Filter.Create("Filter-ProjectileCollisionSystem")
-                .With<AvatarTag>()
+                .With<DamageSource>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            foreach (var source in _damageSourceFilter)
+            foreach (var player in _playerFilter)
             {
-                if ((entity.GetPosition() - source.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadiusSQR)
+                if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadiusSQR)
                 {
-                    var damage = source.Read<ProjectileDamage>().Value;
-                    var from = source.Get<Owner>().Value;
-
-                    if (from.Read<PlayerTag>().PlayerID != entity.Read<Owner>().Value.Read<PlayerTag>().PlayerID)
+                    if (entity.Get<Owner>().Value.Read<PlayerTag>().PlayerID != player.Get<Owner>().Value.Read<PlayerTag>().PlayerID)
                     {
+                        var damage = entity.Read<ProjectileDamage>().Value;
+                        var from = entity.Get<Owner>().Value;
+
                         var collision = new Entity("collision");
-                        collision.Set(new ApplyDamage {ApplyTo = entity, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
-                
-                        if(source.Has<ProjectileActive>())
-                            source.Destroy();
+                        collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
+
+                        if (entity.Has<ProjectileActive>())
+                           entity.Destroy();
+                        return;
                     }
                 }
             }

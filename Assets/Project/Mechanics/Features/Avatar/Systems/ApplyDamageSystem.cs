@@ -3,6 +3,7 @@ using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Core.Features.Player;
 using Project.Core.Features.Player.Components;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar.Systems
 {
@@ -45,9 +46,13 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var apply = entity.Read<ApplyDamage>();
+            ref var apply = ref entity.Get<ApplyDamage>();
+            
+            if (apply.ApplyFrom != Entity.Empty)
+            {
+                apply.ApplyTo.Get<Owner>().Value.Set(new DamagedBy {Value = apply.ApplyFrom});
+            }
 
-            apply.ApplyTo.Get<LastHit>().Enemy = apply.ApplyFrom;
             apply.ApplyTo.Get<PlayerHealth>().Value -= apply.Damage;
 
             world.GetFeature<EventsFeature>().HealthChanged.Execute(apply.ApplyTo.Read<Owner>().Value);

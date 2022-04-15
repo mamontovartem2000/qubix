@@ -1,3 +1,4 @@
+using System;
 using ME.ECS;
 using Photon.Pun;
 using Project.Markers;
@@ -360,7 +361,7 @@ namespace Project.Modules
         public override void OnRoomListUpdate(System.Collections.Generic.List<Photon.Realtime.RoomInfo> roomList)
         {
             Photon.Pun.PhotonNetwork.JoinOrCreateRoom(this.roomName,
-                new Photon.Realtime.RoomOptions() { MaxPlayers = 4, PublishUserId = true, CustomRoomPropertiesForLobby = new[] { "seed" } },
+                new Photon.Realtime.RoomOptions() { MaxPlayers = Convert.ToByte(Worlds.current.GetModule<NetworkModule>().PlayerCount), PublishUserId = true, CustomRoomPropertiesForLobby = new[] { "seed" } },
                 Photon.Realtime.TypedLobby.Default);
         }
 

@@ -9,6 +9,13 @@ namespace Project.Common.Components
         public Entity ApplyFrom;
     }
 
+    public struct ApplyDamageOneShot : IComponentOneShot
+    {
+        public float Damage;
+        public Entity ApplyTo;
+        public Entity ApplyFrom;
+    }
+
     public struct LifeTimeLeft : IComponent
     {
         public float Value;

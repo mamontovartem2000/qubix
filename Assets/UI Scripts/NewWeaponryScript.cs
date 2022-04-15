@@ -2,8 +2,6 @@ using DG.Tweening;
 using ME.ECS;
 using Photon.Pun;
 using Project.Common.Components;
-using Project.Core;
-using Project.Core.Features;
 using Project.Core.Features.Player;
 using TMPro;
 using UnityEngine;
@@ -37,7 +35,7 @@ namespace UI_Scripts
         {
             if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
 
-            var entity = player.Read<PlayerAvatar>().Value;
+            var entity = player.Read<PlayerAvatar>().Value.Read<WeaponEntities>().LeftWeapon;
             if (!entity.Has<LinearWeapon>()) return;
             
             var fill = (float)entity.Read<AmmoCapacity>().Value / entity.Read<AmmoCapacityDefault>().Value;
@@ -50,7 +48,8 @@ namespace UI_Scripts
         {
             if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
 
-            var entity = player.Read<PlayerAvatar>().Value;
+            var entity = player.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon;
+            
             var fill = (float)entity.Read<AmmoCapacity>().Value / entity.Read<AmmoCapacityDefault>().Value;
          
             RightWeaponAmmoImage.fillAmount = fill;
@@ -61,7 +60,7 @@ namespace UI_Scripts
         {
             if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
             
-            var entity = player.Read<PlayerAvatar>().Value;
+            var entity = player.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon;
 
             var time = entity.Read<ReloadTimeDefault>().Value;
         
