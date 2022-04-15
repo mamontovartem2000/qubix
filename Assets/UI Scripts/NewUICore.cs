@@ -50,24 +50,48 @@ namespace UI_Scripts
 
         private void Update()
         {
-            // ShowStats();
+            //ShowStats();
+            //SetTexts();
         }
 
-        public TextMeshProUGUI ServerAdress;
-        public TextMeshProUGUI CurrentCluster;
-        public TextMeshProUGUI CloudRegion;
-        public TextMeshProUGUI RoomName;
-        public TextMeshProUGUI MaxPlayers;
-        public TextMeshProUGUI ActorNumber;
+        private void SetTexts()
+        {
+            for (int i = 0; i < _strings.Length; i++)
+            {
+                Lines[i].SetText(_strings[i]);
+            };
+        }
 
+        public TextMeshProUGUI[] Lines;
+        private string[] _strings = new string[12];
         private void ShowStats()
         {
-            ServerAdress.SetText("Server Adress: " + PhotonNetwork.ServerAddress);
-            CurrentCluster.SetText("Current Cluster: " + PhotonNetwork.CurrentCluster);
-            CloudRegion.SetText("Cloud Region: " + PhotonNetwork.CloudRegion);
-            RoomName.SetText("Room Name: " + PhotonNetwork.CurrentRoom.Name);
-            MaxPlayers.SetText("Max Players: " + PhotonNetwork.CurrentRoom.MaxPlayers);
-            ActorNumber.SetText("Actor Number: " + PhotonNetwork.LocalPlayer.ActorNumber);
+            _strings[0] = PhotonNetwork.NetworkingClient.CurrentCluster;
+            _strings[1] = PhotonNetwork.NetworkingClient.CurrentLobby.ToString();
+            _strings[2] = PhotonNetwork.NetworkingClient.CurrentRoom.ToString();
+            _strings[3] = PhotonNetwork.NetworkingClient.Server.ToString();
+            _strings[4] = PhotonNetwork.NetworkingClient.DisconnectedCause.ToString();
+            _strings[5] = PhotonNetwork.NetworkingClient.IsConnected.ToString();
+            _strings[6] = PhotonNetwork.NetworkingClient.RegionHandler.ToString();
+            _strings[7] = PhotonNetwork.NetworkingClient.GameServerAddress;
+            _strings[8] = PhotonNetwork.NetworkingClient.MatchMakingCallbackTargets.ToString();
+            _strings[9] = PhotonNetwork.NetworkingClient.PlayersInRoomsCount.ToString();
+            _strings[10] = PhotonNetwork.NetworkingClient.PlayersOnMasterCount.ToString();
+            _strings[11] = PhotonNetwork.NetworkingClient.SummaryToCache;
         }
     }
 }
+
+
+// _strings[0] = PhotonNetwork.CurrentCluster; //NetworkingClient.CurrentCluster;
+// _strings[1] = PhotonNetwork.CurrentLobby.ToString(); //NetworkingClient.CurrentLobby.ToString();
+// _strings[2] = PhotonNetwork.CurrentRoom.ToString(); //NetworkingClient.CurrentRoom.ToString();
+// _strings[3] = PhotonNetwork.Server.ToString(); //NetworkingClient.Server.ToString();
+// // _strings[4] = PhotonNetwork //NetworkingClient.DisconnectedCause.ToString();
+// _strings[5] = PhotonNetwork.IsConnected.ToString(); //NetworkingClient.IsConnected.ToString();
+// _strings[6] = PhotonNetwork.CloudRegion; //NetworkingClient.RegionHandler.ToString();
+// _strings[7] = PhotonNetwork.ServerAddress; //NetworkingClient.GameServerAddress;
+// // _strings[8] = PhotonNetwork //NetworkingClient.MatchMakingCallbackTargets.ToString();
+// _strings[9] = PhotonNetwork.CountOfPlayers.ToString(); //NetworkingClient.PlayersInRoomsCount.ToString();
+// _strings[10] = PhotonNetwork.CountOfPlayersOnMaster.ToString(); //NetworkingClient.PlayersOnMasterCount.ToString();
+// // _strings[11] = PhotonNetwork //NetworkingClient.SummaryToCache;
