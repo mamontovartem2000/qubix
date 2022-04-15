@@ -1,8 +1,8 @@
 using ME.ECS;
-using Photon.Pun;
 using Project.Core.Features.Player;
-using UnityEngine;
+using Project.Modules.Network;
 using TMPro;
+using UnityEngine;
 
 namespace UI_Scripts
 {
@@ -25,19 +25,19 @@ namespace UI_Scripts
 
         private void ToggleWinScreen(in Entity entity)
         {
-            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
             _victoryScreen.SetActive(true);
         }
 
         private void ToggleLoseScreen(in Entity entity)
         {
-            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
             _defeatScreen.SetActive(true);
         }
     
         private void ToggleDrawScreen(in Entity entity)
         {
-            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
             _drawScreen.SetActive(true);
         }
 
@@ -64,21 +64,21 @@ namespace UI_Scripts
 
         public TextMeshProUGUI[] Lines;
         private string[] _strings = new string[12];
-        private void ShowStats()
-        {
-            _strings[0] = PhotonNetwork.NetworkingClient.CurrentCluster;
-            _strings[1] = PhotonNetwork.NetworkingClient.CurrentLobby.ToString();
-            _strings[2] = PhotonNetwork.NetworkingClient.CurrentRoom.ToString();
-            _strings[3] = PhotonNetwork.NetworkingClient.Server.ToString();
-            _strings[4] = PhotonNetwork.NetworkingClient.DisconnectedCause.ToString();
-            _strings[5] = PhotonNetwork.NetworkingClient.IsConnected.ToString();
-            _strings[6] = PhotonNetwork.NetworkingClient.RegionHandler.ToString();
-            _strings[7] = PhotonNetwork.NetworkingClient.GameServerAddress;
-            _strings[8] = PhotonNetwork.NetworkingClient.MatchMakingCallbackTargets.ToString();
-            _strings[9] = PhotonNetwork.NetworkingClient.PlayersInRoomsCount.ToString();
-            _strings[10] = PhotonNetwork.NetworkingClient.PlayersOnMasterCount.ToString();
-            _strings[11] = PhotonNetwork.NetworkingClient.SummaryToCache;
-        }
+        //private void ShowStats()
+        //{
+        //    _strings[0] = PhotonNetwork.NetworkingClient.CurrentCluster;
+        //    _strings[1] = PhotonNetwork.NetworkingClient.CurrentLobby.ToString();
+        //    _strings[2] = PhotonNetwork.NetworkingClient.CurrentRoom.ToString();
+        //    _strings[3] = PhotonNetwork.NetworkingClient.Server.ToString();
+        //    _strings[4] = PhotonNetwork.NetworkingClient.DisconnectedCause.ToString();
+        //    _strings[5] = PhotonNetwork.NetworkingClient.IsConnected.ToString();
+        //    _strings[6] = PhotonNetwork.NetworkingClient.RegionHandler.ToString();
+        //    _strings[7] = PhotonNetwork.NetworkingClient.GameServerAddress;
+        //    _strings[8] = PhotonNetwork.NetworkingClient.MatchMakingCallbackTargets.ToString();
+        //    _strings[9] = PhotonNetwork.NetworkingClient.PlayersInRoomsCount.ToString();
+        //    _strings[10] = PhotonNetwork.NetworkingClient.PlayersOnMasterCount.ToString();
+        //    _strings[11] = PhotonNetwork.NetworkingClient.SummaryToCache;
+        //}
     }
 }
 

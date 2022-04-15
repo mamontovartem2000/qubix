@@ -1,9 +1,7 @@
 using ME.ECS;
-using Photon.Pun;
 using Project.Common.Components;
-using Project.Core;
-using Project.Core.Features;
 using Project.Core.Features.Player;
+using Project.Modules.Network;
 using UnityEngine;
 
 namespace UI_Scripts
@@ -28,7 +26,7 @@ namespace UI_Scripts
 
         private void SetPlayer(in Entity player)
         {
-            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
             _player = player.Read<PlayerAvatar>().Value;
         }
     

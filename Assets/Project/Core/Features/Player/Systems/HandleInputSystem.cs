@@ -2,9 +2,9 @@
 using Project.Common.Components;
 using Project.Core.Features.Player.Components;
 using Project.Input.InputHandler.Markers;
-using Project.Modules;
 using System;
 using UnityEngine;
+using Project.Modules.Network;
 
 namespace Project.Core.Features.Player.Systems
 {

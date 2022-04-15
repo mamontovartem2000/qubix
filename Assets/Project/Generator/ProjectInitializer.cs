@@ -8,6 +8,7 @@ namespace Project.Generator {
     
     using TState = ProjectState;
     using Project.Modules;
+    using Project.Modules.Network;
     using ME.ECS;
     using ME.ECS.Views.Providers;
     using Project.Generator.Modules;

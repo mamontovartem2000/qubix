@@ -1,8 +1,8 @@
-using System.Collections;
 using DG.Tweening;
 using ME.ECS;
-using Photon.Pun;
 using Project.Core.Features.Player;
+using Project.Modules.Network;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +26,7 @@ namespace UI_Scripts
 
         private void Deactivate(in Entity entity)
         {
-            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
 
             _background.DOFade(0, 0.5f).SetEase(Ease.Linear);
             _popup.DOFade(0, 0.25f).SetEase(Ease.Linear);
@@ -35,7 +35,7 @@ namespace UI_Scripts
  
         private void Activate(in Entity entity)
         {
-            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
 
             _background.DOFade(0.5f, 0.5f).SetEase(Ease.Linear);
             _popup.DOFade(1f, 1f).SetEase(Ease.Linear);

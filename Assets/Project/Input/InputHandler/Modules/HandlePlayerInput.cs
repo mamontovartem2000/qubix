@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
-using Photon.Pun;
+using Project.Common.Components;
 using Project.Input.InputHandler.Markers;
+using Project.Modules.Network;
 
 namespace Project.Input.InputHandler.Modules
 {
@@ -17,7 +18,7 @@ namespace Project.Input.InputHandler.Modules
 	{
 		private PlayerInput _input;
 		private InputHandlerFeature _feature;
-		
+
 		public World world { get; set; }
 
 		void IModuleBase.OnConstruct()
@@ -57,14 +58,14 @@ namespace Project.Input.InputHandler.Modules
 
 		private void LeftMousePressed()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
 			world.AddMarker(new MouseLeftMarker {ActorID = id, State = InputState.Pressed});
 		}
 		
 		private void LeftMouseReleased()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 
 			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
 			world.AddMarker(new MouseLeftMarker {ActorID = id, State = InputState.Released});
@@ -72,7 +73,7 @@ namespace Project.Input.InputHandler.Modules
 		
 		private void RightMousePressed()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 
 			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
 			world.AddMarker(new MouseRightMarker {ActorID = id, State = InputState.Pressed});
@@ -80,7 +81,7 @@ namespace Project.Input.InputHandler.Modules
 		
 		private void RightMouseReleased()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 
 			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
 			world.AddMarker(new MouseRightMarker {ActorID = id, State = InputState.Released});
@@ -88,27 +89,27 @@ namespace Project.Input.InputHandler.Modules
 		
 		private void LockDirectionPressed()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
 			world.AddMarker(new LockDirectionMarker {ActorID = id, State = InputState.Pressed });
 		}
 		
 		private void LockDirectionReleased()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
 			world.AddMarker(new LockDirectionMarker {ActorID = id, State = InputState.Released });
 		}
 		
 		private void ForwardPressed()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
 			world.AddMarker(new ForwardMarker {ActorID = id, State = InputState.Pressed, Axis = MovementAxis.Vertical});
 		}
 		private void ForwardReleased()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
 			
 			if (_input.Player.MoveLeft.IsPressed() || _input.Player.MoveRight.IsPressed())
@@ -123,14 +124,14 @@ namespace Project.Input.InputHandler.Modules
 
 		private void BackwardPressed()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
 			world.AddMarker(new BackwardMarker {ActorID = id, State = InputState.Pressed, Axis = MovementAxis.Vertical});
 		}
 
 		private void BackwardReleased()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
 
 			if (_input.Player.MoveLeft.IsPressed() || _input.Player.MoveRight.IsPressed())
@@ -145,7 +146,7 @@ namespace Project.Input.InputHandler.Modules
 
 		private void LeftPressed()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
 
 			world.AddMarker(new LeftMarker {ActorID = id, State = InputState.Pressed, Axis = MovementAxis.Horizontal});	
@@ -153,7 +154,7 @@ namespace Project.Input.InputHandler.Modules
 		
 		private void LeftReleased()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
 
 			if (_input.Player.MoveForward.IsPressed() || _input.Player.MoveBackward.IsPressed())
@@ -168,14 +169,14 @@ namespace Project.Input.InputHandler.Modules
 
 		private void RightPressed()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 			
 			world.AddMarker(new RightMarker {ActorID = id, State = InputState.Pressed, Axis = MovementAxis.Horizontal});
 		}
 		
 		private void RightReleased()
 		{
-			var id = PhotonNetwork.LocalPlayer.ActorNumber;
+			var id = NetworkData.OrderId;
 
 			if (_input.Player.MoveForward.IsPressed() || _input.Player.MoveBackward.IsPressed())
 			{

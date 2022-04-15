@@ -4,7 +4,7 @@ using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Core.Features.Player.Modules;
 using Project.Core.Features.Player.Systems;
-using Project.Modules;
+using Project.Modules.Network;
 
 namespace Project.Core.Features.Player
 {

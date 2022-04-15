@@ -1,9 +1,7 @@
 using ME.ECS;
-using Photon.Pun;
 using Project.Common.Components;
-using Project.Core;
-using Project.Core.Features;
 using Project.Core.Features.Player;
+using Project.Modules.Network;
 using TMPro;
 using UnityEngine;
 
@@ -21,7 +19,7 @@ namespace UI_Scripts
 
 		private void UpdateCounter(in Entity entity)
 		{
-			if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber)) return;
+			if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
 
 			CounterText.SetText(entity.Read<PlayerScore>().Deaths.ToString());
 		}
