@@ -5,11 +5,6 @@ using UnityEngine;
 
 namespace Project.Common.Components
 {
-    public struct Owner : IComponent
-    {
-        public Entity Value;
-    }
-    
     public struct AvatarTag : IComponent {}
     public struct NeedAvatar : IComponent
     {
@@ -48,10 +43,23 @@ namespace Project.Common.Components
         public Entity RightWeapon;
     }
 
-    public struct AvatarSettings : IComponent
+    public struct SkillEntities : IComponent
     {
-        public DataConfig PlayerConfig;
+        public Entity FirstSkill;
+        public Entity SecondSkill;
+        public Entity ThirdSkill;
+        public Entity FourthSkill;
+    }
+
+    public struct PlayerConfig : IComponent
+    {
+        public DataConfig AvatarConfig;
         public DataConfig LeftWeaponConfig;
         public DataConfig RightWeaponConfig;
+        
+        public DataConfig FistSkillConfig;
+        public DataConfig SecondSkillConfig;
+        public DataConfig ThirdSkillConfig;
+        public DataConfig FourthSkillConfig;
     }
 }

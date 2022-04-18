@@ -19,17 +19,7 @@ namespace Project.Common.Components
 		public float Value;
 	}
 
-	public struct ProjectileSpeedModifier : IComponent
-	{
-		public float Value;
-	}
-
 	public struct ProjectileDamage : IComponent
-	{
-		public float Value;
-	}
-
-	public struct ProjectileDamageModifier : IComponent
 	{
 		public float Value;
 	}
@@ -40,30 +30,18 @@ namespace Project.Common.Components
 		public float EndDelay;
 	}
 
-	public struct LinearActive : IComponent
-	{
-		public Entity Player;
-	}
+	public struct LinearActive : IComponent {}
 
-	public struct MeleeActive : IComponent
-	{
-		public Entity Player;
-	}
+	public struct MeleeActive : IComponent {}
 
-	public struct ProjectileActive : IComponent
-	{
-		public Entity Player;
-	}
+	public struct ProjectileActive : IComponent {}
 	
 	public struct Trajectory : IComponent
 	{
 		public float Value;
 	}
 	
-	public struct LinearVisual : IComponent
-	{
-		public Entity Parent;
-	}
+	public struct LinearVisual : IComponent {}
 	
 	public struct DamageSource : IComponent {}
 }

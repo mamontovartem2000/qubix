@@ -9,24 +9,17 @@ namespace Project.Common.Components
         public Entity ApplyFrom;
     }
 
-    public struct ApplyDamageOneShot : IComponentOneShot
+    public struct DamagedBy : IComponent
     {
-        public float Damage;
-        public Entity ApplyTo;
-        public Entity ApplyFrom;
-    }
-
-    public struct LifeTimeLeft : IComponent
-    {
-        public float Value;
+        public Entity Value;
     }
     
-    public struct LifeTimeDefault : IComponent
+    public struct Owner : IComponent
     {
-        public float Value;
+        public Entity Value;
     }
     
     public struct LeftWeaponShot : IComponent{}
     public struct RightWeaponShot : IComponent{}
-
+    public struct SpeedModifier : IComponent {}
 }

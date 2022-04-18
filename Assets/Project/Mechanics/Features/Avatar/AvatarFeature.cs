@@ -3,19 +3,16 @@ using ME.ECS.DataConfigs;
 using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features.Events;
-using Project.Core.Features.Player.Components;
 using Project.Mechanics.Features.Avatar.Systems;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar
 {
-    #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-    #endregion
     public sealed class AvatarFeature : Feature
     {
         private readonly Vector3 _direction = new Vector3(0f,0f,1f);
@@ -34,19 +31,25 @@ namespace Project.Mechanics.Features.Avatar
         public void SpawnPlayerAvatar(Entity owner)
         {
             var entity = new Entity("avatar");
-            owner.Read<AvatarSettings>().PlayerConfig.Apply(entity);
+            owner.Read<PlayerConfig>().AvatarConfig.Apply(entity);
 
             var view = world.RegisterViewSource(entity.Read<NeedAvatar>().Value);
             entity.InstantiateView(view);
 
             entity.Get<Owner>().Value = owner;
 
-            entity.Get<WeaponEntities>().LeftWeapon = ConstructWeapon(owner.Read<AvatarSettings>().LeftWeaponConfig, entity);
-            entity.Get<WeaponEntities>().RightWeapon = ConstructWeapon(owner.Read<AvatarSettings>().RightWeaponConfig, entity);
+            entity.Get<WeaponEntities>().LeftWeapon = ConstructWeapon(owner.Read<PlayerConfig>().LeftWeaponConfig, entity);
+            entity.Get<WeaponEntities>().RightWeapon = ConstructWeapon(owner.Read<PlayerConfig>().RightWeaponConfig, entity);
+
+            ref var skills = ref entity.Get<SkillEntities>();
+            
+            skills.FirstSkill = ConstructSkill(owner.Read<PlayerConfig>().FistSkillConfig, owner);
+            skills.SecondSkill = ConstructSkill(owner.Read<PlayerConfig>().SecondSkillConfig, owner);
+            skills.ThirdSkill = ConstructSkill(owner.Read<PlayerConfig>().ThirdSkillConfig, owner);
+            skills.FourthSkill = ConstructSkill(owner.Read<PlayerConfig>().FourthSkillConfig, owner);
 
             entity.SetPosition(SceneUtils.GetRandomSpawnPosition());
             entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
-            entity.Set(new AvatarTag());
 
             owner.Get<PlayerAvatar>().Value = entity;
             world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(owner);
@@ -72,6 +75,15 @@ namespace Project.Mechanics.Features.Avatar
             weapon.Get<Owner>().Value = parent.Get<Owner>().Value;
             
             return weapon;
+        }
+
+        private Entity ConstructSkill(DataConfig skillConfig, Entity owner)
+        {
+            var skill = new Entity("skill");
+            skillConfig.Apply(skill);
+            skill.Get<Owner>().Value = owner;
+
+            return skill;
         }
     }
 }

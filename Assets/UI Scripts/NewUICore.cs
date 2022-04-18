@@ -25,19 +25,19 @@ namespace UI_Scripts
 
         private void ToggleWinScreen(in Entity entity)
         {
-            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.OrderId)) return;
             _victoryScreen.SetActive(true);
         }
 
         private void ToggleLoseScreen(in Entity entity)
         {
-            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.OrderId)) return;
             _defeatScreen.SetActive(true);
         }
     
         private void ToggleDrawScreen(in Entity entity)
         {
-            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.OrderId)) return;
             _drawScreen.SetActive(true);
         }
 

@@ -6,6 +6,7 @@ using Project.Modules.Network;
 namespace Project.Input.InputHandler.Modules
 {
     #region usage
+
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
@@ -15,180 +16,92 @@ namespace Project.Input.InputHandler.Modules
     #endregion
 
     public sealed class HandlePlayerInput : IModule, IUpdate
-	{
-		private PlayerInput _input;
-		private InputHandlerFeature _feature;
+    {
+        private PlayerInput _input;
+        private InputHandlerFeature _feature;
 
-		public World world { get; set; }
+        public World world { get; set; }
 
-		void IModuleBase.OnConstruct()
-		{
-			_feature = world.GetFeature<InputHandlerFeature>();
+        void IModuleBase.OnConstruct()
+        {
+            _feature = world.GetFeature<InputHandlerFeature>();
 
-			_input = new PlayerInput();
-			_input.Enable();
+            _input = new PlayerInput();
+            _input.Enable();
 
-			_input.Player.MoveForward.started += ctx => ForwardPressed();
-			_input.Player.MoveForward.canceled += ctx => ForwardReleased();
+            _input.Player.MoveForward.started += ctx => world.AddMarker(new ForwardMarker
+                {ActorID = NetworkData.OrderId, State = InputState.Pressed, Axis = MovementAxis.Vertical});
 
-			_input.Player.MoveBackward.started += ctx => BackwardPressed();
-			_input.Player.MoveBackward.canceled += ctx => BackwardReleased();
+            _input.Player.MoveForward.canceled += ctx => world.AddMarker(new ForwardMarker
+            {
+                ActorID = NetworkData.OrderId, State = InputState.Released,
+                Axis = _input.Player.MoveLeft.IsPressed() || _input.Player.MoveRight.IsPressed() ? MovementAxis.Horizontal : MovementAxis.Vertical
+            });
 
-			_input.Player.MoveLeft.started += ctx => LeftPressed();
-			_input.Player.MoveLeft.canceled += ctx => LeftReleased();
+            _input.Player.MoveBackward.started += ctx => world.AddMarker(new BackwardMarker
+                {ActorID = NetworkData.OrderId, State = InputState.Pressed, Axis = MovementAxis.Vertical});
 
-			_input.Player.MoveRight.started += ctx => RightPressed();
-			_input.Player.MoveRight.canceled += ctx => RightReleased();
+            _input.Player.MoveBackward.canceled += ctx => world.AddMarker(new BackwardMarker
+            {
+                ActorID = NetworkData.OrderId, State = InputState.Released,
+                Axis = _input.Player.MoveLeft.IsPressed() || _input.Player.MoveRight.IsPressed() ? MovementAxis.Horizontal : MovementAxis.Vertical
+            });
+            ;
 
-			_input.Player.LeftShoot.started += ctx => LeftMousePressed();
-			_input.Player.LeftShoot.canceled += ctx => LeftMouseReleased();
+            _input.Player.MoveLeft.started += ctx => world.AddMarker(new LeftMarker
+                {ActorID = NetworkData.OrderId, State = InputState.Pressed, Axis = MovementAxis.Horizontal});
 
-			_input.Player.RightShoot.started += ctx => RightMousePressed();
-			_input.Player.RightShoot.canceled += ctx => RightMouseReleased();
+            _input.Player.MoveLeft.canceled += ctx => world.AddMarker(new LeftMarker
+            {
+                ActorID = NetworkData.OrderId, State = InputState.Released,
+                Axis = _input.Player.MoveForward.IsPressed() || _input.Player.MoveBackward.IsPressed()
+                    ? MovementAxis.Vertical
+                    : MovementAxis.Horizontal
+            });
 
-			_input.Player.LockDirection.started += ctx => LockDirectionPressed();
-			_input.Player.LockDirection.canceled += ctx => LockDirectionReleased();
-			
-			_input.Player.Skill1.performed += ctx => world.AddMarker(new SkillOneMarker {ActorID = 1});
-			_input.Player.Skill2.performed += ctx => world.AddMarker(new SkillTwoMarker {ActorID = 1});
-			_input.Player.Skill3.performed += ctx => world.AddMarker(new SkillThreeMarker {ActorID = 1});
-			_input.Player.Skill4.performed += ctx => world.AddMarker(new SkillFourMarker {ActorID = 1});
+            _input.Player.MoveRight.started += ctx => world.AddMarker(new RightMarker
+                {ActorID = NetworkData.OrderId, State = InputState.Pressed, Axis = MovementAxis.Horizontal});
 
-		}
+            _input.Player.MoveRight.canceled += ctx => world.AddMarker(new RightMarker
+            {
+                ActorID = NetworkData.OrderId, State = InputState.Released,
+                Axis = _input.Player.MoveForward.IsPressed() || _input.Player.MoveBackward.IsPressed()
+                    ? MovementAxis.Vertical
+                    : MovementAxis.Horizontal
+            });
+            ;
 
-		private void LeftMousePressed()
-		{
-			var id = NetworkData.OrderId;
-			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
-			world.AddMarker(new MouseLeftMarker {ActorID = id, State = InputState.Pressed});
-		}
-		
-		private void LeftMouseReleased()
-		{
-			var id = NetworkData.OrderId;
+            _input.Player.LeftShoot.started +=
+                ctx => world.AddMarker(new MouseLeftMarker {ActorID = NetworkData.OrderId, State = InputState.Pressed});
+            _input.Player.LeftShoot.canceled +=
+                ctx => world.AddMarker(new MouseLeftMarker {ActorID = NetworkData.OrderId, State = InputState.Released});
+            ;
 
-			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
-			world.AddMarker(new MouseLeftMarker {ActorID = id, State = InputState.Released});
-		}
-		
-		private void RightMousePressed()
-		{
-			var id = NetworkData.OrderId;
+            _input.Player.RightShoot.started +=
+                ctx => world.AddMarker(new MouseRightMarker {ActorID = NetworkData.OrderId, State = InputState.Pressed});
+            ;
+            _input.Player.RightShoot.canceled +=
+                ctx => world.AddMarker(new MouseRightMarker {ActorID = NetworkData.OrderId, State = InputState.Released});
 
-			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
-			world.AddMarker(new MouseRightMarker {ActorID = id, State = InputState.Pressed});
-		}
-		
-		private void RightMouseReleased()
-		{
-			var id = NetworkData.OrderId;
+            _input.Player.LockDirection.started += ctx =>
+                world.AddMarker(new LockDirectionMarker {ActorID = NetworkData.OrderId, State = InputState.Pressed});
+            ;
+            _input.Player.LockDirection.canceled += ctx =>
+                world.AddMarker(new LockDirectionMarker {ActorID = NetworkData.OrderId, State = InputState.Released});
+            ;
 
-			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
-			world.AddMarker(new MouseRightMarker {ActorID = id, State = InputState.Released});
-		}
-		
-		private void LockDirectionPressed()
-		{
-			var id = NetworkData.OrderId;
-			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
-			world.AddMarker(new LockDirectionMarker {ActorID = id, State = InputState.Pressed });
-		}
-		
-		private void LockDirectionReleased()
-		{
-			var id = NetworkData.OrderId;
-			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
-			world.AddMarker(new LockDirectionMarker {ActorID = id, State = InputState.Released });
-		}
-		
-		private void ForwardPressed()
-		{
-			var id = NetworkData.OrderId;
-			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
-			world.AddMarker(new ForwardMarker {ActorID = id, State = InputState.Pressed, Axis = MovementAxis.Vertical});
-		}
-		private void ForwardReleased()
-		{
-			var id = NetworkData.OrderId;
-			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
-			
-			if (_input.Player.MoveLeft.IsPressed() || _input.Player.MoveRight.IsPressed())
-			{
-				world.AddMarker(new ForwardMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Horizontal});
-			}
-			else
-			{
-				world.AddMarker(new ForwardMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Vertical});
-			}
-		}
+            _input.Player.Skill1.performed += ctx => world.AddMarker(new FirstSkillMarker {ActorID = NetworkData.OrderId});
+            _input.Player.Skill2.performed += ctx => world.AddMarker(new SecondSkillMarker {ActorID = NetworkData.OrderId});
+            _input.Player.Skill3.performed += ctx => world.AddMarker(new ThirdSkillMarker {ActorID = NetworkData.OrderId});
+            _input.Player.Skill4.performed += ctx => world.AddMarker(new FourthSkillMarker {ActorID = NetworkData.OrderId});
+        }
 
-		private void BackwardPressed()
-		{
-			var id = NetworkData.OrderId;
-			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
-			world.AddMarker(new BackwardMarker {ActorID = id, State = InputState.Pressed, Axis = MovementAxis.Vertical});
-		}
+        void IModuleBase.OnDeconstruct()
+        {
+        }
 
-		private void BackwardReleased()
-		{
-			var id = NetworkData.OrderId;
-			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
-
-			if (_input.Player.MoveLeft.IsPressed() || _input.Player.MoveRight.IsPressed())
-			{
-				world.AddMarker(new BackwardMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Horizontal});
-			}
-			else
-			{
-				world.AddMarker(new BackwardMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Vertical});
-			}
-		}
-
-		private void LeftPressed()
-		{
-			var id = NetworkData.OrderId;
-			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
-
-			world.AddMarker(new LeftMarker {ActorID = id, State = InputState.Pressed, Axis = MovementAxis.Horizontal});	
-		}
-		
-		private void LeftReleased()
-		{
-			var id = NetworkData.OrderId;
-			// var id = Worlds.current.GetFeature<PlayerFeature>().GetActivePlayer().Read<PlayerTag>().PlayerID;
-
-			if (_input.Player.MoveForward.IsPressed() || _input.Player.MoveBackward.IsPressed())
-			{
-				world.AddMarker(new LeftMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Vertical});
-			}
-			else
-			{
-				world.AddMarker(new LeftMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Horizontal});
-			}
-		}
-
-		private void RightPressed()
-		{
-			var id = NetworkData.OrderId;
-			
-			world.AddMarker(new RightMarker {ActorID = id, State = InputState.Pressed, Axis = MovementAxis.Horizontal});
-		}
-		
-		private void RightReleased()
-		{
-			var id = NetworkData.OrderId;
-
-			if (_input.Player.MoveForward.IsPressed() || _input.Player.MoveBackward.IsPressed())
-			{
-				world.AddMarker(new RightMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Vertical});
-			}
-			else
-			{
-				world.AddMarker(new RightMarker {ActorID = id, State = InputState.Released, Axis = MovementAxis.Horizontal});
-			}
-		}
-		
-		void IModuleBase.OnDeconstruct() {}
-		void IUpdate.Update(in float deltaTime) {}
-	}
+        void IUpdate.Update(in float deltaTime)
+        {
+        }
+    }
 }

@@ -1,9 +1,9 @@
 ﻿using ME.ECS;
+using Project.Common.Components;
 
 namespace Project.Input.InputHandler.Markers
 {
     public enum InputState { Pressed, Released }
-    public enum MovementAxis {Horizontal, Vertical}
 
     public struct ForwardMarker : IMarker
     {
@@ -47,19 +47,19 @@ namespace Project.Input.InputHandler.Markers
         public InputState State;
     }
 
-    public struct SkillOneMarker : IMarker
+    public struct FirstSkillMarker : IMarker
     {
         public int ActorID;
     }
-    public struct SkillTwoMarker : IMarker
+    public struct SecondSkillMarker : IMarker
     {
         public int ActorID;
     }
-    public struct SkillThreeMarker : IMarker
+    public struct ThirdSkillMarker : IMarker
     {
         public int ActorID;
     }
-    public struct SkillFourMarker : IMarker
+    public struct FourthSkillMarker : IMarker
     {
         public int ActorID;
     }

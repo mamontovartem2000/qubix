@@ -45,11 +45,12 @@ namespace Project.Mechanics.Features.Weapon.Systems
 			ref var delay = ref entity.Get<MeleeDelay>().Value;
 			var dir = entity.Read<WeaponAim>().Aim.GetPosition() - entity.GetPosition();
 			
+			
 			delay -= deltaTime;
 
 			if (delay <= 0)
 			{
-				_projectile.SpawnMelee(entity, 3, dir);
+				_projectile.SpawnMelee(entity, entity.Read<MeleeWeapon>().Length, dir);
 			}
 		}
 	}

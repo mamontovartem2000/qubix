@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
+  m_Name: PlayerConfig
+  m_EditorClassIdentifier: 
+  sharedGroupId: 0
+  structComponents:
+  - id: 0
+  - id: 1
+  removeStructComponents: []
+  templates: []
+  references:
+    version: 1
+    00000000:
+      type: {class: PlayerConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        AvatarConfig: {fileID: 11400000, guid: d67c3b45891e393469b6ae3e2935ebe1, type: 2}
+        LeftWeaponConfig: {fileID: 11400000, guid: 5b6f72f08e6324c4990a2519008a9c1e, type: 2}
+        RightWeaponConfig: {fileID: 11400000, guid: 0748f578faf53dc458ad12216e734129, type: 2}
+        FistSkillConfig: {fileID: 11400000, guid: 5bcbe078f294c104fa6868545c54d881, type: 2}
+        SecondSkillConfig: {fileID: 11400000, guid: 69bc5c5880f7af04c90b55dcc3f589ed, type: 2}
+        ThirdSkillConfig: {fileID: 11400000, guid: 2f874678bfa0d4949bda802cbce9800a, type: 2}
+        FourthSkillConfig: {fileID: 11400000, guid: 85fc15f13dd476e4db1048599e09cf89, type: 2}
+    00000001:
+      type: {class: PlayerScore, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Kills: 0
+        Deaths: 0

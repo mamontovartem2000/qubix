@@ -1,6 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.Views.Providers;
-using Project.Core.Features.Player.Components;
+using Project.Common.Components;
 using UnityEngine;
 using UnityEngine.UI;
 

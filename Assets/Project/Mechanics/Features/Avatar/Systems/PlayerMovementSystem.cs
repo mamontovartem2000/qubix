@@ -3,9 +3,7 @@ using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.Player;
-using Project.Core.Features.Player.Components;
 using Project.Core.Features.SceneBuilder;
-using Project.Input.InputHandler.Markers;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar.Systems
@@ -83,7 +81,11 @@ namespace Project.Mechanics.Features.Avatar.Systems
 				}
 			}
 
-			var speed = entity.Has<LockTarget>() ? entity.Read<PlayerMovementSpeed>().Value * 0.65f : entity.Read<PlayerMovementSpeed>().Value;
+			var speedBase = entity.Read<PlayerMovementSpeed>().Value;
+			var speedMod = entity.Read<MoveSpeedModifier>().Value * speedBase;
+			var currentSpeed = speedBase + speedMod;
+			
+			var speed = entity.Has<LockTarget>() ? currentSpeed * 0.65f : currentSpeed;
 			entity.SetPosition(Vector3.MoveTowards(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value, speed * deltaTime));     
 		}
 	}

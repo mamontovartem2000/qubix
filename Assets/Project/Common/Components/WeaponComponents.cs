@@ -80,4 +80,9 @@ namespace Project.Common.Components
     {
         public Vector3 Value;
     }
+
+    public struct FiringCooldownModifier : IComponent
+    {
+        public float Value;
+    }
 }

@@ -1,7 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.Views.Providers;
 using Project.Core.Features.GameState.Components;
-using Project.Mechanics.Features.CollisionHandler.Components;
 using Project.Mechanics.Features.CollisionHandler.Systems;
 using UnityEngine;
 
@@ -28,7 +27,6 @@ namespace Project.Mechanics.Features.CollisionHandler
         {
             AddSystem<HealthCollisionSystem>();
             AddSystem<MineCollisionSystem>();
-            AddSystem<ExplosionSystem>();
             AddSystem<ProjectileCollisionSystem>();
 
             ExplosionID = world.RegisterViewSource(ExplosionVFX);
@@ -47,7 +45,6 @@ namespace Project.Mechanics.Features.CollisionHandler
             var vfx = new Entity("vfx");
             vfx.InstantiateView(id);
             vfx.SetPosition(position);
-            vfx.Get<ExplosionTag>().Value = time;
         }
         
         protected override void OnDeconstruct() {}

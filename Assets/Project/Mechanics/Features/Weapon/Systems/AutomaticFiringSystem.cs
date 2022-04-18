@@ -53,9 +53,13 @@ namespace Project.Mechanics.Features.Weapon.Systems
                 dir += new Vector3(world.GetRandomRange(-spread, spread), 0,world.GetRandomRange(-spread, spread));
             }
 
+            var cooldownBase = entity.Read<CooldownDefault>().Value;
+            var cooldownMod = entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Read<FiringCooldownModifier>().Value * cooldownBase;
+            var currentCooldown = cooldownBase + cooldownMod;
+            
             if (ammo - 1 > 0)
             {
-                entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+                entity.Get<Cooldown>().Value = currentCooldown;
             }
             else
             {

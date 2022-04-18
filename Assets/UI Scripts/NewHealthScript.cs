@@ -2,7 +2,6 @@ using DG.Tweening;
 using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.Player;
-using Project.Core.Features.Player.Components;
 using Project.Modules.Network;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +20,7 @@ namespace UI_Scripts
 
         private void HealthChanged(in Entity player)
         {
-            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.OrderId)) return;
             var entity = player.Read<PlayerAvatar>().Value;
             if(!entity.IsAlive()) return;
 

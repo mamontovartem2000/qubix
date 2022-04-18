@@ -1,6 +1,5 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Core.Features.Player.Components;
 using Project.Core.Features.SceneBuilder.Components;
 using UnityEngine;
 
@@ -56,8 +55,8 @@ namespace Project.Core.Features.SceneBuilder.Systems
 
                     if ((player.GetPosition() - portals[i].GetPosition()).sqrMagnitude <= SceneUtils.ItemRadius)
                     {
-                        Vector3 newPosition = Vector3.zero;
-                        var rndIndex = i;
+                        Vector3 newPosition;
+                        int rndIndex;
                         while (true)
                         {
                             rndIndex = world.GetRandomRange(0, portals.Length);

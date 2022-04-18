@@ -1,11 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core;
-using Project.Core.Features;
-using Project.Core.Features.Player.Components;
 using Project.Core.Features.SceneBuilder.Components;
-using Project.Mechanics.Features.CollisionHandler.Components;
-using UnityEngine;
 
 namespace Project.Mechanics.Features.CollisionHandler.Systems {
     #region usage

@@ -33,7 +33,7 @@ namespace UI_Scripts
 
         private void RefreshLeftAmmo(in Entity player)
         {
-            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.OrderId)) return;
 
             var entity = player.Read<PlayerAvatar>().Value.Read<WeaponEntities>().LeftWeapon;
             if (!entity.Has<LinearWeapon>()) return;
@@ -46,7 +46,7 @@ namespace UI_Scripts
 
         private void RefreshRightAmmo(in Entity player)
         {
-            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.OrderId)) return;
 
             var entity = player.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon;
             
@@ -58,7 +58,7 @@ namespace UI_Scripts
     
         private void ReloadRightWeapon(in Entity player)
         {
-            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.OrderId)) return;
             
             var entity = player.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon;
 

@@ -1,6 +1,5 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using UnityEngine;
 
 namespace Project.Mechanics.Features.Lifetime.Systems
 {
@@ -41,9 +40,30 @@ namespace Project.Mechanics.Features.Lifetime.Systems
         {
             ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
             lifeTime -= deltaTime;
+
+            if (!(lifeTime <= 0)) return;
             
-            if(lifeTime <= 0)
-                entity.Destroy();
+            if (entity.Has<SkillTag>())
+            {
+                ref var type = ref entity.Get<SkillEffect>().Value;
+                var skillValue = entity.Read<SkillAmount>().Value;
+
+                switch (type)
+                {
+                    case SkillAttribute.MoveSpeed:
+                    {
+                        entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<MoveSpeedModifier>().Value -= skillValue;
+                        break;
+                    }
+                    case SkillAttribute.AttackSpeed:
+                    {
+                        entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<FiringCooldownModifier>().Value -= skillValue;
+                        break;
+                    }
+                }
+            }
+
+            entity.Destroy();
         }
     }
 }

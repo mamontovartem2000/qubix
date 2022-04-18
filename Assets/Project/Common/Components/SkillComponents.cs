@@ -1,72 +1,39 @@
 ﻿using ME.ECS;
+using ME.ECS.DataConfigs;
 
 namespace Project.Common.Components
 {
-    public struct SkillComponents : IComponent {}
+    public struct SkillTag : IComponent {}
+    public struct PassiveSkill : IComponent {}
+    public struct ActivateSkill : IComponentOneShot {}
 
-    public enum SkillTarget
+    public struct SkillConfig : IComponent
     {
-        Self, Other, Target, Area
+        public DataConfig Value;
+    }
+
+    public struct SkillDuration : IComponent
+    {
+        public float Value;
+    }
+
+    public struct SkillDurationDefault : IComponent
+    {
+        public float Value;
+    }
+
+    public struct SkillEffect : IComponent
+    {
+        public SkillAttribute Value;
+    }
+
+    public struct SkillAmount : IComponent
+    {
+        public float Value;
     }
 
     public enum SkillAttribute
     {
-        MoveSpeed, FireRate, Cooldown, HealthAmount, ArmorAmount, AmmoCap, ReloadRate
-    }
-
-    public enum RechargeType
-    {
-        Immediate, PostEffect
-    }
-
-    public struct ActiveSkill : IComponent
-    {
-        public SkillTarget Target;
-        public SkillAttribute Attribute;
-        public float Amount;
-        public float Duration;
-        public float Cooldown;
-        public RechargeType Recharge;
-    }
-    
-    public struct PassiveSkill : IComponent
-    {
-        public SkillAttribute Attribute;
-        public float Amount;
-    }
-    
-    public struct ToggleSkill : IComponent
-    {
-        public SkillTarget Target;
-        public SkillAttribute Attribute;
-        public float Amount;
-    }
-    
-    public struct ChannelSkill : IComponent
-    {
-        public SkillAttribute Attribute;
-        public float Amount;
-        public float Cooldown;
-        public RechargeType Recharge;
-    }
-    
-    public struct FirstSkillTag : IComponent
-    {
-        public int ActorID;
-    }
-
-    public struct SecondSkillTag : IComponent
-    {
-        public int ActorID;
-    }
-
-    public struct ThirdSkillTag : IComponent
-    {
-        public int ActorID;
-    }
-
-    public struct FourthSkillTag : IComponent
-    {
-        public int ActorID;
+        MoveSpeed, AttackSpeed
     }
 }

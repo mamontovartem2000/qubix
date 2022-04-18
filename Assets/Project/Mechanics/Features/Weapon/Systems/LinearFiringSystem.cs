@@ -1,8 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Core.Features.Player.Components;
 using Project.Mechanics.Features.Projectile;
-using UnityEngine;
 
 namespace Project.Mechanics.Features.Weapon.Systems
 {

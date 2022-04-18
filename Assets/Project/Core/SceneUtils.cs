@@ -81,7 +81,7 @@ namespace Project.Core
         public static bool CheckLocalPlayer(Entity player)
         {
             // Debug.Log(player == Worlds.current.GetFeature<PlayerFeature>().GetPlayer(player.Read<PlayerTag>().PlayerID));
-            return player == Worlds.current.GetFeature<PlayerFeature>().GetPlayer(player.Read<PlayerTag>().PlayerID);
+            return player == Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(player.Read<PlayerTag>().PlayerID);
         }
     }
 }

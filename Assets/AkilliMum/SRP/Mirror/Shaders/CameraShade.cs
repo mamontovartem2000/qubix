@@ -22,6 +22,7 @@ using UnityEngine.XR;
 using UnityEngine.Rendering.PostProcessing;
 #endif
 using UnityEditor;
+#pragma warning disable 618
 #if STEAMVR_ENABLED
 using Valve.VR;
 #endif

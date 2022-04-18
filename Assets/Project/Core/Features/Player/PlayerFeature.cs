@@ -77,7 +77,7 @@ namespace Project.Core.Features.Player
             world.GetFeature<EventsFeature>().OnTimeSynced.Execute();
         }
         
-        public Entity GetPlayer(int id)
+        public Entity GetPlayerByID(int id)
         {
             foreach (var player in _playerFilter)
             {

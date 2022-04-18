@@ -2,7 +2,6 @@
 using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Core.Features.GameState.Components;
-using Project.Core.Features.Player.Components;
 namespace Project.Core.Features.GameState.Systems 
 {
     #region usage
@@ -19,7 +18,7 @@ namespace Project.Core.Features.GameState.Systems
         private GameStateFeature _feature;
         private Filter _playerFilter;
         
-        void ISystemBase.OnConstruct() 
+        void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
             Filter.Create("Player Filter")
@@ -36,7 +35,7 @@ namespace Project.Core.Features.GameState.Systems
                 Entity winner = default;
                 
                 var maxKills = int.MinValue;
-                var minDeaths = int.MinValue;
+                // var minDeaths = int.MinValue;
                 
                 var winCounter = 0;
                 
