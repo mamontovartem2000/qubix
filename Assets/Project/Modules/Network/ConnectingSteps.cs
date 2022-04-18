@@ -1,6 +1,7 @@
 using FlatBuffers;
 using SerializedMessages;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,14 +15,14 @@ namespace Project.Modules.Network
 
         private bool master = false;
 
-        private bool da = true; 
+        private bool da = false; 
 
         private void Start()
         {
             if (master)
                 StartGame1();
             else
-                aaaaa("zHAkoD9LSz+RVg736IjLIg/11");
+                aaaaa("otMfqkxjSRiCpPzOzj5Tzg/2");
 
             //Connect();
             //SendJoinRequest();
@@ -67,6 +68,8 @@ namespace Project.Modules.Network
             NetworkData.Connect.GetMessage += GetMessage;
         }
 
+       
+
         private void GetMessage(byte[] bytes)
         {
             byte[] buffer = new byte[bytes.Length - 1];
@@ -96,6 +99,8 @@ namespace Project.Modules.Network
                     break;
             }
         }
+
+        
 
         private void GetJoinResult(JoinResult joinResult)
         {

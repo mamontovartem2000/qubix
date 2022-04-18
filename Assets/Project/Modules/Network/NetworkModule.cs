@@ -2,7 +2,7 @@
 using Project.Markers;
 using System;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 namespace Project.Modules.Network
 {
@@ -63,7 +63,10 @@ namespace Project.Modules.Network
 
         public NetTransporter()
         {
-            NetworkData.Connect.GetMessage += GetMessage;
+            if (NetworkData.Connect != null)
+                NetworkData.Connect.GetMessage += GetMessage;
+            else
+                Debug.Log("Ошибка. Нет NetworkData.Connect");
         }
 
         private void GetMessage(byte[] bytes)
@@ -86,9 +89,20 @@ namespace Project.Modules.Network
 
         public void SendSystem(byte[] bytes)
         {
-            //_connect.SendSystemMessage(bytes);
-            //this.sentBytesCount += bytes.Length;
+            NetworkData.Connect.SendSystemMessage(bytes);
+            sedfewf(bytes);
+            this.sentBytesCount += bytes.Length;
             //TODO: Временно закомментил
+        }
+
+        void sedfewf(byte[] bytes)
+        {
+            string dgv = "";
+            foreach (var item in bytes)
+            {
+                dgv += item + ", ";
+            }
+            Debug.Log(dgv);
         }
 
         public byte[] Receive()

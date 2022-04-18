@@ -36,7 +36,7 @@ public class WebSocketConnect
         catch { }
     }
 
-    public void CloseClient() //TODO: Добавить этот вызов на кнопку выхода из приложения
+    public void CloseClient()
     {
         if (_socket != null)
         {

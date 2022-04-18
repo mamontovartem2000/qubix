@@ -16,13 +16,11 @@ namespace Project.Modules.Network
 
         public static void LoadBrowserInfo(out string fullRequest, out GameInfo info)
         {
-            //fullRequest = loadInitialDataForUnity();
-            fullRequest = "{\"payload\":\"eyJpc19zeXN0ZW0iOnRydWUsInR5cGUiOiJqb2luX3JlcXVlc3QiLCJyb29tX2lkIjoiNWJGN2tNRXpRV2FlRk9ON3lOVm9GUS8yMiIsInBsYXllcl9pZCI6InBsYXllcjMiLCJwbGF5ZXJfbmlja25hbWUiOiJwbGF5ZXIzIiwicGxheWVyX2ljb24iOiJwbGF5ZXIzLnN2ZyIsImF2YWlsYWJsZV9jaGFyYWN0ZXJzIjpbInJ1c3R5X2pvZSIsInJlZF9yb2RnZXIiXX0\",\"signatures\":[{\"protected\":\"eyJhbGciOiJSUzI1NiIsImtpZCI6IjE2NDk4NjM5MzE4NDJ8bWF0Y2htYWtlciJ9\",\"signature\":\"CNQlrhGMrd2u2tWE5dmejgYE957oaxchMGlCue9iH4VxSyqgqkjUvTEN05d7K23qmfhAAqZDxD6NHZ4Opsn0fOsV5y5wQEFz3RboW8Euz0bFKIukS5B4rWUgdBS7Zjxld9nkmPw5SKgW5YDhme5WgsQcbIZojxKrEpnjb_MBdZI\"}]}";
+            fullRequest = loadInitialDataForUnity();
             string payloadBase64 = CreateFromJSON<JoinRequestData>(fullRequest).payload;
             var payloadInBytes = Convert.FromBase64String(payloadBase64);
             var playerJson = Encoding.UTF8.GetString(payloadInBytes);
             info = CreateFromJSON<GameInfo>(playerJson);
-            Debug.Log(info.map_id);
         }
 
         public static void LoadBrowserInfo22(string fullRequest, out GameInfo info)
@@ -31,7 +29,6 @@ namespace Project.Modules.Network
             var payloadInBytes = Convert.FromBase64String(payloadBase64);
             var playerJson = Encoding.UTF8.GetString(payloadInBytes);
             info = CreateFromJSON<GameInfo>(playerJson);
-            Debug.Log(info.map_id);
         }
 
         public static IEnumerator Loadroom(Action<string> callback)
