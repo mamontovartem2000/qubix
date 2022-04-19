@@ -67,7 +67,7 @@ namespace ME.ECS {
 
         }
 
-        #if !FILTERS_STORAGE_ARCHETYPES
+        #if FILTERS_STORAGE_LEGACY
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
@@ -250,7 +250,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public static bool IsComponentAsTag<TComponent>() where TComponent : struct, IStructComponentBase {
+        public static bool IsComponentAsTag<TComponent>() where TComponent : struct, IComponentBase {
 
             return AllComponentTypes<TComponent>.isTag;
 
@@ -259,7 +259,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public static bool IsComponentAsCopyable<TComponent>() where TComponent : struct, IStructComponentBase {
+        public static bool IsComponentAsCopyable<TComponent>() where TComponent : struct, IComponentBase {
 
             return AllComponentTypes<TComponent>.isCopyable;
 
@@ -271,6 +271,15 @@ namespace ME.ECS {
         public static void SetComponentAsTag<TComponent>() {
 
             AllComponentTypes<TComponent>.isTag = true;
+
+        }
+
+        #if INLINE_METHODS
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        public static void SetComponentAsSimple<TComponent>() {
+
+            AllComponentTypes<TComponent>.isSimple = true;
 
         }
 
@@ -331,10 +340,11 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public static bool InitComponentTypeId<TComponent>(bool isTag = false, bool isCopyable = false, bool isDisposable = false, bool isVersioned = false, bool isVersionedNoState = false, bool isShared = false, bool isOneShot = false) {
+        public static bool InitComponentTypeId<TComponent>(bool isTag = false, bool isSimple = false, bool isCopyable = false, bool isDisposable = false, bool isVersioned = false, bool isVersionedNoState = false, bool isShared = false, bool isOneShot = false) {
 
             var isNew = (AllComponentTypes<TComponent>.typeId == -1);
             if (isTag == true) WorldUtilities.SetComponentAsTag<TComponent>();
+            if (isSimple == true) WorldUtilities.SetComponentAsSimple<TComponent>();
             if (isVersioned == true) WorldUtilities.SetComponentAsVersioned<TComponent>();
             if (isVersionedNoState == true) WorldUtilities.SetComponentAsVersionedNoState<TComponent>();
             if (isCopyable == true) WorldUtilities.SetComponentAsCopyable<TComponent>();

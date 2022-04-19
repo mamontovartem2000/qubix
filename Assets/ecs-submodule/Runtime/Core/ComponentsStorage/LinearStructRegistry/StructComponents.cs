@@ -7,7 +7,7 @@ namespace ME.ECS {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public partial class StructComponents<TComponent> : StructComponentsBase<TComponent> where TComponent : struct, IStructComponentBase {
+    public partial class StructComponents<TComponent> : StructComponentsBase<TComponent> where TComponent : struct, IComponentBase {
 
         [ME.ECS.Serializer.SerializeField]
         internal BufferArraySliced<Component<TComponent>> components;
@@ -26,6 +26,26 @@ namespace ME.ECS {
         public override long GetVersion(in Entity entity) {
 
             return this.components[entity.id].version;
+
+        }
+
+        #if INLINE_METHODS
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        public override long GetVersion(int entityId) {
+
+            return this.components[entityId].version;
+
+        }
+
+        #if INLINE_METHODS
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        public override bool HasChanged(int entityId) {
+
+            // Set as changed only if saved version is equals to current tick
+            // So we have a change in this component at current tick
+            return this.components[entityId].version == (long)Worlds.current.GetCurrentTick();
 
         }
 
@@ -56,7 +76,8 @@ namespace ME.ECS {
 
             if (AllComponentTypes<TComponent>.isVersioned == true) {
                 var v = (long)this.world.GetCurrentTick();
-                this.components[entity.id].version = v;
+                ref var data = ref this.components[entity.id];
+                data.version = v;
                 this.maxVersion = (v > this.maxVersion ? v : this.maxVersion);
             }
 
@@ -113,7 +134,7 @@ namespace ME.ECS {
 
         }
 
-        public override IStructComponentBase GetObject(Entity entity) {
+        public override IComponentBase GetObject(Entity entity) {
 
             #if WORLD_EXCEPTIONS
             if (entity.IsAlive() == false) {
@@ -145,48 +166,11 @@ namespace ME.ECS {
             }
             #endif
 
-            var index = entity.id;
-            ref var bucket = ref this.components[index];
-            bucket.data = buffer.Read<TComponent>();
-
-            var componentIndex = ComponentTypes<TComponent>.typeId;
-            if (bucket.state == 0) {
-
-                bucket.state = 1;
-
-                if (storageType == StorageType.Default) {
-
-                    this.world.currentState.structComponents.entitiesIndexer.Set(entity.id, AllComponentTypes<TComponent>.typeId);
-
-                } else if (storageType == StorageType.NoState) {
-                    
-                    this.world.structComponentsNoState.entitiesIndexer.Set(entity.id, AllComponentTypes<TComponent>.typeId);
-
-                }
-
-                if (componentIndex >= 0) {
-                    
-                    this.world.currentState.storage.archetypes.Set<TComponent>(in entity);
-                    this.world.AddFilterByStructComponent(in entity, componentIndex);
-                    this.world.UpdateFilterByStructComponent(in entity, componentIndex);
-                    
-                }
-
-                return true;
-
-            }
-            
-            if (componentIndex >= 0) {
-                
-                this.world.ValidateFilterByStructComponent(in entity, componentIndex);
-                    
-            }
-
-            return false;
+            return DataBufferUtils.PushSet_INTERNAL(this.world, in entity, this, buffer.Read<TComponent>(), storageType);
 
         }
 
-        public override bool SetObject(in Entity entity, IStructComponentBase data, StorageType storageType) {
+        public override bool SetObject(in Entity entity, IComponentBase data, StorageType storageType) {
 
             #if WORLD_EXCEPTIONS
             if (entity.IsAlive() == false) {
@@ -196,45 +180,8 @@ namespace ME.ECS {
             }
             #endif
 
-            var index = entity.id;
-            ref var bucket = ref this.components[index];
-            bucket.data = (TComponent)data;
-
-            var componentIndex = ComponentTypes<TComponent>.typeId;
-            if (bucket.state == 0) {
-
-                bucket.state = 1;
-                
-                if (storageType == StorageType.Default) {
-
-                    this.world.currentState.structComponents.entitiesIndexer.Set(entity.id, AllComponentTypes<TComponent>.typeId);
-
-                } else if (storageType == StorageType.NoState) {
-                    
-                    this.world.structComponentsNoState.entitiesIndexer.Set(entity.id, AllComponentTypes<TComponent>.typeId);
-
-                }
-
-                if (componentIndex >= 0) {
-                    
-                    this.world.currentState.storage.archetypes.Set<TComponent>(in entity);
-                    this.world.AddFilterByStructComponent(in entity, componentIndex);
-                    this.world.UpdateFilterByStructComponent(in entity, componentIndex);
-                    
-                }
-
-                return true;
-
-            }
+            return DataBufferUtils.PushSet_INTERNAL(this.world, in entity, this, (TComponent)data, storageType);
             
-            if (componentIndex >= 0) {
-                
-                this.world.ValidateFilterByStructComponent(in entity, componentIndex);
-                    
-            }
-
-            return false;
-
         }
 
         #if INLINE_METHODS
@@ -248,39 +195,7 @@ namespace ME.ECS {
 
         public override bool RemoveObject(in Entity entity, StorageType storageType) {
 
-            var index = entity.id;
-            ref var bucket = ref this.components[index];
-            if (bucket.state > 0) {
-
-                this.RemoveData(in entity, ref bucket);
-                bucket.state = 0;
-
-                if (storageType == StorageType.Default) {
-
-                    this.world.currentState.structComponents.entitiesIndexer.Remove(entity.id, AllComponentTypes<TComponent>.typeId);
-
-                } else if (storageType == StorageType.NoState) {
-                    
-                    this.world.structComponentsNoState.entitiesIndexer.Remove(entity.id, AllComponentTypes<TComponent>.typeId);
-
-                }
-
-                if (ComponentTypes<TComponent>.isFilterVersioned == true) this.world.UpdateFilterByStructComponentVersioned<TComponent>(in entity);
-                
-                var componentIndex = ComponentTypes<TComponent>.typeId;
-                if (componentIndex >= 0) {
-                    
-                    this.world.currentState.storage.archetypes.Remove<TComponent>(in entity);
-                    this.world.RemoveFilterByStructComponent<TComponent>(in entity);
-                    this.world.UpdateFilterByStructComponent<TComponent>(in entity);
-                    
-                }
-
-                return true;
-
-            }
-
-            return false;
+            return DataBufferUtils.PushRemove_INTERNAL(this.world, in entity, this, storageType);
 
         }
 

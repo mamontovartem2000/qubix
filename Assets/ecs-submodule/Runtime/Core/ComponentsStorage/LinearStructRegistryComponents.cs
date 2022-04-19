@@ -8,16 +8,16 @@ namespace ME.ECS {
 
     public interface IStructRegistryBase {
 
-        IStructComponentBase GetObject(Entity entity);
-        bool SetObject(in Entity entity, IStructComponentBase data, StorageType storageType);
-        IStructComponentBase GetSharedObject(Entity entity, uint groupId);
-        bool SetSharedObject(in Entity entity, IStructComponentBase data, uint groupId);
+        IComponentBase GetObject(Entity entity);
+        bool SetObject(in Entity entity, IComponentBase data, StorageType storageType);
+        IComponentBase GetSharedObject(Entity entity, uint groupId);
+        bool SetSharedObject(in Entity entity, IComponentBase data, uint groupId);
         bool RemoveObject(in Entity entity, StorageType storageType);
         bool HasType(System.Type type);
 
     }
 
-    public struct Component<TComponent> where TComponent : struct, IStructComponentBase {
+    public struct Component<TComponent> where TComponent : struct, IComponentBase {
 
         public TComponent data;
         public byte state;
@@ -44,16 +44,20 @@ namespace ME.ECS {
         public abstract int GetAllTypeBit();
         public abstract bool IsTag();
 
+        public abstract long GetVersion(in Entity entity);
+        public abstract long GetVersion(int entityId);
+        public abstract bool HasChanged(int entityId);
+
         public abstract void UpdateVersion(in Entity entity);
         public abstract void UpdateVersionNoState(in Entity entity);
         
         public abstract bool HasType(System.Type type);
-        public abstract IStructComponentBase GetObject(Entity entity);
-        public abstract bool SetObject(in Entity entity, IStructComponentBase data, StorageType storageType);
+        public abstract IComponentBase GetObject(Entity entity);
+        public abstract bool SetObject(in Entity entity, IComponentBase data, StorageType storageType);
         public abstract bool SetObject(in Entity entity, UnsafeData buffer, StorageType storageType);
         public abstract System.Collections.Generic.ICollection<uint> GetSharedGroups(Entity entity);
-        public abstract IStructComponentBase GetSharedObject(Entity entity, uint groupId);
-        public abstract bool SetSharedObject(in Entity entity, IStructComponentBase data, uint groupId);
+        public abstract IComponentBase GetSharedObject(Entity entity, uint groupId);
+        public abstract bool SetSharedObject(in Entity entity, IComponentBase data, uint groupId);
         public abstract bool RemoveObject(in Entity entity, StorageType storageType);
 
         #if INLINE_METHODS
@@ -114,7 +118,7 @@ namespace ME.ECS {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public abstract partial class StructComponentsBase<TComponent> : StructRegistryBase where TComponent : struct, IStructComponentBase {
+    public abstract partial class StructComponentsBase<TComponent> : StructRegistryBase where TComponent : struct, IComponentBase {
 
         public struct SharedGroupData {
 
@@ -310,8 +314,6 @@ namespace ME.ECS {
         
         public override int GetCustomHash() => 0;
 
-        public abstract long GetVersion(in Entity entity);
-
         public abstract void UpdateVersion(ref Component<TComponent> bucket);
         
         public uint GetVersionNotStated(in Entity entity) {
@@ -395,7 +397,7 @@ namespace ME.ECS {
             if (AllComponentTypes<TComponent>.isShared == true) this.sharedGroups.Validate(in entity);
             if (AllComponentTypes<TComponent>.isVersionedNoState == true) ArrayUtils.Resize(entity.id, ref this.versionsNoState, true);
 
-            #if !FILTERS_STORAGE_ARCHETYPES
+            #if FILTERS_STORAGE_LEGACY
             this.world.currentState.storage.archetypes.Validate(in entity);
 
             if (ComponentTypes<TComponent>.typeId >= 0 && this.Has(in entity) == true) {
@@ -421,14 +423,14 @@ namespace ME.ECS {
 
         }
 
-        public override IStructComponentBase GetSharedObject(Entity entity, uint groupId) {
+        public override IComponentBase GetSharedObject(Entity entity, uint groupId) {
 
             if (this.sharedGroups.Has(entity.id, groupId) == false) return null;
             return this.sharedGroups.Get(entity.id, groupId);
 
         }
 
-        public override bool SetSharedObject(in Entity entity, IStructComponentBase data, uint groupId) {
+        public override bool SetSharedObject(in Entity entity, IComponentBase data, uint groupId) {
             
             #if WORLD_EXCEPTIONS
             if (entity.IsAlive() == false) {
@@ -711,6 +713,7 @@ namespace ME.ECS {
             var hash = 0;
             for (int i = 0; i < this.list.Length; ++i) {
 
+                if (this.list.arr[i] == null) continue;
                 hash ^= this.list.arr[i].GetCustomHash();
 
             }
@@ -841,7 +844,7 @@ namespace ME.ECS {
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
         #endif
-        public void Validate<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IStructComponentBase {
+        public void Validate<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase {
 
             var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
             this.Validate<TComponent>(code, isTag);
@@ -855,7 +858,7 @@ namespace ME.ECS {
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
         #endif
-        public void Validate<TComponent>(bool isTag = false) where TComponent : struct, IStructComponentBase {
+        public void Validate<TComponent>(bool isTag = false) where TComponent : struct, IComponentBase {
 
             var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
             if (isTag == true) WorldUtilities.SetComponentAsTag<TComponent>();
@@ -871,7 +874,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        private void Validate<TComponent>(int code, bool isTag) where TComponent : struct, IStructComponentBase {
+        private void Validate<TComponent>(int code, bool isTag) where TComponent : struct, IComponentBase {
 
             if (ArrayUtils.WillResize(code, ref this.list) == true) {
 
@@ -895,7 +898,7 @@ namespace ME.ECS {
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
         #endif
-        public void ValidateOneShot<TComponent>(bool isTag = false) where TComponent : struct, IStructComponentBase, IComponentOneShot {
+        public void ValidateOneShot<TComponent>(bool isTag = false) where TComponent : struct, IComponentBase, IComponentOneShot {
 
             var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
             if (isTag == true) WorldUtilities.SetComponentAsTag<TComponent>();
@@ -908,7 +911,7 @@ namespace ME.ECS {
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
         #endif
-        public void ValidateOneShot<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IStructComponentBase, IComponentOneShot {
+        public void ValidateOneShot<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase, IComponentOneShot {
 
             var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
             this.ValidateOneShot<TComponent>(code, isTag);
@@ -925,7 +928,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        private void ValidateOneShot<TComponent>(int code, bool isTag) where TComponent : struct, IStructComponentBase, IComponentOneShot {
+        private void ValidateOneShot<TComponent>(int code, bool isTag) where TComponent : struct, IComponentBase, IComponentOneShot {
 
             if (ArrayUtils.WillResize(code, ref this.list) == true) {
 
@@ -949,7 +952,7 @@ namespace ME.ECS {
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
         #endif
-        public void ValidateCopyable<TComponent>(bool isTag = false) where TComponent : struct, IStructComponentBase, IStructCopyable<TComponent> {
+        public void ValidateCopyable<TComponent>(bool isTag = false) where TComponent : struct, IComponentBase, IStructCopyable<TComponent> {
 
             var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
             if (isTag == true) WorldUtilities.SetComponentAsTag<TComponent>();
@@ -962,7 +965,7 @@ namespace ME.ECS {
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
         #endif
-        public void ValidateCopyable<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IStructComponentBase, IStructCopyable<TComponent> {
+        public void ValidateCopyable<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase, IStructCopyable<TComponent> {
 
             var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
             this.ValidateCopyable<TComponent>(code, isTag);
@@ -979,7 +982,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        private void ValidateCopyable<TComponent>(int code, bool isTag) where TComponent : struct, IStructComponentBase, IStructCopyable<TComponent> {
+        private void ValidateCopyable<TComponent>(int code, bool isTag) where TComponent : struct, IComponentBase, IStructCopyable<TComponent> {
 
             if (ArrayUtils.WillResize(code, ref this.list) == true) {
 
@@ -1003,7 +1006,7 @@ namespace ME.ECS {
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
         #endif
-        public void ValidateDisposable<TComponent>(bool isTag = false) where TComponent : struct, IStructComponentBase, IComponentDisposable {
+        public void ValidateDisposable<TComponent>(bool isTag = false) where TComponent : struct, IComponentBase, IComponentDisposable {
 
             var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
             if (isTag == true) WorldUtilities.SetComponentAsTag<TComponent>();
@@ -1016,7 +1019,7 @@ namespace ME.ECS {
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
         #endif
-        public void ValidateDisposable<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IStructComponentBase, IComponentDisposable {
+        public void ValidateDisposable<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase, IComponentDisposable {
 
             var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
             this.ValidateDisposable<TComponent>(code, isTag);
@@ -1033,7 +1036,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        private void ValidateDisposable<TComponent>(int code, bool isTag) where TComponent : struct, IStructComponentBase, IComponentDisposable {
+        private void ValidateDisposable<TComponent>(int code, bool isTag) where TComponent : struct, IComponentBase, IComponentDisposable {
 
             if (ArrayUtils.WillResize(code, ref this.list) == true) {
 
@@ -1295,19 +1298,19 @@ namespace ME.ECS {
 
         }
 
-        public void ValidateData<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IStructComponentBase {
+        public void ValidateData<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase {
 
             this.currentState.structComponents.Validate<TComponent>(in entity, isTag);
 
         }
 
-        public void ValidateDataOneShot<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IStructComponentBase, IComponentOneShot {
+        public void ValidateDataOneShot<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase, IComponentOneShot {
 
             this.structComponentsNoState.ValidateOneShot<TComponent>(in entity, isTag);
 
         }
 
-        public void ValidateDataCopyable<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IStructComponentBase, IStructCopyable<TComponent> {
+        public void ValidateDataCopyable<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase, IStructCopyable<TComponent> {
 
             this.currentState.structComponents.ValidateCopyable<TComponent>(in entity, isTag);
 
@@ -1452,9 +1455,9 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public ref TComponent GetSharedData<TComponent>(bool createIfNotExists = true) where TComponent : struct, IStructComponent {
+        public ref TComponent GetSharedData<TComponent>() where TComponent : struct, IStructComponent {
 
-            return ref this.GetData<TComponent>(in this.sharedEntity, createIfNotExists);
+            return ref this.GetData<TComponent>(in this.sharedEntity);
 
         }
 
@@ -1607,6 +1610,7 @@ namespace ME.ECS {
 
                 incrementVersion = true;
                 reg.sharedGroups.Set(entity.id, groupId);
+                this.currentState.structComponents.entitiesIndexer.Set(entity.id, AllComponentTypes<TComponent>.typeId);
                 if (ComponentTypes<TComponent>.typeId >= 0) {
 
                     this.currentState.storage.archetypes.Set<TComponent>(in entity);
@@ -1615,13 +1619,9 @@ namespace ME.ECS {
 
                 }
 
-                #if ENTITY_ACTIONS
-                this.RaiseEntityActionOnAdd<TComponent>(in entity);
-                #endif
-
             }
 
-            if (ComponentTypes<TComponent>.typeId >= 0) {
+            if (ComponentTypes<TComponent>.isFilterLambda == true && ComponentTypes<TComponent>.typeId >= 0) {
 
                 this.ValidateFilterByStructComponent<TComponent>(in entity, true);
                 
@@ -1694,6 +1694,7 @@ namespace ME.ECS {
                 }
 
                 state = false;
+                this.currentState.structComponents.entitiesIndexer.Remove(entity.id, AllComponentTypes<TComponent>.typeId);
                 if (ComponentTypes<TComponent>.isFilterVersioned == true) this.UpdateFilterByStructComponentVersioned<TComponent>(in entity);
                 if (ComponentTypes<TComponent>.typeId >= 0) {
 
@@ -1702,10 +1703,6 @@ namespace ME.ECS {
                     this.UpdateFilterByStructComponent<TComponent>(in entity);
 
                 }
-
-                #if ENTITY_ACTIONS
-                this.RaiseEntityActionOnRemove<TComponent>(in entity);
-                #endif
 
             }
 
@@ -1752,6 +1749,7 @@ namespace ME.ECS {
             if (state == false) {
 
                 state = true;
+                this.currentState.structComponents.entitiesIndexer.Set(entity.id, AllComponentTypes<TComponent>.typeId);
                 if (ComponentTypes<TComponent>.typeId >= 0) {
 
                     this.currentState.storage.archetypes.Set<TComponent>(in entity);
@@ -1762,15 +1760,12 @@ namespace ME.ECS {
 
             }
             
-            if (ComponentTypes<TComponent>.typeId >= 0) {
+            if (ComponentTypes<TComponent>.isFilterLambda == true && ComponentTypes<TComponent>.typeId >= 0) {
 
                 this.ValidateFilterByStructComponent<TComponent>(in entity);
                 
             }
             
-            #if ENTITY_ACTIONS
-            this.RaiseEntityActionOnAdd<TComponent>(in entity);
-            #endif
             ref var bucket = ref reg.components[entity.id];
             reg.UpdateVersion(ref bucket);
             if (AllComponentTypes<TComponent>.isVersionedNoState == true) ++reg.versionsNoState.arr[entity.id];
@@ -1806,6 +1801,7 @@ namespace ME.ECS {
             if (state == false) {
 
                 state = true;
+                this.currentState.structComponents.entitiesIndexer.Set(entity.id, AllComponentTypes<TComponent>.typeId);
                 if (ComponentTypes<TComponent>.typeId >= 0) {
 
                     this.currentState.storage.archetypes.Set<TComponent>(in entity);
@@ -1816,15 +1812,12 @@ namespace ME.ECS {
 
             }
             
-            if (ComponentTypes<TComponent>.typeId >= 0) {
+            if (ComponentTypes<TComponent>.isFilterLambda == true && ComponentTypes<TComponent>.typeId >= 0) {
 
                 this.ValidateFilterByStructComponent<TComponent>(in entity);
                 
             }
             
-            #if ENTITY_ACTIONS
-            this.RaiseEntityActionOnAdd<TComponent>(in entity);
-            #endif
             this.currentState.storage.versions.Increment(in entity);
             ref var bucket = ref reg.components[entity.id];
             reg.UpdateVersion(ref bucket);
@@ -1833,7 +1826,7 @@ namespace ME.ECS {
 
         }
         
-        public void SetSharedData(in Entity entity, in IStructComponentBase data, int dataIndex, uint groupId = 0u) {
+        public void SetSharedData(in Entity entity, in IComponentBase data, int dataIndex, uint groupId = 0u) {
             
             #if WORLD_STATE_CHECK
             if (this.HasStep(WorldStep.LogicTick) == false && this.HasResetState() == true) {
@@ -1974,7 +1967,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public IStructComponentBase ReadData(in Entity entity, int registryIndex) {
+        public IComponentBase ReadData(in Entity entity, int registryIndex) {
 
             #if WORLD_EXCEPTIONS
             if (entity.IsAlive() == false) {
@@ -1991,7 +1984,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public ref TComponent GetData<TComponent>(in Entity entity, bool createIfNotExists = true) where TComponent : struct, IStructComponent {
+        public ref TComponent GetData<TComponent>(in Entity entity) where TComponent : struct, IStructComponent {
 
             #if WORLD_STATE_CHECK
             if (this.HasStep(WorldStep.LogicTick) == false && this.HasResetState() == true) {
@@ -2017,44 +2010,8 @@ namespace ME.ECS {
 
             // Inline all manually
             var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-            ref var storage = ref this.currentState.storage;
-            ref var bucket = ref reg.components[entity.id];
-            if (createIfNotExists == true && bucket.state == 0) {
-
-                this.currentState.structComponents.entitiesIndexer.Set(entity.id, AllComponentTypes<TComponent>.typeId);
-                
-                bucket.state = 1;
-                if (ComponentTypes<TComponent>.typeId >= 0) {
-
-                    storage.archetypes.Set<TComponent>(in entity);
-                    this.AddFilterByStructComponent<TComponent>(in entity);
-                    this.UpdateFilterByStructComponent<TComponent>(in entity);
-
-                }
-
-                #if ENTITY_ACTIONS
-                this.RaiseEntityActionOnAdd<TComponent>(in entity);
-                #endif
-
-            }
-
-            if (ComponentTypes<TComponent>.typeId >= 0) {
-
-                this.ValidateFilterByStructComponent<TComponent>(in entity, true);
-                
-            }
+            return ref DataBufferUtils.PushGet_INTERNAL(this, in entity, reg, StorageType.Default);
             
-            {
-
-                reg.UpdateVersion(ref bucket);
-                storage.versions.Increment(in entity);
-                if (AllComponentTypes<TComponent>.isVersionedNoState == true) ++reg.versionsNoState.arr[entity.id];
-                if (ComponentTypes<TComponent>.isFilterVersioned == true) this.UpdateFilterByStructComponentVersioned<TComponent>(in entity);
-
-            }
-
-            return ref bucket.data;
-
         }
 
         #if INLINE_METHODS
@@ -2096,37 +2053,8 @@ namespace ME.ECS {
 
             // Inline all manually
             var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-            ref var storage = ref this.currentState.storage;
-            ref var bucket = ref reg.components[entity.id];
-            ref var state = ref bucket.state;
-            reg.Replace(ref bucket, in data);
-            reg.UpdateVersion(ref bucket);
-            if (state == 0) {
-
-                state = 1;
-                this.currentState.structComponents.entitiesIndexer.Set(entity.id, AllComponentTypes<TComponent>.typeId);
-                if (ComponentTypes<TComponent>.typeId >= 0) {
-
-                    storage.archetypes.Set<TComponent>(in entity);
-                    this.AddFilterByStructComponent<TComponent>(in entity);
-                    this.UpdateFilterByStructComponent<TComponent>(in entity);
-
-                }
-
-            }
+            DataBufferUtils.PushSet_INTERNAL(this, in entity, reg, in data, StorageType.Default);
             
-            if (ComponentTypes<TComponent>.typeId >= 0) {
-
-                this.ValidateFilterByStructComponent<TComponent>(in entity);
-                
-            }
-            #if ENTITY_ACTIONS
-            this.RaiseEntityActionOnAdd<TComponent>(in entity);
-            #endif
-            storage.versions.Increment(in entity);
-            if (AllComponentTypes<TComponent>.isVersionedNoState == true) ++reg.versionsNoState.arr[entity.id];
-            if (ComponentTypes<TComponent>.isFilterVersioned == true) this.UpdateFilterByStructComponentVersioned<TComponent>(in entity);
-
         }
 
         #if INLINE_METHODS
@@ -2241,35 +2169,14 @@ namespace ME.ECS {
             #endif
 
             var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-            ref var storage = ref this.currentState.storage;
-            ref var bucket = ref reg.components[entity.id];
-            if (bucket.state == 0) return;
-            bucket.state = 0;
+            DataBufferUtils.PushRemove_INTERNAL(this, in entity, reg, StorageType.Default);
             
-            this.currentState.structComponents.entitiesIndexer.Remove(entity.id, AllComponentTypes<TComponent>.typeId);
-            
-            storage.versions.Increment(in entity);
-            if (ComponentTypes<TComponent>.isFilterVersioned == true) this.UpdateFilterByStructComponentVersioned<TComponent>(in entity);
-            reg.RemoveData(in entity, ref bucket);
-            
-            if (ComponentTypes<TComponent>.typeId >= 0) {
-
-                storage.archetypes.Remove<TComponent>(in entity);
-                this.RemoveFilterByStructComponent<TComponent>(in entity);
-                this.UpdateFilterByStructComponent<TComponent>(in entity);
-
-            }
-
-            #if ENTITY_ACTIONS
-            this.RaiseEntityActionOnRemove<TComponent>(in entity);
-            #endif
-
         }
 
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public void SetData(in Entity entity, in IStructComponentBase data, int dataIndex) {
+        public void SetData(in Entity entity, in IComponentBase data, int dataIndex) {
 
             #if WORLD_STATE_CHECK
             if (this.HasStep(WorldStep.LogicTick) == false && this.HasResetState() == true) {
@@ -2289,13 +2196,7 @@ namespace ME.ECS {
 
             // Inline all manually
             ref var reg = ref this.currentState.structComponents.list.arr[dataIndex];
-            if (reg.SetObject(entity, data, StorageType.Default) == true) {
-
-                this.currentState.storage.versions.Increment(in entity);
-                reg.UpdateVersion(in entity);
-                reg.UpdateVersionNoState(in entity);
-
-            }
+            reg.SetObject(entity, data, StorageType.Default);
 
         }
 
@@ -2322,13 +2223,7 @@ namespace ME.ECS {
 
             // Inline all manually
             ref var reg = ref this.currentState.structComponents.list.arr[dataIndex];
-            if (reg.SetObject(entity, buffer, storageType) == true) {
-
-                this.currentState.storage.versions.Increment(in entity);
-                reg.UpdateVersion(in entity);
-                reg.UpdateVersionNoState(in entity);
-
-            }
+            reg.SetObject(entity, buffer, storageType);
 
         }
 

@@ -6,7 +6,7 @@ namespace ME.ECS.Serializer {
     
     public struct GenericULongDictionarySerializer : ITypeSerializer, ITypeSerializerInherit {
 
-        public byte GetTypeValue() => (byte)TypeValue.GenericDictionary;
+        public byte GetTypeValue() => (byte)TypeValue.GenericULongDictionary;
 
         public System.Type GetTypeSerialized() => typeof(ME.ECS.Collections.IDictionaryULong);
 
@@ -17,7 +17,6 @@ namespace ME.ECS.Serializer {
             Int32Serializer.PackDirect(packer, dict.Count);
 
             Int32Serializer.PackDirect(packer, packer.GetMetaTypeId(type.GenericTypeArguments[0]));
-            Int32Serializer.PackDirect(packer, packer.GetMetaTypeId(type.GenericTypeArguments[1]));
             Int32Serializer.PackDirect(packer, packer.GetMetaTypeId(type.GetGenericTypeDefinition()));
 
             foreach (DictionaryEntry entry in dict) {
@@ -32,13 +31,11 @@ namespace ME.ECS.Serializer {
         public object Unpack(Packer packer) {
 
             var length = Int32Serializer.UnpackDirect(packer);
-            var typeIdKey = Int32Serializer.UnpackDirect(packer);
             var typeIdValue = Int32Serializer.UnpackDirect(packer);
-            var typeKey = packer.GetMetaType(typeIdKey);
             var typeValue = packer.GetMetaType(typeIdValue);
 
             var type = packer.GetMetaType(Int32Serializer.UnpackDirect(packer));
-            var t = type.MakeGenericType(typeKey, typeValue);
+            var t = type.MakeGenericType(typeValue);
 
             var dict = (ME.ECS.Collections.IDictionaryULong)System.Activator.CreateInstance(t);
 
@@ -55,7 +52,7 @@ namespace ME.ECS.Serializer {
 
     public struct GenericIntDictionarySerializer : ITypeSerializer, ITypeSerializerInherit {
 
-        public byte GetTypeValue() => (byte)TypeValue.GenericDictionary;
+        public byte GetTypeValue() => (byte)TypeValue.GenericIntDictionary;
 
         public System.Type GetTypeSerialized() => typeof(ME.ECS.Collections.IDictionaryInt);
 
@@ -66,7 +63,6 @@ namespace ME.ECS.Serializer {
             Int32Serializer.PackDirect(packer, dict.Count);
 
             Int32Serializer.PackDirect(packer, packer.GetMetaTypeId(type.GenericTypeArguments[0]));
-            Int32Serializer.PackDirect(packer, packer.GetMetaTypeId(type.GenericTypeArguments[1]));
             Int32Serializer.PackDirect(packer, packer.GetMetaTypeId(type.GetGenericTypeDefinition()));
 
             foreach (DictionaryEntry entry in dict) {
@@ -81,13 +77,11 @@ namespace ME.ECS.Serializer {
         public object Unpack(Packer packer) {
 
             var length = Int32Serializer.UnpackDirect(packer);
-            var typeIdKey = Int32Serializer.UnpackDirect(packer);
             var typeIdValue = Int32Serializer.UnpackDirect(packer);
-            var typeKey = packer.GetMetaType(typeIdKey);
             var typeValue = packer.GetMetaType(typeIdValue);
 
             var type = packer.GetMetaType(Int32Serializer.UnpackDirect(packer));
-            var t = type.MakeGenericType(typeKey, typeValue);
+            var t = type.MakeGenericType(typeValue);
 
             var dict = (ME.ECS.Collections.IDictionaryInt)System.Activator.CreateInstance(t);
 

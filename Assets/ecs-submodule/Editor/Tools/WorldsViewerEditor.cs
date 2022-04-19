@@ -522,7 +522,7 @@ namespace ME.ECSEditor {
         struct SharedRegistryData {
 
             public uint groupId;
-            public IStructComponentBase component;
+            public IComponentBase component;
             public IStructRegistryBase registry;
 
         }
@@ -575,7 +575,7 @@ namespace ME.ECSEditor {
                         {
                             var registries = componentsStructStorage.GetAllRegistries();
                             var sortedRegistries = new List<IStructRegistryBase>();
-                            var components = new List<IStructComponentBase>();
+                            var components = new List<IComponentBase>();
                             for (int i = 0; i < registries.Length; ++i) {
 
                                 var registry = registries.arr[i];
@@ -627,7 +627,7 @@ namespace ME.ECSEditor {
                         
                             var registries = componentsStructStorage.GetAllRegistries();
                             var sortedRegistries = new List<SharedRegistryData>();
-                            var components = new List<IStructComponentBase>();
+                            var components = new List<IComponentBase>();
                             for (int i = 0; i < registries.Length; ++i) {
 
                                 var registry = registries.arr[i];
@@ -702,7 +702,7 @@ namespace ME.ECSEditor {
                             var filtersCnt = 0;
                             var containsFilters = PoolListCopyable<FilterData>.Spawn(1);
                             var filters = world.GetFilters();
-                            #if !FILTERS_STORAGE_ARCHETYPES
+                            #if FILTERS_STORAGE_LEGACY
                             for (int i = 0; i < filters.filters.Length; ++i) {
 
                                 var filter = filters.filters.arr[i];
@@ -1211,7 +1211,7 @@ namespace ME.ECSEditor {
 
                                 });
 
-                                #if !FILTERS_STORAGE_ARCHETYPES
+                                #if FILTERS_STORAGE_LEGACY
                                 var filtersCount = 0;
                                 var filtersArr = filters.GetData();
                                 for (int f = 0; f < filtersArr.Length; ++f) {
@@ -1267,7 +1267,7 @@ namespace ME.ECSEditor {
 
         }
 
-        #if !FILTERS_STORAGE_ARCHETYPES
+        #if FILTERS_STORAGE_LEGACY
         public static void DrawFilter(FiltersStorage filters, FilterData filter) {
             
             var cellHeight = 25f;

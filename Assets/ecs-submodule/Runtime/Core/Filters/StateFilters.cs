@@ -22,7 +22,7 @@ namespace ME.ECS {
 
     public partial class World {
 
-        #if !FILTERS_STORAGE_ARCHETYPES
+        #if FILTERS_STORAGE_LEGACY
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
@@ -336,7 +336,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public void UpdateFilterByStructComponentVersioned<T>(in Entity entity) where T : struct, IStructComponentBase {
+        public void UpdateFilterByStructComponentVersioned<T>(in Entity entity) where T : struct, IComponentBase {
 
             this.CalculateJob(in entity,
                               this.currentState.filters.filtersTree.GetFiltersContainsForVersioned<T>(),
@@ -364,15 +364,15 @@ namespace ME.ECS {
         }
         
         public void ValidateFilterByStructComponent(in Entity entity, int componentIndex, bool makeRequest = false) {}
-        public void ValidateFilterByStructComponent<T>(in Entity entity, bool makeRequest = false) where T : struct, IStructComponentBase {}
+        public void ValidateFilterByStructComponent<T>(in Entity entity, bool makeRequest = false) where T : struct, IComponentBase {}
         public void AddFilterByStructComponent(in Entity entity, int componentIndex) {}
-        public void AddFilterByStructComponent<T>(in Entity entity) where T : struct, IStructComponentBase {}
-        public void RemoveFilterByStructComponent<T>(in Entity entity) where T : struct, IStructComponentBase {}
+        public void AddFilterByStructComponent<T>(in Entity entity) where T : struct, IComponentBase {}
+        public void RemoveFilterByStructComponent<T>(in Entity entity) where T : struct, IComponentBase {}
 
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public void UpdateFilterByStructComponent<T>(in Entity entity) where T : struct, IStructComponentBase {
+        public void UpdateFilterByStructComponent<T>(in Entity entity) where T : struct, IComponentBase {
 
             this.CalculateJob(in entity,
                               this.currentState.filters.filtersTree.GetFiltersContainsFor<T>(),
@@ -531,7 +531,7 @@ namespace ME.ECS {
 
     }
 
-    #if !FILTERS_STORAGE_ARCHETYPES
+    #if FILTERS_STORAGE_LEGACY
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
@@ -911,7 +911,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public MultipleFilter Any<TComponent0, TComponent1>() where TComponent0 : struct, IStructComponentBase where TComponent1 : struct, IStructComponentBase {
+        public MultipleFilter Any<TComponent0, TComponent1>() where TComponent0 : struct, IComponentBase where TComponent1 : struct, IComponentBase {
 
             this.primary.With<TComponent0>();
             this.secondary.With<TComponent1>();
@@ -923,7 +923,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public MultipleFilter WithoutAny<TComponent0, TComponent1>() where TComponent0 : struct, IStructComponentBase where TComponent1 : struct, IStructComponentBase {
+        public MultipleFilter WithoutAny<TComponent0, TComponent1>() where TComponent0 : struct, IComponentBase where TComponent1 : struct, IComponentBase {
 
             this.primary.Without<TComponent0>();
             this.secondary.Without<TComponent1>();
@@ -935,7 +935,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public MultipleFilter With<TComponent>() where TComponent : struct, IStructComponentBase {
+        public MultipleFilter With<TComponent>() where TComponent : struct, IComponentBase {
 
             this.primary.With<TComponent>();
             return this;
@@ -945,7 +945,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public MultipleFilter Without<TComponent>() where TComponent : struct, IStructComponentBase {
+        public MultipleFilter Without<TComponent>() where TComponent : struct, IComponentBase {
 
             this.primary.Without<TComponent>();
             return this;
@@ -1198,12 +1198,12 @@ namespace ME.ECS {
 
         }
 
-        #if !ENTITY_API_VERSION1_TURN_OFF
+        #if ENTITY_API_VERSION1_DEPRECATED
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public FilterBuilder WithStructComponent<TComponent>() where TComponent : struct, IStructComponentBase {
+        public FilterBuilder WithStructComponent<TComponent>() where TComponent : struct, IComponentBase {
 
             return this.With<TComponent>();
 
@@ -1213,18 +1213,17 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public FilterBuilder WithoutStructComponent<TComponent>() where TComponent : struct, IStructComponentBase {
+        public FilterBuilder WithoutStructComponent<TComponent>() where TComponent : struct, IComponentBase {
 
             return this.Without<TComponent>();
 
         }
         #endif
 
-        #if !ENTITY_API_VERSION2_TURN_OFF
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public FilterBuilder With<TComponent>() where TComponent : struct, IStructComponentBase {
+        public FilterBuilder With<TComponent>() where TComponent : struct, IComponentBase {
 
             WorldUtilities.SetComponentTypeId<TComponent>();
             this.with.Add<TComponent>();
@@ -1240,7 +1239,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public FilterBuilder Without<TComponent>() where TComponent : struct, IStructComponentBase {
+        public FilterBuilder Without<TComponent>() where TComponent : struct, IComponentBase {
 
             WorldUtilities.SetComponentTypeId<TComponent>();
             this.without.Add<TComponent>();
@@ -1252,12 +1251,11 @@ namespace ME.ECS {
             return this;
 
         }
-        #endif
         
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public FilterBuilder WithShared<TComponent>() where TComponent : struct, IStructComponentBase {
+        public FilterBuilder WithShared<TComponent>() where TComponent : struct, IComponentBase {
 
             WorldUtilities.SetComponentTypeId<TComponent>();
             this.withShared.Add<TComponent>();
@@ -1273,7 +1271,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public FilterBuilder WithoutShared<TComponent>() where TComponent : struct, IStructComponentBase {
+        public FilterBuilder WithoutShared<TComponent>() where TComponent : struct, IComponentBase {
 
             WorldUtilities.SetComponentTypeId<TComponent>();
             this.withoutShared.Add<TComponent>();
@@ -1380,6 +1378,24 @@ namespace ME.ECS {
         public void GetBounds(out int min, out int max) {
 
             this.world.GetFilter(this.id).GetBounds(out min, out max);
+
+        }
+
+        #if INLINE_METHODS
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        public Unity.Collections.NativeList<Entity> ToList(Unity.Collections.Allocator allocator, out int min, out int max) {
+
+            return this.world.GetFilter(this.id).ToList(allocator, out min, out max);
+
+        }
+
+        #if INLINE_METHODS
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        public Unity.Collections.NativeArray<Entity> ToList(Unity.Collections.Allocator allocator = Unity.Collections.Allocator.Persistent) {
+
+            return this.world.GetFilter(this.id).ToList(allocator);
 
         }
 
@@ -2121,6 +2137,44 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
+        public Unity.Collections.NativeList<Entity> ToList(Unity.Collections.Allocator allocator, out int min, out int max) {
+
+            min = this.data.min;
+            max = this.data.max;
+            return this.ToList(allocator);
+
+        }
+
+        #if INLINE_METHODS
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        public Unity.Collections.NativeList<Entity> ToList(Unity.Collections.Allocator allocator = Unity.Collections.Allocator.Persistent) {
+
+            var data = new Unity.Collections.NativeList<Entity>(this.data.count, allocator);
+            for (int i = this.data.min; i <= this.data.max; ++i) {
+
+                if (this.data.dataContains[i] == 1) {
+
+                    if (this.data.onVersionChangedOnly == 1) {
+
+                        if (this.data.dataVersions[i] == 0) continue;
+                        this.data.dataVersions[i] = 0;
+
+                    }
+
+                    data.Add(this.world.currentState.storage.cache.arr[i]);
+
+                }
+
+            }
+
+            return data;
+
+        }
+
+        #if INLINE_METHODS
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public Unity.Collections.NativeArray<Entity> ToArray(Unity.Collections.Allocator allocator, out int min, out int max) {
 
             min = this.data.min;
@@ -2549,7 +2603,7 @@ namespace ME.ECS {
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public FilterData With(IStructComponentBase[] components) {
+        public FilterData With(IComponentBase[] components) {
 
             for (int i = 0; i < components.Length; ++i) {
 
@@ -2570,7 +2624,7 @@ namespace ME.ECS {
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public FilterData Without(IStructComponentBase[] components) {
+        public FilterData Without(IComponentBase[] components) {
 
             for (int i = 0; i < components.Length; ++i) {
 
@@ -2591,7 +2645,7 @@ namespace ME.ECS {
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public FilterData WithStructComponent<TComponent>() where TComponent : struct, IStructComponentBase {
+        public FilterData WithStructComponent<TComponent>() where TComponent : struct, IComponentBase {
 
             WorldUtilities.SetComponentTypeId<TComponent>();
             this.setupVersioned += (f) => WorldUtilities.SetComponentAsFilterVersioned<TComponent>(f.data.onVersionChangedOnly == 1 ? true : false);
@@ -2604,7 +2658,7 @@ namespace ME.ECS {
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public FilterData WithoutStructComponent<TComponent>() where TComponent : struct, IStructComponentBase {
+        public FilterData WithoutStructComponent<TComponent>() where TComponent : struct, IComponentBase {
 
             WorldUtilities.SetComponentTypeId<TComponent>();
             this.setupVersioned += (f) => WorldUtilities.SetComponentAsFilterVersioned<TComponent>(f.data.onVersionChangedOnly == 1 ? true : false);
@@ -2617,7 +2671,7 @@ namespace ME.ECS {
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public FilterData WithSharedComponent<TComponent>() where TComponent : struct, IStructComponentBase {
+        public FilterData WithSharedComponent<TComponent>() where TComponent : struct, IComponentBase {
 
             WorldUtilities.SetComponentTypeId<TComponent>();
             this.data.sharedArchetypeContains.Add<TComponent>();
@@ -2630,7 +2684,7 @@ namespace ME.ECS {
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public FilterData WithoutSharedComponent<TComponent>() where TComponent : struct, IStructComponentBase {
+        public FilterData WithoutSharedComponent<TComponent>() where TComponent : struct, IComponentBase {
 
             WorldUtilities.SetComponentTypeId<TComponent>();
             this.data.sharedArchetypeNotContains.Add<TComponent>();

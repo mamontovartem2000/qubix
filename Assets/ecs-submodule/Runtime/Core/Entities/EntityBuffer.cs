@@ -1,4 +1,4 @@
-﻿#if ENABLE_IL2CPP
+#if ENABLE_IL2CPP
 #define INLINE_METHODS
 #endif
 
@@ -65,7 +65,7 @@ namespace ME.ECS {
     
     public static class DataBufferUtils {
 
-        /*internal static class Jobs<T0> where T0 : struct, IStructComponentBase {
+        /*internal static class Jobs<T0> where T0 : struct, IComponentBase {
             
             [BurstCompile(FloatPrecision.High, FloatMode.Deterministic, CompileSynchronously = true)]
             public unsafe struct Job : IJob {
@@ -141,7 +141,7 @@ namespace ME.ECS {
 
         }
 
-        public static unsafe ForEachUtils.ForEachTask<ME.ECS.Filters.R<T0>> ForEach<T0>(this in Filter filter, ME.ECS.Filters.R<T0> onEach)  where T0:struct,IStructComponentBase {
+        public static unsafe ForEachUtils.ForEachTask<ME.ECS.Filters.R<T0>> ForEach<T0>(this in Filter filter, ME.ECS.Filters.R<T0> onEach)  where T0:struct,IComponentBase {
             
             return new ForEachUtils.ForEachTask<ME.ECS.Filters.R<T0>>(in filter, onEach, (in ForEachUtils.ForEachTask<ME.ECS.Filters.R<T0>> task, in Filter filterInternal, ME.ECS.Filters.R<T0> onEachInternal) => {
 
@@ -203,18 +203,23 @@ namespace ME.ECS {
             });
             
         }*/
-        
-        #if INLINE_METHODS
+
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
-        public static void PushRemove_INTERNAL<T>(World world, in Entity entity, StructComponents<T> reg) where T : struct, IStructComponentBase {
-            
+        public static bool PushRemove_INTERNAL<T>(World world, in Entity entity, StructComponents<T> reg, StorageType storageType = StorageType.Default) where T : struct, IComponentBase {
+
+            var result = false;
             ref var bucket = ref reg.components[entity.id];
             reg.RemoveData(in entity, ref bucket);
             ref var state = ref bucket.state;
             if (state > 0) {
 
                 state = 0;
+                if (storageType == StorageType.Default) {
+                    world.currentState.structComponents.entitiesIndexer.Remove(entity.id, AllComponentTypes<T>.typeId);
+                } else if (storageType == StorageType.NoState) {
+                    world.structComponentsNoState.entitiesIndexer.Remove(entity.id, AllComponentTypes<T>.typeId);
+                }
+                
                 if (ComponentTypes<T>.typeId >= 0) {
 
                     world.currentState.storage.archetypes.Remove<T>(in entity);
@@ -223,24 +228,33 @@ namespace ME.ECS {
 
                 }
 
+                world.currentState.storage.versions.Increment(in entity);
+                reg.UpdateVersion(in entity);
+                if (AllComponentTypes<T>.isVersionedNoState == true) ++reg.versionsNoState.arr[entity.id];
+                if (ComponentTypes<T>.isFilterVersioned == true) world.UpdateFilterByStructComponentVersioned<T>(in entity);
+
+                result = true;
+
             }
-                    
-            world.currentState.storage.versions.Increment(in entity);
-            if (ComponentTypes<T>.isFilterVersioned == true) world.UpdateFilterByStructComponentVersioned<T>(in entity);
+
+            return result;
 
         }
 
-        #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
-        public static void PushSet_INTERNAL<T>(World world, in Entity entity, StructComponents<T> reg, in T data) where T : struct, IStructComponentBase {
+        public static ref T PushGet_INTERNAL<T>(World world, in Entity entity, StructComponents<T> reg, StorageType storageType = StorageType.Default) where T : struct, IComponentBase {
             
             ref var bucket = ref reg.components[entity.id];
-            reg.Replace(ref bucket, in data);
             ref var state = ref bucket.state;
             if (state == 0) {
 
                 state = 1;
+                if (storageType == StorageType.Default) {
+                    world.currentState.structComponents.entitiesIndexer.Set(entity.id, AllComponentTypes<T>.typeId);
+                } else if (storageType == StorageType.NoState) {
+                    world.structComponentsNoState.entitiesIndexer.Set(entity.id, AllComponentTypes<T>.typeId);
+                }
+
                 if (ComponentTypes<T>.typeId >= 0) {
 
                     world.currentState.storage.archetypes.Set<T>(in entity);
@@ -251,7 +265,50 @@ namespace ME.ECS {
 
             }
 
-            if (ComponentTypes<T>.typeId >= 0) {
+            if (ComponentTypes<T>.isFilterLambda == true && ComponentTypes<T>.typeId >= 0) {
+
+                world.ValidateFilterByStructComponent<T>(in entity, true);
+                
+            }
+            
+            world.currentState.storage.versions.Increment(in entity);
+            reg.UpdateVersion(in entity);
+            if (AllComponentTypes<T>.isVersionedNoState == true) ++reg.versionsNoState.arr[entity.id];
+            if (ComponentTypes<T>.isFilterVersioned == true) world.UpdateFilterByStructComponentVersioned<T>(in entity);
+
+            return ref bucket.data;
+            
+        }
+
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        public static bool PushSet_INTERNAL<T>(World world, in Entity entity, StructComponents<T> reg, in T data, StorageType storageType = StorageType.Default) where T : struct, IComponentBase {
+
+            var result = false;
+            ref var bucket = ref reg.components[entity.id];
+            reg.Replace(ref bucket, in data);
+            ref var state = ref bucket.state;
+            if (state == 0) {
+
+                state = 1;
+                if (storageType == StorageType.Default) {
+                    world.currentState.structComponents.entitiesIndexer.Set(entity.id, AllComponentTypes<T>.typeId);
+                } else if (storageType == StorageType.NoState) {
+                    world.structComponentsNoState.entitiesIndexer.Set(entity.id, AllComponentTypes<T>.typeId);
+                }
+
+                if (ComponentTypes<T>.typeId >= 0) {
+
+                    world.currentState.storage.archetypes.Set<T>(in entity);
+                    world.AddFilterByStructComponent<T>(in entity);
+                    world.UpdateFilterByStructComponent<T>(in entity);
+
+                }
+
+                result = true;
+
+            }
+
+            if (ComponentTypes<T>.isFilterLambda == true && ComponentTypes<T>.typeId >= 0) {
 
                 world.ValidateFilterByStructComponent<T>(in entity);
                 
@@ -261,7 +318,9 @@ namespace ME.ECS {
             reg.UpdateVersion(in entity);
             if (AllComponentTypes<T>.isVersionedNoState == true) ++reg.versionsNoState.arr[entity.id];
             if (ComponentTypes<T>.isFilterVersioned == true) world.UpdateFilterByStructComponentVersioned<T>(in entity);
-            
+
+            return result;
+
         }
 
     }

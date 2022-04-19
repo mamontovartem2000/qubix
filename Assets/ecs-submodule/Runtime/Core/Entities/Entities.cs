@@ -37,6 +37,7 @@ namespace ME.ECS {
 
         public static int typeId = -1;
         public static bool isFilterVersioned = false;
+        public static bool isFilterLambda = false;
 
     }
 
@@ -46,6 +47,7 @@ namespace ME.ECS {
         public static bool isTag = false;
         public static bool isVersioned = false;
         public static bool isVersionedNoState = false;
+        public static bool isSimple = false;
         public static bool isCopyable = false;
         public static bool isShared = false;
         public static bool isDisposable = false;
@@ -110,7 +112,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public static Entity ValidateData<TComponent>(this in Entity entity, bool isTag = false) where TComponent : struct, IStructComponentBase {
+        public static Entity ValidateData<TComponent>(this in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase {
 
             Worlds.currentWorld.ValidateData<TComponent>(in entity, isTag);
             return entity;
@@ -149,7 +151,7 @@ namespace ME.ECS {
 
     }
     
-    #if !ENTITY_API_VERSION1_TURN_OFF
+    #if ENTITY_API_VERSION1_DEPRECATED
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false)]
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false)]
@@ -197,9 +199,9 @@ namespace ME.ECS {
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public static ref TComponent GetData<TComponent>(this in Entity entity, bool createIfNotExists = true) where TComponent : struct, IStructComponent {
+        public static ref TComponent GetData<TComponent>(this in Entity entity) where TComponent : struct, IStructComponent {
 
-            return ref Worlds.currentWorld.GetData<TComponent>(in entity, createIfNotExists);
+            return ref Worlds.currentWorld.GetData<TComponent>(in entity);
 
         }
 
@@ -251,7 +253,6 @@ namespace ME.ECS {
     }
     #endif
     
-    #if !ENTITY_API_VERSION2_TURN_OFF
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false)]
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false)]
@@ -340,9 +341,9 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public static ref TComponent Get<TComponent>(this in Entity entity, bool createIfNotExists = true) where TComponent : struct, IStructComponent {
+        public static ref TComponent Get<TComponent>(this in Entity entity) where TComponent : struct, IStructComponent {
 
-            return ref Worlds.currentWorld.GetData<TComponent>(in entity, createIfNotExists);
+            return ref Worlds.currentWorld.GetData<TComponent>(in entity);
 
         }
 
@@ -523,7 +524,6 @@ namespace ME.ECS {
         }
         
     }
-    #endif
 
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false)]

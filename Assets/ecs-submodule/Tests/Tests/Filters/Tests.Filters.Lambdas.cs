@@ -1,10 +1,10 @@
 
 namespace ME.ECS.Tests {
 
-    #if FILTERS_STORAGE_ARCHETYPES
+    #if !FILTERS_STORAGE_LEGACY
     public class Tests_Filters_Lambdas {
 
-        public struct TestComponent : IStructComponent {
+        public struct TestComponent : IComponent {
 
             public int value;
 

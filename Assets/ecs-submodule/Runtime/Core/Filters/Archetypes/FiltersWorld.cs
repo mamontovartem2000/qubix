@@ -9,7 +9,7 @@ using ME.ECS.Collections;
 using Unity.IL2CPP.CompilerServices;
 using Il2Cpp = Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute;
 
-#if FILTERS_STORAGE_ARCHETYPES
+#if !FILTERS_STORAGE_LEGACY
 namespace ME.ECS {
 
     using FiltersArchetype;
@@ -111,15 +111,15 @@ namespace ME.ECS {
 
         }
 
-        public void AddFilterByStructComponent(in Entity entity, int componentId) {
+        public void AddFilterByStructComponent(in Entity entity, int componentId, bool checkLambda) {
 
-            this.currentState.filters.Set(in entity, componentId);
+            this.currentState.filters.Set(in entity, componentId, checkLambda);
 
         }
 
-        public void RemoveFilterByStructComponent(in Entity entity, int componentId) {
+        public void RemoveFilterByStructComponent(in Entity entity, int componentId, bool checkLambda) {
 
-            this.currentState.filters.Remove(in entity, componentId);
+            this.currentState.filters.Remove(in entity, componentId, checkLambda);
 
         }
 
@@ -131,27 +131,27 @@ namespace ME.ECS {
 
         }
 
-        public void ValidateFilterByStructComponent<T>(in Entity entity, bool makeRequest = false) where T : struct, IStructComponentBase {
+        public void ValidateFilterByStructComponent<T>(in Entity entity, bool makeRequest = false) where T : struct, IComponentBase {
 
             this.currentState.filters.Validate<T>(in entity, makeRequest);
 
         }
 
-        public void AddFilterByStructComponent<T>(in Entity entity) where T : struct, IStructComponentBase {
+        public void AddFilterByStructComponent<T>(in Entity entity) where T : struct, IComponentBase {
 
             this.currentState.filters.Set<T>(in entity);
 
         }
 
-        public void RemoveFilterByStructComponent<T>(in Entity entity) where T : struct, IStructComponentBase {
+        public void RemoveFilterByStructComponent<T>(in Entity entity) where T : struct, IComponentBase {
 
             this.currentState.filters.Remove<T>(in entity);
 
         }
 
-        public void UpdateFilterByStructComponent<T>(in Entity entity) where T : struct, IStructComponentBase { }
+        public void UpdateFilterByStructComponent<T>(in Entity entity) where T : struct, IComponentBase { }
 
-        public void UpdateFilterByStructComponentVersioned<T>(in Entity entity) where T : struct, IStructComponentBase { }
+        public void UpdateFilterByStructComponentVersioned<T>(in Entity entity) where T : struct, IComponentBase { }
 
         public void RemoveComponentFromFilter(in Entity entity) {
 

@@ -167,7 +167,7 @@ namespace ME.ECS {
         private const int WORLDS_CAPACITY = 4;
         private const int FILTERS_CACHE_CAPACITY = 10;
         
-        #if !FILTERS_STORAGE_ARCHETYPES
+        #if FILTERS_STORAGE_LEGACY
         private static class FiltersDirectCache {
 
             internal static BufferArray<BufferArray<bool>> dic = new BufferArray<BufferArray<bool>>(null, 0); //new bool[World.WORLDS_CAPACITY][];
@@ -290,7 +290,7 @@ namespace ME.ECS {
             this.OnRecycleComponents();
             this.OnRecycleStructComponents();
         
-            #if !FILTERS_STORAGE_ARCHETYPES
+            #if FILTERS_STORAGE_LEGACY
             if (FiltersDirectCache.dic.arr != null) PoolArray<bool>.Recycle(ref FiltersDirectCache.dic.arr[this.id]);
             #endif
 
@@ -433,14 +433,14 @@ namespace ME.ECS {
             var data = networkModule.GetSerializer().DeserializeWorld(worldData);
 
             // Make a ref of current filters to the new state
-            #if !FILTERS_STORAGE_ARCHETYPES
+            #if FILTERS_STORAGE_LEGACY
             this.GetState().filters.Clear();
             data.state.filters = this.GetState().filters;
             this.GetState().filters = null;
             #endif
 
             this.SetState<TState>(data.state);
-            #if !FILTERS_STORAGE_ARCHETYPES
+            #if FILTERS_STORAGE_LEGACY
             data.state.filters.OnDeserialize(this.GetEntitiesCount());
             #endif
             statesHistory.AddEvents(data.events.events);
@@ -690,7 +690,7 @@ namespace ME.ECS {
 
             }
 
-            #if !FILTERS_STORAGE_ARCHETYPES
+            #if FILTERS_STORAGE_LEGACY
             ArrayUtils.Resize(this.id, ref FiltersDirectCache.dic);
             #endif
 
@@ -1209,60 +1209,6 @@ namespace ME.ECS {
         }
         #endregion
 
-        #region EntityActions
-        #if ENTITY_ACTIONS
-        private static class EntityActionDirectCache<TComponent> where TComponent : struct, IStructComponent {
-
-            public static BufferArray<ListCopyable<EntityAction<TComponent>>> data;
-
-        }
-        
-        public void RaiseEntityActionOnAdd<TComponent>(in Entity entity) where TComponent : struct, IStructComponent {
-            
-            ArrayUtils.Resize(this.id, ref EntityActionDirectCache<TComponent>.data);
-            ref var list = ref EntityActionDirectCache<TComponent>.data.arr[this.id];
-            if (list == null) return;
-            for (int i = 0, count = list.Count; i < count; ++i) {
-
-                list[i].ExecuteOnAdd(in entity);
-
-            }
-
-        }
-        
-        public void RaiseEntityActionOnRemove<TComponent>(in Entity entity) where TComponent : struct, IStructComponent {
-            
-            ArrayUtils.Resize(this.id, ref EntityActionDirectCache<TComponent>.data);
-            ref var list = ref EntityActionDirectCache<TComponent>.data.arr[this.id];
-            if (list == null) return;
-            for (int i = 0, count = list.Count; i < count; ++i) {
-
-                list[i].ExecuteOnRemove(in entity);
-
-            }
-
-        }
-
-        public void RegisterEntityAction<TComponent>(EntityAction<TComponent> action) where TComponent : struct, IStructComponent {
-            
-            ArrayUtils.Resize(this.id, ref EntityActionDirectCache<TComponent>.data);
-            ref var list = ref EntityActionDirectCache<TComponent>.data.arr[this.id];
-            if (list == null) list = PoolList<EntityAction<TComponent>>.Spawn(10);
-            list.Add(action);
-
-        }
-        
-        public void UnRegisterEntityAction<TComponent>(EntityAction<TComponent> action) where TComponent : struct, IStructComponent {
-            
-            ArrayUtils.Resize(this.id, ref EntityActionDirectCache<TComponent>.data);
-            ref var list = ref EntityActionDirectCache<TComponent>.data.arr[this.id];
-            if (list == null) return;
-            list.Remove(action);
-
-        }
-        #endif
-        #endregion
-
         #region EntityVersionIncrementActions
         #if ENTITY_VERSION_INCREMENT_ACTIONS
         private event System.Action<Entity, int> onEntityVersionIncrement;
@@ -1513,7 +1459,7 @@ namespace ME.ECS {
 
         public void UpdateEntityOnCreate(in Entity entity, bool isNew) {
 
-            #if FILTERS_STORAGE_ARCHETYPES
+            #if !FILTERS_STORAGE_LEGACY
             if (isNew == true) {
                 ComponentsInitializerWorld.Init(in entity);
                 this.currentState.storage.versions.Validate(in entity);
@@ -2774,7 +2720,7 @@ namespace ME.ECS {
                                     #pragma warning restore
                                     if (this.settings.useJobsForSystems == true && jobs == true) {
 
-                                        #if !FILTERS_STORAGE_ARCHETYPES
+                                        #if FILTERS_STORAGE_LEGACY
                                         var arrEntities = system.filter.ToArray();
                                         
                                         var filter = this.GetFilter(system.filter.id);

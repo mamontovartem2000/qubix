@@ -3,7 +3,7 @@ namespace ME.ECS.Tests {
 
     public class Tests_Filters_AddRemove {
 
-        private struct TestComponent : IStructComponent {}
+        private struct TestComponent : IComponent {}
         
         private class TestSystem_AddRemove : ISystem, IAdvanceTick {
 
@@ -59,7 +59,7 @@ namespace ME.ECS.Tests {
 
             TestsHelper.Do((w) => {
                 
-                WorldUtilities.InitComponentTypeId<TestComponent>(false);
+                WorldUtilities.InitComponentTypeId<TestComponent>(false, true);
                 ComponentsInitializerWorld.Setup((e) => {
                             
                     e.ValidateData<TestComponent>();

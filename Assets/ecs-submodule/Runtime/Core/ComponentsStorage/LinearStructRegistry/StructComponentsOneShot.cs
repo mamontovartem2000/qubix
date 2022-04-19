@@ -102,10 +102,6 @@ namespace ME.ECS {
 
             }
 
-            #if ENTITY_ACTIONS
-            this.RaiseEntityActionOnRemove<TComponent>(in entity);
-            #endif
-
         }
 
         #if INLINE_METHODS
@@ -194,13 +190,9 @@ namespace ME.ECS {
 
                 }
 
-                #if ENTITY_ACTIONS
-                this.RaiseEntityActionOnAdd<TComponent>(in entity);
-                #endif
-
             }
 
-            if (ComponentTypes<TComponent>.typeId >= 0) {
+            if (ComponentTypes<TComponent>.isFilterLambda == true && ComponentTypes<TComponent>.typeId >= 0) {
 
                 this.ValidateFilterByStructComponent<TComponent>(in entity);
                 
@@ -274,15 +266,12 @@ namespace ME.ECS {
 
             }
             
-            if (ComponentTypes<TComponent>.typeId >= 0) {
+            if (ComponentTypes<TComponent>.isFilterLambda == true && ComponentTypes<TComponent>.typeId >= 0) {
 
                 this.ValidateFilterByStructComponent<TComponent>(in entity);
                 
             }
             
-            #if ENTITY_ACTIONS
-            this.RaiseEntityActionOnAdd<TComponent>(in entity);
-            #endif
             storage.versions.Increment(in entity);
             if (AllComponentTypes<TComponent>.isVersionedNoState == true) ++reg.versionsNoState.arr[entity.id];
             if (ComponentTypes<TComponent>.isFilterVersioned == true) this.UpdateFilterByStructComponentVersioned<TComponent>(in entity);
@@ -312,7 +301,7 @@ namespace ME.ECS {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class StructComponentsOneShot<TComponent> : StructComponents<TComponent> where TComponent : struct, IStructComponentBase, IComponentOneShot {
+    public sealed class StructComponentsOneShot<TComponent> : StructComponents<TComponent> where TComponent : struct, IComponentBase, IComponentOneShot {
 
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

@@ -129,13 +129,6 @@ namespace ME.ECSEditor {
                 return false;
                 #endif
             }, true, InitializerBase.ConfigurationType.DebugAndRelease),
-            new InitializerBase.DefineInfo("ENTITY_ACTIONS", "Turn on to add Entity Actions support. Entity Actions - raise events on Add/Remove components data on entities.", () => {
-                #if ENTITY_ACTIONS
-                return true;
-                #else
-                return false;
-                #endif
-            }, true, InitializerBase.ConfigurationType.DebugAndRelease),
             new InitializerBase.DefineInfo("ENTITY_VERSION_INCREMENT_ACTIONS", "Turn on to raise events on entity version increments.", () => {
                 #if ENTITY_VERSION_INCREMENT_ACTIONS
                 return true;
@@ -143,21 +136,14 @@ namespace ME.ECSEditor {
                 return false;
                 #endif
             }, true, InitializerBase.ConfigurationType.DebugAndRelease),
-            new InitializerBase.DefineInfo("ENTITY_API_VERSION1_TURN_OFF", "Turn off Entity API with SetData/ReadData/GetData methods.", () => {
-                #if ENTITY_API_VERSION1_TURN_OFF
+            new InitializerBase.DefineInfo("ENTITY_API_VERSION1_DEPRECATED", "Turn on Entity API with SetData/ReadData/GetData methods.", () => {
+                #if ENTITY_API_VERSION1_DEPRECATED
                 return true;
                 #else
                 return false;
                 #endif
             }, true, InitializerBase.ConfigurationType.DebugAndRelease),
-            new InitializerBase.DefineInfo("ENTITY_API_VERSION2_TURN_OFF", "Turn off Entity API with Set/Read/Get methods.", () => {
-                #if ENTITY_API_VERSION2_TURN_OFF
-                return true;
-                #else
-                return false;
-                #endif
-            }, true, InitializerBase.ConfigurationType.DebugAndRelease),
-            #if !FILTERS_STORAGE_ARCHETYPES
+            #if FILTERS_STORAGE_LEGACY
             new InitializerBase.DefineInfo("ARCHETYPE_SIZE_128", "Set archetype max bits size to 128 (Components in filters).", () => {
                 #if ARCHETYPE_SIZE_128
                 return true;
@@ -194,8 +180,8 @@ namespace ME.ECSEditor {
                 return false;
                 #endif
             }, true, InitializerBase.ConfigurationType.DebugOnly),
-            new InitializerBase.DefineInfo("FILTERS_STORAGE_ARCHETYPES", "Archetypes storage.", () => {
-                #if FILTERS_STORAGE_ARCHETYPES
+            new InitializerBase.DefineInfo("FILTERS_STORAGE_LEGACY", "Legacy storage instead of Archetypes.", () => {
+                #if FILTERS_STORAGE_LEGACY
                 return true;
                 #else
                 return false;
@@ -356,6 +342,8 @@ namespace ME.ECSEditor {
         private System.Collections.Generic.Dictionary<System.Type, IDebugViewGUIEditor<InitializerBase>> viewsDebugEditors;
         private System.Collections.Generic.Dictionary<System.Type, IJobsViewGUIEditor<InitializerBase>> viewsJobsEditors;
         public override void OnInspectorGUI() {
+            
+            this.serializedObject.Update();
 
             ((Component)this.target).transform.hideFlags = HideFlags.HideInInspector;
             
@@ -723,6 +711,8 @@ namespace ME.ECSEditor {
             //InitializerEditor.listCategories.DoLayoutList();
             EditorGUILayout.PropertyField(this.listCategoriesProp);
             EditorGUI.EndDisabledGroup();
+
+            this.serializedObject.ApplyModifiedProperties();
 
         }
 

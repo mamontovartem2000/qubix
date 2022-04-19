@@ -1,4 +1,3 @@
-//#define FILTERS_STORAGE_ARCHETYPES
 #if ENABLE_IL2CPP
 #define INLINE_METHODS
 #endif
@@ -10,7 +9,7 @@ using ME.ECS.Collections;
 using Unity.IL2CPP.CompilerServices;
 using Il2Cpp = Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute;
 
-#if FILTERS_STORAGE_ARCHETYPES
+#if !FILTERS_STORAGE_LEGACY
 namespace ME.ECS {
 
     [Il2Cpp(Option.NullChecks, false)]
@@ -35,7 +34,13 @@ namespace ME.ECS {
             [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
             #endif
             public bool MoveNext() {
+
+                var onChanged = this.filterData.data.onChanged;
+                var changedTracked = onChanged.Count;
                 
+                var connectedFilters = this.filterData.data.connectedFilters;
+                var connectedTracked = connectedFilters.Count;
+
                 while (true) {
 
                     if (this.archIndex >= this.archetypes.Count) {
@@ -56,8 +61,42 @@ namespace ME.ECS {
 
                     }
 
-                    this.current = this.filterData.storage.GetEntityById(this.arr[this.index]);
+                    var entityId = this.arr[this.index];
+                    this.current = this.filterData.storage.GetEntityById(entityId);
 
+                    if (connectedTracked > 0) {
+                        // Check if all custom filters contains connected entity
+                        var found = true;
+                        for (int i = 0, cnt = connectedTracked; i < cnt; ++i) {
+                            var connectedFilter = connectedFilters[i];
+                            if (connectedFilter.filter.Contains(connectedFilter.get.Invoke(this.current)) == false) {
+                                found = false;
+                                break;
+                            }
+                        }
+
+                        if (found == false) {
+                            continue;
+                        }
+                    }
+
+                    if (changedTracked > 0) {
+                        // Check if any component has changed on this entity
+                        var hasChanged = false;
+                        for (int i = 0, cnt = changedTracked; i < cnt; ++i) {
+                            var typeId = onChanged[i];
+                            var reg = Worlds.current.currentState.structComponents.list.arr[typeId];
+                            if (reg.HasChanged(entityId) == true) {
+                                hasChanged = true;
+                                break;
+                            }
+                        }
+
+                        if (hasChanged == false) {
+                            continue;
+                        }
+                    }
+                    
                     return true;
 
                 }
@@ -228,8 +267,7 @@ namespace ME.ECS {
             min = int.MaxValue;
             max = int.MinValue;
             var filterData = Worlds.current.currentState.filters.GetFilter(this.id);
-            var result = new Unity.Collections.NativeArray<Entity>(filterData.storage.Count(filterData), allocator);
-            var k = 0;
+            var result = new Unity.Collections.NativeList<Entity>(filterData.archetypes.Count * 10, allocator);
             foreach (var archId in filterData.archetypes) {
 
                 var arch = filterData.storage.allArchetypes[archId];
@@ -243,7 +281,45 @@ namespace ME.ECS {
                     if (e > max) {
                         max = e;
                     }
-                    result[k++] = filterData.storage.GetEntityById(e);
+                    result.Add(filterData.storage.GetEntityById(e));
+                    
+                }
+                
+            }
+
+            #if UNITY_EDITOR
+            var res = result.ToArray(allocator);
+            result.Dispose();
+            return res;
+            #else
+            return result.AsArray();
+            #endif
+
+        }
+
+        #if INLINE_METHODS
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        #endif
+        public Unity.Collections.NativeList<Entity> ToList(Unity.Collections.Allocator allocator, out int min, out int max) {
+
+            min = int.MaxValue;
+            max = int.MinValue;
+            var filterData = Worlds.current.currentState.filters.GetFilter(this.id);
+            var result = new Unity.Collections.NativeList<Entity>(filterData.archetypes.Count * 10, allocator);
+            foreach (var archId in filterData.archetypes) {
+
+                var arch = filterData.storage.allArchetypes[archId];
+                for (int i = 0, count = arch.entitiesArr.Count; i < count; ++i) {
+                    
+                    var e = arch.entitiesArr[i];
+                    if (e < min) {
+                        min = e;
+                    }
+
+                    if (e > max) {
+                        max = e;
+                    }
+                    result.Add(filterData.storage.GetEntityById(e));
                     
                 }
                 
@@ -257,6 +333,13 @@ namespace ME.ECS {
 
             var filterData = Worlds.current.currentState.filters.GetFilter(this.id);
             return filterData.Contains(in entity);
+
+        }
+
+        public bool Contains(int entityId) {
+
+            var filterData = Worlds.current.currentState.filters.GetFilter(this.id);
+            return filterData.Contains(entityId);
 
         }
 
@@ -426,10 +509,19 @@ namespace ME.ECS {
         #endif
         public bool Contains(in Entity entity) {
 
+            return this.Contains(entity.id);
+
+        }
+        
+        #if INLINE_METHODS
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        #endif
+        public bool Contains(int entityId) {
+
             foreach (var archId in this.archetypes) {
 
                 var arch = this.storage.allArchetypes[archId];
-                if (arch.entitiesArr.IndexOf(entity.id) >= 0) {
+                if (arch.entitiesContains.Contains(entityId) == true) {
                     return true;
                 }
 
@@ -446,27 +538,76 @@ namespace ME.ECS {
     [Il2Cpp(Option.DivideByZeroChecks, false)]
     internal struct FilterInternalData {
 
-        public struct Pair2 {
+        public struct Pair2 : System.IEquatable<Pair2> {
 
             public int t1;
             public int t2;
 
+            public bool Equals(Pair2 other) {
+                return this.t1 == other.t1 && this.t2 == other.t2;
+            }
+
+            public override bool Equals(object obj) {
+                return obj is Pair2 other && Equals(other);
+            }
+
+            public override int GetHashCode() {
+                unchecked {
+                    return (this.t1 * 397) ^ this.t2;
+                }
+            }
+
         }
 
-        public struct Pair3 {
+        public struct Pair3 : System.IEquatable<Pair3> {
 
             public int t1;
             public int t2;
             public int t3;
 
+            public bool Equals(Pair3 other) {
+                return this.t1 == other.t1 && this.t2 == other.t2 && this.t3 == other.t3;
+            }
+
+            public override bool Equals(object obj) {
+                return obj is Pair3 other && Equals(other);
+            }
+
+            public override int GetHashCode() {
+                unchecked {
+                    var hashCode = this.t1;
+                    hashCode = (hashCode * 397) ^ this.t2;
+                    hashCode = (hashCode * 397) ^ this.t3;
+                    return hashCode;
+                }
+            }
+
         }
 
-        public struct Pair4 {
+        public struct Pair4 : System.IEquatable<Pair4> {
 
             public int t1;
             public int t2;
             public int t3;
             public int t4;
+
+            public bool Equals(Pair4 other) {
+                return this.t1 == other.t1 && this.t2 == other.t2 && this.t3 == other.t3 && this.t4 == other.t4;
+            }
+
+            public override bool Equals(object obj) {
+                return obj is Pair4 other && Equals(other);
+            }
+
+            public override int GetHashCode() {
+                unchecked {
+                    var hashCode = this.t1;
+                    hashCode = (hashCode * 397) ^ this.t2;
+                    hashCode = (hashCode * 397) ^ this.t3;
+                    hashCode = (hashCode * 397) ^ this.t4;
+                    return hashCode;
+                }
+            }
 
         }
 
@@ -474,25 +615,31 @@ namespace ME.ECS {
         internal string name;
 
         [ME.ECS.Serializer.SerializeField]
-        internal List<Pair2> anyPair2;
+        internal ListCopyable<Pair2> anyPair2;
         [ME.ECS.Serializer.SerializeField]
-        internal List<Pair3> anyPair3;
+        internal ListCopyable<Pair3> anyPair3;
         [ME.ECS.Serializer.SerializeField]
-        internal List<Pair4> anyPair4;
+        internal ListCopyable<Pair4> anyPair4;
 
         [ME.ECS.Serializer.SerializeField]
-        internal List<int> contains;
+        internal ListCopyable<int> contains;
         [ME.ECS.Serializer.SerializeField]
-        internal List<int> notContains;
+        internal ListCopyable<int> notContains;
 
         [ME.ECS.Serializer.SerializeField]
-        internal List<int> containsShared;
+        internal ListCopyable<int> containsShared;
         [ME.ECS.Serializer.SerializeField]
-        internal List<int> notContainsShared;
+        internal ListCopyable<int> notContainsShared;
 
         [ME.ECS.Serializer.SerializeField]
-        internal List<int> lambdas;
+        internal ListCopyable<int> onChanged;
+        
+        [ME.ECS.Serializer.SerializeField]
+        internal ListCopyable<int> lambdas;
 
+        [ME.ECS.Serializer.SerializeField]
+        internal ListCopyable<ConnectInfo> connectedFilters;
+        
         public void CopyFrom(FilterInternalData other) {
 
             this.name = other.name;
@@ -504,7 +651,9 @@ namespace ME.ECS {
             ArrayUtils.Copy(other.notContains, ref this.notContains);
             ArrayUtils.Copy(other.containsShared, ref this.containsShared);
             ArrayUtils.Copy(other.notContainsShared, ref this.notContainsShared);
+            ArrayUtils.Copy(other.onChanged, ref this.onChanged);
             ArrayUtils.Copy(other.lambdas, ref this.lambdas);
+            ArrayUtils.Copy(other.connectedFilters, ref this.connectedFilters);
 
         }
 
@@ -512,14 +661,16 @@ namespace ME.ECS {
 
             this.name = default;
 
-            PoolList<Pair2>.Recycle(ref this.anyPair2);
-            PoolList<Pair3>.Recycle(ref this.anyPair3);
-            PoolList<Pair4>.Recycle(ref this.anyPair4);
-            PoolList<int>.Recycle(ref this.contains);
-            PoolList<int>.Recycle(ref this.notContains);
-            PoolList<int>.Recycle(ref this.containsShared);
-            PoolList<int>.Recycle(ref this.notContainsShared);
-            PoolList<int>.Recycle(ref this.lambdas);
+            PoolListCopyable<Pair2>.Recycle(ref this.anyPair2);
+            PoolListCopyable<Pair3>.Recycle(ref this.anyPair3);
+            PoolListCopyable<Pair4>.Recycle(ref this.anyPair4);
+            PoolListCopyable<int>.Recycle(ref this.contains);
+            PoolListCopyable<int>.Recycle(ref this.notContains);
+            PoolListCopyable<int>.Recycle(ref this.containsShared);
+            PoolListCopyable<int>.Recycle(ref this.notContainsShared);
+            PoolListCopyable<int>.Recycle(ref this.onChanged);
+            PoolListCopyable<int>.Recycle(ref this.lambdas);
+            PoolListCopyable<ConnectInfo>.Recycle(ref this.connectedFilters);
 
         }
 
@@ -527,14 +678,16 @@ namespace ME.ECS {
 
             return new FilterInternalData() {
                 name = string.Empty,
-                anyPair2 = new List<Pair2>(),
-                anyPair3 = new List<Pair3>(),
-                anyPair4 = new List<Pair4>(),
-                contains = new List<int>(),
-                notContains = new List<int>(),
-                containsShared = new List<int>(),
-                notContainsShared = new List<int>(),
-                lambdas = new List<int>(),
+                anyPair2 = PoolListCopyable<Pair2>.Spawn(4),
+                anyPair3 = PoolListCopyable<Pair3>.Spawn(4),
+                anyPair4 = PoolListCopyable<Pair4>.Spawn(4),
+                contains = PoolListCopyable<int>.Spawn(4),
+                notContains = PoolListCopyable<int>.Spawn(4),
+                containsShared = PoolListCopyable<int>.Spawn(4),
+                notContainsShared = PoolListCopyable<int>.Spawn(4),
+                onChanged = PoolListCopyable<int>.Spawn(4),
+                lambdas = PoolListCopyable<int>.Spawn(4),
+                connectedFilters = PoolListCopyable<ConnectInfo>.Spawn(0),
             };
 
         }
@@ -547,11 +700,27 @@ namespace ME.ECS {
 
     }
 
+    public interface IFilterConnect {
+
+        Entity entity { get; }
+
+    }
+
+    public struct ConnectInfo {
+
+        public FilterBuilder.ConnectCustomGetEntityDelegate get;
+        public Filter filter;
+
+    }
+
     [Il2Cpp(Option.NullChecks, false)]
     [Il2Cpp(Option.ArrayBoundsChecks, false)]
     [Il2Cpp(Option.DivideByZeroChecks, false)]
     public struct FilterBuilder {
 
+        public delegate void InnerFilterBuilderDelegate(FilterBuilder builder);
+        public delegate Entity ConnectCustomGetEntityDelegate(in Entity entity);
+        
         internal ME.ECS.FiltersArchetype.FiltersArchetypeStorage storage => Worlds.current.currentState.filters;
 
         [ME.ECS.Serializer.SerializeField]
@@ -570,6 +739,8 @@ namespace ME.ECS {
 
             WorldUtilities.SetComponentTypeId<T>();
             WorldUtilities.SetComponentTypeId<TComponent>();
+
+            ComponentTypes<TComponent>.isFilterLambda = true;
 
             var key = ComponentTypes<TComponent>.typeId;
             {
@@ -603,10 +774,53 @@ namespace ME.ECS {
 
         }
 
+        public FilterBuilder Parent(InnerFilterBuilderDelegate parentFilter) {
+
+            this.Connect<ME.ECS.Transform.Container>(parentFilter);
+            return this;
+
+        }
+
+        public FilterBuilder Connect(InnerFilterBuilderDelegate innerFilter, ConnectCustomGetEntityDelegate customGetEntity) {
+
+            var filterBuilder = Filter.Create(this.data.name);
+            innerFilter.Invoke(filterBuilder);
+            var filter = filterBuilder.Push();
+            this.data.connectedFilters.Add(new ConnectInfo() {
+                get = customGetEntity,
+                filter = filter,
+            });
+            return this;
+
+        }
+
+        public FilterBuilder Connect<TConnect>(InnerFilterBuilderDelegate innerFilter) where TConnect : struct, IStructComponent, IFilterConnect {
+
+            this.With<TConnect>();
+            var filterBuilder = Filter.Create(this.data.name);
+            innerFilter.Invoke(filterBuilder);
+            var filter = filterBuilder.Push();
+            this.data.connectedFilters.Add(new ConnectInfo() {
+                get = (in Entity e) => e.Read<TConnect>().entity,
+                filter = filter,
+            });
+            return this;
+
+        }
+
+        public FilterBuilder OnChanged<T>(bool addWith = true) where T : struct, IVersioned {
+
+            if (addWith == true) this.With<T>();
+            WorldUtilities.SetComponentTypeId<T>();
+            if (this.data.onChanged.Contains(ComponentTypes<T>.typeId) == false) this.data.onChanged.Add(AllComponentTypes<T>.typeId);
+            return this;
+
+        }
+
         public FilterBuilder WithoutShared<T>() where T : struct {
 
             WorldUtilities.SetComponentTypeId<T>();
-            this.data.notContainsShared.Add(ComponentTypes<T>.typeId);
+            if (this.data.notContainsShared.Contains(ComponentTypes<T>.typeId) == false) this.data.notContainsShared.Add(ComponentTypes<T>.typeId);
             return this;
 
         }
@@ -614,7 +828,7 @@ namespace ME.ECS {
         public FilterBuilder WithShared<T>() where T : struct {
 
             WorldUtilities.SetComponentTypeId<T>();
-            this.data.containsShared.Add(ComponentTypes<T>.typeId);
+            if (this.data.containsShared.Contains(ComponentTypes<T>.typeId) == false) this.data.containsShared.Add(ComponentTypes<T>.typeId);
             return this;
 
         }
@@ -622,7 +836,7 @@ namespace ME.ECS {
         public FilterBuilder With<T>() where T : struct {
 
             WorldUtilities.SetComponentTypeId<T>();
-            this.data.contains.Add(ComponentTypes<T>.typeId);
+            if (this.data.contains.Contains(ComponentTypes<T>.typeId) == false) this.data.contains.Add(ComponentTypes<T>.typeId);
             return this;
 
         }
@@ -630,7 +844,7 @@ namespace ME.ECS {
         public FilterBuilder Without<T>() where T : struct {
 
             WorldUtilities.SetComponentTypeId<T>();
-            this.data.notContains.Add(ComponentTypes<T>.typeId);
+            if (this.data.notContains.Contains(ComponentTypes<T>.typeId) == false) this.data.notContains.Add(ComponentTypes<T>.typeId);
             return this;
 
         }
@@ -678,7 +892,7 @@ namespace ME.ECS {
         }
 
         public FilterBuilder OnVersionChangedOnly() {
-            throw new System.NotImplementedException("OnVersionChangedOnly can't be used with FILTERS_STORAGE_ARCHETYPES.");
+            throw new System.NotImplementedException("OnVersionChangedOnly can't be used with !FILTERS_STORAGE_LEGACY.");
         }
 
         public Filter Push() {
