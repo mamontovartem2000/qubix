@@ -88,7 +88,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RefractionTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 56e04e4c9123247b8aa58d26b1c0f498, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RippleTex:
@@ -139,7 +139,7 @@ Material:
     - _EnableWave: -1
     - _EnvironmentReflections: 1
     - _FancyShadows: 0
-    - _FarClip: 400
+    - _FarClip: 1000
     - _FoamContribution: 0.47
     - _FoamNoiseScale: 0.77
     - _FoamScale: 4.41
@@ -155,7 +155,7 @@ Material:
     - _Metallic: 0
     - _MixBlackColor: 0
     - _Mode: 0
-    - _NearClip: 0.01
+    - _NearClip: 0.3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
@@ -165,7 +165,7 @@ Material:
     - _Reflection: 0.5
     - _ReflectionContribution: 0.5
     - _ReflectionIntensity: 1
-    - _ReflectionRefraction: 0
+    - _ReflectionRefraction: 0.73
     - _RippleDensity: 3
     - _RippleIntensity: 0.11
     - _RippleRefraction: 0.02

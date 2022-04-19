@@ -130,7 +130,7 @@ Material:
     - _DstBlend: 0
     - _EdgeFoamDepth: 0.2
     - _EnableDepth: -1
-    - _EnableDepthBlur: 1
+    - _EnableDepthBlur: -1
     - _EnableMask: -1
     - _EnableRefraction: -1
     - _EnableRipple: -1
@@ -139,7 +139,7 @@ Material:
     - _EnableWave: -1
     - _EnvironmentReflections: 1
     - _FancyShadows: 0
-    - _FarClip: 400
+    - _FarClip: 1000
     - _FoamContribution: 0.47
     - _FoamNoiseScale: 0.77
     - _FoamScale: 4.41
@@ -155,7 +155,7 @@ Material:
     - _Metallic: 0
     - _MixBlackColor: 0
     - _Mode: 0
-    - _NearClip: 0.01
+    - _NearClip: 0.3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueOffset: 0

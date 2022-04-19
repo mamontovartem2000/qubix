@@ -140,7 +140,7 @@ Material:
     - _EnableWave: -1
     - _EnvironmentReflections: 1
     - _FancyShadows: 0
-    - _FarClip: 400
+    - _FarClip: 1000
     - _FoamContribution: 0.47
     - _FoamNoiseScale: 0.77
     - _FoamScale: 4.41
@@ -156,7 +156,7 @@ Material:
     - _Metallic: 0
     - _MixBlackColor: 0
     - _Mode: 0
-    - _NearClip: 0.01
+    - _NearClip: 0.3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
@@ -198,7 +198,7 @@ Material:
     - _WaveSize: 15
     - _WaveSpeed: 0.005
     - _WetLevel: 0
-    - _WorkType: 1
+    - _WorkType: 3
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:

@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: MirrorGlass1
   m_Shader: {fileID: 4800000, guid: 9872b8e539142416f857307a76de6e0e, type: 3}
-  m_ShaderKeywords: _FULLMIRROR _NORMALMAP
+  m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -140,7 +140,7 @@ Material:
     - _EnableWave: -1
     - _EnvironmentReflections: 1
     - _FancyShadows: 0
-    - _FarClip: 400
+    - _FarClip: 1000
     - _FoamContribution: 0.47
     - _FoamNoiseScale: 0.77
     - _FoamScale: 4.41
@@ -156,7 +156,7 @@ Material:
     - _Metallic: 0
     - _MixBlackColor: 0
     - _Mode: 0
-    - _NearClip: 0.01
+    - _NearClip: 0.3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
@@ -165,7 +165,7 @@ Material:
     - _ReflDistort: 0
     - _Reflection: 0.5
     - _ReflectionContribution: 0.5
-    - _ReflectionIntensity: 1
+    - _ReflectionIntensity: 0.5
     - _ReflectionRefraction: 0
     - _RippleDensity: 3
     - _RippleIntensity: 0.11
