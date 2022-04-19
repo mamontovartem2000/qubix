@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.05923011, g: 0.21305123, b: 0.2194069, a: 1}
+  m_IndirectSpecularColor: {r: 0.021750987, g: 0.114753164, b: 0.118412994, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,6 +130,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1902044271}
     m_Modifications:
+    - target: {fileID: 4958016069329523290, guid: ee41962d3fe947140b1e9eb6eb7777cc, type: 3}
+      propertyPath: configurations.Array.data[0].defines.Array.size
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4958016069329523290, guid: ee41962d3fe947140b1e9eb6eb7777cc, type: 3}
+      propertyPath: configurations.Array.data[1].defines.Array.size
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4958016069329523290, guid: ee41962d3fe947140b1e9eb6eb7777cc, type: 3}
+      propertyPath: configurations.Array.data[0].defines.Array.data[24].name
+      value: ENTITY_API_VERSION1_DEPRECATED
+      objectReference: {fileID: 0}
+    - target: {fileID: 4958016069329523290, guid: ee41962d3fe947140b1e9eb6eb7777cc, type: 3}
+      propertyPath: configurations.Array.data[0].defines.Array.data[25].name
+      value: FILTERS_STORAGE_LEGACY
+      objectReference: {fileID: 0}
+    - target: {fileID: 4958016069329523290, guid: ee41962d3fe947140b1e9eb6eb7777cc, type: 3}
+      propertyPath: configurations.Array.data[1].defines.Array.data[20].name
+      value: ENTITY_API_VERSION1_DEPRECATED
+      objectReference: {fileID: 0}
+    - target: {fileID: 4958016069329523290, guid: ee41962d3fe947140b1e9eb6eb7777cc, type: 3}
+      propertyPath: configurations.Array.data[1].defines.Array.data[21].name
+      value: FILTERS_STORAGE_LEGACY
+      objectReference: {fileID: 0}
     - target: {fileID: 6009573824331432541, guid: ee41962d3fe947140b1e9eb6eb7777cc, type: 3}
       propertyPath: m_Name
       value: ProjectInitializer
@@ -665,114 +689,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381502941}
   m_CullTransparentMesh: 1
---- !u!1 &486910778
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 486910779}
-  - component: {fileID: 486910781}
-  - component: {fileID: 486910780}
-  m_Layer: 0
-  m_Name: Display_Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &486910779
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 486910778}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: -20, y: -18.5, z: -21}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1902044271}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
---- !u!114 &486910780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 486910778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RenderShadows: 0
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: 0
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
---- !u!20 &486910781
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 486910778}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 5
-  field of view: 40
-  orthographic: 1
-  orthographic size: 1
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 3f9b7a2280b2c25468dee1555cef8658, type: 2}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
 --- !u!1 &550779299
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,8 +1259,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949177910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20, y: -0.34, z: -20}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 32, y: -0.35, z: 21}
+  m_LocalScale: {x: 100, y: 0, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1383,7 +1299,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1902044271}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &994954908
 MonoBehaviour:
@@ -2303,7 +2219,6 @@ Transform:
   - {fileID: 373365271}
   - {fileID: 2203115479106424811}
   - {fileID: 25925405}
-  - {fileID: 486910779}
   - {fileID: 994954907}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2733,11 +2648,11 @@ MonoBehaviour:
   DeviceType: 0
   WorkType: 1
   UpVector: 2
-  Intensity: 1
+  Intensity: 0.076
   DisableGBuffer: 1
   RunForEveryXthFrame: 1
   CameraLODLevel: 0
-  TextureLODLevel: 0
+  TextureLODLevel: 2
   HDR: 1
   MSAA: 1
   DisablePixelLights: 0
@@ -2745,24 +2660,24 @@ MonoBehaviour:
   Cull: 0
   CullDistance: 0
   TextureSize: 1
-  ManualSize: 1280
+  ManualSize: 3840
   UseCameraClipPlane: 0
   ClipPlaneOffset: 0
   ReflectLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 167
   DirectLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  MixBlackColor: 1
+  MixBlackColor: 0
   EnableDepthBlur: 1
   DepthBlurShader: {fileID: 4800000, guid: e02cb2d3802ee44a09e3baf03630a245, type: 3}
-  DepthBlurCutoff: 30
-  DepthBlurIterations: 8
+  DepthBlurCutoff: 10
+  DepthBlurIterations: 14
   DepthBlurSurfacePower: 1
   DepthBlurHorizontalMultiplier: 1
-  DepthBlurVerticalMultiplier: 6
-  EnableSimpleDepth: 1
+  DepthBlurVerticalMultiplier: 3
+  EnableSimpleDepth: 0
   SimpleDepthCutoff: 1.18
   Shades:
   - ObjectToShade: {fileID: 949177910}
