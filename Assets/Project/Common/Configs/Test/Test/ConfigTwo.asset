@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: Rocket Launcher
+  m_Name: ConfigTwo
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
@@ -19,8 +19,6 @@ MonoBehaviour:
   - id: 2
   - id: 3
   - id: 4
-  - id: 5
-  - id: 6
   removeStructComponents: []
   templates: []
   references:
@@ -30,28 +28,20 @@ MonoBehaviour:
     00000001:
       type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 20
         Value2:
-          odin: 0
-          dva: {x: 0, y: 0, z: 0}
-          tri: 0
+          odin: 2
+          dva: {x: 9, y: 8, z: 7}
+          tri: 0.987
     00000002:
-      type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0
-    00000003:
-      type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0
-    00000004:
       type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 11400000, guid: 2d9972c25069b6b4b946fcf46ff67460, type: 2}
-    00000005:
+        Value: {fileID: 11400000, guid: 56798c109753c5648a61b2a2c9d980a7, type: 2}
+    00000003:
       type: {class: NeedWeapon, ns: Project.Common.Components, asm: Project.Common}
       data:
-        View: {fileID: 0}
-    00000006:
+        View: {fileID: 4342158228337196574, guid: 69515bc087e2a8749ab8b9c50430842c, type: 3}
+    00000004:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {x: 0, y: 0, z: 0}
+        Value: {x: 0.35, y: 0, z: 0}

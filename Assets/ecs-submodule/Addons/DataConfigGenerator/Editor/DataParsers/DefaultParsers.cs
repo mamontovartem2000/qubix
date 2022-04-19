@@ -42,6 +42,8 @@ namespace ME.ECS.DataConfigGenerator.DataParsers {
         }
 
         public bool Parse(string data, System.Type fieldType, out object result) {
+
+            UnityEngine.Debug.Log(data);
             
             var prs = data.Split(';');
             result = new Vector3Int(int.Parse(prs[0]), int.Parse(prs[1]), int.Parse(prs[2]));

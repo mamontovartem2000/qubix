@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053fc18fa97264e4db8a6b5a8ec45693, type: 3}
+  m_Name: RemoteDataConfigs
+  m_EditorClassIdentifier: 
+  paths:
+  - directory: {fileID: 102900000, guid: 15c3ec76c19bf80469ba91718b021131, type: 3}
+    caption: test attempt
+    version: 79
+    path: https://docs.google.com/spreadsheets/d/e/2PACX-1vTgAYf1tPipMAKMYaN1r19XmiCg2peLsMvbCcNLZfq0a8jAdjuKjVwWHpSgBQhNfL6Jw81lJk1ThJJC/pub?gid=0&single=true&output=csv
+    visitedFiles: Assets/Project/Common/Configs/Test/Test/ConfigOne.asset;Assets/Project/Common/Configs/Test/Test/ConfigTwo.asset
+    behaviour: {fileID: 0}

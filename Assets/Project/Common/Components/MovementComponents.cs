@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Project.Common.Components 
 {   
-    public struct PlayerMoveTarget : IComponent 
+    public struct PlayerMoveTarget : IComponent
     {
         public Vector3 Value;
     }

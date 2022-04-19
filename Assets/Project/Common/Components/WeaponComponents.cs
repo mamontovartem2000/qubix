@@ -1,4 +1,5 @@
-﻿using ME.ECS;
+﻿using System;
+using ME.ECS;
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
 using UnityEngine;
@@ -59,6 +60,15 @@ namespace Project.Common.Components
     public struct AmmoCapacityDefault : IComponent
     {
         public int Value;
+        public TestStruct Value2;
+    }
+
+    [Serializable]
+    public struct TestStruct
+    {
+        public int odin;
+        public Vector3Int dva;
+        public float tri;
     }
 
     public struct SpreadAmount : IComponent
