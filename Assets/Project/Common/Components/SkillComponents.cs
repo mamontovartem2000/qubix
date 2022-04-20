@@ -4,8 +4,15 @@ using ME.ECS.DataConfigs;
 namespace Project.Common.Components
 {
     public struct SkillTag : IComponent {}
+    public struct EffectTag : IComponent {}
     public struct PassiveSkill : IComponent {}
     public struct ActivateSkill : IComponentOneShot {}
+
+    public struct AOESkill : IComponent
+    {
+        public float Value;
+    }
+    public struct Targeted : IComponent {}
 
     public struct SkillConfig : IComponent
     {
@@ -22,18 +29,14 @@ namespace Project.Common.Components
         public float Value;
     }
 
-    public struct SkillEffect : IComponent
-    {
-        public SkillAttribute Value;
-    }
-
     public struct SkillAmount : IComponent
     {
         public float Value;
     }
-
-    public enum SkillAttribute
-    {
-        MoveSpeed, AttackSpeed
-    }
+    
+    public struct BuffTrigger : IComponentOneShot {}
+    public struct SelfTrigger : IComponentOneShot {}
+    
+    public struct StatsBuff : IComponent {}
+    public struct ComponentBuff : IComponent {}
 }

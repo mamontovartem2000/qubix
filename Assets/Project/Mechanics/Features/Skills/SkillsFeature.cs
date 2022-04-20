@@ -1,5 +1,5 @@
 ﻿using ME.ECS;
-using Project.Mechanics.Features.Skills.Systems;
+// using Project.Mechanics.Features.Skills.Systems;
 
 namespace Project.Mechanics.Features
 {
@@ -14,7 +14,7 @@ namespace Project.Mechanics.Features
     {
         protected override void OnConstruct()
         {
-            AddSystem<SkillActivationSystem>();
+            // AddSystem<SkillActivationSystem>();
         }
 
         protected override void OnDeconstruct() {}

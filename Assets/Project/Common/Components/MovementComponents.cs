@@ -26,11 +26,6 @@ namespace Project.Common.Components
 
     public struct LockTarget : IComponent { }
 
-    public struct MoveSpeedModifier : IComponent
-    {
-        public float Value;
-    }
-    
     public enum MovementAxis
     {
         Horizontal, Vertical

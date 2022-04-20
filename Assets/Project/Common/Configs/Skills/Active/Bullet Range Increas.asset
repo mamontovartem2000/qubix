@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: TestProjectile
+  m_Name: Bullet Range Increas
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
   - id: 0
   - id: 1
   - id: 2
+  - id: 3
   removeStructComponents: []
   templates:
-  - f305392db8e7848468c5d28566911368
-  - 5e47133da7cbb0e438aade92c98d6970
+  - d8912ef759777e24ea9aab0c4b9546c3
   references:
     version: 1
     00000000:
-      type: {class: Trajectory, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 1.2
+      type: {class: SkillTag, ns: Project.Common.Components, asm: Project.Common}
     00000001:
-      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: SkillDurationDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 0
     00000002:
-      type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: SkillAmount, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 20
+        Value: 0
+    00000003:
+      type: {class: FiringRangeAffect, ns: Project.Common.Components, asm: Project.Common}

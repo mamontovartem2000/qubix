@@ -10,24 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a0e13efcdbfb4d3fb2a189867f5f509, type: 3}
-  m_Name: Projectile
+  m_Name: Active Skill Template
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
   - id: 0
   - id: 1
+  - id: 2
   removeStructComponents: []
   templates: []
-  editorComment: "\t\t\t"
-  usedIn:
-  - {fileID: 11400000, guid: 55a2d6fc4050b414aa890155fc94d18e, type: 2}
+  editorComment: 
+  usedIn: []
   references:
     version: 1
     00000000:
-      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 10
+      type: {class: SkillTag, ns: Project.Common.Components, asm: Project.Common}
     00000001:
-      type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: SkillDurationDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 20
+        Value: 0
+    00000002:
+      type: {class: SkillAmount, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 0
