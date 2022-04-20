@@ -31,7 +31,10 @@ namespace Project.Modules.Network
                 if (_timer < 0)
                     _timer = 0;
 
-                _text.text = "Time: " + Mathf.Round(_timer);
+                //_text.text = "Time: " + Mathf.Round(_timer);
+                int min = Mathf.FloorToInt(_timer / 60);
+                float sec = _timer - 60 * min;
+                _text.text = $"Time: {min}:{Mathf.Round(sec)}";
             }
         }
     }

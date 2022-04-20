@@ -1,4 +1,6 @@
-﻿using ME.ECS;
+﻿using FlatBuffers;
+using FlatMessages;
+using ME.ECS;
 using Project.Markers;
 using System;
 using System.Collections.Generic;
@@ -28,7 +30,7 @@ namespace Project.Modules.Network
 
         protected override int GetRPCOrder()
         {
-            return NetworkData.OrderId;
+            return NetworkData.PlayerIdInRoom;
         }
 
         protected override ME.ECS.Network.NetworkType GetNetworkType()
@@ -45,11 +47,10 @@ namespace Project.Modules.Network
                 instance.SetSerializer(new FSSerializer());
             }
 
-            Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorID = NetworkData.OrderId });
-            Worlds.currentWorld.AddMarker(new NetworkPlayerConnectedTimeSynced { ActorID = NetworkData.OrderId });
+            Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorID = NetworkData.PlayerIdInRoom });
+            Worlds.currentWorld.AddMarker(new NetworkPlayerConnectedTimeSynced { ActorID = NetworkData.PlayerIdInRoom });
         }
     }
-
 
     public class NetTransporter : ME.ECS.Network.ITransporter
     {
@@ -89,20 +90,52 @@ namespace Project.Modules.Network
 
         public void SendSystem(byte[] bytes)
         {
-            NetworkData.Connect.SendSystemMessage(bytes);
-            sedfewf(bytes);
-            this.sentBytesCount += bytes.Length;
-            //TODO: Временно закомментил
+            //NetworkData.Connect.SendSystemMessage(bytes);
+            //this.sentBytesCount += bytes.Length;
         }
 
-        void sedfewf(byte[] bytes)
+        public void SendSystemHash(uint tick, int hash)
         {
-            string dgv = "";
-            foreach (var item in bytes)
+            FlatBufferBuilder builder = new FlatBufferBuilder(1);
+            var hashMess = ReplayFrom.CreateReplayFrom(builder, tick, hash);
+            var offset = SystemMessage.CreateSystemMessage(builder, (uint)DateTime.Now.Ticks, Payload.SaveHash, hashMess.Value);
+            builder.Finish(offset.Value);
+
+            var bytes = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
+            NetworkData.Connect.SendSystemMessage(bytes);
+            this.sentBytesCount += bytes.Length;
+        }
+
+        private void ProcessMySystemMessage(byte[] bytes)
+        {
+            SystemMessage data = SystemMessage.GetRootAsSystemMessage(new ByteBuffer(bytes));
+
+            switch (data.PayloadType)
             {
-                dgv += item + ", ";
+                case Payload.NONE:
+                    Debug.Log("Payload type NONE!");
+                    break;
+                case Payload.ReplayFrom:
+                    GetReplayHash(data.PayloadAsReplayFrom());
+                    break;
+                case Payload.TimeFromStart:
+                    SetServerTime(data.PayloadAsTimeFromStart());
+                    break;
+                default:
+                    Debug.Log("Unknown system message!");
+                    break;
             }
-            Debug.Log(dgv);
+        }
+
+        private void SetServerTime(TimeFromStart timeFromStart)
+        {
+
+        }
+
+        private void GetReplayHash(ReplayFrom replayFrom)
+        {
+            uint ticks = replayFrom.LastTick;
+            int hash = replayFrom.LastHash;
         }
 
         public byte[] Receive()
@@ -112,9 +145,10 @@ namespace Project.Modules.Network
                 if (this._queueSystem.Count == 0) return null;
 
                 var bytes = this._queueSystem.Dequeue();
+                ProcessMySystemMessage(bytes);
                 this.receivedBytesCount += bytes.Length;
 
-                return bytes;
+                return null;
             }
             else
             {

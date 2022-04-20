@@ -1,65 +1,71 @@
 using FlatBuffers;
-using SerializedMessages;
+using FlatMessages;
 using System;
-using System.Collections;
+using System.Runtime.InteropServices;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Project.Modules.Network
 {
     public class ConnectingSteps  : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _playersList;
-        [SerializeField] private TextMeshProUGUI _roomId;
+        [DllImport("__Internal")]
+        private static extern void ReadyToStart();
 
-        private bool master = false;
+        [SerializeField] private TMP_Text _playersList;
+        [SerializeField] private InputField _playerId;
+        [SerializeField] private InputField _roomId;
+        [SerializeField] private Toggle _needCreateRoom;
 
-        private bool da = false; 
+        private bool _needLoadGameScene; 
 
         private void Start()
         {
-            if (master)
-                StartGame1();
-            else
-                aaaaa("otMfqkxjSRiCpPzOzj5Tzg/2");
-
-            //Connect();
-            //SendJoinRequest();
+            //ReadyToStart();           
         }
 
         private void Update()
         {
-            if (da)
+            if (_needLoadGameScene)
                 SceneManager.LoadScene(1);
-
         }
 
-        private void StartGame()
+        // Browser method
+        public void ProcessJoinRequest(string request)
         {
-            BrowserRequest.LoadBrowserInfo(out string request, out GameInfo info);
+            string payloadBase64 = ParceUtils.CreateFromJSON<JoinRequestData>(request).payload;
+            var payloadInBytes = Convert.FromBase64String(payloadBase64);
+            var playerJson = Encoding.UTF8.GetString(payloadInBytes);
+            GameInfo info = ParceUtils.CreateFromJSON<GameInfo>(playerJson);
             NetworkData.Info = info;
-            NetworkData.FullJoinRequest = request;
-        }
 
-        private void StartGame1()
-        {
-            StartCoroutine(BrowserRequest.Loadroom(aaaaa));
-        }
-
-        private void aaaaa(string aaa)
-        {
-            _roomId.text = aaa;
-            StartCoroutine(BrowserRequest.Loadreq(aaa, bbbbb));
-        }
-
-        private void bbbbb(string aaa)
-        {
-            BrowserRequest.LoadBrowserInfo22(aaa, out GameInfo info);
-            NetworkData.Info = info;
-            NetworkData.FullJoinRequest = aaa;
             Connect();
-            SendJoinRequest();
+            SendJoinRequest(request);
+        }
+
+        public void StartManual()
+        {
+            if (_playerId.text == "")
+            {
+                Debug.Log("Enter id");
+                return;
+            }
+
+            NetworkData.PlayerIdInRoom = Int32.Parse(_playerId.text);
+
+            if (_needCreateRoom.isOn)
+                StartCoroutine(ManualRoomCreating.CreateRoom(GetManualJoinRequest));
+            else
+                GetManualJoinRequest(_roomId.text);
+        }
+
+        private void GetManualJoinRequest(string roomId)
+        {
+            _roomId.text = roomId;
+            StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, ProcessJoinRequest));
         }
 
         private void Connect() //TODO: async connect?
@@ -67,8 +73,6 @@ namespace Project.Modules.Network
             NetworkData.Connect = new WebSocketConnect(NetworkData.Info.server_url);
             NetworkData.Connect.GetMessage += GetMessage;
         }
-
-       
 
         private void GetMessage(byte[] bytes)
         {
@@ -97,21 +101,20 @@ namespace Project.Modules.Network
                 default:
                     Debug.Log("Unknown system message!");
                     break;
+
+                    //TODO: Handle Shutdown
             }
         }
-
-        
-
+    
         private void GetJoinResult(JoinResult joinResult)
         {
             if (joinResult.Value)
             {
                 Debug.Log("Join");
-                //Invoke(nameof(SetCharacterRequest), 3f);
             }
             else
             {
-                //TODO: Очистить коннект
+                //TODO: Close and clear connect
                 Debug.Log($"Join Error: {joinResult.Reason}");
             }
         }
@@ -119,7 +122,7 @@ namespace Project.Modules.Network
         private void SetTimeRemaining(TimeRemaining timeRemaining)
         {
             Debug.Log("Set Time!");
-            NetTimer.Timer.SetTime(timeRemaining.Value);
+            NetTimer.Timer.SetTime(timeRemaining.Value / 1000);
         }
 
         private void SetPlayerList(PlayerList playerList)
@@ -134,22 +137,21 @@ namespace Project.Modules.Network
             }
 
             _playersList.SetText(info);
-            //_playersList.text = info;
         }
 
         private void SetStartGame(Start start)
         {
             Debug.Log("Start");
             NetworkData.Connect.GetMessage -= GetMessage;
-            da = true;
+            _needLoadGameScene = true;
         }
 
-        private void SendJoinRequest()
+        private void SendJoinRequest(string fullJoinRequest)
         {
             FlatBufferBuilder builder = new FlatBufferBuilder(1);
-            var mes = builder.CreateString(NetworkData.FullJoinRequest);
+            var mes = builder.CreateString(fullJoinRequest);
             var request = JoinRequest.CreateJoinRequest(builder, mes);
-            var offset = SystemMessage.CreateSystemMessage(builder, (uint)DateTime.Now.Ticks, Payload.JoinRequest, request.Value); //TODO: Мб Utc; Точно тики?
+            var offset = SystemMessage.CreateSystemMessage(builder, (uint)DateTime.Now.Ticks, Payload.JoinRequest, request.Value); //TODO: maybe Utc; Ticks or miliseconds? Check all messages. Maybe delete time in this struсt.
             builder.Finish(offset.Value);
 
             var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
@@ -162,7 +164,7 @@ namespace Project.Modules.Network
             var id = builder.CreateString(NetworkData.Info.player_id);
             var character = builder.CreateString(NetworkData.Info.available_characters[0]);
             var request = SetCharacter.CreateSetCharacter(builder, id, character);
-            var offset = SystemMessage.CreateSystemMessage(builder, (uint)DateTime.Now.Ticks, Payload.SetCharacter, request.Value); //TODO: Мб Utc; Точно тики?
+            var offset = SystemMessage.CreateSystemMessage(builder, (uint)DateTime.Now.Ticks, Payload.SetCharacter, request.Value);
             builder.Finish(offset.Value);
 
             var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);

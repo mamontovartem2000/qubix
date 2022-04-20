@@ -1,37 +1,14 @@
 using System;
 using System.Collections;
-using System.Runtime.InteropServices;
-using System.Text;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.Networking;
 
 
 namespace Project.Modules.Network
 {
-    public static class BrowserRequest
+    public static class ManualRoomCreating
     {
-        [DllImport("__Internal")]
-        public static extern string loadInitialDataForUnity();
-
-        public static void LoadBrowserInfo(out string fullRequest, out GameInfo info)
-        {
-            fullRequest = loadInitialDataForUnity();
-            string payloadBase64 = CreateFromJSON<JoinRequestData>(fullRequest).payload;
-            var payloadInBytes = Convert.FromBase64String(payloadBase64);
-            var playerJson = Encoding.UTF8.GetString(payloadInBytes);
-            info = CreateFromJSON<GameInfo>(playerJson);
-        }
-
-        public static void LoadBrowserInfo22(string fullRequest, out GameInfo info)
-        {
-            string payloadBase64 = CreateFromJSON<JoinRequestData>(fullRequest).payload;
-            var payloadInBytes = Convert.FromBase64String(payloadBase64);
-            var playerJson = Encoding.UTF8.GetString(payloadInBytes);
-            info = CreateFromJSON<GameInfo>(playerJson);
-        }
-
-        public static IEnumerator Loadroom(Action<string> callback)
+        public static IEnumerator CreateRoom(Action<string> callback)
         {
             string url = "http://13.250.155.40:80/match/create_room";
             Reqqq req = new Reqqq() { map_id  = 15, player_scheme = new int[] { 2 }, lifetime = 60 * 5 };
@@ -51,22 +28,14 @@ namespace Project.Modules.Network
 
             yield return request.SendWebRequest();
 
-
-            if (request.isNetworkError || request.isHttpError)
-            {
-                Debug.Log("Request Error: " + request.error);              
-            }
-            else
-            {
-                Room info = CreateFromJSON<Room>(request.downloadHandler.text);
-                callback(info.id);
-            }
+            Room info = ParceUtils.CreateFromJSON<Room>(request.downloadHandler.text);
+            callback(info.id);
         }
 
-        public static IEnumerator Loadreq(string roomid, Action<string> callback)
+        public static IEnumerator LoadJoinRequest(string roomid, Action<string> callback)
         {
             string url = "http://13.250.155.40:80/match/test/join_request";
-            Player req = new Player() { room_id = roomid, player_id = "sergo" + NetworkData.OrderId }; //TODO: Тут капец временное решение
+            Player req = new Player() { room_id = roomid, player_id = "sergo" + NetworkData.PlayerIdInRoom };
             string json = JsonUtility.ToJson(req);
 
             WWWForm formData = new WWWForm();
@@ -83,21 +52,7 @@ namespace Project.Modules.Network
 
             yield return request.SendWebRequest();
 
-
-            if (request.isNetworkError || request.isHttpError)
-            {
-                Debug.Log("Request Error: " + request.error);
-            }
-            else
-            {
-                callback(request.downloadHandler.text);
-            }
-        }
-
-
-        private static T CreateFromJSON<T>(string jsonString) //TODO: Перенести в утилиты
-        {
-            return JsonUtility.FromJson<T>(jsonString);
+            callback(request.downloadHandler.text);
         }
     }
 

@@ -26,7 +26,7 @@ namespace UI_Scripts
 
         private void SetPlayer(in Entity player)
         {
-            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.OrderId)) return;
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayer(NetworkData.PlayerIdInRoom)) return;
             _player = player.Read<PlayerAvatar>().Value;
         }
     

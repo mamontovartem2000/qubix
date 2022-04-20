@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Project.Core
+namespace Project.Modules.Network
 {
-    public class ParceUtils
+    public static class ParceUtils
     {
         public static T CreateFromJSON<T>(string jsonString)
         {
@@ -19,7 +19,7 @@ namespace Project.Core
     }
 
     [Serializable]
-    public class GameMapRemoteData //TODO: Сопоставить названия полей с серверными
+    public class GameMapRemoteData //TODO: Match field names with server ones
     {
         public byte[] bytes;
         public int offset;
