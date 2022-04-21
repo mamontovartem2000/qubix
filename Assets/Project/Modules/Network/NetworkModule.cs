@@ -4,6 +4,7 @@ using ME.ECS;
 using Project.Markers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Project.Modules.Network
@@ -83,8 +84,12 @@ namespace Project.Modules.Network
 
         public void Send(byte[] bytes)
         {
-            NetworkData.Connect.SendMessage(bytes);
-            this.sentBytesCount += bytes.Length;
+            long tick = Worlds.currentWorld.GetCurrentTick();
+            byte[] tickInByte = BitConverter.GetBytes((int)tick);
+            byte[] result = tickInByte.Concat(bytes).ToArray();
+
+            NetworkData.Connect.SendMessage(result);
+            this.sentBytesCount += result.Length;
             ++this.sentCount;
         }
 
@@ -129,11 +134,14 @@ namespace Project.Modules.Network
 
         private void SetServerTime(TimeFromStart timeFromStart)
         {
-
+            var world = Worlds.currentWorld;
+            var serverTime = timeFromStart.Time / 1000;
+            world.SetTimeSinceStart(serverTime);
         }
 
         private void GetReplayHash(ReplayFrom replayFrom)
         {
+            //TODO: Delete hash from this mesaage
             uint ticks = replayFrom.LastTick;
             int hash = replayFrom.LastHash;
         }

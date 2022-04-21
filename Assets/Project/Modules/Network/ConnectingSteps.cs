@@ -15,22 +15,31 @@ namespace Project.Modules.Network
         [DllImport("__Internal")]
         private static extern void ReadyToStart();
 
-        [SerializeField] private TMP_Text _playersList;
-        [SerializeField] private InputField _playerId;
+        [SerializeField] private InputField _playerNumber;
         [SerializeField] private InputField _roomId;
+        [SerializeField] private InputField _playerNick;
         [SerializeField] private Toggle _needCreateRoom;
 
-        private bool _needLoadGameScene; 
+        private bool _needLoadGameScene;
+        private string _nickname;
 
         private void Start()
         {
-            //ReadyToStart();           
+            //ReadyToStart();
+
+            _needCreateRoom.onValueChanged.AddListener(OpenCloseFields);
+            OpenCloseFields(_needCreateRoom.isOn);
         }
 
         private void Update()
         {
             if (_needLoadGameScene)
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(1);            
+        }
+
+        private void OpenCloseFields(bool value)
+        {
+            _playerNumber.interactable = value;
         }
 
         // Browser method
@@ -48,24 +57,29 @@ namespace Project.Modules.Network
 
         public void StartManual()
         {
-            if (_playerId.text == "")
+            if (_playerNick.text == "")
             {
-                Debug.Log("Enter id");
+                Debug.Log("Enter nickname");
                 return;
             }
 
-            NetworkData.PlayerIdInRoom = Int32.Parse(_playerId.text);
+            _nickname = _playerNick.text;
 
             if (_needCreateRoom.isOn)
-                StartCoroutine(ManualRoomCreating.CreateRoom(GetManualJoinRequest));
-            else
+            {
+                if (_playerNumber.text == "") return;
+
+                int num = Int32.Parse(_playerNumber.text);
+                StartCoroutine(ManualRoomCreating.CreateRoom(num, GetManualJoinRequest));
+            }
+            else if (_roomId.text != "")
                 GetManualJoinRequest(_roomId.text);
         }
 
         private void GetManualJoinRequest(string roomId)
         {
             _roomId.text = roomId;
-            StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, ProcessJoinRequest));
+            StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, _nickname, ProcessJoinRequest));
         }
 
         private void Connect() //TODO: async connect?
@@ -93,7 +107,7 @@ namespace Project.Modules.Network
                     SetStartGame(data.PayloadAsStart());
                     break;
                 case Payload.PlayerList:
-                    SetPlayerList(data.PayloadAsPlayerList());
+                    //SetPlayerList(data.PayloadAsPlayerList());
                     break;
                 case Payload.TimeRemaining:
                     SetTimeRemaining(data.PayloadAsTimeRemaining());
@@ -110,10 +124,12 @@ namespace Project.Modules.Network
         {
             if (joinResult.Value)
             {
-                Debug.Log("Join");
+                NetworkData.PlayerIdInRoom = joinResult.Slot;
+                Debug.Log($"Join {joinResult.Slot}");
             }
             else
             {
+                //TODO: Show notif for user
                 //TODO: Close and clear connect
                 Debug.Log($"Join Error: {joinResult.Reason}");
             }
@@ -136,11 +152,12 @@ namespace Project.Modules.Network
                 info += $"Id: {player.Id}, Character: {player.Character}\n";
             }
 
-            _playersList.SetText(info);
+            //_playersList.SetText(info);
         }
 
         private void SetStartGame(Start start)
         {
+            //TODO: use seed for random
             Debug.Log("Start");
             NetworkData.Connect.GetMessage -= GetMessage;
             _needLoadGameScene = true;

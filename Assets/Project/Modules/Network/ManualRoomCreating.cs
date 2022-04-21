@@ -8,10 +8,10 @@ namespace Project.Modules.Network
 {
     public static class ManualRoomCreating
     {
-        public static IEnumerator CreateRoom(Action<string> callback)
+        public static IEnumerator CreateRoom(int playerNumber, Action<string> callback)
         {
-            string url = "http://13.250.155.40:80/match/create_room";
-            Reqqq req = new Reqqq() { map_id  = 15, player_scheme = new int[] { 2 }, lifetime = 60 * 5 };
+            string url = "http://35.158.134.83:80/match/create_room";
+            Reqqq req = new Reqqq() { map_id  = 15, player_scheme = new int[] { playerNumber }, lifetime = 60 * 5 };
             string json = JsonUtility.ToJson(req);
 
             WWWForm formData = new WWWForm();
@@ -32,10 +32,10 @@ namespace Project.Modules.Network
             callback(info.id);
         }
 
-        public static IEnumerator LoadJoinRequest(string roomid, Action<string> callback)
+        public static IEnumerator LoadJoinRequest(string roomid, string nick, Action<string> callback)
         {
-            string url = "http://13.250.155.40:80/match/test/join_request";
-            Player req = new Player() { room_id = roomid, player_id = "sergo" + NetworkData.PlayerIdInRoom };
+            string url = "http://35.158.134.83:80/match/test/join_request";
+            Player req = new Player() { room_id = roomid, player_id = nick };
             string json = JsonUtility.ToJson(req);
 
             WWWForm formData = new WWWForm();
