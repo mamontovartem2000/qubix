@@ -44,6 +44,8 @@ namespace Project.Mechanics.Features.Weapon.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
+            if(entity.GetParent().Has<StunModifier>()) return;
+            
             ref var ammo = ref entity.Get<AmmoCapacity>().Value;
             var dir = entity.Read<WeaponAim>().Aim.GetPosition() - entity.GetPosition();
             
@@ -54,8 +56,8 @@ namespace Project.Mechanics.Features.Weapon.Systems
             }
 
             var cooldownBase = entity.Read<CooldownDefault>().Value;
-            var cooldownMod = entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Read<FiringCooldownModifier>().Value * cooldownBase;
-            var currentCooldown = cooldownBase + cooldownMod;
+            var cooldownMod = entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Read<FireRateModifier>().Value * cooldownBase;
+            var currentCooldown = cooldownBase - cooldownMod;
             
             if (ammo - 1 > 0)
             {

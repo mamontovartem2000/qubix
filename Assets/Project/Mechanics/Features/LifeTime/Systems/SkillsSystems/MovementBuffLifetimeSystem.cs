@@ -1,59 +1,49 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Mechanics.Features.Projectile;
-using UnityEngine;
+using Project.Mechanics.Features.Lifetime;
 
-namespace Project.Mechanics.Features.Weapon.Systems
+namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 {
-	#region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-	#endregion
-
-	public sealed class MeleeFiringSystem : ISystemFilter
+	public sealed class MovementBuffLifetimeSystem : ISystemFilter
 	{
 		public World world { get; set; }
-		private WeaponFeature _feature;
-		private ProjectileFeature _projectile;
+		
+		private LifeTimeFeature _feature;
 
 		void ISystemBase.OnConstruct()
 		{
 			this.GetFeature(out _feature);
-			world.GetFeature(out _projectile);
 		}
+
 		void ISystemBase.OnDeconstruct() {}
 #if !CSHARP_8_OR_NEWER
 		bool ISystemFilter.jobs => false;
 		int ISystemFilter.jobsBatchCount => 64;
 #endif
 		Filter ISystemFilter.filter { get; set; }
-
 		Filter ISystemFilter.CreateFilter()
 		{
-			return Filter.Create("Filter-MeleeFiringSystem")
-				.With<MeleeWeapon>()
-				.With<MeleeActive>()
-				.Without<ReloadTime>()
+			return Filter.Create("Filter-MovementBuffLifetimeSystem")
+				.With<LifeTimeLeft>()
+				.With<EffectTag>()
+				.With<MoveSpeedModifier>()
 				.Push();
 		}
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			if(entity.GetParent().Has<StunModifier>()) return;
+			ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
+			lifeTime -= deltaTime;
 
-			ref var delay = ref entity.Get<MeleeDelay>().Value;
-			var dir = entity.Read<WeaponAim>().Aim.GetPosition() - entity.GetPosition();
-			
-			
-			delay -= deltaTime;
+			if (lifeTime > 0) return;
 
-			if (delay <= 0)
-			{
-				_projectile.SpawnMelee(entity, entity.Read<MeleeWeapon>().Length, dir);
-			}
+			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<MoveSpeedModifier>().Value -= entity.Read<SkillAmount>().Value;
+			entity.Destroy();
 		}
 	}
 }

@@ -1,28 +1,23 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Mechanics.Features.Projectile;
 using UnityEngine;
 
-namespace Project.Mechanics.Features.Weapon.Systems
+namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 {
-	#region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-	#endregion
-
-	public sealed class MeleeFiringSystem : ISystemFilter
+	public sealed class LinearDamageSkillSystem : ISystemFilter
 	{
 		public World world { get; set; }
-		private WeaponFeature _feature;
-		private ProjectileFeature _projectile;
+		
+		private SkillsFeature _feature;
 
 		void ISystemBase.OnConstruct()
 		{
 			this.GetFeature(out _feature);
-			world.GetFeature(out _projectile);
 		}
 		void ISystemBase.OnDeconstruct() {}
 #if !CSHARP_8_OR_NEWER
@@ -33,27 +28,24 @@ namespace Project.Mechanics.Features.Weapon.Systems
 
 		Filter ISystemFilter.CreateFilter()
 		{
-			return Filter.Create("Filter-MeleeFiringSystem")
-				.With<MeleeWeapon>()
-				.With<MeleeActive>()
-				.Without<ReloadTime>()
+			return Filter.Create("Filter-LinearDamageSkillSystem")
+				.With<LinearDamageAffect>()
 				.Push();
 		}
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			if(entity.GetParent().Has<StunModifier>()) return;
+			var effect = new Entity("effect");
+			effect.Set(new EffectTag());
 
-			ref var delay = ref entity.Get<MeleeDelay>().Value;
-			var dir = entity.Read<WeaponAim>().Aim.GetPosition() - entity.GetPosition();
-			
-			
-			delay -= deltaTime;
+			effect.Get<SkillAmount>().Value = entity.Read<SkillAmount>().Value / 100f;
+			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 
-			if (delay <= 0)
-			{
-				_projectile.SpawnMelee(entity, entity.Read<MeleeWeapon>().Length, dir);
-			}
+			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
+
+			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+
+			Debug.Log("linear damage increased");
 		}
 	}
 }

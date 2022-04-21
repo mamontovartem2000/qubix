@@ -1,5 +1,9 @@
 ﻿using ME.ECS;
-// using Project.Mechanics.Features.Skills.Systems;
+using Project.Common.Components;
+using Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills;
+using Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills;
+using Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills;
+using Project.Mechanics.Features.Skills.Systems.TargetedSkills;
 
 namespace Project.Mechanics.Features
 {
@@ -14,9 +18,42 @@ namespace Project.Mechanics.Features
     {
         protected override void OnConstruct()
         {
-            // AddSystem<SkillActivationSystem>();
+            //attribute modifier systems
+            AddSystem<MovementSpeedSkillsSystem>();
+            AddSystem<AutomaticDamageSkillSystem>();
+            AddSystem<FireRateSkillSystem>();
+            AddSystem<FiringRangeSkillSystem>();
+            
+            //component buff systems
+            AddSystem<ForceShieldSkillSystem>();
+            AddSystem<LifeStealSkillSystem>();
+            AddSystem<LinearPowerSkillSystem>();
+            AddSystem<StunSkillSystem>();
+            AddSystem<SilenceSkillSystem>();
+            
+            //self targeted systems
+            AddSystem<CooldownResetSkillSystem>();
+            AddSystem<DashSkillSystem>();
+            AddSystem<InstantReloadSkillSystem>();
+            AddSystem<LandMineSkillSystem>();
+            AddSystem<PersonalTeleportSkillSystem>();
+            AddSystem<SelfHealSystem>();
+            AddSystem<SideStepSkillSystem>();
+            
+            //targeted systems
+            AddSystem<GrenadeThrowSkillSystem>();
+            AddSystem<MagneticStormSkillSystem>();
+            AddSystem<WormholeHookSkillSystem>();
         }
-
+        
+        protected override void InjectFilter(ref FilterBuilder builder)
+        {
+            builder
+                .With<SkillTag>()
+                .With<ActivateSkill>()
+                .Without<Cooldown>();
+        }
+        
         protected override void OnDeconstruct() {}
     }
 }

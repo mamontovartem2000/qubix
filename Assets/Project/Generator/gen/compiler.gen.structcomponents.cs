@@ -14,6 +14,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacityDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AOESkill>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticDamageAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
@@ -22,6 +24,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, false, false, false, false, false, false);
@@ -46,6 +49,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeLeft>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Linear>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearActive>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearDamageAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearFull>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearPowerAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearPowerModifier>(false, true, false, false, false, false, false, false);
@@ -55,6 +60,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MagneticStormAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MagneticStormModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, true, false, false, false, false, false, false);
@@ -80,7 +87,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDirection>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileSpeed>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileView>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.QuickStepAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.QuickStepModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, true, false, false, false, false, false, false);
@@ -109,8 +115,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponDamageAffect>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WormholeHookAffect>(true, true, false, false, false, false, false, false);
@@ -141,6 +145,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacityDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AOESkill>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticDamageAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
@@ -149,6 +155,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, false, false, false, false, false, false);
@@ -173,6 +180,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeLeft>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Linear>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearActive>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearDamageAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearFull>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearPowerAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearPowerModifier>(false, true, false, false, false, false, false, false);
@@ -182,6 +191,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MagneticStormAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MagneticStormModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, true, false, false, false, false, false, false);
@@ -207,7 +218,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDirection>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileSpeed>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileView>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.QuickStepAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.QuickStepModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, true, false, false, false, false, false, false);
@@ -236,8 +246,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponDamageAffect>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WormholeHookAffect>(true, true, false, false, false, false, false, false);
@@ -263,6 +271,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.AmmoCapacityDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.AOESkill>(false);
             structComponentsContainer.Validate<Project.Common.Components.ApplyDamage>(false);
+            structComponentsContainer.Validate<Project.Common.Components.AutomaticDamageAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.AutomaticDamageModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.AutomaticWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvatarTag>(true);
             structComponentsContainer.ValidateOneShot<Project.Common.Components.BuffTrigger>(true);
@@ -271,6 +281,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.CooldownDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.DamagedBy>(false);
             structComponentsContainer.Validate<Project.Common.Components.DamageSource>(true);
+            structComponentsContainer.Validate<Project.Common.Components.DashAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.EffectTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.FaceDirection>(false);
             structComponentsContainer.Validate<Project.Common.Components.FireRateAffect>(true);
@@ -295,6 +306,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeLeft>(false);
             structComponentsContainer.Validate<Project.Common.Components.Linear>(false);
             structComponentsContainer.Validate<Project.Common.Components.LinearActive>(true);
+            structComponentsContainer.Validate<Project.Common.Components.LinearDamageAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.LinearDamageModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.LinearFull>(true);
             structComponentsContainer.Validate<Project.Common.Components.LinearPowerAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.LinearPowerModifier>(false);
@@ -304,6 +317,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.MagneticStormAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.MagneticStormModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeActive>(true);
+            structComponentsContainer.Validate<Project.Common.Components.MeleeDamageAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.MeleeDamageModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelay>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelayDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(false);
@@ -329,7 +344,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDirection>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileSpeed>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileView>(false);
-            structComponentsContainer.Validate<Project.Common.Components.QuickStepAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.QuickStepModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.ReloadTime>(false);
             structComponentsContainer.Validate<Project.Common.Components.ReloadTimeDefault>(false);
@@ -358,8 +372,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Trajectory>(false);
             structComponentsContainer.Validate<Project.Common.Components.TrajectoryWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.WeaponAim>(false);
-            structComponentsContainer.Validate<Project.Common.Components.WeaponDamageAffect>(true);
-            structComponentsContainer.Validate<Project.Common.Components.WeaponDamageModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponEntities>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponPosition>(false);
             structComponentsContainer.Validate<Project.Common.Components.WormholeHookAffect>(true);
@@ -390,6 +402,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.AmmoCapacityDefault>(false);
             entity.ValidateData<Project.Common.Components.AOESkill>(false);
             entity.ValidateData<Project.Common.Components.ApplyDamage>(false);
+            entity.ValidateData<Project.Common.Components.AutomaticDamageAffect>(true);
+            entity.ValidateData<Project.Common.Components.AutomaticDamageModifier>(false);
             entity.ValidateData<Project.Common.Components.AutomaticWeapon>(true);
             entity.ValidateData<Project.Common.Components.AvatarTag>(true);
             entity.ValidateDataOneShot<Project.Common.Components.BuffTrigger>(true);
@@ -398,6 +412,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.CooldownDefault>(false);
             entity.ValidateData<Project.Common.Components.DamagedBy>(false);
             entity.ValidateData<Project.Common.Components.DamageSource>(true);
+            entity.ValidateData<Project.Common.Components.DashAffect>(true);
             entity.ValidateData<Project.Common.Components.EffectTag>(true);
             entity.ValidateData<Project.Common.Components.FaceDirection>(false);
             entity.ValidateData<Project.Common.Components.FireRateAffect>(true);
@@ -422,6 +437,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.LifeTimeLeft>(false);
             entity.ValidateData<Project.Common.Components.Linear>(false);
             entity.ValidateData<Project.Common.Components.LinearActive>(true);
+            entity.ValidateData<Project.Common.Components.LinearDamageAffect>(true);
+            entity.ValidateData<Project.Common.Components.LinearDamageModifier>(false);
             entity.ValidateData<Project.Common.Components.LinearFull>(true);
             entity.ValidateData<Project.Common.Components.LinearPowerAffect>(true);
             entity.ValidateData<Project.Common.Components.LinearPowerModifier>(false);
@@ -431,6 +448,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.MagneticStormAffect>(true);
             entity.ValidateData<Project.Common.Components.MagneticStormModifier>(false);
             entity.ValidateData<Project.Common.Components.MeleeActive>(true);
+            entity.ValidateData<Project.Common.Components.MeleeDamageAffect>(true);
+            entity.ValidateData<Project.Common.Components.MeleeDamageModifier>(false);
             entity.ValidateData<Project.Common.Components.MeleeDelay>(false);
             entity.ValidateData<Project.Common.Components.MeleeDelayDefault>(false);
             entity.ValidateData<Project.Common.Components.MeleeWeapon>(false);
@@ -456,7 +475,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ProjectileDirection>(false);
             entity.ValidateData<Project.Common.Components.ProjectileSpeed>(false);
             entity.ValidateData<Project.Common.Components.ProjectileView>(false);
-            entity.ValidateData<Project.Common.Components.QuickStepAffect>(true);
             entity.ValidateData<Project.Common.Components.QuickStepModifier>(false);
             entity.ValidateData<Project.Common.Components.ReloadTime>(false);
             entity.ValidateData<Project.Common.Components.ReloadTimeDefault>(false);
@@ -485,8 +503,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Trajectory>(false);
             entity.ValidateData<Project.Common.Components.TrajectoryWeapon>(true);
             entity.ValidateData<Project.Common.Components.WeaponAim>(false);
-            entity.ValidateData<Project.Common.Components.WeaponDamageAffect>(true);
-            entity.ValidateData<Project.Common.Components.WeaponDamageModifier>(false);
             entity.ValidateData<Project.Common.Components.WeaponEntities>(false);
             entity.ValidateData<Project.Common.Components.WeaponPosition>(false);
             entity.ValidateData<Project.Common.Components.WormholeHookAffect>(true);

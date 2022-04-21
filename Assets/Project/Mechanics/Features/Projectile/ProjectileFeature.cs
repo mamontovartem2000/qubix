@@ -34,7 +34,12 @@ namespace Project.Mechanics.Features.Projectile
             
             entity.Get<ProjectileDirection>().Value = direction;
             entity.Get<Owner>().Value = gun.Read<Owner>().Value;
-            
+
+            var damageBase = entity.Read<ProjectileDamage>().Value;
+            var damageMod = damageBase * gun.Get<Owner>().Value.Get<AutomaticDamageModifier>().Value;
+            var currentDamage = damageBase + damageMod;
+
+            entity.Get<ProjectileDamage>().Value = currentDamage;
             entity.Set(new DamageSource());
 
             var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
@@ -57,6 +62,13 @@ namespace Project.Mechanics.Features.Projectile
                 
                 entity.Get<Linear>().StartDelay = delay * i;
                 entity.Get<Linear>().EndDelay = delay * (length - i);
+                
+                var damageBase = entity.Read<ProjectileDamage>().Value;
+                var damageMod = damageBase * gun.Get<Owner>().Value.Get<LinearDamageModifier>().Value;
+                var currentDamage = damageBase + damageMod;
+
+                entity.Get<ProjectileDamage>().Value = currentDamage;
+                entity.Set(new DamageSource());
                 
                 gun.Set(new LinearActive());
                 
@@ -85,6 +97,13 @@ namespace Project.Mechanics.Features.Projectile
 
                 entity.SetLocalPosition(gun.GetParent().GetPosition() + (direction) * i);
 
+                var damageBase = entity.Read<ProjectileDamage>().Value;
+                var damageMod = damageBase * gun.Get<Owner>().Value.Get<MeleeDamageModifier>().Value;
+                var currentDamage = damageBase + damageMod;
+
+                entity.Get<ProjectileDamage>().Value = currentDamage;
+                entity.Set(new DamageSource());
+                
                 entity.Get<Owner>().Value = gun.Read<Owner>().Value;
                 entity.Set(new DamageSource(), ComponentLifetime.NotifyAllSystems);
 

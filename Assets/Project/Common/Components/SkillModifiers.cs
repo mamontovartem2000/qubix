@@ -46,7 +46,17 @@ namespace Project.Common.Components
 		public float Value;
 	}
 
-	public struct WeaponDamageModifier : IComponent
+	public struct AutomaticDamageModifier : IComponent
+	{
+		public float Value;
+	}
+
+	public struct LinearDamageModifier : IComponent
+	{
+		public float Value;
+	}
+
+	public struct MeleeDamageModifier : IComponent
 	{
 		public float Value;
 	}

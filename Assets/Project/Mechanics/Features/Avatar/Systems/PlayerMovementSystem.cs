@@ -8,15 +8,11 @@ using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar.Systems
 {
-	#region usage
-
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-
-	#endregion
 	public sealed class PlayerMovementSystem : ISystemFilter
 	{
 		private PlayerFeature _feature;
@@ -42,6 +38,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 		{
 			return Filter.Create("Filter-PlayerMovementSystem")
 				.WithoutShared<GameFinished>()
+				.Without<StunModifier>()
 				.With<MoveInput>()
 				.Push();
 		}
@@ -83,7 +80,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
 			var speedBase = entity.Read<PlayerMovementSpeed>().Value;
 			var speedMod = entity.Read<MoveSpeedModifier>().Value * speedBase;
-			var currentSpeed = speedBase + speedMod;
+			var currentSpeed = Mathf.Max(speedBase * 0.5f,speedBase + speedMod);
 			
 			var speed = entity.Has<LockTarget>() ? currentSpeed * 0.65f : currentSpeed;
 			entity.SetPosition(Vector3.MoveTowards(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value, speed * deltaTime));     
