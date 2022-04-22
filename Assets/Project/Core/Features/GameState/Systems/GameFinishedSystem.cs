@@ -3,23 +3,28 @@ using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.Player.Components;
-namespace Project.Core.Features.GameState.Systems 
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Project.Core.Features.GameState.Systems
 {
     #region usage
-    #if ECS_COMPILE_IL2CPP_OPTIONS
+#if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
+#endif
     #endregion
-    public sealed class GameFinishedSystem : ISystem, IAdvanceTick, IUpdate 
+
+    public sealed class GameFinishedSystem : ISystem, IAdvanceTick, IUpdate
     {
         public World world { get; set; }
-        
+
         private GameStateFeature _feature;
         private Filter _playerFilter;
-        
-        void ISystemBase.OnConstruct() 
+        private bool _finished;
+
+        void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
             Filter.Create("Player Filter")
@@ -27,65 +32,136 @@ namespace Project.Core.Features.GameState.Systems
                 .WithShared<GameFinished>()
                 .Push(ref _playerFilter);
         }
-        void ISystemBase.OnDeconstruct() {}
+
+        void ISystemBase.OnDeconstruct() { }
 
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
-            if(!world.HasSharedData<GameFinished>()) return;
+            if (!world.HasSharedData<GameFinished>() || _finished) return;
 
-                Entity winner = default;
-                
-                var maxKills = int.MinValue;
-                var minDeaths = int.MinValue;
-                
-                var winCounter = 0;
-                
-                foreach (var player in _playerFilter)
-                {
-                    var kills = player.Read<PlayerScore>().Kills;
-                    
-                    if (kills > maxKills)
-                    {
-                        maxKills = kills;
-                        winner = player;
-                    }
-                }
-                
-                foreach (var player in _playerFilter)
-                {
-                    var kills = player.Read<PlayerScore>().Kills;
-                    
-                    if (kills == maxKills && player != winner)
-                    {
-                        winCounter++;
-                    }
-                }
-                
-                if (winCounter == 0)
-                {
-                    foreach (var player in _playerFilter)
-                    {
-                        if (player == winner)
-                        {
-                            // player.Set(new EndGame {Winner = true});
-                            world.GetFeature<EventsFeature>().Victory.Execute(player);
-                        }
-                        else
-                        {
-                            // player.Set(new EndGame {Winner = false});
-                            world.GetFeature<EventsFeature>().Defeat.Execute(player);
-                        }
-                    }
-                }
+            var winner = GetWinnerEntity();
+
+            foreach (var player in _playerFilter)
+            {
+                if (player == winner)
+                    world.GetFeature<EventsFeature>().Victory.Execute(player);
                 else
-                {
-                    foreach (var player in _playerFilter)
-                    {
-                        world.GetFeature<EventsFeature>().Draw.Execute(player);
-                    }
-                }
+                    world.GetFeature<EventsFeature>().Defeat.Execute(player);
+            }
+
+            _finished = true;
         }
-        
-        void IUpdate.Update(in float deltaTime) {}
+
+        private Entity GetWinnerEntity()
+        {
+            var mostKills = GetPlayersWithMostKills();
+
+            if (mostKills.Count == 1)
+            {
+                Debug.Log("Most kills");
+                return mostKills[0];
+            }
+
+            var fewestDeaths = GetPlayersWithFewestDeaths(mostKills);
+
+            if (fewestDeaths.Count == 1)
+            {
+                Debug.Log("Fewest Deaths");
+                return fewestDeaths[0];
+            }
+
+            var mostHealth = GetPlayersWithMostHealth(fewestDeaths);
+
+            if (mostHealth.Count == 1)
+            {
+                Debug.Log("Most Health");
+                return mostHealth[0];
+            }
+
+            Debug.Log("Random Winner");
+            return GetRandomWinner(mostHealth);
+        }
+
+        private List<Entity> GetPlayersWithMostKills()
+        {
+            var maxKills = int.MinValue;
+            List<Entity> winners = new List<Entity>();
+
+            foreach (var player in _playerFilter)
+            {
+                var kills = player.Read<PlayerScore>().Kills;
+
+                if (kills > maxKills)
+                {
+                    winners.Clear();
+                    winners.Add(player);
+                    maxKills = kills;
+                }
+                else if (kills == maxKills)
+                {
+                    winners.Add(player);
+                }
+            }
+
+            return winners;
+        }
+
+
+        private List<Entity> GetPlayersWithFewestDeaths(List<Entity> playersList)
+        {
+            var minDeaths = int.MaxValue;
+            List<Entity> winners = new List<Entity>();
+
+            foreach (var player in playersList)
+            {
+                var deaths = player.Read<PlayerScore>().Deaths;
+
+                if (deaths < minDeaths)
+                {
+                    winners.Clear();
+                    winners.Add(player);
+                    minDeaths = deaths;
+                }
+                else if (deaths == minDeaths)
+                {
+                    winners.Add(player);
+                }
+            }
+
+            return winners;
+        }
+
+        private List<Entity> GetPlayersWithMostHealth(List<Entity> playersList)
+        {
+            var maxHealth = float.MinValue;
+            List<Entity> winners = new List<Entity>();
+
+            foreach (var player in playersList)
+            {
+                var health = player.Read<PlayerAvatar>().Value.Read<PlayerHealth>().Value;
+
+                if (health > maxHealth)
+                {
+                    winners.Clear();
+                    winners.Add(player);
+                    maxHealth = health;
+                }
+                else if (health == maxHealth)
+                {
+                    winners.Add(player);
+                }
+            }
+
+            return winners;
+        }
+
+        private Entity GetRandomWinner(List<Entity> playersList)
+        {
+            var number = world.GetRandomRange(0, playersList.Count);
+            return playersList[number];
+        }
+
+
+        void IUpdate.Update(in float deltaTime) { }
     }
 }

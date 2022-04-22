@@ -7,15 +7,8 @@ namespace Project.Modules.Network
 {
     public class NetTimer : MonoBehaviour
     {
-        public static NetTimer Timer;
-
         [SerializeField] private TMP_Text _text;
         private float _timer = 0f;
-
-        private void Awake()
-        {
-            Timer = this;
-        }
 
         public void SetTime(float time)
         {
@@ -24,27 +17,20 @@ namespace Project.Modules.Network
 
         private void Update()
         {
-            if (_timer != 0)
+            _timer -= Time.deltaTime;
+
+            if (_timer > 0)
             {
-                _timer -= Time.deltaTime;
+                var mins = Mathf.FloorToInt(_timer / 60);
+                var sec = _timer - 60 * mins;
+                var secs = sec % 60;
 
-                if (_timer < 0)
-                    _timer = 0;
-
-                //_text.text = "Time: " + Mathf.Round(_timer);
-                int min = Mathf.FloorToInt(_timer / 60);
-                float sec = _timer - 60 * min;
-
-                string minStr = min.ToString();
-                if (min < 10)
-                    minStr = "0" + minStr;
-
-                string secStr = Mathf.Round(sec).ToString();
-                if (sec < 10)
-                    secStr = "0" + secStr;
-
-
-                _text.text = $"Time: {minStr}:{secStr}";
+                _text.text = $"Time: {mins:00}:{secs:00}";
+            }
+            else
+            {
+                _timer = 0;
+                _text.text = $"Time: 00:00";
             }
         }
     }

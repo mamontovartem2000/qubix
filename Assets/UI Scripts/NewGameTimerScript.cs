@@ -7,7 +7,6 @@ namespace UI_Scripts
 {
 	public class NewGameTimerScript : MonoBehaviour
 	{
-
 		public GlobalEvent RunTimerEvent;
 		public TextMeshProUGUI TimerText;
 
@@ -18,10 +17,20 @@ namespace UI_Scripts
 
 		private void UpdateTimer(in Entity entity)
 		{
-			var mins = entity.Read<GameTimer>().Value / 60;
-			var secs = entity.Read<GameTimer>().Value % 60;
+			var timerValue = entity.Read<GameTimer>().Value;
 
-			var timer = $"{mins:0}:{secs:00}";
+			if (timerValue <= 0)
+            {
+				TimerText.SetText("00:00");
+				return;
+			}
+
+			var mins = timerValue / 60;
+			var minsFloor = Mathf.FloorToInt(mins);
+			var secsLost = timerValue - 60 * minsFloor;
+			var secs = secsLost % 60;
+
+			var timer = $"{minsFloor:0}:{secs:00}";
 			
 			TimerText.SetText(timer);
 		}

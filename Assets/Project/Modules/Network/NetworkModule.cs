@@ -50,7 +50,7 @@ namespace Project.Modules.Network
 
             Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorID = NetworkData.PlayerIdInRoom });
             Worlds.currentWorld.AddMarker(new NetworkPlayerConnectedTimeSynced { ActorID = NetworkData.PlayerIdInRoom });
-        }
+        }      
     }
 
     public class NetTransporter : ME.ECS.Network.ITransporter
@@ -91,12 +91,6 @@ namespace Project.Modules.Network
             NetworkData.Connect.SendMessage(result);
             this.sentBytesCount += result.Length;
             ++this.sentCount;
-        }
-
-        public void SendSystem(byte[] bytes)
-        {
-            //NetworkData.Connect.SendSystemMessage(bytes);
-            //this.sentBytesCount += bytes.Length;
         }
 
         public void SendSystemHash(uint tick, int hash)
@@ -167,7 +161,7 @@ namespace Project.Modules.Network
 
                 return bytes;
             }
-        }
+        }     
 
         public bool IsConnected() { return NetworkData.Connect != null; }
 

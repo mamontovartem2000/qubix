@@ -1,5 +1,4 @@
 ﻿using ME.ECS;
-using Project.Common.Components;
 using Project.Input.InputHandler.Markers;
 using Project.Modules.Network;
 
@@ -188,7 +187,10 @@ namespace Project.Input.InputHandler.Modules
 			}
 		}
 		
-		void IModuleBase.OnDeconstruct() {}
+		void IModuleBase.OnDeconstruct() 
+		{
+			_input.Dispose();
+		}
 		void IUpdate.Update(in float deltaTime) {}
 	}
 }

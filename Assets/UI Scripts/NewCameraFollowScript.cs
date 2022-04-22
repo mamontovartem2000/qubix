@@ -20,6 +20,8 @@ namespace UI_Scripts
 
         private void Update()
         {
+            if (Worlds.currentWorld == null) return;
+
             if (_player.IsAlive())
                 transform.position = _player.GetPosition() + _offset;
         }

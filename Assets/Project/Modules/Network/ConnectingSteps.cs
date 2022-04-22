@@ -15,6 +15,7 @@ namespace Project.Modules.Network
         [DllImport("__Internal")]
         private static extern void ReadyToStart();
 
+        [SerializeField] private NetTimer _timer;
         [SerializeField] private InputField _playerNumber;
         [SerializeField] private InputField _roomId;
         [SerializeField] private InputField _playerNick;
@@ -138,7 +139,7 @@ namespace Project.Modules.Network
         private void SetTimeRemaining(TimeRemaining timeRemaining)
         {
             Debug.Log("Set Time!");
-            NetTimer.Timer.SetTime(timeRemaining.Value / 1000);
+            _timer.SetTime(timeRemaining.Value / 1000);
         }
 
         private void SetPlayerList(PlayerList playerList)
@@ -157,10 +158,10 @@ namespace Project.Modules.Network
 
         private void SetStartGame(Start start)
         {
-            //TODO: use seed for random
-            Debug.Log("Start");
+            NetworkData.GameSeed = start.Seed;
             NetworkData.Connect.GetMessage -= GetMessage;
             _needLoadGameScene = true;
+            Debug.Log("Start");
         }
 
         private void SendJoinRequest(string fullJoinRequest)

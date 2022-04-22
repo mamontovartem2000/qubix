@@ -1,7 +1,6 @@
 ﻿using Dima.Scripts;
 using ME.ECS;
 using ME.ECS.Collections;
-using Project.Common.Views;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.SceneBuilder.Components;
 using Project.Core.Features.SceneBuilder.Systems;
@@ -40,8 +39,6 @@ namespace Project.Core.Features.SceneBuilder
 
         private const int EMPTY_TILE = 0, SIMPLE_TILE = 1, PORTAL_TILE = 2, AMMO_TILE = 3;
 
-        public Entity TimerEntity;
-
         protected override void OnConstruct()
         {
             AddSystem<NewHealthDispenserSystem>();
@@ -64,8 +61,6 @@ namespace Project.Core.Features.SceneBuilder
 
         private void PrepareMap()
         {
-            TimerEntity = new Entity("init");
-
             GetDimensions();
              SceneUtils.SetWidthAndHeight(Width, Height);
 
@@ -81,42 +76,41 @@ namespace Project.Core.Features.SceneBuilder
         }
 
         private void DrawMap(BufferArray<byte> source)
-         {
-             for (var i = 0; i < source.Count; i++)
-             {
-                 Entity entity = Entity.Empty;
+        {
+            for (var i = 0; i < source.Count; i++)
+            {
+                Entity entity = Entity.Empty;
 
-                 switch (source[i])
-                 {
-                     case SIMPLE_TILE:
-                         {
-                             entity = new Entity("Platform-Tile");
-                             entity.InstantiateView(_tileID);
-                             break;
-                         }
-                     case PORTAL_TILE:
-                         {
-                             entity = new Entity("Portal-Tile");
-                             entity.InstantiateView(_portalTileID);
-                             entity.Set(new PortalTag());
-                             break;
-                         }
-                     case AMMO_TILE:
-                         {
-                             entity = new Entity("Ammo-Tile");
-                             entity.InstantiateView(_ammoTileID);
-                             entity.Set(new DispenserTag {TimerDefault = 8, Timer = 8 });
-                             break;
-                         }
-                 }
+                switch (source[i])
+                {
+                    case SIMPLE_TILE:
+                        {
+                            entity = new Entity("Platform-Tile");
+                            entity.InstantiateView(_tileID);
+                            break;
+                        }
+                    case PORTAL_TILE:
+                        {
+                            entity = new Entity("Portal-Tile");
+                            entity.InstantiateView(_portalTileID);
+                            entity.Set(new PortalTag());
+                            break;
+                        }
+                    case AMMO_TILE:
+                        {
+                            entity = new Entity("Ammo-Tile");
+                            entity.InstantiateView(_ammoTileID);
+                            entity.Set(new DispenserTag { TimerDefault = 8, Timer = 8 });
+                            break;
+                        }
+                }
 
-                 if (entity != Entity.Empty)
-                     entity.SetPosition(SceneUtils.IndexToPosition(i));
-             }
+                if (entity != Entity.Empty)
+                    entity.SetPosition(SceneUtils.IndexToPosition(i));
+            }
 
-             TimerEntity = new Entity("timer");
-             TimerEntity.Get<GameTimer>().Value = 150;
-         }       
+            world.SetSharedData(new MapInitialized());
+        }    
 
         private void GetDimensions()
         {

@@ -40,7 +40,6 @@ namespace ME.ECS.Network {
 
         bool IsConnected();
         void Send(byte[] bytes);
-        void SendSystem(byte[] bytes);
         void SendSystemHash(uint tick, int hash);
 
         byte[] Receive();
@@ -557,33 +556,21 @@ namespace ME.ECS.Network {
 
                         if (this.transporter != null && this.serializer != null) {
 
-                            if (storeInHistory == false) {
-
-                                this.transporter.SendSystem(this.serializer.Serialize(evt));
-
-                            } else {
-
+                            if (storeInHistory == true)
                                 this.transporter.Send(this.serializer.Serialize(evt));
-
-                            }
-
                         }
-
                     }
-
                 }
 
                 if (storedInHistory == false && parameters != null) {
 
                     // Return parameters into pool if we are not storing them locally
                     PoolArray<object>.Recycle(ref parameters);
-
                 }
 
             } else {
 
                 throw new RegisterObjectMissingException(instance, rpcId);
-
             }
 
         }

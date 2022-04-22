@@ -37,7 +37,8 @@ namespace Project.Generator {
 
         public void Update() {
 
-            if (this.world == null) {
+            if (this.world == null) 
+            {
 
                 // Initialize world
                 WorldUtilities.CreateWorld<TState>(ref this.world, this.tickTime);
@@ -53,7 +54,7 @@ namespace Project.Generator {
                     
                     // Create new state
                     this.world.SetState<TState>(WorldUtilities.CreateState<TState>());
-                    this.world.SetSeed(1u);
+                    this.world.SetSeed(NetworkData.GameSeed);
                     ComponentsInitializer.DoInit();
                     this.Initialize(this.world);
 
@@ -70,7 +71,8 @@ namespace Project.Generator {
 
             }
 
-            if (this.world != null && this.world.IsLoaded() == true) {
+            if (this.world != null && this.world.IsLoaded() == true) 
+            {
 
                 var dt = Time.deltaTime;
                 this.world.PreUpdate(dt);

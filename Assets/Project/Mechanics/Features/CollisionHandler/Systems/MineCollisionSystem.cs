@@ -57,8 +57,8 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
             {
                 if ((entity.GetPosition() - collectible.GetPosition()).sqrMagnitude <= SceneUtils.ItemRadius)
                 {
-                    if (entity.Has<DamagedBy>())
-                        entity.Remove<DamagedBy>();
+                    if (entity.Get<Owner>().Value.Has<DamagedBy>())
+                        entity.Get<Owner>().Value.Remove<DamagedBy>();
                     
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = entity, Damage = 25f}, ComponentLifetime.NotifyAllSystems);

@@ -35,7 +35,7 @@ namespace Project.Core.Features.GameState.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Get<GameTimer>().Value - deltaTime > 0)
+            if (entity.Read<GameTimer>().Value > 0)
             {
                 entity.Get<GameTimer>().Value -= deltaTime;
                 world.GetFeature<EventsFeature>().TimerTick.Execute(entity);
@@ -43,7 +43,7 @@ namespace Project.Core.Features.GameState.Systems
             else
             {
                 world.GetFeature<EventsFeature>().OnGameFinished.Execute();
-                world.SetSharedData(new GameFinished {Timer = 2f});
+                world.SetSharedData(new GameFinished());
                 world.SetSharedData(new GamePaused());
             }
         }
