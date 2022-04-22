@@ -34,22 +34,20 @@ namespace ME.ECS.Network {
         None = 0x0,
         SendToNet = 0x1,
         RunLocal = 0x2,
-
     }
 
     public interface ITransporter {
 
         bool IsConnected();
         void Send(byte[] bytes);
-        void SendSystem(byte[] bytes);
+        void SendSystemHash(uint tick, int hash);
+
         byte[] Receive();
 
         int GetEventsSentCount();
         int GetEventsBytesSentCount();
         int GetEventsReceivedCount();
         int GetEventsBytesReceivedCount();
-
-
     }
 
     public interface ISerializer {
@@ -558,33 +556,21 @@ namespace ME.ECS.Network {
 
                         if (this.transporter != null && this.serializer != null) {
 
-                            if (storeInHistory == false) {
-
-                                this.transporter.SendSystem(this.serializer.Serialize(evt));
-
-                            } else {
-
+                            if (storeInHistory == true)
                                 this.transporter.Send(this.serializer.Serialize(evt));
-
-                            }
-
                         }
-
                     }
-
                 }
 
                 if (storedInHistory == false && parameters != null) {
 
                     // Return parameters into pool if we are not storing them locally
                     PoolArray<object>.Recycle(ref parameters);
-
                 }
 
             } else {
 
                 throw new RegisterObjectMissingException(instance, rpcId);
-
             }
 
         }
@@ -730,6 +716,28 @@ namespace ME.ECS.Network {
 
         }
 
+        protected virtual void SendMySync(float deltaTime)
+        {
+            this.syncTime += deltaTime;
+            if (this.syncTime >= 2f)
+            {
+                if (this.syncTickSent != this.syncedTick)
+                {
+                    this.transporter.SendSystemHash(this.syncedTick, this.syncHash);
+                    this.runCurrentEvent = new ME.ECS.StatesHistory.HistoryEvent()
+                    {
+                        order = this.GetRPCOrder(),
+                    };
+
+                    this.Sync_RPC(this.syncedTick, this.syncHash);
+                    this.syncTickSent = this.syncedTick;
+
+                }
+                this.syncTime -= 2f;
+            }
+
+        }
+
         protected virtual void ReceiveEventsAndApply() {
 
             if (this.transporter != null && this.serializer != null) {
@@ -856,9 +864,9 @@ namespace ME.ECS.Network {
             
             if (this.GetNetworkType() != NetworkType.RunLocal) {
 
-                this.SendPing(deltaTime);
-                this.SendSync(deltaTime);
-
+                //this.SendPing(deltaTime);
+                //this.SendSync(deltaTime);
+                this.SendMySync(deltaTime);
             }
 
         }

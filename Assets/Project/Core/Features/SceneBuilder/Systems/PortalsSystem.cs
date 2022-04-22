@@ -42,7 +42,7 @@ namespace Project.Core.Features.SceneBuilder.Systems
 
         void ISystemBase.OnDeconstruct() { }
 
-        //TODO: Если все порталы заняты?
+        //TODO: If all portals are busy?
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
             Entity[] portals = SceneUtils.ConvertFilterToEntityArray(_portalFilter);
@@ -65,9 +65,9 @@ namespace Project.Core.Features.SceneBuilder.Systems
 
                             newPosition = portals[rndIndex].GetPosition();
 
-                            //TODO: Проверить свободен ли целевой портал
+                            //TODO: No check if the target portal is free.
                             //if (SceneUtils.IsFree(newPosition))
-                                break;
+                            break;
                         }
 
                         player.Set(new TeleportPlayer());

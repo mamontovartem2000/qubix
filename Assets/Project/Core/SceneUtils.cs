@@ -2,7 +2,6 @@ using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.Player;
 using Project.Core.Features.SceneBuilder.Components;
-using Project.Modules;
 using UnityEngine;
 
 namespace Project.Core

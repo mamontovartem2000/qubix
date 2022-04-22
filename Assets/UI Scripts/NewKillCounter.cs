@@ -19,7 +19,7 @@ namespace UI_Scripts
 
 		private void UpdateCounter(in Entity entity)
 		{
-			if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.OrderId)) return;
+			if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.PlayerIdInRoom)) return;
 
 			CounterText.SetText(entity.Read<PlayerScore>().Kills.ToString());
 		}

@@ -499,6 +499,10 @@ namespace ME.ECS.Tests {
                 public int GetEventsReceivedCount()      => this.receivedCount;
                 public int GetEventsBytesReceivedCount() => this.receivedBytesCount;
 
+                public void SendSystemHash(uint tick, int hash)
+                {
+                    //throw new System.NotImplementedException();
+                }
             }
 
             public class FakeTransportBridge {

@@ -20,13 +20,15 @@ namespace UI_Scripts
 
         private void Update()
         {
+            if (Worlds.currentWorld == null) return;
+
             if (_player.IsAlive())
                 transform.position = _player.GetPosition() + _offset;
         }
 
         private void SetPlayer(in Entity player)
         {
-            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.OrderId)) return;
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.PlayerIdInRoom)) return;
             _player = player.Read<PlayerAvatar>().Value;
         }
     
