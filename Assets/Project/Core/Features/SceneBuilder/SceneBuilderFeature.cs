@@ -1,6 +1,7 @@
 ﻿using Dima.Scripts;
 using ME.ECS;
 using ME.ECS.Collections;
+using Project.Common.Components;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.SceneBuilder.Components;
 using Project.Core.Features.SceneBuilder.Systems;
@@ -61,6 +62,9 @@ namespace Project.Core.Features.SceneBuilder
 
         private void PrepareMap()
         {
+            Entity entity = new Entity("init");
+            entity.Set(new TestTag());
+
             GetDimensions();
              SceneUtils.SetWidthAndHeight(Width, Height);
 

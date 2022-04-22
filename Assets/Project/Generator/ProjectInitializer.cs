@@ -24,7 +24,8 @@ namespace Project.Generator {
         private World world;
         public float tickTime = 0.033f;
         public uint inputTicks = 3;
-
+        public int Capacity;
+        
         public void OnDrawGizmos() {
 
             if (this.world != null) {
@@ -54,8 +55,9 @@ namespace Project.Generator {
                     
                     // Create new state
                     this.world.SetState<TState>(WorldUtilities.CreateState<TState>());
-                    this.world.SetSeed(NetworkData.GameSeed);
+                    this.world.SetSeed(1u);
                     ComponentsInitializer.DoInit();
+                    // world.SetEntitiesCapacity(Capacity);
                     this.Initialize(this.world);
 
                     // Add your custom systems here

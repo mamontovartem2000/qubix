@@ -20,7 +20,7 @@ namespace UI_Scripts
 			var timerValue = entity.Read<GameTimer>().Value;
 
 			if (timerValue <= 0)
-            {
+			{
 				TimerText.SetText("00:00");
 				return;
 			}

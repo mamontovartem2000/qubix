@@ -28,7 +28,8 @@ namespace Project.Core.Features.GameState.Systems
             this.GetFeature(out _feature);
             Filter.Create("Player Filter")
                 .With<PlayerTag>()
-                .WithShared<GameFinished>()
+                // .With<AvatarTag>()
+                // .WithShared<GameFinished>()
                 .Push(ref _playerFilter);
         }
 
@@ -53,6 +54,8 @@ namespace Project.Core.Features.GameState.Systems
 
         private Entity GetWinnerEntity()
         {
+            Debug.Log(_playerFilter.Count);
+            
             var mostKills = GetPlayersWithMostKills();
 
             if (mostKills.Count == 1)

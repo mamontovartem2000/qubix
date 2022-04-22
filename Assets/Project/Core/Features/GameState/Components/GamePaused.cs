@@ -12,5 +12,4 @@ namespace Project.Core.Features.GameState.Components
 	}
 	
 	public struct MapInitialized : IComponent {}
-
 }

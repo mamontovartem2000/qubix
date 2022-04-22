@@ -22,4 +22,6 @@ namespace Project.Common.Components
     public struct LeftWeaponShot : IComponent{}
     public struct RightWeaponShot : IComponent{}
     public struct SpeedModifier : IComponent {}
+    
+    public struct TestTag   : IComponent {}
 }

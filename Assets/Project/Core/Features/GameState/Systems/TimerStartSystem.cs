@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Core.Features.Events;
 using Project.Core.Features.GameState.Components;
 
 namespace Project.Core.Features.GameState.Systems
@@ -28,9 +29,9 @@ namespace Project.Core.Features.GameState.Systems
 		void IAdvanceTick.AdvanceTick(in float deltaTime)
 		{
 			if (world.HasSharedData<MapInitialized>())
-            {
+			{
 				Entity timerEntity = new Entity("Timer");
-				timerEntity.Get<GameTimer>().Value = 10;
+				timerEntity.Get<GameTimer>().Value = 5;
 				world.RemoveSharedData<MapInitialized>();
 			}
 		}

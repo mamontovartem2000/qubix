@@ -15,9 +15,9 @@ public class GameSceneDestroyer : MonoBehaviour
     {
         if (Worlds.currentWorld == null) return;
         if (!Worlds.currentWorld.HasSharedData<GameFinished>()) return;
-
+        
         _leftTime += Time.deltaTime;
-
+        
         if (_leftTime > WaintingTime)
             Disconnect();
     }

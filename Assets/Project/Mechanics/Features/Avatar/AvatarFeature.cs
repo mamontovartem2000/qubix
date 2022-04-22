@@ -40,7 +40,7 @@ namespace Project.Mechanics.Features.Avatar
 
             entity.Get<WeaponEntities>().LeftWeapon = ConstructWeapon(owner.Read<PlayerConfig>().LeftWeaponConfig, entity);
             entity.Get<WeaponEntities>().RightWeapon = ConstructWeapon(owner.Read<PlayerConfig>().RightWeaponConfig, entity);
-
+            entity.Get<PlayerHealth>().Value = 100;
             ref var skills = ref entity.Get<SkillEntities>();
             
             // skills.FirstSkill = ConstructSkill(owner.Read<PlayerConfig>().FistSkillConfig, owner);
