@@ -43,10 +43,10 @@ namespace Project.Mechanics.Features.Avatar
 
             ref var skills = ref entity.Get<SkillEntities>();
             
-            skills.FirstSkill = ConstructSkill(owner.Read<PlayerConfig>().FistSkillConfig, owner);
-            skills.SecondSkill = ConstructSkill(owner.Read<PlayerConfig>().SecondSkillConfig, owner);
-            skills.ThirdSkill = ConstructSkill(owner.Read<PlayerConfig>().ThirdSkillConfig, owner);
-            skills.FourthSkill = ConstructSkill(owner.Read<PlayerConfig>().FourthSkillConfig, owner);
+            // skills.FirstSkill = ConstructSkill(owner.Read<PlayerConfig>().FistSkillConfig, owner);
+            // skills.SecondSkill = ConstructSkill(owner.Read<PlayerConfig>().SecondSkillConfig, owner);
+            // skills.ThirdSkill = ConstructSkill(owner.Read<PlayerConfig>().ThirdSkillConfig, owner);
+            // skills.FourthSkill = ConstructSkill(owner.Read<PlayerConfig>().FourthSkillConfig, owner);
 
             entity.SetPosition(SceneUtils.GetRandomSpawnPosition());
             entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();

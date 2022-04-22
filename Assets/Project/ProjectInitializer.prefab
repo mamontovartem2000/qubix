@@ -96,6 +96,10 @@ MonoBehaviour:
       name: FILTERS_STORAGE_ARCHETYPES
     - enabled: 0
       name: FIXED_POINT_MATH
+    - enabled: 0
+      name: ENTITY_API_VERSION1_DEPRECATED
+    - enabled: 0
+      name: FILTERS_STORAGE_LEGACY
   - name: Release
     isDirty: 0
     configurationType: 1
@@ -140,6 +144,10 @@ MonoBehaviour:
       name: FILTERS_STORAGE_ARCHETYPES
     - enabled: 0
       name: FIXED_POINT_MATH
+    - enabled: 0
+      name: ENTITY_API_VERSION1_DEPRECATED
+    - enabled: 0
+      name: FILTERS_STORAGE_LEGACY
   selectedConfiguration: Debug
   featuresList:
     features: []

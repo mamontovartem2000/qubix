@@ -91,7 +91,7 @@ namespace Project.Core.Features.SceneBuilder
                      case SIMPLE_TILE:
                          {
                              entity = new Entity("Platform-Tile");
-                             entity.InstantiateView(_tileID);
+                             // entity.InstantiateView(_tileID);
                              break;
                          }
                      case PORTAL_TILE:

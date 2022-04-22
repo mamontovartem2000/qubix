@@ -19,6 +19,7 @@ MonoBehaviour:
   - id: 2
   - id: 3
   - id: 4
+  - id: 5
   removeStructComponents: []
   templates: []
   references:
@@ -34,7 +35,7 @@ MonoBehaviour:
     00000002:
       type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 0}
+        Value: {fileID: 11400000, guid: a9f6b48fe8bb1aa4b92fb6b22ff0882d, type: 2}
     00000003:
       type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -42,4 +43,8 @@ MonoBehaviour:
     00000004:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {x: 0, y: 0, z: 0}
+        Value: {x: -0.35, y: 0, z: 0}
+    00000005:
+      type: {class: NeedWeapon, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        View: {fileID: 8803681592273465616, guid: f0bde90e231d7d7498459313846775a8, type: 3}
