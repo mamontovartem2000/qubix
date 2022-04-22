@@ -15,10 +15,8 @@ namespace Project.Core.Features.GameState
 
         protected override void OnConstruct()
         {
-            AddSystem<TimerStartSystem>();
             AddSystem<GameRunSystem>();
 	        AddSystem<GameFinishedSystem>();
-            //AddSystem<LoadingJoinSceneSystem>();            
         }
 
         protected override void OnDeconstruct() { }
