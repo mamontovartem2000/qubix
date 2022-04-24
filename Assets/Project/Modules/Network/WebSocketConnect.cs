@@ -1,28 +1,37 @@
 using System.Linq;
+using NativeWebSocket;
+using UnityEngine;
 using UnityEngine.Events;
-using WebSocketSharp;
 
 public class WebSocketConnect
 {
     public UnityAction<byte[]> GetMessage;
-    private WebSocket _socket;
+    public WebSocket Socket;
 
-    public WebSocketConnect(string url)
+    public WebSocketConnect()
     {
-        _socket = new WebSocket(url);
-        _socket.Connect();
-        _socket.OnMessage += (sender, e) => GetMessage.Invoke(e.RawData);
+        CreateConnect();
+    }
+
+    private async void CreateConnect()
+    {
+        Socket = new WebSocket("ws://35.158.134.83:80/match");
+        Socket.OnMessage += (e) => GetMessage.Invoke(e);
+
+
+        Socket.OnError += (e) =>
+        {
+            Debug.Log("Error! " + e);
+        };
+
+        await Socket.Connect();
     }
 
     public void SendMessage(byte[] message)
     {
-        try
-        {
-            byte[] type = new byte[1] { 0 };
-            byte[] result = type.Concat(message).ToArray();
-            _socket.Send(result);
-        }
-        catch { }
+        byte[] type = new byte[1] { 0 };
+        byte[] result = type.Concat(message).ToArray();
+        Socket.Send(result);
     }
 
     public void SendSystemMessage(byte[] message)
@@ -31,16 +40,19 @@ public class WebSocketConnect
         {
             byte[] type = new byte[1] { 1 };
             byte[] result = type.Concat(message).ToArray();
-            _socket.Send(result);
+            Socket.Send(result);
         }
-        catch { }
+        catch
+        {
+            Debug.Log("yeet");
+        }
     }
 
-    public void CloseClient()
+    public async void CloseClient()
     {
-        if (_socket != null)
+        if (Socket != null)
         {
-            _socket.Close();
+            await Socket.Close();
         }
     }
 

@@ -7,12 +7,17 @@ using DG.Tweening;
 
 public class GameSceneDestroyer : MonoBehaviour
 {
-    private const float WaintingTime = 5f;
+    private const float WaintingTime = 7f;
 
     private float _leftTime = 0;
 
     private void Update()
     {
+#if !UNITY_WEBGL || UNITY_EDITOR
+        if (NetworkData.Connect != null && NetworkData.Connect.Socket.State == NativeWebSocket.WebSocketState.Open)
+            NetworkData.Connect.Socket.DispatchMessageQueue();
+#endif
+
         if (Worlds.currentWorld == null) return;
         if (!Worlds.currentWorld.HasSharedData<GameFinished>()) return;
         

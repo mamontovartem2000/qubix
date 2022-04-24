@@ -55,7 +55,7 @@ namespace Project.Generator {
                     
                     // Create new state
                     this.world.SetState<TState>(WorldUtilities.CreateState<TState>());
-                    this.world.SetSeed(1u);
+                    this.world.SetSeed(NetworkData.GameSeed);
                     ComponentsInitializer.DoInit();
                     // world.SetEntitiesCapacity(Capacity);
                     this.Initialize(this.world);

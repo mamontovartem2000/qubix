@@ -3,7 +3,6 @@ using FlatMessages;
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,7 +26,6 @@ namespace Project.Modules.Network
         private void Start()
         {
             //ReadyToStart();
-
             _needCreateRoom.onValueChanged.AddListener(OpenCloseFields);
             OpenCloseFields(_needCreateRoom.isOn);
         }
@@ -35,7 +33,12 @@ namespace Project.Modules.Network
         private void Update()
         {
             if (_needLoadGameScene)
-                SceneManager.LoadScene(1);            
+                SceneManager.LoadScene(1);
+
+#if !UNITY_WEBGL || UNITY_EDITOR
+            if (NetworkData.Connect != null && NetworkData.Connect.Socket.State == NativeWebSocket.WebSocketState.Open)
+                NetworkData.Connect.Socket.DispatchMessageQueue();
+#endif
         }
 
         private void OpenCloseFields(bool value)
@@ -52,7 +55,6 @@ namespace Project.Modules.Network
             GameInfo info = ParceUtils.CreateFromJSON<GameInfo>(playerJson);
             NetworkData.Info = info;
 
-            Connect();
             SendJoinRequest(request);
         }
 
@@ -63,13 +65,19 @@ namespace Project.Modules.Network
                 Debug.Log("Enter nickname");
                 return;
             }
+            
+            NetworkData.Connect = new WebSocketConnect();
+            NetworkData.Connect.GetMessage += GetMessage;
+            NetworkData.Connect.Socket.OnOpen += Connection;
 
             _nickname = _playerNick.text;
+        }
 
+        private void Connection()
+        {
+            Debug.Log("Open");
             if (_needCreateRoom.isOn)
             {
-                if (_playerNumber.text == "") return;
-
                 int num = Int32.Parse(_playerNumber.text);
                 StartCoroutine(ManualRoomCreating.CreateRoom(num, GetManualJoinRequest));
             }
@@ -81,12 +89,6 @@ namespace Project.Modules.Network
         {
             _roomId.text = roomId;
             StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, _nickname, ProcessJoinRequest));
-        }
-
-        private void Connect() //TODO: async connect?
-        {
-            NetworkData.Connect = new WebSocketConnect(NetworkData.Info.server_url);
-            NetworkData.Connect.GetMessage += GetMessage;
         }
 
         private void GetMessage(byte[] bytes)
@@ -108,7 +110,7 @@ namespace Project.Modules.Network
                     SetStartGame(data.PayloadAsStart());
                     break;
                 case Payload.PlayerList:
-                    //SetPlayerList(data.PayloadAsPlayerList());
+                    SetPlayerList(data.PayloadAsPlayerList());
                     break;
                 case Payload.TimeRemaining:
                     SetTimeRemaining(data.PayloadAsTimeRemaining());
@@ -169,7 +171,7 @@ namespace Project.Modules.Network
             FlatBufferBuilder builder = new FlatBufferBuilder(1);
             var mes = builder.CreateString(fullJoinRequest);
             var request = JoinRequest.CreateJoinRequest(builder, mes);
-            var offset = SystemMessage.CreateSystemMessage(builder, (uint)DateTime.Now.Ticks, Payload.JoinRequest, request.Value); //TODO: maybe Utc; Ticks or miliseconds? Check all messages. Maybe delete time in this struñt.
+            var offset = SystemMessage.CreateSystemMessage(builder, (uint)DateTime.Now.Ticks, Payload.JoinRequest, request.Value); //TODO: maybe Utc; Ticks or miliseconds? Check all messages. Maybe delete time in this struï¿½t.
             builder.Finish(offset.Value);
 
             var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
