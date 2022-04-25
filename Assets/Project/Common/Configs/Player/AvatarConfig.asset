@@ -19,6 +19,7 @@ MonoBehaviour:
   - id: 2
   - id: 3
   - id: 4
+  - id: 5
   removeStructComponents: []
   templates: []
   references:
@@ -41,3 +42,7 @@ MonoBehaviour:
       type: {class: FiringCooldownModifier, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 0
+    00000005:
+      type: {class: PlayerHealth, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 100

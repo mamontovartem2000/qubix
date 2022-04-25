@@ -74,6 +74,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerArmor>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealth>(false, true, false, false, false, false, false, false);
@@ -205,6 +206,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerArmor>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealth>(false, true, false, false, false, false, false, false);
@@ -331,6 +333,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.PassiveSkill>(true);
             structComponentsContainer.Validate<Project.Common.Components.PersonalTeleportAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.PersonalTeleportModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.PlayerArmor>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerAvatar>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealth>(false);
@@ -462,6 +465,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.PassiveSkill>(true);
             entity.ValidateData<Project.Common.Components.PersonalTeleportAffect>(true);
             entity.ValidateData<Project.Common.Components.PersonalTeleportModifier>(false);
+            entity.ValidateData<Project.Common.Components.PlayerArmor>(false);
             entity.ValidateData<Project.Common.Components.PlayerAvatar>(false);
             entity.ValidateData<Project.Common.Components.PlayerConfig>(false);
             entity.ValidateData<Project.Common.Components.PlayerHealth>(false);

@@ -7,6 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AOT;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class MainThreadUtil : MonoBehaviour
