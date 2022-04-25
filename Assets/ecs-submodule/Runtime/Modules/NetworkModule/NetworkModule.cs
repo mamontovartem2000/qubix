@@ -735,7 +735,11 @@ namespace ME.ECS.Network {
                 }
                 this.syncTime -= 2f;
             }
+        }
 
+        public int GetSyncHash()
+        {
+            return syncHash;
         }
 
         protected virtual void ReceiveEventsAndApply() {

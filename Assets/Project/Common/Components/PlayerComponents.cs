@@ -18,9 +18,10 @@ namespace Project.Common.Components
     
     public struct PlayerTag : IComponent
     {
-        public int PlayerID; 
+        public int PlayerLocalID;
+        public string PlayerServerID;
     }
-    
+
     public struct RespawnTime : IComponent
     {
         public float Value;

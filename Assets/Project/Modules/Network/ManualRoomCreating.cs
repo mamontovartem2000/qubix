@@ -10,7 +10,7 @@ namespace Project.Modules.Network
     {
         public static IEnumerator CreateRoom(int playerNumber, Action<string> callback)
         {
-            string url = "http://35.158.134.83:80/match/create_room";
+            string url = "https://game.qubixinfinity.io/match/create_room";
             Reqqq req = new Reqqq() { map_id  = 15, player_scheme = new int[] { playerNumber }, lifetime = 60 * 5 };
             string json = JsonUtility.ToJson(req);
 
@@ -34,7 +34,7 @@ namespace Project.Modules.Network
 
         public static IEnumerator LoadJoinRequest(string roomid, string nick, Action<string> callback)
         {
-            string url = "http://35.158.134.83:80/match/test/join_request";
+            string url = "https://game.qubixinfinity.io/match/test/join_request";
             Player req = new Player() { room_id = roomid, player_id = nick };
             string json = JsonUtility.ToJson(req);
 

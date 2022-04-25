@@ -15,7 +15,7 @@ public class WebSocketConnect
 
     private async void CreateConnect()
     {
-        Socket = new WebSocket("ws://35.158.134.83:80/match");
+        Socket = new WebSocket("wss://game.qubixinfinity.io/match");
         Socket.OnMessage += (e) => GetMessage.Invoke(e);
 
 

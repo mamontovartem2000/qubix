@@ -46,7 +46,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
             {
                 if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude <= SceneUtils.PlayerRadiusSQR)
                 {
-                    if (entity.Get<Owner>().Value.Read<PlayerTag>().PlayerID != player.Get<Owner>().Value.Read<PlayerTag>().PlayerID)
+                    if (entity.Get<Owner>().Value.Read<PlayerTag>().PlayerLocalID != player.Get<Owner>().Value.Read<PlayerTag>().PlayerLocalID)
                     {
                         var damage = entity.Read<ProjectileDamage>().Value;
                         var from = entity.Get<Owner>().Value;

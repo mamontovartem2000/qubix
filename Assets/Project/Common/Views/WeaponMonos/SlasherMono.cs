@@ -28,7 +28,8 @@ namespace Project.Common.Views.WeaponMonos
 
         private void EndAnimation()
         {
-            if (!entity.Has<LeftWeaponShot>())
+            //TODO: Added if (entity != null). Maybe change to event and delete Invoke
+            if (!entity.IsAlive() && !entity.Has<LeftWeaponShot>())
                 _anim.SetBool("Attack", false);
         }
     }

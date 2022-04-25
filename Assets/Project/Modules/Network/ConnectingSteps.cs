@@ -75,7 +75,6 @@ namespace Project.Modules.Network
 
         private void Connection()
         {
-            Debug.Log("Open");
             if (_needCreateRoom.isOn)
             {
                 int num = Int32.Parse(_playerNumber.text);
@@ -171,7 +170,7 @@ namespace Project.Modules.Network
             FlatBufferBuilder builder = new FlatBufferBuilder(1);
             var mes = builder.CreateString(fullJoinRequest);
             var request = JoinRequest.CreateJoinRequest(builder, mes);
-            var offset = SystemMessage.CreateSystemMessage(builder, (uint)DateTime.Now.Ticks, Payload.JoinRequest, request.Value); //TODO: maybe Utc; Ticks or miliseconds? Check all messages. Maybe delete time in this stru�t.
+            var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.JoinRequest, request.Value); //TODO: maybe Utc; Ticks or miliseconds? Check all messages. Maybe delete time in this stru�t.
             builder.Finish(offset.Value);
 
             var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
@@ -184,7 +183,7 @@ namespace Project.Modules.Network
             var id = builder.CreateString(NetworkData.Info.player_id);
             var character = builder.CreateString(NetworkData.Info.available_characters[0]);
             var request = SetCharacter.CreateSetCharacter(builder, id, character);
-            var offset = SystemMessage.CreateSystemMessage(builder, (uint)DateTime.Now.Ticks, Payload.SetCharacter, request.Value);
+            var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.SetCharacter, request.Value);
             builder.Finish(offset.Value);
 
             var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);

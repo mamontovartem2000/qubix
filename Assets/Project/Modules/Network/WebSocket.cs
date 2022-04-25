@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.WebSockets;
@@ -6,10 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AOT;
-using System.Runtime.InteropServices;
 using UnityEngine;
-using System.Collections;
 
 public class MainThreadUtil : MonoBehaviour
 {

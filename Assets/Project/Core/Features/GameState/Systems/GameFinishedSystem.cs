@@ -4,6 +4,8 @@ using Project.Core.Features.Events;
 using Project.Core.Features.GameState.Components;
 using System.Collections.Generic;
 using UnityEngine;
+using Project.Modules.Network;
+
 
 namespace Project.Core.Features.GameState.Systems
 {
@@ -29,7 +31,6 @@ namespace Project.Core.Features.GameState.Systems
             Filter.Create("Player Filter")
                 .With<PlayerTag>()
                 // .With<AvatarTag>()
-                // .WithShared<GameFinished>()
                 .Push(ref _playerFilter);
         }
 
@@ -49,13 +50,12 @@ namespace Project.Core.Features.GameState.Systems
                     world.GetFeature<EventsFeature>().Defeat.Execute(player);
             }
 
+            SendGameResult(winner);
             _finished = true;
         }
 
         private Entity GetWinnerEntity()
         {
-            Debug.Log(_playerFilter.Count);
-            
             var mostKills = GetPlayersWithMostKills();
 
             if (mostKills.Count == 1)
@@ -84,6 +84,25 @@ namespace Project.Core.Features.GameState.Systems
             return GetRandomWinner(mostHealth);
         }
 
+        private void SendGameResult(Entity winner)
+        {
+            List<PlayerStats> stats = new List<PlayerStats>();
+
+            foreach (var player in _playerFilter)
+            {
+                var kills = player.Read<PlayerScore>().Kills;
+                var deaths = player.Read<PlayerScore>().Kills;
+                var id = player.Read<PlayerTag>().PlayerServerID;
+
+                stats.Add(new PlayerStats() { Kills = (uint)kills, Deaths = (uint)deaths, PlayerId = id });
+            }
+
+            var winnerId = winner.Read<PlayerTag>().PlayerServerID;
+
+            SystemMessages.SendEndGameStats(stats, winnerId);
+
+        }
+
         private List<Entity> GetPlayersWithMostKills()
         {
             var maxKills = int.MinValue;
@@ -107,7 +126,6 @@ namespace Project.Core.Features.GameState.Systems
 
             return winners;
         }
-
 
         private List<Entity> GetPlayersWithFewestDeaths(List<Entity> playersList)
         {
@@ -162,7 +180,6 @@ namespace Project.Core.Features.GameState.Systems
             var number = world.GetRandomRange(0, playersList.Count);
             return playersList[number];
         }
-
 
         void IUpdate.Update(in float deltaTime) { }
     }

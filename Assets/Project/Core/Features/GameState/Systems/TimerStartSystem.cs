@@ -31,7 +31,7 @@ namespace Project.Core.Features.GameState.Systems
 			if (world.HasSharedData<MapInitialized>())
 			{
 				Entity timerEntity = new Entity("Timer");
-				timerEntity.Get<GameTimer>().Value = 150;
+				timerEntity.Get<GameTimer>().Value = 30;
 				world.RemoveSharedData<MapInitialized>();
 			}
 		}

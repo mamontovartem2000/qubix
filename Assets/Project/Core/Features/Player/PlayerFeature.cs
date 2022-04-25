@@ -51,7 +51,7 @@ namespace Project.Core.Features.Player
         private void PlayerConnected_RPC(int id)
         {
             var player = new Entity("player_" + id);
-            player.Set(new PlayerTag {PlayerID = id});
+            player.Set(new PlayerTag {PlayerLocalID = id, PlayerServerID = NetworkData.Info.player_id});
             PlayerConfig.Apply(player);
             
         }
@@ -81,7 +81,7 @@ namespace Project.Core.Features.Player
         {
             foreach (var player in _playerFilter)
             {
-                if (player.Read<PlayerTag>().PlayerID == id)
+                if (player.Read<PlayerTag>().PlayerLocalID == id)
                 {
                     return player;
                 }
