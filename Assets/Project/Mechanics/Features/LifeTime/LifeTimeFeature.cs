@@ -21,6 +21,7 @@ namespace Project.Mechanics.Features.Lifetime
         protected override void OnConstruct()
         {
             AddSystem<LifeTimeSystem>();
+            AddSystem<LinearLifeSystem>();
             AddSystem<LinearVisualLifeTimeSystem>();
         }
 

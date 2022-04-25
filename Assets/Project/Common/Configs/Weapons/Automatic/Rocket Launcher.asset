@@ -31,10 +31,6 @@ MonoBehaviour:
       type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 0
-        Value2:
-          odin: 0
-          dva: {x: 0, y: 0, z: 0}
-          tri: 0
     00000002:
       type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -46,12 +42,12 @@ MonoBehaviour:
     00000004:
       type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 11400000, guid: 2d9972c25069b6b4b946fcf46ff67460, type: 2}
+        Value: {fileID: 11400000, guid: 6e38e637ac9cade4a88e525a6350a6ac, type: 2}
     00000005:
       type: {class: NeedWeapon, ns: Project.Common.Components, asm: Project.Common}
       data:
-        View: {fileID: 0}
+        View: {fileID: 8892978076922649115, guid: b2197c6a03c203041814c79d6e8a92f1, type: 3}
     00000006:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {x: 0, y: 0, z: 0}
+        Value: {x: 0.35, y: 0, z: 0}

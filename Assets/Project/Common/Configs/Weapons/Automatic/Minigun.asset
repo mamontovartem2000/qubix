@@ -31,27 +31,27 @@ MonoBehaviour:
     00000001:
       type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 60
     00000002:
       type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 0.2
     00000003:
       type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 4
     00000004:
       type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 0}
+        Value: {fileID: 11400000, guid: b1e80e01970dbb347ac34e7457348507, type: 2}
     00000005:
       type: {class: NeedWeapon, ns: Project.Common.Components, asm: Project.Common}
       data:
-        View: {fileID: 0}
+        View: {fileID: 276426974453686500, guid: 9b19b738539f3a34aaac715f459e41c0, type: 3}
     00000006:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {x: 0, y: 0, z: 0}
+        Value: {x: 0.35, y: 0, z: 0}
     00000007:
       type: {class: SpreadAmount, ns: Project.Common.Components, asm: Project.Common}
       data:

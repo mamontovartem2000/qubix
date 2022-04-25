@@ -15,6 +15,7 @@ MonoBehaviour:
   sharedGroupId: 0
   structComponents:
   - id: 0
+  - id: 1
   removeStructComponents: []
   templates: []
   references:
@@ -23,3 +24,7 @@ MonoBehaviour:
       type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 0.3
+    00000001:
+      type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 6769514574179158299, guid: d65fe7f30c658044ebe53be3729edc42, type: 3}

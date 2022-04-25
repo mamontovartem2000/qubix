@@ -69,7 +69,7 @@ namespace Project.Mechanics.Features.Projectile
 
                 entity.Get<ProjectileDamage>().Value = currentDamage;
                 entity.Set(new DamageSource());
-                
+                                
                 gun.Set(new LinearActive());
                 
                 entity.Set(new DamageSource());
@@ -79,7 +79,7 @@ namespace Project.Mechanics.Features.Projectile
             visual.SetParent(gun);
             visual.Set(new LinearVisual());
             
-            visual.SetLocalPosition(gun.GetPosition());
+            visual.SetLocalPosition(new Vector3(-0.15f,0f, 0.5f));
             
             var view = world.RegisterViewSource(gun.Read<ProjectileView>().Value);
             visual.InstantiateView(view);

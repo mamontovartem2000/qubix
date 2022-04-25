@@ -7,16 +7,19 @@ using UnityEngine;
 namespace Project.Common.Components
 {
     public struct AutomaticWeapon : IComponent {}
+    
     public struct LinearWeapon : IComponent
     {
         public int Length;
     }
     public struct TrajectoryWeapon : IComponent {}
+    
     public struct MeleeWeapon : IComponent
     {
         public int Length;
     }
     public struct LinearFull : IComponent {}
+    
     public struct WeaponAim : IComponent
     {
         public Entity Aim;

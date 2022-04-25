@@ -6,26 +6,22 @@ using UnityEngine.UI;
 
 namespace Project.Core.Features.Player.Views
 {
-    public class PlayerView : MonoBehaviourView
-    {
-        public bool ShowHealth;
-        [SerializeField] private Image Healthbar;
-        public override bool applyStateJob => true;
-        public override void OnInitialize() {}
-        public override void OnDeInitialize() {}
+	public class PlayerView : MonoBehaviourView
+	{
+		[SerializeField] private Image _healthBar;
+		public override bool applyStateJob => true;
+		public override void OnInitialize() {}
+		public override void OnDeInitialize() {}
+		public override void ApplyState(float deltaTime, bool immediately)
+		{
+			transform.position = entity.GetPosition();
+			transform.rotation = entity.GetRotation();
+			
+			var fill = entity.Read<PlayerHealth>().Value / 100;
 
-        public override void ApplyState(float deltaTime, bool immediately)
-        {
-            transform.position = entity.GetPosition();
-            transform.rotation = entity.GetRotation();
-
-            if (ShowHealth)
-            {
-                var fill = entity.Read<PlayerHealth>().Value / 100;
-
-                Healthbar.fillAmount = fill;
-                Healthbar.color = Color.Lerp(Color.red, Color.green, fill);
-            }
-        }
-    }
+			_healthBar.fillAmount = fill;
+			_healthBar.color = Color.Lerp(Color.red, Color.green, fill);
+			_healthBar.transform.rotation = Quaternion.Euler(45f, 45f, 0);
+		}
+	}
 }

@@ -42,6 +42,9 @@ namespace Project.Mechanics.Features.Lifetime.Systems
             {
                 if (!entity.Has<LinearActive>())
                 {
+                    var testView = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
+                    entity.InstantiateView(testView);
+                    
                     entity.GetParent().Get<ReloadTime>().Value = entity.GetParent().Read<ReloadTimeDefault>().Value;
                     entity.Set(new LinearActive());
                 }

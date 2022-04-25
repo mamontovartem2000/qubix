@@ -62,4 +62,9 @@ namespace Project.Common.Components
         public DataConfig ThirdSkillConfig;
         public DataConfig FourthSkillConfig;
     }
+
+    public struct PlayerArmor : IComponent
+    {
+        public float Value;
+    }
 }

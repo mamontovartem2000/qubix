@@ -24,6 +24,7 @@ namespace Project.Mechanics.Features.Avatar
             AddSystem<PlayerHealthSystem>();
             AddSystem<SpawnPlayerAvatarSystem>();
             AddSystem<PlayerMovementSystem>();
+            AddSystem<MoveInputCapSystem>();
         }
 
         protected override void OnDeconstruct() {}
@@ -40,8 +41,8 @@ namespace Project.Mechanics.Features.Avatar
 
             entity.Get<WeaponEntities>().LeftWeapon = ConstructWeapon(owner.Read<PlayerConfig>().LeftWeaponConfig, entity);
             entity.Get<WeaponEntities>().RightWeapon = ConstructWeapon(owner.Read<PlayerConfig>().RightWeaponConfig, entity);
-            entity.Get<PlayerHealth>().Value = 100;
-            ref var skills = ref entity.Get<SkillEntities>();
+            
+            // ref var skills = ref entity.Get<SkillEntities>();
             
             // skills.FirstSkill = ConstructSkill(owner.Read<PlayerConfig>().FistSkillConfig, owner);
             // skills.SecondSkill = ConstructSkill(owner.Read<PlayerConfig>().SecondSkillConfig, owner);
@@ -59,6 +60,8 @@ namespace Project.Mechanics.Features.Avatar
         {
             var weapon = new Entity("weapon");
             weaponConfig.Apply(weapon);
+            
+            
             weapon.SetParent(parent);
             
             weapon.SetLocalPosition(weapon.Read<WeaponPosition>().Value);
