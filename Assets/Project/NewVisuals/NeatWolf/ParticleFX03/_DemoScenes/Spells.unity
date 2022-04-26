@@ -3067,6 +3067,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19800004, guid: 6c5f6b61a73ca8c4898b0715238d20be, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800004, guid: 6c5f6b61a73ca8c4898b0715238d20be, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c5f6b61a73ca8c4898b0715238d20be, type: 3}
 --- !u!1001 &217815295
@@ -10208,6 +10216,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19800008, guid: 32242d35f7ee6ba488bd4645fa1d8e8b, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800008, guid: 32242d35f7ee6ba488bd4645fa1d8e8b, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32242d35f7ee6ba488bd4645fa1d8e8b, type: 3}
 --- !u!4 &837967263 stripped
@@ -10602,6 +10618,14 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 9872a01502671c34cb1f1c43524acb66, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800004, guid: 9872a01502671c34cb1f1c43524acb66, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800004, guid: 9872a01502671c34cb1f1c43524acb66, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9872a01502671c34cb1f1c43524acb66, type: 3}
