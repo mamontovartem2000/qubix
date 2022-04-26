@@ -29,7 +29,7 @@ namespace Project.Mechanics.Features.Projectile
             var entity = new Entity("projectile");
             gun.Read<ProjectileConfig>().Value.Apply(entity);
 
-            entity.SetLocalPosition(gun.GetPosition());
+            entity.SetLocalPosition(gun.GetLocalPosition());
             entity.SetLocalRotation(gun.GetParent().GetRotation());
             
             entity.Get<ProjectileDirection>().Value = direction;
