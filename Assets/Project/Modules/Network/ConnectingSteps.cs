@@ -6,6 +6,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Project.Modules.Network
 {
@@ -14,10 +15,12 @@ namespace Project.Modules.Network
         [DllImport("__Internal")]
         private static extern void ReadyToStart();
 
+        [SerializeField] private GameObject _loginScreen;
+        [SerializeField] private GameObject _selectionScreen;
         [SerializeField] private NetTimer _timer;
-        [SerializeField] private InputField _playerNumber;
-        [SerializeField] private InputField _roomId;
-        [SerializeField] private InputField _playerNick;
+        [SerializeField] private TMP_InputField _playerNumber;
+        [SerializeField] private TMP_InputField _roomId;
+        [SerializeField] private TMP_InputField _playerNick;
         [SerializeField] private Toggle _needCreateRoom;
 
         private bool _needLoadGameScene;
@@ -26,6 +29,7 @@ namespace Project.Modules.Network
         private void Start()
         {
             //ReadyToStart();
+            CharacterSelectionScript.OnPlayerSelected += SetCharacterRequest;
             _needCreateRoom.onValueChanged.AddListener(OpenCloseFields);
             OpenCloseFields(_needCreateRoom.isOn);
         }
@@ -71,6 +75,9 @@ namespace Project.Modules.Network
             NetworkData.Connect.Socket.OnOpen += Connection;
 
             _nickname = _playerNick.text;
+
+            _loginScreen.SetActive(false);
+            _selectionScreen.SetActive(true);
         }
 
         private void Connection()
@@ -141,20 +148,33 @@ namespace Project.Modules.Network
         {
             Debug.Log("Set Time!");
             _timer.SetTime(timeRemaining.Value / 1000);
+
+            if (timeRemaining.Value / 1000 <= 5)
+            {
+                _loginScreen.SetActive(false);
+                _selectionScreen.SetActive(true);
+            }
         }
 
         private void SetPlayerList(PlayerList playerList)
         {
             Debug.Log("Set Players!");
-            string info = "Players:\n";
+
+            PlayerInfo[] playersInfo = new PlayerInfo[playerList.PlayersLength];
 
             for (int i = 0; i < playerList.PlayersLength; i++)
             {
-                var player = playerList.Players(i).Value;
-                info += $"Id: {player.Id}, Character: {player.Character}\n";
+                var id = playerList.Players(i).Value.Id;
+                var slot = playerList.Players(i).Value.Slot;
+                var nick = playerList.Players(i).Value.Nickname;
+                var character = playerList.Players(i).Value.Character;
+                var icon = playerList.Players(i).Value.Icon;
+
+                PlayerInfo player = new PlayerInfo() { Id = id, Slot = slot, Nickname = nick, Character = character, Icon = icon };
+                playersInfo[i] = player;
             }
 
-            //_playersList.SetText(info);
+            NetworkData.PlayersInfo = playersInfo;
         }
 
         private void SetStartGame(Start start)
@@ -177,11 +197,11 @@ namespace Project.Modules.Network
             NetworkData.Connect.SendSystemMessage(ms);
         }
 
-        public void SetCharacterRequest()
+        public void SetCharacterRequest(string characterName)
         {
             FlatBufferBuilder builder = new FlatBufferBuilder(1);
             var id = builder.CreateString(NetworkData.Info.player_id);
-            var character = builder.CreateString(NetworkData.Info.available_characters[0]);
+            var character = builder.CreateString(characterName);
             var request = SetCharacter.CreateSetCharacter(builder, id, character);
             var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.SetCharacter, request.Value);
             builder.Finish(offset.Value);

@@ -91,4 +91,13 @@ namespace Project.Modules.Network
         public uint Deaths;
         public string PlayerId;
     }
+
+    public struct PlayerInfo
+    {
+        public string Id;
+        public int Slot;
+        public string Nickname;
+        public string Character;
+        public string Icon;
+    }
 }

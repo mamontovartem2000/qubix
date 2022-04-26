@@ -6,6 +6,7 @@ namespace Project.Modules.Network
         public static GameInfo Info;
         public static int PlayerIdInRoom = 1;
         public static uint GameSeed = 1;
+        public static PlayerInfo[] PlayersInfo;
 
         public static void CloseNetwork()
         {
