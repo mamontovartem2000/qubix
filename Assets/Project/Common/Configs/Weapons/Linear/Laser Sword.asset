@@ -20,6 +20,7 @@ MonoBehaviour:
   - id: 3
   - id: 4
   - id: 5
+  - id: 6
   removeStructComponents: []
   templates: []
   references:
@@ -48,3 +49,7 @@ MonoBehaviour:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {x: -0.35, y: 0, z: 0}
+    00000006:
+      type: {class: AmmoCapacity, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 100

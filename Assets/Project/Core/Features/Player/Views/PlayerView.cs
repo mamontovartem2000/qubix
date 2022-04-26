@@ -8,7 +8,7 @@ namespace Project.Core.Features.Player.Views
 {
     public class PlayerView : MonoBehaviourView
     {
-        [SerializeField] private Image _healthBar;
+        // [SerializeField] private Image _healthBar;
         public override bool applyStateJob => true;
         public override void OnInitialize() { }
         public override void OnDeInitialize() { }

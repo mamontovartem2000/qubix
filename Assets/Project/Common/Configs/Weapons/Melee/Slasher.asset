@@ -27,11 +27,11 @@ MonoBehaviour:
     00000000:
       type: {class: MeleeWeapon, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Length: 0
+        Length: 2
     00000001:
       type: {class: MeleeDelayDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 0.2
     00000002:
       type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -39,7 +39,7 @@ MonoBehaviour:
     00000003:
       type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 1
     00000004:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:

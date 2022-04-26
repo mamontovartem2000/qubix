@@ -22,6 +22,7 @@ MonoBehaviour:
   - id: 5
   - id: 6
   - id: 7
+  - id: 8
   removeStructComponents: []
   templates: []
   references:
@@ -35,7 +36,7 @@ MonoBehaviour:
     00000002:
       type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0.2
+        Value: 0.15
     00000003:
       type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -55,4 +56,8 @@ MonoBehaviour:
     00000007:
       type: {class: SpreadAmount, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 0.2
+    00000008:
+      type: {class: AmmoCapacity, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 60

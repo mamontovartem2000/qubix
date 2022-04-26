@@ -29,7 +29,10 @@ namespace Project.Mechanics.Features.Projectile
             var entity = new Entity("projectile");
             gun.Read<ProjectileConfig>().Value.Apply(entity);
 
-            entity.SetLocalPosition(gun.GetLocalPosition());
+            entity.SetParent(gun);
+            entity.SetLocalPosition(new Vector3(0.15f, 0f, 0.25f));
+            entity.SetParent(Entity.Empty);
+            
             entity.SetLocalRotation(gun.GetParent().GetRotation());
             
             entity.Get<ProjectileDirection>().Value = direction;
@@ -94,8 +97,9 @@ namespace Project.Mechanics.Features.Projectile
             {
                 var entity = new Entity("melee");
                 gun.Read<ProjectileConfig>().Value.Apply(entity);
-
-                entity.SetLocalPosition(gun.GetParent().GetPosition() + (direction) * i);
+                
+                entity.SetParent(gun);
+                entity.SetLocalPosition(direction + new Vector3(0.25f,0f, 0.5f + i));
 
                 var damageBase = entity.Read<ProjectileDamage>().Value;
                 var damageMod = damageBase * gun.Get<Owner>().Value.Get<MeleeDamageModifier>().Value;
@@ -109,6 +113,8 @@ namespace Project.Mechanics.Features.Projectile
 
                 var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
                 entity.InstantiateView(view);
+
+                entity.SetParent(Entity.Empty);
             }
 
             if(!gun.Has<LeftWeaponShot>())
