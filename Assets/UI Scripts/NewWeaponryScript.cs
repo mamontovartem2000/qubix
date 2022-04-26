@@ -18,9 +18,6 @@ namespace UI_Scripts
         public Image LeftWeaponAmmoImage;
         public Image RightWeaponAmmoImage;
 
-        public Image LeftWeaponIcon;
-        public Image RightWeaponIcon;
-    
         public TextMeshProUGUI LeftWeaponAmmoText;
         public TextMeshProUGUI RightWeaponAmmoText;
 
@@ -65,10 +62,8 @@ namespace UI_Scripts
             var time = entity.Read<ReloadTimeDefault>().Value;
         
             RightWeaponAmmoImage.fillAmount = 0;        
-            RightWeaponIcon.fillAmount = 0;        
 
             RightWeaponAmmoImage.DOFillAmount(1, time);
-            RightWeaponIcon.DOFillAmount(1, time);
         }
 
         private void OnDestroy()

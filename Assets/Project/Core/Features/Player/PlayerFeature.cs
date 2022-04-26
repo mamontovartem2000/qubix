@@ -20,7 +20,9 @@ namespace Project.Core.Features.Player
 
     public sealed class PlayerFeature : Feature
     {
-        public DataConfig PlayerConfig;
+        public DataConfig BullerConfig;
+        public DataConfig GoldHunterConfig;
+        public DataConfig PowerfConfig;
         
         private RPCId _onPlayerConnected, _onPlayerDisconnected, _onGameStarted;
         private Filter _playerFilter;
@@ -52,8 +54,25 @@ namespace Project.Core.Features.Player
         {
             var player = new Entity("player_" + id);
             player.Set(new PlayerTag {PlayerLocalID = id, PlayerServerID = NetworkData.Info.player_id});
-            PlayerConfig.Apply(player);
             
+            switch (NetworkData.PlayersInfo[id].Character)
+            {
+                case "Buller":
+                {
+                    BullerConfig.Apply(player);
+                    break;
+                }
+                case "GoldHunter":
+                {
+                    GoldHunterConfig.Apply(player);
+                    break;
+                }
+                case "Powerf":
+                {
+                    PowerfConfig.Apply(player);
+                    break;
+                }
+            }
         }
 
         public void OnLocalPlayerDisconnected(int id)

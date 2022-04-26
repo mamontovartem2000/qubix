@@ -76,8 +76,7 @@ namespace Project.Modules.Network
 
             _nickname = _playerNick.text;
 
-            _loginScreen.SetActive(false);
-            _selectionScreen.SetActive(true);
+            Invoke(nameof(SwapScreens), 5f);
         }
 
         private void Connection()
@@ -149,11 +148,12 @@ namespace Project.Modules.Network
             Debug.Log("Set Time!");
             _timer.SetTime(timeRemaining.Value / 1000);
 
-            if (timeRemaining.Value / 1000 <= 5)
-            {
+        }
+
+        private void SwapScreens()
+        {
                 _loginScreen.SetActive(false);
                 _selectionScreen.SetActive(true);
-            }
         }
 
         private void SetPlayerList(PlayerList playerList)
