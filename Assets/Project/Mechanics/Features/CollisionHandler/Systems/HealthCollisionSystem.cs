@@ -48,7 +48,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         {
             foreach (var collectible in _powerUpFilter)
             {
-                if ((entity.GetPosition() - collectible.GetPosition()).sqrMagnitude <= SceneUtils.ItemRadius)
+                if ((entity.GetPosition() - collectible.GetPosition()).sqrMagnitude <= SceneUtils.ItemRadiusSQR)
                 {
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage {ApplyTo = entity, Damage = -10f}, ComponentLifetime.NotifyAllSystems);

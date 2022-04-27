@@ -1,5 +1,7 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
+using ME.ECS.Views.Providers;
+using UnityEngine.UI;
 
 namespace Project.Common.Components
 {
@@ -39,4 +41,14 @@ namespace Project.Common.Components
     
     public struct StatsBuff : IComponent {}
     public struct ComponentBuff : IComponent {}
+
+    public struct SkillImage : IComponent
+    {
+        public Image Value;
+    }
+
+    public struct SkillVFX : IComponent
+    {
+        public MonoBehaviourViewBase Value;
+    }
 }

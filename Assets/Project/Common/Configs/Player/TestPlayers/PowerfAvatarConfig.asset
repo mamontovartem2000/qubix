@@ -18,6 +18,8 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
+  - id: 4
+  - id: 5
   removeStructComponents: []
   templates: []
   references:
@@ -38,3 +40,9 @@ MonoBehaviour:
       type: {class: PlayerArmor, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 15
+    00000004:
+      type: {class: AvatarTag, ns: Project.Common.Components, asm: Project.Common}
+    00000005:
+      type: {class: PlayerHealthDefault, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 125

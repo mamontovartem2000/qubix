@@ -78,6 +78,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealth>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerMovementSpeed>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerMoveTarget>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerScore>(false, true, false, false, false, false, false, false);
@@ -101,11 +102,13 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillDuration>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillDurationDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillEntities>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillImage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillSilenceAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillSilenceModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillsResetAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillsResetModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpreadAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StatsBuff>(true, true, false, false, false, false, false, false);
@@ -210,6 +213,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealth>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerMovementSpeed>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerMoveTarget>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerScore>(false, true, false, false, false, false, false, false);
@@ -233,11 +237,13 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillDuration>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillDurationDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillEntities>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillImage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillSilenceAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillSilenceModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillsResetAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillsResetModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpreadAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StatsBuff>(true, true, false, false, false, false, false, false);
@@ -337,6 +343,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.PlayerAvatar>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealth>(false);
+            structComponentsContainer.Validate<Project.Common.Components.PlayerHealthDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerMovementSpeed>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerMoveTarget>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerScore>(false);
@@ -360,11 +367,13 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SkillDuration>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillDurationDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillEntities>(false);
+            structComponentsContainer.Validate<Project.Common.Components.SkillImage>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillSilenceAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.SkillSilenceModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillsResetAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.SkillsResetModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.SkillVFX>(false);
             structComponentsContainer.Validate<Project.Common.Components.SpeedModifier>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpreadAmount>(false);
             structComponentsContainer.Validate<Project.Common.Components.StatsBuff>(true);
@@ -469,6 +478,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.PlayerAvatar>(false);
             entity.ValidateData<Project.Common.Components.PlayerConfig>(false);
             entity.ValidateData<Project.Common.Components.PlayerHealth>(false);
+            entity.ValidateData<Project.Common.Components.PlayerHealthDefault>(false);
             entity.ValidateData<Project.Common.Components.PlayerMovementSpeed>(false);
             entity.ValidateData<Project.Common.Components.PlayerMoveTarget>(false);
             entity.ValidateData<Project.Common.Components.PlayerScore>(false);
@@ -492,11 +502,13 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SkillDuration>(false);
             entity.ValidateData<Project.Common.Components.SkillDurationDefault>(false);
             entity.ValidateData<Project.Common.Components.SkillEntities>(false);
+            entity.ValidateData<Project.Common.Components.SkillImage>(false);
             entity.ValidateData<Project.Common.Components.SkillSilenceAffect>(true);
             entity.ValidateData<Project.Common.Components.SkillSilenceModifier>(false);
             entity.ValidateData<Project.Common.Components.SkillsResetAffect>(true);
             entity.ValidateData<Project.Common.Components.SkillsResetModifier>(false);
             entity.ValidateData<Project.Common.Components.SkillTag>(true);
+            entity.ValidateData<Project.Common.Components.SkillVFX>(false);
             entity.ValidateData<Project.Common.Components.SpeedModifier>(true);
             entity.ValidateData<Project.Common.Components.SpreadAmount>(false);
             entity.ValidateData<Project.Common.Components.StatsBuff>(true);

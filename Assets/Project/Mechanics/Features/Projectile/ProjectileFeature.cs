@@ -62,6 +62,8 @@ namespace Project.Mechanics.Features.Projectile
 
                 entity.SetParent(gun);
                 entity.SetLocalPosition(new Vector3(0f,0f, i/2f));
+
+                entity.Get<Owner>().Value = gun.Get<Owner>().Value;
                 
                 entity.Get<Linear>().StartDelay = delay * i;
                 entity.Get<Linear>().EndDelay = delay * (length - i);

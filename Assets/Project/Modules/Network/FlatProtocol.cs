@@ -155,23 +155,27 @@ public struct JoinRequest : IFlatbufferObject
   public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
   public JoinRequest __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public string Json { get { int o = __p.__offset(4); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public sbyte GameType { get { int o = __p.__offset(4); return o != 0 ? __p.bb.GetSbyte(o + __p.bb_pos) : (sbyte)0; } }
+  public string Json { get { int o = __p.__offset(6); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
 #if ENABLE_SPAN_T
-  public Span<byte> GetJsonBytes() { return __p.__vector_as_span<byte>(4, 1); }
+  public Span<byte> GetJsonBytes() { return __p.__vector_as_span<byte>(6, 1); }
 #else
-  public ArraySegment<byte>? GetJsonBytes() { return __p.__vector_as_arraysegment(4); }
+  public ArraySegment<byte>? GetJsonBytes() { return __p.__vector_as_arraysegment(6); }
 #endif
-  public byte[] GetJsonArray() { return __p.__vector_as_array<byte>(4); }
+  public byte[] GetJsonArray() { return __p.__vector_as_array<byte>(6); }
 
   public static Offset<FlatMessages.JoinRequest> CreateJoinRequest(FlatBufferBuilder builder,
+      sbyte game_type = 0,
       StringOffset jsonOffset = default(StringOffset)) {
-    builder.StartTable(1);
+    builder.StartTable(2);
     JoinRequest.AddJson(builder, jsonOffset);
+    JoinRequest.AddGameType(builder, game_type);
     return JoinRequest.EndJoinRequest(builder);
   }
 
-  public static void StartJoinRequest(FlatBufferBuilder builder) { builder.StartTable(1); }
-  public static void AddJson(FlatBufferBuilder builder, StringOffset jsonOffset) { builder.AddOffset(0, jsonOffset.Value, 0); }
+  public static void StartJoinRequest(FlatBufferBuilder builder) { builder.StartTable(2); }
+  public static void AddGameType(FlatBufferBuilder builder, sbyte gameType) { builder.AddSbyte(0, gameType, 0); }
+  public static void AddJson(FlatBufferBuilder builder, StringOffset jsonOffset) { builder.AddOffset(1, jsonOffset.Value, 0); }
   public static Offset<FlatMessages.JoinRequest> EndJoinRequest(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<FlatMessages.JoinRequest>(o);
@@ -287,16 +291,26 @@ public struct TimeRemaining : IFlatbufferObject
   public TimeRemaining __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
   public uint Value { get { int o = __p.__offset(4); return o != 0 ? __p.bb.GetUint(o + __p.bb_pos) : (uint)0; } }
+  public string State { get { int o = __p.__offset(6); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetStateBytes() { return __p.__vector_as_span<byte>(6, 1); }
+#else
+  public ArraySegment<byte>? GetStateBytes() { return __p.__vector_as_arraysegment(6); }
+#endif
+  public byte[] GetStateArray() { return __p.__vector_as_array<byte>(6); }
 
   public static Offset<FlatMessages.TimeRemaining> CreateTimeRemaining(FlatBufferBuilder builder,
-      uint value = 0) {
-    builder.StartTable(1);
+      uint value = 0,
+      StringOffset stateOffset = default(StringOffset)) {
+    builder.StartTable(2);
+    TimeRemaining.AddState(builder, stateOffset);
     TimeRemaining.AddValue(builder, value);
     return TimeRemaining.EndTimeRemaining(builder);
   }
 
-  public static void StartTimeRemaining(FlatBufferBuilder builder) { builder.StartTable(1); }
+  public static void StartTimeRemaining(FlatBufferBuilder builder) { builder.StartTable(2); }
   public static void AddValue(FlatBufferBuilder builder, uint value) { builder.AddUint(0, value, 0); }
+  public static void AddState(FlatBufferBuilder builder, StringOffset stateOffset) { builder.AddOffset(1, stateOffset.Value, 0); }
   public static Offset<FlatMessages.TimeRemaining> EndTimeRemaining(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<FlatMessages.TimeRemaining>(o);

@@ -24,7 +24,8 @@ namespace UI_Scripts
             var entity = player.Read<PlayerAvatar>().Value;
             if(!entity.IsAlive()) return;
 
-            var fill = entity.Read<PlayerHealth>().Value / 100;
+            var frac = 1 / entity.Read<PlayerHealthDefault>().Value;
+            var fill = entity.Read<PlayerHealth>().Value * frac;
 
             Healthbar.DOFillAmount(fill, 0.5f);
             Healthbar.color = Color.Lerp(Color.red, Color.green, fill);

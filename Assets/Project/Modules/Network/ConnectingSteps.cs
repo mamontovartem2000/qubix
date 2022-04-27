@@ -10,204 +10,205 @@ using TMPro;
 
 namespace Project.Modules.Network
 {
-    public class ConnectingSteps  : MonoBehaviour
-    {
-        [DllImport("__Internal")]
-        private static extern void ReadyToStart();
+	public class ConnectingSteps : MonoBehaviour
+	{
+		[DllImport("__Internal")]
+		private static extern void ReadyToStart();
 
-        [SerializeField] private GameObject _loginScreen;
-        [SerializeField] private GameObject _selectionScreen;
-        [SerializeField] private NetTimer _timer;
-        [SerializeField] private TMP_InputField _playerNumber;
-        [SerializeField] private TMP_InputField _roomId;
-        [SerializeField] private TMP_InputField _playerNick;
-        [SerializeField] private Toggle _needCreateRoom;
+		[SerializeField] private GameObject _loginScreen;
+		[SerializeField] private GameObject _selectionScreen;
+		[SerializeField] private NetTimer _timer;
+		[SerializeField] private TMP_InputField _playerNumber;
+		[SerializeField] private TMP_InputField _roomId;
+		[SerializeField] private TMP_InputField _playerNick;
+		[SerializeField] private Toggle _needCreateRoom;
 
-        private bool _needLoadGameScene;
-        private string _nickname;
+		private bool _needLoadGameScene;
+		private string _nickname;
 
-        private void Start()
-        {
-            //ReadyToStart();
-            CharacterSelectionScript.OnPlayerSelected += SetCharacterRequest;
-            _needCreateRoom.onValueChanged.AddListener(OpenCloseFields);
-            OpenCloseFields(_needCreateRoom.isOn);
-        }
+		private void Start()
+		{
+			//ReadyToStart();
+			CharacterSelectionScript.OnPlayerSelected += SetCharacterRequest;
+			_needCreateRoom.onValueChanged.AddListener(OpenCloseFields);
+			OpenCloseFields(_needCreateRoom.isOn);
+		}
 
-        private void Update()
-        {
-            if (_needLoadGameScene)
-                SceneManager.LoadScene(1);
+		private void Update()
+		{
+			if (_needLoadGameScene)
+				SceneManager.LoadScene(1);
 
 #if !UNITY_WEBGL || UNITY_EDITOR
-            if (NetworkData.Connect != null && NetworkData.Connect.Socket.State == NativeWebSocket.WebSocketState.Open)
-                NetworkData.Connect.Socket.DispatchMessageQueue();
+			if (NetworkData.Connect != null && NetworkData.Connect.Socket.State == NativeWebSocket.WebSocketState.Open)
+				NetworkData.Connect.Socket.DispatchMessageQueue();
 #endif
-        }
+		}
 
-        private void OpenCloseFields(bool value)
-        {
-            _playerNumber.interactable = value;
-        }
+		private void OpenCloseFields(bool value)
+		{
+			_playerNumber.interactable = value;
+		}
 
-        // Browser method
-        public void ProcessJoinRequest(string request)
-        {
-            string payloadBase64 = ParceUtils.CreateFromJSON<JoinRequestData>(request).payload;
-            var payloadInBytes = Convert.FromBase64String(payloadBase64);
-            var playerJson = Encoding.UTF8.GetString(payloadInBytes);
-            GameInfo info = ParceUtils.CreateFromJSON<GameInfo>(playerJson);
-            NetworkData.Info = info;
+		// Browser method
+		public void ProcessJoinRequest(string request)
+		{
+			string payloadBase64 = ParceUtils.CreateFromJSON<JoinRequestData>(request).payload;
+			var payloadInBytes = Convert.FromBase64String(payloadBase64);
+			var playerJson = Encoding.UTF8.GetString(payloadInBytes);
+			GameInfo info = ParceUtils.CreateFromJSON<GameInfo>(playerJson);
+			NetworkData.Info = info;
 
-            SendJoinRequest(request);
-        }
+			SendJoinRequest(request);
+		}
 
-        public void StartManual()
-        {
-            if (_playerNick.text == "")
-            {
-                Debug.Log("Enter nickname");
-                return;
-            }
-            
-            NetworkData.Connect = new WebSocketConnect();
-            NetworkData.Connect.GetMessage += GetMessage;
-            NetworkData.Connect.Socket.OnOpen += Connection;
+		public void StartManual()
+		{
+			if (_playerNick.text == "")
+			{
+				Debug.Log("Enter nickname");
+				return;
+			}
 
-            _nickname = _playerNick.text;
+			NetworkData.Connect = new WebSocketConnect();
+			NetworkData.Connect.GetMessage += GetMessage;
+			NetworkData.Connect.Socket.OnOpen += Connection;
 
-            Invoke(nameof(SwapScreens), 5f);
-        }
+			_nickname = _playerNick.text;
+		}
 
-        private void Connection()
-        {
-            if (_needCreateRoom.isOn)
-            {
-                int num = Int32.Parse(_playerNumber.text);
-                StartCoroutine(ManualRoomCreating.CreateRoom(num, GetManualJoinRequest));
-            }
-            else if (_roomId.text != "")
-                GetManualJoinRequest(_roomId.text);
-        }
+		private void Connection()
+		{
+			if (_needCreateRoom.isOn)
+			{
+				int num = Int32.Parse(_playerNumber.text);
+				StartCoroutine(ManualRoomCreating.CreateRoom(num, GetManualJoinRequest));
+			}
+			else if (_roomId.text != "")
+				GetManualJoinRequest(_roomId.text);
+		}
 
-        private void GetManualJoinRequest(string roomId)
-        {
-            _roomId.text = roomId;
-            StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, _nickname, ProcessJoinRequest));
-        }
+		private void GetManualJoinRequest(string roomId)
+		{
+			_roomId.text = roomId;
+			StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, _nickname, ProcessJoinRequest));
+		}
 
-        private void GetMessage(byte[] bytes)
-        {
-            byte[] buffer = new byte[bytes.Length - 1];
-            Array.Copy(bytes, 1, buffer, 0, buffer.Length);
+		private void GetMessage(byte[] bytes)
+		{
+			byte[] buffer = new byte[bytes.Length - 1];
+			Array.Copy(bytes, 1, buffer, 0, buffer.Length);
 
-            SystemMessage data = SystemMessage.GetRootAsSystemMessage(new ByteBuffer(buffer));
+			SystemMessage data = SystemMessage.GetRootAsSystemMessage(new ByteBuffer(buffer));
 
-            switch (data.PayloadType)
-            {
-                case Payload.NONE:
-                    Debug.Log("Payload type NONE!");
-                    break;
-                case Payload.JoinResult:
-                    GetJoinResult(data.PayloadAsJoinResult());
-                    break;
-                case Payload.Start:
-                    SetStartGame(data.PayloadAsStart());
-                    break;
-                case Payload.PlayerList:
-                    SetPlayerList(data.PayloadAsPlayerList());
-                    break;
-                case Payload.TimeRemaining:
-                    SetTimeRemaining(data.PayloadAsTimeRemaining());
-                    break;
-                default:
-                    Debug.Log("Unknown system message!");
-                    break;
+			switch (data.PayloadType)
+			{
+				case Payload.NONE:
+					Debug.Log("Payload type NONE!");
+					break;
+				case Payload.JoinResult:
+					GetJoinResult(data.PayloadAsJoinResult());
+					break;
+				case Payload.Start:
+					SetStartGame(data.PayloadAsStart());
+					break;
+				case Payload.PlayerList:
+					SetPlayerList(data.PayloadAsPlayerList());
+					break;
+				case Payload.TimeRemaining:
+					SetTimeRemaining(data.PayloadAsTimeRemaining());
+					break;
+				default:
+					Debug.Log("Unknown system message!");
+					break;
 
-                    //TODO: Handle Shutdown
-            }
-        }
-    
-        private void GetJoinResult(JoinResult joinResult)
-        {
-            if (joinResult.Value)
-            {
-                NetworkData.PlayerIdInRoom = joinResult.Slot;
-                Debug.Log($"Join {joinResult.Slot}");
-            }
-            else
-            {
-                //TODO: Show notif for user
-                //TODO: Close and clear connect
-                Debug.Log($"Join Error: {joinResult.Reason}");
-            }
-        }
+				//TODO: Handle Shutdown
+			}
+		}
 
-        private void SetTimeRemaining(TimeRemaining timeRemaining)
-        {
-            Debug.Log("Set Time!");
-            _timer.SetTime(timeRemaining.Value / 1000);
+		private void GetJoinResult(JoinResult joinResult)
+		{
+			if (joinResult.Value)
+			{
+				NetworkData.PlayerIdInRoom = joinResult.Slot;
+				Debug.Log($"Join {joinResult.Slot}");
+			}
+			else
+			{
+				//TODO: Show notif for user
+				//TODO: Close and clear connect
+				Debug.Log($"Join Error: {joinResult.Reason}");
+			}
+		}
 
-        }
+		private void SetTimeRemaining(TimeRemaining timeRemaining)
+		{
+			Debug.Log("Set Time!");
+			_timer.SetTime(timeRemaining.Value / 1000);
 
-        private void SwapScreens()
-        {
-                _loginScreen.SetActive(false);
-                _selectionScreen.SetActive(true);
-        }
+			if (timeRemaining.State == "starting")
+				SwapScreens();
+		}
 
-        private void SetPlayerList(PlayerList playerList)
-        {
-            Debug.Log("Set Players!");
+		private void SwapScreens()
+		{
+			_loginScreen.SetActive(false);
+			_selectionScreen.SetActive(true);
+			CharacterSelectionScript.FirePlayerSelected("GoldHunter");
+		}
 
-            PlayerInfo[] playersInfo = new PlayerInfo[playerList.PlayersLength];
+		private void SetPlayerList(PlayerList playerList)
+		{
+			Debug.Log("Set Players!");
 
-            for (int i = 0; i < playerList.PlayersLength; i++)
-            {
-                var id = playerList.Players(i).Value.Id;
-                var slot = playerList.Players(i).Value.Slot;
-                var nick = playerList.Players(i).Value.Nickname;
-                var character = playerList.Players(i).Value.Character;
-                var icon = playerList.Players(i).Value.Icon;
+			PlayerInfo[] playersInfo = new PlayerInfo[playerList.PlayersLength];
 
-                PlayerInfo player = new PlayerInfo() { Id = id, Slot = slot, Nickname = nick, Character = character, Icon = icon };
-                playersInfo[i] = player;
-            }
+			for (int i = 0; i < playerList.PlayersLength; i++)
+			{
+				var id = playerList.Players(i).Value.Id;
+				var slot = playerList.Players(i).Value.Slot;
+				var nick = playerList.Players(i).Value.Nickname;
+				var character = playerList.Players(i).Value.Character;
+				var icon = playerList.Players(i).Value.Icon;
 
-            NetworkData.PlayersInfo = playersInfo;
-        }
+				PlayerInfo player = new PlayerInfo() {Id = id, Slot = slot, Nickname = nick, Character = character, Icon = icon};
+				playersInfo[i] = player;
+			}
 
-        private void SetStartGame(Start start)
-        {
-            NetworkData.GameSeed = start.Seed;
-            NetworkData.Connect.GetMessage -= GetMessage;
-            _needLoadGameScene = true;
-            Debug.Log("Start");
-        }
+			NetworkData.PlayersInfo = playersInfo;
+		}
 
-        private void SendJoinRequest(string fullJoinRequest)
-        {
-            FlatBufferBuilder builder = new FlatBufferBuilder(1);
-            var mes = builder.CreateString(fullJoinRequest);
-            var request = JoinRequest.CreateJoinRequest(builder, mes);
-            var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.JoinRequest, request.Value); //TODO: maybe Utc; Ticks or miliseconds? Check all messages. Maybe delete time in this stru�t.
-            builder.Finish(offset.Value);
+		private void SetStartGame(Start start)
+		{
+			NetworkData.GameSeed = start.Seed;
+			NetworkData.Connect.GetMessage -= GetMessage;
+			_needLoadGameScene = true;
+			Debug.Log("Start");
+		}
 
-            var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
-            NetworkData.Connect.SendSystemMessage(ms);
-        }
+		private void SendJoinRequest(string fullJoinRequest)
+		{
+			FlatBufferBuilder builder = new FlatBufferBuilder(1);
+			var mes = builder.CreateString(fullJoinRequest);
+			var request = JoinRequest.CreateJoinRequest(builder, 0, mes);
+			var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.JoinRequest, request.Value); //TODO: maybe Utc; Ticks or miliseconds? Check all messages. Maybe delete time in this stru�t.
+			builder.Finish(offset.Value);
 
-        public void SetCharacterRequest(string characterName)
-        {
-            FlatBufferBuilder builder = new FlatBufferBuilder(1);
-            var id = builder.CreateString(NetworkData.Info.player_id);
-            var character = builder.CreateString(characterName);
-            var request = SetCharacter.CreateSetCharacter(builder, id, character);
-            var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.SetCharacter, request.Value);
-            builder.Finish(offset.Value);
+			var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
+			NetworkData.Connect.SendSystemMessage(ms);
+		}
 
-            var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
-            NetworkData.Connect.SendSystemMessage(ms);
-        }
-    }
+		public void SetCharacterRequest(string characterName)
+		{
+			FlatBufferBuilder builder = new FlatBufferBuilder(1);
+			var id = builder.CreateString(NetworkData.Info.player_id);
+			var character = builder.CreateString(characterName);
+			var request = SetCharacter.CreateSetCharacter(builder, id, character);
+			var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.SetCharacter, request.Value);
+			builder.Finish(offset.Value);
+
+			var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
+			NetworkData.Connect.SendSystemMessage(ms);
+		}
+	}
 }

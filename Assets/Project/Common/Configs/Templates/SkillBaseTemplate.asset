@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a0e13efcdbfb4d3fb2a189867f5f509, type: 3}
-  m_Name: Active Skill Template
+  m_Name: SkillBaseTemplate
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
@@ -26,10 +26,10 @@ MonoBehaviour:
     00000000:
       type: {class: SkillTag, ns: Project.Common.Components, asm: Project.Common}
     00000001:
-      type: {class: SkillDurationDefault, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: {fileID: 0}
     00000002:
-      type: {class: SkillAmount, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: SkillVFX, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: {fileID: 0}

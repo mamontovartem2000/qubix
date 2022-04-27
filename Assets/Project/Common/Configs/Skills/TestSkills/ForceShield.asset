@@ -13,8 +13,22 @@ MonoBehaviour:
   m_Name: ForceShield
   m_EditorClassIdentifier: 
   sharedGroupId: 0
-  structComponents: []
+  structComponents:
+  - id: 0
+  - id: 1
+  - id: 2
   removeStructComponents: []
-  templates: []
+  templates:
+  - 0d26bef2c52edf445b5adb462dc06cbd
   references:
     version: 1
+    00000000:
+      type: {class: SkillTag, ns: Project.Common.Components, asm: Project.Common}
+    00000001:
+      type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 0}
+    00000002:
+      type: {class: SkillVFX, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 0}
