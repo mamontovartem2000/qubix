@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 namespace Project.Modules.Network
 {
-    public class NetTimer : MonoBehaviour
+    public class WaitingRoomTimer : MonoBehaviour
     {
         [SerializeField] private TMP_Text _text;
         private float _timer = 0f;
@@ -25,12 +23,12 @@ namespace Project.Modules.Network
                 var sec = _timer - 60 * mins;
                 var secs = sec % 60;
 
-                _text.text = $"Time: {mins:00}:{secs:00}";
+                _text.text = $"{mins:00}:{Mathf.FloorToInt(secs):00}";
             }
             else
             {
                 _timer = 0;
-                _text.text = $"Time: 00:00";
+                _text.text = $"00:00";
             }
         }
     }

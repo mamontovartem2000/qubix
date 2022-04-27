@@ -17,13 +17,13 @@ namespace Project.Modules.Network
 
 		[SerializeField] private GameObject _loginScreen;
 		[SerializeField] private GameObject _selectionScreen;
-		[SerializeField] private NetTimer _timer;
+		[SerializeField] private WaitingRoomTimer _timer;
 		[SerializeField] private TMP_InputField _playerNumber;
 		[SerializeField] private TMP_InputField _roomId;
 		[SerializeField] private TMP_InputField _playerNick;
 		[SerializeField] private Toggle _needCreateRoom;
 
-		private bool _needLoadGameScene;
+		private bool _needLoadGameScene, _needReloadThisScene;
 		private string _nickname;
 
 		private void Start()
@@ -37,7 +37,10 @@ namespace Project.Modules.Network
 		private void Update()
 		{
 			if (_needLoadGameScene)
-				SceneManager.LoadScene(1);
+				SceneManager.LoadScene(1, LoadSceneMode.Single);
+
+			if (_needReloadThisScene)
+				SceneManager.LoadScene(0, LoadSceneMode.Single);
 
 #if !UNITY_WEBGL || UNITY_EDITOR
 			if (NetworkData.Connect != null && NetworkData.Connect.Socket.State == NativeWebSocket.WebSocketState.Open)
@@ -58,8 +61,11 @@ namespace Project.Modules.Network
 			var playerJson = Encoding.UTF8.GetString(payloadInBytes);
 			GameInfo info = ParceUtils.CreateFromJSON<GameInfo>(playerJson);
 			NetworkData.Info = info;
+			NetworkData.FullJoinRequest = request;
 
-			SendJoinRequest(request);
+			NetworkData.Connect = new WebSocketConnect();
+			NetworkData.Connect.GetMessage += GetMessage;
+			NetworkData.Connect.StartJoining += SendJoinRequest;
 		}
 
 		public void StartManual()
@@ -68,17 +74,10 @@ namespace Project.Modules.Network
 			{
 				Debug.Log("Enter nickname");
 				return;
-			}
-
-			NetworkData.Connect = new WebSocketConnect();
-			NetworkData.Connect.GetMessage += GetMessage;
-			NetworkData.Connect.Socket.OnOpen += Connection;
+			}			
 
 			_nickname = _playerNick.text;
-		}
 
-		private void Connection()
-		{
 			if (_needCreateRoom.isOn)
 			{
 				int num = Int32.Parse(_playerNumber.text);
@@ -118,12 +117,19 @@ namespace Project.Modules.Network
 				case Payload.TimeRemaining:
 					SetTimeRemaining(data.PayloadAsTimeRemaining());
 					break;
+				case Payload.Shutdown:
+					ShutdownRoom(data.PayloadAsShutdown());
+					break;
 				default:
 					Debug.Log("Unknown system message!");
 					break;
-
-				//TODO: Handle Shutdown
 			}
+		}
+
+        private void ShutdownRoom(Shutdown shutdown)
+        {
+			Debug.Log("ShutDown");
+			_needReloadThisScene = true;
 		}
 
 		private void GetJoinResult(JoinResult joinResult)
@@ -186,10 +192,10 @@ namespace Project.Modules.Network
 			Debug.Log("Start");
 		}
 
-		private void SendJoinRequest(string fullJoinRequest)
+		private void SendJoinRequest()
 		{
 			FlatBufferBuilder builder = new FlatBufferBuilder(1);
-			var mes = builder.CreateString(fullJoinRequest);
+			var mes = builder.CreateString(NetworkData.FullJoinRequest);
 			var request = JoinRequest.CreateJoinRequest(builder, 0, mes);
 			var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.JoinRequest, request.Value); //TODO: maybe Utc; Ticks or miliseconds? Check all messages. Maybe delete time in this stru�t.
 			builder.Finish(offset.Value);

@@ -30,7 +30,7 @@ namespace UI_Scripts
 			var secsLost = timerValue - 60 * minsFloor;
 			var secs = secsLost % 60;
 
-			var timer = $"{minsFloor:0}:{secs:00}";
+			var timer = $"{minsFloor:0}:{Mathf.FloorToInt(secs):00}";
 			
 			TimerText.SetText(timer);
 		}

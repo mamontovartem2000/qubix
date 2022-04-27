@@ -1,12 +1,14 @@
 using System.Linq;
 using NativeWebSocket;
+using Project.Modules.Network;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class WebSocketConnect
 {
     public UnityAction<byte[]> GetMessage;
-    public WebSocket Socket;
+    public UnityAction StartJoining;
+    public WebSocket Socket { get; private set; }
 
     public WebSocketConnect()
     {
@@ -15,13 +17,21 @@ public class WebSocketConnect
 
     private async void CreateConnect()
     {
-        Socket = new WebSocket("wss://game.qubixinfinity.io/match");
-        Socket.OnMessage += (e) => GetMessage.Invoke(e);
-
+        Socket = new WebSocket(NetworkData.Info.server_url);
+        Socket.OnMessage += (e) => GetMessage?.Invoke(e);
+        Socket.OnOpen += () => StartJoining?.Invoke();
 
         Socket.OnError += (e) =>
         {
             Debug.Log("Error! " + e);
+        };
+
+        Socket.OnClose += (e) =>
+        {
+            //TODO: можно проверять по типук
+            Debug.Log("Close! " + e);
+            CloseClient();
+            CreateConnect();
         };
 
         await Socket.Connect();
@@ -29,9 +39,16 @@ public class WebSocketConnect
 
     public void SendMessage(byte[] message)
     {
-        byte[] type = new byte[1] { 0 };
-        byte[] result = type.Concat(message).ToArray();
-        Socket.Send(result);
+        try
+        {
+            byte[] type = new byte[1] { 0 };
+            byte[] result = type.Concat(message).ToArray();
+            Socket.Send(result);
+        }
+        catch
+        {
+            Debug.Log("Send error");
+        }
     }
 
     public void SendSystemMessage(byte[] message)
@@ -44,7 +61,7 @@ public class WebSocketConnect
         }
         catch
         {
-            Debug.Log("yeet");
+            Debug.Log("SendSystem error");
         }
     }
 
