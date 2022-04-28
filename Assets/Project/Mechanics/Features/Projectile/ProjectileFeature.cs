@@ -3,6 +3,7 @@ using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Mechanics.Features.Projectile.Systems;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Project.Mechanics.Features.Projectile
 {
@@ -93,39 +94,65 @@ namespace Project.Mechanics.Features.Projectile
                 gun.Remove<LinearFull>();
         }
 
-        public void SpawnMelee(Entity gun, int length, Vector3 direction)
+        public void SpawnMelee(Entity gun, Vector3 position)
         {
-            for (var i = 1; i < length; i++)
-            {
-                var entity = new Entity("melee");
-                gun.Read<ProjectileConfig>().Value.Apply(entity);
-                
-                entity.SetParent(gun);
-                entity.SetLocalPosition(direction + new Vector3(0.25f,0f, 0.5f + i));
+            var entity = new Entity("melee");
+            gun.Read<ProjectileConfig>().Value.Apply(entity);
+            entity.SetLocalPosition(position);
 
-                var damageBase = entity.Read<ProjectileDamage>().Value;
-                var damageMod = damageBase * gun.Get<Owner>().Value.Get<MeleeDamageModifier>().Value;
-                var currentDamage = damageBase + damageMod;
-
-                entity.Get<ProjectileDamage>().Value = currentDamage;
-                entity.Set(new DamageSource());
-                
-                entity.Get<Owner>().Value = gun.Read<Owner>().Value;
-                entity.Set(new DamageSource(), ComponentLifetime.NotifyAllSystems);
-
-                var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
-                entity.InstantiateView(view);
-
-                entity.SetParent(Entity.Empty);
-            }
-
-            if(!gun.Has<LeftWeaponShot>())
-                gun.Remove<MeleeActive>();
+            var damageBase = entity.Read<ProjectileDamage>().Value;
+            var damageMod = damageBase * gun.Get<Owner>().Value.Get<MeleeDamageModifier>().Value;
+            var currentDamage = damageBase + damageMod;
             
-            gun.Get<MeleeDelay>().Value = gun.Read<MeleeDelayDefault>().Value;
-            gun.Get<ReloadTime>().Value = gun.Read<ReloadTimeDefault>().Value;
+            entity.Get<ProjectileDamage>().Value = currentDamage;
+            entity.Get<Owner>().Value = gun.Read<Owner>().Value;
+            entity.Set(new DamageSource(), ComponentLifetime.NotifyAllSystems);
+            
+            var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
+            entity.InstantiateView(view);
+            
+            entity.SetParent(Entity.Empty);
+            
+            
             
             world.GetFeature<EventsFeature>().leftWeaponFired.Execute(gun.Get<Owner>().Value);
         }
+        
+        // public void SpawnMelee(Entity gun, int length, Vector3 direction)
+        // {
+        //     for (var i = 1; i < length; i++)
+        //     {
+        //         var entity = new Entity("melee");
+        //         gun.Read<ProjectileConfig>().Value.Apply(entity);
+        //         
+        //         entity.SetParent(gun);
+        //         // var mov = gun.GetParent().Read<PlayerMovementSpeed>().Value;
+        //         var moveAmount = entity.Read<MoveInput>().Axis == MovementAxis.Horizontal ? entity.Read<MoveInput>().Value.x : entity.Read<MoveInput>().Value.y;
+        //         entity.SetLocalPosition(direction + new Vector3(0.25f,0f, 0.5f + i * moveAmount));
+        //
+        //         var damageBase = entity.Read<ProjectileDamage>().Value;
+        //         var damageMod = damageBase * gun.Get<Owner>().Value.Get<MeleeDamageModifier>().Value;
+        //         var currentDamage = damageBase + damageMod;
+        //
+        //         entity.Get<ProjectileDamage>().Value = currentDamage;
+        //         entity.Set(new DamageSource());
+        //         
+        //         entity.Get<Owner>().Value = gun.Read<Owner>().Value;
+        //         entity.Set(new DamageSource(), ComponentLifetime.NotifyAllSystems);
+        //
+        //         var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
+        //         entity.InstantiateView(view);
+        //
+        //         entity.SetParent(Entity.Empty);
+        //     }
+        //
+        //     if(!gun.Has<LeftWeaponShot>())
+        //         gun.Remove<MeleeActive>();
+        //     
+        //     gun.Get<MeleeDelay>().Value = gun.Read<MeleeDelayDefault>().Value;
+        //     gun.Get<ReloadTime>().Value = gun.Read<ReloadTimeDefault>().Value;
+        //     
+        //     world.GetFeature<EventsFeature>().leftWeaponFired.Execute(gun.Get<Owner>().Value);
+        // }
     }
 }

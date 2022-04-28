@@ -7,8 +7,9 @@ namespace Project.Common.Views.WeaponMonos
 {
     public class SlasherMono : MonoBehaviourView
     {
-        [SerializeField] private Animator _anim; 
-        
+        [SerializeField] private Animator _anim;
+
+        private bool _isAttacking;
         public override bool applyStateJob => true;
         public override void OnInitialize() { }
         public override void OnDeInitialize() { }
@@ -19,19 +20,7 @@ namespace Project.Common.Views.WeaponMonos
             transform.rotation = entity.GetParent().GetRotation();
 
             if (!entity.IsAlive()) return;
-            if (entity.Has<LeftWeaponShot>())
-            {
-                _anim.SetBool("Attack", true);
-                Invoke(nameof(EndAnimation), 1f);
-            }
-        }
-
-        private void EndAnimation()
-        {
-            if (!entity.IsAlive()) return;
-
-            if (!entity.Has<LeftWeaponShot>())
-                _anim.SetBool("Attack", false);
+            _anim.SetBool("Attack", entity.Has<LeftWeaponShot>());
         }
     }
 }

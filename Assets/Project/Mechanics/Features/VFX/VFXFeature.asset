@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175204c6ee47e62458118257bc8a82f4, type: 3}
+  m_Name: VFXFeature
+  m_EditorClassIdentifier: 
+  editorComment: 
+  PlayerDeathVFX: {fileID: 3061242489515781670, guid: 02374ff7bce45d4458f66ee2e2359aa3, type: 3}
+  AutomaticMuzzleVFX: {fileID: 3955334300979004090, guid: 81e971a11ab09274bb345c60dcdc5819, type: 3}
+  ExplosionVFX: {fileID: 511615295811354751, guid: fe2482976a995c64fb7f2397198f3d9d, type: 3}
+  HealthPickUpVFX: {fileID: 6021477216475121451, guid: 18208a934922161489af81a7ab0d11fa, type: 3}
+  PlayerImpactVFX: {fileID: 4184831819711075013, guid: 928af6c64bfafcf4099bc523fb03d1a7, type: 3}
+  PlayerDamagedStatusVFX: {fileID: 3361269694434061605, guid: 2e1b7c0d05ebc064e9a57d86d62ae7e3, type: 3}
+  TeleportVFX: {fileID: 5891438525712314593, guid: 0296734482459c545a370e5bc0064819, type: 3}

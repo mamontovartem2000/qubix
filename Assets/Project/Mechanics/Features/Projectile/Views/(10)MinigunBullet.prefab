@@ -91,7 +91,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7511886704704312132}
   - component: {fileID: 2966322144701503504}
-  - component: {fileID: 1651863943588560278}
   m_Layer: 0
   m_Name: (10)MinigunBullet
   m_TagString: Untagged
@@ -135,36 +134,3 @@ MonoBehaviour:
       halfEnding: 0.5
     hasElements: 0
     hasDefault: 1
---- !u!114 &1651863943588560278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7166429340699265534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e098496109e8314ba3f360ac369d552, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: -591256033219733473, guid: 8f273f4fd27cc694e96a067a1fd40563, type: 3}
-        meshRenderer: {fileID: 1186685292003443538}
-        meshFilter: {fileID: 1186685292003443539}
-        material: {fileID: 2100000, guid: 738b485d3f90a2d4da3475cf2f77d7ad, type: 2}
-        localPosition: {x: 0, y: 0, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 1, y: 1, z: 1}

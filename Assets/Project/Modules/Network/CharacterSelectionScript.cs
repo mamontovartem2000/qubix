@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Project.Modules.Network
 {
@@ -13,18 +12,15 @@ namespace Project.Modules.Network
 
 		[SerializeField] private GameObject[] _chars;
 
-		// private void Awake()
-		// {
-		// 	Select(Random.Range(0,3));
-		// }
-
 		public void Select(int index)
 		{
 			for (int i = 0; i < _chars.Length; i++)
 			{
 				_chars[i].SetActive(i == index);
 			}
+			
 			FirePlayerSelected(Names[index]);
+			Debug.Log(Names[index]);
 		}
 	}
 }

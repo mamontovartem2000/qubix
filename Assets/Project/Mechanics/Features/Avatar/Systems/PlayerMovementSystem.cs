@@ -4,6 +4,7 @@ using Project.Core;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.Player;
 using Project.Core.Features.SceneBuilder;
+using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar.Systems
@@ -17,17 +18,17 @@ namespace Project.Mechanics.Features.Avatar.Systems
 	{
 		private PlayerFeature _feature;
 		private SceneBuilderFeature _scene;
+		private VFXFeature _vfx;
 
 		public World world { get; set; }
 
 		void ISystemBase.OnConstruct()
 		{
-			this.GetFeature(out this._feature);
+			this.GetFeature(out _feature);
+			world.GetFeature(out _vfx);
 			world.GetFeature(out _scene);
 		}
-
 		void ISystemBase.OnDeconstruct() {}
-
 #if !CSHARP_8_OR_NEWER
 		bool ISystemFilter.jobs => false;
 		int ISystemFilter.jobsBatchCount => 64;

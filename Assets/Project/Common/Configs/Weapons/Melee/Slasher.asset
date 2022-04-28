@@ -31,7 +31,7 @@ MonoBehaviour:
     00000001:
       type: {class: MeleeDelayDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0.2
+        Value: 0.1
     00000002:
       type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -39,7 +39,7 @@ MonoBehaviour:
     00000003:
       type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 1
+        Value: 0.9
     00000004:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:

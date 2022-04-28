@@ -1,6 +1,7 @@
 ﻿using Dima.Scripts;
 using ME.ECS;
 using ME.ECS.Collections;
+using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.SceneBuilder.Components;
@@ -20,6 +21,10 @@ namespace Project.Core.Features.SceneBuilder
     public sealed class SceneBuilderFeature : Feature
     {
         [SerializeField] private TextAsset _sourceMap;
+
+        public MonoBehaviourViewBase PortIn;
+        public MonoBehaviourViewBase PortOut;
+        public ViewId _in, _out;
 
         [Header("Tiles")]
          // public TileParticle TileView;
@@ -49,6 +54,8 @@ namespace Project.Core.Features.SceneBuilder
             _tileID = world.RegisterViewSource(TileView);
             _portalTileID = world.RegisterViewSource(PortalView);
             _ammoTileID = world.RegisterViewSource(DispenserView);
+            _in = world.RegisterViewSource(PortIn);
+            _out = world.RegisterViewSource(PortOut);
             
             PrepareMap();
         }
@@ -214,6 +221,7 @@ namespace Project.Core.Features.SceneBuilder
             int moveFrom = SceneUtils.PositionToIndex(currentPos);
             world.GetSharedData<MapComponents>().WalkableMap[moveFrom] = SIMPLE_TILE;
             TakeTheCell(targetPos);
+            ReleaseTheCell(currentPos);
         }
         public void TakeTheCell(Vector3 targetPos)
         {

@@ -29,15 +29,17 @@ namespace Project.Modules.Network
 
         protected override int GetRPCOrder()
         {
-            if (FakeConnect)
-                return 1;
-            else
-                return NetworkData.PlayerIdInRoom;
+            return NetworkData.PlayerIdInRoom;
         }
 
         protected override ME.ECS.Network.NetworkType GetNetworkType()
         {
-            return ME.ECS.Network.NetworkType.SendToNet | ME.ECS.Network.NetworkType.RunLocal;
+            if (FakeConnect)
+            {
+                return ME.ECS.Network.NetworkType.RunLocal;
+            }
+            else
+                return ME.ECS.Network.NetworkType.SendToNet | ME.ECS.Network.NetworkType.RunLocal;
         }
 
         protected override void OnInitialize()

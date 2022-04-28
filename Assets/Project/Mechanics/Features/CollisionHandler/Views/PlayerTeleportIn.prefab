@@ -9842,7 +9842,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7129272503013764879}
   - component: {fileID: 390483980942133195}
-  - component: {fileID: 1945515870302437652}
   m_Layer: 0
   m_Name: PlayerTeleportIn
   m_TagString: Untagged
@@ -9888,58 +9887,6 @@ MonoBehaviour:
       halfEnding: 0.5
     hasElements: 1
     hasDefault: 1
---- !u!114 &1945515870302437652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7129272503013764872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb2754fe3962b44096f66a877c3a6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 5402451715157673906}
-          settings:
-            simulationType: 1
-            minSimulationTime: 0.2
-            minEndingTime: 0.1
-            halfEnding: 0.5
-          hasDefault: 1
-        psSource: {fileID: 5402451715157673906}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: 0, y: 0.027, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 0.24515, y: 0.24515, z: 0.24515}
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 5402097259922624614}
-          settings:
-            simulationType: 1
-            minSimulationTime: 0.2
-            minEndingTime: 0.1
-            halfEnding: 0.5
-          hasDefault: 1
-        psSource: {fileID: 5402097259922624614}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: 0, y: 0.027, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 0.24515, y: 0.24515, z: 0.24515}
 --- !u!1 &7385318355013524608
 GameObject:
   m_ObjectHideFlags: 0

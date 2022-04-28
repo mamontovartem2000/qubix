@@ -24290,7 +24290,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1605529330600057352}
   - component: {fileID: 3955334300979004090}
-  - component: {fileID: 6332884412053193464}
   m_Layer: 0
   m_Name: MinigunMuzzle
   m_TagString: Untagged
@@ -24327,7 +24326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystemSimulation:
     particleItems:
-    - particleSystem: {fileID: 0}
+    - particleSystem: {fileID: 3377061518498702930}
     - particleSystem: {fileID: 1605529329751470520}
     - particleSystem: {fileID: 1605529329832239190}
     - particleSystem: {fileID: 1605529329786339181}
@@ -24340,134 +24339,6 @@ MonoBehaviour:
       halfEnding: 0.5
     hasElements: 1
     hasDefault: 1
---- !u!114 &6332884412053193464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605529330600057353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 379db0cb6ec1ad9408f895a4940bf8bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: 0, y: 0, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 0, y: 0, z: 0}
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 1605529329751470520}
-          settings:
-            simulationType: 1
-            minSimulationTime: 0.2
-            minEndingTime: 0.1
-            halfEnding: 0.5
-          hasDefault: 1
-        psSource: {fileID: 1605529329751470520}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: -0.15199995, y: 0, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 1, y: 1, z: 1}
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 1605529329832239190}
-          settings:
-            simulationType: 1
-            minSimulationTime: 0.2
-            minEndingTime: 0.1
-            halfEnding: 0.5
-          hasDefault: 1
-        psSource: {fileID: 1605529329832239190}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: -0.041199982, y: 0.034799993, z: 0}
-        localRotation: {x: 90, y: 0, z: 0}
-        localScale: {x: 1, y: 1.0000004, z: 1.0000004}
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 1605529329786339181}
-          settings:
-            simulationType: 1
-            minSimulationTime: 0.2
-            minEndingTime: 0.1
-            halfEnding: 0.5
-          hasDefault: 1
-        psSource: {fileID: 1605529329786339181}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: -0.07920003, y: 0.07120001, z: -0.024}
-        localRotation: {x: 45.000008, y: -0, z: -0}
-        localScale: {x: 1, y: 1.0000001, z: 1.0000001}
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 1605529329420313715}
-          settings:
-            simulationType: 1
-            minSimulationTime: 0.2
-            minEndingTime: 0.1
-            halfEnding: 0.5
-          hasDefault: 1
-        psSource: {fileID: 1605529329420313715}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: -0.021600008, y: 0.0636, z: 0.036000002}
-        localRotation: {x: 45.000004, y: 180, z: 180}
-        localScale: {x: 1, y: 1.0000002, z: 1.0000002}
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 1605529329015497867}
-          settings:
-            simulationType: 1
-            minSimulationTime: 0.2
-            minEndingTime: 0.1
-            halfEnding: 0.5
-          hasDefault: 1
-        psSource: {fileID: 1605529329015497867}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: -0.13240004, y: 0, z: 0}
-        localRotation: {x: 0, y: 90, z: -0}
-        localScale: {x: 1.0000004, y: 1, z: 1.0000004}
 --- !u!1 &1686626091381097185
 GameObject:
   m_ObjectHideFlags: 0

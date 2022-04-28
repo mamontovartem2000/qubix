@@ -3,6 +3,7 @@ using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.SceneBuilder;
+using Project.Mechanics.Features.VFX;
 
 namespace Project.Mechanics.Features.Avatar.Systems
 {
@@ -15,9 +16,12 @@ namespace Project.Mechanics.Features.Avatar.Systems
     {
         public World world { get; set; }
         private SceneBuilderFeature _scene;
+        private VFXFeature _vfx;
         
-        void ISystemBase.OnConstruct() {
+        void ISystemBase.OnConstruct() 
+        {
             world.GetFeature(out _scene);
+            world.GetFeature(out _vfx);
         }
 
         void ISystemBase.OnDeconstruct() {}
@@ -54,6 +58,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
             
             world.GetFeature<EventsFeature>().PlayerDeath.Execute(player);      
             _scene.ReleaseTheCell(entity.Read<PlayerMoveTarget>().Value);
+            _vfx.SpawnVFX(VFXFeature.VFXType.Death, entity.GetPosition());
 
             entity.Destroy();
         }

@@ -3,6 +3,7 @@ using ME.ECS.Transform;
 using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features.SceneBuilder.Components;
+using Project.Mechanics.Features.VFX;
 
 namespace Project.Mechanics.Features.CollisionHandler.Systems 
 {
@@ -19,12 +20,14 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         public World world { get; set; }
         
         private CollisionHandlerFeature _feature;
+        private VFXFeature _vfx;
         
         private Filter _powerUpFilter;
 
         void ISystemBase.OnConstruct() 
         {
             this.GetFeature(out _feature);
+            world.GetFeature(out _vfx);
 
             Filter.Create("powerup-filter")
                 .With<HealthTag>()
@@ -56,7 +59,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
                     if (collectible.GetParent().Has<Spawned>())
                         collectible.GetParent().Remove<Spawned>();
                     
-                    _feature.SpawnVFX(entity.GetPosition(), _feature.HealID, _feature.DefaultTimer);                    
+                    _vfx.SpawnVFX(VFXFeature.VFXType.Heal, collectible.GetPosition());
                     collectible.Destroy();
                 }
             }   

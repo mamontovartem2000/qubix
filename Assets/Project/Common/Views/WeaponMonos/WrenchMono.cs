@@ -19,17 +19,8 @@ namespace Assets.Dima.Scripts
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetParent().GetRotation();
 
-            if (entity.Has<LeftWeaponShot>())
-            {
-                _anim.SetBool("Attack", true);
-                Invoke(nameof(EndAnimation), 0.75f);
-            }
-        }
-        
-        private void EndAnimation()
-        {
-            if(!entity.Has<LeftWeaponShot>())
-                _anim.SetBool("Attack", false);
+            if (!entity.IsAlive()) return;
+            _anim.SetBool("Attack", entity.Has<LeftWeaponShot>());
         }
     }
 }

@@ -21,7 +21,7 @@ namespace UI_Scripts
 		{
 			if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.PlayerIdInRoom)) return;
 
-			// CounterText.SetText(entity.Read<PlayerScore>().Deaths.ToString());
+			CounterText.SetText(entity.Read<PlayerScore>().Deaths + " : DEATHS");
 		}
 
 		private void OnDestroy()

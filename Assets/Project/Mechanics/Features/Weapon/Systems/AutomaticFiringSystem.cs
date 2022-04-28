@@ -2,6 +2,7 @@
 using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Mechanics.Features.Projectile;
+using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Weapon.Systems
@@ -19,12 +20,15 @@ namespace Project.Mechanics.Features.Weapon.Systems
         
         private WeaponFeature _feature;
         private ProjectileFeature _projectile;
+        private VFXFeature _vfx;
         
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
             world.GetFeature(out _projectile);
+            world.GetFeature(out _vfx);
         }
+        
         void ISystemBase.OnDeconstruct(){}
 #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
@@ -71,6 +75,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
             
             ammo -= 1;
             _projectile.SpawnProjectile(entity, dir);
+            _vfx.SpawnVFX(entity, dir);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core;
+using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.CollisionHandler.Systems
@@ -17,11 +18,15 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         public World world { get; set; }
         
         private CollisionHandlerFeature _feature;
+        private VFXFeature _vfx;
+        
         private Filter _playerFilter;
 
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
+            world.GetFeature(out _vfx);
+            
             Filter.Create("Projectile-Filter")
                 .With<AvatarTag>()
                 .Push(ref _playerFilter);
@@ -55,8 +60,11 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
                         collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
 
                         if (entity.Has<ProjectileActive>())
+                        {
+                            _vfx.SpawnVFX(VFXFeature.VFXType.Impact, player.GetPosition());
                            entity.Destroy();
-                        return;
+                            return;
+                        }
                     }
                 }
             }
