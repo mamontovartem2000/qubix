@@ -21,6 +21,7 @@ namespace Project.Modules.Network
 		[SerializeField] private GameObject _timerHolder;
 		[SerializeField] private TMP_InputField _playerNumber;
 		[SerializeField] private TMP_InputField _roomId;
+		[SerializeField] private TMP_InputField _hostNick;
 		[SerializeField] private TMP_InputField _playerNick;
 		// [SerializeField] private Toggle _needCreateRoom;
 
@@ -71,14 +72,32 @@ namespace Project.Modules.Network
 
 		public void StartManual()
 		{
-			if (_playerNick.text == "")
+			if (_hostNick.text == "" && _playerNick.text == "")
 			{
 				Debug.Log("Enter nickname");
 				return;
-			}			
+			}
+			// 	if (LoginScreenCore.IsHost)
+			// {
+			// 	if (_hostNick.text == "")
+			// 	{
+			// 		Debug.Log("Enter nickname");
+			// 		return;
+			// 	}			
+			// }
+			// else
+			// {
+			// 	if (_playerNick.text == "")
+			// 	{
+			// 		Debug.Log("Enter nickname");
+			// 		return;
+			// 	}
+			// }
 
-			_nickname = _playerNick.text;
-			
+			_nickname = LoginScreenCore.IsHost ? _hostNick.text : _playerNick.text;
+
+			Debug.Log(_nickname);
+
 			_timerHolder.gameObject.SetActive(true);
 
 			if (LoginScreenCore.IsHost)

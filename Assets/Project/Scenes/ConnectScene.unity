@@ -1794,7 +1794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &398259951
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1829,7 +1829,7 @@ GameObject:
   - component: {fileID: 399640323}
   - component: {fileID: 399640322}
   m_Layer: 5
-  m_Name: Nickname
+  m_Name: JoinNickname
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2621,8 +2621,9 @@ MonoBehaviour:
   _timer: {fileID: 507771649}
   _timerHolder: {fileID: 806313218}
   _playerNumber: {fileID: 385853239}
-  _roomId: {fileID: 1893202533}
-  _playerNick: {fileID: 2108088887}
+  _roomId: {fileID: 1371437038}
+  _hostNick: {fileID: 2108088887}
+  _playerNick: {fileID: 399640322}
 --- !u!114 &486837001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3111,7 +3112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &734709285
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4306,7 +4307,7 @@ GameObject:
   - component: {fileID: 1371437039}
   - component: {fileID: 1371437038}
   m_Layer: 5
-  m_Name: Number of players
+  m_Name: Room_ID
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6775,7 +6776,7 @@ GameObject:
   - component: {fileID: 2108088888}
   - component: {fileID: 2108088887}
   m_Layer: 5
-  m_Name: Nickname
+  m_Name: HostNickname
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
