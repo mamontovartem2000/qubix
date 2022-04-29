@@ -1,5 +1,4 @@
-﻿using System;
-using ME.ECS;
+﻿using ME.ECS;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using UnityEngine;
