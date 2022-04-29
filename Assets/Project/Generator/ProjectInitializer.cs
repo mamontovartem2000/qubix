@@ -58,7 +58,7 @@ namespace Project.Generator {
                     //this.world.SetSeed(NetworkData.GameSeed);
                     this.world.SetSeed(1u);
                     ComponentsInitializer.DoInit();
-                    // world.SetEntitiesCapacity(Capacity);
+                    world.SetEntitiesCapacity(Capacity);
                     this.Initialize(this.world);
 
                     // Add your custom systems here
@@ -70,6 +70,17 @@ namespace Project.Generator {
                     // Save initialization state
                     this.world.SaveResetState<TState>();
 
+                    var tmpState = new TState[10];
+                    
+                    for (int i = 0; i < 10; i++)
+                    {
+                        tmpState[i] = WorldUtilities.CreateState<TState>();
+                    }
+
+                    for (int i = 0; i < 10; i++)
+                    {
+                        WorldUtilities.ReleaseState(ref tmpState[i]);
+                    }
                 });
 
             }

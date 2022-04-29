@@ -19,13 +19,12 @@ namespace Project.Modules {
 
             // Here you can set up history states capacity
             return 10u;
-
         }
 
         protected override uint GetTicksPerState() {
 
             // Every N ticks network module should clone current world's state 
-            return 20u;
+            return 10u;
 
         }
 

@@ -20,7 +20,10 @@ namespace Project.Modules.Network
 		[SerializeField] private WaitingRoomTimer _timer;
 		[SerializeField] private GameObject _timerHolder;
 		[SerializeField] private TMP_InputField _playerNumber;
-		[SerializeField] private TMP_InputField _roomId;
+		[SerializeField] private TMP_InputField _playerRoomID;
+		
+		[SerializeField] private TextMeshProUGUI _hostRoomID;
+		
 		[SerializeField] private TMP_InputField _hostNick;
 		[SerializeField] private TMP_InputField _playerNick;
 		// [SerializeField] private Toggle _needCreateRoom;
@@ -32,8 +35,6 @@ namespace Project.Modules.Network
 		{
 			//ReadyToStart();
 			CharacterSelectionScript.OnPlayerSelected += SetCharacterRequest;
-			// _needCreateRoom.onValueChanged.AddListener(OpenCloseFields);
-			// OpenCloseFields(_needCreateRoom.isOn);
 		}
 
 		private void Update()
@@ -49,11 +50,6 @@ namespace Project.Modules.Network
 				NetworkData.Connect.Socket.DispatchMessageQueue();
 #endif
 		}
-
-		// private void OpenCloseFields(bool value)
-		// {
-		// 	_playerNumber.interactable = value;
-		// }
 
 		// Browser method
 		public void ProcessJoinRequest(string request)
@@ -105,13 +101,13 @@ namespace Project.Modules.Network
 				int num = Int32.Parse(_playerNumber.text);
 				StartCoroutine(ManualRoomCreating.CreateRoom(num, GetManualJoinRequest));
 			}
-			else if (_roomId.text != "")
-				GetManualJoinRequest(_roomId.text);
+			else if (_playerRoomID.text != "")
+				GetManualJoinRequest(_playerRoomID.text);
 		}
 
 		private void GetManualJoinRequest(string roomId)
 		{
-			_roomId.text = roomId;
+			_hostRoomID.text = roomId;
 			StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, _nickname, ProcessJoinRequest));
 		}
 

@@ -818,7 +818,8 @@ namespace ME.ECS.Network {
                 sourceState = this.world.GetResetState<TState>();
 
             }
-            //UnityEngine.Debug.LogWarning("Rollback. Oldest: " + oldestEventTick + ", sourceTick: " + sourceTick + " (hash: " + sourceState.GetHash() + " rnd: " + sourceState.randomState + "), targetTick: " + targetTick + ", currentTick: " + tick + ", timeSinceGameStart: " + timeSinceGameStart);
+            
+            // UnityEngine.Debug.LogWarning("Rollback. Oldest: " + oldestEventTick + ", sourceTick: " + sourceTick + " (hash: " + sourceState.GetHash() + " rnd: " + sourceState.randomState + "), targetTick: " + targetTick + ", currentTick: " + tick + ", timeSinceGameStart: " + timeSinceGameStart);
             
             this.statesHistoryModule.InvalidateEntriesAfterTick(sourceTick);
 
@@ -844,6 +845,9 @@ namespace ME.ECS.Network {
                 this.revertingTo = tick;
                 currentState.CopyFrom(sourceState);
                 currentState.Initialize(this.world, freeze: false, restore: true);
+
+                UnityEngine.Debug.Log($"rollback: {sourceTick - tick}");
+                
                 if (this.asyncMode == false) this.world.Simulate(sourceTick, tick, 0f);
             }
             this.isReverting = false;
