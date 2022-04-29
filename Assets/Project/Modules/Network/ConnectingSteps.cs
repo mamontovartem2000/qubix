@@ -18,10 +18,11 @@ namespace Project.Modules.Network
 		[SerializeField] private GameObject _loginScreen;
 		[SerializeField] private GameObject _selectionScreen;
 		[SerializeField] private WaitingRoomTimer _timer;
+		[SerializeField] private GameObject _timerHolder;
 		[SerializeField] private TMP_InputField _playerNumber;
 		[SerializeField] private TMP_InputField _roomId;
 		[SerializeField] private TMP_InputField _playerNick;
-		[SerializeField] private Toggle _needCreateRoom;
+		// [SerializeField] private Toggle _needCreateRoom;
 
 		private bool _needLoadGameScene, _needReloadThisScene;
 		private string _nickname;
@@ -30,8 +31,8 @@ namespace Project.Modules.Network
 		{
 			//ReadyToStart();
 			CharacterSelectionScript.OnPlayerSelected += SetCharacterRequest;
-			_needCreateRoom.onValueChanged.AddListener(OpenCloseFields);
-			OpenCloseFields(_needCreateRoom.isOn);
+			// _needCreateRoom.onValueChanged.AddListener(OpenCloseFields);
+			// OpenCloseFields(_needCreateRoom.isOn);
 		}
 
 		private void Update()
@@ -48,10 +49,10 @@ namespace Project.Modules.Network
 #endif
 		}
 
-		private void OpenCloseFields(bool value)
-		{
-			_playerNumber.interactable = value;
-		}
+		// private void OpenCloseFields(bool value)
+		// {
+		// 	_playerNumber.interactable = value;
+		// }
 
 		// Browser method
 		public void ProcessJoinRequest(string request)
@@ -77,8 +78,10 @@ namespace Project.Modules.Network
 			}			
 
 			_nickname = _playerNick.text;
+			
+			_timerHolder.gameObject.SetActive(true);
 
-			if (_needCreateRoom.isOn)
+			if (LoginScreenCore.IsHost)
 			{
 				int num = Int32.Parse(_playerNumber.text);
 				StartCoroutine(ManualRoomCreating.CreateRoom(num, GetManualJoinRequest));
