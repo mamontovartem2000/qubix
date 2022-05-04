@@ -137,7 +137,7 @@ namespace ME.ECS {
 
         }
 
-        static partial void Init(ref ME.ECS.StructComponentsContainer structComponentsContainer) {
+        static partial void Init(ref ME.ECS.StructComponentsContainer structComponentsContainer, ref ME.ECS.StructComponentsContainer noStateStructComponentsContainer) {
 
             WorldUtilities.ResetTypeIds();
 
@@ -274,7 +274,7 @@ namespace ME.ECS {
             CoreComponentsInitializer.Init(ref structComponentsContainer);
 
 
-            structComponentsContainer.ValidateOneShot<Project.Common.Components.ActivateSkill>(true);
+            noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.ActivateSkill>(true);
             structComponentsContainer.Validate<Project.Common.Components.AmmoCapacity>(false);
             structComponentsContainer.Validate<Project.Common.Components.AmmoCapacityDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.AOESkill>(false);
@@ -283,7 +283,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.AutomaticDamageModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.AutomaticWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvatarTag>(true);
-            structComponentsContainer.ValidateOneShot<Project.Common.Components.BuffTrigger>(true);
+            noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.BuffTrigger>(true);
             structComponentsContainer.Validate<Project.Common.Components.ComponentBuff>(true);
             structComponentsContainer.Validate<Project.Common.Components.Cooldown>(false);
             structComponentsContainer.Validate<Project.Common.Components.CooldownDefault>(false);
@@ -359,7 +359,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ReloadTimeDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.RespawnTime>(false);
             structComponentsContainer.Validate<Project.Common.Components.RightWeaponShot>(true);
-            structComponentsContainer.ValidateOneShot<Project.Common.Components.SelfTrigger>(true);
+            noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.SelfTrigger>(true);
             structComponentsContainer.Validate<Project.Common.Components.SideStepAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.SideStepModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillAmount>(false);

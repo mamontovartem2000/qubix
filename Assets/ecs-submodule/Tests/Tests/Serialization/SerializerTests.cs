@@ -465,6 +465,11 @@ namespace ME.ECS.Tests {
                     ++this.sentCount;
         }
 
+                public void SendSystemHash(uint tick, int hash)
+                {
+                    // throw new System.NotImplementedException();
+                }
+
                 public void SendSystem(byte[] bytes) {
                     this.sentSystemData.Enqueue(bytes);
 
@@ -499,10 +504,6 @@ namespace ME.ECS.Tests {
                 public int GetEventsReceivedCount()      => this.receivedCount;
                 public int GetEventsBytesReceivedCount() => this.receivedBytesCount;
 
-                public void SendSystemHash(uint tick, int hash)
-                {
-                    //throw new System.NotImplementedException();
-                }
             }
 
             public class FakeTransportBridge {

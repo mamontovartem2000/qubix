@@ -821,11 +821,14 @@ namespace ME.ECS {
 
             }
 
-            var list = this.entitiesIndexer.Get(entity.id);
+            var list = this.entitiesIndexer.Get();
             if (list != null) {
                 
-                foreach (var index in list) {
+                foreach (var kv in list) {
 
+                    if (kv.entityId != entity.id) continue;
+
+                    var index = kv.componentId;
                     var item = this.list.arr[index];
                     if (item != null) {
 
@@ -900,7 +903,7 @@ namespace ME.ECS {
         #endif
         public void ValidateOneShot<TComponent>(bool isTag = false) where TComponent : struct, IComponentBase, IComponentOneShot {
 
-            var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
+            var code = WorldUtilities.GetOneShotComponentTypeId<TComponent>();
             if (isTag == true) WorldUtilities.SetComponentAsTag<TComponent>();
             this.ValidateOneShot<TComponent>(code, isTag);
 
@@ -913,7 +916,7 @@ namespace ME.ECS {
         #endif
         public void ValidateOneShot<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase, IComponentOneShot {
 
-            var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
+            var code = WorldUtilities.GetOneShotComponentTypeId<TComponent>();
             this.ValidateOneShot<TComponent>(code, isTag);
             var reg = (StructComponentsOneShot<TComponent>)this.list.arr[code];
             reg.Validate(in entity);
@@ -1064,12 +1067,7 @@ namespace ME.ECS {
         #endif
         public bool HasBit(in Entity entity, int bit) {
 
-            var list = this.entitiesIndexer.Get(entity.id);
-            if (list != null) {
-                return list.Contains(bit);
-            }
-
-            return false;
+            return this.entitiesIndexer.Has(entity.id, bit);
             
         }
 
@@ -1224,6 +1222,12 @@ namespace ME.ECS {
         public ref StructComponentsContainer GetStructComponents() {
 
             return ref this.currentState.structComponents;
+
+        }
+
+        public ref StructComponentsContainer GetNoStateStructComponents() {
+
+            return ref this.structComponentsNoState;
 
         }
 

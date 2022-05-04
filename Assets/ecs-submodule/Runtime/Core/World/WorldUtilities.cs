@@ -153,7 +153,11 @@ namespace ME.ECS {
         public static void ResetTypeIds() {
 
             AllComponentTypesCounter.counter = -1;
+            OneShotComponentTypesCounter.counter = -1;
+            ComponentTypesCounter.counter = -1;
             ComponentTypesRegistry.allTypeId.Clear();
+            ComponentTypesRegistry.oneShotTypeId.Clear();
+            ComponentTypesRegistry.typeId.Clear();
             if (ComponentTypesRegistry.reset != null) ComponentTypesRegistry.reset.Invoke();
             ComponentTypesRegistry.reset = null;
 
@@ -209,6 +213,34 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
+        public static int GetOneShotComponentTypeId<TComponent>() {
+
+            if (OneShotComponentTypes<TComponent>.typeId < 0) {
+
+                WorldUtilities.CacheOneShotComponentTypeId<TComponent>();
+
+            }
+
+            return OneShotComponentTypes<TComponent>.typeId;
+
+        }
+
+        private static void CacheOneShotComponentTypeId<TComponent>() {
+            
+            OneShotComponentTypes<TComponent>.typeId = ++OneShotComponentTypesCounter.counter;
+            ComponentTypesRegistry.oneShotTypeId.Add(typeof(TComponent), OneShotComponentTypes<TComponent>.typeId);
+
+            ComponentTypesRegistry.reset += () => {
+
+                OneShotComponentTypes<TComponent>.typeId = -1;
+
+            };
+
+        }
+
+        #if INLINE_METHODS
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static int GetComponentTypeId<TComponent>() {
 
             return ComponentTypes<TComponent>.typeId;
@@ -242,6 +274,12 @@ namespace ME.ECS {
 
                 ComponentTypes<TComponent>.typeId = ++ComponentTypesCounter.counter;
                 ComponentTypesRegistry.typeId.Add(typeof(TComponent), ComponentTypes<TComponent>.typeId);
+
+                ComponentTypesRegistry.reset += () => {
+
+                    ComponentTypes<TComponent>.typeId = -1;
+
+                };
 
             }
 
@@ -307,6 +345,7 @@ namespace ME.ECS {
         public static void SetComponentAsOneShot<TComponent>() {
 
             AllComponentTypes<TComponent>.isOneShot = true;
+            WorldUtilities.GetOneShotComponentTypeId<TComponent>();
 
         }
 

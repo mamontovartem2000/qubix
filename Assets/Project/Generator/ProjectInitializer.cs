@@ -1,45 +1,68 @@
 using UnityEngine;
 
 #region Namespaces
-namespace Project.Generator.Systems {} namespace Project.Generator.Components {} namespace Project.Generator.Modules {} namespace Project.Generator.Features {} namespace Project.Generator.Markers {} namespace Project.Generator.Views {}
+
+namespace Project.Generator.Systems
+{
+}
+
+namespace Project.Generator.Components
+{
+}
+
+namespace Project.Generator.Modules
+{
+}
+
+namespace Project.Generator.Features
+{
+}
+
+namespace Project.Generator.Markers
+{
+}
+
+namespace Project.Generator.Views
+{
+}
+
 #endregion
 
-namespace Project.Generator {
-    
-    using TState = ProjectState;
-    using Project.Modules;
-    using Project.Modules.Network;
-    using ME.ECS;
-    using ME.ECS.Views.Providers;
-    using Project.Generator.Modules;
-    
-    #if ECS_COMPILE_IL2CPP_OPTIONS
+namespace Project.Generator
+{
+	using TState = ProjectState;
+	using Project.Modules;
+	using Project.Modules.Network;
+	using ME.ECS;
+	using ME.ECS.Views.Providers;
+	using Project.Generator.Modules;
+
+#if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
-    [DefaultExecutionOrder(-1000)]
-    public sealed class ProjectInitializer : InitializerBase {
+#endif
+
+	[DefaultExecutionOrder(-1000)]
+	public sealed class ProjectInitializer : InitializerBase
+	{
 
         private World world;
         public float tickTime = 0.033f;
         public uint inputTicks = 3;
-        public int Capacity;
-        
+        public int entitiesCapacity = 200;
+
         public void OnDrawGizmos() {
 
             if (this.world != null) {
                 
                 this.world.OnDrawGizmos();
-                
             }
-            
         }
 
         public void Update() {
 
-            if (this.world == null) 
-            {
+            if (this.world == null) {
 
                 // Initialize world
                 WorldUtilities.CreateWorld<TState>(ref this.world, this.tickTime);
@@ -51,46 +74,50 @@ namespace Project.Generator {
                     this.world.GetModule<StatesHistoryModule>().SetTicksForInput(this.inputTicks);
                     this.world.AddModule<NetworkModule>();
                     
-                    // Add your custom modules here
-                    
                     // Create new state
                     this.world.SetState<TState>(WorldUtilities.CreateState<TState>());
+                    
+                    // Set world seed
+                    // this.world.SetSeed(1u);
                     this.world.SetSeed(NetworkData.GameSeed);
-                    //this.world.SetSeed(1u);
+                    
                     ComponentsInitializer.DoInit();
-                    world.SetEntitiesCapacity(Capacity);
+                    this.world.SetEntitiesCapacity(this.entitiesCapacity);
                     this.Initialize(this.world);
-
-                    // Add your custom systems here
                     
                 }
                 
+            }
+
+            if (this.world != null && this.world.IsLoading() == false && this.world.IsLoaded() == false) {
+                
+                this.world.SetWorldThread(System.Threading.Thread.CurrentThread);
                 this.world.Load(() => {
                 
                     // Save initialization state
                     this.world.SaveResetState<TState>();
 
                     var tmpState = new TState[10];
-                    
+					
                     for (int i = 0; i < 10; i++)
                     {
                         tmpState[i] = WorldUtilities.CreateState<TState>();
                     }
-
+					
                     for (int i = 0; i < 10; i++)
                     {
                         WorldUtilities.ReleaseState(ref tmpState[i]);
                     }
                 });
-
+                
             }
 
-            if (this.world != null && this.world.IsLoaded() == true) 
-            {
+            if (this.world != null && this.world.IsLoaded() == true) {
 
                 var dt = Time.deltaTime;
                 this.world.PreUpdate(dt);
                 this.world.Update(dt);
+                this.world.LateUpdate(dt);
 
             }
 
@@ -130,11 +157,11 @@ namespace ME.ECS {
         
         public static void DoInit() {
             
-            ComponentsInitializer.Init(ref Worlds.currentWorld.GetStructComponents());
+            ComponentsInitializer.Init(ref Worlds.currentWorld.GetStructComponents(), ref Worlds.currentWorld.GetNoStateStructComponents());
             
         }
 
-        static partial void Init(ref ME.ECS.StructComponentsContainer structComponentsContainer);
+        static partial void Init(ref ME.ECS.StructComponentsContainer structComponentsContainer, ref ME.ECS.StructComponentsContainer noStateStructComponentsContainer);
 
     }
 

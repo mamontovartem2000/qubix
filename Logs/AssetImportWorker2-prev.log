@@ -1,0 +1,293 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.1f1 (3b70a0754835) revision 3895456'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19044) 64bit Professional' Language: 'ru' Physical Memory: 32701 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.1f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker2
+-projectPath
+C:/Projects/qubix
+-logFile
+Logs/AssetImportWorker2.log
+-srvPort
+51474
+Successfully changed project path to: C:/Projects/qubix
+C:/Projects/qubix
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Refreshing native plugins compatible for Editor in 92.04 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.1f1 (3b70a0754835)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.1f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Projects/qubix/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 2060 (ID=0x1f03)
+    Vendor:   NVIDIA
+    VRAM:     12087 MB
+    Driver:   30.0.14.9709
+Shader 'NeatWolf/NW_Particle Rim AddSmooth 2S': fallback shader 'Particles/Additive (Soft)' not found
+Shader 'NeatWolf/NW_Particle Rim AddSmooth': fallback shader 'Particles/Additive (Soft)' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.1f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.1f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.1f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56836
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.1f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.1f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.1f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.007333 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 94.81 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.631 seconds
+Domain Reload Profiling:
+	ReloadAssembly (632ms)
+		BeginReloadAssembly (67ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (460ms)
+			LoadAssemblies (65ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (94ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (29ms)
+			SetupLoadedEditorAssemblies (289ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (54ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (95ms)
+				BeforeProcessingInitializeOnLoad (2ms)
+				ProcessInitializeOnLoadAttributes (96ms)
+				ProcessInitializeOnLoadMethodAttributes (42ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.006846 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 92.25 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.565 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2566ms)
+		BeginReloadAssembly (226ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (141ms)
+		EndReloadAssembly (2250ms)
+			LoadAssemblies (102ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (1250ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (86ms)
+			SetupLoadedEditorAssemblies (766ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (20ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (92ms)
+				BeforeProcessingInitializeOnLoad (131ms)
+				ProcessInitializeOnLoadAttributes (432ms)
+				ProcessInitializeOnLoadMethodAttributes (84ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Hidden/WaterTessellated': fallback shader 'Hidden/Water' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'NeatWolf/NW_Particle Rim AddSmooth': fallback shader 'Particles/Additive (Soft)' not found
+Shader 'Hidden/WaterTessellated': fallback shader 'Hidden/Water' not found
+Shader 'NeatWolf/NW_Particle Rim AddSmooth 2S': fallback shader 'Particles/Additive (Soft)' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 1.28 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5762 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 85 unused Assets / (1.0 MB). Loaded Objects now: 6194.
+Memory consumption went from 256.7 MB to 255.7 MB.
+Total: 4.792000 ms (FindLiveObjects: 0.531900 ms CreateObjectMapping: 0.506700 ms MarkObjects: 3.311700 ms  DeleteObjects: 0.440900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 19342.931263 seconds.
+  path: Assets/Project/Mechanics
+  artifactKey: Guid(93a089dc0a3d9b24ab621ccbf247849a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Project/Mechanics using Guid(93a089dc0a3d9b24ab621ccbf247849a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7203123ae952cf94fd98d8c587ee29b4') in 0.013368 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.334474 seconds.
+  path: Assets/Project/Generator/Project.gen.asmdef
+  artifactKey: Guid(08bd938ff8e14a5429e7126161578d56) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Project/Generator/Project.gen.asmdef using Guid(08bd938ff8e14a5429e7126161578d56) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b07807802fd019bc80c7b7a697fbd9bb') in 0.013298 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 17.934208 seconds.
+  path: Assets/Project/Scenes
+  artifactKey: Guid(ba53c09e029149144a28961b6850f77f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Project/Scenes using Guid(ba53c09e029149144a28961b6850f77f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3289203b9cca5b71dbc3f15609bdb47e') in 0.005850 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.224433 seconds.
+  path: Assets/Project/Settings
+  artifactKey: Guid(5ad3b037f5eed884394045c68e1b0674) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Project/Settings using Guid(5ad3b037f5eed884394045c68e1b0674) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e1f6ca5944317ad8aea76fbf30fb175') in 0.005210 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.168914 seconds.
+  path: Assets/Project/Visuals(refactor later)
+  artifactKey: Guid(9570e698e6335cd4cb4ee3cf78fd95c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Project/Visuals(refactor later) using Guid(9570e698e6335cd4cb4ee3cf78fd95c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5dbd90f78818610e9f898b2380514157') in 0.005343 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.161248 seconds.
+  path: Assets/Project/AssemblyInfo.cs
+  artifactKey: Guid(3cece31738650df4bb2663090717b89b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Project/AssemblyInfo.cs using Guid(3cece31738650df4bb2663090717b89b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7dafbd0bf671fbabb0e60c0e296faf17') in 0.006954 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.158941 seconds.
+  path: Assets/Project/csc.rsp
+  artifactKey: Guid(aa9fef76fc74009409b70012a17a4e08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Project/csc.rsp using Guid(aa9fef76fc74009409b70012a17a4e08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1e4dd7c07fb2d548d778c16da1142fc') in 0.006402 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.164205 seconds.
+  path: Assets/Project/Project.asmdef
+  artifactKey: Guid(f3f27a31a31541749a95cfbb23ad69a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Project/Project.asmdef using Guid(f3f27a31a31541749a95cfbb23ad69a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b6961e2ad88b11e888a4c506884ddc3f') in 0.004283 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007450 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.64 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+
+=================================================================
+	Native Crash Reporting
+=================================================================
+Got a UNKNOWN while executing native code. This usually indicates
+a fatal error in the mono runtime or one of the native libraries 
+used by your application.
+=================================================================
+
+=================================================================
+	Managed Stacktrace:
+=================================================================
+	  at <unknown> <0xffffffff>
+	  at UnityEditor.AssetDatabase:ImportAsset <0x000eb>
+	  at ME.ECSEditor.ScriptTemplates:Create <0x0188a>
+	  at ME.ECSEditor.Generator:CompileDirectory <0x03c22>
+	  at ME.ECSEditor.Generator:OnAfterAssemblyReload <0x0093a>
+	  at ME.ECSEditor.StructComponentsGenerator:OnAfterAssemblyReload <0x000b2>
+	  at UnityEditor.AssemblyReloadEvents:OnAfterAssemblyReload <0x001e6>
+	  at System.Object:runtime_invoke_void <0x00184>
+=================================================================
+Received signal SIGSEGV
+Obtained 35 stack frames
+0x00007ff6b98e3a22 (Unity) <lambda_283f97c31f4e30d8552a28501eddf336>::operator()
+0x00007ff6b991daa1 (Unity) LMDB_Transaction::Run
+0x00007ff6b991de44 (Unity) SourceAssetDBWriteTxn::Run
+0x00007ff6b98f2a4f (Unity) SourceAssetScanner::Refresh
+0x00007ff6b98be7ec (Unity) ImportAtPathV2
+0x00007ff6b984e822 (Unity) AssetDatabase::ImportAtPath
+0x00007ff6b7d30879 (Unity) AssetDatabase_CUSTOM_ImportAsset
+0x000002175049612c (Mono JIT Code) (wrapper managed-to-native) UnityEditor.AssetDatabase:ImportAsset (string,UnityEditor.ImportAssetOptions)
+0x000002175049246b (Mono JIT Code) [ScriptTemplates.cs:191] ME.ECSEditor.ScriptTemplates:Create (string,string,string,System.Collections.Generic.Dictionary`2<string, string>,bool,System.Action`1<UnityEngine.Object>) 
+0x000002175047cfd3 (Mono JIT Code) [Generator.cs:496] ME.ECSEditor.Generator:CompileDirectory (string) 
+0x0000021750476bab (Mono JIT Code) [Generator.cs:110] ME.ECSEditor.Generator:OnAfterAssemblyReload (bool,bool) 
+0x0000021750475d63 (Mono JIT Code) [StructComponentsGenerator.cs:82] ME.ECSEditor.StructComponentsGenerator:OnAfterAssemblyReload () 
+0x0000021750472e17 (Mono JIT Code) UnityEditor.AssemblyReloadEvents:OnAfterAssemblyReload ()
+0x000002174f321f15 (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void (object,intptr,intptr,intptr)
+0x00007ffe4ccce0a4 (mono-2.0-bdwgc) [mini-runtime.c:3445] mono_jit_runtime_invoke 
+0x00007ffe4cc0e744 (mono-2.0-bdwgc) [object.c:3066] do_runtime_invoke 
+0x00007ffe4cc0e8dc (mono-2.0-bdwgc) [object.c:3113] mono_runtime_invoke 
+0x00007ff6b850f454 (Unity) scripting_method_invoke
+0x00007ff6b850a074 (Unity) ScriptingInvocation::Invoke
+0x00007ff6b84d9971 (Unity) MonoManager::EndReloadAssembly
+0x00007ff6b84e0fe8 (Unity) MonoManager::ReloadAssembly
+0x00007ff6b9413a62 (Unity) LoadDomainAndUserAssemblies
+0x00007ff6b9414194 (Unity) LoadUserAssemblies
+0x00007ff6b98a5508 (Unity) <lambda_c8aac203af85da22e031a8e6d38250eb>::operator()
+0x00007ff6b993a402 (Unity) asio::detail::completion_handler<core::mutable_function<void __cdecl(void)> >::do_complete
+0x00007ff6b993c68d (Unity) asio::detail::win_iocp_io_service::do_one
+0x00007ff6b993faae (Unity) asio::io_service::run
+0x00007ff6b99388a1 (Unity) IOService::Run
+0x00007ff6b98d1d58 (Unity) RunAssetImportWorkerClientV2
+0x00007ff6b98d1e2b (Unity) RunAssetImporterV2
+0x00007ff6b910a680 (Unity) Application::InitializeProject
+0x00007ff6b95626d8 (Unity) WinMain
+0x00007ff6ba88427e (Unity) __scrt_common_main_seh
+0x00007ffea62a7034 (KERNEL32) BaseThreadInitThunk
+0x00007ffea75a2651 (ntdll) RtlUserThreadStart
+
