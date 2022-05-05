@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Preset_2
+  m_Shader: {fileID: 4800000, guid: 035494a084a38c64b8fc519923203a50, type: 3}
+  m_ShaderKeywords: _EMISSION _SUNDISK_HIGH_QUALITY
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats:
+    - _CloudAnimSpeed: 0.15
+    - _CloudDensity: 7.92
+    - _CloudOffset: 287
+    - _CloudSharpness: 1.5
+    - _CloudVisibility: 7
+    - _NebulaAnimSpeed: 0.2
+    - _NebulaDensity: 0.75
+    - _NebulaOffset: 213
+    - _StarsAmount: 1
+    - _StarsBlinkingSpeed: 0.3
+    - _StarsColorVariation: 0.6
+    - _StarsLightRandomness: 0.5
+    - _StarsSize: 0.789
+    - _TrailAnimSpeed: 0.7
+    - _TrailComplexity: 2.47
+    - _TrailOffset: 238
+    - _TrailSize: 1
+    - _TrailVisibility: 0.4
+    m_Colors:
+    - _CloudColor: {r: 0.90344834, g: 1, b: 0, a: 1}
+    - _NebulaColor: {r: 0.30147058, g: 0.28969917, b: 0.22388624, a: 1}
+    - _SkyColor: {r: 0.019, g: 0.019, b: 0.019, a: 1}
+    - _StarsColorOne: {r: 0.674, g: 0.725, b: 0.85, a: 1}
+    - _StarsColorTwo: {r: 0.39999998, g: 0.36206895, b: 0.14999999, a: 1}
+    - _TrailColor: {r: 0.384, g: 0.458, b: 0.827, a: 1}
+  m_BuildTextureStacks: []
