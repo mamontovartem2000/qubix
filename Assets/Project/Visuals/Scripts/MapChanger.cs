@@ -27,13 +27,19 @@ public class MapChanger : MonoBehaviour
                 ChangeColor(28, 15, 0);
                 ChangeEmissionColor(7, 7, 1);
                 ExtraChangeColors(1, 2, 3, 4, 5);
-                ExtraChangeEmissionColors(7,6,5,4,3);
+                ExtraChangeEmissionColors(7, 6, 5, 4, 3);
                 break;
             case Maps.Coliseum:
                 ChangeColor(7, 22, 7);
                 ChangeEmissionColor(0, 4, 0);
                 ExtraChangeColors(8, 7, 6, 5, 4);
-                ExtraChangeEmissionColors(0,1,2,3,4);
+                ExtraChangeEmissionColors(0, 1, 2, 3, 4);
+                break;
+            case Maps.Forest:
+                ChangeColor(13, 22, 14);
+                ChangeEmissionColor(3, 2, 3);
+                ExtraChangeColors(13, 13, 13, 13, 13);
+                ExtraChangeEmissionColors(3, 3, 3, 3, 3);
                 break;
         }
     }
@@ -75,5 +81,6 @@ public class MapChanger : MonoBehaviour
 public enum Maps
 {
     Black = 0,
-    Coliseum = 1
+    Coliseum = 1,
+    Forest = 2,
 }
