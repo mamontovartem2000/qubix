@@ -36,7 +36,7 @@ namespace Project.Core.Features.SceneBuilder.Systems
 
             _mineID = world.RegisterViewSource(_scene.MineView);
         }
-        
+
         void ISystemBase.OnDeconstruct() {}
 
         void IAdvanceTick.AdvanceTick(in float deltaTime)

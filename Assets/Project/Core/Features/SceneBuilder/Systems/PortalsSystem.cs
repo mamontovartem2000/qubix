@@ -1,6 +1,8 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.SceneBuilder.Components;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Project.Core.Features.SceneBuilder.Systems
@@ -42,7 +44,6 @@ namespace Project.Core.Features.SceneBuilder.Systems
 
         void ISystemBase.OnDeconstruct() { }
 
-        //TODO: If all portals are busy?
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
             Entity[] portals = SceneUtils.ConvertFilterToEntityArray(_portalFilter);
@@ -57,41 +58,47 @@ namespace Project.Core.Features.SceneBuilder.Systems
                     {
                         Vector3 newPosition;
                         int rndIndex;
+                        List<Entity> lastPortals = portals.ToList();
+                        lastPortals.RemoveAt(i);
+
                         while (true)
                         {
-                            rndIndex = world.GetRandomRange(0, portals.Length);
-                            if (rndIndex == i)
-                                continue;
+                            rndIndex = world.GetRandomRange(0, lastPortals.Count);
+                            newPosition = lastPortals[rndIndex].GetPosition();
 
-                            newPosition = portals[rndIndex].GetPosition();
+                            if (SceneUtils.IsFree(newPosition))
+                                break;
+                            else
+                                lastPortals.RemoveAt(rndIndex);
 
-                            //TODO: No check if the target portal is free.
-                            //if (SceneUtils.IsFree(newPosition))
-                            break;
+                            if (lastPortals.Count == 0)
+                            {
+                                //TODO: If all portals are busy?
+                                Debug.Log("Error. No free portals!");
+                                return;
+                            }
                         }
 
                         player.Set(new TeleportPlayer());
-                        
+
                         var portIn = new Entity("in");
                         portIn.SetPosition(portals[i].GetPosition());
-                        portIn.InstantiateView(_scene._in);
+                        portIn.InstantiateView(_scene._inPortal);
                         portIn.Get<LifeTimeLeft>().Value = 3;
-                        
+
                         var portOut = new Entity("out");
                         portOut.SetPosition(newPosition);
-                        portOut.InstantiateView(_scene._out);
+                        portOut.InstantiateView(_scene._outPortal);
                         portOut.Get<LifeTimeLeft>().Value = 3;
 
-                        player.SetPosition(portals[rndIndex].GetPosition());
-                        
-                        _scene.Move(player.GetPosition(), newPosition);
+                        _scene.Move(portals[i].GetPosition(), newPosition);
                         player.SetPosition(newPosition);
                         player.Get<PlayerMoveTarget>().Value = newPosition;
                     }
                 }
             }
-        }     
+        }
 
         void IUpdate.Update(in float deltaTime) { }
-        }
     }
+}

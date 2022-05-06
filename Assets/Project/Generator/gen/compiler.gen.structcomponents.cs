@@ -128,9 +128,11 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GamePaused>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameTimer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.MapInitialized>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.DefaultComponents>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.HealthTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapComponents>(false, false, true, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MineTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.PortalTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.Spawned>(true, true, false, false, false, false, false, false);
@@ -263,9 +265,11 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GamePaused>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameTimer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.MapInitialized>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.DefaultComponents>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.HealthTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapComponents>(false, false, true, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MineTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.PortalTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.Spawned>(true, true, false, false, false, false, false, false);
@@ -393,9 +397,11 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GamePaused>(true);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GameTimer>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.MapInitialized>(true);
+            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.DefaultComponents>(false);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.HealthTag>(true);
             structComponentsContainer.ValidateCopyable<Project.Core.Features.SceneBuilder.Components.MapComponents>(false);
+            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.MapConstruct>(false);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.MineTag>(true);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.PortalTag>(true);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.Spawned>(true);
@@ -528,9 +534,11 @@ namespace ME.ECS {
             entity.ValidateData<Project.Core.Features.GameState.Components.GamePaused>(true);
             entity.ValidateData<Project.Core.Features.GameState.Components.GameTimer>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.MapInitialized>(true);
+            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.DefaultComponents>(false);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.HealthTag>(true);
             entity.ValidateDataCopyable<Project.Core.Features.SceneBuilder.Components.MapComponents>(false);
+            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.MapConstruct>(false);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.MineTag>(true);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.PortalTag>(true);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.Spawned>(true);

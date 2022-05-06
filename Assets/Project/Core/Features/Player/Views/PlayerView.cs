@@ -1,8 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.Views.Providers;
-using Project.Common.Components;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Project.Core.Features.Player.Views
 {

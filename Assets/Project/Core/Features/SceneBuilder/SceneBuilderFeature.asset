@@ -14,10 +14,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editorComment: 
   _sourceMap: {fileID: 4900000, guid: 5b4ad51c5c843b645b4bba0d18e0fcc1, type: 3}
-  PortIn: {fileID: 7344226804866017549, guid: 6af7ad806e9b7104a970232cbe2bcab8, type: 3}
-  PortOut: {fileID: 390483980942133195, guid: a325960eb9a8f6a4daf248a9d0502e61, type: 3}
-  TileView: {fileID: 1589015403645606094, guid: 665f6031717fef849aebb6ba87c174eb, type: 3}
-  PortalView: {fileID: 2814839581664627612, guid: 3e97f244f456d8c468714bfe9b4d7cd3, type: 3}
-  DispenserView: {fileID: 391812404919080866, guid: fa3c37b626321e24485be4fb0fb9b5fe, type: 3}
+  _objectsMap: {fileID: 4900000, guid: 2a919558b867eea428b7f334694a370e, type: 3}
+  In_PortalEffect: {fileID: 390483980942133195, guid: a325960eb9a8f6a4daf248a9d0502e61, type: 3}
+  Out_PortalEffect: {fileID: 7344226804866017549, guid: 6af7ad806e9b7104a970232cbe2bcab8, type: 3}
   MineView: {fileID: 7241131762590579855, guid: a46ac6ad3d8c115419b4065129074340, type: 3}
   HealthView: {fileID: 9096977100224094012, guid: b302e6f730ab0b34581626de5c10628b, type: 3}
+  _tileList:
+  - Key: 1
+    View: {fileID: 1589015403645606094, guid: 665f6031717fef849aebb6ba87c174eb, type: 3}
+  - Key: 2
+    View: {fileID: 2245204047749653968, guid: 7d8fe0bb73aefeb4ea97676f117accba, type: 3}
+  - Key: 3
+    View: {fileID: 7698703003313269464, guid: c7927937846fd0f49afb306b7df7349a, type: 3}
+  - Key: 4
+    View: {fileID: 359643723809364686, guid: cc9d7a510b797c94a84940fb87492592, type: 3}
+  - Key: 5
+    View: {fileID: 391812404919080866, guid: fa3c37b626321e24485be4fb0fb9b5fe, type: 3}
+  - Key: 6
+    View: {fileID: 2814839581664627612, guid: 3e97f244f456d8c468714bfe9b4d7cd3, type: 3}
+  - Key: 7
+    View: {fileID: 5217906039151477467, guid: f8da85df298d1864985bc9211030cebb, type: 3}
+  - Key: 8
+    View: {fileID: 2422704755448078563, guid: 34a9fc728b85a1b43a62c57fb3229225, type: 3}
+  - Key: 11
+    View: {fileID: 8264746845256926033, guid: 8c7f1559f82a5d34fb1a063c17ceae22, type: 3}
+  - Key: 12
+    View: {fileID: 624404769572040846, guid: aa78a708845969443aa903cff58fbf90, type: 3}
+  _objectsList:
+  - Key: 1
+    View: {fileID: 8902556867661448518, guid: d11a570dfc1cb4d4f89c38a4ff2a6c2a, type: 3}
+  - Key: 2
+    View: {fileID: 4840483628190261945, guid: fee53cf20a361324ab1dad94db84ebc4, type: 3}
+  - Key: 3
+    View: {fileID: 399587210868654846, guid: 7012e657b31f59245861735f70a6a8dd, type: 3}
+  - Key: 5
+    View: {fileID: 6861320492349872770, guid: 4040c6c1a4f9cb5459e19a384604ad0f, type: 3}
+  - Key: 6
+    View: {fileID: 1495060730672888059, guid: 43ff68f29233e464d870ca75f2a84376, type: 3}
+  - Key: 7
+    View: {fileID: 6494576317730327402, guid: 55282c1bf724680489d8004fd78e2e66, type: 3}
+  - Key: 8
+    View: {fileID: 4947256931796407474, guid: 576a77f5a21a1bb4d95cac1328a40826, type: 3}
+  - Key: 9
+    View: {fileID: 957361009507432920, guid: 27dd1660b8de228419097eb7b30d8505, type: 3}
+  - Key: 10
+    View: {fileID: 6619239839162994021, guid: a6dd37d30cb06334db2924e9455b6bd3, type: 3}
+  - Key: 11
+    View: {fileID: 1556272852754573989, guid: a3b91560b419fec458c0dadd21babc69, type: 3}
+  - Key: 12
+    View: {fileID: 7667637796445630849, guid: ed15e8036e597814696346d2bd5c0428, type: 3}
+  - Key: 13
+    View: {fileID: 7724755089585348204, guid: 8570ab53c3d05d54a8d6fe974d9160d5, type: 3}
+  - Key: 14
+    View: {fileID: 5498157561107045302, guid: 07380c4078a7f57458a9d851a2c3d054, type: 3}
+  - Key: 15
+    View: {fileID: 2584504524314878372, guid: 494eb74c2519f574aa81122751b6ee33, type: 3}
+  - Key: 16
+    View: {fileID: 4442785450059702667, guid: 87d2897ae262d6b48a4f7e36a7a9b3a8, type: 3}
+  - Key: 17
+    View: {fileID: 185941804650702023, guid: 1ffcb629a29aa2945846373ae7cb9c1b, type: 3}
+  - Key: 18
+    View: {fileID: 3265300865609609942, guid: d5f1082bd40928244a13a492804cc2d0, type: 3}
+  - Key: 19
+    View: {fileID: 8123247040969083610, guid: 48021877310ca5548bcdf687d2267a76, type: 3}
+  - Key: 20
+    View: {fileID: 3694828011553855368, guid: 2e6bf67f18f5ce84ba9535275e8a9ee3, type: 3}
+  - Key: 21
+    View: {fileID: 4722212388327168087, guid: ae39df6132c85814bb7295266a1e2cfe, type: 3}
+  - Key: 22
+    View: {fileID: 1178339433124822526, guid: 9560837afee107546b5f5dfe7d850863, type: 3}
+  - Key: 23
+    View: {fileID: 5537805481623580380, guid: d5c13dd93ca7ce842a58ce203040e28b, type: 3}

@@ -1,7 +1,10 @@
 using ME.ECS;
+using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Core.Features.Player;
 using Project.Core.Features.SceneBuilder.Components;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Project.Core
@@ -83,5 +86,52 @@ namespace Project.Core
             // Debug.Log(player == Worlds.current.GetFeature<PlayerFeature>().GetPlayer(player.Read<PlayerTag>().PlayerID));
             return player == Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(player.Read<PlayerTag>().PlayerLocalID);
         }
+    }
+
+
+    [Serializable]
+    public class GameMapRemoteData //TODO: Match field names with server ones
+    {
+        public byte[] bytes;
+        public int offset;
+
+        public GameMapRemoteData(TextAsset sourceMap)
+        {
+            var omg = sourceMap.text.Split('\n');
+            List<byte> byteList = new List<byte>();
+
+            foreach (var line in omg)
+            {
+                var stringArray = line.Split(' ');
+                byte[] byteArray = Array.ConvertAll(stringArray, s => byte.Parse(s));
+                offset = byteArray.Length;
+                byteList.AddRange(byteArray);
+            }
+
+            bytes = byteList.ToArray();
+
+            //int count = 0;
+            //string df = string.Empty;
+
+            //for (int i = 0; i < bytes.Length; i++)
+            //{
+            //    count++;
+            //    df += bytes[i].ToString();
+
+            //    if (count == offset)
+            //    {
+            //        count = 0;
+            //        df += "\n";
+            //    }
+            //}
+            //Debug.Log(df);
+        }
+    }
+
+    [Serializable]
+    public struct MapViewElement
+    {
+        public int Key;
+        public MonoBehaviourView View;
     }
 }
