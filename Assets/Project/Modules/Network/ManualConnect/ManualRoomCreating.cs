@@ -28,7 +28,7 @@ namespace Project.Modules.Network
 
             yield return request.SendWebRequest();
 
-            Room info = ParceUtils.CreateFromJSON<Room>(request.downloadHandler.text);
+            Room info = NetworkData.CreateFromJSON<Room>(request.downloadHandler.text);
             callback(info.id);
         }
 

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Project.Modules.Network
 {
     public static class NetworkData
@@ -17,6 +19,11 @@ namespace Project.Modules.Network
             GameSeed = 1;
             FullJoinRequest = string.Empty;
             PlayersInfo = null;
+        }
+
+        public static T CreateFromJSON<T>(string jsonString)
+        {
+            return JsonUtility.FromJson<T>(jsonString);
         }
     }
 }

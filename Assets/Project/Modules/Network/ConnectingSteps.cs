@@ -54,10 +54,10 @@ namespace Project.Modules.Network
 		// Browser method
 		public void ProcessJoinRequest(string request)
 		{
-			string payloadBase64 = ParceUtils.CreateFromJSON<JoinRequestData>(request).payload;
+			string payloadBase64 = NetworkData.CreateFromJSON<JoinRequestData>(request).payload;
 			var payloadInBytes = Convert.FromBase64String(payloadBase64);
 			var playerJson = Encoding.UTF8.GetString(payloadInBytes);
-			GameInfo info = ParceUtils.CreateFromJSON<GameInfo>(playerJson);
+			GameInfo info = NetworkData.CreateFromJSON<GameInfo>(playerJson);
 			NetworkData.Info = info;
 			NetworkData.FullJoinRequest = request;
 

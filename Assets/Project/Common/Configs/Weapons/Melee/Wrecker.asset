@@ -26,8 +26,6 @@ MonoBehaviour:
     version: 1
     00000000:
       type: {class: MeleeWeapon, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Length: 0
     00000001:
       type: {class: MeleeDelayDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -47,4 +45,4 @@ MonoBehaviour:
     00000005:
       type: {class: WeaponView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        View: {fileID: 6285051073144073388, guid: f079beb482b99ee40987f44e9717d248, type: 3}
+        Value: {fileID: 6285051073144073388, guid: f079beb482b99ee40987f44e9717d248, type: 3}

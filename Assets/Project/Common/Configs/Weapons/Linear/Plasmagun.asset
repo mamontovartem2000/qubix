@@ -27,7 +27,7 @@ MonoBehaviour:
     00000000:
       type: {class: LinearWeapon, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Length: 0
+        Value: 0
     00000001:
       type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -43,7 +43,7 @@ MonoBehaviour:
     00000004:
       type: {class: WeaponView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        View: {fileID: 8664389495973404364, guid: 78092db44023a7545977c56316c04aa2, type: 3}
+        Value: {fileID: 8664389495973404364, guid: 78092db44023a7545977c56316c04aa2, type: 3}
     00000005:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:

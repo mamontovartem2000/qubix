@@ -24,6 +24,8 @@ public enum Payload : byte
   InvalidHash = 10,
   TimeFromStart = 11,
   GameOver = 12,
+  CloseRoom = 13,
+  StatsReceive = 14,
 };
 
 public struct JoinResult : IFlatbufferObject
@@ -515,6 +517,60 @@ public struct GameOver : IFlatbufferObject
   }
 };
 
+public struct CloseRoom : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_2_0_0(); }
+  public static CloseRoom GetRootAsCloseRoom(ByteBuffer _bb) { return GetRootAsCloseRoom(_bb, new CloseRoom()); }
+  public static CloseRoom GetRootAsCloseRoom(ByteBuffer _bb, CloseRoom obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
+  public CloseRoom __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public bool Value { get { int o = __p.__offset(4); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+
+  public static Offset<FlatMessages.CloseRoom> CreateCloseRoom(FlatBufferBuilder builder,
+      bool value = false) {
+    builder.StartTable(1);
+    CloseRoom.AddValue(builder, value);
+    return CloseRoom.EndCloseRoom(builder);
+  }
+
+  public static void StartCloseRoom(FlatBufferBuilder builder) { builder.StartTable(1); }
+  public static void AddValue(FlatBufferBuilder builder, bool value) { builder.AddBool(0, value, false); }
+  public static Offset<FlatMessages.CloseRoom> EndCloseRoom(FlatBufferBuilder builder) {
+    int o = builder.EndTable();
+    return new Offset<FlatMessages.CloseRoom>(o);
+  }
+};
+
+public struct StatsReceive : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_2_0_0(); }
+  public static StatsReceive GetRootAsStatsReceive(ByteBuffer _bb) { return GetRootAsStatsReceive(_bb, new StatsReceive()); }
+  public static StatsReceive GetRootAsStatsReceive(ByteBuffer _bb, StatsReceive obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
+  public StatsReceive __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public bool Ok { get { int o = __p.__offset(4); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+
+  public static Offset<FlatMessages.StatsReceive> CreateStatsReceive(FlatBufferBuilder builder,
+      bool ok = false) {
+    builder.StartTable(1);
+    StatsReceive.AddOk(builder, ok);
+    return StatsReceive.EndStatsReceive(builder);
+  }
+
+  public static void StartStatsReceive(FlatBufferBuilder builder) { builder.StartTable(1); }
+  public static void AddOk(FlatBufferBuilder builder, bool ok) { builder.AddBool(0, ok, false); }
+  public static Offset<FlatMessages.StatsReceive> EndStatsReceive(FlatBufferBuilder builder) {
+    int o = builder.EndTable();
+    return new Offset<FlatMessages.StatsReceive>(o);
+  }
+};
+
 public struct SystemMessage : IFlatbufferObject
 {
   private Table __p;
@@ -540,6 +596,8 @@ public struct SystemMessage : IFlatbufferObject
   public FlatMessages.InvalidHash PayloadAsInvalidHash() { return Payload<FlatMessages.InvalidHash>().Value; }
   public FlatMessages.TimeFromStart PayloadAsTimeFromStart() { return Payload<FlatMessages.TimeFromStart>().Value; }
   public FlatMessages.GameOver PayloadAsGameOver() { return Payload<FlatMessages.GameOver>().Value; }
+  public FlatMessages.CloseRoom PayloadAsCloseRoom() { return Payload<FlatMessages.CloseRoom>().Value; }
+  public FlatMessages.StatsReceive PayloadAsStatsReceive() { return Payload<FlatMessages.StatsReceive>().Value; }
 
   public static Offset<FlatMessages.SystemMessage> CreateSystemMessage(FlatBufferBuilder builder,
       uint timestamp = 0,
