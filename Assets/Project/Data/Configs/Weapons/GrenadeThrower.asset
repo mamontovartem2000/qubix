@@ -10,17 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: Slasher
+  m_Name: GrenadeThrower
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
   - id: 0
   - id: 1
   - id: 2
-  - id: 3
-  - id: 4
-  - id: 5
-  - id: 6
   removeStructComponents: []
   templates: []
   references:
@@ -28,26 +24,12 @@ MonoBehaviour:
     00000000:
       type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 11400000, guid: a9f6b48fe8bb1aa4b92fb6b22ff0882d, type: 2}
+        Value: {fileID: 11400000}
     00000001:
       type: {class: WeaponView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 8803681592273465616, guid: f0bde90e231d7d7498459313846775a8, type: 3}
+        Value: {fileID: 3326995486286109673, guid: 6b09df0589172b24e9b9aeaf82c1074a, type: 3}
     00000002:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {x: -0.35, y: 0, z: 0}
-    00000003:
-      type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0.9
-    00000004:
-      type: {class: MeleeDelayDefault, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0.1
-    00000005:
-      type: {class: MeleeWeapon, ns: Project.Common.Components, asm: Project.Common}
-    00000006:
-      type: {class: FiringCooldownModifier, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0
+        Value: {x: 0.35, y: 0, z: 0}

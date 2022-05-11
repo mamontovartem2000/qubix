@@ -24,8 +24,8 @@ MonoBehaviour:
       type: {class: PlayerConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
         AvatarConfig: {fileID: 11400000, guid: d67c3b45891e393469b6ae3e2935ebe1, type: 2}
-        LeftWeaponConfig: {fileID: 11400000, guid: dae6cba8d0914a14182846f471d02364, type: 2}
-        RightWeaponConfig: {fileID: 11400000, guid: 3263f346d5560fa4db2a0f25196a3519, type: 2}
+        LeftWeaponConfig: {fileID: 0}
+        RightWeaponConfig: {fileID: 11400000, guid: dae6cba8d0914a14182846f471d02364, type: 2}
         FirstSkillConfig: {fileID: 11400000, guid: 6da08fa284cb65341aecbe4b48d9b548, type: 2}
         SecondSkillConfig: {fileID: 11400000, guid: 3fd8854a3195c344ab6d6cd48680ab75, type: 2}
         ThirdSkillConfig: {fileID: 11400000, guid: 4d77eb1f52c5b7041a90dfdaef64c435, type: 2}

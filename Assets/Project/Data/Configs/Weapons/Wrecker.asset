@@ -10,17 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: Flamethrower
+  m_Name: Wrecker
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
   - id: 0
   - id: 1
   - id: 2
-  - id: 3
-  - id: 4
-  - id: 5
-  - id: 6
   removeStructComponents: []
   templates: []
   references:
@@ -28,28 +24,12 @@ MonoBehaviour:
     00000000:
       type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 11400000, guid: b1aa7a2b129f80047a53ce8378b0acf6, type: 2}
+        Value: {fileID: 11400000, guid: 475be9945c9211e4ea6c2678d75f3b18, type: 2}
     00000001:
       type: {class: WeaponView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 3426979247361699055, guid: 695c4dd21cdf4134ca63683410c908d2, type: 3}
+        Value: {fileID: 6285051073144073388, guid: f079beb482b99ee40987f44e9717d248, type: 3}
     00000002:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {x: -0.35, y: 0, z: 0}
-    00000003:
-      type: {class: AmmoCapacity, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 100
-    00000004:
-      type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 100
-    00000005:
-      type: {class: LinearWeapon, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 3
-    00000006:
-      type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: {fileID: 1319295140966577040, guid: 24ab087fcfb49da4ca4b198fa046f11e, type: 3}
