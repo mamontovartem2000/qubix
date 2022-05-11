@@ -5,6 +5,7 @@ using ME.ECS.Views.Providers;
 using Project.Core.Features.SceneBuilder.Components;
 using Project.Core.Features.SceneBuilder.Systems;
 using System.Collections.Generic;
+using Project.Core.Features.GameState.Components;
 using UnityEngine;
 
 namespace Project.Core.Features.SceneBuilder
@@ -51,6 +52,8 @@ namespace Project.Core.Features.SceneBuilder
             AddSystem<PortalsSystem>();
 
             PrepareMap();
+            
+            world.SetSharedData(new MapInitialized());
         }
 
         protected override void OnDeconstruct() { }

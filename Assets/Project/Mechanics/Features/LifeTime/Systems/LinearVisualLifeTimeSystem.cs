@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.Lifetime.Systems
 {
@@ -38,6 +39,8 @@ namespace Project.Mechanics.Features.Lifetime.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			Debug.Log(entity.ToString());
+			
 			if (entity.GetParent().Has<LinearActive>()) return;
 			entity.Destroy();
 		}
