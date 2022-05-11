@@ -645,8 +645,11 @@ namespace ME.ECS.Network {
                         
                 System.Reflection.MethodInfo methodInfo;
                 if (this.registry.TryGetValue(historyEvent.rpcId, out methodInfo) == true) {
+
                     UnityEngine.Debug.LogWarning("Received. evt.objId: " + historyEvent.objId + ", evt.rpcId: " + historyEvent.rpcId + ", evt.order: " + historyEvent.order + ", method: " + methodInfo.Name);
+
                 }
+
             }*/
 
             if ((this.GetNetworkType() & NetworkType.RunLocal) != 0 && historyEvent.order == this.GetRPCOrder()) {
@@ -826,7 +829,9 @@ namespace ME.ECS.Network {
                 this.statesHistoryModule.InvalidateEntriesAfterTick(sourceTick);
                 
             } else {
+
                 this.statesHistoryModule.SetLastSavedTick(sourceTick);
+
             }*/
 
             #if ENABLE_PROFILER
@@ -1154,6 +1159,8 @@ namespace ME.ECS.Network {
             this.CallRPC(instance, rpcId, true, arr);
 
         }
+
     }
+
 }
 #endif
