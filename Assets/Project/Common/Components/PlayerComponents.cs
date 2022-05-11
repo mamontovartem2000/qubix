@@ -58,7 +58,7 @@ namespace Project.Common.Components
         public DataConfig LeftWeaponConfig;
         public DataConfig RightWeaponConfig;
         
-        public DataConfig FistSkillConfig;
+        public DataConfig FirstSkillConfig;
         public DataConfig SecondSkillConfig;
         public DataConfig ThirdSkillConfig;
         public DataConfig FourthSkillConfig;
