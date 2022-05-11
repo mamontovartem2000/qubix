@@ -51,7 +51,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
             if(entity.GetParent().Has<StunModifier>()) return;
             
             ref var ammo = ref entity.Get<AmmoCapacity>().Value;
-            var dir = entity.Read<WeaponAim>().Aim.GetPosition() - entity.GetPosition();
+            var dir = entity.Read<WeaponAim>().Value.GetPosition() - entity.GetPosition();
             
             if (entity.Has<SpreadAmount>())
             {

@@ -70,9 +70,9 @@ namespace Project.Mechanics.Features.Avatar
             aim.SetParent(weapon);
             aim.SetLocalPosition(weapon.Has<TrajectoryWeapon>() ?_direction +_trajectory: _direction);
 
-            weapon.Get<WeaponAim>().Aim = aim;
+            weapon.Get<WeaponAim>().Value = aim;
             
-            var view = world.RegisterViewSource(weapon.Read<NeedWeapon>().View);
+            var view = world.RegisterViewSource(weapon.Read<WeaponView>().Value);
             weapon.InstantiateView(view);
             
             weapon.Get<Owner>().Value = parent.Get<Owner>().Value;

@@ -64,12 +64,11 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveInput>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.NeedAvatar>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.NeedWeapon>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Owner>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportAffect>(true, true, false, false, false, false, false, false);
@@ -122,6 +121,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WormholeHookAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WormholeHookModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameFinished>(true, true, false, false, false, false, false, false);
@@ -201,12 +201,11 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveInput>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.NeedAvatar>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.NeedWeapon>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Owner>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportAffect>(true, true, false, false, false, false, false, false);
@@ -259,6 +258,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WormholeHookAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WormholeHookModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameFinished>(true, true, false, false, false, false, false, false);
@@ -333,12 +333,11 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.MeleeDamageModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelay>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelayDefault>(false);
-            structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(false);
+            structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.MoveInput>(false);
             structComponentsContainer.Validate<Project.Common.Components.MoveSpeedAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.MoveSpeedModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.NeedAvatar>(false);
-            structComponentsContainer.Validate<Project.Common.Components.NeedWeapon>(false);
             structComponentsContainer.Validate<Project.Common.Components.Owner>(false);
             structComponentsContainer.Validate<Project.Common.Components.PassiveSkill>(true);
             structComponentsContainer.Validate<Project.Common.Components.PersonalTeleportAffect>(true);
@@ -391,6 +390,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.WeaponAim>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponEntities>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponPosition>(false);
+            structComponentsContainer.Validate<Project.Common.Components.WeaponView>(false);
             structComponentsContainer.Validate<Project.Common.Components.WormholeHookAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.WormholeHookModifier>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GameFinished>(true);
@@ -470,12 +470,11 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.MeleeDamageModifier>(false);
             entity.ValidateData<Project.Common.Components.MeleeDelay>(false);
             entity.ValidateData<Project.Common.Components.MeleeDelayDefault>(false);
-            entity.ValidateData<Project.Common.Components.MeleeWeapon>(false);
+            entity.ValidateData<Project.Common.Components.MeleeWeapon>(true);
             entity.ValidateData<Project.Common.Components.MoveInput>(false);
             entity.ValidateData<Project.Common.Components.MoveSpeedAffect>(true);
             entity.ValidateData<Project.Common.Components.MoveSpeedModifier>(false);
             entity.ValidateData<Project.Common.Components.NeedAvatar>(false);
-            entity.ValidateData<Project.Common.Components.NeedWeapon>(false);
             entity.ValidateData<Project.Common.Components.Owner>(false);
             entity.ValidateData<Project.Common.Components.PassiveSkill>(true);
             entity.ValidateData<Project.Common.Components.PersonalTeleportAffect>(true);
@@ -528,6 +527,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.WeaponAim>(false);
             entity.ValidateData<Project.Common.Components.WeaponEntities>(false);
             entity.ValidateData<Project.Common.Components.WeaponPosition>(false);
+            entity.ValidateData<Project.Common.Components.WeaponView>(false);
             entity.ValidateData<Project.Common.Components.WormholeHookAffect>(true);
             entity.ValidateData<Project.Common.Components.WormholeHookModifier>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.GameFinished>(true);

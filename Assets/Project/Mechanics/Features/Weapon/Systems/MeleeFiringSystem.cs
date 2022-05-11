@@ -45,7 +45,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
 			if(entity.GetParent().Has<StunModifier>()) return;
 
 			ref var delay = ref entity.Get<MeleeDelay>().Value;
-			var gunDir = entity.Read<WeaponAim>().Aim.GetPosition();
+			var gunDir = entity.Read<WeaponAim>().Value.GetPosition();
 			
 			delay -= deltaTime;
 

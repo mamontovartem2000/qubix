@@ -45,7 +45,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
         {
             if(entity.GetParent().Has<StunModifier>()) return;
 
-            var len = entity.Read<LinearWeapon>().Length;
+            var len = entity.Read<LinearWeapon>().Value;
             _projectile.SpawnLinear(entity, len, deltaTime);
         }
     }
