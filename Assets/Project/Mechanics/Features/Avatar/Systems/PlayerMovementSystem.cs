@@ -46,10 +46,13 @@ namespace Project.Mechanics.Features.Avatar.Systems
 		}
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-				ref readonly var moveAmount = ref entity.Read<MoveInput>().Value;
-				var direction = entity.Read<MoveInput>().Axis == MovementAxis.Vertical ? Vector3.right : Vector3.back;
-
+			ref readonly var moveAmount = ref entity.Read<MoveInput>().Value;
+			var direction = entity.Read<MoveInput>().Axis == MovementAxis.Vertical ? Vector3.right : Vector3.back;
+			
+			if (entity.GetRotation() != Quaternion.Euler(entity.Read<FaceDirection>().Value))
+			{
 				entity.SetRotation(Quaternion.RotateTowards(entity.GetRotation(), Quaternion.LookRotation(entity.Read<FaceDirection>().Value), 40f));
+			}
 
 			if (moveAmount != 0)
 			{

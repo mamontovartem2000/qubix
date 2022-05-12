@@ -34,9 +34,9 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			ref var input = ref entity.Get<MoveInput>().Value;
-			var clamped = Mathf.Clamp(input, -1, 1);
-			input = clamped;
+			// ref var input = ref entity.Get<MoveInput>().Value;
+			// var clamped = Mathf.Clamp(input, -1, 1);
+			// input = clamped;
 		}
 	}
 }

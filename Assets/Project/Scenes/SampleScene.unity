@@ -3266,102 +3266,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940805600}
   m_CullTransparentMesh: 1
---- !u!1 &949177910
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 949177914}
-  - component: {fileID: 949177913}
-  - component: {fileID: 949177912}
-  - component: {fileID: 949177911}
-  m_Layer: 0
-  m_Name: Mirror Plane
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!64 &949177911
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949177910}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &949177912
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949177910}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 9ee1c2f87cb5c4ece8b43bdd2d39d1d6, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &949177913
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949177910}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &949177914
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949177910}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 32, y: -0.35, z: 21}
-  m_LocalScale: {x: 100, y: 0, z: 100}
-  m_Children: []
-  m_Father: {fileID: 1902044271}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &983147917
 GameObject:
   m_ObjectHideFlags: 0
@@ -3473,7 +3377,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1902044271}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &994954908
 MonoBehaviour:
@@ -6453,7 +6357,6 @@ Transform:
   - {fileID: 373365271}
   - {fileID: 2203115479106424811}
   - {fileID: 25925405}
-  - {fileID: 949177914}
   - {fileID: 994954907}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -8993,7 +8896,6 @@ GameObject:
   - component: {fileID: 2203115479106424810}
   - component: {fileID: 2203115479106424815}
   - component: {fileID: 2203115479106424817}
-  - component: {fileID: 2203115479106424816}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9015,86 +8917,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPassEvent: {fileID: 11400000, guid: be33c7913ada15040b7dd81a291611ed, type: 2}
   _offset: {x: -11, y: 10, z: -4}
---- !u!114 &2203115479106424816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2203115479106424814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35a505113e8a54d2d815b2daf269e750, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsEnabled: 1
-  Name: 
-  IsMirrorInMirror: 0
-  MirrorInMirrorId: 
-  TurnOffOcclusion: 0
-  DeviceType: 0
-  WorkType: 1
-  UpVector: 2
-  Intensity: 0.076
-  DisableGBuffer: 1
-  RunForEveryXthFrame: 1
-  CameraLODLevel: 0
-  TextureLODLevel: 2
-  HDR: 1
-  MSAA: 1
-  DisablePixelLights: 0
-  Shadow: 0
-  Cull: 0
-  CullDistance: 0
-  TextureSize: 1
-  ManualSize: 3840
-  UseCameraClipPlane: 0
-  ClipPlaneOffset: 0
-  ReflectLayers:
-    serializedVersion: 2
-    m_Bits: 167
-  DirectLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  MixBlackColor: 0
-  EnableDepthBlur: 1
-  DepthBlurShader: {fileID: 4800000, guid: e02cb2d3802ee44a09e3baf03630a245, type: 3}
-  DepthBlurCutoff: 10
-  DepthBlurIterations: 14
-  DepthBlurSurfacePower: 1
-  DepthBlurHorizontalMultiplier: 1
-  DepthBlurVerticalMultiplier: 3
-  EnableSimpleDepth: 0
-  SimpleDepthCutoff: 1.18
-  Shades:
-  - ObjectToShade: {fileID: 949177910}
-    MaterialToChange: {fileID: 2100000, guid: 9ee1c2f87cb5c4ece8b43bdd2d39d1d6, type: 2}
-  EnableFinalShader: 0
-  FinalShader: {fileID: 0}
-  EnableARMode: 0
-  Iterations: 3
-  NeighbourPixels: 5
-  BlockSize: 8
-  EnableRefraction: 0
-  RefractionTexture: {fileID: 0}
-  Refraction: 0
-  EnableWaves: 0
-  WaveNoiseTexture: {fileID: 0}
-  WaveSize: 15
-  WaveDistortion: 0.02
-  WaveSpeed: 0.005
-  EnableRipples: 0
-  RippleTexture: {fileID: 0}
-  RippleSize: 5
-  RippleRefraction: 0.02
-  RippleDensity: 3
-  RippleSpeed: 20
-  EnableMask: 0
-  MaskTexture: {fileID: 0}
-  MaskTiling: {x: 1, y: 1}
-  MaskCutoff: 0.5
-  MaskEdgeDarkness: 1
-  _cameraAttachedTo: {fileID: 2203115479106424812}
 --- !u!45 &2203115479106424817
 Skybox:
   m_ObjectHideFlags: 0

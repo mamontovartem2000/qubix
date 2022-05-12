@@ -18,23 +18,38 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
+  - id: 4
+  - id: 5
+  - id: 6
   removeStructComponents: []
   templates: []
   references:
     version: 1
     00000000:
-      type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 0}
+        Value: {fileID: 11400000, guid: ccdae680de4d67043abe03d40dcb3a23, type: 2}
     00000001:
-      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: WeaponView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: {fileID: 2525851274780467698, guid: a8b471d0aa86ef740be759be308aff8c, type: 3}
     00000002:
-      type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {x: 0.35, y: 0, z: 0}
+    00000003:
+      type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 0
-    00000003:
-      type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
+    00000004:
+      type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 0
+    00000005:
+      type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 0
+    00000006:
+      type: {class: SpreadAmount, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 0

@@ -17,8 +17,6 @@ MonoBehaviour:
   - id: 0
   - id: 1
   - id: 2
-  - id: 3
-  - id: 4
   removeStructComponents: []
   templates: []
   references:
@@ -26,7 +24,7 @@ MonoBehaviour:
     00000000:
       type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 0}
+        Value: {fileID: 2371503065138435176, guid: 70fe0c5a0f4457f45b78c2a8bc467e9b, type: 3}
     00000001:
       type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -35,9 +33,3 @@ MonoBehaviour:
       type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 1
-    00000003:
-      type: {class: MeleeWeapon, ns: Project.Common.Components, asm: Project.Common}
-    00000004:
-      type: {class: FiringCooldownModifier, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0

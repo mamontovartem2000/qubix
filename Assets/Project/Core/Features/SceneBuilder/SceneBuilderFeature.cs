@@ -47,9 +47,9 @@ namespace Project.Core.Features.SceneBuilder
             _outPortal = world.RegisterViewSource(Out_PortalEffect);
 
             RegisterViewsToDictionary();
-            AddSystem<NewHealthDispenserSystem>();
-            AddSystem<SpawnMineSystem>();
-            AddSystem<PortalsSystem>();
+            // AddSystem<NewHealthDispenserSystem>();
+            // AddSystem<SpawnMineSystem>();
+            // AddSystem<PortalsSystem>();
 
             PrepareMap();
             
