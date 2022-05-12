@@ -1,49 +1,47 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Input.InputHandler.Markers
 {
     public enum InputState { Pressed, Released }
 
+    public struct MovementMarker : IMarker
+    {
+        public MovementAxis Axis;
+        public int Value;
+    }
+    
     public struct ForwardMarker : IMarker
     {
-        public int ActorID;
         public InputState State;
         public MovementAxis Axis;
     }
     public struct BackwardMarker : IMarker
     {
-        public int ActorID;
-
         public InputState State;
         public MovementAxis Axis;
     }
     public struct LeftMarker : IMarker
     {
-        public int ActorID;
-
         public InputState State;
         public MovementAxis Axis;
     }
     public struct RightMarker : IMarker
     {
-        public int ActorID;
         public InputState State;
         public MovementAxis Axis;
     }
     public struct MouseLeftMarker : IMarker
     {
-        public int ActorID;
         public InputState State;
     }
     public struct MouseRightMarker : IMarker
     {
-        public int ActorID;
         public InputState State;
     }
     public struct LockDirectionMarker : IMarker
     {
-        public int ActorID;
         public InputState State;
     }
 

@@ -3,14 +3,25 @@ using UnityEngine;
 
 namespace Project.Common.Components 
 {   
+    public enum MovementAxis
+    {
+        Horizontal, Vertical
+    }
+    
     public struct PlayerMoveTarget : IComponent
     {
         public Vector3 Value;
     }
 
+    // public struct MoveInput : IComponent
+    // {
+    //     public Vector2Int Value;
+    //     public MovementAxis Axis;
+    // }
+
     public struct MoveInput : IComponent
     {
-        public Vector2Int Value;
+        public int Value;
         public MovementAxis Axis;
     }
 
@@ -26,8 +37,8 @@ namespace Project.Common.Components
 
     public struct LockTarget : IComponent { }
 
-    public enum MovementAxis
+    public enum MovementVector
     {
-        Horizontal, Vertical
+        Left, Right, Forward, Backward, Zero 
     }
 }

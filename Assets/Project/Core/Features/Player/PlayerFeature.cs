@@ -15,6 +15,7 @@ namespace Project.Core.Features.Player
 #endif
 	public sealed class PlayerFeature : Feature
 	{
+		public PlayerInput PlayerInput;
 		public DataConfig BullerConfig;
 		public DataConfig GoldHunterConfig;
 		public DataConfig PowerfConfig;
@@ -25,14 +26,18 @@ namespace Project.Core.Features.Player
 		protected override void OnConstruct()
 		{
 			AddModule<PlayerConnectionModule>();
+			AddSystem<InputSafeCheckSystem>();
+			AddSystem<HandleInputSystem>();
+			
+			PlayerInput = new PlayerInput();
+			PlayerInput.Enable();
+			
 			Filter.Create("Player-Filter")
 				.With<PlayerTag>()
 				.Push(ref _playerFilter);
 
 			var net = world.GetModule<NetworkModule>();
 			net.RegisterObject(this);
-
-			AddSystem<HandleInputSystem>();
 
 			_onPlayerConnected = net.RegisterRPC(new System.Action<int>(PlayerConnected_RPC).Method);
 			_onPlayerDisconnected = net.RegisterRPC(new System.Action<int>(PlayerDisconnected_RPC).Method);
@@ -119,8 +124,6 @@ namespace Project.Core.Features.Player
 			return Entity.Empty;
 		}
 
-		protected override void OnDeconstruct()
-		{
-		}
+		protected override void OnDeconstruct() {}
 	}
 }

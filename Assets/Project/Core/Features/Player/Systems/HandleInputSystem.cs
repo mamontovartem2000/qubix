@@ -24,7 +24,8 @@ namespace Project.Core.Features.Player.Systems
 
 		private Filter _playerFilter;
 
-		private RPCId _forward, _backward, _left, _right, _mouseLeft, _mouseRight, _lockDirection;
+		private RPCId _movement;
+		private RPCId _mouseLeft, _mouseRight, _lockDirection;
 		private RPCId _firstSkill, _secondSkill, _thirdSkill, _fourthSkill;
 
 		void ISystemBase.OnConstruct()
@@ -32,7 +33,6 @@ namespace Project.Core.Features.Player.Systems
 			Net = world.GetModule<NetworkModule>();
 
 			this.GetFeature(out _feature);
-			// var net = world.GetModule<NetworkModule>();
 			Net.RegisterObject(this);
 			RegisterRPSs(Net);
 
@@ -43,10 +43,6 @@ namespace Project.Core.Features.Player.Systems
 
 		private void RegisterRPSs(NetworkModule net)
 		{
-			_forward = net.RegisterRPC(new Action<ForwardMarker>(ForwardKey_RPC).Method);
-			_backward = net.RegisterRPC(new Action<BackwardMarker>(BackwardKey_RPC).Method);
-			_left = net.RegisterRPC(new Action<LeftMarker>(LeftKey_RPC).Method);
-			_right = net.RegisterRPC(new Action<RightMarker>(RightKey_RPC).Method);
 			_mouseLeft = net.RegisterRPC(new Action<MouseLeftMarker>(LeftMouse_RPC).Method);
 			_mouseRight = net.RegisterRPC(new Action<MouseRightMarker>(RightMouse_RPC).Method);
 			_lockDirection = net.RegisterRPC(new Action<LockDirectionMarker>(SpaceKey_RPC).Method);
@@ -55,16 +51,17 @@ namespace Project.Core.Features.Player.Systems
 			_secondSkill = net.RegisterRPC(new Action<SecondSkillMarker>(SecondSkill_RPC).Method);
 			_thirdSkill = net.RegisterRPC(new Action<ThirdSkillMarker>(ThirdSkill_RPC).Method);
 			_fourthSkill = net.RegisterRPC(new Action<FourthSkillMarker>(FourthSkill_RPC).Method);
+
+			_movement = net.RegisterRPC(new Action<MovementMarker>(Movement_RPC).Method);
 		}
+
+		
 
 		void ISystemBase.OnDeconstruct() {}
 
 		void IUpdate.Update(in float deltaTime)
 		{
-			if (world.GetMarker(out ForwardMarker fm)) Net.RPC(this, _forward, fm);
-			if (world.GetMarker(out BackwardMarker bm)) Net.RPC(this, _backward, bm);
-			if (world.GetMarker(out LeftMarker lm)) Net.RPC(this, _left, lm);
-			if (world.GetMarker(out RightMarker rm)) Net.RPC(this, _right, rm);
+			if(world.GetMarker(out MovementMarker move)) Net.RPC(this, _movement, move);
 			
 			if (world.GetMarker(out MouseLeftMarker mlm)) Net.RPC(this, _mouseLeft, mlm);
 			if (world.GetMarker(out MouseRightMarker mrm)) Net.RPC(this, _mouseRight, mrm);
@@ -77,101 +74,110 @@ namespace Project.Core.Features.Player.Systems
 			if(world.GetMarker(out FourthSkillMarker fourth)) Net.RPC(this, _fourthSkill, fourth);
 		}
 
-		private void ForwardKey_RPC(ForwardMarker fm)
+		private void Movement_RPC(MovementMarker move)
 		{
 			var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
 			if (!player.Has<PlayerAvatar>()) return;
 
 			ref var entity = ref player.Get<PlayerAvatar>().Value;
-
-			entity.Get<MoveInput>().Axis = fm.Axis;
-
-			switch (fm.State)
-			{
-				case InputState.Pressed:
-				{
-					entity.Get<MoveInput>().Value.y += 1;
-					break;
-				}
-				case InputState.Released:
-				{
-					entity.Get<MoveInput>().Value.y -= 1;
-					break;
-				}
-			}
+			entity.Set(new MoveInput {Axis = move.Axis, Value = move.Value});
 		}
-
-		private void BackwardKey_RPC(BackwardMarker bm)
-		{
-			var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-			if (!player.Has<PlayerAvatar>()) return;
-
-			ref var entity = ref player.Get<PlayerAvatar>().Value;
-
-			entity.Get<MoveInput>().Axis = bm.Axis;
-
-			switch (bm.State)
-			{
-				case InputState.Pressed:
-				{
-					entity.Get<MoveInput>().Value.y -= 1;
-					break;
-				}
-				case InputState.Released:
-				{
-					entity.Get<MoveInput>().Value.y += 1;
-					break;
-				}
-			}
-		}
-
-		private void LeftKey_RPC(LeftMarker lm)
-		{
-			var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-			if (!player.Has<PlayerAvatar>()) return;
-
-			ref var entity = ref player.Get<PlayerAvatar>().Value;
-
-			entity.Get<MoveInput>().Axis = lm.Axis;
-
-			switch (lm.State)
-			{
-				case InputState.Pressed:
-				{
-					entity.Get<MoveInput>().Value.x -= 1;
-					break;
-				}
-				case InputState.Released:
-				{
-					entity.Get<MoveInput>().Value.x += 1;
-					break;
-				}
-			}
-		}
-
-		private void RightKey_RPC(RightMarker rm)
-		{
-			var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-			if (!player.Has<PlayerAvatar>()) return;
-
-			ref var entity = ref player.Get<PlayerAvatar>().Value;
-
-			entity.Get<MoveInput>().Axis = rm.Axis;
-
-			switch (rm.State)
-			{
-				case InputState.Pressed:
-				{
-					entity.Get<MoveInput>().Value.x += 1;
-					break;
-				}
-				case InputState.Released:
-				{
-					entity.Get<MoveInput>().Value.x -= 1;
-					break;
-				}
-			}
-		}
+		
+		// private void ForwardKey_RPC(ForwardMarker fm)
+		// {
+		// 	var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+		// 	if (!player.Has<PlayerAvatar>()) return;
+		//
+		// 	ref var entity = ref player.Get<PlayerAvatar>().Value;
+		//
+		// 	entity.Get<MoveInput>().Axis = fm.Axis;
+		//
+		// 	switch (fm.State)
+		// 	{
+		// 		case InputState.Pressed:
+		// 		{
+		// 			entity.Get<MoveInput>().Value.y += 1;
+		// 			break;
+		// 		}
+		// 		case InputState.Released:
+		// 		{
+		// 			entity.Get<MoveInput>().Value.y -= 1;
+		// 			break;
+		// 		}
+		// 	}
+		// }
+		//
+		// private void BackwardKey_RPC(BackwardMarker bm)
+		// {
+		// 	var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+		// 	if (!player.Has<PlayerAvatar>()) return;
+		//
+		// 	ref var entity = ref player.Get<PlayerAvatar>().Value;
+		//
+		// 	entity.Get<MoveInput>().Axis = bm.Axis;
+		//
+		// 	switch (bm.State)
+		// 	{
+		// 		case InputState.Pressed:
+		// 		{
+		// 			entity.Get<MoveInput>().Value.y -= 1;
+		// 			break;
+		// 		}
+		// 		case InputState.Released:
+		// 		{
+		// 			entity.Get<MoveInput>().Value.y += 1;
+		// 			break;
+		// 		}
+		// 	}
+		// }
+		//
+		// private void LeftKey_RPC(LeftMarker lm)
+		// {
+		// 	var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+		// 	if (!player.Has<PlayerAvatar>()) return;
+		//
+		// 	ref var entity = ref player.Get<PlayerAvatar>().Value;
+		//
+		// 	entity.Get<MoveInput>().Axis = lm.Axis;
+		//
+		// 	switch (lm.State)
+		// 	{
+		// 		case InputState.Pressed:
+		// 		{
+		// 			entity.Get<MoveInput>().Value.x -= 1;
+		// 			break;
+		// 		}
+		// 		case InputState.Released:
+		// 		{
+		// 			entity.Get<MoveInput>().Value.x += 1;
+		// 			break;
+		// 		}
+		// 	}
+		// }
+		//
+		// private void RightKey_RPC(RightMarker rm)
+		// {
+		// 	var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+		// 	if (!player.Has<PlayerAvatar>()) return;
+		//
+		// 	ref var entity = ref player.Get<PlayerAvatar>().Value;
+		//
+		// 	entity.Get<MoveInput>().Axis = rm.Axis;
+		//
+		// 	switch (rm.State)
+		// 	{
+		// 		case InputState.Pressed:
+		// 		{
+		// 			entity.Get<MoveInput>().Value.x += 1;
+		// 			break;
+		// 		}
+		// 		case InputState.Released:
+		// 		{
+		// 			entity.Get<MoveInput>().Value.x -= 1;
+		// 			break;
+		// 		}
+		// 	}
+		// }
 
 		private void LeftMouse_RPC(MouseLeftMarker mlm)
 		{

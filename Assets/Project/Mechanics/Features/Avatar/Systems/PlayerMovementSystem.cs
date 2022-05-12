@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Microsoft.Win32;
 using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features.GameState.Components;
@@ -45,7 +46,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 		}
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-				var moveAmount = entity.Read<MoveInput>().Axis == MovementAxis.Horizontal ? entity.Read<MoveInput>().Value.x : entity.Read<MoveInput>().Value.y;
+				ref readonly var moveAmount = ref entity.Read<MoveInput>().Value;
 				var direction = entity.Read<MoveInput>().Axis == MovementAxis.Vertical ? Vector3.right : Vector3.back;
 
 				entity.SetRotation(Quaternion.RotateTowards(entity.GetRotation(), Quaternion.LookRotation(entity.Read<FaceDirection>().Value), 40f));
