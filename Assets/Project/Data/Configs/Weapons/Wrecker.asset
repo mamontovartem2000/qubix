@@ -22,14 +22,14 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 11400000, guid: 475be9945c9211e4ea6c2678d75f3b18, type: 2}
+        Value: {fileID: 0}
     00000001:
-      type: {class: WeaponView, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 6285051073144073388, guid: f079beb482b99ee40987f44e9717d248, type: 3}
+        Value: 0
     00000002:
-      type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {x: -0.35, y: 0, z: 0}
+        Value: 0

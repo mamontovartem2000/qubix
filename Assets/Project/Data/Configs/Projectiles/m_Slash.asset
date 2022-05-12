@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: Minigun
+  m_Name: m_Slash
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
@@ -18,6 +18,7 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
+  - id: 4
   removeStructComponents: []
   templates: []
   references:
@@ -27,14 +28,16 @@ MonoBehaviour:
       data:
         Value: {fileID: 0}
     00000001:
-      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 4
-    00000002:
       type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 60
-    00000003:
+        Value: 35
+    00000002:
       type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0.1
+        Value: 1
+    00000003:
+      type: {class: MeleeWeapon, ns: Project.Common.Components, asm: Project.Common}
+    00000004:
+      type: {class: FiringCooldownModifier, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 0

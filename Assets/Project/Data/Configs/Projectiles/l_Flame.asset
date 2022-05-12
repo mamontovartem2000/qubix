@@ -10,26 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: Machinegun
+  m_Name: l_Flame
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
   - id: 0
   - id: 1
-  - id: 2
   removeStructComponents: []
   templates: []
   references:
     version: 1
     00000000:
-      type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 11400000, guid: 2423306ebde76d14cad5fe0a6105bbc4, type: 2}
+        Value: {fileID: 1319295140966577040, guid: 24ab087fcfb49da4ca4b198fa046f11e, type: 3}
     00000001:
-      type: {class: WeaponView, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 7488603227075078415, guid: bd5d74ccea702b245a326f05e3963490, type: 3}
-    00000002:
-      type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: {x: 0.35, y: 0, z: 0}
+        Value: 1.2
