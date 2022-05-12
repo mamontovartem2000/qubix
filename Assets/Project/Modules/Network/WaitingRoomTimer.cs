@@ -8,8 +8,16 @@ namespace Project.Modules.Network
         [SerializeField] private TMP_Text _text;
         private float _timer = 0f;
 
-        public void SetTime(float time)
+        private void Start()
         {
+            Stepsss.TimeRemaining += SetTime;
+        }
+
+        public void SetTime(uint time)
+        {
+            if (_text.gameObject.activeSelf == false)
+                _text.gameObject.SetActive(true);
+
             _timer = time;
         }
 
@@ -28,7 +36,7 @@ namespace Project.Modules.Network
             else
             {
                 _timer = 0;
-                _text.text = $"00:00";
+                _text.text = $"Loading level";
             }
         }
     }

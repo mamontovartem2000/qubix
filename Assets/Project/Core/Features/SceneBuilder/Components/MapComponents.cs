@@ -7,6 +7,7 @@ namespace Project.Core.Features.SceneBuilder.Components
     public struct MapComponents : IStructCopyable<MapComponents>
     {
         public BufferArray<byte> WalkableMap;
+        public BufferArray<Vector3> MineMap;
         public BufferArray<float> HeightMap;
         public BufferArray<Vector3> PortalsMap;
 

@@ -1,12 +1,10 @@
-using System;
 using UnityEngine;
 
 namespace Project.Modules.Network
 {
-	public class CharacterSelectionScript : MonoBehaviour
+    public class CharacterSelectionScript : MonoBehaviour
 	{
-		public static event Action<string> OnPlayerSelected;
-		public static void FirePlayerSelected(string s) => OnPlayerSelected?.Invoke(s);
+		public static void FirePlayerSelected(string name) => Stepsss.SetCharacterRequest(name);
 
 		public string[] Names;
 
@@ -18,9 +16,9 @@ namespace Project.Modules.Network
 			{
 				_chars[i].SetActive(i == index);
 			}
-			
-			FirePlayerSelected(Names[index]);
-			Debug.Log(Names[index]);
+
+			Stepsss.SetCharacterRequest(Names[index]);
+			Debug.Log("Chosen character: " + Names[index]);
 		}
 	}
 }

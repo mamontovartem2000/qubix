@@ -9,10 +9,11 @@ namespace Project.Modules.Network
 {
     public static class SystemMessages
     {
+        public static Action GameIsOver;
+
         public static byte[] SystemHashMessage(uint tick, int hash)
         {
             FlatBufferBuilder builder = new FlatBufferBuilder(1);
-            //Debug.Log($"tick {tick}, hash {hash}");
             var hashMess = SaveHash.CreateSaveHash(builder, tick, hash);
             var offset = SystemMessage.CreateSystemMessage(builder, GetTime(), Payload.SaveHash, hashMess.Value);
             builder.Finish(offset.Value);
@@ -34,6 +35,9 @@ namespace Project.Modules.Network
                     break;
                 case Payload.TimeFromStart:
                     SetServerTime(data.PayloadAsTimeFromStart());
+                    break;
+                case Payload.StatsReceive:
+                    GameIsOver?.Invoke();
                     break;
                 default:
                     Debug.Log("Unknown system message!");
@@ -81,7 +85,7 @@ namespace Project.Modules.Network
 
         public static uint GetTime()
         {
-            return (uint)DateTime.Now.Ticks;
+            return (uint) new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
         }
     }
 
