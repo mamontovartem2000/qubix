@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,8 +6,11 @@ namespace Project.Modules.Network
 {
     public class ConnectSupport : MonoBehaviour
 	{
-		public static Action ReadyToPlay;
-		public static Action GameCancelled;
+		[DllImport("__Internal")]
+		private static extern void ReadyToStart();
+
+		[DllImport("__Internal")]
+		private static extern void GameCancelled();
 
 		[SerializeField] private GameObject _selectionScreen;
 
@@ -18,7 +21,7 @@ namespace Project.Modules.Network
 			Stepsss.LoadMainMenuScene += ReloadMenuScene;
 			Stepsss.LoadGameScene += LoadGameScene;
 			Stepsss.ShowCharacterSelectionWindow += SwapScreens;
-			ReadyToPlay?.Invoke();
+			ReadyToStart();
 		}
 
 		private void Update()
@@ -30,8 +33,8 @@ namespace Project.Modules.Network
 				SceneManager.LoadScene(0, LoadSceneMode.Single);
 
 #if !UNITY_WEBGL || UNITY_EDITOR
-			if (NetworkData.Connect != null && NetworkData.Connect.Socket.State == NativeWebSocket.WebSocketState.Open)
-				NetworkData.Connect.Socket.DispatchMessageQueue();
+			if (NetworkData.Connect != null)
+				NetworkData.Connect.DispatchWebSocketMessageQueue();
 #endif
 		}
 

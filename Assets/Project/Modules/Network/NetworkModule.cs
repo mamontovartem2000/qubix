@@ -69,7 +69,7 @@ namespace Project.Modules.Network
         public NetTransporter()
         {
             if (NetworkData.Connect != null)
-                NetworkData.Connect.GetMessage += GetMessage;
+                NetworkData.Connect.OnMessage += GetMessage; //TODO: Unsubscribe
             else
                 Debug.Log("Error. NetworkData.Connect is null");
         }

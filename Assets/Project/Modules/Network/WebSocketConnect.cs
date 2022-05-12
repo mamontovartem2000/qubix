@@ -1,80 +1,102 @@
-using System.Linq;
 using NativeWebSocket;
-using Project.Modules.Network;
+using System;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class WebSocketConnect
+namespace Project.Modules.Network
 {
-    public UnityAction<byte[]> GetMessage;
-    public UnityAction StartJoining;
-    public WebSocket Socket { get; private set; }
-
-    public WebSocketConnect()
+    public class WebSocketConnect
     {
-        CreateConnect();
-    }
+        public Action ConnectSuccessful;
+        public Action<string> ConnectError;
+        public Action<byte[]> OnMessage;
 
-    private async void CreateConnect()
-    {
-        Socket = new WebSocket(NetworkData.Info.server_url);
-        Socket.OnMessage += (e) => GetMessage?.Invoke(e);
-        Socket.OnOpen += () => StartJoining?.Invoke();
+        private WebSocket _socket;
 
-        Socket.OnError += (e) =>
+        public WebSocketConnect()
         {
-            Debug.Log("Error! " + e);
-        };
-
-        Socket.OnClose += (e) =>
-        {
-            //TODO: можно проверять по типук
-            Debug.Log("Close! " + e);
-            CloseClient();
             CreateConnect();
-        };
-
-        await Socket.Connect();
-    }
-
-    public void SendMessage(byte[] message)
-    {
-        try
-        {
-            byte[] type = new byte[1] { 0 };
-            byte[] result = type.Concat(message).ToArray();
-            Socket.Send(result);
         }
-        catch
-        {
-            Debug.Log("Send error");
-        }
-    }
 
-    public void SendSystemMessage(byte[] message)
-    {
-        try
+        private async void CreateConnect()
         {
-            byte[] type = new byte[1] { 1 };
-            byte[] result = type.Concat(message).ToArray();
-            Socket.Send(result);
-        }
-        catch
-        {
-            Debug.Log("SendSystem error");
-        }
-    }
+            try
+            {
+                _socket = new WebSocket(NetworkData.Info.server_url);
+            }
+            catch (Exception exception)
+            {
+                // Invalid URI: The format of the URI could not be determined.
+                Debug.Log("Create " + exception);
 
-    public async void CloseClient()
-    {
-        if (Socket != null)
-        {
-            await Socket.Close();
-        }
-    }
+                ConnectError?.Invoke(exception.Message);
+                return;
+            }
 
-    ~WebSocketConnect()
-    {
-        CloseClient();
+            _socket.OnOpen += () => ConnectSuccessful?.Invoke();
+            _socket.OnMessage += (e) => OnMessage?.Invoke(e);
+
+            _socket.OnError += (e) =>
+            {
+                // If there is no Internet connection:
+                // Unable to connect to the remote server
+                Debug.Log("Error! " + e);
+                ConnectError?.Invoke(e);
+            };
+
+            _socket.OnClose += (e) =>
+            {
+                Debug.Log("Close! " + e);
+            };
+
+            await _socket.Connect();
+        }
+
+        public void SendMessage(byte[] message)
+        {
+            try
+            {
+                byte[] type = new byte[1] { 0 };
+                byte[] result = type.Concat(message).ToArray();
+                _socket.Send(result);
+            }
+            catch
+            {
+                Debug.Log("Send error");
+            }
+        }
+
+        public void SendSystemMessage(byte[] message)
+        {
+            try
+            {
+                byte[] type = new byte[1] { 1 };
+                byte[] result = type.Concat(message).ToArray();
+                _socket.Send(result);
+            }
+            catch
+            {
+                Debug.Log("SendSystem error");
+            }
+        }
+
+        public void DispatchWebSocketMessageQueue()
+        {
+            if (_socket.State == WebSocketState.Open)
+                _socket.DispatchMessageQueue();
+        }
+
+        public async void CloseClient()
+        {
+            if (_socket != null)
+            {
+                await _socket.Close();
+            }
+        }
+
+        ~WebSocketConnect()
+        {
+            CloseClient();
+        }
     }
 }

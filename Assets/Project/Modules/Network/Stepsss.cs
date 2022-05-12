@@ -23,11 +23,18 @@ namespace Project.Modules.Network
 			NetworkData.FullJoinRequest = request;
 
 			NetworkData.Connect = new WebSocketConnect();
-			NetworkData.Connect.GetMessage += GetMessage;
-			NetworkData.Connect.StartJoining += SendJoinRequest;
+			NetworkData.Connect.OnMessage += GetMessage;
+			NetworkData.Connect.ConnectSuccessful += SendJoinRequest;
+			NetworkData.Connect.ConnectError += ExitGame;
 		}
 
-		private static void GetMessage(byte[] bytes)
+        private static void ExitGame(string obj)
+        {
+			Debug.Log("Reload Main");
+			LoadMainMenuScene?.Invoke();
+		}
+
+        private static void GetMessage(byte[] bytes)
 		{
 			byte[] buffer = new byte[bytes.Length - 1];
 			Array.Copy(bytes, 1, buffer, 0, buffer.Length);
@@ -114,7 +121,7 @@ namespace Project.Modules.Network
 		private static void SetStartGame(Start start)
 		{
 			NetworkData.GameSeed = start.Seed;
-			NetworkData.Connect.GetMessage -= GetMessage;
+			NetworkData.Connect.OnMessage -= GetMessage;
 			LoadGameScene?.Invoke();
 			Debug.Log("Start");
 		}

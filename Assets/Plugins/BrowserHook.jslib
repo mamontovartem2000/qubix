@@ -1,6 +1,15 @@
 mergeInto(LibraryManager.library, {
 
 ReadyToStart: function() {
-        window.alert("Hello, world!");
+        ReadyToStartFunction();
     },
+
+GameCancelled: function() {
+        GameCancelledFunction();
+    },
+
+GameIsOver: function() {
+        GameIsOverFunction();
+    },
+
 });

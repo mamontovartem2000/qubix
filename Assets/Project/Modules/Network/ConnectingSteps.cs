@@ -36,8 +36,8 @@ namespace Project.Modules.Network
 				SceneManager.LoadScene(0, LoadSceneMode.Single);
 
 #if !UNITY_WEBGL || UNITY_EDITOR
-			if (NetworkData.Connect != null && NetworkData.Connect.Socket.State == NativeWebSocket.WebSocketState.Open)
-				NetworkData.Connect.Socket.DispatchMessageQueue();
+			if (NetworkData.Connect != null)
+				NetworkData.Connect.DispatchWebSocketMessageQueue();
 #endif
 		}
 

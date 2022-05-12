@@ -14,8 +14,8 @@ public class GameSceneDestroyer : MonoBehaviour
     private void Update()
     {
 #if !UNITY_WEBGL || UNITY_EDITOR
-        if (NetworkData.Connect != null && NetworkData.Connect.Socket.State == NativeWebSocket.WebSocketState.Open)
-            NetworkData.Connect.Socket.DispatchMessageQueue();
+        if (NetworkData.Connect != null)
+            NetworkData.Connect.DispatchWebSocketMessageQueue();
 #endif
 
         if (Worlds.currentWorld == null) return;
