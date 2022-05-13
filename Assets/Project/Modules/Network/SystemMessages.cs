@@ -3,16 +3,12 @@ using FlatMessages;
 using ME.ECS;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace Project.Modules.Network
 {
     public static class SystemMessages
     {
-        [DllImport("__Internal")]
-        private static extern void GameIsOver();
-
         public static byte[] SystemHashMessage(uint tick, int hash)
         {
             FlatBufferBuilder builder = new FlatBufferBuilder(1);
@@ -39,7 +35,7 @@ namespace Project.Modules.Network
                     SetServerTime(data.PayloadAsTimeFromStart());
                     break;
                 case Payload.StatsReceive:
-                    GameIsOver();
+                    BrowserEvents.GameIsOver();
                     break;
                 default:
                     Debug.Log("Unknown system message!");

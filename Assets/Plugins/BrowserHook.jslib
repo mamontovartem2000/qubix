@@ -12,4 +12,8 @@ GameIsOver: function() {
         GameIsOverFunction();
     },
 
+GameError: function() {
+        GameErrorFunction();
+    },
+
 });

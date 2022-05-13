@@ -6,12 +6,6 @@ namespace Project.Modules.Network
 {
     public class ConnectSupport : MonoBehaviour
 	{
-		[DllImport("__Internal")]
-		private static extern void ReadyToStart();
-
-		[DllImport("__Internal")]
-		private static extern void GameCancelled();
-
 		[SerializeField] private GameObject _selectionScreen;
 
 		private bool _needLoadGameScene, _needReloadThisScene;
@@ -21,7 +15,11 @@ namespace Project.Modules.Network
 			Stepsss.LoadMainMenuScene += ReloadMenuScene;
 			Stepsss.LoadGameScene += LoadGameScene;
 			Stepsss.ShowCharacterSelectionWindow += SwapScreens;
-			ReadyToStart();
+#if UNITY_WEBGL && !UNITY_EDITOR
+			BrowserEvents.ReadyToStart();
+#endif
+			string request = "";
+			SetJoinRequest(request);
 		}
 
 		private void Update()
