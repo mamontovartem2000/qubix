@@ -20,7 +20,6 @@ MonoBehaviour:
   - id: 3
   - id: 4
   - id: 5
-  - id: 6
   removeStructComponents: []
   templates: []
   references:
@@ -47,7 +46,3 @@ MonoBehaviour:
         Value: 0.1
     00000005:
       type: {class: MeleeWeapon, ns: Project.Common.Components, asm: Project.Common}
-    00000006:
-      type: {class: FiringCooldownModifier, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0

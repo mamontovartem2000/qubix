@@ -19,6 +19,7 @@ MonoBehaviour:
   - id: 2
   - id: 3
   - id: 4
+  - id: 5
   removeStructComponents: []
   templates: []
   references:
@@ -43,3 +44,5 @@ MonoBehaviour:
       type: {class: MeleeDelayDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 0
+    00000005:
+      type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
+  m_Name: GoldHunterSource
+  m_EditorClassIdentifier: 
+  sharedGroupId: 0
+  structComponents:
+  - id: 0
+  - id: 1
+  removeStructComponents: []
+  templates: []
+  references:
+    version: 1
+    00000000:
+      type: {class: PlayerConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        AvatarConfig: {fileID: 11400000, guid: 338718e75006dcb4080092a62e7b5b0a, type: 2}
+        LeftWeaponConfig: {fileID: 11400000, guid: aa7957ac10fbff0489a7d707b3afa23c, type: 2}
+        RightWeaponConfig: {fileID: 11400000, guid: b0428b6eb75742e4896e5e54a368f597, type: 2}
+        FirstSkillConfig: {fileID: 0}
+        SecondSkillConfig: {fileID: 0}
+        ThirdSkillConfig: {fileID: 0}
+        FourthSkillConfig: {fileID: 0}
+    00000001:
+      type: {class: PlayerScore, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Kills: 0
+        Deaths: 0

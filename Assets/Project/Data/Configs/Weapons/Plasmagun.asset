@@ -17,6 +17,10 @@ MonoBehaviour:
   - id: 0
   - id: 1
   - id: 2
+  - id: 3
+  - id: 4
+  - id: 5
+  - id: 6
   removeStructComponents: []
   templates: []
   references:
@@ -33,3 +37,19 @@ MonoBehaviour:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {x: -0.35, y: 0, z: 0}
+    00000003:
+      type: {class: AmmoCapacity, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 100
+    00000004:
+      type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 100
+    00000005:
+      type: {class: LinearWeapon, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 7
+    00000006:
+      type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 4750566254876390811, guid: a5effc025e9e1054ebdc1abe1546666b, type: 3}

@@ -1,6 +1,5 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using UnityEngine;
 
 namespace Project.Input.InputHandler.Markers
 {
@@ -10,27 +9,6 @@ namespace Project.Input.InputHandler.Markers
     {
         public MovementAxis Axis;
         public int Value;
-    }
-    
-    public struct ForwardMarker : IMarker
-    {
-        public InputState State;
-        public MovementAxis Axis;
-    }
-    public struct BackwardMarker : IMarker
-    {
-        public InputState State;
-        public MovementAxis Axis;
-    }
-    public struct LeftMarker : IMarker
-    {
-        public InputState State;
-        public MovementAxis Axis;
-    }
-    public struct RightMarker : IMarker
-    {
-        public InputState State;
-        public MovementAxis Axis;
     }
     public struct MouseLeftMarker : IMarker
     {

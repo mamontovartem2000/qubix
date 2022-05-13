@@ -22,6 +22,7 @@ MonoBehaviour:
   - id: 5
   - id: 6
   - id: 7
+  - id: 8
   removeStructComponents: []
   templates: []
   references:
@@ -58,3 +59,5 @@ MonoBehaviour:
       type: {class: SpreadAmount, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 0.2
+    00000008:
+      type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}

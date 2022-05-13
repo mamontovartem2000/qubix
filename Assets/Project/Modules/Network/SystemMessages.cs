@@ -39,7 +39,7 @@ namespace Project.Modules.Network
                     SetServerTime(data.PayloadAsTimeFromStart());
                     break;
                 case Payload.StatsReceive:
-                    GameIsOver();
+                    //GameIsOver();
                     break;
                 default:
                     Debug.Log("Unknown system message!");

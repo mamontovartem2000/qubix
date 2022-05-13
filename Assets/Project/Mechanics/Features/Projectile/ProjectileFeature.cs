@@ -27,11 +27,13 @@ namespace Project.Mechanics.Features.Projectile
 
         public void SpawnProjectile(Entity gun, Vector3 direction)
         {
+            Debug.Log("spawned projectile");
+
             var entity = new Entity("projectile");
             gun.Read<ProjectileConfig>().Value.Apply(entity);
 
             entity.SetParent(gun);
-            entity.SetLocalPosition(new Vector3(0.15f, 0f, 0.25f));
+            entity.SetLocalPosition(new Vector3(0.15f, 0f, 0.0f));
             entity.SetParent(Entity.Empty);
             
             entity.SetLocalRotation(gun.GetParent().GetRotation());
@@ -56,6 +58,7 @@ namespace Project.Mechanics.Features.Projectile
 
         public void SpawnLinear(Entity gun, int length, float delay)
         {
+            Debug.Log("spawned linear");
             for (var i = 1; i < length; i++)
             {
                 var entity = new Entity("laser");
@@ -95,6 +98,8 @@ namespace Project.Mechanics.Features.Projectile
 
         public void SpawnMelee(Entity gun, Vector3 position)
         {
+            Debug.Log("spawned melee");
+
             var entity = new Entity("melee");
             gun.Read<ProjectileConfig>().Value.Apply(entity);
             entity.SetLocalPosition(position);

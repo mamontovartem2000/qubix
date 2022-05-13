@@ -26,7 +26,7 @@ namespace Project.Core.Features.Player
 		protected override void OnConstruct()
 		{
 			AddModule<PlayerConnectionModule>();
-			AddSystem<InputSafeCheckSystem>();
+			// AddSystem<InputSafeCheckSystem>();
 			AddSystem<HandleInputSystem>();
 			
 			PlayerInput = new PlayerInput();

@@ -34,7 +34,7 @@ namespace Project.Mechanics.Features.Avatar
             var entity = new Entity("avatar");
             owner.Read<PlayerConfig>().AvatarConfig.Apply(entity);
 
-            var view = world.RegisterViewSource(entity.Read<NeedAvatar>().Value);
+            var view = world.RegisterViewSource(entity.Read<AvatarView>().Value);
             entity.InstantiateView(view);
 
             entity.Get<Owner>().Value = owner;

@@ -18,6 +18,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ComponentBuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Cooldown>(false, true, false, false, false, false, false, false);
@@ -68,7 +69,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveInput>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedModifier>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.NeedAvatar>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Owner>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportAffect>(true, true, false, false, false, false, false, false);
@@ -155,6 +155,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ComponentBuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Cooldown>(false, true, false, false, false, false, false, false);
@@ -205,7 +206,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveInput>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedModifier>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.NeedAvatar>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Owner>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportAffect>(true, true, false, false, false, false, false, false);
@@ -287,6 +287,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.AutomaticDamageModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.AutomaticWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvatarTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.AvatarView>(false);
             noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.BuffTrigger>(true);
             structComponentsContainer.Validate<Project.Common.Components.ComponentBuff>(true);
             structComponentsContainer.Validate<Project.Common.Components.Cooldown>(false);
@@ -337,7 +338,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.MoveInput>(false);
             structComponentsContainer.Validate<Project.Common.Components.MoveSpeedAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.MoveSpeedModifier>(false);
-            structComponentsContainer.Validate<Project.Common.Components.NeedAvatar>(false);
             structComponentsContainer.Validate<Project.Common.Components.Owner>(false);
             structComponentsContainer.Validate<Project.Common.Components.PassiveSkill>(true);
             structComponentsContainer.Validate<Project.Common.Components.PersonalTeleportAffect>(true);
@@ -424,6 +424,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.AutomaticDamageModifier>(false);
             entity.ValidateData<Project.Common.Components.AutomaticWeapon>(true);
             entity.ValidateData<Project.Common.Components.AvatarTag>(true);
+            entity.ValidateData<Project.Common.Components.AvatarView>(false);
             entity.ValidateDataOneShot<Project.Common.Components.BuffTrigger>(true);
             entity.ValidateData<Project.Common.Components.ComponentBuff>(true);
             entity.ValidateData<Project.Common.Components.Cooldown>(false);
@@ -474,7 +475,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.MoveInput>(false);
             entity.ValidateData<Project.Common.Components.MoveSpeedAffect>(true);
             entity.ValidateData<Project.Common.Components.MoveSpeedModifier>(false);
-            entity.ValidateData<Project.Common.Components.NeedAvatar>(false);
             entity.ValidateData<Project.Common.Components.Owner>(false);
             entity.ValidateData<Project.Common.Components.PassiveSkill>(true);
             entity.ValidateData<Project.Common.Components.PersonalTeleportAffect>(true);
