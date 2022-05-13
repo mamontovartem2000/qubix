@@ -36,10 +36,8 @@ namespace Project.Core.Features.SceneBuilder
         [SerializeField] private List<MapViewElement> _tileList = new List<MapViewElement>();
         [SerializeField] private List<MapViewElement> _objectsList = new List<MapViewElement>();
 
-
         private Dictionary<int, ViewId> _tilesView = new Dictionary<int, ViewId>();
         private Dictionary<int, ViewId> _objectsView = new Dictionary<int, ViewId>();
-
 
         protected override void OnConstruct()
         {
@@ -47,12 +45,15 @@ namespace Project.Core.Features.SceneBuilder
             _outPortal = world.RegisterViewSource(Out_PortalEffect);
 
             RegisterViewsToDictionary();
-            // AddSystem<NewHealthDispenserSystem>();
-            // AddSystem<SpawnMineSystem>();
-            // AddSystem<PortalsSystem>();
+            AddSystem<NewHealthDispenserSystem>();
+            AddSystem<SpawnMineSystem>();
+            AddSystem<PortalsSystem>();
 
             PrepareMap();
-            
+
+            if (_objectsMap != null)
+                PrepareObjectMap();
+
             world.SetSharedData(new MapInitialized());
         }
 
@@ -77,8 +78,6 @@ namespace Project.Core.Features.SceneBuilder
         {
             //GameMapRemoteData mapData = ParceUtils.CreateFromJSON<UniversalData<GameMapRemoteData>>(data).data;
             GameMapRemoteData mapData = new GameMapRemoteData(_sourceMap);
-            GameMapRemoteData objects = new GameMapRemoteData(_objectsMap);
-
 
             int height = mapData.bytes.Length / mapData.offset;
             int width = mapData.offset;
@@ -87,6 +86,11 @@ namespace Project.Core.Features.SceneBuilder
             CreateWalkableMap(height * width, mapData.bytes, out BufferArray<byte> walkableMap);
             world.SetSharedData(new MapComponents { WalkableMap = walkableMap });
             DrawMap(mapData.bytes);
+        }
+
+        private void PrepareObjectMap()
+        {
+            GameMapRemoteData objects = new GameMapRemoteData(_objectsMap);
             DrawMapObjects(objects.bytes);
         }
 

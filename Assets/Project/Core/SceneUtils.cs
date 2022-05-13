@@ -90,7 +90,7 @@ namespace Project.Core
 
 
     [Serializable]
-    public class GameMapRemoteData //TODO: Match field names with server ones
+    public class GameMapRemoteData
     {
         public byte[] bytes;
         public int offset;
@@ -100,31 +100,54 @@ namespace Project.Core
             var omg = sourceMap.text.Split('\n');
             List<byte> byteList = new List<byte>();
 
+            var arr = omg[0].Split(' ');
+            offset = arr.Length + 2;
+            var wall = CreateWalls();
+            byteList.AddRange(wall);
+
             foreach (var line in omg)
             {
+                byteList.Add(0);
                 var stringArray = line.Split(' ');
                 byte[] byteArray = Array.ConvertAll(stringArray, s => byte.Parse(s));
-                offset = byteArray.Length;
                 byteList.AddRange(byteArray);
+                byteList.Add(0);
             }
 
+            byteList.AddRange(wall);
             bytes = byteList.ToArray();
 
-            //int count = 0;
-            //string df = string.Empty;
+            //DebugMapMatrix();
+        }
 
-            //for (int i = 0; i < bytes.Length; i++)
-            //{
-            //    count++;
-            //    df += bytes[i].ToString();
+        private List<byte> CreateWalls()
+        {
+            List<byte> wall = new List<byte>(offset);
 
-            //    if (count == offset)
-            //    {
-            //        count = 0;
-            //        df += "\n";
-            //    }
-            //}
-            //Debug.Log(df);
+            for (int i = 0; i < offset; i++)
+            {
+                wall.Add(0);
+            }
+            return wall;
+        }
+
+        private void DebugMapMatrix()
+        {
+            int count = 0;
+            string df = string.Empty;
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                count++;
+                df += bytes[i].ToString();
+
+                if (count == offset)
+                {
+                    count = 0;
+                    df += "\n";
+                }
+            }
+            Debug.Log(df);
         }
     }
 
