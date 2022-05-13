@@ -80,11 +80,13 @@ namespace Project.Modules.Network
             }
         }
 
+#if !UNITY_WEBGL || UNITY_EDITOR
         public void DispatchWebSocketMessageQueue()
         {
             if (_socket.State == WebSocketState.Open)
                 _socket.DispatchMessageQueue();
         }
+#endif
 
         public async void CloseClient()
         {
