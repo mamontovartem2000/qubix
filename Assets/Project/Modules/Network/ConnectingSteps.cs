@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Project.Modules.Network
 {
@@ -11,6 +12,9 @@ namespace Project.Modules.Network
 		[SerializeField] private GameObject _selectionScreen;
 		[SerializeField] private TMP_InputField _playerNumber;
 		[SerializeField] private TMP_InputField _playerRoomID;
+		[SerializeField] private Button _joinReadyButton;
+		[SerializeField] private Button _hostReadyButton;
+
 		
 		[SerializeField] private TextMeshProUGUI _hostRoomID;
 		
@@ -62,6 +66,8 @@ namespace Project.Modules.Network
 
 		private void GetManualJoinRequest(string roomId)
 		{
+			_joinReadyButton.interactable = false;
+			_hostReadyButton.interactable = false;
 			_hostRoomID.text = roomId;
 			StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, _nickname, Stepsss.ProcessJoinRequest));
 		}	

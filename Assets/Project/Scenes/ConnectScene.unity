@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2670,6 +2670,8 @@ MonoBehaviour:
   _selectionScreen: {fileID: 143924702}
   _playerNumber: {fileID: 385853239}
   _playerRoomID: {fileID: 1371437038}
+  _joinReadyButton: {fileID: 1625218333}
+  _hostReadyButton: {fileID: 1444920330}
   _hostRoomID: {fileID: 1830884690}
   _hostNick: {fileID: 2108088887}
   _playerNick: {fileID: 399640322}

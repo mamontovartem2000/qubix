@@ -56,23 +56,10 @@ namespace Project.Core.Features.Player.Systems
 			_movement = net.RegisterRPC(new Action<MovementMarker>(Movement_RPC).Method);
 		}
 
-		private void Debuga()
-		{
-			var ent = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
-			var wep = ent.Read<PlayerAvatar>().Value.Read<WeaponEntities>().LeftWeapon;
-
-			var shot = wep.Has<LeftWeaponShot>();
-			var active = wep.Has<LinearActive>();
-
-			Debug.Log($"left://ent: {ent.ToStringNoVersion()}, shot: {shot}, active: {active}");
-		}
-		
-
 		void ISystemBase.OnDeconstruct() {}
 
 		void IUpdate.Update(in float deltaTime)
 		{
-			// Debuga();
 			if(world.GetMarker(out MovementMarker move)) Net.RPC(this, _movement, move);
 			
 			if (world.GetMarker(out MouseLeftMarker mlm)) Net.RPC(this, _mouseLeft, mlm);
@@ -88,7 +75,8 @@ namespace Project.Core.Features.Player.Systems
 
 		private void Movement_RPC(MovementMarker move)
 		{
-			var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
+			var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+			// var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
 			if (!player.Has<PlayerAvatar>()) return;
 
 			ref var entity = ref player.Get<PlayerAvatar>().Value;
@@ -97,7 +85,8 @@ namespace Project.Core.Features.Player.Systems
 		
 		private void LeftMouse_RPC(MouseLeftMarker mlm)
 		{
-			var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
+			// var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
+			var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
 			if (!player.Has<PlayerAvatar>()) return;
 
 			ref var entity = ref player.Get<PlayerAvatar>().Value.Get<WeaponEntities>().LeftWeapon;
@@ -109,7 +98,6 @@ namespace Project.Core.Features.Player.Systems
 					entity.Set(new LeftWeaponShot());
 					entity.Set(new MeleeActive());
 
-					// Debug.Log($"left://ent: {entity.ToSmallString()}, shot: {entity.Has<LeftWeaponShot>()}");
 					break;
 				}
 				case InputState.Released:
@@ -123,7 +111,8 @@ namespace Project.Core.Features.Player.Systems
 
 		private void RightMouse_RPC(MouseRightMarker mrm)
 		{
-			var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
+			var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+			// var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
 			if (!player.Has<PlayerAvatar>()) return;
 
 			ref var entity = ref player.Get<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon;
@@ -145,7 +134,8 @@ namespace Project.Core.Features.Player.Systems
 
 		private void SpaceKey_RPC(LockDirectionMarker sm)
 		{
-			var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
+			var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+			// var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
 			if (!player.Has<PlayerAvatar>()) return;
 
 			ref var entity = ref player.Get<PlayerAvatar>().Value;
