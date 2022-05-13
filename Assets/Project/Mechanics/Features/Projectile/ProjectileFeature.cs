@@ -27,8 +27,6 @@ namespace Project.Mechanics.Features.Projectile
 
         public void SpawnProjectile(Entity gun, Vector3 direction)
         {
-            Debug.Log("spawned projectile");
-
             var entity = new Entity("projectile");
             gun.Read<ProjectileConfig>().Value.Apply(entity);
 
@@ -58,7 +56,6 @@ namespace Project.Mechanics.Features.Projectile
 
         public void SpawnLinear(Entity gun, int length, float delay)
         {
-            Debug.Log("spawned linear");
             for (var i = 1; i < length; i++)
             {
                 var entity = new Entity("laser");

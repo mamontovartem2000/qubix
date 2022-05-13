@@ -183,10 +183,6 @@ MonoBehaviour:
       features:
         features:
         - enabled: 1
-          feature: {fileID: 11400000, guid: 69a0a3d309b58744fa1746c3fcc570b1, type: 2}
-          innerFeatures:
-            innerFeatures: []
-        - enabled: 1
           feature: {fileID: 11400000, guid: 85849b1f113fa2e48aa9e5cbe11c4018, type: 2}
           innerFeatures:
             innerFeatures: []
@@ -210,6 +206,10 @@ MonoBehaviour:
           feature: {fileID: 11400000, guid: 7937d2c685f9ccb4b9da7903e8c81b09, type: 2}
           innerFeatures:
             innerFeatures: []
+        - enabled: 1
+          feature: {fileID: 11400000, guid: 69a0a3d309b58744fa1746c3fcc570b1, type: 2}
+          innerFeatures:
+            innerFeatures: []
   worldSettings:
     useJobsForSystems: 1
     useJobsForViews: 1
@@ -231,6 +231,6 @@ MonoBehaviour:
       unityParticlesProviderShowOnScene: 1
   tickTime: 0.033
   inputTicks: 3
-  Capacity: 100
+  entitiesCapacity: 200
   references:
     version: 1

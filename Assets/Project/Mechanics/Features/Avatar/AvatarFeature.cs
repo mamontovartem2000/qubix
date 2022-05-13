@@ -24,7 +24,6 @@ namespace Project.Mechanics.Features.Avatar
             AddSystem<PlayerHealthSystem>();
             AddSystem<SpawnPlayerAvatarSystem>();
             AddSystem<PlayerMovementSystem>();
-            AddSystem<MoveInputCapSystem>();
         }
 
         protected override void OnDeconstruct() {}
@@ -61,9 +60,7 @@ namespace Project.Mechanics.Features.Avatar
             var weapon = new Entity("weapon");
             weaponConfig.Apply(weapon);
             
-            
             weapon.SetParent(parent);
-            
             weapon.SetLocalPosition(weapon.Read<WeaponPosition>().Value);
 
             var aim = new Entity("aim");
@@ -71,6 +68,7 @@ namespace Project.Mechanics.Features.Avatar
             aim.SetLocalPosition(weapon.Has<TrajectoryWeapon>() ?_direction +_trajectory: _direction);
 
             weapon.Get<WeaponAim>().Value = aim;
+            weapon.Get<AmmoCapacity>().Value = weapon.Read<AmmoCapacityDefault>().Value;
             
             var view = world.RegisterViewSource(weapon.Read<WeaponView>().Value);
             weapon.InstantiateView(view);

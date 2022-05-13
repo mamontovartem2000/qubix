@@ -15,6 +15,7 @@ MonoBehaviour:
   sharedGroupId: 0
   structComponents:
   - id: 0
+  - id: 1
   removeStructComponents: []
   templates: []
   references:
@@ -23,3 +24,7 @@ MonoBehaviour:
       type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 0.6
+    00000001:
+      type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 1
