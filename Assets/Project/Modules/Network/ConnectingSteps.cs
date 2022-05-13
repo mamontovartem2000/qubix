@@ -83,5 +83,12 @@ namespace Project.Modules.Network
 			//TODO: Add random selection
 			CharacterSelectionScript.FirePlayerSelected("GoldHunter");
 		}
+
+		private void OnDestroy()
+		{
+			Stepsss.LoadMainMenuScene -= ReloadMenuScene;
+			Stepsss.LoadGameScene -= LoadGameScene;
+			Stepsss.ShowCharacterSelectionWindow -= SwapScreens;
+		}
 	}
 }

@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Project.Modules.Network
@@ -18,8 +17,6 @@ namespace Project.Modules.Network
 #if UNITY_WEBGL && !UNITY_EDITOR
 			BrowserEvents.ReadyToStart();
 #endif
-			string request = "";
-			SetJoinRequest(request);
 		}
 
 		private void Update()
@@ -57,6 +54,13 @@ namespace Project.Modules.Network
 			_selectionScreen.SetActive(true);
 			//TODO: Add random selection
 			CharacterSelectionScript.FirePlayerSelected("GoldHunter");
+		}
+
+		private void OnDestroy()
+		{
+			Stepsss.LoadMainMenuScene -= ReloadMenuScene;
+			Stepsss.LoadGameScene -= LoadGameScene;
+			Stepsss.ShowCharacterSelectionWindow -= SwapScreens;
 		}
 	}
 }

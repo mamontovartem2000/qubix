@@ -35,7 +35,9 @@ namespace Project.Modules.Network
                     SetServerTime(data.PayloadAsTimeFromStart());
                     break;
                 case Payload.StatsReceive:
+#if UNITY_WEBGL && !UNITY_EDITOR
                     BrowserEvents.GameIsOver();
+#endif
                     break;
                 default:
                     Debug.Log("Unknown system message!");

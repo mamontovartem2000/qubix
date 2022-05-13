@@ -39,5 +39,10 @@ namespace Project.Modules.Network
                 _text.text = $"Loading level";
             }
         }
+
+        private void OnDestroy()
+        {
+            Stepsss.TimeRemaining -= SetTime;
+        }
     }
 }
