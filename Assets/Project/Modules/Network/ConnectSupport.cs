@@ -1,17 +1,10 @@
-﻿using System.Runtime.InteropServices;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Project.Modules.Network
 {
     public class ConnectSupport : MonoBehaviour
 	{
-		[DllImport("__Internal")]
-		private static extern void ReadyToStart();
-
-		[DllImport("__Internal")]
-		private static extern void GameCancelled();
-
 		[SerializeField] private GameObject _selectionScreen;
 
 		private bool _needLoadGameScene, _needReloadThisScene;
@@ -21,7 +14,9 @@ namespace Project.Modules.Network
 			Stepsss.LoadMainMenuScene += ReloadMenuScene;
 			Stepsss.LoadGameScene += LoadGameScene;
 			Stepsss.ShowCharacterSelectionWindow += SwapScreens;
-			ReadyToStart();
+#if UNITY_WEBGL && !UNITY_EDITOR
+			BrowserEvents.ReadyToStart();
+#endif
 		}
 
 		private void Update()
@@ -59,6 +54,13 @@ namespace Project.Modules.Network
 			_selectionScreen.SetActive(true);
 			//TODO: Add random selection
 			CharacterSelectionScript.FirePlayerSelected("GoldHunter");
+		}
+
+		private void OnDestroy()
+		{
+			Stepsss.LoadMainMenuScene -= ReloadMenuScene;
+			Stepsss.LoadGameScene -= LoadGameScene;
+			Stepsss.ShowCharacterSelectionWindow -= SwapScreens;
 		}
 	}
 }

@@ -121,7 +121,7 @@ namespace Project.Modules.Network
 		private static void SetStartGame(Start start)
 		{
 			NetworkData.GameSeed = start.Seed;
-			NetworkData.Connect.OnMessage -= GetMessage;
+			Unsubscibe();
 			LoadGameScene?.Invoke();
 			Debug.Log("Start");
 		}
@@ -150,5 +150,12 @@ namespace Project.Modules.Network
 			var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
 			NetworkData.Connect.SendSystemMessage(ms);
 		}
+
+		private static void Unsubscibe()
+        {
+			NetworkData.Connect.OnMessage -= GetMessage;
+			NetworkData.Connect.ConnectSuccessful -= SendJoinRequest;
+			NetworkData.Connect.ConnectError -= ExitGame;
+		} 
 	}
 }
