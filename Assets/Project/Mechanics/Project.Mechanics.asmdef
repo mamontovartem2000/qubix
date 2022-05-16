@@ -2,13 +2,15 @@
     "name": "Project.Mechanics",
     "rootNamespace": "",
     "references": [
-        "GUID:8979e5b9ed38b420d8191f6eb2c94074",
-        "GUID:1e50cf49f12c346f5ab77c5d33b0db51",
-        "GUID:948ed582966c54c1988774d66ffc3446",
-        "GUID:abeec234eac0119488dda990697ab7b6",
-        "GUID:d09b58b2fa8f4ca4eb527dc6fc32f83c",
-        "GUID:6a9a21c43daaf4b4d8d0c6de006b6212",
-        "GUID:f3f27a31a31541749a95cfbb23ad69a3"
+        "ME.ECS",
+        "ME.ECS.IL2CPP",
+        "ME.Pools",
+        "Project.Common",
+        "Project.Core",
+        "Project.Input",
+        "Project",
+        "Unity.Mathematics",
+        "Unity.Collections"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -153,6 +153,13 @@ MonoBehaviour:
     features: []
   featuresListCategories:
     items:
+    - folderCaption: PreTick
+      features:
+        features:
+        - enabled: 1
+          feature: {fileID: 11400000, guid: cc6a0f783dbfe1243b965f04a9a95af9, type: 2}
+          innerFeatures:
+            innerFeatures: []
     - folderCaption: Input
       features:
         features:
@@ -208,6 +215,13 @@ MonoBehaviour:
             innerFeatures: []
         - enabled: 1
           feature: {fileID: 11400000, guid: 69a0a3d309b58744fa1746c3fcc570b1, type: 2}
+          innerFeatures:
+            innerFeatures: []
+    - folderCaption: PostTick
+      features:
+        features:
+        - enabled: 1
+          feature: {fileID: 11400000, guid: f158ad834aa15f0409bee8cb61883338, type: 2}
           innerFeatures:
             innerFeatures: []
   worldSettings:

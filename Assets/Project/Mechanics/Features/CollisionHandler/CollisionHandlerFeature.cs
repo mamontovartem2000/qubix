@@ -28,6 +28,7 @@ namespace Project.Mechanics.Features.CollisionHandler
             AddSystem<HealthCollisionSystem>();
             AddSystem<MineCollisionSystem>();
             AddSystem<ProjectileCollisionSystem>();
+            AddSystem<CollisionDetectionSystem>();
 
             // ExplosionID = world.RegisterViewSource(ExplosionVFX);
             // PlayerDeathID = world.RegisterViewSource(PlayerDeathVFX);

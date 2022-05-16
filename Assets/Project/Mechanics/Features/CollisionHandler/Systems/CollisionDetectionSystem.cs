@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using ME.ECS.Collections;
 using Project.Common.Components;
+using Unity.Collections;
 
 namespace Project.Mechanics.Features.CollisionHandler.Systems
 {
@@ -29,7 +30,27 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
 
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
+            var results = new NativeList<QuadElement<Entity>>(Allocator.TempJob);
             
+            foreach (var entity in _collisionFilter)
+            {
+                results.Clear();
+                NativeQuadTreeUtils.GetResults(entity.GetPosition().XZ(), 2f, results);
+
+                foreach (var item in results)
+                {
+                    if(item.element == entity) continue;
+                    if ((item.element.GetPosition() - entity.GetPosition()).sqrMagnitude <= 2 * 2)
+                    {
+                        //do stuff
+                        // switch (@enum)
+                        // {
+                        //     
+                        // }
+                    }
+                }
+                
+            }
         }
     }
 }

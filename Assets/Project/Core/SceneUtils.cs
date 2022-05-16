@@ -16,12 +16,12 @@ namespace Project.Core
         public const float PlayerRadiusSQR = PlayerRadius * PlayerRadius;
         public const float ItemRadiusSQR = ItemRadius * ItemRadius;
 
-        private static int _width, _height;
+        public static int Width, Height;
 
         public static void SetWidthAndHeight(int width, int height)
         {
-            _width = width;
-            _height = height;
+            Width = width;
+            Height = height;
         }
 
         public static Entity[] ConvertFilterToEntityArray(Filter filter)
@@ -42,13 +42,13 @@ namespace Project.Core
             var x = Mathf.RoundToInt(vec.x);
             var y = Mathf.RoundToInt(vec.z);
 
-            return y * _width + x;
+            return y * Width + x;
         }
 
         public static Vector3 IndexToPosition(int index)
         {
-            var x = index % _width;
-            var y = Mathf.FloorToInt(index / (float)_width);
+            var x = index % Width;
+            var y = Mathf.FloorToInt(index / (float)Width);
 
             return new Vector3(x, 0f, y);
         }
@@ -74,7 +74,7 @@ namespace Project.Core
 
             while (!IsFree(position))
             {
-                var rnd = Worlds.current.GetRandomRange(0, _width * _height);
+                var rnd = Worlds.current.GetRandomRange(0, Width * Height);
                 position = IndexToPosition(rnd);
             }
 
