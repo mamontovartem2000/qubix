@@ -20,6 +20,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CircleRect>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CollisionTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ComponentBuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Cooldown>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, true, false, false, false, false, false, false);
@@ -110,6 +112,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpreadAmount>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SquareRect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StatsBuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunModifier>(false, true, false, false, false, false, false, false);
@@ -118,6 +121,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TestTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TriangleRect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
@@ -157,6 +161,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CircleRect>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CollisionTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ComponentBuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Cooldown>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, true, false, false, false, false, false, false);
@@ -247,6 +253,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpreadAmount>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SquareRect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StatsBuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunModifier>(false, true, false, false, false, false, false, false);
@@ -255,6 +262,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TestTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TriangleRect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
@@ -289,6 +297,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.AvatarTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvatarView>(false);
             noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.BuffTrigger>(true);
+            structComponentsContainer.Validate<Project.Common.Components.CircleRect>(false);
+            structComponentsContainer.Validate<Project.Common.Components.CollisionTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.ComponentBuff>(true);
             structComponentsContainer.Validate<Project.Common.Components.Cooldown>(false);
             structComponentsContainer.Validate<Project.Common.Components.CooldownDefault>(false);
@@ -379,6 +389,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SkillVFX>(false);
             structComponentsContainer.Validate<Project.Common.Components.SpeedModifier>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpreadAmount>(false);
+            structComponentsContainer.Validate<Project.Common.Components.SquareRect>(false);
             structComponentsContainer.Validate<Project.Common.Components.StatsBuff>(true);
             structComponentsContainer.Validate<Project.Common.Components.StunAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.StunModifier>(false);
@@ -387,6 +398,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.TestTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.Trajectory>(false);
             structComponentsContainer.Validate<Project.Common.Components.TrajectoryWeapon>(true);
+            structComponentsContainer.Validate<Project.Common.Components.TriangleRect>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponAim>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponEntities>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponPosition>(false);
@@ -426,6 +438,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.AvatarTag>(true);
             entity.ValidateData<Project.Common.Components.AvatarView>(false);
             entity.ValidateDataOneShot<Project.Common.Components.BuffTrigger>(true);
+            entity.ValidateData<Project.Common.Components.CircleRect>(false);
+            entity.ValidateData<Project.Common.Components.CollisionTag>(true);
             entity.ValidateData<Project.Common.Components.ComponentBuff>(true);
             entity.ValidateData<Project.Common.Components.Cooldown>(false);
             entity.ValidateData<Project.Common.Components.CooldownDefault>(false);
@@ -516,6 +530,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SkillVFX>(false);
             entity.ValidateData<Project.Common.Components.SpeedModifier>(true);
             entity.ValidateData<Project.Common.Components.SpreadAmount>(false);
+            entity.ValidateData<Project.Common.Components.SquareRect>(false);
             entity.ValidateData<Project.Common.Components.StatsBuff>(true);
             entity.ValidateData<Project.Common.Components.StunAffect>(true);
             entity.ValidateData<Project.Common.Components.StunModifier>(false);
@@ -524,6 +539,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.TestTag>(true);
             entity.ValidateData<Project.Common.Components.Trajectory>(false);
             entity.ValidateData<Project.Common.Components.TrajectoryWeapon>(true);
+            entity.ValidateData<Project.Common.Components.TriangleRect>(false);
             entity.ValidateData<Project.Common.Components.WeaponAim>(false);
             entity.ValidateData<Project.Common.Components.WeaponEntities>(false);
             entity.ValidateData<Project.Common.Components.WeaponPosition>(false);

@@ -13,12 +13,6 @@ namespace Project.Common.Components
         public Vector3 Value;
     }
 
-    // public struct MoveInput : IComponent
-    // {
-    //     public Vector2Int Value;
-    //     public MovementAxis Axis;
-    // }
-
     public struct MoveInput : IComponent
     {
         public int Value;
@@ -36,9 +30,4 @@ namespace Project.Common.Components
     }
 
     public struct LockTarget : IComponent { }
-
-    public enum MovementVector
-    {
-        Left, Right, Forward, Backward, Zero 
-    }
 }

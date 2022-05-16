@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: a_Machine
+  m_Name: m_Scyt
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
   - id: 0
   - id: 1
   - id: 2
-  - id: 3
   removeStructComponents: []
   templates: []
   references:
@@ -25,16 +24,12 @@ MonoBehaviour:
     00000000:
       type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 5022673654633621757, guid: c08957f3a19eefa439bb1cd70cb5fb6d, type: 3}
+        Value: {fileID: 0}
     00000001:
       type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 16
+        Value: 1
     00000002:
-      type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 20
-    00000003:
       type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 1.5
+        Value: 1
