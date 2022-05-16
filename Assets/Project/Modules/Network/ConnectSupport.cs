@@ -36,6 +36,7 @@ namespace Project.Modules.Network
 		// Browser method
 		public void SetJoinRequest(string request)
 		{
+			Debug.Log(request);
 			Stepsss.ProcessJoinRequest(request);
 		}
 
