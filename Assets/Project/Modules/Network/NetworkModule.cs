@@ -51,8 +51,7 @@ namespace Project.Modules.Network
                 instance.SetSerializer(new FSSerializer());
             }
 
-            Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorID = NetworkData.PlayerIdInRoom });
-            Worlds.currentWorld.AddMarker(new NetworkPlayerConnectedTimeSynced { ActorID = NetworkData.PlayerIdInRoom });
+            Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = NetworkData.PlayerIdInRoom, ServerID = NetworkData.Info.player_id, Nickname = NetworkData.Info.player_nickname });
         }      
     }
 

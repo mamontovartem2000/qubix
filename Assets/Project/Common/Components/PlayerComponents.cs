@@ -15,6 +15,7 @@ namespace Project.Common.Components
     {
         public int PlayerLocalID;
         public string PlayerServerID;
+        public string Nickname;
     }
     public struct WeaponEntities : IComponent
     {

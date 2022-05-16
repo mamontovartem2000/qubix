@@ -27,17 +27,12 @@ namespace Project.Core.Features.Player.Modules
         {
             if (world.GetMarker(out NetworkSetActivePlayer nsap))
             {
-                _feature.OnLocalPlayerConnected(nsap.ActorID);
+                _feature.OnLocalPlayerConnected(nsap.ActorLocalID, nsap.ServerID, nsap.Nickname);
             }
             
             if (world.GetMarker(out NetworkPlayerDisconnected npd))
             {
                 _feature.OnLocalPlayerDisconnected(npd.ActorID);
-            }
-
-            if (world.GetMarker(out NetworkPlayerConnectedTimeSynced npcts))
-            {
-                _feature.OnGameStarted(npcts.ActorID);
             }
         }
     }

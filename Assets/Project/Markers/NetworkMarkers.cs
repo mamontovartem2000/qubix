@@ -4,15 +4,12 @@ namespace Project.Markers
 {
     public struct NetworkSetActivePlayer : IMarker
     {
-        public int ActorID;
+        public int ActorLocalID;
+        public string ServerID;
+        public string Nickname;
     }
 
     public struct NetworkPlayerDisconnected : IMarker
-    {
-        public int ActorID;
-    }
-
-    public struct NetworkPlayerConnectedTimeSynced : IMarker
     {
         public int ActorID;
     }

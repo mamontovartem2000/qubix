@@ -20,7 +20,7 @@ namespace Project.Core.Features.Player
 		public DataConfig GoldHunterConfig;
 		public DataConfig PowerfConfig;
 
-		private RPCId _onPlayerConnected, _onPlayerDisconnected, _onGameStarted;
+		private RPCId _onPlayerConnected, _onPlayerDisconnected;
 		private Filter _playerFilter;
 
 		protected override void OnConstruct()
@@ -39,31 +39,30 @@ namespace Project.Core.Features.Player
 			var net = world.GetModule<NetworkModule>();
 			net.RegisterObject(this);
 
-			_onPlayerConnected = net.RegisterRPC(new System.Action<int>(PlayerConnected_RPC).Method);
+			_onPlayerConnected = net.RegisterRPC(new System.Action<int, string, string>(PlayerConnected_RPC).Method);
 			_onPlayerDisconnected = net.RegisterRPC(new System.Action<int>(PlayerDisconnected_RPC).Method);
-			_onGameStarted = net.RegisterRPC(new System.Action<int>(GameStarted_RPC).Method);
 		}
 
-		public void OnLocalPlayerConnected(int id)
+		public void OnLocalPlayerConnected(int local_id, string global_id, string nickname)
 		{
 			var net = world.GetModule<NetworkModule>();
-			net.RPC(this, _onPlayerConnected, id);
+			net.RPC(this, _onPlayerConnected, local_id, global_id, nickname);
 		}
 
-		private void PlayerConnected_RPC(int id)
+		private void PlayerConnected_RPC(int local_id, string global_id, string nickname)
 		{
-			var player = new Entity("player_" + id);
+			var player = new Entity("player_" + local_id);
 
 			if (world.GetModule<NetworkModule>().FakeConnect)
 			{
 				GoldHunterConfig.Apply(player);
-				player.Set(new PlayerTag {PlayerLocalID = id, PlayerServerID = "yeet"});
+				player.Set(new PlayerTag {PlayerLocalID = local_id, PlayerServerID = "yeet"});
 			}
 			else
 			{
-				player.Set(new PlayerTag {PlayerLocalID = id, PlayerServerID = NetworkData.Info.player_id});	
+				player.Set(new PlayerTag {PlayerLocalID = local_id, PlayerServerID = global_id, Nickname = nickname });	
 				
-				switch (NetworkData.PlayersInfo[id].Character)
+				switch (NetworkData.PlayersInfo[local_id].Character)
 				{
 					case "Buller":
 					{
@@ -98,17 +97,6 @@ namespace Project.Core.Features.Player
 			weps.LeftWeapon.Destroy();
 			weps.RightWeapon.Destroy();
 			avtr.Destroy();
-		}
-
-		public void OnGameStarted(int id)
-		{
-			var net = world.GetModule<NetworkModule>();
-			net.RPC(this, _onGameStarted, id);
-		}
-
-		private void GameStarted_RPC(int id)
-		{
-			world.GetFeature<EventsFeature>().OnTimeSynced.Execute();
 		}
 
 		public Entity GetPlayerByID(int id)

@@ -87,18 +87,32 @@ namespace Project.Modules.Network
         public string payload;
     }
 
+    //[Serializable]
+    //public class GameInfo
+    //{
+    //    public string room_id;
+    //    public string player_id;
+    //    public int map_id;
+    //    public string game_mode;
+    //    public int[] multiplayer_schema;
+    //    public string type;
+    //    public string player_nickname;
+    //    public string player_icon;
+    //    public string server_url;
+    //    public string[] available_characters;
+    //}
+
     [Serializable]
     public class GameInfo
     {
+        public string server_url;
         public string room_id;
-        public string player_id;
+        public string player_icon;
+        public string player_nickname;
         public int map_id;
         public string game_mode;
         public int[] multiplayer_schema;
-        public string type;
-        public string player_nickname;
-        public string player_icon;
-        public string server_url;
         public string[] available_characters;
+        public string player_id;
     }
 }

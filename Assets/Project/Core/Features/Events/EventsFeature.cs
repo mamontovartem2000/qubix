@@ -11,7 +11,6 @@ namespace Project.Core.Features.Events {
     public sealed class EventsFeature : Feature
     {
         // public GlobalEvent PassLocalPlayer;
-        public GlobalEvent OnTimeSynced;
         public GlobalEvent HealthChanged;
         public GlobalEvent AllPlayersReady;
         public GlobalEvent OnGameStarted;

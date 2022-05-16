@@ -17,6 +17,8 @@ namespace Project.Modules.Network
 #if UNITY_WEBGL && !UNITY_EDITOR
 			BrowserEvents.ReadyToStart();
 #endif
+			//string sdf = "{\"payload\":\"eyJzZXJ2ZXJfdXJsIjoid3NzOi8vZ2FtZS5xdWJpeGluZmluaXR5LmlvL21hdGNoIiwicm9vbV9pZCI6NDI4LCJwbGF5ZXJfaWQiOiJmZTc4YTMyMC0xNmNjLTQ2MWItYmMwMS0zMmI4YjZkZWY3ZTkiLCJwbGF5ZXJfaWNvbiI6Imh0dHBzOi8vZDNyc2Y3NTYxd2oyNzQuY2xvdWRmcm9udC5uZXQvbW9ja19hdmF0YXJzL3F1Yml4XzExLnBuZyIsInBsYXllcl9uaWNrbmFtZSI6IkRpbWEiLCJtYXBfaWQiOjMsImdhbWVfbW9kZSI6InNraXJtaXNoIiwibXVsdGlwbGF5ZXJfc2NoZW1hIjpbMV0sImF2YWlsYWJsZV9jaGFyYWN0ZXJzIjpbIkxvbWl4IiwiTG9taXgiLCJMb21peCIsIkxvbWl4IiwiTG9taXgiLCJMb21peCIsIlNpbGVuIl0sImV4cGlyZXNfYXQiOjE2NTI3MTIxNzcyNzh9\",\"signatures\":[{\"protected\":\"eyJhbGciOiJSUzI1NiIsImtpZCI6Im5hbWV8bWF0Y2htYWtpbmcifQ\",\"signature\":\"uZbHJOJHTQXCi2tSp240mLJQe69v0O0UAQwG0uBbsjpjf4RRFHjPMiBxzrobbMoJtmg7WkTjicR0hqfF9RlsObJuGx_IVaPQkmPJtpGKl4r98iBPRrBSifWNatjbJXP26UXYyub4eXZaxb38q9DM0AniV_cZSN1TWkYHOM2_-uY\"}]}";
+			//SetJoinRequest(sdf);
 		}
 
 		private void Update()

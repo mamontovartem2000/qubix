@@ -40,7 +40,7 @@ namespace Project.Modules.Network
 			Array.Copy(bytes, 1, buffer, 0, buffer.Length);
 
 			SystemMessage data = SystemMessage.GetRootAsSystemMessage(new ByteBuffer(buffer));
-
+			Debug.Log(data);
 			switch (data.PayloadType)
 			{
 				case Payload.NONE:
@@ -136,6 +136,7 @@ namespace Project.Modules.Network
 
 			var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
 			NetworkData.Connect.SendSystemMessage(ms);
+			Debug.Log("Send JoinRequest");
 		}
 
 		public static void SetCharacterRequest(string characterName)
