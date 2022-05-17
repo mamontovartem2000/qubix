@@ -51,6 +51,8 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
                 }
                 
             }
+
+            results.Dispose();
         }
     }
 }

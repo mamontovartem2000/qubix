@@ -16,7 +16,8 @@ namespace Project.Mechanics.Features.PreLogicTick.Systems
     public sealed class QuadTreeInitSystem : ISystem, IAdvanceTick
     {
         public World world { get; set; }
-        
+        public static NativeArray<QuadElement<Entity>> array;
+
         private PreLogicTickFeature _feature;
         private Filter _collisionFilter;
         void ISystemBase.OnConstruct()
@@ -33,17 +34,17 @@ namespace Project.Mechanics.Features.PreLogicTick.Systems
         {
             var width = SceneUtils.Width;
             var height = SceneUtils.Height;
-            var arr = new NativeArray<QuadElement<Entity>>(_collisionFilter.Count, Allocator.TempJob);
+            array = new NativeArray<QuadElement<Entity>>(_collisionFilter.Count, Allocator.TempJob);
 
             var i = 0;
             
             foreach (var coll in _collisionFilter)
             {
-                arr[i++] = new QuadElement<Entity>() {element = coll, pos = coll.GetPosition().XZ()};
+                array[i++] = new QuadElement<Entity>() {element = coll, pos = coll.GetPosition().XZ()};
             }
             
             NativeQuadTreeUtils.PrepareTick(new AABB2D(new Vector2(width/2, height/2), new float2(width/2, height/2)),
-                arr, arr.Length);
+                array, array.Length);
         }
     }
 }

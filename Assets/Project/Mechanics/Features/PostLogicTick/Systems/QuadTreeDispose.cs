@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.Collections;
+using Project.Mechanics.Features.PreLogicTick.Systems;
 
 namespace Project.Mechanics.Features.PostLogicTick.Systems {
 
@@ -30,6 +31,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems {
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
             NativeQuadTreeUtils.EndTick();
+            QuadTreeInitSystem.array.Dispose();
         }
     }
 }

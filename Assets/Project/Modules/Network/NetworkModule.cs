@@ -25,7 +25,7 @@ namespace Project.Modules.Network
 
     public class NetworkModule : ME.ECS.Network.NetworkModule<TState>
     {
-        public bool FakeConnect = false;
+        public bool FakeConnect = true;
 
         protected override int GetRPCOrder()
         {
@@ -49,9 +49,13 @@ namespace Project.Modules.Network
                 var instance = (ME.ECS.Network.INetworkModuleBase)this;
                 instance.SetTransporter(new NetTransporter());
                 instance.SetSerializer(new FSSerializer());
+                Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = NetworkData.PlayerIdInRoom, 
+                    ServerID = NetworkData.Info.player_id, Nickname = NetworkData.Info.player_nickname });
             }
-
-            Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = NetworkData.PlayerIdInRoom, ServerID = NetworkData.Info.player_id, Nickname = NetworkData.Info.player_nickname });
+            else
+            {
+                Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = 0, ServerID = "player_id", Nickname = "test_nickname" });
+            }
         }      
     }
 
