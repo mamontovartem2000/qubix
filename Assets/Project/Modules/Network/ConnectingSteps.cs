@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Project.Modules.Network
 {
@@ -14,7 +15,7 @@ namespace Project.Modules.Network
 		[SerializeField] private TMP_InputField _playerRoomID;
 		[SerializeField] private Button _joinReadyButton;
 		[SerializeField] private Button _hostReadyButton;
-
+		[SerializeField] private CharacterSelection _select;
 		
 		[SerializeField] private TextMeshProUGUI _hostRoomID;
 		
@@ -86,8 +87,10 @@ namespace Project.Modules.Network
 		{
 			_loginScreen.SetActive(false);
 			_selectionScreen.SetActive(true);
+			
 			//TODO: Add random selection
-			CharacterSelectionScript.FirePlayerSelected("GoldHunter");
+			var rnd = Random.Range(0, 3);
+			_select.Select(rnd);
 		}
 
 		private void OnDestroy()

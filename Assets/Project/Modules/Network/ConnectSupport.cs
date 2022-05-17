@@ -6,6 +6,7 @@ namespace Project.Modules.Network
     public class ConnectSupport : MonoBehaviour
 	{
 		[SerializeField] private GameObject _selectionScreen;
+		[SerializeField] private CharacterSelection _select;
 
 		private bool _needLoadGameScene, _needReloadThisScene;
 
@@ -56,7 +57,8 @@ namespace Project.Modules.Network
 		{
 			_selectionScreen.SetActive(true);
 			//TODO: Add random selection
-			CharacterSelectionScript.FirePlayerSelected("GoldHunter");
+			var rnd = Random.Range(0, 3);
+			_select.Select(rnd) ;
 		}
 
 		private void OnDestroy()
