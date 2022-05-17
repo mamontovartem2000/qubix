@@ -12,6 +12,7 @@ namespace Project.Modules.Network
 		public static Action LoadMainMenuScene;
 		public static Action LoadGameScene;
 		public static Action ShowCharacterSelectionWindow;
+		public static Action<RoomInfo[]> GetRoomList;
 
 		public static void ProcessJoinRequest(string request)
 		{
@@ -22,13 +23,28 @@ namespace Project.Modules.Network
 			NetworkData.Info = info;
 			NetworkData.FullJoinRequest = request;
 
-			NetworkData.Connect = new WebSocketConnect();
+			CreateSocketConnect(NetworkData.Info.server_url);
+		}
+
+		public static void ProcessJoinRequestWithoutSocket(string request)
+		{
+			string payloadBase64 = NetworkData.CreateFromJSON<JoinRequestData>(request).payload;
+			var payloadInBytes = Convert.FromBase64String(payloadBase64);
+			var playerJson = Encoding.UTF8.GetString(payloadInBytes);
+			GameInfo info = NetworkData.CreateFromJSON<GameInfo>(playerJson);
+			NetworkData.Info = info;
+			NetworkData.FullJoinRequest = request;				
+		}
+
+		public static void CreateSocketConnect(string url)
+        {
+			NetworkData.Connect = new WebSocketConnect(url);
 			NetworkData.Connect.OnMessage += GetMessage;
 			NetworkData.Connect.ConnectSuccessful += SendJoinRequest;
 			NetworkData.Connect.ConnectError += ExitGame;
 		}
 
-        private static void ExitGame(string obj)
+		private static void ExitGame(string obj)
         {
 			Debug.Log("Reload Main");
 			LoadMainMenuScene?.Invoke();
@@ -40,7 +56,7 @@ namespace Project.Modules.Network
 			Array.Copy(bytes, 1, buffer, 0, buffer.Length);
 
 			SystemMessage data = SystemMessage.GetRootAsSystemMessage(new ByteBuffer(buffer));
-			Debug.Log(data);
+
 			switch (data.PayloadType)
 			{
 				case Payload.NONE:
@@ -61,13 +77,33 @@ namespace Project.Modules.Network
 				case Payload.Shutdown:
 					ShutdownRoom(data.PayloadAsShutdown());
 					break;
+				case Payload.RoomList:
+					ShowRoomList(data.PayloadAsRoomList());
+					break;
 				default:
 					Debug.Log("Unknown system message!");
 					break;
 			}
 		}
 
-		private static void ShutdownRoom(Shutdown shutdown)
+        private static void ShowRoomList(RoomList roomList)
+        {
+			Debug.Log("Set Rooms!");
+
+			RoomInfo[] roomsInfo = new RoomInfo[roomList.RoomsLength];
+
+			for (int i = 0; i < roomList.RoomsLength; i++)
+			{
+				var room = roomList.Rooms(i);
+
+				RoomInfo roomInfo = new RoomInfo() { Id = room.Value.Id, PlayersCount = room.Value.PlayersCount, MaxPlayersCount = room.Value.MaxPlayersCount };
+				roomsInfo[i] = roomInfo;
+			}
+
+			GetRoomList?.Invoke(roomsInfo);
+		}
+
+        private static void ShutdownRoom(Shutdown shutdown)
 		{
 			Debug.Log("ShutDown");
 			LoadMainMenuScene?.Invoke();
@@ -105,14 +141,15 @@ namespace Project.Modules.Network
 
 			for (int i = 0; i < playerList.PlayersLength; i++)
 			{
-				var id = playerList.Players(i).Value.Id;
-				var slot = playerList.Players(i).Value.Slot;
-				var nick = playerList.Players(i).Value.Nickname;
-				var character = playerList.Players(i).Value.Character;
-				var icon = playerList.Players(i).Value.Icon;
+				var player = playerList.Players(i);
+				var id = player.Value.Id;
+				var slot = player.Value.Slot;
+				var nick = player.Value.Nickname;
+				var character = player.Value.Character;
+				var icon = player.Value.Icon;
 
-				PlayerInfo player = new PlayerInfo() { Id = id, Slot = slot, Nickname = nick, Character = character, Icon = icon };
-				playersInfo[i] = player;
+				PlayerInfo playerInfo = new PlayerInfo() { Id = id, Slot = slot, Nickname = nick, Character = character, Icon = icon };
+				playersInfo[i] = playerInfo;
 			}
 
 			NetworkData.PlayersInfo = playersInfo;
@@ -130,7 +167,7 @@ namespace Project.Modules.Network
 		{
 			FlatBufferBuilder builder = new FlatBufferBuilder(1);
 			var mes = builder.CreateString(NetworkData.FullJoinRequest);
-			var request = JoinRequest.CreateJoinRequest(builder, 0, mes);
+			var request = JoinRequest.CreateJoinRequest(builder, 0, mes); //TODO: Choose 0 or 1
 			var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.JoinRequest, request.Value);
 			builder.Finish(offset.Value);
 

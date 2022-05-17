@@ -13,16 +13,16 @@ namespace Project.Modules.Network
 
         private WebSocket _socket;
 
-        public WebSocketConnect()
+        public WebSocketConnect(string url)
         {
-            CreateConnect();
+            CreateConnect(url);
         }
 
-        private async void CreateConnect()
+        private async void CreateConnect(string url)
         {
             try
             {
-                _socket = new WebSocket(NetworkData.Info.server_url);
+                _socket = new WebSocket(url);
             }
             catch (Exception exception)
             {

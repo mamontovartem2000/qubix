@@ -26,6 +26,8 @@ public enum Payload : byte
   GameOver = 12,
   CloseRoom = 13,
   StatsReceive = 14,
+  LeaveRoom = 15,
+  RoomList = 16,
 };
 
 public struct JoinResult : IFlatbufferObject
@@ -248,6 +250,105 @@ public struct Player : IFlatbufferObject
   public static Offset<FlatMessages.Player> EndPlayer(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<FlatMessages.Player>(o);
+  }
+};
+
+public struct Room : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_2_0_0(); }
+  public static Room GetRootAsRoom(ByteBuffer _bb) { return GetRootAsRoom(_bb, new Room()); }
+  public static Room GetRootAsRoom(ByteBuffer _bb, Room obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
+  public Room __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public string Id { get { int o = __p.__offset(4); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetIdBytes() { return __p.__vector_as_span<byte>(4, 1); }
+#else
+  public ArraySegment<byte>? GetIdBytes() { return __p.__vector_as_arraysegment(4); }
+#endif
+  public byte[] GetIdArray() { return __p.__vector_as_array<byte>(4); }
+  public uint PlayersCount { get { int o = __p.__offset(6); return o != 0 ? __p.bb.GetUint(o + __p.bb_pos) : (uint)0; } }
+  public uint MaxPlayersCount { get { int o = __p.__offset(8); return o != 0 ? __p.bb.GetUint(o + __p.bb_pos) : (uint)0; } }
+
+  public static Offset<FlatMessages.Room> CreateRoom(FlatBufferBuilder builder,
+      StringOffset idOffset = default(StringOffset),
+      uint players_count = 0,
+      uint max_players_count = 0) {
+    builder.StartTable(3);
+    Room.AddMaxPlayersCount(builder, max_players_count);
+    Room.AddPlayersCount(builder, players_count);
+    Room.AddId(builder, idOffset);
+    return Room.EndRoom(builder);
+  }
+
+  public static void StartRoom(FlatBufferBuilder builder) { builder.StartTable(3); }
+  public static void AddId(FlatBufferBuilder builder, StringOffset idOffset) { builder.AddOffset(0, idOffset.Value, 0); }
+  public static void AddPlayersCount(FlatBufferBuilder builder, uint playersCount) { builder.AddUint(1, playersCount, 0); }
+  public static void AddMaxPlayersCount(FlatBufferBuilder builder, uint maxPlayersCount) { builder.AddUint(2, maxPlayersCount, 0); }
+  public static Offset<FlatMessages.Room> EndRoom(FlatBufferBuilder builder) {
+    int o = builder.EndTable();
+    return new Offset<FlatMessages.Room>(o);
+  }
+};
+
+public struct RoomList : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_2_0_0(); }
+  public static RoomList GetRootAsRoomList(ByteBuffer _bb) { return GetRootAsRoomList(_bb, new RoomList()); }
+  public static RoomList GetRootAsRoomList(ByteBuffer _bb, RoomList obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
+  public RoomList __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public FlatMessages.Room? Rooms(int j) { int o = __p.__offset(4); return o != 0 ? (FlatMessages.Room?)(new FlatMessages.Room()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
+  public int RoomsLength { get { int o = __p.__offset(4); return o != 0 ? __p.__vector_len(o) : 0; } }
+
+  public static Offset<FlatMessages.RoomList> CreateRoomList(FlatBufferBuilder builder,
+      VectorOffset roomsOffset = default(VectorOffset)) {
+    builder.StartTable(1);
+    RoomList.AddRooms(builder, roomsOffset);
+    return RoomList.EndRoomList(builder);
+  }
+
+  public static void StartRoomList(FlatBufferBuilder builder) { builder.StartTable(1); }
+  public static void AddRooms(FlatBufferBuilder builder, VectorOffset roomsOffset) { builder.AddOffset(0, roomsOffset.Value, 0); }
+  public static VectorOffset CreateRoomsVector(FlatBufferBuilder builder, Offset<FlatMessages.Room>[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
+  public static VectorOffset CreateRoomsVectorBlock(FlatBufferBuilder builder, Offset<FlatMessages.Room>[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static void StartRoomsVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static Offset<FlatMessages.RoomList> EndRoomList(FlatBufferBuilder builder) {
+    int o = builder.EndTable();
+    return new Offset<FlatMessages.RoomList>(o);
+  }
+};
+
+public struct LeaveRoom : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_2_0_0(); }
+  public static LeaveRoom GetRootAsLeaveRoom(ByteBuffer _bb) { return GetRootAsLeaveRoom(_bb, new LeaveRoom()); }
+  public static LeaveRoom GetRootAsLeaveRoom(ByteBuffer _bb, LeaveRoom obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
+  public LeaveRoom __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public bool Value { get { int o = __p.__offset(4); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+
+  public static Offset<FlatMessages.LeaveRoom> CreateLeaveRoom(FlatBufferBuilder builder,
+      bool value = false) {
+    builder.StartTable(1);
+    LeaveRoom.AddValue(builder, value);
+    return LeaveRoom.EndLeaveRoom(builder);
+  }
+
+  public static void StartLeaveRoom(FlatBufferBuilder builder) { builder.StartTable(1); }
+  public static void AddValue(FlatBufferBuilder builder, bool value) { builder.AddBool(0, value, false); }
+  public static Offset<FlatMessages.LeaveRoom> EndLeaveRoom(FlatBufferBuilder builder) {
+    int o = builder.EndTable();
+    return new Offset<FlatMessages.LeaveRoom>(o);
   }
 };
 
@@ -598,6 +699,8 @@ public struct SystemMessage : IFlatbufferObject
   public FlatMessages.GameOver PayloadAsGameOver() { return Payload<FlatMessages.GameOver>().Value; }
   public FlatMessages.CloseRoom PayloadAsCloseRoom() { return Payload<FlatMessages.CloseRoom>().Value; }
   public FlatMessages.StatsReceive PayloadAsStatsReceive() { return Payload<FlatMessages.StatsReceive>().Value; }
+  public FlatMessages.LeaveRoom PayloadAsLeaveRoom() { return Payload<FlatMessages.LeaveRoom>().Value; }
+  public FlatMessages.RoomList PayloadAsRoomList() { return Payload<FlatMessages.RoomList>().Value; }
 
   public static Offset<FlatMessages.SystemMessage> CreateSystemMessage(FlatBufferBuilder builder,
       uint timestamp = 0,

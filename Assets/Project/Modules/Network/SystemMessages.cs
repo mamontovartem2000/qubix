@@ -106,4 +106,11 @@ namespace Project.Modules.Network
         public string Character;
         public string Icon;
     }
+
+    public struct RoomInfo
+    {
+        public string Id;
+        public uint PlayersCount;
+        public uint MaxPlayersCount;
+    }
 }

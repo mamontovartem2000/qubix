@@ -5,6 +5,7 @@ namespace Project.Modules.Network
 {
     public class WaitingRoomTimer : MonoBehaviour
     {
+        [SerializeField] private GameObject _textPlace;
         [SerializeField] private TMP_Text _text;
         private float _timer = 0f;
 
@@ -15,8 +16,8 @@ namespace Project.Modules.Network
 
         public void SetTime(uint time)
         {
-            if (_text.gameObject.activeSelf == false)
-                _text.gameObject.SetActive(true);
+            if (_textPlace.activeSelf == false)
+                _textPlace.SetActive(true);
 
             _timer = time;
         }
@@ -36,7 +37,7 @@ namespace Project.Modules.Network
             else
             {
                 _timer = 0;
-                _text.text = $"Loading level";
+                _textPlace.SetActive(false);
             }
         }
 

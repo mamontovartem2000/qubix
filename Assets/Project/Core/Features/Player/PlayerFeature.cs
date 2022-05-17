@@ -4,6 +4,7 @@ using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Core.Features.Player.Modules;
 using Project.Core.Features.Player.Systems;
+using Project.Markers;
 using Project.Modules.Network;
 
 namespace Project.Core.Features.Player
@@ -39,45 +40,45 @@ namespace Project.Core.Features.Player
 			var net = world.GetModule<NetworkModule>();
 			net.RegisterObject(this);
 
-			_onPlayerConnected = net.RegisterRPC(new System.Action<int, string, string>(PlayerConnected_RPC).Method);
+			_onPlayerConnected = net.RegisterRPC(new System.Action<NetworkSetActivePlayer>(PlayerConnected_RPC).Method);
 			_onPlayerDisconnected = net.RegisterRPC(new System.Action<int>(PlayerDisconnected_RPC).Method);
 		}
 
-		public void OnLocalPlayerConnected(int local_id, string global_id, string nickname)
+		public void OnLocalPlayerConnected(NetworkSetActivePlayer marker)
 		{
 			var net = world.GetModule<NetworkModule>();
-			net.RPC(this, _onPlayerConnected, local_id, global_id, nickname);
+			net.RPC(this, _onPlayerConnected, marker);
 		}
 
-		private void PlayerConnected_RPC(int local_id, string global_id, string nickname)
+		private void PlayerConnected_RPC(NetworkSetActivePlayer nsap)
 		{
-			var player = new Entity("player_" + local_id);
-			player.Set(new PlayerTag {PlayerLocalID = local_id, PlayerServerID = global_id, Nickname = nickname });	
+			var localId = nsap.ActorLocalID;
+			var player = new Entity("player_" + localId);
+			player.Set(new PlayerTag {PlayerLocalID = localId, PlayerServerID = nsap.ServerID, Nickname = nsap.Nickname });
 
 			if (world.GetModule<NetworkModule>().FakeConnect)
-			{
+            {
 				GoldHunterConfig.Apply(player);
+				return;
 			}
-			else
+
+			switch (NetworkData.PlayersInfo[localId].Character)
 			{
-				switch (NetworkData.PlayersInfo[local_id].Character)
-				{
-					case "Buller":
+				case "Buller":
 					{
 						BullerConfig.Apply(player);
 						break;
 					}
-					case "GoldHunter":
+				case "GoldHunter":
 					{
 						GoldHunterConfig.Apply(player);
 						break;
 					}
-					case "Powerf":
+				case "Powerf":
 					{
 						PowerfConfig.Apply(player);
 						break;
 					}
-				}
 			}
 		}
 

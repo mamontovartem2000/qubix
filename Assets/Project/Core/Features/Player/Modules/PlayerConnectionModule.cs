@@ -27,7 +27,7 @@ namespace Project.Core.Features.Player.Modules
         {
             if (world.GetMarker(out NetworkSetActivePlayer nsap))
             {
-                _feature.OnLocalPlayerConnected(nsap.ActorLocalID, nsap.ServerID, nsap.Nickname);
+                _feature.OnLocalPlayerConnected(nsap);
             }
             
             if (world.GetMarker(out NetworkPlayerDisconnected npd))
