@@ -21,6 +21,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CircleRect>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Collided>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CollisionStatic>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CollisionTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ComponentBuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Cooldown>(false, true, false, false, false, false, false, false);
@@ -162,6 +164,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CircleRect>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Collided>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CollisionStatic>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CollisionTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ComponentBuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Cooldown>(false, true, false, false, false, false, false, false);
@@ -298,6 +302,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.AvatarView>(false);
             noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.BuffTrigger>(true);
             structComponentsContainer.Validate<Project.Common.Components.CircleRect>(false);
+            structComponentsContainer.Validate<Project.Common.Components.Collided>(true);
+            structComponentsContainer.Validate<Project.Common.Components.CollisionStatic>(true);
             structComponentsContainer.Validate<Project.Common.Components.CollisionTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.ComponentBuff>(true);
             structComponentsContainer.Validate<Project.Common.Components.Cooldown>(false);
@@ -439,6 +445,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.AvatarView>(false);
             entity.ValidateDataOneShot<Project.Common.Components.BuffTrigger>(true);
             entity.ValidateData<Project.Common.Components.CircleRect>(false);
+            entity.ValidateData<Project.Common.Components.Collided>(true);
+            entity.ValidateData<Project.Common.Components.CollisionStatic>(true);
             entity.ValidateData<Project.Common.Components.CollisionTag>(true);
             entity.ValidateData<Project.Common.Components.ComponentBuff>(true);
             entity.ValidateData<Project.Common.Components.Cooldown>(false);

@@ -42,9 +42,10 @@ namespace ME.ECS {
         #endif
         public static void OnEntityVersionChanged(in Entity entity) {
 
-            if (entity.TryRead<Nodes>(out var nodes) == true) {
+            if (entity.Has<Nodes>() == true) {
 
                 var world = Worlds.currentWorld;
+                ref readonly var nodes = ref entity.Read<Nodes>();
                 foreach (var item in nodes.items) {
 
                     world.IncrementEntityVersion(in item);
@@ -64,9 +65,9 @@ namespace ME.ECS {
 
             var v = entity.GetVersion();
             var ent = entity;
-            while (ent.TryRead<Container>(out var container) == true) {
+            while (ent.Has<Container>() == true) {
 
-                ent = container.entity;
+                ent = ent.Read<Container>().entity;
                 v += ent.GetVersion();
                 
             }
@@ -89,7 +90,7 @@ namespace ME.ECS {
         public static void SetParent(this in Entity child, in Entity root, bool worldPositionStays) {
 
             if (worldPositionStays == true) {
-                
+
                 var pos = child.GetPosition();
                 var rot = child.GetRotation();
                 ECSTransformHierarchy.SetParent_INTERNAL(in child, in root);

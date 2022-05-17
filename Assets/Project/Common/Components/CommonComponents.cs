@@ -17,6 +17,7 @@ namespace Project.Common.Components
     
     //test components for new collision detection system implementation
     public struct CollisionTag : IComponent {}
+    public struct CollisionStatic : IComponent {}
     public struct CircleRect : IComponent
     {
         public float Radius;
@@ -33,4 +34,6 @@ namespace Project.Common.Components
         public float Length;
         public float Width;
     }
+    
+    public struct Collided : IComponent {}
 }

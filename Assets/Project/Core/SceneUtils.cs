@@ -22,6 +22,8 @@ namespace Project.Core
         {
             Width = width;
             Height = height;
+
+            Debug.Log($"w: {width}, h: {height}");
         }
 
         public static Entity[] ConvertFilterToEntityArray(Filter filter)

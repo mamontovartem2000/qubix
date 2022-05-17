@@ -4,6 +4,7 @@ using ME.ECS.Collections;
 using ME.ECS.Views.Providers;
 using Project.Core.Features.SceneBuilder.Components;
 using System.Collections.Generic;
+using Project.Common.Components;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.SceneBuilder.Systems;
 using UnityEngine;
@@ -150,6 +151,10 @@ namespace Project.Core.Features.SceneBuilder
                 Entity entity = new Entity("Map-Object");
                 entity.InstantiateView(_objectsView[bytes[i]]);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
+                entity.Set(new CollisionTag());
+                entity.Set(new CollisionStatic());
+                entity.Get<SquareRect>().Height = 0.3f;
+                entity.Get<SquareRect>().Width = 0.4f;
                 TakeTheCell(i);
             }
         }
