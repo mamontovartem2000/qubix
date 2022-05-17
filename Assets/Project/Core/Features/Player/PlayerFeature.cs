@@ -52,16 +52,14 @@ namespace Project.Core.Features.Player
 		private void PlayerConnected_RPC(int local_id, string global_id, string nickname)
 		{
 			var player = new Entity("player_" + local_id);
+			player.Set(new PlayerTag {PlayerLocalID = local_id, PlayerServerID = global_id, Nickname = nickname });	
 
 			if (world.GetModule<NetworkModule>().FakeConnect)
 			{
 				GoldHunterConfig.Apply(player);
-				player.Set(new PlayerTag {PlayerLocalID = local_id, PlayerServerID = "yeet"});
 			}
 			else
 			{
-				player.Set(new PlayerTag {PlayerLocalID = local_id, PlayerServerID = global_id, Nickname = nickname });	
-				
 				switch (NetworkData.PlayersInfo[local_id].Character)
 				{
 					case "Buller":

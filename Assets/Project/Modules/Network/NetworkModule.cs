@@ -54,7 +54,7 @@ namespace Project.Modules.Network
             }
             else
             {
-                Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = 0, ServerID = "player_id", Nickname = "test_nickname" });
+                Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = 1, ServerID = "player_id", Nickname = "test_nickname" });
             }
         }      
     }
