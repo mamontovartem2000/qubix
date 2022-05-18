@@ -35,7 +35,7 @@ namespace Project.Mechanics.Features.Avatar
 
             var view = world.RegisterViewSource(entity.Read<AvatarView>().Value);
             entity.InstantiateView(view);
-
+            
             entity.Get<Owner>().Value = owner;
 
             entity.Get<WeaponEntities>().LeftWeapon = ConstructWeapon(owner.Read<PlayerConfig>().LeftWeaponConfig, entity);

@@ -6,6 +6,7 @@ using Project.Core.Features.GameState.Components;
 using Project.Core.Features.Player;
 using Project.Core.Features.SceneBuilder;
 using Project.Mechanics.Features.VFX;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar.Systems
@@ -49,7 +50,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 			ref readonly var moveAmount = ref entity.Read<MoveInput>().Value;
 			var direction = entity.Read<MoveInput>().Axis == MovementAxis.Vertical ? Vector3.right : Vector3.back;
 			
-			if (entity.GetRotation() != Quaternion.Euler(entity.Read<FaceDirection>().Value))
+			if (entity.GetRotation() != fpquaternion.Euler(entity.Read<FaceDirection>().Value))
 			{
 				entity.SetRotation(Quaternion.RotateTowards(entity.GetRotation(), Quaternion.LookRotation(entity.Read<FaceDirection>().Value), 40f));
 			}
@@ -63,7 +64,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
 				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= 0.025f)
 				{
-					entity.SetPosition(Vector3Int.CeilToInt(entity.Read<PlayerMoveTarget>().Value));
+					entity.SetPosition((Vector3)Vector3Int.CeilToInt(entity.Read<PlayerMoveTarget>().Value));
 					
 					var newTarget = entity.GetPosition() + direction * moveAmount;
 

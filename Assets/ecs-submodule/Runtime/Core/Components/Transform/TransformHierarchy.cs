@@ -42,10 +42,9 @@ namespace ME.ECS {
         #endif
         public static void OnEntityVersionChanged(in Entity entity) {
 
-            if (entity.Has<Nodes>() == true) {
+            if (entity.TryRead<Nodes>(out var nodes) == true) {
 
                 var world = Worlds.currentWorld;
-                ref readonly var nodes = ref entity.Read<Nodes>();
                 foreach (var item in nodes.items) {
 
                     world.IncrementEntityVersion(in item);
@@ -65,9 +64,9 @@ namespace ME.ECS {
 
             var v = entity.GetVersion();
             var ent = entity;
-            while (ent.Has<Container>() == true) {
+            while (ent.TryRead<Container>(out var container) == true) {
 
-                ent = ent.Read<Container>().entity;
+                ent = container.entity;
                 v += ent.GetVersion();
                 
             }
@@ -108,6 +107,36 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
+        public static void SetParent2D(this in Entity child, in Entity root) {
+
+            child.SetParent2D(in root, worldPositionStays: true);
+
+        }
+
+        #if INLINE_METHODS
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        public static void SetParent2D(this in Entity child, in Entity root, bool worldPositionStays) {
+
+            if (worldPositionStays == true) {
+
+                var pos = child.GetPosition2D();
+                var rot = child.GetRotation2D();
+                ECSTransformHierarchy.SetParent_INTERNAL(in child, in root);
+                child.SetPosition2D(pos);
+                child.SetRotation2D(rot);
+
+            } else {
+
+                ECSTransformHierarchy.SetParent_INTERNAL(in child, in root);
+
+            }
+
+        }
+
+        #if INLINE_METHODS
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         private static void SetParent_INTERNAL(in Entity child, in Entity root) {
 
             if (child == root) return;
@@ -131,10 +160,6 @@ namespace ME.ECS {
 
             }
             
-            if (root.Has<Rotation>() == false) {
-                root.SetLocalRotation(UnityEngine.Quaternion.identity);
-            }
-
             if (ECSTransformHierarchy.FindInHierarchy(in child, in root) == true) return;
 
             if (container.entity.IsAlive() == true) {

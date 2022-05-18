@@ -21,12 +21,6 @@ namespace Project.Core.Features.Player.Views
         {
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetRotation();
-
-            //var fill = entity.Read<PlayerHealth>().Value / 100;
-
-            //_healthBar.fillAmount = fill;
-            //_healthBar.color = Color.Lerp(Color.red, Color.green, fill);
-            //_healthBar.transform.rotation = Quaternion.Euler(45f, 45f, 0);
         }
         
         private void TweenUp()

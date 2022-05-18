@@ -37,7 +37,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
             foreach (var entity in _collisionFilter)
             {
                 results.Clear();
-                NativeQuadTreeUtils.GetResults(entity.GetPosition().XZ(), 1f, results);
+                NativeQuadTreeUtils.GetResults(entity.GetPosition().XZ(), (fp)1f, results);
 
                 foreach (var item in results)
                 {

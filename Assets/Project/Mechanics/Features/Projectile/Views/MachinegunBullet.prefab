@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 186288292398744687}
   - component: {fileID: 5022673654633621757}
-  - component: {fileID: 752856608241149570}
   m_Layer: 0
   m_Name: MachinegunBullet
   m_TagString: Untagged
@@ -54,39 +53,13 @@ MonoBehaviour:
       halfEnding: 0.5
     hasElements: 0
     hasDefault: 1
---- !u!114 &752856608241149570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711010857564085973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 693245c77706cf243ab4f546552c6e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: -591256033219733473, guid: 22275f209bcf9a941a361e491e3d4e06, type: 3}
-        meshRenderer: {fileID: 7547411919078265122}
-        meshFilter: {fileID: 7547411919078265121}
-        material: {fileID: 2100000, guid: eff1019184e341b42ba950994e6dba10, type: 2}
-        localPosition: {x: 0, y: 0, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 1, y: 1, z: 1}
+  defaultParameters:
+    useDespawnTime: 1
+    despawnTime: 5
+    cacheCustomViewId: 0
+    useCache: 0
+    useCacheTimeout: 0
+    cacheTimeout: 0
 --- !u!1 &7547411919078265124
 GameObject:
   m_ObjectHideFlags: 0

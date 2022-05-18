@@ -41,7 +41,7 @@ namespace Project.Mechanics.Features.PreLogicTick.Systems
             foreach (var coll in _collisionFilter)
             {
                 var pos = coll.GetPosition();
-                if (pos.x < 0 || pos.x > SceneUtils.Width || pos.z < 0 || pos.z > SceneUtils.Height) continue;
+                if (pos.x < 0f || pos.x > (float)SceneUtils.Width || pos.z < 0f || pos.z > (float)SceneUtils.Height) continue;
                 
                 array[i++] = new QuadElement<Entity>() {element = coll, pos = coll.GetPosition().XZ()};
             }

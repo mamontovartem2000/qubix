@@ -23,9 +23,8 @@ namespace Project.Common.Views.WeaponMonos
         public override void ApplyState(float deltaTime, bool immediately)
         {
             transform.position = entity.GetPosition();
-            transform.rotation = entity.GetParent().GetRotation();
+            transform.rotation = entity.GetRotation();
 
-            if (!entity.IsAlive()) return;
             _anim.SetBool("Attack", entity.Has<LeftWeaponShot>());
         }
         

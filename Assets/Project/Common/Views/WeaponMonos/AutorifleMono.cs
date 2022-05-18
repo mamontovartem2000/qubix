@@ -20,7 +20,7 @@ namespace Assets.Dima.Scripts
         public override void ApplyState(float deltaTime, bool immediately)
         {
             transform.position = entity.GetPosition();
-            transform.rotation = entity.GetParent().GetRotation();
+            transform.rotation = entity.GetRotation();
         }
         
         [SerializeField] private Transform _body;
