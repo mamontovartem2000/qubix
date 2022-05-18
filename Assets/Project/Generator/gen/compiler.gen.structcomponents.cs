@@ -64,6 +64,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LockTarget>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MagneticStormAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MagneticStormModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageModifier>(false, true, false, false, false, false, false, false);
@@ -121,6 +122,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TestTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TileRotation>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TileView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TriangleRect>(false, true, false, false, false, false, false, false);
@@ -134,11 +137,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GamePaused>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameTimer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.MapInitialized>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.DefaultComponents>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.HealthTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapComponents>(false, false, true, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MineTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.PortalTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.Spawned>(true, true, false, false, false, false, false, false);
@@ -207,6 +208,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LockTarget>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MagneticStormAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MagneticStormModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageModifier>(false, true, false, false, false, false, false, false);
@@ -264,6 +266,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TestTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TileRotation>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TileView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TriangleRect>(false, true, false, false, false, false, false, false);
@@ -277,11 +281,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GamePaused>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameTimer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.MapInitialized>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.DefaultComponents>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.HealthTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapComponents>(false, false, true, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MineTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.PortalTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.Spawned>(true, true, false, false, false, false, false, false);
@@ -345,6 +347,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.LockTarget>(true);
             structComponentsContainer.Validate<Project.Common.Components.MagneticStormAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.MagneticStormModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.MapConstruct>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeActive>(true);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDamageAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDamageModifier>(false);
@@ -402,6 +405,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Targeted>(true);
             structComponentsContainer.Validate<Project.Common.Components.TeleportPlayer>(false);
             structComponentsContainer.Validate<Project.Common.Components.TestTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.TileRotation>(false);
+            structComponentsContainer.Validate<Project.Common.Components.TileView>(false);
             structComponentsContainer.Validate<Project.Common.Components.Trajectory>(false);
             structComponentsContainer.Validate<Project.Common.Components.TrajectoryWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.TriangleRect>(false);
@@ -415,11 +420,9 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GamePaused>(true);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GameTimer>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.MapInitialized>(true);
-            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.DefaultComponents>(false);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.HealthTag>(true);
             structComponentsContainer.ValidateCopyable<Project.Core.Features.SceneBuilder.Components.MapComponents>(false);
-            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.MapConstruct>(false);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.MineTag>(true);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.PortalTag>(true);
             structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.Spawned>(true);
@@ -488,6 +491,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.LockTarget>(true);
             entity.ValidateData<Project.Common.Components.MagneticStormAffect>(true);
             entity.ValidateData<Project.Common.Components.MagneticStormModifier>(false);
+            entity.ValidateData<Project.Common.Components.MapConstruct>(false);
             entity.ValidateData<Project.Common.Components.MeleeActive>(true);
             entity.ValidateData<Project.Common.Components.MeleeDamageAffect>(true);
             entity.ValidateData<Project.Common.Components.MeleeDamageModifier>(false);
@@ -545,6 +549,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Targeted>(true);
             entity.ValidateData<Project.Common.Components.TeleportPlayer>(false);
             entity.ValidateData<Project.Common.Components.TestTag>(true);
+            entity.ValidateData<Project.Common.Components.TileRotation>(false);
+            entity.ValidateData<Project.Common.Components.TileView>(false);
             entity.ValidateData<Project.Common.Components.Trajectory>(false);
             entity.ValidateData<Project.Common.Components.TrajectoryWeapon>(true);
             entity.ValidateData<Project.Common.Components.TriangleRect>(false);
@@ -558,11 +564,9 @@ namespace ME.ECS {
             entity.ValidateData<Project.Core.Features.GameState.Components.GamePaused>(true);
             entity.ValidateData<Project.Core.Features.GameState.Components.GameTimer>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.MapInitialized>(true);
-            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.DefaultComponents>(false);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.HealthTag>(true);
             entity.ValidateDataCopyable<Project.Core.Features.SceneBuilder.Components.MapComponents>(false);
-            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.MapConstruct>(false);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.MineTag>(true);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.PortalTag>(true);
             entity.ValidateData<Project.Core.Features.SceneBuilder.Components.Spawned>(true);

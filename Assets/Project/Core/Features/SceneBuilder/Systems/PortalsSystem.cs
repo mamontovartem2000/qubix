@@ -7,17 +7,11 @@ using UnityEngine;
 
 namespace Project.Core.Features.SceneBuilder.Systems
 {
-    #region usage
-#pragma warning disable
-#pragma warning restore
-
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-    #endregion
-
     public sealed class PortalsSystem : ISystem, IAdvanceTick, IUpdate
     {
         private SceneBuilderFeature _scene;
@@ -91,7 +85,7 @@ namespace Project.Core.Features.SceneBuilder.Systems
                         portOut.InstantiateView(_scene._outPortal);
                         portOut.Get<LifeTimeLeft>().Value = 3;
 
-                        _scene.Move(portals[i].GetPosition(), newPosition);
+                        SceneUtils.Move(portals[i].GetPosition(), newPosition);
                         player.SetPosition(newPosition);
                         player.Get<PlayerMoveTarget>().Value = newPosition;
                     }

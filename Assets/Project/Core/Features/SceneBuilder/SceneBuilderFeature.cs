@@ -1,9 +1,8 @@
-﻿using Dima.Scripts;
-using ME.ECS;
+﻿using ME.ECS;
 using ME.ECS.Collections;
 using ME.ECS.Views.Providers;
 using Project.Core.Features.SceneBuilder.Components;
-using System.Collections.Generic;
+using ME.ECS.DataConfigs;
 using Project.Common.Components;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.SceneBuilder.Systems;
@@ -11,193 +10,183 @@ using UnityEngine;
 
 namespace Project.Core.Features.SceneBuilder
 {
-    #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS
      [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
       Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
       Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-
-    #endregion
-
     public sealed class SceneBuilderFeature : Feature
     {
         [Header("General")]
         [SerializeField] private TextAsset _sourceMap;
         [SerializeField] private TextAsset _objectsMap;
 
-        [HideInInspector] public ViewId _inPortal, _outPortal;
-        public MonoBehaviourViewBase In_PortalEffect;
-        public MonoBehaviourViewBase Out_PortalEffect;
+        [HideInInspector] public ViewId _inPortal, _outPortal, _mineId, _healthId;
 
-        [Header("Tiles")]
-        public MineMono MineView;
-        public HealthMono HealthView;
+        [Header("Reworked Links")]
+        public MonoBehaviourViewBase[] TileViewSources;
+        public DataConfig[] ObjectConfigs;
 
-        [SerializeField] private List<MapViewElement> _tileList = new List<MapViewElement>();
-        [SerializeField] private List<MapViewElement> _objectsList = new List<MapViewElement>();
-
-        private Dictionary<int, ViewId> _tilesView = new Dictionary<int, ViewId>();
-        private Dictionary<int, ViewId> _objectsView = new Dictionary<int, ViewId>();
-
+        public MonoBehaviourViewBase In_PortalEffect, Out_PortalEffect, MineMono, HealthMono;
+        
+        private ViewId[] _tileViewIds, _objectViewIds;
+        
         protected override void OnConstruct()
         {
-            _inPortal = world.RegisterViewSource(In_PortalEffect);
-            _outPortal = world.RegisterViewSource(Out_PortalEffect);
-
-            RegisterViewsToDictionary();
             AddSystem<NewHealthDispenserSystem>();
             AddSystem<SpawnMineSystem>();
             AddSystem<PortalsSystem>();
 
-            PrepareMap();
-
-            if (_objectsMap != null)
-                PrepareObjectMap();
-
+            RegisterViews();
             world.SetSharedData(new MapInitialized());
+        }
+
+        protected override void OnConstructLate()
+        {
+            PrepareMaps();
         }
 
         protected override void OnDeconstruct() { }
 
-        private void RegisterViewsToDictionary()
+        private void RegisterViews()
         {
-            foreach (var tile in _tileList)
+            _tileViewIds = new ViewId[TileViewSources.Length];
+            _objectViewIds = new ViewId[ObjectConfigs.Length];
+            
+            for (var i = 2; i < TileViewSources.Length; i++)
             {
-                ViewId view = world.RegisterViewSource(tile.View);
-                _tilesView.Add(tile.Key, view);
+                _tileViewIds[i] = world.RegisterViewSource(TileViewSources[i]);
             }
 
-            foreach (var tile in _objectsList)
+            for (int i = 1; i < ObjectConfigs.Length; i++)
             {
-                ViewId view = world.RegisterViewSource(tile.View);
-                _objectsView.Add(tile.Key, view);
+                _objectViewIds[i] = world.RegisterViewSource(ObjectConfigs[i].Read<TileView>().Value);
             }
+            
+            _inPortal = world.RegisterViewSource(In_PortalEffect);
+            _outPortal = world.RegisterViewSource(Out_PortalEffect);
+            _mineId = world.RegisterViewSource(MineMono);
+            _healthId = world.RegisterViewSource(HealthMono);
         }
 
-        private void PrepareMap()
+        private void PrepareMaps()
         {
             //GameMapRemoteData mapData = ParceUtils.CreateFromJSON<UniversalData<GameMapRemoteData>>(data).data;
-            GameMapRemoteData mapData = new GameMapRemoteData(_sourceMap);
+            var mapData = new GameMapRemoteData(_sourceMap);
 
-            int height = mapData.bytes.Length / mapData.offset;
-            int width = mapData.offset;
+            var height = mapData.bytes.Length / mapData.offset;
+            var width = mapData.offset;
+            
             SceneUtils.SetWidthAndHeight(width, height);
+            world.SetSharedData(new MapComponents { WalkableMap = CreateWalkableMap(height * width, mapData.bytes) });
 
-            CreateWalkableMap(height * width, mapData.bytes, out BufferArray<byte> walkableMap);
-            world.SetSharedData(new MapComponents { WalkableMap = walkableMap });
             DrawMap(mapData.bytes);
+            
+            if (_objectsMap != null)
+            {
+                var objects = new GameMapRemoteData(_objectsMap);
+                DrawMapObjects(objects.bytes);
+            }
         }
 
-        private void PrepareObjectMap()
+        private void DrawMap(byte[] s)
         {
-            GameMapRemoteData objects = new GameMapRemoteData(_objectsMap);
-            DrawMapObjects(objects.bytes);
-        }
-
-        private void DrawMap(byte[] source)
-        {
-            for (var i = 0; i < source.Length; i++)
+            var i = -1;
+            foreach (var b in s)
             {
                 Entity entity = Entity.Empty;
-
-                switch (source[i])
+                i++;
+                
+                switch (b)
                 {
-                    case 1: // Walkable tiles
-                    case 2:
-                    case 3:
-                    case 4:
+                    case 0:
+                    case 1:
+                    {
+                        break;
+                    }
+                    case 8: // Dispencer tile
+                    {
+                        entity = new Entity("Dispencer-Tile");
+                        entity.Set(new DispenserTag {TimerDefault = 8, Timer = 8});
+                        break;
+                    }
+                    case 9: // Teleport tile
+                    {
+                        entity = new Entity("Portal-Tile");
+                        entity.Set(new PortalTag());
+                        break;
+                    }
+                    case 10: // Bridge tile
                     case 11:
-                    case 12:
-                        {
-                            entity = new Entity("Platform-Tile");
-                            break;
-                        }
-                    case 5: // Dispencer tile
-                        {
-                            entity = new Entity("Dispencer-Tile");
-                            entity.Set(new DispenserTag { TimerDefault = 8, Timer = 8 });
-                            break;
-                        }
-                    case 6: // Teleport tile
-                        {
-                            entity = new Entity("Portal-Tile");
-                            entity.Set(new PortalTag());
-                            break;
-                        }
-                    case 7: // Bridge tile
-                    case 8:
-                        {
-                            entity = new Entity("Bridge-Tile");
-                            break;
-                        }
-
+                    {
+                        entity = new Entity("Bridge-Tile");
+                        break;
+                    }
+                    default:
+                    {
+                        entity = new Entity("Platform-Tile");
+                        break;
+                    }
                 }
+                
+                if (entity == Entity.Empty) continue;
 
-                if (entity != Entity.Empty)
-                {
-                    entity.InstantiateView(_tilesView[source[i]]);
-                    entity.SetPosition(SceneUtils.IndexToPosition(i));
-                }
-            }
-        }
-
-        private void DrawMapObjects(byte[] bytes)
-        {
-            for (var i = 0; i < bytes.Length; i++)
-            {
-                if (bytes[i] == 0) continue;
-
-                Entity entity = new Entity("Map-Object");
-                entity.InstantiateView(_objectsView[bytes[i]]);
+                entity.InstantiateView(_tileViewIds[b]);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
-                entity.Set(new CollisionTag());
-                entity.Set(new CollisionStatic());
-                entity.Get<SquareRect>().Height = 0.3f;
-                entity.Get<SquareRect>().Width = 0.4f;
-                TakeTheCell(i);
             }
         }
 
-        private void CreateWalkableMap(int size, byte[] mapInByte, out BufferArray<byte> walkableMap)
+        private void DrawMapObjects(byte[] s)
         {
-            walkableMap = PoolArray<byte>.Spawn(size);
+            var i = -1;
+            
+            foreach (var b in s)
+            {
+                i++;
+                if(b == 0) continue;
+                
+                var entity = new Entity("Prop");
+                ObjectConfigs[b].Apply(entity);
+                entity.InstantiateView(_objectViewIds[b]);
+                entity.SetPosition(SceneUtils.IndexToPosition(i));
+                SceneUtils.TakeTheCell(i);
+            }
+        }
+
+        private BufferArray<byte> CreateWalkableMap(int size, byte[] mapInByte)
+        {
+            var a = PoolArray<byte>.Spawn(size);
 
             for (var i = 0; i < mapInByte.Length; i++)
             {
                 var number = mapInByte[i];
 
                 if (number == 0 || number == 1)
-                    walkableMap[i] = number;
+                    a[i] = number;
                 else
-                    walkableMap[i] = 1;
+                    a[i] = 1;
 
                 //  Anything not equal to 0 will be equal to 1
             }
+
+            return a;
         }
 
-        public void Move(Vector3 currentPos, Vector3 targetPos)
+        public void SpawnMine()
         {
-            int moveFrom = SceneUtils.PositionToIndex(currentPos);
-            world.GetSharedData<MapComponents>().WalkableMap[moveFrom] = 1;
-            TakeTheCell(targetPos);
+            var entity = new Entity("Mine");
+
+            entity.Set(new MineTag());
+            entity.SetPosition(SceneUtils.GetRandomSpawnPosition());
+            entity.InstantiateView(_mineId);
         }
 
-        public void TakeTheCell(Vector3 targetPos)
+        public Entity SpawnHealth()
         {
-            int moveTo = SceneUtils.PositionToIndex(targetPos);
-            world.GetSharedData<MapComponents>().WalkableMap[moveTo] = 0;
-        }
-
-        public void TakeTheCell(int index)
-        {
-            world.GetSharedData<MapComponents>().WalkableMap[index] = 0;
-        }
-
-        public void ReleaseTheCell(Vector3 currentPos)
-        {
-            int moveFrom = SceneUtils.PositionToIndex(currentPos);
-            world.GetSharedData<MapComponents>().WalkableMap[moveFrom] = 1;
+            var entity = new Entity("Health");
+            entity.Set(new HealthTag());
+            entity.InstantiateView(_healthId);
+            return entity;
         }
     }
 }

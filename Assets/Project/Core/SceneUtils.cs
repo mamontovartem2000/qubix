@@ -1,5 +1,4 @@
 using ME.ECS;
-using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Core.Features.Player;
 using Project.Core.Features.SceneBuilder.Components;
@@ -22,8 +21,6 @@ namespace Project.Core
         {
             Width = width;
             Height = height;
-
-            Debug.Log($"w: {width}, h: {height}");
         }
 
         public static Entity[] ConvertFilterToEntityArray(Filter filter)
@@ -36,6 +33,7 @@ namespace Project.Core
                 entities[index] = entity;
                 index++;
             }
+
             return entities;
         }
 
@@ -50,7 +48,7 @@ namespace Project.Core
         public static Vector3 IndexToPosition(int index)
         {
             var x = index % Width;
-            var y = Mathf.FloorToInt(index / (float)Width);
+            var y = Mathf.FloorToInt(index / (float) Width);
 
             return new Vector3(x, 0f, y);
         }
@@ -88,8 +86,31 @@ namespace Project.Core
             // Debug.Log(player == Worlds.current.GetFeature<PlayerFeature>().GetPlayer(player.Read<PlayerTag>().PlayerID));
             return player == Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(player.Read<PlayerTag>().PlayerLocalID);
         }
-    }
 
+        public static void Move(Vector3 currentPos, Vector3 targetPos)
+        {
+            int moveFrom = SceneUtils.PositionToIndex(currentPos);
+            Worlds.current.GetSharedData<MapComponents>().WalkableMap[moveFrom] = 1;
+            TakeTheCell(targetPos);
+        }
+
+        public static void TakeTheCell(Vector3 targetPos)
+        {
+            int moveTo = PositionToIndex(targetPos);
+            Worlds.current.GetSharedData<MapComponents>().WalkableMap[moveTo] = 0;
+        }
+
+        public static void TakeTheCell(int index)
+        {
+            Worlds.current.GetSharedData<MapComponents>().WalkableMap[index] = 0;
+        }
+
+        public static void ReleaseTheCell(Vector3 currentPos)
+        {
+            int moveFrom = PositionToIndex(currentPos);
+            Worlds.current.GetSharedData<MapComponents>().WalkableMap[moveFrom] = 1;
+        }
+    }
 
     [Serializable]
     public class GameMapRemoteData
@@ -151,12 +172,5 @@ namespace Project.Core
             }
             Debug.Log(df);
         }
-    }
-
-    [Serializable]
-    public struct MapViewElement
-    {
-        public int Key;
-        public MonoBehaviourView View;
     }
 }

@@ -1,12 +1,10 @@
 ﻿using ME.ECS;
-using Microsoft.Win32;
 using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.Player;
 using Project.Core.Features.SceneBuilder;
 using Project.Mechanics.Features.VFX;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar.Systems
@@ -70,7 +68,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
 					if (SceneUtils.IsWalkable(newTarget))
 					{
-						_scene.Move(entity.Read<PlayerMoveTarget>().Value, newTarget);
+						SceneUtils.Move(entity.Read<PlayerMoveTarget>().Value, newTarget);
 						entity.Get<PlayerMoveTarget>().Value = newTarget;
 						
 						if (entity.Has<TeleportPlayer>())

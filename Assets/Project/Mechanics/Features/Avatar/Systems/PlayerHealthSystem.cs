@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core;
 using Project.Core.Features.Events;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.SceneBuilder;
@@ -15,12 +16,10 @@ namespace Project.Mechanics.Features.Avatar.Systems
     public sealed class PlayerHealthSystem : ISystemFilter 
     {
         public World world { get; set; }
-        private SceneBuilderFeature _scene;
         private VFXFeature _vfx;
         
         void ISystemBase.OnConstruct() 
         {
-            world.GetFeature(out _scene);
             world.GetFeature(out _vfx);
         }
 
@@ -57,7 +56,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
             player.Remove<PlayerAvatar>();
             
             world.GetFeature<EventsFeature>().PlayerDeath.Execute(player);      
-            _scene.ReleaseTheCell(entity.Read<PlayerMoveTarget>().Value);
+            SceneUtils.ReleaseTheCell(entity.Read<PlayerMoveTarget>().Value);
             _vfx.SpawnVFX(VFXFeature.VFXType.Death, entity.GetPosition());
 
             entity.Destroy();
