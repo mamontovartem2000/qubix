@@ -16,10 +16,10 @@ namespace Project.Modules.Network
 
         public void SetTime(uint time)
         {
+            _timer = time;
+
             if (_textPlace.activeSelf == false)
                 _textPlace.SetActive(true);
-
-            _timer = time;
         }
 
         private void Update()
@@ -37,7 +37,7 @@ namespace Project.Modules.Network
             else
             {
                 _timer = 0;
-                _textPlace.SetActive(false);
+                _text.text = $"Loading...";
             }
         }
 

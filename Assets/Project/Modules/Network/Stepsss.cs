@@ -23,7 +23,10 @@ namespace Project.Modules.Network
 			NetworkData.Info = info;
 			NetworkData.FullJoinRequest = request;
 
-			CreateSocketConnect(NetworkData.Info.server_url);
+			NetworkData.Connect = new WebSocketConnect(NetworkData.Info.server_url);
+			NetworkData.Connect.OnMessage += GetMessage;
+			NetworkData.Connect.ConnectSuccessful += SendJoinRequest;
+			NetworkData.Connect.ConnectError += ExitGame;
 		}
 
 		public static void ProcessJoinRequestWithoutSocket(string request)
@@ -33,14 +36,16 @@ namespace Project.Modules.Network
 			var playerJson = Encoding.UTF8.GetString(payloadInBytes);
 			GameInfo info = NetworkData.CreateFromJSON<GameInfo>(playerJson);
 			NetworkData.Info = info;
-			NetworkData.FullJoinRequest = request;				
+			NetworkData.FullJoinRequest = request;
+
+			SendJoinRequest();
 		}
 
 		public static void CreateSocketConnect(string url)
         {
 			NetworkData.Connect = new WebSocketConnect(url);
 			NetworkData.Connect.OnMessage += GetMessage;
-			NetworkData.Connect.ConnectSuccessful += SendJoinRequest;
+			NetworkData.Connect.ConnectSuccessful += () => Debug.Log("Socket Opened");
 			NetworkData.Connect.ConnectError += ExitGame;
 		}
 
@@ -127,10 +132,12 @@ namespace Project.Modules.Network
 		private static void SetTimeRemaining(TimeRemaining timeRemaining)
 		{
 			Debug.Log("Set Time!");
-			TimeRemaining?.Invoke(timeRemaining.Value / 1000);
 
 			if (timeRemaining.State == "starting")
+            {
+				TimeRemaining?.Invoke(timeRemaining.Value / 1000);
 				ShowCharacterSelectionWindow?.Invoke();
+			}
 		}
 
 		private static void SetPlayerList(PlayerList playerList)
@@ -174,6 +181,18 @@ namespace Project.Modules.Network
 			var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
 			NetworkData.Connect.SendSystemMessage(ms);
 			Debug.Log("Send JoinRequest");
+		}
+
+		public static void LeaveRoomRequest()
+		{
+			FlatBufferBuilder builder = new FlatBufferBuilder(1);
+			var request = LeaveRoom.CreateLeaveRoom(builder, true);
+			var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.LeaveRoom, request.Value);
+			builder.Finish(offset.Value);
+
+			var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
+			NetworkData.Connect.SendSystemMessage(ms);
+			Debug.Log("Leave Room");
 		}
 
 		public static void SetCharacterRequest(string characterName)
