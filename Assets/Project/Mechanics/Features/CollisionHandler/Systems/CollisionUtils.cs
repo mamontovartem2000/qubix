@@ -23,7 +23,7 @@ public static class CollisionUtils
 	{
 		ref readonly var circleRadius = ref circle.Get<CircleRect>().Radius;
 		ref readonly var squareWidth = ref square.Get<SquareRect>().Width;
-		ref readonly var squareHeight = ref square.Get<SquareRect>().Width;
+		ref readonly var squareHeight = ref square.Get<SquareRect>().Height;
 		
 		var circlePosition = circle.GetPosition();
 		var squarePosition = square.GetPosition();

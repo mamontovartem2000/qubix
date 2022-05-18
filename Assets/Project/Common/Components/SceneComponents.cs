@@ -10,11 +10,16 @@ namespace Project.Common.Components
 	}
 	public struct TileView : IComponent
 	{
-		public MonoBehaviourViewBase Value;
+		public ParticleViewSourceBase Value;
 	}
 
 	public struct TileRotation : IComponent
 	{
 		public Vector3 Value;
+	}
+
+	public struct BridgeTile : IComponent
+	{
+		public bool Value;
 	}
 }

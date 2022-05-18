@@ -1,6 +1,5 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Core.Features.SceneBuilder.Components;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -75,15 +74,15 @@ namespace Project.Core.Features.SceneBuilder.Systems
 
                         player.Set(new TeleportPlayer());
 
-                        var portIn = new Entity("in");
-                        portIn.SetPosition(portals[i].GetPosition());
-                        portIn.InstantiateView(_scene._inPortal);
-                        portIn.Get<LifeTimeLeft>().Value = 3;
-
-                        var portOut = new Entity("out");
-                        portOut.SetPosition(newPosition);
-                        portOut.InstantiateView(_scene._outPortal);
-                        portOut.Get<LifeTimeLeft>().Value = 3;
+                        // var portIn = new Entity("in");
+                        // portIn.SetPosition(portals[i].GetPosition());
+                        // portIn.InstantiateView(_scene._inPortal);
+                        // portIn.Get<LifeTimeLeft>().Value = 3;
+                        //
+                        // var portOut = new Entity("out");
+                        // portOut.SetPosition(newPosition);
+                        // portOut.InstantiateView(_scene._outPortal);
+                        // portOut.Get<LifeTimeLeft>().Value = 3;
 
                         SceneUtils.Move(portals[i].GetPosition(), newPosition);
                         player.SetPosition(newPosition);

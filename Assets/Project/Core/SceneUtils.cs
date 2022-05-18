@@ -1,7 +1,6 @@
 using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.Player;
-using Project.Core.Features.SceneBuilder.Components;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

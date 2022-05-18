@@ -90,7 +90,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8009331757062252515}
-  - component: {fileID: -2862474124600401884}
+  - component: {fileID: -245801661258740902}
+  - component: {fileID: 6999707644315909464}
   m_Layer: 4
   m_Name: Health
   m_TagString: Untagged
@@ -113,7 +114,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2862474124600401884
+--- !u!114 &-245801661258740902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,7 +123,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7236453785416187225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 568c5331562b65a408260d0c0e3be7c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 3780f980b7d1646498fbfa5719357631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystemSimulation:
@@ -141,3 +142,36 @@ MonoBehaviour:
     useCache: 0
     useCacheTimeout: 0
     cacheTimeout: 0
+--- !u!114 &6999707644315909464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7236453785416187225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f2df9f6a7da714419a856fac4a32a25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 4702925393065980420, guid: dffcb6e506f3a0444aea9b0d28552daa, type: 3}
+        meshRenderer: {fileID: 9027791633847149688}
+        meshFilter: {fileID: 7091180686952188597}
+        material: {fileID: 2100000, guid: 05c290c86a12f224b86733771837e09b, type: 2}
+        localPosition: {x: 0, y: -0.4, z: 0}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 1, y: 1, z: 1}

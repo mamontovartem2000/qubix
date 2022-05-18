@@ -188,6 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7478828035864157207}
   - component: {fileID: -6843489200307283207}
+  - component: {fileID: 6038225579465045130}
   m_Layer: 0
   m_Name: Tile 1
   m_TagString: Untagged
@@ -238,3 +239,55 @@ MonoBehaviour:
     useCache: 0
     useCacheTimeout: 0
     cacheTimeout: 0
+--- !u!114 &6038225579465045130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8537168741213304097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232f74a8af3e52b4eb91dcebfb621f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 5062246478642505140, guid: acae17ab99ff2c74e94a1e61e5c70659, type: 3}
+        meshRenderer: {fileID: 1480533743875202132}
+        meshFilter: {fileID: 3706214903019333790}
+        material: {fileID: 2100000, guid: 82cfc8c35f66d65409fb343dcea11f79, type: 2}
+        localPosition: {x: 0, y: -0.4, z: 0}
+        localRotation: {x: 0.000009334667, y: 0, z: 0}
+        localScale: {x: 1, y: 1, z: 1}
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+        meshRenderer: {fileID: 7651727872316932113}
+        meshFilter: {fileID: 1047145348890805763}
+        material: {fileID: 2100000, guid: 9ee1c2f87cb5c4ece8b43bdd2d39d1d6, type: 2}
+        localPosition: {x: 0, y: -0.39000002, z: 0.0000000016292067}
+        localRotation: {x: 0.000009334667, y: -0, z: -0}
+        localScale: {x: 0.08694494, y: 0.08694494, z: 0.08694494}

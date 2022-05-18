@@ -1,5 +1,5 @@
 ﻿using ME.ECS;
-using Project.Core.Features.SceneBuilder.Components;
+using Project.Common.Components;
 
 namespace Project.Core.Features.SceneBuilder.Systems
 {

@@ -1,6 +1,6 @@
 ﻿using ME.ECS;
 
-namespace Project.Core.Features.SceneBuilder.Components 
+namespace Project.Common.Components 
 {
     public struct HealthTag : IComponent {}
 

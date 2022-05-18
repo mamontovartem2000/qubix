@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4445172347900381188}
-  - component: {fileID: -6593569631356176297}
+  - component: {fileID: 6383715620182903642}
+  - component: {fileID: 3273252858465205237}
   m_Layer: 0
   m_Name: Mine
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6593569631356176297
+--- !u!114 &6383715620182903642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3961967136171987646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 568c5331562b65a408260d0c0e3be7c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 3780f980b7d1646498fbfa5719357631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystemSimulation:
@@ -60,6 +61,39 @@ MonoBehaviour:
     useCache: 0
     useCacheTimeout: 0
     cacheTimeout: 0
+--- !u!114 &3273252858465205237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3961967136171987646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f2df9f6a7da714419a856fac4a32a25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: -263230822648345300, guid: 321fa8e7fa5e8584dbc495abb92dd301, type: 3}
+        meshRenderer: {fileID: 7985902332036058116}
+        meshFilter: {fileID: 1920915902386488523}
+        material: {fileID: 2100000, guid: 60d5ea06f2eddea4b9ac4a0cbb735dd9, type: 2}
+        localPosition: {x: 0, y: -0.4, z: 0}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 1, y: 1, z: 1}
 --- !u!1 &8818481072329427299
 GameObject:
   m_ObjectHideFlags: 0

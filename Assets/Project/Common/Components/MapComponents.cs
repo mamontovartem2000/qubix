@@ -2,7 +2,7 @@
 using ME.ECS.Collections;
 using UnityEngine;
 
-namespace Project.Core.Features.SceneBuilder.Components
+namespace Project.Common.Components
 {
     public struct MapComponents : IStructCopyable<MapComponents>
     {

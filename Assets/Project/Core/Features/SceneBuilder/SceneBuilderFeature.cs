@@ -1,8 +1,8 @@
 ﻿using ME.ECS;
 using ME.ECS.Collections;
 using ME.ECS.Views.Providers;
-using Project.Core.Features.SceneBuilder.Components;
 using ME.ECS.DataConfigs;
+using ME.ECS.Transform;
 using Project.Common.Components;
 using Project.Core.Features.GameState.Components;
 using Project.Core.Features.SceneBuilder.Systems;
@@ -17,19 +17,23 @@ namespace Project.Core.Features.SceneBuilder
 #endif
     public sealed class SceneBuilderFeature : Feature
     {
+        private const int HEALTH = 0;
+        private const int MINE = 1;
+        
         [Header("General")]
         [SerializeField] private TextAsset _sourceMap;
         [SerializeField] private TextAsset _objectsMap;
 
-        [HideInInspector] public ViewId _inPortal, _outPortal, _mineId, _healthId;
+        //[HideInInspector] public ViewId _inPortal, _outPortal, _mineId, _healthId;
+        // public MonoBehaviourViewBase In_PortalEffect, Out_PortalEffect, MineMono, HealthMono;
 
         [Header("Reworked Links")]
-        public MonoBehaviourViewBase[] TileViewSources;
-        public DataConfig[] ObjectConfigs;
+        // public MonoBehaviourViewBase[] TileViewSources;
+        public ParticleViewSourceBase[] TileViewSources;
+        public DataConfig[] PropsConfigs;
+        public ParticleViewSourceBase[] ObjectViewSources;
 
-        public MonoBehaviourViewBase In_PortalEffect, Out_PortalEffect, MineMono, HealthMono;
-        
-        private ViewId[] _tileViewIds, _objectViewIds;
+        private ViewId[] _tileViewIds, _propsViewIds, _objectViewIds;
         
         protected override void OnConstruct()
         {
@@ -51,22 +55,28 @@ namespace Project.Core.Features.SceneBuilder
         private void RegisterViews()
         {
             _tileViewIds = new ViewId[TileViewSources.Length];
-            _objectViewIds = new ViewId[ObjectConfigs.Length];
-            
+            _propsViewIds = new ViewId[PropsConfigs.Length];
+            _objectViewIds = new ViewId[ObjectViewSources.Length];
+
             for (var i = 2; i < TileViewSources.Length; i++)
             {
                 _tileViewIds[i] = world.RegisterViewSource(TileViewSources[i]);
             }
 
-            for (int i = 1; i < ObjectConfigs.Length; i++)
+            for (int i = 1; i < PropsConfigs.Length; i++)
             {
-                _objectViewIds[i] = world.RegisterViewSource(ObjectConfigs[i].Read<TileView>().Value);
+                _propsViewIds[i] = world.RegisterViewSource(PropsConfigs[i].Read<TileView>().Value);
+            }
+
+            for (int i = 0; i < ObjectViewSources.Length; i++)
+            {
+                _objectViewIds[i] = world.RegisterViewSource(ObjectViewSources[i]);
             }
             
-            _inPortal = world.RegisterViewSource(In_PortalEffect);
-            _outPortal = world.RegisterViewSource(Out_PortalEffect);
-            _mineId = world.RegisterViewSource(MineMono);
-            _healthId = world.RegisterViewSource(HealthMono);
+            // _inPortal = world.RegisterViewSource(In_PortalEffect);
+            // _outPortal = world.RegisterViewSource(Out_PortalEffect);
+            // _mineId = world.RegisterViewSource(MineMono);
+            // _healthId = world.RegisterViewSource(HealthMono);
         }
 
         private void PrepareMaps()
@@ -117,9 +127,15 @@ namespace Project.Core.Features.SceneBuilder
                         break;
                     }
                     case 10: // Bridge tile
+                    {
+                        entity = new Entity("Bridge-Tile");
+                        entity.Get<BridgeTile>().Value = true;
+                        break;
+                    }
                     case 11:
                     {
                         entity = new Entity("Bridge-Tile");
+                        entity.Get<BridgeTile>().Value = false;
                         break;
                     }
                     default:
@@ -146,9 +162,10 @@ namespace Project.Core.Features.SceneBuilder
                 if(b == 0) continue;
                 
                 var entity = new Entity("Prop");
-                ObjectConfigs[b].Apply(entity);
-                entity.InstantiateView(_objectViewIds[b]);
+                PropsConfigs[b].Apply(entity);
+                entity.InstantiateView(_propsViewIds[b]);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
+                entity.SetRotation(PropsConfigs[b].Read<Rotation>().value);
                 SceneUtils.TakeTheCell(i);
             }
         }
@@ -178,14 +195,14 @@ namespace Project.Core.Features.SceneBuilder
 
             entity.Set(new MineTag());
             entity.SetPosition(SceneUtils.GetRandomSpawnPosition());
-            entity.InstantiateView(_mineId);
+            entity.InstantiateView(_objectViewIds[MINE]);
         }
 
         public Entity SpawnHealth()
         {
             var entity = new Entity("Health");
             entity.Set(new HealthTag());
-            entity.InstantiateView(_healthId);
+            entity.InstantiateView(_objectViewIds[HEALTH]);
             return entity;
         }
     }

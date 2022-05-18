@@ -124,6 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5914716452286732088}
   - component: {fileID: 3143380838030912496}
+  - component: {fileID: 3093188130798929080}
   m_Layer: 0
   m_Name: SlowWallV
   m_TagString: Untagged
@@ -174,6 +175,77 @@ MonoBehaviour:
     useCache: 0
     useCacheTimeout: 0
     cacheTimeout: 0
+--- !u!114 &3093188130798929080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6439755946628861314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28052540b51422b4bbcaf2084b255436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: -7948895996104547794, guid: 3acabdc4692b92c48ba5f907c3037921, type: 3}
+        meshRenderer: {fileID: 7825701217619877811}
+        meshFilter: {fileID: 6668045341113970311}
+        material: {fileID: 2100000, guid: 6030bba8b9170474dadf309e41cd9849, type: 2}
+        localPosition: {x: 0, y: -0.8, z: 0}
+        localRotation: {x: 0, y: 270, z: 0}
+        localScale: {x: 1.0000002, y: 1, z: 1.0000002}
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: -7948895996104547794, guid: 3acabdc4692b92c48ba5f907c3037921, type: 3}
+        meshRenderer: {fileID: 7825701218108814397}
+        meshFilter: {fileID: 6668045340361311497}
+        material: {fileID: 2100000, guid: 6030bba8b9170474dadf309e41cd9849, type: 2}
+        localPosition: {x: 5.0000005, y: -0.8, z: 0.00000047683716}
+        localRotation: {x: 0, y: 270, z: 0}
+        localScale: {x: 1.0000002, y: 1, z: 1.0000002}
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+        meshRenderer: {fileID: 5929202063829340044}
+        meshFilter: {fileID: 9084538792911287103}
+        material: {fileID: 2100000, guid: 35f374f1075a5cc4eafb63e5df9f73ad, type: 2}
+        localPosition: {x: 2.4999912, y: -0.356, z: 0.00000023841858}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 4.7567515, y: 0.7090277, z: 0.1404718}
 --- !u!1 &8220159660203104920
 GameObject:
   m_ObjectHideFlags: 0

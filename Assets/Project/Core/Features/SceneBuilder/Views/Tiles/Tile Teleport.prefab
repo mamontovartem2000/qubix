@@ -24219,6 +24219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6439774410174021282}
   - component: {fileID: -4152197160192619193}
+  - component: {fileID: -3668558979262628724}
   m_Layer: 0
   m_Name: Tile Teleport
   m_TagString: Untagged
@@ -24275,6 +24276,134 @@ MonoBehaviour:
     useCache: 0
     useCacheTimeout: 0
     cacheTimeout: 0
+--- !u!114 &-3668558979262628724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6439774410174021281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232f74a8af3e52b4eb91dcebfb621f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 5062246478642505140, guid: acae17ab99ff2c74e94a1e61e5c70659, type: 3}
+        meshRenderer: {fileID: 141950717339391395}
+        meshFilter: {fileID: 6438440860424995186}
+        material: {fileID: 2100000, guid: d1e1c8d26b940fa44aa48da5b174ad25, type: 2}
+        localPosition: {x: 0, y: -0.4, z: 0}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 1, y: 1, z: 1}
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 5020455427808806248}
+          settings:
+            simulationType: 1
+            minSimulationTime: 0.2
+            minEndingTime: 0.1
+            halfEnding: 0.5
+          hasDefault: 1
+        psSource: {fileID: 5020455427808806248}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 0}
+        meshRenderer: {fileID: 0}
+        meshFilter: {fileID: 0}
+        material: {fileID: 0}
+        localPosition: {x: 0, y: -0.5, z: 0}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 0.24, y: 0.24, z: 0.24}
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 3281018070992613025}
+          settings:
+            simulationType: 1
+            minSimulationTime: 0.2
+            minEndingTime: 0.1
+            halfEnding: 0.5
+          hasDefault: 1
+        psSource: {fileID: 3281018070992613025}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 0}
+        meshRenderer: {fileID: 0}
+        meshFilter: {fileID: 0}
+        material: {fileID: 0}
+        localPosition: {x: 0, y: -0.5, z: 0}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 0.24, y: 0.24, z: 0.24}
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 6806472030760577483}
+          settings:
+            simulationType: 1
+            minSimulationTime: 0.2
+            minEndingTime: 0.1
+            halfEnding: 0.5
+          hasDefault: 1
+        psSource: {fileID: 6806472030760577483}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 0}
+        meshRenderer: {fileID: 0}
+        meshFilter: {fileID: 0}
+        material: {fileID: 0}
+        localPosition: {x: -0.000007630328, y: -0.6036632, z: 0.0077171335}
+        localRotation: {x: 0, y: 150.00002, z: 0}
+        localScale: {x: 0.09909755, y: 0.0990975, z: 0.09909755}
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 6019415125056736582}
+          settings:
+            simulationType: 1
+            minSimulationTime: 0.2
+            minEndingTime: 0.1
+            halfEnding: 0.5
+          hasDefault: 1
+        psSource: {fileID: 6019415125056736582}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 0}
+        meshRenderer: {fileID: 0}
+        meshFilter: {fileID: 0}
+        material: {fileID: 0}
+        localPosition: {x: -0.000007630328, y: -0.6036632, z: 0.0077171335}
+        localRotation: {x: 0, y: 150.00002, z: 0}
+        localScale: {x: 0.09909755, y: 0.0990975, z: 0.09909755}
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 6686946059572491054}
+          settings:
+            simulationType: 1
+            minSimulationTime: 0.2
+            minEndingTime: 0.1
+            halfEnding: 0.5
+          hasDefault: 1
+        psSource: {fileID: 6686946059572491054}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 0}
+        meshRenderer: {fileID: 0}
+        meshFilter: {fileID: 0}
+        material: {fileID: 0}
+        localPosition: {x: -0.000007630328, y: -0.6036632, z: 0.0077171335}
+        localRotation: {x: 0, y: 150.00002, z: 0}
+        localScale: {x: 0.09909755, y: 0.0990975, z: 0.09909755}
 --- !u!1 &7403190036194245671
 GameObject:
   m_ObjectHideFlags: 0

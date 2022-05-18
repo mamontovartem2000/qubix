@@ -19,6 +19,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarView>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.BridgeTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CircleRect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Collided>(true, true, false, false, false, false, false, false);
@@ -30,6 +31,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, false, false, false, false, false, false);
@@ -43,6 +45,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GrenadeThrowModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealingAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealingModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.HealthTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
@@ -64,6 +67,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LockTarget>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MagneticStormAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MagneticStormModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MapComponents>(false, false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageAffect>(true, true, false, false, false, false, false, false);
@@ -71,6 +75,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MineTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveInput>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedModifier>(false, true, false, false, false, false, false, false);
@@ -87,6 +92,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerMoveTarget>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerScore>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerTag>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PortalTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, true, false, false, false, false, false, false);
@@ -113,6 +119,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillsResetModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpreadAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SquareRect>(false, true, false, false, false, false, false, false);
@@ -137,12 +144,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GamePaused>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameTimer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.MapInitialized>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.HealthTag>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapComponents>(false, false, true, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MineTag>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.PortalTag>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.Spawned>(true, true, false, false, false, false, false, false);
 
         }
 
@@ -163,6 +164,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarView>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.BridgeTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CircleRect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Collided>(true, true, false, false, false, false, false, false);
@@ -174,6 +176,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, false, false, false, false, false, false);
@@ -187,6 +190,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GrenadeThrowModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealingAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealingModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.HealthTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
@@ -208,6 +212,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LockTarget>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MagneticStormAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MagneticStormModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MapComponents>(false, false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageAffect>(true, true, false, false, false, false, false, false);
@@ -215,6 +220,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MineTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveInput>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedModifier>(false, true, false, false, false, false, false, false);
@@ -231,6 +237,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerMoveTarget>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerScore>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerTag>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PortalTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, true, false, false, false, false, false, false);
@@ -257,6 +264,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillsResetModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpreadAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SquareRect>(false, true, false, false, false, false, false, false);
@@ -281,12 +289,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GamePaused>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.GameTimer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Core.Features.GameState.Components.MapInitialized>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.HealthTag>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MapComponents>(false, false, true, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.MineTag>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.PortalTag>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Core.Features.SceneBuilder.Components.Spawned>(true, true, false, false, false, false, false, false);
 
             ComponentsInitializerWorld.Setup(ComponentsInitializerWorldGen.Init);
             CoreComponentsInitializer.Init(ref structComponentsContainer);
@@ -302,6 +304,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.AutomaticWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvatarTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvatarView>(false);
+            structComponentsContainer.Validate<Project.Common.Components.BridgeTile>(false);
             noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.BuffTrigger>(true);
             structComponentsContainer.Validate<Project.Common.Components.CircleRect>(false);
             structComponentsContainer.Validate<Project.Common.Components.Collided>(true);
@@ -313,6 +316,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.DamagedBy>(false);
             structComponentsContainer.Validate<Project.Common.Components.DamageSource>(true);
             structComponentsContainer.Validate<Project.Common.Components.DashAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.DispenserTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.EffectTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.FaceDirection>(false);
             structComponentsContainer.Validate<Project.Common.Components.FireRateAffect>(true);
@@ -326,6 +330,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.GrenadeThrowModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.HealingAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.HealingModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.HealthTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.InstantReloadAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.InstantReloadModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.LandMineAffect>(true);
@@ -347,6 +352,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.LockTarget>(true);
             structComponentsContainer.Validate<Project.Common.Components.MagneticStormAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.MagneticStormModifier>(false);
+            structComponentsContainer.ValidateCopyable<Project.Common.Components.MapComponents>(false);
             structComponentsContainer.Validate<Project.Common.Components.MapConstruct>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeActive>(true);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDamageAffect>(true);
@@ -354,6 +360,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelay>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelayDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(true);
+            structComponentsContainer.Validate<Project.Common.Components.MineTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.MoveInput>(false);
             structComponentsContainer.Validate<Project.Common.Components.MoveSpeedAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.MoveSpeedModifier>(false);
@@ -370,6 +377,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.PlayerMoveTarget>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerScore>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerTag>(false);
+            structComponentsContainer.Validate<Project.Common.Components.PortalTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileActive>(true);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDamage>(false);
@@ -396,6 +404,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SkillsResetModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.SkillVFX>(false);
+            structComponentsContainer.Validate<Project.Common.Components.Spawned>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpeedModifier>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpreadAmount>(false);
             structComponentsContainer.Validate<Project.Common.Components.SquareRect>(false);
@@ -420,12 +429,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GamePaused>(true);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.GameTimer>(false);
             structComponentsContainer.Validate<Project.Core.Features.GameState.Components.MapInitialized>(true);
-            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false);
-            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.HealthTag>(true);
-            structComponentsContainer.ValidateCopyable<Project.Core.Features.SceneBuilder.Components.MapComponents>(false);
-            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.MineTag>(true);
-            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.PortalTag>(true);
-            structComponentsContainer.Validate<Project.Core.Features.SceneBuilder.Components.Spawned>(true);
 
         }
 
@@ -446,6 +449,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.AutomaticWeapon>(true);
             entity.ValidateData<Project.Common.Components.AvatarTag>(true);
             entity.ValidateData<Project.Common.Components.AvatarView>(false);
+            entity.ValidateData<Project.Common.Components.BridgeTile>(false);
             entity.ValidateDataOneShot<Project.Common.Components.BuffTrigger>(true);
             entity.ValidateData<Project.Common.Components.CircleRect>(false);
             entity.ValidateData<Project.Common.Components.Collided>(true);
@@ -457,6 +461,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.DamagedBy>(false);
             entity.ValidateData<Project.Common.Components.DamageSource>(true);
             entity.ValidateData<Project.Common.Components.DashAffect>(true);
+            entity.ValidateData<Project.Common.Components.DispenserTag>(false);
             entity.ValidateData<Project.Common.Components.EffectTag>(true);
             entity.ValidateData<Project.Common.Components.FaceDirection>(false);
             entity.ValidateData<Project.Common.Components.FireRateAffect>(true);
@@ -470,6 +475,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.GrenadeThrowModifier>(false);
             entity.ValidateData<Project.Common.Components.HealingAffect>(true);
             entity.ValidateData<Project.Common.Components.HealingModifier>(false);
+            entity.ValidateData<Project.Common.Components.HealthTag>(true);
             entity.ValidateData<Project.Common.Components.InstantReloadAffect>(true);
             entity.ValidateData<Project.Common.Components.InstantReloadModifier>(false);
             entity.ValidateData<Project.Common.Components.LandMineAffect>(true);
@@ -491,6 +497,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.LockTarget>(true);
             entity.ValidateData<Project.Common.Components.MagneticStormAffect>(true);
             entity.ValidateData<Project.Common.Components.MagneticStormModifier>(false);
+            entity.ValidateDataCopyable<Project.Common.Components.MapComponents>(false);
             entity.ValidateData<Project.Common.Components.MapConstruct>(false);
             entity.ValidateData<Project.Common.Components.MeleeActive>(true);
             entity.ValidateData<Project.Common.Components.MeleeDamageAffect>(true);
@@ -498,6 +505,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.MeleeDelay>(false);
             entity.ValidateData<Project.Common.Components.MeleeDelayDefault>(false);
             entity.ValidateData<Project.Common.Components.MeleeWeapon>(true);
+            entity.ValidateData<Project.Common.Components.MineTag>(true);
             entity.ValidateData<Project.Common.Components.MoveInput>(false);
             entity.ValidateData<Project.Common.Components.MoveSpeedAffect>(true);
             entity.ValidateData<Project.Common.Components.MoveSpeedModifier>(false);
@@ -514,6 +522,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.PlayerMoveTarget>(false);
             entity.ValidateData<Project.Common.Components.PlayerScore>(false);
             entity.ValidateData<Project.Common.Components.PlayerTag>(false);
+            entity.ValidateData<Project.Common.Components.PortalTag>(true);
             entity.ValidateData<Project.Common.Components.ProjectileActive>(true);
             entity.ValidateData<Project.Common.Components.ProjectileConfig>(false);
             entity.ValidateData<Project.Common.Components.ProjectileDamage>(false);
@@ -540,6 +549,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SkillsResetModifier>(false);
             entity.ValidateData<Project.Common.Components.SkillTag>(true);
             entity.ValidateData<Project.Common.Components.SkillVFX>(false);
+            entity.ValidateData<Project.Common.Components.Spawned>(true);
             entity.ValidateData<Project.Common.Components.SpeedModifier>(true);
             entity.ValidateData<Project.Common.Components.SpreadAmount>(false);
             entity.ValidateData<Project.Common.Components.SquareRect>(false);
@@ -564,12 +574,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Core.Features.GameState.Components.GamePaused>(true);
             entity.ValidateData<Project.Core.Features.GameState.Components.GameTimer>(false);
             entity.ValidateData<Project.Core.Features.GameState.Components.MapInitialized>(true);
-            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.DispenserTag>(false);
-            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.HealthTag>(true);
-            entity.ValidateDataCopyable<Project.Core.Features.SceneBuilder.Components.MapComponents>(false);
-            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.MineTag>(true);
-            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.PortalTag>(true);
-            entity.ValidateData<Project.Core.Features.SceneBuilder.Components.Spawned>(true);
 
         }
 

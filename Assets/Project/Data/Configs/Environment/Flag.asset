@@ -27,17 +27,17 @@ MonoBehaviour:
     00000000:
       type: {class: TileView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 5505095873356457620, guid: 7012e657b31f59245861735f70a6a8dd, type: 3}
+        Value: {fileID: -8628598425631280483, guid: 7012e657b31f59245861735f70a6a8dd, type: 3}
     00000001:
-      type: {class: TileRotation, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: {x: 0, y: 0, z: 0}
-    00000002:
       type: {class: SquareRect, ns: Project.Common.Components, asm: Project.Common}
       data:
         Width: 0.4
         Height: 0.4
-    00000003:
+    00000002:
       type: {class: CollisionTag, ns: Project.Common.Components, asm: Project.Common}
-    00000004:
+    00000003:
       type: {class: CollisionStatic, ns: Project.Common.Components, asm: Project.Common}
+    00000004:
+      type: {class: TileRotation, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {x: 0, y: 0, z: 0}

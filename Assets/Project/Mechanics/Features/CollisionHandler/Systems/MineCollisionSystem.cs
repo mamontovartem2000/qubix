@@ -1,7 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core;
-using Project.Core.Features.SceneBuilder.Components;
 using Project.Mechanics.Features.VFX;
 
 namespace Project.Mechanics.Features.CollisionHandler.Systems
