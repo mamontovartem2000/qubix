@@ -1,3 +1,5 @@
+using FlatMessages;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -5,18 +7,38 @@ namespace Project.Modules.Network
 {
     public class WaitingRoomTimer : MonoBehaviour
     {
+        public static Action ShowCharacterSelectionWindow;
+
         [SerializeField] private GameObject _textPlace;
         [SerializeField] private TMP_Text _text;
+        [SerializeField] private bool _showOnlyLast10sec;
+
         private float _timer = 0f;
 
         private void Start()
         {
-            Stepsss.TimeRemaining += SetTime;
+            Stepsss.SetTimer += SetTimer;
         }
 
-        public void SetTime(uint time)
+        public void SetTimer(TimeRemaining time)
         {
-            _timer = time;
+            if (_showOnlyLast10sec)
+            {
+                if (time.State != "starting")
+                    return;
+            }
+
+            if (time.State == "starting")
+            {
+                ShowCharacterSelectionWindow?.Invoke();
+            }
+
+            ShowTimer(time);
+        }
+
+        private void ShowTimer(TimeRemaining time)
+        {
+            _timer = time.Value / 1000;
 
             if (_textPlace.activeSelf == false)
                 _textPlace.SetActive(true);
@@ -43,7 +65,7 @@ namespace Project.Modules.Network
 
         private void OnDestroy()
         {
-            Stepsss.TimeRemaining -= SetTime;
+            Stepsss.SetTimer -= SetTimer;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Project.Modules.Network
         {
 			Stepsss.LoadMainMenuScene += ReloadMenuScene;
 			Stepsss.LoadGameScene += LoadGameScene;
-			Stepsss.ShowCharacterSelectionWindow += SwapScreens;
+			WaitingRoomTimer.ShowCharacterSelectionWindow += SwapScreens;
 		}
 
 		private void Update()
@@ -97,7 +97,7 @@ namespace Project.Modules.Network
 		{
 			Stepsss.LoadMainMenuScene -= ReloadMenuScene;
 			Stepsss.LoadGameScene -= LoadGameScene;
-			Stepsss.ShowCharacterSelectionWindow -= SwapScreens;
+			WaitingRoomTimer.ShowCharacterSelectionWindow -= SwapScreens;
 		}
 	}
 }

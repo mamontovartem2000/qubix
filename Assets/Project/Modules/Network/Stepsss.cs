@@ -8,10 +8,9 @@ namespace Project.Modules.Network
 {
     public static class Stepsss
 	{
-		public static Action<uint> TimeRemaining;
 		public static Action LoadMainMenuScene;
 		public static Action LoadGameScene;
-		public static Action ShowCharacterSelectionWindow;
+		public static Action<TimeRemaining> SetTimer;
 		public static Action<RoomInfo[]> GetRoomList;
 
 		public static void ProcessJoinRequest(string request)
@@ -134,12 +133,7 @@ namespace Project.Modules.Network
 		private static void SetTimeRemaining(TimeRemaining timeRemaining)
 		{
 			Debug.Log("Set Time!");
-
-			if (timeRemaining.State == "starting")
-            {
-				TimeRemaining?.Invoke(timeRemaining.Value / 1000);
-				ShowCharacterSelectionWindow?.Invoke();
-			}
+			SetTimer?.Invoke(timeRemaining);
 		}
 
 		private static void SetPlayerList(PlayerList playerList)

@@ -18,7 +18,7 @@ namespace Project.Modules.Network
 		{
 			Stepsss.LoadMainMenuScene += ReloadMenuScene;
 			Stepsss.LoadGameScene += LoadGameScene;
-			Stepsss.ShowCharacterSelectionWindow += SwapScreens;
+			WaitingRoomTimer.ShowCharacterSelectionWindow += SwapScreens;
 
 			Stepsss.GetRoomList += ShowRooms;
 			RoomPrefab.JoinRoom += SelectRoom;
@@ -41,11 +41,11 @@ namespace Project.Modules.Network
 
 		private void ShowRooms(RoomInfo[] obj)
 		{
-			//Debug.Log("Rooms: ");
+			Debug.Log("Rooms: ");
 
             for (int i = 0; i < obj.Length; i++)
             {
-				//Debug.Log($"{obj[i].Id} {obj[i].PlayersCount} {obj[i].MaxPlayersCount}");
+				Debug.Log($"{obj[i].Id} {obj[i].PlayersCount} {obj[i].MaxPlayersCount}");
 				_rooms[i].UpdateRoomInfo(obj[i], i + 1);
 			}
 
@@ -61,10 +61,14 @@ namespace Project.Modules.Network
 			if (_roomSelected == false)
             {
 				_roomSelected = true;
-				return;
+				var rnd = UnityEngine.Random.Range(0f, 1f);
+				StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, "Player" + rnd, Stepsss.ProcessJoinRequestWithoutSocket));
 			}
+            else
+            {
+				Stepsss.ChangeRoomRequest(roomId);
+            }
 
-			Stepsss.ChangeRoomRequest(roomId);
 		}
 
 		private void ReloadMenuScene()
@@ -95,7 +99,7 @@ namespace Project.Modules.Network
 		{
 			Stepsss.LoadMainMenuScene -= ReloadMenuScene;
 			Stepsss.LoadGameScene -= LoadGameScene;
-			Stepsss.ShowCharacterSelectionWindow -= SwapScreens;
+			WaitingRoomTimer.ShowCharacterSelectionWindow -= SwapScreens;
 			Stepsss.GetRoomList -= ShowRooms;
 		}
 	}

@@ -5,7 +5,6 @@ namespace Project.Modules.Network
 {
     public class ConnectSupport : MonoBehaviour
 	{
-		[SerializeField] private GameObject _selectionScreen;
 		[SerializeField] private CharacterSelection _select;
 
 		private bool _needLoadGameScene, _needReloadThisScene;
@@ -14,7 +13,7 @@ namespace Project.Modules.Network
 		{
 			Stepsss.LoadMainMenuScene += ReloadMenuScene;
 			Stepsss.LoadGameScene += LoadGameScene;
-			Stepsss.ShowCharacterSelectionWindow += SwapScreens;
+			WaitingRoomTimer.ShowCharacterSelectionWindow += SwapScreens;
 #if UNITY_WEBGL && !UNITY_EDITOR
 			BrowserEvents.ReadyToStart();
 #endif
@@ -55,8 +54,7 @@ namespace Project.Modules.Network
 
 		private void SwapScreens()
 		{
-			_selectionScreen.SetActive(true);
-			//TODO: Add random selection
+			_select.gameObject.SetActive(true);
 			var rnd = Random.Range(0, 3);
 			_select.Select(rnd) ;
 		}
@@ -65,7 +63,7 @@ namespace Project.Modules.Network
 		{
 			Stepsss.LoadMainMenuScene -= ReloadMenuScene;
 			Stepsss.LoadGameScene -= LoadGameScene;
-			Stepsss.ShowCharacterSelectionWindow -= SwapScreens;
+			WaitingRoomTimer.ShowCharacterSelectionWindow -= SwapScreens;
 		}
 	}
 }

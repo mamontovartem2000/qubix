@@ -65,9 +65,6 @@ namespace Project.Modules.Network
         {
             JoinRoom?.Invoke(_roomInfo.Id);
             SelectRoom();
-            
-            var rnd = UnityEngine.Random.Range(0f, 1f);
-            StartCoroutine(ManualRoomCreating.LoadJoinRequest(_roomInfo.Id, "Player" + rnd, Stepsss.ProcessJoinRequestWithoutSocket));
         }
 
         private void SelectRoom()
@@ -80,6 +77,7 @@ namespace Project.Modules.Network
 
         private void UnselectRoom(string id)
         {
+            _joinButton.interactable = true;
             _image.enabled = false;
             _joinButton.gameObject.GetComponent<Image>().sprite = _unselectedButton;
             _playersCount.color = _unselectedText;
