@@ -1,8 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Project.Common.Views
+namespace Project.Common.Views.Particles
 {
-	using ME.ECS.Views.Providers;
 	public class ObjectParticleView : ParticleViewSource<ApplyObjectParticleViewStateParticle> {}
 	[System.Serializable]
 	public class ApplyObjectParticleViewStateParticle : ParticleView<ApplyObjectParticleViewStateParticle>

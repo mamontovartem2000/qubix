@@ -6,7 +6,7 @@ namespace Project.Common.Components
 {
 	public struct ProjectileView : IComponent
 	{
-		public MonoBehaviourViewBase Value;
+		public ParticleViewSourceBase Value;
 	}
 	
 	public struct ProjectileDirection : IComponent

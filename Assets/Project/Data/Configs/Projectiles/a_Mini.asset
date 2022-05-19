@@ -18,6 +18,7 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
+  - id: 4
   removeStructComponents: []
   templates: []
   references:
@@ -25,7 +26,7 @@ MonoBehaviour:
     00000000:
       type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 2966322144701503504, guid: ef284bd35f82add43b59088a6b6c63e4, type: 3}
+        Value: {fileID: -6952189289343319530, guid: ef284bd35f82add43b59088a6b6c63e4, type: 3}
     00000001:
       type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -38,3 +39,5 @@ MonoBehaviour:
       type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 1
+    00000004:
+      type: {class: CollisionDynamic, ns: Project.Common.Components, asm: Project.Common}

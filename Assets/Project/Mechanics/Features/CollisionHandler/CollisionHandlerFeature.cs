@@ -27,10 +27,11 @@ namespace Project.Mechanics.Features.CollisionHandler
         
         protected override void OnConstruct()
         {
-            AddSystem<HealthCollisionSystem>();
-            AddSystem<MineCollisionSystem>();
-            AddSystem<ProjectileCollisionSystem>();
-            AddSystem<CollisionDetectionSystem>();
+            // AddSystem<HealthCollisionSystem>();
+            // AddSystem<MineCollisionSystem>();
+            // AddSystem<ProjectileCollisionSystem>();
+            // AddSystem<CollisionDetectionSystem>();
+            AddSystem<GridCollisionDetectionSystem>();
 
             // ExplosionID = world.RegisterViewSource(ExplosionVFX);
             // PlayerDeathID = world.RegisterViewSource(PlayerDeathVFX);

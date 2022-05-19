@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4750840750772608133}
-  - component: {fileID: 2767397463871810422}
+  - component: {fileID: -3132330114482880627}
   m_Layer: 0
   m_Name: RocketgunBullet
   m_TagString: Untagged
@@ -113,7 +113,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2767397463871810422
+--- !u!114 &-3132330114482880627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,22 +122,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 5378899743754683967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56d3ebe3b04baa04e9862a18c45e80b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 71e78985d3e16b145b81727bc2ec70ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleSystemSimulation:
-    particleItems: []
-    settings:
-      simulationType: 1
-      minSimulationTime: 0.2
-      minEndingTime: 0.1
-      halfEnding: 0.5
-    hasElements: 0
-    hasDefault: 1
-  defaultParameters:
-    useDespawnTime: 0
-    despawnTime: 0
-    cacheCustomViewId: 0
-    useCache: 0
-    useCacheTimeout: 0
-    cacheTimeout: 0
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 1988216149656743765, guid: e7187f34ac955114faaff9e9a4d317e2, type: 3}
+        meshRenderer: {fileID: 4468897918686086454}
+        meshFilter: {fileID: 4468897918686086453}
+        material: {fileID: 2100000, guid: 3352db6979209694aa6423f9a0618876, type: 2}
+        localPosition: {x: 0, y: 0, z: 0}
+        localRotation: {x: 90, y: 0, z: 0}
+        localScale: {x: 1, y: 1.0000002, z: 1.0000002}

@@ -25,7 +25,7 @@ namespace Project.Mechanics.Features.PreLogicTick.Systems
             this.GetFeature(out this._feature);
 
             Filter.Create("collision-Filter")
-                .With<CollisionTag>()
+                .With<CollisionDynamic>()
                 .Push(ref _collisionFilter);
         }
 

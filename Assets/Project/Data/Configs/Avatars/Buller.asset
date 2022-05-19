@@ -20,6 +20,7 @@ MonoBehaviour:
   - id: 3
   - id: 4
   - id: 5
+  - id: 6
   removeStructComponents: []
   templates: []
   references:
@@ -46,3 +47,5 @@ MonoBehaviour:
         Value: 80
     00000005:
       type: {class: AvatarTag, ns: Project.Common.Components, asm: Project.Common}
+    00000006:
+      type: {class: CollisionStatic, ns: Project.Common.Components, asm: Project.Common}

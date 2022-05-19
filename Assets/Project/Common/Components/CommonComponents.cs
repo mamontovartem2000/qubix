@@ -13,27 +13,11 @@ namespace Project.Common.Components
     public struct LeftWeaponShot : IComponent{}
     public struct RightWeaponShot : IComponent{}
     public struct SpeedModifier : IComponent {}
-    public struct TestTag   : IComponent {}
-    
-    //test components for new collision detection system implementation
-    public struct CollisionTag : IComponent {}
+    public struct CollisionDynamic : IComponent {}
     public struct CollisionStatic : IComponent {}
-    public struct CircleRect : IComponent
-    {
-        public float Radius;
-    }
 
-    public struct SquareRect : IComponent
+    public struct Collided : IComponent
     {
-        public float Width;
-        public float Height;
+        public Entity Value;
     }
-
-    public struct TriangleRect : IComponent
-    {
-        public float Length;
-        public float Width;
-    }
-    
-    public struct Collided : IComponent {}
 }

@@ -19,7 +19,7 @@ namespace Project.Mechanics.Features {
 
         protected override void OnConstruct()
         {
-            AddSystem<QuadTreeInitSystem>();
+            // AddSystem<QuadTreeInitSystem>();
         }
 
         protected override void OnDeconstruct() {

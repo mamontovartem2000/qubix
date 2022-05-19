@@ -3,7 +3,6 @@ using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Mechanics.Features.Projectile.Systems;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Project.Mechanics.Features.Projectile
 {
@@ -31,10 +30,9 @@ namespace Project.Mechanics.Features.Projectile
             gun.Read<ProjectileConfig>().Value.Apply(entity);
 
             entity.SetParent(gun);
-            entity.SetLocalPosition(new Vector3(0.15f, 0f, 0.0f));
+            entity.SetLocalPosition(new Vector3(-0.15f, 0f, 0.0f));
             entity.SetParent(Entity.Empty);
-            
-            entity.SetLocalRotation(gun.GetParent().GetRotation());
+            // entity.SetLocalRotation(gun.GetParent().GetRotation());
             
             entity.Get<ProjectileDirection>().Value = direction;
             entity.Get<Owner>().Value = gun.Read<Owner>().Value;
@@ -95,8 +93,6 @@ namespace Project.Mechanics.Features.Projectile
 
         public void SpawnMelee(Entity gun, Vector3 position)
         {
-            Debug.Log("spawned melee");
-
             var entity = new Entity("melee");
             gun.Read<ProjectileConfig>().Value.Apply(entity);
             entity.SetLocalPosition(position);

@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1706151169656966133}
-  - component: {fileID: 5489068152358734413}
-  - component: {fileID: 8069012544563126391}
+  - component: {fileID: 5198146776024206507}
   m_Layer: 0
   m_Name: ShotgunBullet
   m_TagString: Untagged
@@ -33,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5489068152358734413
+--- !u!114 &5198146776024206507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,28 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2082536456512147791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6188b39e6df31a4a858f5cbe7d26bf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystemSimulation:
-    particleItems: []
-    settings:
-      simulationType: 1
-      minSimulationTime: 0.2
-      minEndingTime: 0.1
-      halfEnding: 0.5
-    hasElements: 0
-    hasDefault: 1
---- !u!114 &8069012544563126391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2082536456512147791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa29a24606c2a3b44a737200e5335b38, type: 3}
+  m_Script: {fileID: 11500000, guid: 71e78985d3e16b145b81727bc2ec70ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data:

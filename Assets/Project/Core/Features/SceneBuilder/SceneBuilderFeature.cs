@@ -196,6 +196,8 @@ namespace Project.Core.Features.SceneBuilder
             entity.Set(new MineTag());
             entity.SetPosition(SceneUtils.GetRandomSpawnPosition());
             entity.InstantiateView(_objectViewIds[MINE]);
+            entity.Set(new CollisionDynamic());
+            entity.Get<Owner>().Value = entity;
         }
 
         public Entity SpawnHealth()
@@ -203,6 +205,8 @@ namespace Project.Core.Features.SceneBuilder
             var entity = new Entity("Health");
             entity.Set(new HealthTag());
             entity.InstantiateView(_objectViewIds[HEALTH]);
+            entity.Set(new CollisionDynamic());
+            entity.Get<Owner>().Value = entity;
             return entity;
         }
     }

@@ -17,8 +17,6 @@ MonoBehaviour:
   - id: 0
   - id: 1
   - id: 2
-  - id: 3
-  - id: 4
   removeStructComponents: []
   templates:
   - 42195f0a559d99a479384ed2079515c8
@@ -29,15 +27,8 @@ MonoBehaviour:
       data:
         Value: {fileID: -2959570093172990955, guid: 27dd1660b8de228419097eb7b30d8505, type: 3}
     00000001:
-      type: {class: SquareRect, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Width: 0.9
-        Height: 0.9
-    00000002:
-      type: {class: CollisionTag, ns: Project.Common.Components, asm: Project.Common}
-    00000003:
-      type: {class: CollisionStatic, ns: Project.Common.Components, asm: Project.Common}
-    00000004:
       type: {class: TileRotation, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {x: 0, y: 0, z: 0}
+    00000002:
+      type: {class: CollisionStatic, ns: Project.Common.Components, asm: Project.Common}

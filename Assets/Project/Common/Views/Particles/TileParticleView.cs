@@ -1,12 +1,12 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 using Project.Common.Components;
 
-namespace Project.Common.Views
+namespace Project.Common.Views.Particles
 {
-	using ME.ECS.Views.Providers;
-	public class PropsParticleView : ParticleViewSource<ApplyPropsParticleViewStateParticle> {}
+	public class TileParticleView : ParticleViewSource<ApplyTileParticleViewStateParticle> {}
 	[System.Serializable]
-	public class ApplyPropsParticleViewStateParticle : ParticleView<ApplyPropsParticleViewStateParticle>
+	public class ApplyTileParticleViewStateParticle : ParticleView<ApplyTileParticleViewStateParticle>
 	{
 		public override void OnInitialize() {}
 		public override void OnDeInitialize() {}
@@ -16,16 +16,21 @@ namespace Project.Common.Views
 			rootData.position = entity.GetPosition() - new fp3(0, 0.3, 0);
 			rootData.rotation3D = entity.GetRotation().eulerAngles;
 			
-			if (entity.Has<TileRotation>())
+			if (entity.Has<BridgeTile>())
 			{
-				var rot = entity.Read<TileRotation>().Value;
+				var hor = entity.Read<BridgeTile>().Value;
+
+				var rot = new fp3(0, hor ? 90 : 0, 0);
+				var off = new fp3(hor ? 1 : 0.5, 0, hor ? 0.5 : 1);
+
+				rootData.position += off;
 				rootData.rotation3D += rot;
 			}
 			
 			rootData.startSize = 1f;
 			this.SetRootData(ref rootData);
 		}
-
+		
 		public override void ApplyState(float deltaTime, bool immediately) {}
 	}
 }
