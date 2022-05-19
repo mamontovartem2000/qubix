@@ -17,8 +17,8 @@ namespace Project.Modules.Network
 #if UNITY_WEBGL && !UNITY_EDITOR
 			BrowserEvents.ReadyToStart();
 #endif
-			//string sdf = "";
-			//SetJoinRequest(sdf);
+			string sdf = "";
+			SetJoinRequest(sdf);
 		}
 
 		private void Update()
@@ -38,7 +38,7 @@ namespace Project.Modules.Network
 		// Browser method
 		public void SetJoinRequest(string request)
 		{
-			Debug.Log(request);
+			Debug.Log("Request: " + request);
 			Stepsss.ProcessJoinRequest(request);
 		}
 
@@ -65,5 +65,10 @@ namespace Project.Modules.Network
 			Stepsss.LoadGameScene -= LoadGameScene;
 			WaitingRoomTimer.ShowCharacterSelectionWindow -= SwapScreens;
 		}
+	}
+
+	class DataItem
+	{
+		public string username;
 	}
 }

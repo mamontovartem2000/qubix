@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-
 namespace Project.Modules.Network
 {
     public static class ManualRoomCreating
@@ -86,21 +85,6 @@ namespace Project.Modules.Network
     {
         public string payload;
     }
-
-    //[Serializable]
-    //public class GameInfo
-    //{
-    //    public string room_id;
-    //    public string player_id;
-    //    public int map_id;
-    //    public string game_mode;
-    //    public int[] multiplayer_schema;
-    //    public string type;
-    //    public string player_nickname;
-    //    public string player_icon;
-    //    public string server_url;
-    //    public string[] available_characters;
-    //}
 
     [Serializable]
     public class GameInfo

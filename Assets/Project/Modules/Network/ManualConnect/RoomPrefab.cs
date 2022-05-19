@@ -39,6 +39,15 @@ namespace Project.Modules.Network
             SetRoomId();
             SetPlayersCount();
             InitHoverImage();
+            UpdateButton();
+        }
+
+        private void UpdateButton()
+        {
+            if (_roomInfo.PlayersCount == _roomInfo.MaxPlayersCount)
+                _joinButton.interactable = false;
+            else
+                _joinButton.interactable = true;
         }
 
         private void SetPlayersCount()

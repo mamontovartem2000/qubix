@@ -43,7 +43,7 @@ namespace Project.Modules.Network
 		{
 			Debug.Log("Rooms: ");
 
-            for (int i = 0; i < obj.Length; i++)
+            for (int i = 0; i < 6; i++)
             {
 				Debug.Log($"{obj[i].Id} {obj[i].PlayersCount} {obj[i].MaxPlayersCount}");
 				_rooms[i].UpdateRoomInfo(obj[i], i + 1);
