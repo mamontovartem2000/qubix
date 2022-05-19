@@ -2,38 +2,43 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace Project.Modules.Network
 {
     public class RoomPrefab : MonoBehaviour
     {
-        public static Action ChooseRoom;
+        public static Action<string> JoinRoom;
 
         [SerializeField] private TMP_Text _playersCount;
         [SerializeField] private TMP_Text _roomId;
         [SerializeField] private Button _joinButton;
         [SerializeField] private Image _image;
+
+        [Header("Hover Sprites")]
         [SerializeField] private Sprite _hoverUp;
         [SerializeField] private Sprite _hoverCenter;
         [SerializeField] private Sprite _hoverDown;
-        [SerializeField] private Sprite _hoverButton;
-        [SerializeField] private Color _textHover;
+        [SerializeField] private Sprite _unselectedButton;
+        [SerializeField] private Sprite _selectedButton;
+        [SerializeField] private Color _unselectedText;
+        [SerializeField] private Color _selectedText;
 
         private RoomInfo _roomInfo;
+        private int _roomNumber;
 
         private void Start()
         {
-            _joinButton.onClick.AddListener(JoinRoom);
-            RoomListConnect.ShowSelectedRoom += DisableButton;
+            _joinButton.onClick.AddListener(JoinTheRoom);
+            JoinRoom += UnselectRoom;
         }
 
         public void UpdateRoomInfo(RoomInfo info, int roomNumber)
         {
             _roomInfo = info;
-            SetRoomId(roomNumber);
+            _roomNumber = roomNumber;
+            SetRoomId();
             SetPlayersCount();
-            HoverEffect(roomNumber);
+            InitHoverImage();
         }
 
         private void SetPlayersCount()
@@ -41,45 +46,49 @@ namespace Project.Modules.Network
             _playersCount.text = $"{_roomInfo.PlayersCount}/{_roomInfo.MaxPlayersCount}";
         }
 
-        private void SetRoomId(int roomNumber)
+        private void SetRoomId()
         {
-            _roomId.text = $"Room {roomNumber}";
+            _roomId.text = $"Room {_roomNumber}";
         }
 
-        private void JoinRoom()
+        private void InitHoverImage()
         {
-            ChooseRoom?.Invoke();
-            FillFrame();
-            _joinButton.gameObject.GetComponent<Image>().sprite = _hoverButton;
-            _playersCount.color = _textHover;
-            var rnd = Random.Range(0f, 1f);
-            StartCoroutine(ManualRoomCreating.LoadJoinRequest(_roomInfo.Id, "Player" + rnd, Stepsss.ProcessJoinRequestWithoutSocket));
-        }
-
-        private void HoverEffect(int roomNumber)
-        {
-            if (roomNumber == 1)
+            if (_roomNumber == 1)
                 _image.sprite = _hoverUp;
-            else if (roomNumber == 5)
+            else if (_roomNumber == 5)
                 _image.sprite = _hoverDown;
             else
                 _image.sprite = _hoverCenter;
         }
 
-        private void DisableButton()
+        private void JoinTheRoom()
         {
-            _joinButton.onClick.RemoveAllListeners();
+            JoinRoom?.Invoke(_roomInfo.Id);
+            SelectRoom();
+            
+            var rnd = UnityEngine.Random.Range(0f, 1f);
+            StartCoroutine(ManualRoomCreating.LoadJoinRequest(_roomInfo.Id, "Player" + rnd, Stepsss.ProcessJoinRequestWithoutSocket));
         }
 
-        private void FillFrame()
+        private void SelectRoom()
         {
+            _joinButton.interactable = false;
             _image.enabled = true;
+            _joinButton.gameObject.GetComponent<Image>().sprite = _selectedButton;
+            _playersCount.color = _selectedText;
+        }
+
+        private void UnselectRoom(string id)
+        {
+            _image.enabled = false;
+            _joinButton.gameObject.GetComponent<Image>().sprite = _unselectedButton;
+            _playersCount.color = _unselectedText;
         }
 
         private void OnDisable()
         {
             _joinButton.onClick.RemoveAllListeners();
-            RoomListConnect.ShowSelectedRoom -= DisableButton;
+            JoinRoom -= UnselectRoom;
         }
     }
 }

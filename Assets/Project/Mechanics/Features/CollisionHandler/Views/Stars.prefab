@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4986029038959207584}
   - component: {fileID: 4986029038959207587}
   - component: {fileID: 4986029038959207586}
-  - component: {fileID: 1064278589477409693}
   m_Layer: 0
   m_Name: Stars
   m_TagString: Untagged
@@ -4899,58 +4898,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1064278589477409693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4986029038959207589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dde4a0ece685dfd48a41faf767fb8696, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 4986029038959207587}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: 0, y: 0, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 0, y: 0, z: 0}
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 2204553278129970321}
-          settings:
-            simulationType: 1
-            minSimulationTime: 0.2
-            minEndingTime: 0.1
-            halfEnding: 0.5
-          hasDefault: 1
-        psSource: {fileID: 2204553278129970321}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: 0, y: 0, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 0.2, y: 0.2, z: 0.2}
 --- !u!1 &5796176682504147937
 GameObject:
   m_ObjectHideFlags: 0

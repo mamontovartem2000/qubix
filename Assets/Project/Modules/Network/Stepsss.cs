@@ -126,6 +126,8 @@ namespace Project.Modules.Network
 				//TODO: Show notif for user
 				//TODO: Close and clear connect
 				Debug.Log($"Join Error: {joinResult.Reason}");
+				NetworkData.CloseNetwork();
+				LoadMainMenuScene?.Invoke();
 			}
 		}
 
@@ -183,16 +185,17 @@ namespace Project.Modules.Network
 			Debug.Log("Send JoinRequest");
 		}
 
-		public static void LeaveRoomRequest()
+		public static void ChangeRoomRequest(string roomId)
 		{
 			FlatBufferBuilder builder = new FlatBufferBuilder(1);
-			var request = LeaveRoom.CreateLeaveRoom(builder, true);
-			var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.LeaveRoom, request.Value);
+			var id = builder.CreateString(roomId);
+			var request = ChangeRoom.CreateChangeRoom(builder, id);
+			var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.ChangeRoom, request.Value);
 			builder.Finish(offset.Value);
 
 			var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
 			NetworkData.Connect.SendSystemMessage(ms);
-			Debug.Log("Leave Room");
+			Debug.Log("Change Room");
 		}
 
 		public static void SetCharacterRequest(string characterName)

@@ -28,6 +28,7 @@ public enum Payload : byte
   StatsReceive = 14,
   LeaveRoom = 15,
   RoomList = 16,
+  ChangeRoom = 17,
 };
 
 public struct JoinResult : IFlatbufferObject
@@ -183,6 +184,39 @@ public struct JoinRequest : IFlatbufferObject
   public static Offset<FlatMessages.JoinRequest> EndJoinRequest(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<FlatMessages.JoinRequest>(o);
+  }
+};
+
+public struct ChangeRoom : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_2_0_0(); }
+  public static ChangeRoom GetRootAsChangeRoom(ByteBuffer _bb) { return GetRootAsChangeRoom(_bb, new ChangeRoom()); }
+  public static ChangeRoom GetRootAsChangeRoom(ByteBuffer _bb, ChangeRoom obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
+  public ChangeRoom __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public string RoomId { get { int o = __p.__offset(4); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetRoomIdBytes() { return __p.__vector_as_span<byte>(4, 1); }
+#else
+  public ArraySegment<byte>? GetRoomIdBytes() { return __p.__vector_as_arraysegment(4); }
+#endif
+  public byte[] GetRoomIdArray() { return __p.__vector_as_array<byte>(4); }
+
+  public static Offset<FlatMessages.ChangeRoom> CreateChangeRoom(FlatBufferBuilder builder,
+      StringOffset room_idOffset = default(StringOffset)) {
+    builder.StartTable(1);
+    ChangeRoom.AddRoomId(builder, room_idOffset);
+    return ChangeRoom.EndChangeRoom(builder);
+  }
+
+  public static void StartChangeRoom(FlatBufferBuilder builder) { builder.StartTable(1); }
+  public static void AddRoomId(FlatBufferBuilder builder, StringOffset roomIdOffset) { builder.AddOffset(0, roomIdOffset.Value, 0); }
+  public static Offset<FlatMessages.ChangeRoom> EndChangeRoom(FlatBufferBuilder builder) {
+    int o = builder.EndTable();
+    return new Offset<FlatMessages.ChangeRoom>(o);
   }
 };
 
@@ -701,6 +735,7 @@ public struct SystemMessage : IFlatbufferObject
   public FlatMessages.StatsReceive PayloadAsStatsReceive() { return Payload<FlatMessages.StatsReceive>().Value; }
   public FlatMessages.LeaveRoom PayloadAsLeaveRoom() { return Payload<FlatMessages.LeaveRoom>().Value; }
   public FlatMessages.RoomList PayloadAsRoomList() { return Payload<FlatMessages.RoomList>().Value; }
+  public FlatMessages.ChangeRoom PayloadAsChangeRoom() { return Payload<FlatMessages.ChangeRoom>().Value; }
 
   public static Offset<FlatMessages.SystemMessage> CreateSystemMessage(FlatBufferBuilder builder,
       uint timestamp = 0,

@@ -1,22 +1,18 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
 
 namespace Project.Modules.Network
 {
-	public class RoomListConnect : MonoBehaviour
+    public class RoomListConnect : MonoBehaviour
 	{
-		public static Action ShowSelectedRoom;
-
 		[SerializeField] private GameObject _roomListScreen;
+		[SerializeField] private GameObject _loadingPanel;
 		[SerializeField] private CharacterSelection _select;
-		[SerializeField] private Loading _loadingImage;
-		[SerializeField] private LeaveRoomButton _leaveButton;
 		[SerializeField] private RoomPrefab[] _rooms;
 
 		private bool _needLoadGameScene, _needReloadThisScene;
 		private bool _roomListLoaded;
+		private bool _roomSelected;
 
 		private void Start()
 		{
@@ -25,9 +21,8 @@ namespace Project.Modules.Network
 			Stepsss.ShowCharacterSelectionWindow += SwapScreens;
 
 			Stepsss.GetRoomList += ShowRooms;
-			LeaveRoomButton.LeaveRoomAction += ReloadMenuScene;
+			RoomPrefab.JoinRoom += SelectRoom;
 			Stepsss.CreateSocketConnect("wss://game.qubixinfinity.io/match");
-			RoomPrefab.ChooseRoom += SelectRoom;
 		}
 
         private void Update()
@@ -48,7 +43,7 @@ namespace Project.Modules.Network
 		{
 			//Debug.Log("Rooms: ");
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < obj.Length; i++)
             {
 				//Debug.Log($"{obj[i].Id} {obj[i].PlayersCount} {obj[i].MaxPlayersCount}");
 				_rooms[i].UpdateRoomInfo(obj[i], i + 1);
@@ -61,10 +56,15 @@ namespace Project.Modules.Network
 			}
 		}
 
-		private void SelectRoom()
+		private void SelectRoom(string roomId)
 		{
-			ShowSelectedRoom?.Invoke();
-			_leaveButton.gameObject.SetActive(true);
+			if (_roomSelected == false)
+            {
+				_roomSelected = true;
+				return;
+			}
+
+			Stepsss.ChangeRoomRequest(roomId);
 		}
 
 		private void ReloadMenuScene()
@@ -79,7 +79,7 @@ namespace Project.Modules.Network
 
 		private void ShowRoomList()
 		{
-			_loadingImage.gameObject.SetActive(false);
+			_loadingPanel.SetActive(false);
 			_roomListScreen.SetActive(true);
 		}
 
@@ -87,8 +87,7 @@ namespace Project.Modules.Network
 		{
 			_roomListScreen.SetActive(false);
 			_select.gameObject.SetActive(true);
-			_leaveButton.gameObject.SetActive(false);
-			var rnd = Random.Range(0, 3);
+			var rnd = UnityEngine.Random.Range(0, 3);
 			_select.Select(rnd);
 		}
 
@@ -98,8 +97,6 @@ namespace Project.Modules.Network
 			Stepsss.LoadGameScene -= LoadGameScene;
 			Stepsss.ShowCharacterSelectionWindow -= SwapScreens;
 			Stepsss.GetRoomList -= ShowRooms;
-			RoomPrefab.ChooseRoom -= SelectRoom;
-			LeaveRoomButton.LeaveRoomAction -= ReloadMenuScene;
 		}
 	}
 }
