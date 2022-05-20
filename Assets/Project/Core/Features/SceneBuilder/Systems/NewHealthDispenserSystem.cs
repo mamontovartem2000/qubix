@@ -37,7 +37,7 @@ namespace Project.Core.Features.SceneBuilder.Systems
             ref var dispenser = ref entity.Get<DispenserTag>();
             dispenser.Timer -= deltaTime;
 
-            if (dispenser.Timer <= 0)
+            if (dispenser.Timer <= (fp)0)
             {
                 var health = _feature.SpawnHealth();
                 health.SetParent(entity);

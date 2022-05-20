@@ -45,7 +45,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
             apply.ApplyTo.Get<PlayerHealth>().Value -= apply.Damage;
 
-            if (apply.ApplyTo.Get<PlayerHealth>().Value > 100)
+            if (apply.ApplyTo.Get<PlayerHealth>().Value > (fp)100)
                 apply.ApplyTo.Get<PlayerHealth>().Value = 100;
 
             world.GetFeature<EventsFeature>().HealthChanged.Execute(apply.ApplyTo.Read<Owner>().Value);

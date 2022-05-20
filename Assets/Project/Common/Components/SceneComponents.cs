@@ -15,7 +15,7 @@ namespace Project.Common.Components
 
 	public struct TileRotation : IComponent
 	{
-		public Vector3 Value;
+		public fp3 Value;
 	}
 
 	public struct BridgeTile : IComponent

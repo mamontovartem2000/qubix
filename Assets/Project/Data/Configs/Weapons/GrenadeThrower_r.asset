@@ -36,7 +36,13 @@ MonoBehaviour:
     00000002:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {x: 0.35, y: 0, z: 0}
+        Value:
+          x:
+            m_rawValue: 1503238528
+          y:
+            m_rawValue: 0
+          z:
+            m_rawValue: 0
     00000003:
       type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
       data:

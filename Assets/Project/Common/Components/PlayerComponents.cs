@@ -9,7 +9,7 @@ namespace Project.Common.Components
     public struct AvatarView : IComponent {public MonoBehaviourViewBase Value;}
     public struct PlayerAvatar : IComponent {public Entity Value;}
     public struct RespawnTime : IComponent {public float Value;}
-    public struct FaceDirection : IComponent {public Vector3 Value;}
+    public struct FaceDirection : IComponent {public fp3 Value;}
     public struct PlayerArmor : IComponent {public float Value;}
     public struct PlayerTag : IComponent 
     {

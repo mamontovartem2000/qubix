@@ -49,7 +49,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
 			
 			delay -= deltaTime;
 
-			if (delay <= 0)
+			if (delay <= (fp)0)
 			{
 				if(!entity.Has<LeftWeaponShot>())
 					entity.Remove<MeleeActive>();

@@ -10,7 +10,7 @@ namespace Project.Common.Components
     
     public struct PlayerMoveTarget : IComponent
     {
-        public Vector3 Value;
+        public fp3 Value;
     }
 
     public struct MoveInput : IComponent

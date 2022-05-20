@@ -40,7 +40,7 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 			ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
 			lifeTime -= deltaTime;
 
-			if (lifeTime > 0) return;
+			if (lifeTime > 0f) return;
 
 			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Remove<SkillSilenceModifier>();
 			entity.Destroy();

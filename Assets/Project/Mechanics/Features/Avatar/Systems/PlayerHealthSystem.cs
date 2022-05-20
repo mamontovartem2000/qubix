@@ -40,7 +40,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var health = entity.Read<PlayerHealth>().Value;
-            if(health > 0) return;
+            if(health > (fp)0) return;
 
             if (entity.Get<Owner>().Value.Has<DamagedBy>())
             {

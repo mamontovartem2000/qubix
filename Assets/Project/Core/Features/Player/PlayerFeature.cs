@@ -57,7 +57,7 @@ namespace Project.Core.Features.Player
 			player.Set(new PlayerTag {PlayerLocalID = localId, PlayerServerID = nsap.ServerID, Nickname = nsap.Nickname });
 
 			if (world.GetModule<NetworkModule>().FakeConnect)
-            {
+			{
 				GoldHunterConfig.Apply(player);
 				return;
 			}

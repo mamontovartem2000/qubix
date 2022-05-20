@@ -38,7 +38,7 @@ namespace Project.Mechanics.Features.Lifetime.Systems
             ref var delay = ref entity.Get<Linear>();
             delay.StartDelay -= deltaTime;
             
-            if(delay.StartDelay <= 0)
+            if(delay.StartDelay <= (fp)0)
             {
                 if (!entity.Has<LinearActive>())
                 {
@@ -54,7 +54,7 @@ namespace Project.Mechanics.Features.Lifetime.Systems
             if (!entity.GetParent().Has<LinearActive>() || entity.GetParent().Has<MeleeWeapon>())
             {
                 delay.EndDelay -= deltaTime;
-                if (delay.EndDelay <= 0)
+                if (delay.EndDelay <= (fp)0)
                 {
                     entity.Destroy();
                 }

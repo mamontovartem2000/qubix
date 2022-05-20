@@ -40,7 +40,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
             ref var time = ref entity.Get<RespawnTime>().Value;
             time -= deltaTime;
             
-            if(time <= 0)
+            if(time <= (fp)0)
             {
                 entity.Remove<RespawnTime>();
                 _feature.SpawnPlayerAvatar(entity);

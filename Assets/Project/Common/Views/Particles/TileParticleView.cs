@@ -15,7 +15,7 @@ namespace Project.Common.Views.Particles
 			ref var rootData = ref this.GetRootData();
 			rootData.position = entity.GetPosition() - new fp3(0, 0.3, 0);
 			rootData.rotation3D = entity.GetRotation().eulerAngles;
-			
+
 			if (entity.Has<BridgeTile>())
 			{
 				var hor = entity.Read<BridgeTile>().Value;

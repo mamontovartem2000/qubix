@@ -36,20 +36,36 @@ namespace Project.Core
             return entities;
         }
 
-        public static int PositionToIndex(Vector3 vec)
+        public static int PositionToIndex(fp3 vec)
         {
-            var x = Mathf.RoundToInt(vec.x);
-            var y = Mathf.RoundToInt(vec.z);
+            var x = (int)fpmath.round(vec.x);
+            var y = (int)fpmath.round(vec.z);
 
             return y * Width + x;
         }
+        
+        public static int PositionToIndex(fp3 vec, int width)
+        {
+            var x = (int)fpmath.round(vec.x);
+            var y = (int)fpmath.round(vec.z);
 
-        public static Vector3 IndexToPosition(int index)
+            return y * width + x;
+        }
+
+        public static fp3 IndexToPosition(int index)
         {
             var x = index % Width;
-            var y = Mathf.FloorToInt(index / (float) Width);
+            var y = fpmath.floor(index / (fp) Width);
 
-            return new Vector3(x, 0f, y);
+            return new fp3(x, 0f, y);
+        }
+        
+        public static fp3 IndexToPosition(int index, int width)
+        {
+            var x = index % width;
+            var y = fpmath.floor(index / (fp) width);
+
+            return new fp3(x, 0f, y);
         }
 
         public static bool IsWalkable(Vector3 position, Vector3 direction)

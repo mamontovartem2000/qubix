@@ -11,7 +11,7 @@ namespace Project.Common.Components
 	
 	public struct ProjectileDirection : IComponent
 	{
-		public Vector3 Value;
+		public fp3 Value;
 	}
 	
 	public struct ProjectileSpeed : IComponent
