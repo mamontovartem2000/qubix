@@ -6,7 +6,7 @@ namespace Project.Modules.Network
     {
         public static WebSocketConnect Connect;
         public static GameInfo Info;
-        public static int PlayerIdInRoom = 1;
+        public static int PlayerIdInRoom = 0;
         public static string FullJoinRequest = string.Empty;
         public static uint GameSeed = 1;
         public static PlayerInfo[] PlayersInfo;

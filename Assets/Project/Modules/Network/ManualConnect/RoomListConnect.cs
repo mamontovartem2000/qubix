@@ -41,11 +41,11 @@ namespace Project.Modules.Network
 
 		private void ShowRooms(RoomInfo[] obj)
 		{
-			Debug.Log("Rooms: ");
+			string text = "Rooms: \n";
 
             for (int i = 0; i < 6; i++)
             {
-				Debug.Log($"{obj[i].Id} {obj[i].PlayersCount} {obj[i].MaxPlayersCount}");
+				text += $"{obj[i].Id} {obj[i].PlayersCount} {obj[i].MaxPlayersCount}\n";
 				_rooms[i].UpdateRoomInfo(obj[i], i + 1);
 			}
 
@@ -54,6 +54,8 @@ namespace Project.Modules.Network
 				_roomListLoaded = true;
 				ShowRoomList();
 			}
+
+			Debug.Log(text);
 		}
 
 		private void SelectRoom(string roomId)

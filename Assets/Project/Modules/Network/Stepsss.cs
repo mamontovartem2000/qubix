@@ -92,8 +92,6 @@ namespace Project.Modules.Network
 
         private static void ShowRoomList(RoomList roomList)
         {
-			Debug.Log("Set Rooms!");
-
 			RoomInfo[] roomsInfo = new RoomInfo[roomList.RoomsLength];
 
 			for (int i = 0; i < roomList.RoomsLength; i++)
@@ -138,7 +136,7 @@ namespace Project.Modules.Network
 
 		private static void SetPlayerList(PlayerList playerList)
 		{
-			Debug.Log("Set Players!");
+			string debug = "Set Players: \n";
 
 			PlayerInfo[] playersInfo = new PlayerInfo[playerList.PlayersLength];
 
@@ -153,9 +151,11 @@ namespace Project.Modules.Network
 
 				PlayerInfo playerInfo = new PlayerInfo() { Id = id, Slot = slot, Nickname = nick, Character = character, Icon = icon };
 				playersInfo[i] = playerInfo;
+				debug += $"Slot: {slot}, Id: {id}, Character: {character};\n";
 			}
 
 			NetworkData.PlayersInfo = playersInfo;
+			Debug.Log(debug);
 		}
 
 		private static void SetStartGame(Start start)
