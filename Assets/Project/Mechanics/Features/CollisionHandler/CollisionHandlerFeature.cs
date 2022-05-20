@@ -27,7 +27,7 @@ namespace Project.Mechanics.Features.CollisionHandler
         
         protected override void OnConstruct()
         {
-            // AddSystem<HealthCollisionSystem>();
+            AddSystem<HealthCollisionSystem>();
             // AddSystem<MineCollisionSystem>();
             // AddSystem<ProjectileCollisionSystem>();
             // AddSystem<CollisionDetectionSystem>();

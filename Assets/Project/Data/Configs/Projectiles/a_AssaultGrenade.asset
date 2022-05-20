@@ -19,6 +19,7 @@ MonoBehaviour:
   - id: 2
   - id: 3
   - id: 4
+  - id: 5
   removeStructComponents: []
   templates: []
   references:
@@ -26,7 +27,7 @@ MonoBehaviour:
     00000000:
       type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 2230017351136092842, guid: 6b5cc8d5d0589294e96ffd940a328c59, type: 3}
+        Value: {fileID: -8512600830712622292, guid: 6b5cc8d5d0589294e96ffd940a328c59, type: 3}
     00000001:
       type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -41,3 +42,7 @@ MonoBehaviour:
       type: {class: Trajectory, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 1
+    00000005:
+      type: {class: SecondaryDamage, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 0}

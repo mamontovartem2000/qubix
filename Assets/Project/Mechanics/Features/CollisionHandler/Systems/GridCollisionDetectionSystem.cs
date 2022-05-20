@@ -72,7 +72,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
 
 					if (sIndex != dIndex) continue;
 
-					dynamicBag.Set(i, new Collided {Value = entity});
+					dynamicBag.Set(i, new Collided {ApplyTo = entity, ApplyFrom = dOwner});
 				}
 			}
 		}

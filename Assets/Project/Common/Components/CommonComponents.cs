@@ -18,6 +18,7 @@ namespace Project.Common.Components
 
     public struct Collided : IComponent
     {
-        public Entity Value;
+        public Entity ApplyFrom;
+        public Entity ApplyTo;
     }
 }

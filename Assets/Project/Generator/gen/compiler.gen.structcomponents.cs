@@ -79,6 +79,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Owner>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Pallette>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportModifier>(false, true, false, false, false, false, false, false);
@@ -103,6 +104,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RespawnTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RightWeaponShot>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondaryDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SelfTrigger>(true, false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SideStepAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SideStepModifier>(false, true, false, false, false, false, false, false);
@@ -220,6 +222,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Owner>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Pallette>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportModifier>(false, true, false, false, false, false, false, false);
@@ -244,6 +247,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RespawnTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RightWeaponShot>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondaryDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SelfTrigger>(true, false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SideStepAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SideStepModifier>(false, true, false, false, false, false, false, false);
@@ -356,6 +360,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.MoveSpeedAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.MoveSpeedModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.Owner>(false);
+            structComponentsContainer.Validate<Project.Common.Components.Pallette>(true);
             structComponentsContainer.Validate<Project.Common.Components.PassiveSkill>(true);
             structComponentsContainer.Validate<Project.Common.Components.PersonalTeleportAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.PersonalTeleportModifier>(false);
@@ -380,6 +385,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ReloadTimeDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.RespawnTime>(false);
             structComponentsContainer.Validate<Project.Common.Components.RightWeaponShot>(true);
+            structComponentsContainer.Validate<Project.Common.Components.SecondaryDamage>(false);
             noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.SelfTrigger>(true);
             structComponentsContainer.Validate<Project.Common.Components.SideStepAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.SideStepModifier>(false);
@@ -497,6 +503,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.MoveSpeedAffect>(true);
             entity.ValidateData<Project.Common.Components.MoveSpeedModifier>(false);
             entity.ValidateData<Project.Common.Components.Owner>(false);
+            entity.ValidateData<Project.Common.Components.Pallette>(true);
             entity.ValidateData<Project.Common.Components.PassiveSkill>(true);
             entity.ValidateData<Project.Common.Components.PersonalTeleportAffect>(true);
             entity.ValidateData<Project.Common.Components.PersonalTeleportModifier>(false);
@@ -521,6 +528,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ReloadTimeDefault>(false);
             entity.ValidateData<Project.Common.Components.RespawnTime>(false);
             entity.ValidateData<Project.Common.Components.RightWeaponShot>(true);
+            entity.ValidateData<Project.Common.Components.SecondaryDamage>(false);
             entity.ValidateDataOneShot<Project.Common.Components.SelfTrigger>(true);
             entity.ValidateData<Project.Common.Components.SideStepAffect>(true);
             entity.ValidateData<Project.Common.Components.SideStepModifier>(false);

@@ -1210,7 +1210,7 @@ namespace ME.ECSEditor {
             #if FPS_MODULE_SUPPORT
             var fpsModule = graph.world.GetModule<IFPSModuleBase>();
             if (fpsModule != null) {
-
+    
                 px += 100f;
                 {
                     var frameTime = graph.graph.sumPreviousFrame;

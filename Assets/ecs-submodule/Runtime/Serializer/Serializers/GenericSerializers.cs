@@ -1,14 +1,21 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using INLINE = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace ME.ECS.Serializer {
 
     public struct GenericSerializer : ITypeSerializer {
 
-        public byte GetTypeValue() { return (byte)TypeValue.Generic; }
-        public System.Type GetTypeSerialized() { return typeof(GenericSerializer); }
+        [INLINE(256)] public byte GetTypeValue() { return (byte)TypeValue.Generic; }
+        [INLINE(256)] public System.Type GetTypeSerialized() { return typeof(GenericSerializer); }
 
-        public void Pack(Packer packer, object obj, System.Type rootType) {
+        [INLINE(256)] public static void PackDirect(Packer packer, object obj) {
+            new GenericSerializer().Pack(packer, obj);
+        }
+
+        [INLINE(256)] public static object UnpackDirect(Packer packer) {
+            return new GenericSerializer().Unpack(packer);
+        }
+
+        [INLINE(256)] public void Pack(Packer packer, object obj, System.Type rootType) {
             
             var fields = rootType.GetCachedFields();
             for (int i = 0; i < fields.Length; ++i) {
@@ -36,8 +43,8 @@ namespace ME.ECS.Serializer {
             }
 
         }
-
-        public void Pack(Packer packer, object obj) {
+        
+        [INLINE(256)] public void Pack(Packer packer, object obj) {
 
             var rootType = obj.GetType();
             var typeId = packer.GetMetaTypeId(rootType);
@@ -103,7 +110,7 @@ namespace ME.ECS.Serializer {
             }
         }
         
-        public object Unpack(Packer packer) {
+        [INLINE(256)] public object Unpack(Packer packer) {
 
             var typeId = Int32Serializer.UnpackDirect(packer);
             var rootType = packer.GetMetaType(typeId);

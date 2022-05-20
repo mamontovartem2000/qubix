@@ -37,6 +37,17 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			var applyTo = entity.Get<Collided>().ApplyTo;
+			var applyFrom = entity.Get<Collided>().ApplyFrom;
+
+			if (applyTo.Has<PlayerAvatar>())
+			{
+				applyTo.Get<DamagedBy>().Value = applyFrom;
+
+				var collision = new Entity("collision");
+				collision.Set(new ApplyDamage {ApplyTo = applyTo.Get<PlayerAvatar>().Value, Damage = 25f}, ComponentLifetime.NotifyAllSystems);
+			}
+			
 			if (entity.Has<ProjectileActive>())
 			{
 				_vfx.SpawnVFX(VFXFeature.VFXType.BulletWall, entity.GetPosition());

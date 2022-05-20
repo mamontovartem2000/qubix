@@ -61,6 +61,7 @@ namespace Project.Mechanics.Features.Projectile
 
                 entity.SetParent(gun);
                 entity.SetLocalPosition(new Vector3(0f,0f, i/2f));
+                entity.SetLocalRotation(gun.GetRotation());
 
                 entity.Get<Owner>().Value = gun.Get<Owner>().Value;
                 
@@ -83,6 +84,7 @@ namespace Project.Mechanics.Features.Projectile
             visual.Set(new LinearVisual());
             
             visual.SetLocalPosition(new Vector3(-0.15f,0f, 0.5f));
+            visual.SetLocalRotation(gun.GetLocalRotation());
             
             var view = world.RegisterViewSource(gun.Read<ProjectileView>().Value);
             visual.InstantiateView(view);

@@ -73,16 +73,7 @@ namespace Project.Core.Features.SceneBuilder.Systems
                         }
 
                         player.Set(new TeleportPlayer());
-
-                        // var portIn = new Entity("in");
-                        // portIn.SetPosition(portals[i].GetPosition());
-                        // portIn.InstantiateView(_scene._inPortal);
-                        // portIn.Get<LifeTimeLeft>().Value = 3;
-                        //
-                        // var portOut = new Entity("out");
-                        // portOut.SetPosition(newPosition);
-                        // portOut.InstantiateView(_scene._outPortal);
-                        // portOut.Get<LifeTimeLeft>().Value = 3;
+                        _scene.CreatePortal(newPosition, portals[i].GetPosition());
 
                         SceneUtils.Move(portals[i].GetPosition(), newPosition);
                         player.SetPosition(newPosition);

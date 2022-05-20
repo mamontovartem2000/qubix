@@ -38,7 +38,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			var player = entity.Get<Collided>().Value;
+			var player = entity.Get<Collided>().ApplyTo;
 
 			var collision = new Entity("collision");
 			collision.Set(new ApplyDamage {ApplyTo = player, Damage = -10f}, ComponentLifetime.NotifyAllSystems);

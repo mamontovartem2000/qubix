@@ -6,7 +6,7 @@ namespace Project.Modules.Network
     {
         public static WebSocketConnect Connect = null;
         public static GameInfo Info = null;
-        public static int PlayerIdInRoom = 0;
+        public static int PlayerIdInRoom = 1;
         public static string FullJoinRequest = string.Empty;
         public static uint GameSeed = 1;
         public static PlayerInfo[] PlayersInfo = null;
@@ -16,7 +16,7 @@ namespace Project.Modules.Network
         {
             Connect.CloseClient();
             Info = null;
-            PlayerIdInRoom = 0;
+            PlayerIdInRoom = 1;
             GameSeed = 1;
             FullJoinRequest = string.Empty;
             PlayersInfo = null;

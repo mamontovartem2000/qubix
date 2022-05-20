@@ -22,4 +22,6 @@ namespace Project.Common.Components
 	{
 		public bool Value;
 	}
+	
+	public struct Pallette : IComponent {}
 }

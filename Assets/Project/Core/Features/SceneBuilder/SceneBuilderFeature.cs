@@ -24,7 +24,10 @@ namespace Project.Core.Features.SceneBuilder
         [SerializeField] private TextAsset _sourceMap;
         [SerializeField] private TextAsset _objectsMap;
 
-        //[HideInInspector] public ViewId _inPortal, _outPortal, _mineId, _healthId;
+        private ViewId _portal;
+        public MonoBehaviourViewBase Portal;
+        
+        // [HideInInspector] public ViewId _inPortal, _outPortal, _mineId, _healthId;
         // public MonoBehaviourViewBase In_PortalEffect, Out_PortalEffect, MineMono, HealthMono;
 
         [Header("Reworked Links")]
@@ -52,11 +55,14 @@ namespace Project.Core.Features.SceneBuilder
 
         protected override void OnDeconstruct() { }
 
+        private ViewId _vfx;
         private void RegisterViews()
         {
             _tileViewIds = new ViewId[TileViewSources.Length];
             _propsViewIds = new ViewId[PropsConfigs.Length];
             _objectViewIds = new ViewId[ObjectViewSources.Length];
+            _vfx = world.RegisterViewSource(VFXView);
+            _portal = world.RegisterViewSource(Portal);
 
             for (var i = 2; i < TileViewSources.Length; i++)
             {
@@ -99,6 +105,8 @@ namespace Project.Core.Features.SceneBuilder
             }
         }
 
+        public MonoBehaviourViewBase VFXView;
+
         private void DrawMap(byte[] s)
         {
             var i = -1;
@@ -124,6 +132,9 @@ namespace Project.Core.Features.SceneBuilder
                     {
                         entity = new Entity("Portal-Tile");
                         entity.Set(new PortalTag());
+                        var vfx = new Entity("tpvfx");
+                        vfx.InstantiateView(_vfx);
+                        vfx.SetPosition(SceneUtils.IndexToPosition(i));
                         break;
                     }
                     case 10: // Bridge tile
@@ -165,6 +176,8 @@ namespace Project.Core.Features.SceneBuilder
                 PropsConfigs[b].Apply(entity);
                 entity.InstantiateView(_propsViewIds[b]);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
+                if(entity.Has<Pallette>())
+                    entity.SetPosition(entity.GetPosition() + new fp3(-0.15,0.2,0.15));
                 entity.SetRotation(PropsConfigs[b].Read<Rotation>().value);
                 SceneUtils.TakeTheCell(i);
             }
@@ -205,9 +218,22 @@ namespace Project.Core.Features.SceneBuilder
             var entity = new Entity("Health");
             entity.Set(new HealthTag());
             entity.InstantiateView(_objectViewIds[HEALTH]);
-            entity.Set(new CollisionDynamic());
+            // entity.Set(new CollisionDynamic());
             entity.Get<Owner>().Value = entity;
             return entity;
+        }
+
+        public void CreatePortal(fp3 invec, fp3 outvec)
+        {
+            var portIn = new Entity("in");
+            portIn.SetPosition(invec);
+            portIn.InstantiateView(_portal);
+            portIn.Get<LifeTimeLeft>().Value = 3;
+            
+            var portOut = new Entity("out");
+            portOut.SetPosition(outvec);
+            portOut.InstantiateView(_portal);
+            portOut.Get<LifeTimeLeft>().Value = 3;
         }
     }
 }

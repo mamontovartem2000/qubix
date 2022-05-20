@@ -37,12 +37,13 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			var player = entity.Get<Collided>().Value;
-			if (player.Get<Owner>().Value.Has<DamagedBy>())
-				player.Get<Owner>().Value.Remove<DamagedBy>();
+			var player = entity.Get<Collided>().ApplyTo;
+			
+			if (player.Has<DamagedBy>())
+				player.Remove<DamagedBy>();
 
 			var collision = new Entity("collision");
-			collision.Set(new ApplyDamage {ApplyTo = player, Damage = 25f}, ComponentLifetime.NotifyAllSystems);
+			collision.Set(new ApplyDamage {ApplyTo = player.Get<PlayerAvatar>().Value, Damage = 25f}, ComponentLifetime.NotifyAllSystems);
 
 			_vfx.SpawnVFX(VFXFeature.VFXType.Explosion, entity.GetPosition());
 			entity.Destroy();

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1706151169656966133}
-  - component: {fileID: 5198146776024206507}
+  - component: {fileID: -8595713138264810336}
   m_Layer: 0
   m_Name: ShotgunBullet
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5198146776024206507
+--- !u!114 &-8595713138264810336
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,30 +41,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 2082536456512147791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71e78985d3e16b145b81727bc2ec70ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 347f78ec346e85e44ba9fceb91c649eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 2901204626697698887, guid: d3e38139d84c01f47bbc4c724b59f9dc, type: 3}
-        meshRenderer: {fileID: 7989360298194798849}
-        meshFilter: {fileID: 7989360298194798862}
-        material: {fileID: 2100000, guid: 00090dc250b18cd45929fce22e6519ac, type: 2}
-        localPosition: {x: 0, y: 0, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 1, y: 1, z: 1}
+  particleSystemSimulation:
+    particleItems: []
+    settings:
+      simulationType: 1
+      minSimulationTime: 0.2
+      minEndingTime: 0.1
+      halfEnding: 0.5
+    hasElements: 0
+    hasDefault: 1
+  defaultParameters:
+    useDespawnTime: 0
+    despawnTime: 0
+    cacheCustomViewId: 0
+    useCache: 0
+    useCacheTimeout: 0
+    cacheTimeout: 0
 --- !u!1 &7989360298194798851
 GameObject:
   m_ObjectHideFlags: 0

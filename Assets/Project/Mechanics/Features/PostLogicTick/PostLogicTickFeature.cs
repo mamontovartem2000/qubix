@@ -14,7 +14,7 @@ namespace Project.Mechanics.Features.PostLogicTick
 		{
 			// AddSystem<QuadTreeDispose>();
 			AddSystem<BulletDisposeSystem>();
-			AddSystem<HealthDisposeSystem>();
+			//AddSystem<HealthDisposeSystem>();
 			AddSystem<MineDisposeSystem>();
 		}
 

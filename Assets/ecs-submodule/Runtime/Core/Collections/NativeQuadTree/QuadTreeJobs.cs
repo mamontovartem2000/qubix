@@ -54,6 +54,7 @@ namespace ME.ECS.Collections {
             NativeQuadTreeUtils<Entity>.GetResults(position, size, results);
 
         }
+
     }
     
     public static class NativeQuadTreeUtils<T> where T : unmanaged {

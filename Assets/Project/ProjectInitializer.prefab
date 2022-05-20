@@ -159,71 +159,71 @@ MonoBehaviour:
         - enabled: 1
           feature: {fileID: 11400000, guid: cc6a0f783dbfe1243b965f04a9a95af9, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
     - folderCaption: Input
       features:
         features:
         - enabled: 1
           feature: {fileID: 11400000, guid: 7e90eadb9bb4ff241bcbfbb4d2c49dd8, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
     - folderCaption: Core
       features:
         features:
         - enabled: 1
           feature: {fileID: 11400000, guid: 7913e320b2a3b8845867bb3551246ebe, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
         - enabled: 1
           feature: {fileID: 11400000, guid: b6add260d24620b49a0c28a4e32ee49b, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
         - enabled: 1
           feature: {fileID: 11400000, guid: 3fc1e1dd221103046abd1ff5d010fedd, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
         - enabled: 1
           feature: {fileID: 11400000, guid: 6d0646a8848ab9642ac3e752d4691453, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
     - folderCaption: Mechanics
       features:
         features:
         - enabled: 1
           feature: {fileID: 11400000, guid: 85849b1f113fa2e48aa9e5cbe11c4018, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
         - enabled: 1
           feature: {fileID: 11400000, guid: a244fb0790ab19443b03082ccdd8e1d5, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
         - enabled: 1
           feature: {fileID: 11400000, guid: a12c15e19298aac4da7b2995382101ab, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
         - enabled: 1
           feature: {fileID: 11400000, guid: 60c8957af464b1c4a8ca81f51fc48d06, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
         - enabled: 1
           feature: {fileID: 11400000, guid: 93b5d691226f82646ae8c5ae3f18926b, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
         - enabled: 1
           feature: {fileID: 11400000, guid: 7937d2c685f9ccb4b9da7903e8c81b09, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
         - enabled: 1
           feature: {fileID: 11400000, guid: 69a0a3d309b58744fa1746c3fcc570b1, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
     - folderCaption: PostTick
       features:
         features:
         - enabled: 1
           feature: {fileID: 11400000, guid: f158ad834aa15f0409bee8cb61883338, type: 2}
           innerFeatures:
-            innerFeatures: []
+            features: []
   worldSettings:
     useJobsForSystems: 1
     useJobsForViews: 1
@@ -246,5 +246,3 @@ MonoBehaviour:
   tickTime: 0.033
   inputTicks: 3
   entitiesCapacity: 200
-  references:
-    version: 1

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 78450271693061867}
-  - component: {fileID: 481297389318906269}
+  - component: {fileID: -2484011240604195641}
   m_Layer: 0
   m_Name: SniperBullet
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &481297389318906269
+--- !u!114 &-2484011240604195641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,49 +42,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 746866053044003921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71e78985d3e16b145b81727bc2ec70ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 347f78ec346e85e44ba9fceb91c649eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: -591256033219733473, guid: 8797a15ca3128ab4da11317bf9745a7b, type: 3}
-        meshRenderer: {fileID: 3448668414923955977}
-        meshFilter: {fileID: 3448668414923955976}
-        material: {fileID: 2100000, guid: b767f2d23b9bba046b2baf8dadb7de97, type: 2}
-        localPosition: {x: 0, y: 0, z: 0}
-        localRotation: {x: 90, y: 0, z: 0}
-        localScale: {x: 1, y: 1.0000002, z: 1.0000002}
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 3198964306475559086}
-          settings:
-            simulationType: 1
-            minSimulationTime: 0.2
-            minEndingTime: 0.1
-            halfEnding: 0.5
-          hasDefault: 1
-        psSource: {fileID: 3198964306475559086}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: 0, y: 0, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 0.19999999, y: 0.20000002, z: 0.20000002}
+  particleSystemSimulation:
+    particleItems:
+    - particleSystem: {fileID: 3198964306475559086}
+    settings:
+      simulationType: 1
+      minSimulationTime: 0.2
+      minEndingTime: 0.1
+      halfEnding: 0.5
+    hasElements: 1
+    hasDefault: 1
+  defaultParameters:
+    useDespawnTime: 0
+    despawnTime: 0
+    cacheCustomViewId: 0
+    useCache: 0
+    useCacheTimeout: 0
+    cacheTimeout: 0
 --- !u!1 &3448668414923955983
 GameObject:
   m_ObjectHideFlags: 0
