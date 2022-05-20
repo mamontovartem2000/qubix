@@ -3,16 +3,12 @@ using FlatMessages;
 using ME.ECS;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace Project.Modules.Network
 {
     public static class SystemMessages
     {
-        [DllImport("__Internal")]
-        private static extern void GameIsOver();
-
         public static byte[] SystemHashMessage(uint tick, int hash)
         {
             FlatBufferBuilder builder = new FlatBufferBuilder(1);
@@ -40,7 +36,7 @@ namespace Project.Modules.Network
                     break;
                 case Payload.StatsReceive:
 #if UNITY_WEBGL && !UNITY_EDITOR
-                    GameIsOver();
+                    BrowserEvents.GameIsOver();
 #endif
                     break;
                 default:

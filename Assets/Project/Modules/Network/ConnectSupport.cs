@@ -70,9 +70,4 @@ namespace Project.Modules.Network
 			WaitingRoomTimer.ShowCharacterSelectionWindow -= SwapScreens;
 		}
 	}
-
-	class DataItem
-	{
-		public string username;
-	}
 }
