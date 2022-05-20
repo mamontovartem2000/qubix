@@ -19,8 +19,9 @@ namespace Project.Mechanics.Features.VFX
 		public MonoBehaviourViewBase PlayerImpactVFX;
 		public MonoBehaviourViewBase PlayerDamagedStatusVFX;
 		public MonoBehaviourViewBase TeleportVFX;
+		public MonoBehaviourViewBase BulletWallVFX;
 
-		private ViewId Death, Impact, Damage, Heal, Teleport, Explosion, Muzzle;
+		private ViewId Death, Impact, Damage, Heal, Teleport, Explosion, Muzzle, BulletWall;
 		
 		protected override void OnConstruct()
 		{
@@ -31,6 +32,7 @@ namespace Project.Mechanics.Features.VFX
 			Teleport = world.RegisterViewSource(TeleportVFX);
 			Explosion = world.RegisterViewSource(ExplosionVFX);
 			Muzzle = world.RegisterViewSource(AutomaticMuzzleVFX);
+			BulletWall = world.RegisterViewSource(BulletWallVFX);
 		}
 
 		protected override void OnDeconstruct() {}
@@ -86,8 +88,12 @@ namespace Project.Mechanics.Features.VFX
 				case VFXType.Muzzle:
 				{
 					fx.InstantiateView(Muzzle);
-					fx.Get<LifeTimeLeft>().Value = 0.1f;
-					
+					fx.Get<LifeTimeLeft>().Value = 0.1f;					
+					break;
+				}
+				case VFXType.BulletWall:
+				{
+					fx.InstantiateView(BulletWall);
 					break;
 				}
 			}
@@ -95,7 +101,7 @@ namespace Project.Mechanics.Features.VFX
 		
 		public enum VFXType
 		{
-			Death, Impact, Damage, Heal, Teleport, Explosion, Muzzle
+			Death, Impact, Damage, Heal, Teleport, Explosion, Muzzle, BulletWall
 		}
 	}
 }
