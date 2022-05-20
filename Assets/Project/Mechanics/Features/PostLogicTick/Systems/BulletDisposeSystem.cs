@@ -39,7 +39,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 		{
 			if (entity.Has<ProjectileActive>())
 			{
-				_vfx.SpawnVFX(VFXFeature.VFXType.Impact, entity.GetPosition());
+				_vfx.SpawnVFX(VFXFeature.VFXType.BulletWall, entity.GetPosition());
 				entity.Destroy();
 			}
 		}
