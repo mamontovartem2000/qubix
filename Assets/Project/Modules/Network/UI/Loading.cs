@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class Loading : MonoBehaviour
+namespace Project.Modules.Network.UI
 {
-    private Vector3 _angel = new Vector3(0f, 0f, -50f);
-
-    private void Update()
+    public class Loading : MonoBehaviour
     {
-        transform.Rotate(_angel * Time.deltaTime);
+        private Vector3 _angel = new Vector3(0f, 0f, -50f);
+
+        private void Update()
+        {
+            transform.Rotate(_angel * Time.deltaTime);
+        }
     }
 }

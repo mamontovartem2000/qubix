@@ -1,9 +1,9 @@
+using Project.Modules.Network.UI;
 using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace Project.Modules.Network
 {
@@ -90,7 +90,7 @@ namespace Project.Modules.Network
 			_selectionScreen.SetActive(true);
 			
 			//TODO: Add random selection
-			var rnd = Random.Range(0, 3);
+			var rnd = UnityEngine.Random.Range(0, 3);
 			_select.Select(rnd);
 		}
 

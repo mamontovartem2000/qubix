@@ -3,7 +3,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace Project.Modules.Network
+namespace Project.Modules.Network.UI
 {
     public class WaitingRoomTimer : MonoBehaviour
     {
@@ -18,6 +18,7 @@ namespace Project.Modules.Network
         private void Start()
         {
             Stepsss.SetTimer += SetTimer;
+
         }
 
         public void SetTimer(TimeRemaining time)

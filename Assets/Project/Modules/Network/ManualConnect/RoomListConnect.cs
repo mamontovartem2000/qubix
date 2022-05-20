@@ -1,3 +1,4 @@
+using Project.Modules.Network.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -104,6 +105,7 @@ namespace Project.Modules.Network
 			Stepsss.LoadGameScene -= LoadGameScene;
 			WaitingRoomTimer.ShowCharacterSelectionWindow -= SwapScreens;
 			Stepsss.GetRoomList -= ShowRooms;
+			RoomPrefab.JoinRoom -= SelectRoom;
 		}
 	}
 }

@@ -25,6 +25,7 @@ namespace Project.Modules.Network
 
         private RoomInfo _roomInfo;
         private int _roomNumber;
+        private bool _selected = false;
 
         private void Start()
         {
@@ -44,10 +45,14 @@ namespace Project.Modules.Network
 
         private void UpdateButton()
         {
-            if (_roomInfo.PlayersCount == _roomInfo.MaxPlayersCount)
+            if (_roomInfo.PlayersCount == _roomInfo.MaxPlayersCount || _selected)
+            {
                 _joinButton.interactable = false;
+            }
             else
+            {
                 _joinButton.interactable = true;
+            }
         }
 
         private void SetPlayersCount()
@@ -78,6 +83,7 @@ namespace Project.Modules.Network
 
         private void SelectRoom()
         {
+            _selected = true;
             _joinButton.interactable = false;
             _image.enabled = true;
             _joinButton.gameObject.GetComponent<Image>().sprite = _selectedButton;
@@ -86,6 +92,7 @@ namespace Project.Modules.Network
 
         private void UnselectRoom(string id)
         {
+            _selected = false;
             _joinButton.interactable = true;
             _image.enabled = false;
             _joinButton.gameObject.GetComponent<Image>().sprite = _unselectedButton;
