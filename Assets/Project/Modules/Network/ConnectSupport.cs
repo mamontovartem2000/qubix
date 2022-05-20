@@ -5,20 +5,22 @@ namespace Project.Modules.Network
 {
     public class ConnectSupport : MonoBehaviour
 	{
+		[SerializeField] private GameObject _loading;
 		[SerializeField] private CharacterSelection _select;
 
 		private bool _needLoadGameScene, _needReloadThisScene;
 
 		private void Start()
 		{
+			NetworkData.ServerJoinType = 2;
 			Stepsss.LoadMainMenuScene += ReloadMenuScene;
 			Stepsss.LoadGameScene += LoadGameScene;
 			WaitingRoomTimer.ShowCharacterSelectionWindow += SwapScreens;
 #if UNITY_WEBGL && !UNITY_EDITOR
 			BrowserEvents.ReadyToStart();
 #endif
-			string sdf = "";
-			SetJoinRequest(sdf);
+			//string sdf = "";
+			//SetJoinRequest(sdf);
 		}
 
 		private void Update()
@@ -54,6 +56,7 @@ namespace Project.Modules.Network
 
 		private void SwapScreens()
 		{
+			_loading.SetActive(false);
 			_select.gameObject.SetActive(true);
 			var rnd = Random.Range(0, 3);
 			_select.Select(rnd) ;
