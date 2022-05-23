@@ -30,11 +30,13 @@ public class GameSceneDestroyer : MonoBehaviour
 
     private void Disconnect()
     {
+        var buildType = NetworkData.BuildType;
+        
         DOTween.KillAll();
         DestroyWorld();
         NetworkData.CloseNetwork();
 
-        if (NetworkData.BuildType != BuildTypes.Front)
+        if (buildType != BuildTypes.Front)
         {
             SceneManager.LoadScene(0);
         }

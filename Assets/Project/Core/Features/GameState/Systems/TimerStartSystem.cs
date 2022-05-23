@@ -33,13 +33,14 @@ namespace Project.Core.Features.GameState.Systems
 				Entity timerEntity = new Entity("Timer");
 
 				if (NetworkData.BuildType == BuildTypes.PC)
-                {
-					timerEntity.Get<GameTimer>().Value = 15;
+				{
+					timerEntity.Get<GameTimer>().Value = 150;
 				}
-                else if (NetworkData.BuildType == BuildTypes.Front)
+				else if (NetworkData.BuildType == BuildTypes.Front)
 				{
 					timerEntity.Get<GameTimer>().Value = 15;
-                }
+				}
+
 				world.RemoveSharedData<MapInitialized>();
 			}
 		}
