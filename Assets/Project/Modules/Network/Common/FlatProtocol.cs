@@ -50,22 +50,32 @@ public struct JoinResult : IFlatbufferObject
 #endif
   public byte[] GetReasonArray() { return __p.__vector_as_array<byte>(6); }
   public byte Slot { get { int o = __p.__offset(8); return o != 0 ? __p.bb.Get(o + __p.bb_pos) : (byte)0; } }
+  public string Team { get { int o = __p.__offset(10); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetTeamBytes() { return __p.__vector_as_span<byte>(10, 1); }
+#else
+  public ArraySegment<byte>? GetTeamBytes() { return __p.__vector_as_arraysegment(10); }
+#endif
+  public byte[] GetTeamArray() { return __p.__vector_as_array<byte>(10); }
 
   public static Offset<FlatMessages.JoinResult> CreateJoinResult(FlatBufferBuilder builder,
       bool value = false,
       StringOffset reasonOffset = default(StringOffset),
-      byte slot = 0) {
-    builder.StartTable(3);
+      byte slot = 0,
+      StringOffset teamOffset = default(StringOffset)) {
+    builder.StartTable(4);
+    JoinResult.AddTeam(builder, teamOffset);
     JoinResult.AddReason(builder, reasonOffset);
     JoinResult.AddSlot(builder, slot);
     JoinResult.AddValue(builder, value);
     return JoinResult.EndJoinResult(builder);
   }
 
-  public static void StartJoinResult(FlatBufferBuilder builder) { builder.StartTable(3); }
+  public static void StartJoinResult(FlatBufferBuilder builder) { builder.StartTable(4); }
   public static void AddValue(FlatBufferBuilder builder, bool value) { builder.AddBool(0, value, false); }
   public static void AddReason(FlatBufferBuilder builder, StringOffset reasonOffset) { builder.AddOffset(1, reasonOffset.Value, 0); }
   public static void AddSlot(FlatBufferBuilder builder, byte slot) { builder.AddByte(2, slot, 0); }
+  public static void AddTeam(FlatBufferBuilder builder, StringOffset teamOffset) { builder.AddOffset(3, teamOffset.Value, 0); }
   public static Offset<FlatMessages.JoinResult> EndJoinResult(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<FlatMessages.JoinResult>(o);

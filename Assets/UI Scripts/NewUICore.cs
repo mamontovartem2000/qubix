@@ -21,13 +21,13 @@ namespace UI_Scripts
 
         private void ToggleWinScreen(in Entity entity)
         {
-            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.PlayerIdInRoom)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.SlotInRoom)) return;
             _victoryScreen.SetActive(true);
         }
 
         private void ToggleLoseScreen(in Entity entity)
         {
-            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.PlayerIdInRoom)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.SlotInRoom)) return;
             _defeatScreen.SetActive(true);
         }
     

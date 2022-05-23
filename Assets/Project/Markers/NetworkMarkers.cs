@@ -7,6 +7,7 @@ namespace Project.Markers
         public int ActorLocalID;
         public string ServerID;
         public string Nickname;
+        public string Team;
     }
 
     public struct NetworkPlayerDisconnected : IMarker

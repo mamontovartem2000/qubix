@@ -17,11 +17,10 @@ namespace Project.Modules.Network
 			Stepsss.LoadMainMenuScene += ReloadMenuScene;
 			Stepsss.LoadGameScene += LoadGameScene;
 			WaitingRoomTimer.ShowCharacterSelectionWindow += SwapScreens;
+
 #if UNITY_WEBGL && !UNITY_EDITOR
 			BrowserEvents.ReadyToStart();
 #endif
-			//string sdf = "";
-			//SetJoinRequest(sdf);
 		}
 
 		private void Update()

@@ -20,7 +20,7 @@ namespace UI_Scripts
 
         private void HealthChanged(in Entity player)
         {
-            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.PlayerIdInRoom)) return;
+            if(player != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.SlotInRoom)) return;
             var entity = player.Read<PlayerAvatar>().Value;
             if(!entity.IsAlive()) return;
 

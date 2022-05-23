@@ -36,7 +36,7 @@ namespace Project.Core.Features.Player.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if(entity.Get<Owner>().Value != _feature.GetPlayerByID(NetworkData.PlayerIdInRoom)) return;
+            if(entity.Get<Owner>().Value != _feature.GetPlayerByID(NetworkData.SlotInRoom)) return;
             var input = _feature.PlayerInput;
             ref readonly var axis = ref entity.Read<MoveInput>().Axis;
             ref readonly var value = ref entity.Read<MoveInput>().Value;
