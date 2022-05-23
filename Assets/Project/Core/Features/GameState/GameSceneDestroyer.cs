@@ -4,6 +4,7 @@ using Project.Modules.Network;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using System.Threading.Tasks;
 
 public class GameSceneDestroyer : MonoBehaviour
 {
@@ -32,7 +33,11 @@ public class GameSceneDestroyer : MonoBehaviour
         DOTween.KillAll();
         DestroyWorld();
         NetworkData.CloseNetwork();
-        SceneManager.LoadScene(0);
+
+        if (NetworkData.BuildType != BuildTypes.Front)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     private void DestroyWorld()

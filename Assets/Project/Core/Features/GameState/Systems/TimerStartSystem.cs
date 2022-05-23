@@ -31,13 +31,14 @@ namespace Project.Core.Features.GameState.Systems
 			if (world.HasSharedData<MapInitialized>())
 			{
 				Entity timerEntity = new Entity("Timer");
-				if (NetworkData.ServerJoinType == 2)
+
+				if (NetworkData.BuildType == BuildTypes.PC)
                 {
 					timerEntity.Get<GameTimer>().Value = 15;
 				}
-                else
-                {
-					timerEntity.Get<GameTimer>().Value = 150;
+                else if (NetworkData.BuildType == BuildTypes.Front)
+				{
+					timerEntity.Get<GameTimer>().Value = 15;
                 }
 				world.RemoveSharedData<MapInitialized>();
 			}

@@ -170,7 +170,9 @@ namespace Project.Modules.Network
 		{
 			FlatBufferBuilder builder = new FlatBufferBuilder(1);
 			var mes = builder.CreateString(NetworkData.FullJoinRequest);
-			var request = JoinRequest.CreateJoinRequest(builder, (sbyte)NetworkData.ServerJoinType, mes); //TODO: Choose 0 or 1
+
+			var type = NetworkData.BuildType == BuildTypes.Front ? 2 : 0;
+			var request = JoinRequest.CreateJoinRequest(builder, (sbyte)type, mes); //TODO: Choose 0 or 1
 			var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.JoinRequest, request.Value);
 			builder.Finish(offset.Value);
 

@@ -17,7 +17,6 @@ namespace Project.Modules.Network
 
 		private void Start()
 		{
-			NetworkData.ServerJoinType = 0;
 			Stepsss.LoadMainMenuScene += ReloadMenuScene;
 			Stepsss.LoadGameScene += LoadGameScene;
 			WaitingRoomTimer.ShowCharacterSelectionWindow += SwapScreens;

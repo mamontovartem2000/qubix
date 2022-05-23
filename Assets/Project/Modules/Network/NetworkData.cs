@@ -10,7 +10,7 @@ namespace Project.Modules.Network
         public static string FullJoinRequest = string.Empty;
         public static uint GameSeed = 1;
         public static PlayerInfo[] PlayersInfo = null;
-        public static int ServerJoinType = 0;
+        public static BuildTypes BuildType = BuildTypes.PC;
 
         public static void CloseNetwork()
         {
@@ -20,12 +20,17 @@ namespace Project.Modules.Network
             GameSeed = 1;
             FullJoinRequest = string.Empty;
             PlayersInfo = null;
-            ServerJoinType = 0;
+            BuildType = BuildTypes.PC;
         }
 
         public static T CreateFromJSON<T>(string jsonString)
         {
             return JsonUtility.FromJson<T>(jsonString);
-        }
+        }   
+    }
+    public enum BuildTypes
+    {
+        PC,
+        Front
     }
 }
