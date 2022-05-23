@@ -47,7 +47,8 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			
+						
+			entity.Remove<ActivateSkill>();
 			Debug.Log("range increased");
 		}
 	}

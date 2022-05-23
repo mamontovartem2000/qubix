@@ -44,7 +44,8 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 			skills.FourthSkill.Get<Cooldown>().Value = 0;
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			
+						
+			entity.Remove<ActivateSkill>();
 			Debug.Log("cooldown reset");
 		}
 	}

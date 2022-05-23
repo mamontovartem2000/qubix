@@ -1,6 +1,8 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core.Features.Events;
 using UnityEngine;
+
 
 namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 {
@@ -37,15 +39,16 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			var effect = new Entity("effect");
-			effect.Set(new EffectTag());
+			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Set(new StunModifier());
 
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Set(new StunModifier());
-				
-			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
-			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
-			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			
+			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = 5;
+
+			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon.Get<ReloadTime>().Value = 
+			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon.Read<ReloadTimeDefault>().Value;
+
+            world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Get<Owner>().Value);
+						
+			entity.Remove<ActivateSkill>();
 			Debug.Log("Character is stunned");
 		}
 	}

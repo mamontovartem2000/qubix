@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
@@ -36,7 +37,18 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			var nextPos = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<FaceDirection>().Value * 4 + entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition();
+
+			if(SceneUtils.IsFree(nextPos))
+			{
+				SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition(), nextPos);
+				entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.SetPosition(nextPos);
+				entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<PlayerMoveTarget>().Value = nextPos;
+			}
+
+			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			
+			entity.Remove<ActivateSkill>();
 			Debug.Log("dash activated");
 		}
 	}

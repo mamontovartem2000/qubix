@@ -39,7 +39,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 		{
 			return Filter.Create("Filter-PlayerMovementSystem")
 				.WithoutShared<GameFinished>()
-				.Without<StunModifier>()
+				.Without<Stun>()
 				.With<MoveInput>()
 				.Push();
 		}
@@ -83,7 +83,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 			}
 
 			var speedBase = entity.Read<PlayerMovementSpeed>().Value;
-			var speedMod = entity.Read<MoveSpeedModifier>().Value * speedBase;
+			var speedMod = entity.Read<MoveSpeedModifier>().Value * speedBase * entity.Read<Slowness>().Value;
 			var currentSpeed = Mathf.Max(speedBase * 0.5f,speedBase + speedMod);
 			
 			var speed = entity.Has<LockTarget>() ? currentSpeed * 0.65f : currentSpeed;

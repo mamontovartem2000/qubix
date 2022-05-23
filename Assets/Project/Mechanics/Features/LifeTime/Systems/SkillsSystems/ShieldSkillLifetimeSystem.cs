@@ -31,12 +31,13 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 			return Filter.Create("Filter-ShieldSkillLifetimeSystem")
 				.With<LifeTimeLeft>()
 				.With<EffectTag>()
-				.With<ForceShieldModifier>()
 				.Push();
 		}
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Has<ForceShieldModifier>()) return;
+
 			ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
 			lifeTime -= deltaTime;
 

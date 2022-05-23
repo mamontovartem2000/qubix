@@ -50,7 +50,6 @@ namespace Project.Mechanics.Features
         {
             builder
                 .With<SkillTag>()
-                .With<ActivateSkill>()
                 .Without<Cooldown>();
         }
         

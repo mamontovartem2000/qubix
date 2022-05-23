@@ -16,6 +16,11 @@ namespace Project.Common.Components
 		public float Value;
 	}
 
+	public struct Stun : IComponent
+	{
+		public float Value;
+	}
+	
 	public struct StunModifier : IComponent
 	{
 		public float Value;
@@ -47,11 +52,6 @@ namespace Project.Common.Components
 	}
 
 	public struct AutomaticDamageModifier : IComponent
-	{
-		public float Value;
-	}
-
-	public struct LinearDamageModifier : IComponent
 	{
 		public float Value;
 	}
@@ -93,7 +93,8 @@ namespace Project.Common.Components
 
 	public struct LinearPowerModifier : IComponent
 	{
-		public float Value;
+		public float Damage;
+		public int Speed;
 	}
 
 	public struct WormholeHookModifier : IComponent

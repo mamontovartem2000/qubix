@@ -54,9 +54,9 @@ namespace Project.Mechanics.Features.Weapon.Systems
 			
 			if (entity.Has<LinearActive>())
 			{
-				if (ammo - 1 > 0)
+				if (ammo - 1 * entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<LinearPowerModifier>().Damage > 0)
 				{
-					ammo--;
+					ammo -= entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<LinearPowerModifier>().Speed;
 				}
 				else
 				{

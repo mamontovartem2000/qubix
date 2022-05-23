@@ -9,39 +9,40 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-	public sealed class InstantReloadSkillSystem : ISystemFilter
-	{
-		public World world { get; set; }
-		
-		private SkillsFeature _feature;
+    public sealed class InstantReloadSkillSystem : ISystemFilter
+    {
+        public World world { get; set; }
 
-		void ISystemBase.OnConstruct()
-		{
-			this.GetFeature(out _feature);
-		}
+        private SkillsFeature _feature;
 
-		void ISystemBase.OnDeconstruct() {}
+        void ISystemBase.OnConstruct()
+        {
+            this.GetFeature(out _feature);
+        }
+
+        void ISystemBase.OnDeconstruct() { }
 #if !CSHARP_8_OR_NEWER
-		bool ISystemFilter.jobs => false;
-		int ISystemFilter.jobsBatchCount => 64;
+        bool ISystemFilter.jobs => false;
+        int ISystemFilter.jobsBatchCount => 64;
 #endif
-		Filter ISystemFilter.filter { get; set; }
+        Filter ISystemFilter.filter { get; set; }
 
-		Filter ISystemFilter.CreateFilter()
-		{
-			return Filter.Create("Filter-InstantReloadSkillSystem")
-				.With<InstantReloadAffect>()
-				.Push();
-		}
+        Filter ISystemFilter.CreateFilter()
+        {
+            return Filter.Create("Filter-InstantReloadSkillSystem")
+                .With<InstantReloadAffect>()
+                .Push();
+        }
 
-		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
-		{
-				ref var weapon = ref entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<WeaponEntities>();
-				
-				weapon.LeftWeapon.Get<AmmoCapacity>().Value = weapon.LeftWeapon.Read<AmmoCapacityDefault>().Value;
-				weapon.RightWeapon.Get<ReloadTime>().Value = 0;
+        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
+        {
+            ref var weapon = ref entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<WeaponEntities>();
 
-				Debug.Log("weapons reloaded");
-		}
-	}
+            weapon.LeftWeapon.Get<AmmoCapacity>().Value = weapon.LeftWeapon.Read<AmmoCapacityDefault>().Value;
+            weapon.RightWeapon.Get<ReloadTime>().Value = 0;
+			
+			entity.Remove<ActivateSkill>();
+            Debug.Log("weapons reloaded");
+        }
+    }
 }

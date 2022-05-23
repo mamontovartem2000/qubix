@@ -20,6 +20,7 @@ namespace Project.Mechanics.Features.CollisionHandler
         protected override void OnConstruct()
         {
             AddSystem<GridCollisionDetectionSystem>();
+            AddSystem<GrenadeExplosionSystem>();
         }
         
         protected override void InjectFilter(ref FilterBuilder builder)

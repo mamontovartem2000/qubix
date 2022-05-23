@@ -44,7 +44,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if(entity.GetParent().Has<StunModifier>()) return;
+            if(entity.GetParent().Has<Stun>()) return;
 
             var len = entity.Read<LinearWeapon>().Value;
             _projectile.SpawnLinear(entity, len, deltaTime);

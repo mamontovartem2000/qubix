@@ -17,7 +17,8 @@ namespace Project.Mechanics.Features.Weapon
             AddSystem<AutomaticFiringSystem>();
             AddSystem<LinearFiringSystem>();
             AddSystem<MeleeFiringSystem>();
-            
+            AddSystem<AmmoCapacityDefaultRestoreSystem>();
+
             AddSystem<WeaponCooldownSystem>();
             AddSystem<LinearReloadSystem>();
             AddSystem<WeaponReloadSystem>();

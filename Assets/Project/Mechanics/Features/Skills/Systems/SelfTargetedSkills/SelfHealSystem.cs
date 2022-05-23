@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core.Features.Events;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
@@ -35,9 +36,14 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<PlayerHealth>().Value += entity.Read<SkillAmount>().Value;
+            var collision = new Entity("collision");
+			collision.Set(new ApplyDamage {ApplyTo = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value, ApplyFrom = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value, Damage = -entity.Read<SkillAmount>().Value}, ComponentLifetime.NotifyAllSystems);
+                    
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-            
+
+            world.GetFeature<EventsFeature>().HealthChanged.Execute(entity.Read<Owner>().Value);
+            			
+			entity.Remove<ActivateSkill>();
             Debug.Log("Healed");
         }
     }

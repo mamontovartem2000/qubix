@@ -14,11 +14,12 @@ namespace Project.Common.Components
 	{
 		public DataConfig Value;
 	}
+
 	public struct ProjectileDirection : IComponent
 	{
 		public fp3 Value;
 	}
-	
+
 	public struct ProjectileSpeed : IComponent
 	{
 		public float Value;
@@ -27,6 +28,12 @@ namespace Project.Common.Components
 	public struct ProjectileDamage : IComponent
 	{
 		public float Value;
+	}
+
+	public struct Slowness : IComponent
+	{
+		public float Value;
+		public float LifeTime;
 	}
 
 	public struct Linear : IComponent
@@ -50,7 +57,7 @@ namespace Project.Common.Components
 	{
 		public float Value;
 	}
-	
+	public struct Grenade : IComponent {}
 	public struct LinearVisual : IComponent {}
 	
 	public struct DamageSource : IComponent {}

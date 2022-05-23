@@ -47,9 +47,9 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			effect.Get<SkillAmount>().Value = amount;
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 
-			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			
+			entity.Remove<ActivateSkill>();
 			Debug.Log("move speed increased");
 		}
 	}

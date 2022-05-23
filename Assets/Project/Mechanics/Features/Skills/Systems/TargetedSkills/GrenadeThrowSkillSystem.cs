@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using UnityEngine;
+using ME.ECS.DataConfigs;
 
 namespace Project.Mechanics.Features.Skills.Systems.TargetedSkills
 {
@@ -36,6 +37,20 @@ namespace Project.Mechanics.Features.Skills.Systems.TargetedSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			var playerAvatar = entity.Read<Owner>().Value.Get<PlayerAvatar>().Value;
+			var grenade = new Entity("grenade");
+			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+			grenade.Set(new Owner{Value = entity.Read<Owner>().Value});
+			grenade.Set(new Grenade());
+            grenade.Get<ProjectileDirection>().Value = new Vector3(playerAvatar.Read<FaceDirection>().Value.x * 1.2f, 2, playerAvatar.Read<FaceDirection>().Value.z * 1.2f) ;
+
+			entity.Read<ProjectileConfig>().Value.Apply(grenade);
+			grenade.SetPosition(playerAvatar.GetPosition());
+
+			var view = world.RegisterViewSource(grenade.Read<ProjectileView>().Value);
+            grenade.InstantiateView(view);
+			
+			entity.Remove<ActivateSkill>();
 			Debug.Log("Fire in the hole");
 		}
 	}

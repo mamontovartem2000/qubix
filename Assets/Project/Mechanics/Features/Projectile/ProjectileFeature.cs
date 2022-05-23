@@ -65,7 +65,7 @@ namespace Project.Mechanics.Features.Projectile
                 entity.Get<Linear>().EndDelay = delay * (length - i);
                 
                 var damageBase = entity.Read<ProjectileDamage>().Value;
-                var damageMod = damageBase * owner.Get<LinearDamageModifier>().Value;
+                var damageMod = damageBase * owner.Read<PlayerAvatar>().Value.Get<LinearPowerModifier>().Damage;
                 var currentDamage = damageBase + damageMod;
                 
                 entity.Get<ProjectileDamage>().Value = currentDamage;

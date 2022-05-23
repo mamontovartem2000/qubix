@@ -42,21 +42,38 @@ namespace Project.Mechanics.Features.Avatar.Systems
             var to = apply.ApplyTo;
             var damage = apply.Damage;
 
+            Debug.Log(from.ToSmallString());
+            
             if (from.Has<PlayerAvatar>())
             {
                 to.Get<Owner>().Value.Set(new DamagedBy {Value = from});
             }
 
             ref var health = ref to.Get<PlayerHealth>().Value;
-            health -= damage;
+            
 
-            if (health < 0)
+            if(apply.ApplyFrom.Has<StunModifier>())
+                apply.ApplyTo.Set(new Stun{Value = 1});
+
+            if (apply.ApplyTo.Has<ForceShieldModifier>() && apply.ApplyTo.Get<ForceShieldModifier>().Value - damage >= 0)
             {
-                    health = 0;
+                apply.ApplyTo.Get<ForceShieldModifier>().Value -= damage;
             }
-            else if(health > to.Read<PlayerHealthDefault>().Value)
+            else if (apply.ApplyTo.Has<ForceShieldModifier>() && apply.ApplyTo.Get<ForceShieldModifier>().Value - damage < 0)
             {
-                health = to.Read<PlayerHealthDefault>().Value;
+                apply.ApplyTo.Get<ForceShieldModifier>().Value -= damage;
+                damage = -apply.ApplyTo.Get<ForceShieldModifier>().Value;
+                health -= damage;
+            }
+            else health -= damage;
+
+            if (apply.ApplyTo.Get<PlayerHealth>().Value < 0)
+            {
+                apply.ApplyTo.Get<PlayerHealth>().Value = 0;
+            }
+            else if(apply.ApplyTo.Get<PlayerHealth>().Value > to.Read<PlayerHealthDefault>().Value)
+            {
+                apply.ApplyTo.Get<PlayerHealth>().Value = to.Read<PlayerHealthDefault>().Value;
             }
             
             world.GetFeature<EventsFeature>().HealthChanged.Execute(apply.ApplyTo.Read<Owner>().Value);

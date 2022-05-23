@@ -32,6 +32,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 		{
 			return Filter.Create("Filter-LinearPowerSkillSystem")
 				.With<LinearPowerAffect>()
+                .With<ActivateSkill>()
 				.Push();
 		}
 
@@ -40,12 +41,13 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			var effect = new Entity("effect");
 			effect.Set(new EffectTag());
 
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Set(new LinearPowerModifier());
+			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Set(new LinearPowerModifier{Damage = 1.5f});
 				
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-
+			
+			entity.Remove<ActivateSkill>();
 			Debug.Log("Linear Power activated");
 		}
 	}

@@ -8,7 +8,7 @@ namespace Project.Common.Components
     public struct SkillTag : IComponent {}
     public struct EffectTag : IComponent {}
     public struct PassiveSkill : IComponent {}
-    public struct ActivateSkill : IComponentOneShot {}
+    public struct ActivateSkill : IComponent {}
 
     public struct AOESkill : IComponent
     {

@@ -49,7 +49,8 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			effect.Set(new FireRateModifier());
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-
+			
+			entity.Remove<ActivateSkill>();
 			Debug.Log("fire rate increased");
 		}
 	}

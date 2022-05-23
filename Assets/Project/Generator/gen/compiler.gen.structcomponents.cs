@@ -9,7 +9,7 @@ namespace ME.ECS {
             CoreComponentsInitializer.InitTypeId();
 
 
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.ActivateSkill>(true, false, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ActivateSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacity>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacityDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AOESkill>(false, true, false, false, false, false, false, false);
@@ -40,6 +40,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FiringRangeModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Grenade>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GrenadeThrowAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GrenadeThrowModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealingAffect>(true, true, false, false, false, false, false, false);
@@ -57,7 +58,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Linear>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearDamageAffect>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearFull>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearIndex>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearPowerAffect>(true, true, false, false, false, false, false, false);
@@ -123,10 +123,12 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillsResetModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Slowness>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpreadAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StatsBuff>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Stun>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
@@ -155,7 +157,7 @@ namespace ME.ECS {
             CoreComponentsInitializer.InitTypeId();
 
 
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.ActivateSkill>(true, false, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ActivateSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacity>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacityDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AOESkill>(false, true, false, false, false, false, false, false);
@@ -186,6 +188,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FiringRangeModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Grenade>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GrenadeThrowAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GrenadeThrowModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealingAffect>(true, true, false, false, false, false, false, false);
@@ -203,7 +206,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Linear>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearDamageAffect>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearFull>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearIndex>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearPowerAffect>(true, true, false, false, false, false, false, false);
@@ -269,10 +271,12 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillsResetModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Slowness>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpreadAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StatsBuff>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Stun>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
@@ -296,7 +300,7 @@ namespace ME.ECS {
             CoreComponentsInitializer.Init(ref structComponentsContainer);
 
 
-            noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.ActivateSkill>(true);
+            structComponentsContainer.Validate<Project.Common.Components.ActivateSkill>(true);
             structComponentsContainer.Validate<Project.Common.Components.AmmoCapacity>(false);
             structComponentsContainer.Validate<Project.Common.Components.AmmoCapacityDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.AOESkill>(false);
@@ -327,6 +331,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.FiringRangeModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.ForceShieldAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.ForceShieldModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.Grenade>(true);
             structComponentsContainer.Validate<Project.Common.Components.GrenadeThrowAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.GrenadeThrowModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.HealingAffect>(true);
@@ -344,7 +349,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Linear>(false);
             structComponentsContainer.Validate<Project.Common.Components.LinearActive>(true);
             structComponentsContainer.Validate<Project.Common.Components.LinearDamageAffect>(true);
-            structComponentsContainer.Validate<Project.Common.Components.LinearDamageModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.LinearFull>(true);
             structComponentsContainer.Validate<Project.Common.Components.LinearIndex>(false);
             structComponentsContainer.Validate<Project.Common.Components.LinearPowerAffect>(true);
@@ -410,10 +414,12 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SkillsResetModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.SkillVFX>(false);
+            structComponentsContainer.Validate<Project.Common.Components.Slowness>(false);
             structComponentsContainer.Validate<Project.Common.Components.Spawned>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpeedModifier>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpreadAmount>(false);
             structComponentsContainer.Validate<Project.Common.Components.StatsBuff>(true);
+            structComponentsContainer.Validate<Project.Common.Components.Stun>(false);
             structComponentsContainer.Validate<Project.Common.Components.StunAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.StunModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.Targeted>(true);
@@ -442,7 +448,7 @@ namespace ME.ECS {
         public static void Init(Entity entity) {
 
 
-            entity.ValidateDataOneShot<Project.Common.Components.ActivateSkill>(true);
+            entity.ValidateData<Project.Common.Components.ActivateSkill>(true);
             entity.ValidateData<Project.Common.Components.AmmoCapacity>(false);
             entity.ValidateData<Project.Common.Components.AmmoCapacityDefault>(false);
             entity.ValidateData<Project.Common.Components.AOESkill>(false);
@@ -473,6 +479,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.FiringRangeModifier>(false);
             entity.ValidateData<Project.Common.Components.ForceShieldAffect>(true);
             entity.ValidateData<Project.Common.Components.ForceShieldModifier>(false);
+            entity.ValidateData<Project.Common.Components.Grenade>(true);
             entity.ValidateData<Project.Common.Components.GrenadeThrowAffect>(true);
             entity.ValidateData<Project.Common.Components.GrenadeThrowModifier>(false);
             entity.ValidateData<Project.Common.Components.HealingAffect>(true);
@@ -490,7 +497,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Linear>(false);
             entity.ValidateData<Project.Common.Components.LinearActive>(true);
             entity.ValidateData<Project.Common.Components.LinearDamageAffect>(true);
-            entity.ValidateData<Project.Common.Components.LinearDamageModifier>(false);
             entity.ValidateData<Project.Common.Components.LinearFull>(true);
             entity.ValidateData<Project.Common.Components.LinearIndex>(false);
             entity.ValidateData<Project.Common.Components.LinearPowerAffect>(true);
@@ -556,10 +562,12 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SkillsResetModifier>(false);
             entity.ValidateData<Project.Common.Components.SkillTag>(true);
             entity.ValidateData<Project.Common.Components.SkillVFX>(false);
+            entity.ValidateData<Project.Common.Components.Slowness>(false);
             entity.ValidateData<Project.Common.Components.Spawned>(true);
             entity.ValidateData<Project.Common.Components.SpeedModifier>(true);
             entity.ValidateData<Project.Common.Components.SpreadAmount>(false);
             entity.ValidateData<Project.Common.Components.StatsBuff>(true);
+            entity.ValidateData<Project.Common.Components.Stun>(false);
             entity.ValidateData<Project.Common.Components.StunAffect>(true);
             entity.ValidateData<Project.Common.Components.StunModifier>(false);
             entity.ValidateData<Project.Common.Components.Targeted>(true);
