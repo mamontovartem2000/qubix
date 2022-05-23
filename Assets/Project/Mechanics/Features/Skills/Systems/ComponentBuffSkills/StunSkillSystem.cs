@@ -40,14 +40,17 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Set(new StunModifier());
+			ref readonly var owner = ref entity.Read<Owner>().Value;
+			ref var avatar = ref owner.Get<PlayerAvatar>().Value;
 
-			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = 5;
+			avatar.Set(new StunModifier());
 
-			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon.Get<ReloadTime>().Value = 
-			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon.Read<ReloadTimeDefault>().Value;
+			avatar.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = 5;
 
-            world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Get<Owner>().Value);
+			avatar.Read<WeaponEntities>().RightWeapon.Get<ReloadTime>().Value = 
+			avatar.Read<WeaponEntities>().RightWeapon.Read<ReloadTimeDefault>().Value;
+
+            world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(owner);
 						
 			entity.Remove<ActivateSkill>();
 			Debug.Log("Character is stunned");

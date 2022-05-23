@@ -8,13 +8,14 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
     using Components; using Modules; using Systems; using Markers;
-    #pragma warning restore
-    
-    #if ECS_COMPILE_IL2CPP_OPTIONS
+    using Project.Core;
+#pragma warning restore
+
+#if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
+#endif
     public sealed class GrenadeExplosionSystem : ISystemFilter {
         
         private CollisionHandlerFeature feature;
@@ -54,13 +55,14 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                     if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > (fp)9) continue;
                     Debug.Log("hit");
                     
-                    entity.Read<SecondaryDamage>().Value.Apply(player);
-
                     var debuff = new Entity("debuff");
-
+                    var index = SceneUtils.PositionToIndex(player.GetPosition());
+                    var pos = SceneUtils.IndexToPosition(index);
                     debuff.Get<Owner>().Value = entity.Read<Owner>().Value;
-                    debuff.Get<ProjectileDamage>().Value = entity.Read<SecondaryDamage>().Value.Read<ProjectileDamage>().Value;
-                    debuff.Set(new DamageSource(), ComponentLifetime.NotifyAllSystems);
+                    entity.Read<SecondaryDamage>().Value.Apply(debuff);
+                    debuff.Set(new ProjectileActive());
+                    debuff.Set(new CollisionDynamic());
+                    debuff.SetPosition(pos);
                 }
                 entity.Destroy();
             }
