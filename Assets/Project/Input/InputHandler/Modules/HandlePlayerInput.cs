@@ -46,10 +46,10 @@ namespace Project.Input.InputHandler.Modules
             _input.Player.LockDirection.started += ctx => world.AddMarker(new LockDirectionMarker {State = InputState.Pressed});
             _input.Player.LockDirection.canceled += ctx => world.AddMarker(new LockDirectionMarker {State = InputState.Released});
 
-            _input.Player.Skill1.performed += ctx => world.AddMarker(new FirstSkillMarker {ActorID = NetworkData.PlayerIdInRoom});
-            _input.Player.Skill2.performed += ctx => world.AddMarker(new SecondSkillMarker {ActorID = NetworkData.PlayerIdInRoom});
-            _input.Player.Skill3.performed += ctx => world.AddMarker(new ThirdSkillMarker {ActorID = NetworkData.PlayerIdInRoom});
-            _input.Player.Skill4.performed += ctx => world.AddMarker(new FourthSkillMarker {ActorID = NetworkData.PlayerIdInRoom});
+            _input.Player.Skill1.performed += ctx => world.AddMarker(new FirstSkillMarker {ActorID = NetworkData.SlotInRoom});
+            _input.Player.Skill2.performed += ctx => world.AddMarker(new SecondSkillMarker {ActorID = NetworkData.SlotInRoom});
+            _input.Player.Skill3.performed += ctx => world.AddMarker(new ThirdSkillMarker {ActorID = NetworkData.SlotInRoom});
+            _input.Player.Skill4.performed += ctx => world.AddMarker(new FourthSkillMarker {ActorID = NetworkData.SlotInRoom});
         }
         
         private void ForwardPressed()

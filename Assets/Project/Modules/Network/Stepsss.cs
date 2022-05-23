@@ -115,8 +115,9 @@ namespace Project.Modules.Network
 		{
 			if (joinResult.Value)
 			{
-				NetworkData.PlayerIdInRoom = joinResult.Slot;
-				Debug.Log($"Join {joinResult.Slot}");
+				NetworkData.SlotInRoom = joinResult.Slot;
+				NetworkData.Team = joinResult.Team;
+				Debug.Log($"Join slot: {joinResult.Slot}, team {joinResult.Team};");
 			}
 			else
 			{

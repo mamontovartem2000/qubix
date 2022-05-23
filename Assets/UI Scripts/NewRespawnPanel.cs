@@ -26,7 +26,7 @@ namespace UI_Scripts
 
         private void Deactivate(in Entity entity)
         {
-            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.PlayerIdInRoom)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.SlotInRoom)) return;
 
             _background.DOFade(0, 0.5f).SetEase(Ease.Linear);
             _popup.DOFade(0, 0.25f).SetEase(Ease.Linear);
@@ -35,7 +35,7 @@ namespace UI_Scripts
  
         private void Activate(in Entity entity)
         {
-            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.PlayerIdInRoom)) return;
+            if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.SlotInRoom)) return;
 
             _background.DOFade(0.5f, 0.5f).SetEase(Ease.Linear);
             _popup.DOFade(1f, 1f).SetEase(Ease.Linear);

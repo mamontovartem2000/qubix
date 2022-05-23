@@ -29,7 +29,7 @@ namespace Project.Modules.Network
 
         protected override int GetRPCOrder()
         {
-            return NetworkData.PlayerIdInRoom;
+            return NetworkData.SlotInRoom;
         }
 
         protected override ME.ECS.Network.NetworkType GetNetworkType()
@@ -49,12 +49,12 @@ namespace Project.Modules.Network
                 var instance = (ME.ECS.Network.INetworkModuleBase)this;
                 instance.SetTransporter(new NetTransporter());
                 instance.SetSerializer(new FSSerializer());
-                Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = NetworkData.PlayerIdInRoom, 
-                    ServerID = NetworkData.Info.player_id, Nickname = NetworkData.Info.player_nickname });
+                Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = NetworkData.SlotInRoom, 
+                    ServerID = NetworkData.Info.player_id, Nickname = NetworkData.Info.player_nickname, Team = NetworkData.Team });
             }
             else
             {
-                Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = 1, ServerID = "player_id", Nickname = "test_nickname" });
+                Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = 1, ServerID = "player_id", Nickname = "test_nickname", Team = "team" });
             }
         }      
     }

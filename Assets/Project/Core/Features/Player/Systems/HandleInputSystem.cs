@@ -156,7 +156,7 @@ namespace Project.Core.Features.Player.Systems
 
 		private void FirstSkill_RPC(FirstSkillMarker fsm)
 		{
-			var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
+			var player = _feature.GetPlayerByID(NetworkData.SlotInRoom);
 			if (!player.Has<PlayerAvatar>()) return;
 		
 			ref var entity = ref player.Get<PlayerAvatar>().Value.Get<SkillEntities>().FirstSkill;
@@ -166,7 +166,7 @@ namespace Project.Core.Features.Player.Systems
 		
 		private void SecondSkill_RPC(SecondSkillMarker ssm)
 		{
-			var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
+			var player = _feature.GetPlayerByID(NetworkData.SlotInRoom);
 			if (!player.Has<PlayerAvatar>()) return;
 		
 			ref var entity = ref player.Get<PlayerAvatar>().Value.Get<SkillEntities>().SecondSkill;
@@ -176,7 +176,7 @@ namespace Project.Core.Features.Player.Systems
 		
 		private void ThirdSkill_RPC(ThirdSkillMarker tsm)
 		{
-			var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
+			var player = _feature.GetPlayerByID(NetworkData.SlotInRoom);
 			if (!player.Has<PlayerAvatar>()) return;
 		
 			ref var entity = ref player.Get<PlayerAvatar>().Value.Get<SkillEntities>().ThirdSkill;
@@ -186,7 +186,7 @@ namespace Project.Core.Features.Player.Systems
 		
 		private void FourthSkill_RPC(FourthSkillMarker fsm)
 		{
-			var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
+			var player = _feature.GetPlayerByID(NetworkData.SlotInRoom);
 			if (!player.Has<PlayerAvatar>()) return;
 		
 			ref var entity = ref player.Get<PlayerAvatar>().Value.Get<SkillEntities>().FourthSkill;

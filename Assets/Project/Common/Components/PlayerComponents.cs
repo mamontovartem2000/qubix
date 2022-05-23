@@ -1,7 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
-using UnityEngine;
 
 namespace Project.Common.Components
 {
@@ -16,6 +15,7 @@ namespace Project.Common.Components
         public int PlayerLocalID;
         public string PlayerServerID;
         public string Nickname;
+        public string Team;
     }
     public struct WeaponEntities : IComponent
     {
