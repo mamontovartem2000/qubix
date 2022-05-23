@@ -30,7 +30,7 @@ namespace Project.Mechanics.Features.Projectile
             gun.Read<ProjectileConfig>().Value.Apply(entity);
 
             entity.SetParent(gun);
-            entity.SetLocalPosition(new Vector3(-0.15f, 0f, 0.0f));
+            entity.SetLocalPosition(new Vector3(-0.15f, 0f, 0.5f));
             entity.SetParent(Entity.Empty);
             // entity.SetLocalRotation(gun.GetParent().GetRotation());
             

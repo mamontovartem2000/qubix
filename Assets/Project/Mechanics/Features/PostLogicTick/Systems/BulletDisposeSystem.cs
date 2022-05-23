@@ -1,6 +1,8 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core;
 using Project.Mechanics.Features.VFX;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.PostLogicTick.Systems
 {
@@ -50,7 +52,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 			
 			if (entity.Has<ProjectileActive>())
 			{
-				_vfx.SpawnVFX(VFXFeature.VFXType.BulletWall, entity.GetPosition());
+				_vfx.SpawnVFX(VFXFeature.VFXType.BulletWall, applyTo.GetPosition());
 				entity.Destroy();
 			}
 		}
