@@ -38,7 +38,7 @@ namespace Project.Mechanics.Features.Lifetime.Systems
             ref var delay = ref entity.Get<Linear>();
             delay.StartDelay -= deltaTime;
             
-            if(delay.StartDelay <= (fp)0)
+            if(delay.StartDelay <= 0)
             {
                 if (!entity.Has<LinearActive>())
                 {

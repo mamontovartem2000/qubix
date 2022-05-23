@@ -12,9 +12,8 @@ namespace Project.Mechanics.Features.PostLogicTick
 	{
 		protected override void OnConstruct()
 		{
-			// AddSystem<QuadTreeDispose>();
 			AddSystem<BulletDisposeSystem>();
-			//AddSystem<HealthDisposeSystem>();
+			AddSystem<HealthDisposeSystem>();
 			AddSystem<MineDisposeSystem>();
 		}
 

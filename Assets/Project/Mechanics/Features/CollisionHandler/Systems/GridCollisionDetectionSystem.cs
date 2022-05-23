@@ -49,7 +49,6 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
 				var sPos = staticBag.ReadT0(index).ToVector3();
 				var sOwner = staticBag.ReadT1(index).Value;
 				var dist = (fp)2 * 2;
-				var entity = staticBag.GetEntity(index);
 
 				for (int i = 0; i < dynamicBag.Length; i++)
 				{
@@ -72,7 +71,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
 
 					if (sIndex != dIndex) continue;
 
-					dynamicBag.Set(i, new Collided {ApplyTo = entity, ApplyFrom = dOwner});
+					dynamicBag.Set(i, new Collided {ApplyTo = sOwner, ApplyFrom = dOwner});
 				}
 			}
 		}

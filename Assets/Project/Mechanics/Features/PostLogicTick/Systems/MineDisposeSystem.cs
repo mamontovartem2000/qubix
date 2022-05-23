@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Mechanics.Features.VFX;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.PostLogicTick.Systems
 {
@@ -37,13 +38,15 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			var player = entity.Get<Collided>().ApplyTo;
+			ref var owner = ref entity.Get<Collided>().ApplyTo;
+			ref var player = ref owner.Get<PlayerAvatar>().Value;
+			ref var from = ref entity.Get<Collided>().ApplyFrom;
 			
-			if (player.Has<DamagedBy>())
-				player.Remove<DamagedBy>();
+			if (owner.Has<DamagedBy>())
+				owner.Remove<DamagedBy>();
 
 			var collision = new Entity("collision");
-			collision.Set(new ApplyDamage {ApplyTo = player.Get<PlayerAvatar>().Value, Damage = 25f}, ComponentLifetime.NotifyAllSystems);
+			collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = 25f}, ComponentLifetime.NotifyAllSystems);
 
 			_vfx.SpawnVFX(VFXFeature.VFXType.Explosion, entity.GetPosition());
 			entity.Destroy();

@@ -17,26 +17,9 @@ namespace Project.Mechanics.Features.CollisionHandler
     #endregion
     public sealed class CollisionHandlerFeature : Feature
     {
-        // public MonoBehaviourViewBase ExplosionVFX;
-        // public MonoBehaviourViewBase PlayerDeathVFX;
-        // public MonoBehaviourViewBase HealVFX;
-        // public MonoBehaviourViewBase TakeDamageVFX;
-        //
-        // public ViewId ExplosionID, PlayerDeathID, HealID, TakeDamageID;
-        // public float DefaultTimer;
-        
         protected override void OnConstruct()
         {
-            AddSystem<HealthCollisionSystem>();
-            // AddSystem<MineCollisionSystem>();
-            // AddSystem<ProjectileCollisionSystem>();
-            // AddSystem<CollisionDetectionSystem>();
             AddSystem<GridCollisionDetectionSystem>();
-
-            // ExplosionID = world.RegisterViewSource(ExplosionVFX);
-            // PlayerDeathID = world.RegisterViewSource(PlayerDeathVFX);
-            // HealID = world.RegisterViewSource(HealVFX);
-            // TakeDamageID = world.RegisterViewSource(TakeDamageVFX);
         }
         
         protected override void InjectFilter(ref FilterBuilder builder)
@@ -44,13 +27,6 @@ namespace Project.Mechanics.Features.CollisionHandler
             builder.WithoutShared<GamePaused>();
         }
 
-        // public void SpawnVFX(Vector3 position, ViewId id, float time)
-        // {
-        //     var vfx = new Entity("vfx");
-        //     vfx.InstantiateView(id);
-        //     vfx.SetPosition(position);
-        // }
-        
         protected override void OnDeconstruct() {}
     }
 }

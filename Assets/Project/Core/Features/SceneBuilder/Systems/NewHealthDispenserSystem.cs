@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Core.Features.SceneBuilder.Systems
 {
@@ -39,9 +40,9 @@ namespace Project.Core.Features.SceneBuilder.Systems
 
             if (dispenser.Timer <= (fp)0)
             {
-                var health = _feature.SpawnHealth();
-                health.SetParent(entity);
+                var health = _feature.SpawnHealth(entity);
                 health.SetPosition(entity.GetPosition());
+
                 dispenser.Timer = dispenser.TimerDefault;
                 entity.Set(new Spawned());
             }

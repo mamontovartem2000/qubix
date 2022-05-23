@@ -54,43 +54,58 @@ namespace Project.Mechanics.Features.Projectile
 
         public void SpawnLinear(Entity gun, int length, float delay)
         {
-            for (var i = 1; i < length; i++)
+            for (int i = 0; i < length; i++)
             {
-                var entity = new Entity("laser");
+                var entity = new Entity("linear");
                 gun.Read<ProjectileConfig>().Value.Apply(entity);
 
-                entity.SetParent(gun);
-                entity.SetLocalPosition(new Vector3(0f,0f, i/2f));
-                entity.SetLocalRotation(gun.GetRotation());
-
-                entity.Get<Owner>().Value = gun.Get<Owner>().Value;
+                var owner = entity.Get<Owner>().Value = gun.Read<Owner>().Value;
                 
                 entity.Get<Linear>().StartDelay = delay * i;
                 entity.Get<Linear>().EndDelay = delay * (length - i);
                 
                 var damageBase = entity.Read<ProjectileDamage>().Value;
-                var damageMod = damageBase * gun.Get<Owner>().Value.Get<LinearDamageModifier>().Value;
+                var damageMod = damageBase * owner.Get<LinearDamageModifier>().Value;
                 var currentDamage = damageBase + damageMod;
-
+                
                 entity.Get<ProjectileDamage>().Value = currentDamage;
-                entity.Set(new DamageSource());
-                                
                 gun.Set(new LinearActive());
-                entity.Set(new DamageSource());
             }
-
-            var visual = new Entity("vis");
-            visual.SetParent(gun);
-            visual.Set(new LinearVisual());
             
-            visual.SetLocalPosition(new Vector3(-0.15f,0f, 0.5f));
-            visual.SetLocalRotation(gun.GetLocalRotation());
-            
-            var view = world.RegisterViewSource(gun.Read<ProjectileView>().Value);
-            visual.InstantiateView(view);
-            
-            if (gun.Has<LinearFull>())
-                gun.Remove<LinearFull>();
+            // for (var i = 1; i < length; i++)
+            // {
+            //     var entity = new Entity("laser");
+            //     gun.Read<ProjectileConfig>().Value.Apply(entity);
+            //
+            //     entity.SetParent(gun);
+            //     entity.SetLocalPosition(new Vector3(0f,0f, i/2f));
+            //     entity.SetLocalRotation(gun.GetRotation());
+            //
+            //     entity.Get<Owner>().Value = gun.Get<Owner>().Value;
+            //     
+            //     entity.Get<Linear>().StartDelay = delay * i;
+            //     entity.Get<Linear>().EndDelay = delay * (length - i);
+            //     
+            //     var damageBase = entity.Read<ProjectileDamage>().Value;
+            //     var damageMod = damageBase * gun.Get<Owner>().Value.Get<LinearDamageModifier>().Value;
+            //     var currentDamage = damageBase + damageMod;
+            //
+            //     entity.Get<ProjectileDamage>().Value = currentDamage;
+            //     gun.Set(new LinearActive());
+            // }
+            //
+            // var visual = new Entity("vis");
+            // visual.SetParent(gun);
+            // visual.Set(new LinearVisual());
+            //
+            // visual.SetLocalPosition(new Vector3(-0.15f,0f, 0.5f));
+            // visual.SetLocalRotation(gun.GetLocalRotation());
+            //
+            // var view = world.RegisterViewSource(gun.Read<ProjectileView>().Value);
+            // visual.InstantiateView(view);
+            //
+            // if (gun.Has<LinearFull>())
+            //     gun.Remove<LinearFull>();
         }
 
         public void SpawnMelee(Entity gun, Vector3 position)

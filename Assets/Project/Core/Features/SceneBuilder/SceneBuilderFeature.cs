@@ -179,6 +179,9 @@ namespace Project.Core.Features.SceneBuilder
                 if(entity.Has<Pallette>())
                     entity.SetPosition(entity.GetPosition() + new fp3(-0.15,0.2,0.15));
                 entity.SetRotation(PropsConfigs[b].Read<Rotation>().value);
+                
+                entity.Get<Owner>().Value = entity;
+
                 SceneUtils.TakeTheCell(i);
             }
         }
@@ -210,16 +213,17 @@ namespace Project.Core.Features.SceneBuilder
             entity.SetPosition(SceneUtils.GetRandomSpawnPosition());
             entity.InstantiateView(_objectViewIds[MINE]);
             entity.Set(new CollisionDynamic());
-            entity.Get<Owner>().Value = entity;
+            entity.Get<Owner>().Value = new Entity("ii");
         }
 
-        public Entity SpawnHealth()
+        public Entity SpawnHealth(Entity owner)
         {
             var entity = new Entity("Health");
             entity.Set(new HealthTag());
             entity.InstantiateView(_objectViewIds[HEALTH]);
-            // entity.Set(new CollisionDynamic());
-            entity.Get<Owner>().Value = entity;
+            entity.Set(new CollisionDynamic());
+            entity.Get<ProjectileDirection>().Value = fp3.zero;
+            entity.Get<Owner>().Value = owner;
             return entity;
         }
 
