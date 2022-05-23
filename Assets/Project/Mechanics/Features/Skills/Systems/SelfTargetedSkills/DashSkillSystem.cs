@@ -32,6 +32,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 		{
 			return Filter.Create("Filter-DashSkillSystem")
 				.With<DashAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

@@ -31,6 +31,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 		{
 			return Filter.Create("Filter-LifestealSkillSystem")
 				.With<LifeStealAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

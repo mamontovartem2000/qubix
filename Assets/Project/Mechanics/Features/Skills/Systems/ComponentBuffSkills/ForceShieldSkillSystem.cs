@@ -31,6 +31,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 		{
 			return Filter.Create("Filter-ForceShieldSkillSystem")
 				.With<ForceShieldAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

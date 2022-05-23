@@ -31,6 +31,7 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 		{
 			return Filter.Create("Filter-MovementSpeedSkillsSystem")
 				.With<MoveSpeedAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

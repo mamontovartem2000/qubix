@@ -32,6 +32,7 @@ namespace Project.Mechanics.Features.Skills.Systems.TargetedSkills
 		{
 			return Filter.Create("Filter-GrenadeThrowSkillSystem")
 				.With<GrenadeThrowAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

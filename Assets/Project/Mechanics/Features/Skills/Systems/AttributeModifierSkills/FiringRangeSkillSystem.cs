@@ -31,6 +31,7 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 		{
 			return Filter.Create("Filter-FiringRangeSkillSystem")
 				.With<FiringRangeAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

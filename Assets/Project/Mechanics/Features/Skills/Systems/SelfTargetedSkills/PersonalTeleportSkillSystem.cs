@@ -32,6 +32,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 		{
 			return Filter.Create("Filter-PersonalTeleportSkillSystem")
 				.With<PersonalTeleportAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

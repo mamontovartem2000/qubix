@@ -31,6 +31,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 		{
 			return Filter.Create("Filter-SideStepSkillSystem")
 				.With<SideStepAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

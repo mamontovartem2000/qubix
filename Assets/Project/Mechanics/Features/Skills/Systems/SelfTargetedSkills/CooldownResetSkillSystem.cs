@@ -31,6 +31,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 		{
 			return Filter.Create("Filter-CooldownResetSkillSystem")
 				.With<SkillsResetAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

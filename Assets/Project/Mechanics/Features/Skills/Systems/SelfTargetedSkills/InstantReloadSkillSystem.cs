@@ -31,6 +31,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
         {
             return Filter.Create("Filter-InstantReloadSkillSystem")
                 .With<InstantReloadAffect>()
+                .With<ActivateSkill>()
                 .Push();
         }
 

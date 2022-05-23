@@ -32,6 +32,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 		{
 			return Filter.Create("Filter-SilenceSkillSystem")
 				.With<SkillSilenceAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

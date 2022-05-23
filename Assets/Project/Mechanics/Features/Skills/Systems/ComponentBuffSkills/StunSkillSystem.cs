@@ -34,6 +34,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 		{
 			return Filter.Create("Filter-StunSkillSystem")
 				.With<StunAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

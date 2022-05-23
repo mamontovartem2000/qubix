@@ -31,6 +31,7 @@ namespace Project.Mechanics.Features.Skills.Systems.TargetedSkills
 		{
 			return Filter.Create("Filter-MagneticStormSkillSystem")
 				.With<MagneticStormAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

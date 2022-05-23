@@ -31,6 +31,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
         {
             return Filter.Create("Filter-SkillActivationSystem")
                 .With<HealingAffect>()
+                .With<ActivateSkill>()
                 .Push();
         }
 
