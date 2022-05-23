@@ -35,6 +35,11 @@ namespace Project.Common.Components
 		public float EndDelay;
 	}
 
+	public struct LinearIndex : IComponent
+	{
+		public int Value;
+	}
+
 	public struct LinearActive : IComponent {}
 
 	public struct MeleeActive : IComponent {}

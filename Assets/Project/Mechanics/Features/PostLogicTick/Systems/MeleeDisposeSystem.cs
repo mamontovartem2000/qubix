@@ -1,49 +1,52 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using UnityEngine;
 
-namespace Project.Mechanics.Features.Lifetime.Systems
+namespace Project.Mechanics.Features.PostLogicTick.Systems
 {
-    #region usage
+#pragma warning disable
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-
-    #endregion
-    public sealed class LifeTimeSystem : ISystemFilter
+    public sealed class MeleeDisposeSystem : ISystemFilter
     {
         public World world { get; set; }
-        private LifeTimeFeature _feature;
-
+        
+        private PostLogicTickFeature _feature;
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
         }
-
         void ISystemBase.OnDeconstruct() {}
-
 #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;
 #endif
         Filter ISystemFilter.filter { get; set; }
-
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-LifeTimeSystem")
-                .With<LifeTimeLeft>()
-                .Without<EffectTag>()
+            return Filter.Create("Filter-MeleeDisposeSystem")
+                .With<MeleeAimer>()
+                .With<Collided>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
-            lifeTime -= deltaTime;
+            ref var owner = ref entity.Get<Collided>().ApplyTo;
+            ref var from = ref entity.Get<Collided>().ApplyFrom;
+            ref readonly var damage = ref entity.Read<ProjectileDamage>().Value;
 
-            if (lifeTime <= 0)
-                entity.Destroy();
+            if (owner.Has<PlayerAvatar>())
+            {
+                ref var player = ref owner.Get<PlayerAvatar>().Value;
+                var collision = new Entity("collision");
+                collision.Set(new ApplyDamage {ApplyTo = player ,ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
+            }
+
+            entity.Remove<Collided>();
         }
     }
 }

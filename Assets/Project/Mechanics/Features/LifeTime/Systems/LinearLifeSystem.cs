@@ -37,24 +37,29 @@ namespace Project.Mechanics.Features.Lifetime.Systems
         {
             ref var delay = ref entity.Get<Linear>();
             delay.StartDelay -= deltaTime;
-            
-            if(delay.StartDelay <= 0)
+
+            if(!entity.Get<Owner>().Value.Has<PlayerAvatar>()) return;
+            ref var player = ref entity.Get<Owner>().Value.Get<PlayerAvatar>().Value;
+
+            ref readonly var linIndex = ref entity.Read<LinearIndex>().Value;
+            ref readonly var dir = ref player.Read<FaceDirection>().Value;
+
+            if (delay.StartDelay <= 0)
             {
                 if (!entity.Has<LinearActive>())
                 {
                     //Linear weapon length testing view instantiation;
-                    // var testView = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
-                    // entity.InstantiateView(testView);
-                    
-                    entity.GetParent().Get<ReloadTime>().Value = entity.GetParent().Read<ReloadTimeDefault>().Value;
+                    //var testView = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
+                    //entity.InstantiateView(testView);
+
+                    player.Get<ReloadTime>().Value = player.Read<ReloadTimeDefault>().Value;
                     entity.Set(new LinearActive());
                 }
-            }
 
-            if (!entity.GetParent().Has<LinearActive>() || entity.GetParent().Has<MeleeWeapon>())
-            {
-                delay.EndDelay -= deltaTime;
-                if (delay.EndDelay <= (fp)0)
+                var linPos = player.GetPosition() + dir * linIndex;
+                entity.SetPosition(linPos);
+
+                if (!player.Get<WeaponEntities>().LeftWeapon.Has<LinearActive>())
                 {
                     entity.Destroy();
                 }

@@ -59,6 +59,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearDamageAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearFull>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearIndex>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearPowerAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearPowerModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearVisual>(true, true, false, false, false, false, false, false);
@@ -69,8 +70,10 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapComponents>(false, false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeAimer>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageSpot>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, true, false, false, false, false, false, false);
@@ -202,6 +205,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearDamageAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearDamageModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearFull>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearIndex>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearPowerAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearPowerModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearVisual>(true, true, false, false, false, false, false, false);
@@ -212,8 +216,10 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapComponents>(false, false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeAimer>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageSpot>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, true, false, false, false, false, false, false);
@@ -340,6 +346,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.LinearDamageAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.LinearDamageModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.LinearFull>(true);
+            structComponentsContainer.Validate<Project.Common.Components.LinearIndex>(false);
             structComponentsContainer.Validate<Project.Common.Components.LinearPowerAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.LinearPowerModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.LinearVisual>(true);
@@ -350,8 +357,10 @@ namespace ME.ECS {
             structComponentsContainer.ValidateCopyable<Project.Common.Components.MapComponents>(false);
             structComponentsContainer.Validate<Project.Common.Components.MapConstruct>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeActive>(true);
+            structComponentsContainer.Validate<Project.Common.Components.MeleeAimer>(true);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDamageAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDamageModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.MeleeDamageSpot>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelay>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelayDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(true);
@@ -483,6 +492,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.LinearDamageAffect>(true);
             entity.ValidateData<Project.Common.Components.LinearDamageModifier>(false);
             entity.ValidateData<Project.Common.Components.LinearFull>(true);
+            entity.ValidateData<Project.Common.Components.LinearIndex>(false);
             entity.ValidateData<Project.Common.Components.LinearPowerAffect>(true);
             entity.ValidateData<Project.Common.Components.LinearPowerModifier>(false);
             entity.ValidateData<Project.Common.Components.LinearVisual>(true);
@@ -493,8 +503,10 @@ namespace ME.ECS {
             entity.ValidateDataCopyable<Project.Common.Components.MapComponents>(false);
             entity.ValidateData<Project.Common.Components.MapConstruct>(false);
             entity.ValidateData<Project.Common.Components.MeleeActive>(true);
+            entity.ValidateData<Project.Common.Components.MeleeAimer>(true);
             entity.ValidateData<Project.Common.Components.MeleeDamageAffect>(true);
             entity.ValidateData<Project.Common.Components.MeleeDamageModifier>(false);
+            entity.ValidateData<Project.Common.Components.MeleeDamageSpot>(false);
             entity.ValidateData<Project.Common.Components.MeleeDelay>(false);
             entity.ValidateData<Project.Common.Components.MeleeDelayDefault>(false);
             entity.ValidateData<Project.Common.Components.MeleeWeapon>(true);

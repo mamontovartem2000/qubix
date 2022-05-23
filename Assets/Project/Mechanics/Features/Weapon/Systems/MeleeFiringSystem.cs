@@ -45,11 +45,11 @@ namespace Project.Mechanics.Features.Weapon.Systems
 			if(entity.GetParent().Has<StunModifier>()) return;
 
 			ref var delay = ref entity.Get<MeleeDelay>().Value;
-			var gunDir = entity.Read<WeaponAim>().Value.GetPosition();
-			
+			ref var aim = ref entity.Get<MeleeDamageSpot>().Value;
+
 			delay -= deltaTime;
 
-			if (delay <= (fp)0)
+			if (delay <= 0)
 			{
 				if(!entity.Has<LeftWeaponShot>())
 					entity.Remove<MeleeActive>();
@@ -57,7 +57,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
 				entity.Get<MeleeDelay>().Value = entity.Read<MeleeDelayDefault>().Value;
 				entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;
 				
-				_projectile.SpawnMelee(entity, gunDir);
+				_projectile.SpawnMelee(aim);
 			}
 		}
 	}

@@ -77,7 +77,7 @@ namespace Project.Core.Features.Player.Systems
 		{
 			var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
 			// var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
-			if (!player.Has<PlayerAvatar>()) return;
+			if(player.Read<PlayerAvatar>().Value == Entity.Empty) return;
 
 			ref var entity = ref player.Get<PlayerAvatar>().Value;
 			entity.Set(new MoveInput {Axis = move.Axis, Value = move.Value});
@@ -87,10 +87,9 @@ namespace Project.Core.Features.Player.Systems
 		{
 			// var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
 			var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-			if (!player.Has<PlayerAvatar>()) return;
+			if(player.Read<PlayerAvatar>().Value == Entity.Empty) return;
 
 			ref var entity = ref player.Get<PlayerAvatar>().Value.Get<WeaponEntities>().LeftWeapon;
-			
 			switch (mlm.State)
 			{
 				case InputState.Pressed:
@@ -113,10 +112,10 @@ namespace Project.Core.Features.Player.Systems
 		{
 			var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
 			// var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
-			if (!player.Has<PlayerAvatar>()) return;
+			if(player.Read<PlayerAvatar>().Value == Entity.Empty) return;
 
 			ref var entity = ref player.Get<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon;
-			
+
 			switch (mrm.State)
 			{
 				case InputState.Pressed:
@@ -136,8 +135,8 @@ namespace Project.Core.Features.Player.Systems
 		{
 			var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
 			// var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
-			if (!player.Has<PlayerAvatar>()) return;
-
+			if(player.Read<PlayerAvatar>().Value == Entity.Empty) return;
+			
 			ref var entity = ref player.Get<PlayerAvatar>().Value;
 
 			switch (sm.State)

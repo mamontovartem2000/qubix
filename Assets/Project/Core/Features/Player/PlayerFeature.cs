@@ -58,7 +58,7 @@ namespace Project.Core.Features.Player
 
 			if (world.GetModule<NetworkModule>().FakeConnect)
 			{
-				GoldHunterConfig.Apply(player);
+				BullerConfig.Apply(player);
 				return;
 			}
 

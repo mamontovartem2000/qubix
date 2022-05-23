@@ -42,8 +42,6 @@ namespace Project.Mechanics.Features.Avatar.Systems
             var to = apply.ApplyTo;
             var damage = apply.Damage;
 
-            Debug.Log(from.ToSmallString());
-            
             if (from.Has<PlayerAvatar>())
             {
                 to.Get<Owner>().Value.Set(new DamagedBy {Value = from});

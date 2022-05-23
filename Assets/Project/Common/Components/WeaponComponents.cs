@@ -12,6 +12,8 @@ namespace Project.Common.Components
     public struct MeleeWeapon : IComponent {}
     public struct LinearFull : IComponent {}
     public struct WeaponAim : IComponent {public Entity Value;}
+    public struct MeleeDamageSpot : IComponent{public Entity Value;}
+    public struct MeleeAimer : IComponent {};
     public struct ProjectileConfig : IComponent {public DataConfig Value;}
     public struct WeaponView : IComponent {public MonoBehaviourViewBase Value;}
     public struct ReloadTime : IComponent {public float Value;}

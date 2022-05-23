@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Mechanics.Features.LifeTime.Systems;
 
 namespace Project.Mechanics.Features.Lifetime
 {
@@ -23,6 +24,8 @@ namespace Project.Mechanics.Features.Lifetime
             AddSystem<LifeTimeSystem>();
             AddSystem<LinearLifeSystem>();
             AddSystem<LinearVisualLifeTimeSystem>();
+            AddSystem<MeleeAimInitSystem>();
+            AddSystem<MeleeAimPositionSystem>();
         }
 
         protected override void OnDeconstruct() { }

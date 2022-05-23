@@ -40,7 +40,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var health = entity.Read<PlayerHealth>().Value;
-            if(health > (fp)0) return;
+            if(health > 0) return;
 
             if (entity.Get<Owner>().Value.Has<DamagedBy>())
             {
@@ -48,17 +48,15 @@ namespace Project.Mechanics.Features.Avatar.Systems
                 enemy.Get<PlayerScore>().Kills += 1;
                 world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
             }
-
-            ref var player = ref entity.Get<Owner>().Value;
             
+            ref var player = ref entity.Get<Owner>().Value;
             player.Get<PlayerScore>().Deaths += 1;
-            player.Get<RespawnTime>().Value = 5f;
-            player.Remove<PlayerAvatar>();
             
             world.GetFeature<EventsFeature>().PlayerDeath.Execute(player);      
             SceneUtils.ReleaseTheCell(entity.Read<PlayerMoveTarget>().Value);
             _vfx.SpawnVFX(VFXFeature.VFXType.Death, entity.GetPosition());
-
+            
+            player.Remove<PlayerAvatar>();
             entity.Destroy();
         }
     }

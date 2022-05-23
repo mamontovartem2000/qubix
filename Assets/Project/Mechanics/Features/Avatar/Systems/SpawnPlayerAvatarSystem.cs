@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar.Systems
 {
@@ -40,10 +41,10 @@ namespace Project.Mechanics.Features.Avatar.Systems
             ref var time = ref entity.Get<RespawnTime>().Value;
             time -= deltaTime;
             
-            if(time <= (fp)0)
+            if(time <= 0)
             {
-                entity.Remove<RespawnTime>();
-                _feature.SpawnPlayerAvatar(entity);
+                entity.Get<PlayerAvatar>().Value = _feature.SpawnPlayerAvatar(entity);
+                entity.Get<RespawnTime>().Value = 5;
             }
         }
     }
