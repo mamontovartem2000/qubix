@@ -37,6 +37,12 @@ public class MapChanger : MonoBehaviour
                 ExtraChangeColors(13, 13, 13, 13, 13);
                 ExtraChangeEmissionColors(3, 3, 3, 3, 3);
                 break;
+            case Maps.Neon:
+                ChangeColor(23, 19, 19);
+                ChangeEmissionColor(1, 6, 6);
+                ExtraChangeColors(1, 20, 4, 19, 30);
+                ExtraChangeEmissionColors(7, 1, 1, 1, 1);
+                break;
         }
     }
 
@@ -79,4 +85,5 @@ public enum Maps
     Black = 0,
     Coliseum = 1,
     Forest = 2,
+    Neon = 3,
 }
