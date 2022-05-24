@@ -44,14 +44,17 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 			ref readonly var damage = ref entity.Read<ProjectileDamage>().Value;
 
 			var pos = owner.GetPosition();
-			
+
 			if (owner.Has<PlayerAvatar>())
 			{
 				ref var player = ref owner.Get<PlayerAvatar>().Value;
 				pos = player.GetPosition();
-				
-				var collision = new Entity("collision");
-				collision.Set(new ApplyDamage {ApplyTo = player ,ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
+
+				if (owner.Read<PlayerTag>().Team != from.Read<PlayerTag>().Team)
+				{
+					var collision = new Entity("collision");
+					collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);
+				}
 			}
 			
 			_vfx.SpawnVFX(VFXFeature.VFXType.BulletWall, pos);

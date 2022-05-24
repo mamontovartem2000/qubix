@@ -42,8 +42,12 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
             if (owner.Has<PlayerAvatar>())
             {
                 ref var player = ref owner.Get<PlayerAvatar>().Value;
-                var collision = new Entity("collision");
-                collision.Set(new ApplyDamage {ApplyTo = player ,ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
+
+                if (owner.Read<PlayerTag>().Team != from.Read<PlayerTag>().Team)
+                {
+                    var collision = new Entity("collision");
+                    collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);
+                }
             }
 
             entity.Remove<Collided>();

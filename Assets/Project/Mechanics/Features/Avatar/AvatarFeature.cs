@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
+using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features.Events;
@@ -15,15 +16,22 @@ namespace Project.Mechanics.Features.Avatar
 #endif
     public sealed class AvatarFeature : Feature
     {
+        public MonoBehaviourViewBase NicknameView;
+        public bool DisplayNickname = true;
+
         private readonly Vector3 _direction = new Vector3(0f,0f,1f);
         private readonly Vector3 _trajectory = new Vector3(0f, 1f, 0f);
-        
+
+        private ViewId _playerNick;
+
         protected override void OnConstruct()
         {
             AddSystem<SpawnPlayerAvatarSystem>();
             AddSystem<ApplyDamageSystem>();
             AddSystem<PlayerHealthSystem>();
             AddSystem<PlayerMovementSystem>();
+
+            _playerNick = world.RegisterViewSource(NicknameView);
         }
 
         protected override void OnDeconstruct() {}
@@ -37,6 +45,13 @@ namespace Project.Mechanics.Features.Avatar
             entity.InstantiateView(view);
             
             entity.Get<Owner>().Value = owner;
+
+            if (DisplayNickname)
+            {
+                var nick = new Entity("Nickname");
+                nick.InstantiateView(_playerNick);
+                nick.SetParent(entity);
+            }
 
             entity.Get<WeaponEntities>().LeftWeapon = ConstructWeapon(owner.Read<PlayerConfig>().LeftWeaponConfig, entity);
             entity.Get<WeaponEntities>().RightWeapon = ConstructWeapon(owner.Read<PlayerConfig>().RightWeaponConfig, entity);

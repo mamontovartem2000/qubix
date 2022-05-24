@@ -20,11 +20,9 @@ namespace Project.Core.Features.Player
 		public DataConfig BullerConfig;
 		public DataConfig GoldHunterConfig;
 		public DataConfig PowerfConfig;
-		public NicknameView NicknameView;
 
 		private RPCId _onPlayerConnected, _onPlayerDisconnected;
 		private Filter _playerFilter;
-		private ViewId _playerNick;
 
 		protected override void OnConstruct()
 		{
@@ -42,8 +40,6 @@ namespace Project.Core.Features.Player
 			var net = world.GetModule<NetworkModule>();
 			net.RegisterObject(this);
 
-			_playerNick = world.RegisterViewSource(NicknameView);
-
 			_onPlayerConnected = net.RegisterRPC(new System.Action<NetworkSetActivePlayer>(PlayerConnected_RPC).Method);
 			_onPlayerDisconnected = net.RegisterRPC(new System.Action<int>(PlayerDisconnected_RPC).Method);
 		}
@@ -58,11 +54,7 @@ namespace Project.Core.Features.Player
 		{
 			var localId = nsap.ActorLocalID;
 			var player = new Entity("player_" + localId);
-			player.Set(new PlayerTag {PlayerLocalID = localId, PlayerServerID = nsap.ServerID, Nickname = nsap.Nickname });
-
-			var nick = new Entity("Nickname");
-			nick.InstantiateView(_playerNick);
-			//nick.SetParent(player);
+			player.Set(new PlayerTag {PlayerLocalID = localId, PlayerServerID = nsap.ServerID, Nickname = nsap.Nickname, Team = nsap.Team });
 
 			if (world.GetModule<NetworkModule>().FakeConnect)
 			{
