@@ -19,6 +19,7 @@ MonoBehaviour:
   - id: 2
   - id: 3
   - id: 4
+  - id: 5
   removeStructComponents: []
   templates: []
   references:
@@ -26,7 +27,7 @@ MonoBehaviour:
     00000000:
       type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 2
+        Value: 20
     00000001:
       type: {class: SkillAmount, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -40,4 +41,8 @@ MonoBehaviour:
       data:
         Value: 1
     00000004:
+      type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 1
+    00000005:
       type: {class: GrenadeThrowAffect, ns: Project.Common.Components, asm: Project.Common}

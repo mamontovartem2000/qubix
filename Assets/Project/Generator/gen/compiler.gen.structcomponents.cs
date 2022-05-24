@@ -121,7 +121,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillSilenceModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillsResetAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillsResetModifier>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Slowness>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
@@ -269,7 +269,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillSilenceModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillsResetAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillsResetModifier>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Slowness>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
@@ -412,7 +412,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SkillSilenceModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillsResetAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.SkillsResetModifier>(false);
-            structComponentsContainer.Validate<Project.Common.Components.SkillTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.SkillTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillVFX>(false);
             structComponentsContainer.Validate<Project.Common.Components.Slowness>(false);
             structComponentsContainer.Validate<Project.Common.Components.Spawned>(true);
@@ -560,7 +560,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SkillSilenceModifier>(false);
             entity.ValidateData<Project.Common.Components.SkillsResetAffect>(true);
             entity.ValidateData<Project.Common.Components.SkillsResetModifier>(false);
-            entity.ValidateData<Project.Common.Components.SkillTag>(true);
+            entity.ValidateData<Project.Common.Components.SkillTag>(false);
             entity.ValidateData<Project.Common.Components.SkillVFX>(false);
             entity.ValidateData<Project.Common.Components.Slowness>(false);
             entity.ValidateData<Project.Common.Components.Spawned>(true);

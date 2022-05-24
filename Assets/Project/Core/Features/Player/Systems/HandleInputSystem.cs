@@ -162,7 +162,8 @@ namespace Project.Core.Features.Player.Systems
 
             ref var entity = ref player.Get<PlayerAvatar>().Value.Get<SkillEntities>().FirstSkill;
 
-            entity.Set(new ActivateSkill());
+            if(!entity.Has<Cooldown>())
+                entity.Set(new ActivateSkill());
         }
 
         private void SecondSkill_RPC(SecondSkillMarker ssm)
@@ -173,7 +174,8 @@ namespace Project.Core.Features.Player.Systems
 
             ref var entity = ref player.Get<PlayerAvatar>().Value.Get<SkillEntities>().SecondSkill;
 
-            entity.Set(new ActivateSkill());
+            if(!entity.Has<Cooldown>())
+                entity.Set(new ActivateSkill());
         }
 
         private void ThirdSkill_RPC(ThirdSkillMarker tsm)
@@ -184,7 +186,8 @@ namespace Project.Core.Features.Player.Systems
 
             ref var entity = ref player.Get<PlayerAvatar>().Value.Get<SkillEntities>().ThirdSkill;
 
-            entity.Set(new ActivateSkill());
+            if(!entity.Has<Cooldown>())
+                entity.Set(new ActivateSkill());
         }
 
         private void FourthSkill_RPC(FourthSkillMarker fsm)
@@ -195,7 +198,8 @@ namespace Project.Core.Features.Player.Systems
 
             ref var entity = ref player.Get<PlayerAvatar>().Value.Get<SkillEntities>().FourthSkill;
 
-            entity.Set(new ActivateSkill());
+            if(!entity.Has<Cooldown>())
+                entity.Set(new ActivateSkill());
         }
     }
 }

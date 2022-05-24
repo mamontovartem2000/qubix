@@ -1,15 +1,18 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Project.Common.Components
 {
-    public struct SkillTag : IComponent {}
+    public struct SkillTag : IComponent 
+    {
+        public int id;
+    }
     public struct EffectTag : IComponent {}
     public struct PassiveSkill : IComponent {}
     public struct ActivateSkill : IComponent {}
-
     public struct AOESkill : IComponent
     {
         public float Value;
@@ -44,7 +47,7 @@ namespace Project.Common.Components
 
     public struct SkillImage : IComponent
     {
-        public Image Value;
+        public int Value;
     }
 
     public struct SkillVFX : IComponent

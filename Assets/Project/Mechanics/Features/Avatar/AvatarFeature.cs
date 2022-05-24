@@ -43,10 +43,12 @@ namespace Project.Mechanics.Features.Avatar
             
             ref var skills = ref entity.Get<SkillEntities>();
             
-            skills.FirstSkill = ConstructSkill(owner.Read<PlayerConfig>().FirstSkillConfig, owner);
-            skills.SecondSkill = ConstructSkill(owner.Read<PlayerConfig>().SecondSkillConfig, owner);
-            skills.ThirdSkill = ConstructSkill(owner.Read<PlayerConfig>().ThirdSkillConfig, owner);
-            skills.FourthSkill = ConstructSkill(owner.Read<PlayerConfig>().FourthSkillConfig, owner);
+            skills.FirstSkill = ConstructSkill(owner.Read<PlayerConfig>().FirstSkillConfig, owner, 0);
+            skills.SecondSkill = ConstructSkill(owner.Read<PlayerConfig>().SecondSkillConfig, owner, 1);
+            skills.ThirdSkill = ConstructSkill(owner.Read<PlayerConfig>().ThirdSkillConfig, owner, 2);
+            skills.FourthSkill = ConstructSkill(owner.Read<PlayerConfig>().FourthSkillConfig, owner, 3);
+            
+            world.GetFeature<EventsFeature>().SkillImageChange.Execute(owner);
 
             entity.SetPosition(SceneUtils.GetRandomSpawnPosition());
             entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
@@ -78,11 +80,11 @@ namespace Project.Mechanics.Features.Avatar
             return weapon;
         }
 
-        private Entity ConstructSkill(DataConfig skillConfig, Entity owner)
+        private Entity ConstructSkill(DataConfig skillConfig, Entity owner, int id)
         {
             var skill = new Entity("skill");
             skillConfig.Apply(skill);
-            skill.Set(new SkillTag());
+            skill.Set(new SkillTag{id = id});
             skill.Get<Owner>().Value = owner;
             return skill;
         }

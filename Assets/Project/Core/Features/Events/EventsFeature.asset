@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: EventsFeature
   m_EditorClassIdentifier: 
   editorComment: 
-  OnTimeSynced: {fileID: 11400000, guid: dcae1a2e4e5571247bf0879ae4aad27a, type: 2}
   HealthChanged: {fileID: 11400000, guid: d981a0237b4bd2f418c141529b5bd7ce, type: 2}
   AllPlayersReady: {fileID: 11400000, guid: 2a007bed3644b424baaa3da5a0f475b9, type: 2}
   OnGameStarted: {fileID: 11400000, guid: 20ba952d6d439c74eac78ba0751ff9be, type: 2}
@@ -29,3 +28,5 @@ MonoBehaviour:
   rightWeaponFired: {fileID: 11400000, guid: f288ad3abdd826f46b4abfd5a9f0fedc, type: 2}
   LeftweaponDepleted: {fileID: 11400000, guid: 79cdabb3b24a9b84ca598ee7a2d359fe, type: 2}
   RightWeaponDepleted: {fileID: 11400000, guid: 3f0cfa2a4c0fb684c8dc9ce48f8470b6, type: 2}
+  CooldownTick: {fileID: 11400000, guid: 162fb03220f83634eb5af0c86f289042, type: 2}
+  SkillImageChange: {fileID: 11400000, guid: aa5d51e4fcdaaca40b36dbdeeceabb34, type: 2}

@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using ME.ECS.Transform;
 using Project.Common.Components;
+using Project.Core.Features.Events;
 
 namespace Project.Mechanics.Features.Weapon.Systems
 {
@@ -37,6 +38,8 @@ namespace Project.Mechanics.Features.Weapon.Systems
         {
             ref var cooldown = ref entity.Get<Cooldown>().Value;
             cooldown -= deltaTime;
+            
+            world.GetFeature<EventsFeature>().CooldownTick.Execute(entity);
             
             if(cooldown <= (fp)0)
                 entity.Remove<Cooldown>();

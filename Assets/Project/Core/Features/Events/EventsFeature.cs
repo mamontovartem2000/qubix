@@ -30,6 +30,9 @@ namespace Project.Core.Features.Events {
         public GlobalEvent rightWeaponFired;
         public GlobalEvent LeftweaponDepleted;
         public GlobalEvent RightWeaponDepleted;
+
+        public GlobalEvent CooldownTick;
+        public GlobalEvent SkillImageChange;
             
         protected override void OnConstruct() {}
         protected override void OnDeconstruct() {}

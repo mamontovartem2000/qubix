@@ -41,7 +41,9 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
             weapon.LeftWeapon.Get<AmmoCapacity>().Value = weapon.LeftWeapon.Read<AmmoCapacityDefault>().Value;
             weapon.RightWeapon.Get<ReloadTime>().Value = 0;
-			
+
+			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+            
 			entity.Remove<ActivateSkill>();
             Debug.Log("weapons reloaded");
         }
