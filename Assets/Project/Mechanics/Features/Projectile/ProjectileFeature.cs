@@ -82,8 +82,8 @@ namespace Project.Mechanics.Features.Projectile
                 var view = world.RegisterViewSource(gun.Read<ProjectileView>().Value);
                 visual.InstantiateView(view);
                 
-                if (gun.Has<LinearFull>())
-                    gun.Remove<LinearFull>();
+                // if (gun.Has<LinearFull>())
+                //     gun.Remove<LinearFull>();
             }
         }
 

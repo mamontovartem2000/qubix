@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.Weapon.Systems
 {
@@ -52,11 +53,14 @@ namespace Project.Mechanics.Features.Weapon.Systems
 			var ammoCap = entity.Read<AmmoCapacityDefault>().Value;
 			ref var ammo = ref entity.Get<AmmoCapacity>().Value;
 			
+			var mod = entity.Has<LinearPowerModifier>() ? 1 : 0;
+			var deplete = 1 + mod;
+
 			if (entity.Has<LinearActive>())
 			{
-				if (ammo - 1 * entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<LinearPowerModifier>().Damage > 0)
+				if (ammo - deplete > 0)
 				{
-					ammo -= entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<LinearPowerModifier>().Speed;
+					ammo -= deplete;
 				}
 				else
 				{
