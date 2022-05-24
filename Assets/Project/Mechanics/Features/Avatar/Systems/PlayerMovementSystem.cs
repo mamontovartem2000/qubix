@@ -89,8 +89,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 			
 			var speedBase = entity.Read<PlayerMovementSpeed>().Value;
 			var speedMod = entity.Read<MoveSpeedModifier>().Value * speedBase * entity.Read<Slowness>().Value;
-			var currentSpeed = Mathf.Max(speedBase * 0.5f,speedBase + speedMod);
-			
+			var currentSpeed = speedMod;
 			var speed = entity.Has<LockTarget>() ? currentSpeed * 0.65f : currentSpeed;
 			entity.SetPosition(Vector3.MoveTowards(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value, speed * deltaTime));     
 		}

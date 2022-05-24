@@ -10,47 +10,46 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-	public sealed class DashSkillSystem : ISystemFilter
-	{
-		public World world { get; set; }
-		
-		private SkillsFeature _feature;
+    public sealed class DashSkillSystem : ISystemFilter
+    {
+        public World world { get; set; }
 
-		void ISystemBase.OnConstruct()
-		{
-			this.GetFeature(out _feature);
-		}
+        private SkillsFeature _feature;
 
-		void ISystemBase.OnDeconstruct() {}
+        void ISystemBase.OnConstruct()
+        {
+            this.GetFeature(out _feature);
+        }
+
+        void ISystemBase.OnDeconstruct() { }
 #if !CSHARP_8_OR_NEWER
-		bool ISystemFilter.jobs => false;
-		int ISystemFilter.jobsBatchCount => 64;
+        bool ISystemFilter.jobs => false;
+        int ISystemFilter.jobsBatchCount => 64;
 #endif
-		Filter ISystemFilter.filter { get; set; }
+        Filter ISystemFilter.filter { get; set; }
 
-		Filter ISystemFilter.CreateFilter()
-		{
-			return Filter.Create("Filter-DashSkillSystem")
-				.With<DashAffect>()
-				.With<ActivateSkill>()
-				.Push();
-		}
+        Filter ISystemFilter.CreateFilter()
+        {
+            return Filter.Create("Filter-DashSkillSystem")
+                .With<DashAffect>()
+                .With<ActivateSkill>()
+                .Push();
+        }
 
-		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
-		{
-			var nextPos = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<FaceDirection>().Value * 4 + entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition();
-
-			if(SceneUtils.IsFree(nextPos))
-			{
-				SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition(), nextPos);
-				entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.SetPosition(nextPos);
-				entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<PlayerMoveTarget>().Value = nextPos;
-			}
-
-			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
+        {
+            var nextPos = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<FaceDirection>().Value * 4 + entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition();
 			
 			entity.Remove<ActivateSkill>();
-			Debug.Log("dash activated");
-		}
-	}
+
+            if (!SceneUtils.IsFree(nextPos)) return;
+            SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition(), nextPos);
+            entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.SetPosition(nextPos);
+            entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<PlayerMoveTarget>().Value = nextPos;
+
+            entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+
+            Debug.Log("dash activated");
+        }
+    }
 }

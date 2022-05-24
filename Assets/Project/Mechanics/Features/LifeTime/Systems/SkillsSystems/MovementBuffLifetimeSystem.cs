@@ -42,7 +42,7 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 
 			if (lifeTime > 0f) return;
 
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<MoveSpeedModifier>().Value -= entity.Read<SkillAmount>().Value;
+			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<MoveSpeedModifier>().Value = 1;
 			entity.Destroy();
 		}
 	}

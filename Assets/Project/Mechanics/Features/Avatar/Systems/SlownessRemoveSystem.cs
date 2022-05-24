@@ -46,7 +46,7 @@ namespace Project.Mechanics.Features.Avatar.Systems {
 
 			if (entity.Get<Slowness>().LifeTime > 0f) return;
 
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Remove<Slowness>();
+			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<Slowness>().Value = 1;
         }
     
     }

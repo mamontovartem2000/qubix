@@ -62,6 +62,9 @@ namespace Project.Mechanics.Features.Avatar
             skills.SecondSkill = ConstructSkill(owner.Read<PlayerConfig>().SecondSkillConfig, owner, 1);
             skills.ThirdSkill = ConstructSkill(owner.Read<PlayerConfig>().ThirdSkillConfig, owner, 2);
             skills.FourthSkill = ConstructSkill(owner.Read<PlayerConfig>().FourthSkillConfig, owner, 3);
+
+            entity.Get<Slowness>().Value = 1;
+            entity.Get<MoveSpeedModifier>().Value = 1;
             
             world.GetFeature<EventsFeature>().SkillImageChange.Execute(owner);
 
