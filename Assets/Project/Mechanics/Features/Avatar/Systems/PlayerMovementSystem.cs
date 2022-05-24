@@ -1,10 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core;
-using Project.Core.Features.GameState.Components;
 using Project.Core.Features.Player;
-using Project.Core.Features.SceneBuilder;
-using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar.Systems
@@ -17,16 +14,12 @@ namespace Project.Mechanics.Features.Avatar.Systems
 	public sealed class PlayerMovementSystem : ISystemFilter
 	{
 		private PlayerFeature _feature;
-		private SceneBuilderFeature _scene;
-		private VFXFeature _vfx;
 
 		public World world { get; set; }
 
 		void ISystemBase.OnConstruct()
 		{
 			this.GetFeature(out _feature);
-			world.GetFeature(out _vfx);
-			world.GetFeature(out _scene);
 		}
 		void ISystemBase.OnDeconstruct() {}
 #if !CSHARP_8_OR_NEWER
@@ -71,17 +64,29 @@ namespace Project.Mechanics.Features.Avatar.Systems
 						SceneUtils.Move(entity.Read<PlayerMoveTarget>().Value, newTarget);
 						entity.Get<PlayerMoveTarget>().Value = newTarget;
 						
-						if (entity.Has<TeleportPlayer>())
-						{
-							if (entity.Read<TeleportPlayer>().NeedDelete)
-								entity.Remove<TeleportPlayer>();
-							else
-								entity.Get<TeleportPlayer>().NeedDelete = true;
-						}                      
+						// if (entity.Has<TeleportPlayer>())
+						// {
+						// 	if (entity.Read<TeleportPlayer>().NeedDelete)
+						// 		entity.Remove<TeleportPlayer>();
+						// 	else
+						// 		entity.Get<TeleportPlayer>().NeedDelete = true;
+						// }                      
 					}
 				}
 			}
 
+			if (entity.Has<AvoidTeleport>())
+			{
+				if (entity.Get<AvoidTeleport>().Value - deltaTime > 0f)
+				{
+					entity.Get<AvoidTeleport>().Value -= deltaTime;
+				}
+				else
+				{
+					entity.Remove<AvoidTeleport>();
+				}
+			}
+			
 			var speedBase = entity.Read<PlayerMovementSpeed>().Value;
 			var speedMod = entity.Read<MoveSpeedModifier>().Value * speedBase * entity.Read<Slowness>().Value;
 			var currentSpeed = Mathf.Max(speedBase * 0.5f,speedBase + speedMod);

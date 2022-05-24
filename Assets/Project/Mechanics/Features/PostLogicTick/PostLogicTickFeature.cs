@@ -17,6 +17,7 @@ namespace Project.Mechanics.Features.PostLogicTick
 			AddSystem<MineDisposeSystem>();
 			AddSystem<LinearDisposeSystem>();
 			AddSystem<MeleeDisposeSystem>();
+			AddSystem<PortalDisposeSystem>();
 		}
 
 		protected override void OnDeconstruct() {}

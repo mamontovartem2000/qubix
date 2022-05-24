@@ -1,5 +1,5 @@
 using ME.ECS;
-using Project.Core.Features.GameState.Components;
+using Project.Common.Components;
 using TMPro;
 using UnityEngine;
 

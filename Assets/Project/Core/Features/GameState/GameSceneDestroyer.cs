@@ -1,10 +1,9 @@
 using ME.ECS;
-using Project.Core.Features.GameState.Components;
 using Project.Modules.Network;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
-using System.Threading.Tasks;
+using Project.Common.Components;
 
 public class GameSceneDestroyer : MonoBehaviour
 {

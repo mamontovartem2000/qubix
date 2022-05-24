@@ -25,7 +25,7 @@ namespace Project.Modules.Network
 
     public class NetworkModule : ME.ECS.Network.NetworkModule<TState>
     {
-        public bool FakeConnect = false;
+        public bool FakeConnect = true;
 
         protected override int GetRPCOrder()
         {

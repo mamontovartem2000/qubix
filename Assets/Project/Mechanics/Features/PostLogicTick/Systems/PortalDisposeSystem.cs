@@ -1,5 +1,7 @@
-﻿using ME.ECS;
+﻿using System.Collections.Generic;
+using ME.ECS;
 using Project.Common.Components;
+using Project.Core;
 using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
@@ -10,29 +12,36 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-	public sealed class HealthDisposeSystem : ISystemFilter
+	public sealed class PortalDisposeSystem : ISystemFilter
 	{
 		public World world { get; set; }
 		
 		private PostLogicTickFeature _feature;
 		private VFXFeature _vfx;
 
+		private Filter _portalFilter;
+
 		void ISystemBase.OnConstruct()
 		{
 			this.GetFeature(out _feature);
 			world.GetFeature(out _vfx);
+
+			Filter.Create("portal-Filter")
+				.With<PortalDispenserTag>()
+				.With<Spawned>()
+				.Push(ref _portalFilter);
 		}
+
 		void ISystemBase.OnDeconstruct() {}
 #if !CSHARP_8_OR_NEWER
 		bool ISystemFilter.jobs => false;
 		int ISystemFilter.jobsBatchCount => 64;
 #endif
 		Filter ISystemFilter.filter { get; set; }
-
 		Filter ISystemFilter.CreateFilter()
 		{
-			return Filter.Create("Filter-HealthDisposeSystem")
-				.With<HealthTag>()
+			return Filter.Create("Filter-PortalDisposeSystem")
+				.With<PortalTag>()
 				.With<Collided>()
 				.Push();
 		}
@@ -41,16 +50,43 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 		{
 			ref var owner = ref entity.Get<Collided>().ApplyTo;
 			ref var player = ref owner.Get<PlayerAvatar>().Value;
-			ref var from = ref entity.Get<Collided>().ApplyFrom;
 
-			if (entity.Get<Owner>().Value.Has<Spawned>())
-				entity.Get<Owner>().Value.Remove<Spawned>();
+			if (player.Has<AvoidTeleport>())
+			{
+				entity.Remove<Collided>();
+				return;
+			}
+			
+			var vec = SceneUtils.GetAvailablePortalPositions();
+			var pos = fp3.zero;
 
-			var collision = new Entity("collision");
-			collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = -10f}, ComponentLifetime.NotifyAllSystems);
-                    
-			_vfx.SpawnVFX(VFXFeature.VFXType.Heal, entity.GetPosition());
-			entity.Destroy();
+			if (vec.Length > 1)
+			{
+				pos = SceneUtils.GetRandomPortalPosition(vec);
+				SceneUtils.Move(player.GetPosition(), pos);
+
+				// foreach (var portal in _portalFilter)
+				// {
+				// 	if (portal.GetPosition() == pos)
+				// 	{
+				// 		Debug.Log(portal.ToSmallString());
+				// 		
+				// 		portal.Get<PortalDispenserTag>().Timer = 3;
+				// 		portal.Get<SpawnedPortal>().Value.Destroy();
+				// 		portal.Remove<SpawnedPortal>();
+				// 	}	
+				// }
+				
+				player.Get<AvoidTeleport>().Value = 3;
+				
+				player.SetPosition(pos);
+				player.Get<PlayerMoveTarget>().Value = pos;
+				entity.Remove<Collided>();
+
+				// entity.Destroy();
+				// SceneUtils.TakePortal(pos);
+			}
+
 		}
 	}
 }

@@ -1,27 +1,23 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core;
-using Project.Mechanics.Features.VFX;
-using UnityEngine;
 
-namespace Project.Mechanics.Features.PostLogicTick.Systems
+namespace Project.Mechanics.Features.CollisionHandler.Systems
 {
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-	public sealed class MineDisposeSystem : ISystemFilter
+	public sealed class NewPortalDispenserSystem : ISystemFilter
 	{
 		public World world { get; set; }
 		
-		private PostLogicTickFeature _feature;
-		private VFXFeature _vfx;
+		private CollisionHandlerFeature _feature;
 
 		void ISystemBase.OnConstruct()
 		{
 			this.GetFeature(out _feature);
-			world.GetFeature(out _vfx);
 		}
 		void ISystemBase.OnDeconstruct() {}
 #if !CSHARP_8_OR_NEWER
@@ -31,27 +27,26 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 		Filter ISystemFilter.filter { get; set; }
 		Filter ISystemFilter.CreateFilter()
 		{
-			return Filter.Create("Filter-MineDisposeSystem")
-				.With<MineTag>()
-				.With<Collided>()
+			return Filter.Create("Filter-NewPortalDispenserSystem")
+				.With<PortalDispenserTag>()
+				.Without<SpawnedPortal>()
 				.Push();
 		}
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			ref var owner = ref entity.Get<Collided>().ApplyTo;
-			ref var player = ref owner.Get<PlayerAvatar>().Value;
-			ref var from = ref entity.Get<Collided>().ApplyFrom;
-			
-			if (owner.Has<DamagedBy>())
-				owner.Remove<DamagedBy>();
+			ref var dispenser = ref entity.Get<PortalDispenserTag>();
+			dispenser.Timer -= deltaTime;
 
-			var collision = new Entity("collision");
-			collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = 25f}, ComponentLifetime.NotifyAllSystems);
+			if (dispenser.Timer <= 0)
+			{
+				var portal = _feature.SpawnPortal(entity);
+				portal.SetPosition(entity.GetPosition());
+				SceneUtils.ReleasePortal(portal.GetPosition());
 
-			_vfx.SpawnVFX(VFXFeature.VFXType.Explosion, entity.GetPosition());
-			SceneUtils.ReleaseMine(entity.GetPosition());
-			entity.Destroy();
+				dispenser.Timer = dispenser.TimerDefault;
+				entity.Get<SpawnedPortal>().Value = portal;
+			}
 		}
 	}
 }

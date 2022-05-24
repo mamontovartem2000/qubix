@@ -10,9 +10,6 @@ namespace Project.Core
     public static class SceneUtils
     {
         public const float ItemRadius = 0.2f;
-        public const float PlayerRadius = 0.6f;
-        public const float PlayerRadiusSQR = PlayerRadius * PlayerRadius;
-        public const float ItemRadiusSQR = ItemRadius * ItemRadius;
 
         public static int Width, Height;
 
@@ -36,20 +33,13 @@ namespace Project.Core
             return entities;
         }
 
+        //positioning index methods
         public static int PositionToIndex(fp3 vec)
         {
             var x = (int)fpmath.round(vec.x);
             var y = (int)fpmath.round(vec.z);
 
             return y * Width + x;
-        }
-        
-        public static int PositionToIndex(fp3 vec, int width)
-        {
-            var x = (int)fpmath.round(vec.x);
-            var y = (int)fpmath.round(vec.z);
-
-            return y * width + x;
         }
 
         public static fp3 IndexToPosition(int index)
@@ -59,7 +49,16 @@ namespace Project.Core
 
             return new fp3(x, 0f, y);
         }
-        
+
+        //burst compile compatible overloads
+        public static int PositionToIndex(fp3 vec, int width)
+        {
+            var x = (int)fpmath.round(vec.x);
+            var y = (int)fpmath.round(vec.z);
+
+            return y * width + x;
+        }
+
         public static fp3 IndexToPosition(int index, int width)
         {
             var x = index % width;
@@ -68,43 +67,37 @@ namespace Project.Core
             return new fp3(x, 0f, y);
         }
 
-        public static bool IsWalkable(Vector3 position, Vector3 direction)
+        //position check methods
+        public static fp3 GetRandomFreePosition()
         {
-            return Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(position + direction)] != 0;
-        }
+            var pos = fp3.zero;
 
-        public static bool IsWalkable(Vector3 target)
-        {
-            return Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(target)] != 0;
-        }
-
-        public static bool IsFree(Vector3 position)
-        {
-            return Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(position)] == 1;
-        }
-
-        public static Vector3 GetRandomSpawnPosition()
-        {
-            var position = Vector3.zero;
-
-            while (!IsFree(position))
+            while (!IsWalkable(pos))
             {
                 var rnd = Worlds.current.GetRandomRange(0, Width * Height);
-                position = IndexToPosition(rnd);
+                pos = IndexToPosition(rnd);
+                
+                if (!IsFree(pos)) pos = fp3.zero;
             }
-
-            return position;
+            
+            return pos;
         }
 
-        public static bool CheckLocalPlayer(Entity player)
+        public static bool IsWalkable(fp3 pos)
         {
-            // Debug.Log(player == Worlds.current.GetFeature<PlayerFeature>().GetPlayer(player.Read<PlayerTag>().PlayerID));
-            return player == Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(player.Read<PlayerTag>().PlayerLocalID);
+            return Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(pos)] == 1 
+                   || Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(pos)] == 2;
         }
 
+        public static bool IsFree(fp3 pos)
+        {
+            return Worlds.current.ReadSharedData<MapComponents>().MineMap[PositionToIndex(pos)] == 0;
+        }
+
+        //walkable map index changing methods
         public static void Move(Vector3 currentPos, Vector3 targetPos)
         {
-            int moveFrom = SceneUtils.PositionToIndex(currentPos);
+            int moveFrom = PositionToIndex(currentPos);
             Worlds.current.GetSharedData<MapComponents>().WalkableMap[moveFrom] = 1;
             TakeTheCell(targetPos);
         }
@@ -124,6 +117,71 @@ namespace Project.Core
         {
             int moveFrom = PositionToIndex(currentPos);
             Worlds.current.GetSharedData<MapComponents>().WalkableMap[moveFrom] = 1;
+        }
+
+        public static void PlantMine(fp3 pos)
+        {
+            var i = PositionToIndex(pos);
+            Worlds.current.GetSharedData<MapComponents>().MineMap[i] = 1;
+        }
+
+        public static void ReleaseMine(fp3 pos)
+        {
+            var i = PositionToIndex(pos);
+            Worlds.current.GetSharedData<MapComponents>().MineMap[i] = 0;
+        }
+
+        public static void TakePortal(fp3 pos)
+        {
+            var i = PositionToIndex(pos);
+            Worlds.current.GetSharedData<MapComponents>().PortalsMap[i] = 0;
+        }
+
+        public static void ReleasePortal(fp3 pos)
+        {
+            var i = PositionToIndex(pos);
+            Worlds.current.GetSharedData<MapComponents>().PortalsMap[i] = 1;
+        }
+
+        public static fp3[] GetAvailablePortalPositions()
+        {
+            var tmp = 0;
+
+            foreach (var b in Worlds.current.ReadSharedData<MapComponents>().PortalsMap)
+            {
+                if (b == 1)
+                    tmp++;
+            }
+
+            var ar = new fp3[tmp];
+            var idx = 0;
+            
+            for (int i = 0; i < Worlds.current.ReadSharedData<MapComponents>().PortalsMap.Length; i++)
+            {
+                if (Worlds.current.ReadSharedData<MapComponents>().PortalsMap[i] == 1)
+                {
+                    ar[idx] = IndexToPosition(i);
+                    idx++;
+                }
+            }
+
+            foreach (var a in ar)
+            {
+                Debug.Log(a);
+            }
+            return ar;
+        }
+        public static fp3 GetRandomPortalPosition(fp3[] vec)
+        {
+            var pos = fp3.zero;
+
+            while (!IsWalkable(pos))
+            {
+                var rnd = Worlds.current.GetRandomRange(0, vec.Length);
+                pos = vec[rnd];
+            }
+            
+            return pos;
         }
     }
 

@@ -2,8 +2,6 @@
 using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features.Events;
-using Project.Core.Features.GameState.Components;
-using Project.Core.Features.SceneBuilder;
 using Project.Mechanics.Features.VFX;
 
 namespace Project.Mechanics.Features.Avatar.Systems

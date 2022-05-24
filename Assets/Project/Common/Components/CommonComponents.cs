@@ -15,10 +15,14 @@ namespace Project.Common.Components
     public struct SpeedModifier : IComponent {}
     public struct CollisionDynamic : IComponent {}
     public struct CollisionStatic : IComponent {}
-
     public struct Collided : IComponent
     {
         public Entity ApplyFrom;
         public Entity ApplyTo;
     }
+    public struct PortalActive : IComponent {}
+    public struct GamePaused : IComponent {}
+    public struct GameFinished : IComponent { }
+    public struct GameTimer : IComponent {public float Value;}
+    public struct MapInitialized : IComponent {}
 }

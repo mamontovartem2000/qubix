@@ -50,7 +50,7 @@ namespace Project.Mechanics.Features.Avatar
             
             world.GetFeature<EventsFeature>().SkillImageChange.Execute(owner);
 
-            entity.SetPosition(SceneUtils.GetRandomSpawnPosition());
+            entity.SetPosition(SceneUtils.GetRandomFreePosition());
             entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
 
             world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(owner);

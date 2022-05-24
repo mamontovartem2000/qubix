@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 
-namespace Project.Core.Features.SceneBuilder.Systems 
+namespace Project.Mechanics.Features.CollisionHandler.Systems 
 {
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
@@ -12,7 +12,7 @@ namespace Project.Core.Features.SceneBuilder.Systems
     {        
         public World world { get; set; }
 
-        private SceneBuilderFeature _feature;
+        private CollisionHandlerFeature _feature;
 
         private Filter _mineFilter;
         void ISystemBase.OnConstruct() 

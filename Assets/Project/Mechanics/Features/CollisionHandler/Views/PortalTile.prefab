@@ -9547,8 +9547,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5654866007535880027}
-  - component: {fileID: 4008953527856844223}
-  - component: {fileID: 6549699452600832427}
   m_Layer: 0
   m_Name: PortalTile
   m_TagString: Untagged
@@ -9571,78 +9569,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4008953527856844223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9183092736819648498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5ff12e2f7c15c84b9644214727b9fc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystemSimulation:
-    particleItems:
-    - particleSystem: {fileID: 2715207207157524174}
-    - particleSystem: {fileID: 5587528427879746823}
-    settings:
-      simulationType: 1
-      minSimulationTime: 0.2
-      minEndingTime: 0.1
-      halfEnding: 0.5
-    hasElements: 1
-    hasDefault: 1
---- !u!114 &6549699452600832427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9183092736819648498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62fa1621a19693f4a96412ff0a4eafc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 2715207207157524174}
-          settings:
-            simulationType: 1
-            minSimulationTime: 0.2
-            minEndingTime: 0.1
-            halfEnding: 0.5
-          hasDefault: 1
-        psSource: {fileID: 2715207207157524174}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: 0, y: 0.049063504, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 0.24515, y: 0.24515, z: 0.24515}
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 5587528427879746823}
-          settings:
-            simulationType: 1
-            minSimulationTime: 0.2
-            minEndingTime: 0.1
-            halfEnding: 0.5
-          hasDefault: 1
-        psSource: {fileID: 5587528427879746823}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 0}
-        meshRenderer: {fileID: 0}
-        meshFilter: {fileID: 0}
-        material: {fileID: 0}
-        localPosition: {x: 0, y: 0.027, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 0.24515, y: 0.24515, z: 0.24515}
