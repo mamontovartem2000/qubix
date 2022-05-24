@@ -16,4 +16,8 @@ GameError: function() {
         GameErrorFunction();
     },
 
+WorldDestroyed: function() {
+        WorldDestroyedFunction();
+    },
+
 });

@@ -15,5 +15,8 @@ namespace Project.Modules.Network
 
 		[DllImport("__Internal")]
 		public static extern void GameError();
+
+		[DllImport("__Internal")]
+		public static extern void WorldDestroyed();
 	}
 }

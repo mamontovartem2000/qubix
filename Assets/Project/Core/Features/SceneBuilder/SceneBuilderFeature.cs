@@ -5,6 +5,7 @@ using ME.ECS.DataConfigs;
 using ME.ECS.Transform;
 using Project.Common.Components;
 using UnityEngine;
+using Project.Modules.Network;
 
 namespace Project.Core.Features.SceneBuilder
 {
@@ -16,8 +17,10 @@ namespace Project.Core.Features.SceneBuilder
     public sealed class SceneBuilderFeature : Feature
     {
         [Header("General")]
-        [SerializeField] private TextAsset _sourceMap;
-        [SerializeField] private TextAsset _objectsMap;
+        [SerializeField] private TextAsset _colizei;
+        [SerializeField] private TextAsset _colizei_obj;
+        [SerializeField] private TextAsset _neon;
+        [SerializeField] private TextAsset _neon_obj;
         [Header("Reworked Links")]
         public ParticleViewSourceBase[] TileViewSources;
         public DataConfig[] PropsConfigs;
@@ -41,13 +44,28 @@ namespace Project.Core.Features.SceneBuilder
 
             for (int i = 1; i < PropsConfigs.Length; i++)
             {
-                _propsViewIds[i] = world.RegisterViewSource(PropsConfigs[i].Read<TileView>().Value);
+                if (PropsConfigs[i] != null) 
+                    _propsViewIds[i] = world.RegisterViewSource(PropsConfigs[i].Read<TileView>().Value);
             }
         }
         private void PrepareMaps()
         {
             //GameMapRemoteData mapData = ParceUtils.CreateFromJSON<UniversalData<GameMapRemoteData>>(data).data;
-            var mapData = new GameMapRemoteData(_sourceMap);
+            GameMapRemoteData mapData = null;
+            TextAsset objData = null;
+
+            if (NetworkData.Info.map_id == 1)
+            {
+                mapData = new GameMapRemoteData(_colizei);
+                objData = _colizei_obj;
+                MapChanger.Changer.ChangeMap(Maps.Coliseum);
+            }
+            else if (NetworkData.Info.map_id == 2)
+            {
+                mapData = new GameMapRemoteData(_neon);
+                objData = _neon_obj;
+                MapChanger.Changer.ChangeMap(Maps.Neon);
+            }
 
             var height = mapData.bytes.Length / mapData.offset;
             var width = mapData.offset;
@@ -61,10 +79,10 @@ namespace Project.Core.Features.SceneBuilder
             });
             
             DrawMap(mapData.bytes);
-            
-            if (_objectsMap != null)
+
+            if (objData != null)
             {
-                var objects = new GameMapRemoteData(_objectsMap);
+                var objects = new GameMapRemoteData(objData);
                 DrawMapObjects(objects.bytes);
             }
         }

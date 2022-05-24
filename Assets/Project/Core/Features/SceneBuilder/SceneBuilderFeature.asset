@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: SceneBuilderFeature
   m_EditorClassIdentifier: 
   editorComment: 
-  _sourceMap: {fileID: 4900000, guid: be4e55937eae8ac4e9b3470e542c6ea7, type: 3}
-  _objectsMap: {fileID: 4900000, guid: 36fa5b400d85a64449da26c86b491855, type: 3}
-  Portal: {fileID: 5891438525712314593, guid: 0296734482459c545a370e5bc0064819, type: 3}
+  _colizei: {fileID: 4900000, guid: be4e55937eae8ac4e9b3470e542c6ea7, type: 3}
+  _colizei_obj: {fileID: 4900000, guid: b0914f74fa18ce5409e28919c5d9a6fd, type: 3}
+  _neon: {fileID: 4900000, guid: c4af628e52667dc4f98c6049b34bdc64, type: 3}
+  _neon_obj: {fileID: 4900000, guid: 5c4082ba234c73c478108104e9f7f602, type: 3}
   TileViewSources:
   - {fileID: 0}
   - {fileID: 0}
@@ -52,7 +53,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fc7b0cbe41b92c640a9bf4f74142c49e, type: 2}
   - {fileID: 11400000, guid: 5fea3e4e7cf3f714d861b4d104a71e9d, type: 2}
   - {fileID: 11400000, guid: 99b3dc7642f50e64188564fa4c727ad0, type: 2}
-  ObjectViewSources:
-  - {fileID: 6999707644315909464, guid: b302e6f730ab0b34581626de5c10628b, type: 3}
-  - {fileID: 3273252858465205237, guid: a46ac6ad3d8c115419b4065129074340, type: 3}
-  VFXView: {fileID: 5184994520182697675, guid: 0518e21c2786f984f9ffddb7bb32fc73, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: c39af10b691aa4e4681918709f086480, type: 2}
+  - {fileID: 11400000, guid: 934ba75eac143b04887ff82010edd07d, type: 2}
+  - {fileID: 11400000, guid: 47b03f2265f37a041a4b135c467c6336, type: 2}
+  - {fileID: 11400000, guid: f6ee190c54ac714449d9b5b598354b7c, type: 2}
+  - {fileID: 11400000, guid: a2ca110224a26d94289686a1fc7a657d, type: 2}
+  - {fileID: 11400000, guid: ebdbfcc1d546bd5489e9b1a1c1e19393, type: 2}
+  - {fileID: 11400000, guid: c9b7b2c3499309840b8f5aa95dadf978, type: 2}
+  - {fileID: 11400000, guid: eabc5c327183226438c3a4175f78d4b0, type: 2}
+  - {fileID: 11400000, guid: 3cab9f6925dee23418ef3851ec56de29, type: 2}
+  - {fileID: 11400000, guid: 182ea643a57997644bcb14faa793a2e7, type: 2}
+  - {fileID: 11400000, guid: c730dbf8b9125ef46be11f8df9afd41d, type: 2}

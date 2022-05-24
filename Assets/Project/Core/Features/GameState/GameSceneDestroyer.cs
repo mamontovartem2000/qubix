@@ -7,7 +7,7 @@ using Project.Common.Components;
 
 public class GameSceneDestroyer : MonoBehaviour
 {
-    private const float WaintingTime = 7f;
+    private const float WaintingTime = 2f;
 
     private float _leftTime = 0;
 
@@ -38,6 +38,12 @@ public class GameSceneDestroyer : MonoBehaviour
         if (buildType != BuildTypes.Front)
         {
             SceneManager.LoadScene(0);
+        }
+        else
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+                    BrowserEvents.WorldDestroyed();
+#endif
         }
     }
 

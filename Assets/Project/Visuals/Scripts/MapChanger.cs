@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class MapChanger : MonoBehaviour
 {
-    [SerializeField] public Maps Maps;
+    public static MapChanger Changer;
+
     [SerializeField] private Material[] _mainFloors;
     [SerializeField] private Material[] _extraObjects;
     [SerializeField] private Material[] _props;
@@ -10,14 +11,14 @@ public class MapChanger : MonoBehaviour
     [SerializeField] private Color[] _colorPalletes;
     [SerializeField] private Color[] _emissionColorPalletes;
 
-    private void Start()
+    private void Awake()
     {
-        ChangeMap();
+        Changer = this;
     }
 
-    public void ChangeMap()
+    public void ChangeMap(Maps map)
     {
-        switch (Maps)
+        switch (map)
         {
             case Maps.Black:
                 ChangeColor(28, 15, 0);

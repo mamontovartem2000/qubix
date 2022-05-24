@@ -54,32 +54,71 @@ namespace Project.Core.Features.GameState.Systems
 
         private Entity GetWinnerEntity()
         {
-            var mostKills = GetPlayersWithMostKills();
+            var mostKillsPlayers = GetPlayersWithMostKills();
 
-            if (mostKills.Count == 1)
+            if (mostKillsPlayers.Count == 1)
             {
                 Debug.Log("Most kills");
-                return mostKills[0];
+                return mostKillsPlayers[0];
             }
 
-            var fewestDeaths = GetPlayersWithFewestDeaths(mostKills);
+            var fewestDeathsPlayers = GetPlayersWithFewestDeaths(mostKillsPlayers);
 
-            if (fewestDeaths.Count == 1)
+            if (fewestDeathsPlayers.Count == 1)
             {
                 Debug.Log("Fewest Deaths");
-                return fewestDeaths[0];
+                return fewestDeathsPlayers[0];
             }
 
-            var mostHealth = GetPlayersWithMostHealth(fewestDeaths);
+            var mostHealthPlayers = GetPlayersWithMostHealth(fewestDeathsPlayers);
 
-            if (mostHealth.Count == 1)
+            if (mostHealthPlayers.Count == 1)
             {
                 Debug.Log("Most Health");
-                return mostHealth[0];
+                return mostHealthPlayers[0];
             }
 
             Debug.Log("Random Winner");
-            return GetRandomWinner(mostHealth);
+            return GetRandomWinner(mostHealthPlayers);
+        }
+
+        private string GetWinnerTeam()
+        {
+            var teamNumber = NetworkData.Info.multiplayer_schema.Length;
+            List<Team> teams = new List<Team>(teamNumber);
+
+            GetTeamFullStats(teams[0], "blue");
+            GetTeamFullStats(teams[1], "red");
+
+            if (teams[0].Kills > teams[1].Kills)
+                return "blue";
+            else if (teams[0].Kills < teams[1].Kills)
+                return "red";
+
+            if (teams[0].Deaths < teams[1].Deaths)
+                return "blue";
+            else if (teams[0].Deaths > teams[1].Deaths)
+                return "red";
+
+            if (teams[0].Health > teams[1].Health)
+                return "blue";
+            else if (teams[0].Health < teams[1].Health)
+                return "red";
+
+            //TODO: Add random
+            return "blue";
+        }
+
+        private void GetTeamFullStats(Team team, string teamColor)
+        {
+            foreach (var player in _playerFilter)
+            {
+                if (player.Read<PlayerTag>().Team != teamColor) continue;
+
+                team.Kills += player.Read<PlayerScore>().Kills;
+                team.Deaths += player.Read<PlayerScore>().Kills;
+                team.Health += player.Read<PlayerAvatar>().Value.Read<PlayerHealth>().Value;
+            }
         }
 
         private void SendGameResult(Entity winner)
@@ -98,7 +137,6 @@ namespace Project.Core.Features.GameState.Systems
             var winnerId = winner.Read<PlayerTag>().PlayerServerID;
 
             SystemMessages.SendEndGameStats(stats, winnerId);
-
         }
 
         private List<Entity> GetPlayersWithMostKills()
@@ -180,5 +218,12 @@ namespace Project.Core.Features.GameState.Systems
         }
 
         void IUpdate.Update(in float deltaTime) { }
+    }
+
+    public class Team
+    {
+        public int Kills = 0;
+        public int Deaths = 0;
+        public float Health = 0;
     }
 }
