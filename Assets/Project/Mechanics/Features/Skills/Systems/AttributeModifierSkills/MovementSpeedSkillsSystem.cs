@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
@@ -14,6 +15,7 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 		public World world { get; set; }
 		
 		private SkillsFeature _feature;
+		private VFXFeature _vfx;
 
 		void ISystemBase.OnConstruct()
 		{
@@ -47,7 +49,8 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			
+			_vfx.SpawnVFX(VFXFeature.VFXType.SkillQuickness, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition());
+
 			entity.Remove<ActivateSkill>();
 			Debug.Log("move speed increased");
 		}

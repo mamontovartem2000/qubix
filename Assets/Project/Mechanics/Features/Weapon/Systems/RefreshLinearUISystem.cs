@@ -33,7 +33,6 @@ namespace Project.Mechanics.Features.Weapon.Systems
         {
             return Filter.Create("Filter-NewRefreshAmmoUISystem")
                 .With<LinearWeapon>()
-                // .Without<LinearFull>()
                 .Push();
         }
 

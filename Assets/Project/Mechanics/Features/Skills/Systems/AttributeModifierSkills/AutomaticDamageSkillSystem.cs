@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.Events;
+using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
@@ -15,7 +16,7 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 		public World world { get; set; }
 		
 		private SkillsFeature _feature;
-
+		
 		void ISystemBase.OnConstruct()
 		{
 			this.GetFeature(out _feature);

@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.Events;
+using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
@@ -15,6 +16,7 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 		public World world { get; set; }
 		
 		private SkillsFeature _feature;
+		private VFXFeature _vfx;
 
 		void ISystemBase.OnConstruct()
 		{
@@ -54,7 +56,7 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Get<Owner>().Value);
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			
+			_vfx.SpawnVFX(VFXFeature.VFXType.SkillOffenciveBurst, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition());
 			entity.Remove<ActivateSkill>();
 			Debug.Log("fire rate increased");
 		}

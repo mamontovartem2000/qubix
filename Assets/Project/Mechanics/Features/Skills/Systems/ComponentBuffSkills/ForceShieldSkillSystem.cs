@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
@@ -14,6 +15,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 		public World world { get; set; }
 		
 		private SkillsFeature _feature;
+		private VFXFeature _vfx;
 
 		void ISystemBase.OnConstruct()
 		{
@@ -46,6 +48,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			
+			_vfx.SpawnVFX(VFXFeature.VFXType.PlayerShield, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition());
 			entity.Remove<ActivateSkill>();
 			Debug.Log("shield activated");
 		}

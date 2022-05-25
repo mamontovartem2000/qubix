@@ -52,7 +52,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
             
             world.GetFeature<EventsFeature>().PlayerDeath.Execute(player);      
             SceneUtils.ReleaseTheCell(entity.Read<PlayerMoveTarget>().Value);
-            _vfx.SpawnVFX(VFXFeature.VFXType.Death, entity.GetPosition());
+            _vfx.SpawnVFX(VFXFeature.VFXType.PlayerDeath, entity.GetPosition());
             
             player.Remove<PlayerAvatar>();
             entity.Destroy();
