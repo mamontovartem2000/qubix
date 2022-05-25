@@ -14,6 +14,7 @@ public class MapChanger : MonoBehaviour
     private void Awake()
     {
         Changer = this;
+        // ChangeMap(Maps.Neon);
     }
 
     public void ChangeMap(Maps map)
