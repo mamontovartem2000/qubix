@@ -20,5 +20,4 @@ public class TestLine : MonoBehaviour
             _lr.SetPosition(i, _points[i].position);
         }
     }
-
 }
