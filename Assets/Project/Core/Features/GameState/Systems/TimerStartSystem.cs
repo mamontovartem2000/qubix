@@ -34,7 +34,7 @@ namespace Project.Core.Features.GameState.Systems
 
 				if (NetworkData.BuildType == BuildTypes.PC)
 				{
-					timerEntity.Get<GameTimer>().Value = 15;
+					timerEntity.Get<GameTimer>().Value = 150;
 				}
 				else if (NetworkData.BuildType == BuildTypes.Front)
 				{

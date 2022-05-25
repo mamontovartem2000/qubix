@@ -10,7 +10,6 @@ namespace Project.Modules.Network
     public class ConnectingSteps : MonoBehaviour
 	{
 		[SerializeField] private GameObject _loginScreen;
-		[SerializeField] private GameObject _selectionScreen;
 		[SerializeField] private TMP_InputField _playerNumber;
 		[SerializeField] private TMP_InputField _playerRoomID;
 		[SerializeField] private Button _joinReadyButton;
@@ -86,7 +85,7 @@ namespace Project.Modules.Network
 		private void SwapScreens()
 		{
 			_loginScreen.SetActive(false);
-			_selectionScreen.SetActive(true);
+			_select.gameObject.SetActive(true);
 			
 			//TODO: Add random selection
 			var rnd = UnityEngine.Random.Range(0, 3);
