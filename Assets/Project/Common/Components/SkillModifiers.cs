@@ -23,12 +23,12 @@ namespace Project.Common.Components
 	
 	public struct StunModifier : IComponent
 	{
-		public float Value;
+		public int Value;
 	}
 
 	public struct FireRateModifier : IComponent
 	{
-		public float Value;
+		public int Value;
 	}
 
 	public struct ForceShieldModifier : IComponent

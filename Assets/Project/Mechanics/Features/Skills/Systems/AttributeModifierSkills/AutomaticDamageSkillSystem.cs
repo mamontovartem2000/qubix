@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core.Features.Events;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
@@ -42,11 +43,6 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			effect.Set(new EffectTag());
 
 			var amount = entity.Read<SkillAmount>().Value / 100f;
-
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<AutomaticDamageModifier>().Value += amount;
-			
-			effect.Get<SkillAmount>().Value = amount;
-			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;

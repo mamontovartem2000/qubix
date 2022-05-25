@@ -5,6 +5,7 @@ using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features.Events;
 using Project.Mechanics.Features.Avatar.Systems;
+using Project.Mechanics.Features.LifeTime.Systems.SkillsSystems;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar
@@ -30,6 +31,13 @@ namespace Project.Mechanics.Features.Avatar
             AddSystem<ApplyDamageSystem>();
             AddSystem<PlayerHealthSystem>();
             AddSystem<PlayerMovementSystem>();
+
+            AddSystem<SlownessRemoveSystem>();
+            AddSystem<StunLifeTimeSystem>();
+            AddSystem<MovementBuffLifetimeSystem>();
+            AddSystem<ProjectileDamageBuffLifetimeSystem>();
+            AddSystem<LinearPowerSkillLifetimeSystem>();
+            AddSystem<LinearDamageBuffLifetimeSystem>();
 
             _playerNick = world.RegisterViewSource(NicknameView);
         }

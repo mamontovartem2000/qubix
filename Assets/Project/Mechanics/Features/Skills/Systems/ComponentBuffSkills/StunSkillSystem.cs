@@ -43,7 +43,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			ref readonly var owner = ref entity.Read<Owner>().Value;
 			ref var avatar = ref owner.Get<PlayerAvatar>().Value;
 
-			avatar.Set(new StunModifier());
+			avatar.Get<WeaponEntities>().RightWeapon.Set(new StunModifier());
 
 			avatar.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = 5;
 
@@ -51,7 +51,9 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			avatar.Read<WeaponEntities>().RightWeapon.Read<ReloadTimeDefault>().Value;
 
             world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(owner);
-						
+            
+            entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+
 			entity.Remove<ActivateSkill>();
 			Debug.Log("Character is stunned");
 		}

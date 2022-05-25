@@ -62,6 +62,12 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                     entity.Read<SecondaryDamage>().Value.Apply(debuff);
                     debuff.Set(new ProjectileActive());
                     debuff.Set(new CollisionDynamic());
+                    if (debuff.Has<Slowness>())
+                    {
+                        player.Get<Slowness>().Value = debuff.Get<Slowness>().Value/100;
+                        player.Get<Slowness>().LifeTime = debuff.Get<Slowness>().LifeTime;
+                        
+                    }
                     debuff.SetPosition(pos);
                 }
                 entity.Destroy();

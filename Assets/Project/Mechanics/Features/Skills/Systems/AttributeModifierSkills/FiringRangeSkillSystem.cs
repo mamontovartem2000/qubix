@@ -43,7 +43,7 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			
 			var amount = entity.Read<SkillAmount>().Value / 100f;
 
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<FireRateModifier>().Value += amount;
+			// entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<FireRateModifier>().Value += amount;
 			effect.Get<SkillAmount>().Value = amount;
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 

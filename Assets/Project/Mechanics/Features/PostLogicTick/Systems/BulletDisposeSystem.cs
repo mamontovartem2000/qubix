@@ -2,6 +2,7 @@
 using Project.Common.Components;
 using Project.Core;
 using Project.Mechanics.Features.VFX;
+using Project.Modules.Network;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.PostLogicTick.Systems
@@ -50,9 +51,13 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 				ref var player = ref owner.Get<PlayerAvatar>().Value;
 				pos = player.GetPosition();
 
-				if (owner.Read<PlayerTag>().Team != from.Read<PlayerTag>().Team)
+				if (owner.Read<PlayerTag>().Team != from.Read<PlayerTag>().Team || NetworkData.Team == string.Empty)
 				{
 					var collision = new Entity("collision");
+					if (entity.Has<StunModifier>())
+					{
+						player.Set(new Stun { Value = entity.Read<StunModifier>().Value });
+					}
 					collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);
 				}
 			}

@@ -42,8 +42,8 @@ namespace Project.Mechanics.Features.Weapon.Systems {
     
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
         {
-            if(entity.Read<WeaponEntities>().RightWeapon.Read<AmmoCapacity>().Value <= 1)
-                entity.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = 20;
+            // if(entity.Read<WeaponEntities>().RightWeapon.Read<AmmoCapacity>().Value <= 1)
+                // entity.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = 20;
         }
     
     }

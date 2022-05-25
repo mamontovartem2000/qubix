@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core.Features.Events;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
@@ -41,13 +42,16 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			effect.Get<Owner>().Value = entity.Get<Owner>().Value;
 			effect.Set(new EffectTag());
 
-			var amount = entity.Read<SkillAmount>().Value / 100f;
+			// var amount = entity.Read<SkillAmount>().Value / 100f;
 
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<FireRateModifier>().Value += amount;
-			
-			effect.Get<SkillAmount>().Value = amount;
+			// entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<FireRateModifier>().Value += amount;
+			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = 2;
+			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon.Get<AmmoCapacity>().Value = 2;
+			// effect.Get<SkillAmount>().Value = amount;
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 			effect.Set(new FireRateModifier());
+			
+			world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Get<Owner>().Value);
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			

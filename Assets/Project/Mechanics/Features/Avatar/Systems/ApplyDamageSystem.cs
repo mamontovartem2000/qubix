@@ -49,9 +49,6 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
             ref var health = ref to.Get<PlayerHealth>().Value;
 
-            if(apply.ApplyFrom.Has<StunModifier>())
-                apply.ApplyTo.Set(new Stun{Value = 1});
-
             if (apply.ApplyTo.Has<ForceShieldModifier>() && apply.ApplyTo.Get<ForceShieldModifier>().Value - damage >= 0)
             {
                 apply.ApplyTo.Get<ForceShieldModifier>().Value -= damage;

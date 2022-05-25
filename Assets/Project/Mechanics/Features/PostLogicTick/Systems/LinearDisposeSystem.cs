@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Mechanics.Features.VFX;
+using Project.Modules.Network;
 
 namespace Project.Mechanics.Features.PostLogicTick.Systems
 {
@@ -46,7 +47,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
             {
                 ref var player = ref owner.Get<PlayerAvatar>().Value;
 
-                if (owner.Read<PlayerTag>().Team != from.Read<PlayerTag>().Team)
+                if (owner.Read<PlayerTag>().Team != from.Read<PlayerTag>().Team || NetworkData.Team == string.Empty)
                 {
                     var collision = new Entity("collision");
                     collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);

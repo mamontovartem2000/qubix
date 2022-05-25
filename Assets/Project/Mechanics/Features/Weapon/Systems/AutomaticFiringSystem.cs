@@ -60,8 +60,8 @@ namespace Project.Mechanics.Features.Weapon.Systems
             }
 
             var cooldownBase = entity.Read<CooldownDefault>().Value;
-            var cooldownMod = entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Read<FireRateModifier>().Value * cooldownBase;
-            var currentCooldown = cooldownBase - cooldownMod;
+            var cooldownMod = cooldownBase;
+            var currentCooldown = cooldownMod;
             
             if (ammo - 1 > 0)
             {
@@ -69,6 +69,18 @@ namespace Project.Mechanics.Features.Weapon.Systems
             }
             else
             {
+                if (entity.Has<FireRateModifier>())
+                {
+                    entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<AmmoCapacityDefault>().Value = entity.Read<FireRateModifier>().Value;
+                    entity.Remove<MoveSpeedModifier>();
+                }
+                
+                if (entity.Has<StunModifier>())
+                {
+                    entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<AmmoCapacityDefault>().Value = entity.Read<StunModifier>().Value;
+                    entity.Remove<StunModifier>();
+                }
+                
                 entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;
                 world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Get<Owner>().Value);
             }

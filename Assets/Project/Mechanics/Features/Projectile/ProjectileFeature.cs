@@ -36,7 +36,8 @@ namespace Project.Mechanics.Features.Projectile
             
             entity.Get<ProjectileDirection>().Value = direction;
             entity.Get<Owner>().Value = gun.Read<Owner>().Value;
-
+            if (gun.Has<StunModifier>())
+                entity.Set(new StunModifier { Value = 5 });
             var damageBase = entity.Read<ProjectileDamage>().Value;
             var damageMod = damageBase * gun.Get<Owner>().Value.Get<AutomaticDamageModifier>().Value;
             var currentDamage = damageBase + damageMod;
