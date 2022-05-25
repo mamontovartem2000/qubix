@@ -24,11 +24,12 @@ public enum Payload : byte
   InvalidHash = 10,
   TimeFromStart = 11,
   GameOver = 12,
-  CloseRoom = 13,
-  StatsReceive = 14,
-  LeaveRoom = 15,
-  RoomList = 16,
-  ChangeRoom = 17,
+  TeamGameOver = 13,
+  CloseRoom = 14,
+  StatsReceive = 15,
+  LeaveRoom = 16,
+  RoomList = 17,
+  ChangeRoom = 18,
 };
 
 public struct JoinResult : IFlatbufferObject
@@ -731,7 +732,7 @@ public struct TeamGameOver : IFlatbufferObject
 #endif
   public byte[] GetWinTeamArray() { return __p.__vector_as_array<byte>(4); }
   public int Hash { get { int o = __p.__offset(6); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
-  public FlatMessages.Stats? Stats(int j) { int o = __p.__offset(8); return o != 0 ? (FlatMessages.Stats?)(new FlatMessages.Stats()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
+  public FlatMessages.TeamStats? Stats(int j) { int o = __p.__offset(8); return o != 0 ? (FlatMessages.TeamStats?)(new FlatMessages.TeamStats()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
   public int StatsLength { get { int o = __p.__offset(8); return o != 0 ? __p.__vector_len(o) : 0; } }
 
   public static Offset<FlatMessages.TeamGameOver> CreateTeamGameOver(FlatBufferBuilder builder,
@@ -749,8 +750,8 @@ public struct TeamGameOver : IFlatbufferObject
   public static void AddWinTeam(FlatBufferBuilder builder, StringOffset winTeamOffset) { builder.AddOffset(0, winTeamOffset.Value, 0); }
   public static void AddHash(FlatBufferBuilder builder, int hash) { builder.AddInt(1, hash, 0); }
   public static void AddStats(FlatBufferBuilder builder, VectorOffset statsOffset) { builder.AddOffset(2, statsOffset.Value, 0); }
-  public static VectorOffset CreateStatsVector(FlatBufferBuilder builder, Offset<FlatMessages.Stats>[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
-  public static VectorOffset CreateStatsVectorBlock(FlatBufferBuilder builder, Offset<FlatMessages.Stats>[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static VectorOffset CreateStatsVector(FlatBufferBuilder builder, Offset<FlatMessages.TeamStats>[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
+  public static VectorOffset CreateStatsVectorBlock(FlatBufferBuilder builder, Offset<FlatMessages.TeamStats>[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
   public static void StartStatsVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
   public static Offset<FlatMessages.TeamGameOver> EndTeamGameOver(FlatBufferBuilder builder) {
     int o = builder.EndTable();
@@ -837,6 +838,7 @@ public struct SystemMessage : IFlatbufferObject
   public FlatMessages.InvalidHash PayloadAsInvalidHash() { return Payload<FlatMessages.InvalidHash>().Value; }
   public FlatMessages.TimeFromStart PayloadAsTimeFromStart() { return Payload<FlatMessages.TimeFromStart>().Value; }
   public FlatMessages.GameOver PayloadAsGameOver() { return Payload<FlatMessages.GameOver>().Value; }
+  public FlatMessages.TeamGameOver PayloadAsTeamGameOver() { return Payload<FlatMessages.TeamGameOver>().Value; }
   public FlatMessages.CloseRoom PayloadAsCloseRoom() { return Payload<FlatMessages.CloseRoom>().Value; }
   public FlatMessages.StatsReceive PayloadAsStatsReceive() { return Payload<FlatMessages.StatsReceive>().Value; }
   public FlatMessages.LeaveRoom PayloadAsLeaveRoom() { return Payload<FlatMessages.LeaveRoom>().Value; }

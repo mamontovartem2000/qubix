@@ -70,6 +70,32 @@ namespace Project.Modules.Network
             NetworkData.Connect.SendSystemMessage(ms);
         }
 
+        public static void SendTeamGameStats(List<PlayerStats> stats, string winnerTeam)
+        {
+            FlatBufferBuilder builder = new FlatBufferBuilder(1);
+            var winner = builder.CreateString(winnerTeam);
+            Offset<TeamStats>[] offsets = new Offset<TeamStats>[stats.Count];
+
+            for (int i = 0; i < stats.Count; i++)
+            {
+                PlayerStats player = stats[i];
+                var playerId = builder.CreateString(player.PlayerId);
+                var playerTeam = builder.CreateString(player.Team);
+                var playerStats = TeamStats.CreateTeamStats(builder, player.Kills, player.Deaths, playerId, playerTeam);
+                offsets[i] = playerStats;
+            }
+
+            var statsArray = TeamGameOver.CreateStatsVector(builder, offsets);
+            var hash = Worlds.currentWorld.GetModule<NetworkModule>().GetSyncHash();
+            var gameOver = TeamGameOver.CreateTeamGameOver(builder, winner, hash, statsArray);
+
+            var offset = SystemMessage.CreateSystemMessage(builder, GetTime(), Payload.TeamGameOver, gameOver.Value);
+            builder.Finish(offset.Value);
+
+            var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
+            NetworkData.Connect.SendSystemMessage(ms);
+        }
+
         private static void SetServerTime(TimeFromStart timeFromStart)
         {
             var world = Worlds.currentWorld;
@@ -94,6 +120,7 @@ namespace Project.Modules.Network
         public uint Kills;
         public uint Deaths;
         public string PlayerId;
+        public string Team;
     }
 
     public struct PlayerInfo

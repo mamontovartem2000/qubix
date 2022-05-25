@@ -28,7 +28,6 @@ namespace Project.Core.Features.GameState.Systems
             this.GetFeature(out _feature);
             Filter.Create("Player Filter")
                 .With<PlayerTag>()
-                // .With<AvatarTag>()
                 .Push(ref _playerFilter);
         }
 
@@ -38,6 +37,19 @@ namespace Project.Core.Features.GameState.Systems
         {
             if (!world.HasSharedData<GameFinished>() || _finished) return;
 
+            //TODO: use game type in join request
+            if (NetworkData.Team == string.Empty)
+            {
+                DeathMatchGame();
+            }
+            else
+            {
+                TeamGame();
+            }
+        }
+
+        private void DeathMatchGame()
+        {
             var winner = GetWinnerEntity();
 
             foreach (var player in _playerFilter)
@@ -48,7 +60,25 @@ namespace Project.Core.Features.GameState.Systems
                     world.GetFeature<EventsFeature>().Defeat.Execute(player);
             }
 
+            Debug.Log("SendGameResult");
             SendGameResult(winner);
+            _finished = true;
+        }
+
+        private void TeamGame()
+        {
+            var winnerTeam = GetWinnerTeam();
+
+            foreach (var player in _playerFilter)
+            {
+                if (player.Read<PlayerTag>().Team == winnerTeam)
+                    world.GetFeature<EventsFeature>().Victory.Execute(player);
+                else
+                    world.GetFeature<EventsFeature>().Defeat.Execute(player);
+            }
+
+            Debug.Log("SendTeamGameResult");
+            SendTeamGameResult(winnerTeam);
             _finished = true;
         }
 
@@ -84,25 +114,25 @@ namespace Project.Core.Features.GameState.Systems
 
         private string GetWinnerTeam()
         {
-            var teamNumber = NetworkData.Info.multiplayer_schema.Length;
-            List<Team> teams = new List<Team>(teamNumber);
+            Team team1 = new Team();
+            Team team2 = new Team();
 
-            GetTeamFullStats(teams[0], "blue");
-            GetTeamFullStats(teams[1], "red");
+            GetTeamFullStats(team1, "blue");
+            GetTeamFullStats(team2, "red");
 
-            if (teams[0].Kills > teams[1].Kills)
+            if (team1.Kills > team2.Kills)
                 return "blue";
-            else if (teams[0].Kills < teams[1].Kills)
+            else if (team1.Kills < team2.Kills)
                 return "red";
 
-            if (teams[0].Deaths < teams[1].Deaths)
+            if (team1.Deaths < team2.Deaths)
                 return "blue";
-            else if (teams[0].Deaths > teams[1].Deaths)
+            else if (team1.Deaths > team2.Deaths)
                 return "red";
 
-            if (teams[0].Health > teams[1].Health)
+            if (team1.Health > team2.Health)
                 return "blue";
-            else if (teams[0].Health < teams[1].Health)
+            else if (team1.Health < team2.Health)
                 return "red";
 
             //TODO: Add random
@@ -137,6 +167,24 @@ namespace Project.Core.Features.GameState.Systems
             var winnerId = winner.Read<PlayerTag>().PlayerServerID;
 
             SystemMessages.SendEndGameStats(stats, winnerId);
+        }
+
+        private void SendTeamGameResult(string winnerTeam)
+        {
+            List<PlayerStats> stats = new List<PlayerStats>();
+
+            foreach (var player in _playerFilter)
+            {
+                var kills = player.Read<PlayerScore>().Kills;
+                var deaths = player.Read<PlayerScore>().Kills;
+                var id = player.Read<PlayerTag>().PlayerServerID;
+                var team = player.Read<PlayerTag>().Team;
+
+
+                stats.Add(new PlayerStats() { Kills = (uint)kills, Deaths = (uint)deaths, PlayerId = id, Team = team });
+            }
+
+            SystemMessages.SendTeamGameStats(stats, winnerTeam);
         }
 
         private List<Entity> GetPlayersWithMostKills()
