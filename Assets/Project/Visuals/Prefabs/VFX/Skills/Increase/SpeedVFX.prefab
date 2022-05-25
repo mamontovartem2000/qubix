@@ -4759,7 +4759,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 8f805fab8e6194b46af23e0352930378, type: 2}
-  - {fileID: 2100000, guid: a1177ff07848e35478f2ae991a23743e, type: 2}
+  - {fileID: 2100000, guid: c9b7e36775e44df44babaee5abcc37f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4859,6 +4859,13 @@ MonoBehaviour:
       halfEnding: 0.5
     hasElements: 1
     hasDefault: 1
+  defaultParameters:
+    useDespawnTime: 0
+    despawnTime: 0
+    cacheCustomViewId: 0
+    useCache: 0
+    useCacheTimeout: 0
+    cacheTimeout: 0
 --- !u!1 &470696563953024435
 GameObject:
   m_ObjectHideFlags: 0
