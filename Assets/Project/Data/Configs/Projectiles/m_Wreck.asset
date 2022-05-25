@@ -17,7 +17,6 @@ MonoBehaviour:
   - id: 0
   - id: 1
   - id: 2
-  - id: 3
   removeStructComponents: []
   templates: []
   references:
@@ -31,8 +30,4 @@ MonoBehaviour:
       data:
         Value: 1
     00000002:
-      type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 1
-    00000003:
       type: {class: CollisionDynamic, ns: Project.Common.Components, asm: Project.Common}
