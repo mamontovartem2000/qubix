@@ -617,6 +617,57 @@ public struct Stats : IFlatbufferObject
   }
 };
 
+public struct TeamStats : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_2_0_0(); }
+  public static TeamStats GetRootAsTeamStats(ByteBuffer _bb) { return GetRootAsTeamStats(_bb, new TeamStats()); }
+  public static TeamStats GetRootAsTeamStats(ByteBuffer _bb, TeamStats obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
+  public TeamStats __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public uint Kills { get { int o = __p.__offset(4); return o != 0 ? __p.bb.GetUint(o + __p.bb_pos) : (uint)0; } }
+  public uint Deaths { get { int o = __p.__offset(6); return o != 0 ? __p.bb.GetUint(o + __p.bb_pos) : (uint)0; } }
+  public string Id { get { int o = __p.__offset(8); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetIdBytes() { return __p.__vector_as_span<byte>(8, 1); }
+#else
+  public ArraySegment<byte>? GetIdBytes() { return __p.__vector_as_arraysegment(8); }
+#endif
+  public byte[] GetIdArray() { return __p.__vector_as_array<byte>(8); }
+  public string Team { get { int o = __p.__offset(10); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetTeamBytes() { return __p.__vector_as_span<byte>(10, 1); }
+#else
+  public ArraySegment<byte>? GetTeamBytes() { return __p.__vector_as_arraysegment(10); }
+#endif
+  public byte[] GetTeamArray() { return __p.__vector_as_array<byte>(10); }
+
+  public static Offset<FlatMessages.TeamStats> CreateTeamStats(FlatBufferBuilder builder,
+      uint kills = 0,
+      uint deaths = 0,
+      StringOffset idOffset = default(StringOffset),
+      StringOffset teamOffset = default(StringOffset)) {
+    builder.StartTable(4);
+    TeamStats.AddTeam(builder, teamOffset);
+    TeamStats.AddId(builder, idOffset);
+    TeamStats.AddDeaths(builder, deaths);
+    TeamStats.AddKills(builder, kills);
+    return TeamStats.EndTeamStats(builder);
+  }
+
+  public static void StartTeamStats(FlatBufferBuilder builder) { builder.StartTable(4); }
+  public static void AddKills(FlatBufferBuilder builder, uint kills) { builder.AddUint(0, kills, 0); }
+  public static void AddDeaths(FlatBufferBuilder builder, uint deaths) { builder.AddUint(1, deaths, 0); }
+  public static void AddId(FlatBufferBuilder builder, StringOffset idOffset) { builder.AddOffset(2, idOffset.Value, 0); }
+  public static void AddTeam(FlatBufferBuilder builder, StringOffset teamOffset) { builder.AddOffset(3, teamOffset.Value, 0); }
+  public static Offset<FlatMessages.TeamStats> EndTeamStats(FlatBufferBuilder builder) {
+    int o = builder.EndTable();
+    return new Offset<FlatMessages.TeamStats>(o);
+  }
+};
+
 public struct GameOver : IFlatbufferObject
 {
   private Table __p;
@@ -659,6 +710,51 @@ public struct GameOver : IFlatbufferObject
   public static Offset<FlatMessages.GameOver> EndGameOver(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<FlatMessages.GameOver>(o);
+  }
+};
+
+public struct TeamGameOver : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_2_0_0(); }
+  public static TeamGameOver GetRootAsTeamGameOver(ByteBuffer _bb) { return GetRootAsTeamGameOver(_bb, new TeamGameOver()); }
+  public static TeamGameOver GetRootAsTeamGameOver(ByteBuffer _bb, TeamGameOver obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
+  public TeamGameOver __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public string WinTeam { get { int o = __p.__offset(4); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetWinTeamBytes() { return __p.__vector_as_span<byte>(4, 1); }
+#else
+  public ArraySegment<byte>? GetWinTeamBytes() { return __p.__vector_as_arraysegment(4); }
+#endif
+  public byte[] GetWinTeamArray() { return __p.__vector_as_array<byte>(4); }
+  public int Hash { get { int o = __p.__offset(6); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public FlatMessages.Stats? Stats(int j) { int o = __p.__offset(8); return o != 0 ? (FlatMessages.Stats?)(new FlatMessages.Stats()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
+  public int StatsLength { get { int o = __p.__offset(8); return o != 0 ? __p.__vector_len(o) : 0; } }
+
+  public static Offset<FlatMessages.TeamGameOver> CreateTeamGameOver(FlatBufferBuilder builder,
+      StringOffset winTeamOffset = default(StringOffset),
+      int hash = 0,
+      VectorOffset statsOffset = default(VectorOffset)) {
+    builder.StartTable(3);
+    TeamGameOver.AddStats(builder, statsOffset);
+    TeamGameOver.AddHash(builder, hash);
+    TeamGameOver.AddWinTeam(builder, winTeamOffset);
+    return TeamGameOver.EndTeamGameOver(builder);
+  }
+
+  public static void StartTeamGameOver(FlatBufferBuilder builder) { builder.StartTable(3); }
+  public static void AddWinTeam(FlatBufferBuilder builder, StringOffset winTeamOffset) { builder.AddOffset(0, winTeamOffset.Value, 0); }
+  public static void AddHash(FlatBufferBuilder builder, int hash) { builder.AddInt(1, hash, 0); }
+  public static void AddStats(FlatBufferBuilder builder, VectorOffset statsOffset) { builder.AddOffset(2, statsOffset.Value, 0); }
+  public static VectorOffset CreateStatsVector(FlatBufferBuilder builder, Offset<FlatMessages.Stats>[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
+  public static VectorOffset CreateStatsVectorBlock(FlatBufferBuilder builder, Offset<FlatMessages.Stats>[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static void StartStatsVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static Offset<FlatMessages.TeamGameOver> EndTeamGameOver(FlatBufferBuilder builder) {
+    int o = builder.EndTable();
+    return new Offset<FlatMessages.TeamGameOver>(o);
   }
 };
 
