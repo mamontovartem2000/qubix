@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.Events;
+using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
 
@@ -16,10 +17,12 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 		public World world { get; set; }
 		
 		private SkillsFeature _feature;
+		private VFXFeature _vfx;
 
 		void ISystemBase.OnConstruct()
 		{
 			this.GetFeature(out _feature);
+			world.GetFeature(out _vfx);
 		}
 
 		void ISystemBase.OnDeconstruct() {}
@@ -53,6 +56,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
             world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(owner);
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+            _vfx.SpawnVFX(VFXFeature.VFXType.StatusStunEffect, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
 
 			entity.Remove<ActivateSkill>();
 			Debug.Log("Character is stunned");

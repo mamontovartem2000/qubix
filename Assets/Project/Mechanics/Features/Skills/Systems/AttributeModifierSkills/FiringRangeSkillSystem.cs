@@ -18,6 +18,7 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 		void ISystemBase.OnConstruct()
 		{
 			this.GetFeature(out _feature);
+			
 		}
 
 		void ISystemBase.OnDeconstruct() {}

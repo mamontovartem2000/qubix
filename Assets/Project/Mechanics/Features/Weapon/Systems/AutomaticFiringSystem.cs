@@ -71,8 +71,8 @@ namespace Project.Mechanics.Features.Weapon.Systems
             {
                 if (entity.Has<FireRateModifier>())
                 {
-                    entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<AmmoCapacityDefault>().Value = entity.Read<FireRateModifier>().Value;
-                    entity.Remove<MoveSpeedModifier>();
+                    entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = entity.Read<FireRateModifier>().Value;
+                    entity.Remove<FireRateModifier>();
                 }
                 
                 if (entity.Has<StunModifier>())
@@ -87,7 +87,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
             
             ammo -= 1;
             _projectile.SpawnProjectile(entity, dir);
-            _vfx.SpawnVFX(VFXFeature.VFXType.MinigunMuzzle, dir);
+            _vfx.SpawnVFX(VFXFeature.VFXType.MinigunMuzzle, dir, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
         }
     }
 }

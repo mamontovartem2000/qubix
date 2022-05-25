@@ -19,7 +19,8 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 
 		void ISystemBase.OnConstruct()
 		{
-			this.GetFeature(out _feature);
+			this.GetFeature(out _feature);						
+			world.GetFeature(out _vfx);
 		}
 
 		void ISystemBase.OnDeconstruct() {}
@@ -49,7 +50,7 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			_vfx.SpawnVFX(VFXFeature.VFXType.SkillQuickness, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition());
+			_vfx.SpawnVFX(VFXFeature.VFXType.SkillQuickness, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
 
 			entity.Remove<ActivateSkill>();
 			Debug.Log("move speed increased");

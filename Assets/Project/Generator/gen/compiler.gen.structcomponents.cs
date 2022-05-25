@@ -145,6 +145,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.VFXTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
@@ -297,6 +298,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.VFXTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
@@ -444,6 +446,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.TileView>(false);
             structComponentsContainer.Validate<Project.Common.Components.Trajectory>(false);
             structComponentsContainer.Validate<Project.Common.Components.TrajectoryWeapon>(true);
+            structComponentsContainer.Validate<Project.Common.Components.VFXTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.WeaponAim>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponEntities>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponPosition>(false);
@@ -596,6 +599,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.TileView>(false);
             entity.ValidateData<Project.Common.Components.Trajectory>(false);
             entity.ValidateData<Project.Common.Components.TrajectoryWeapon>(true);
+            entity.ValidateData<Project.Common.Components.VFXTag>(true);
             entity.ValidateData<Project.Common.Components.WeaponAim>(false);
             entity.ValidateData<Project.Common.Components.WeaponEntities>(false);
             entity.ValidateData<Project.Common.Components.WeaponPosition>(false);

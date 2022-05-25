@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.Events;
+using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
@@ -15,10 +16,13 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
         public World world { get; set; }
         
         private SkillsFeature _feature;
-        
+        private VFXFeature _vfx;
+
         void ISystemBase.OnConstruct()
         {
-            this.GetFeature(out _feature);
+            this.GetFeature(out _feature);            
+            world.GetFeature(out _vfx);
+
         }
 
         void ISystemBase.OnDeconstruct() {}
@@ -43,7 +47,8 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 
             world.GetFeature<EventsFeature>().HealthChanged.Execute(entity.Read<Owner>().Value);
-            			
+            
+            _vfx.SpawnVFX(VFXFeature.VFXType.SkillHeal, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
 			entity.Remove<ActivateSkill>();
             Debug.Log("Healed");
         }

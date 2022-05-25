@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Core;
+using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
@@ -15,10 +16,11 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
         public World world { get; set; }
 
         private SkillsFeature _feature;
-
+        private VFXFeature _vfx;
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
+            world.GetFeature(out _vfx);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -76,7 +78,8 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
             entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<PlayerMoveTarget>().Value = randomPlayerPos;
 
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-
+            
+            _vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
             entity.Remove<ActivateSkill>();
             Debug.Log("WHZOOKH!");
 

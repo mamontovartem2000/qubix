@@ -20,6 +20,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 		void ISystemBase.OnConstruct()
 		{
 			this.GetFeature(out _feature);
+			world.GetFeature(out _vfx);
 		}
 
 		void ISystemBase.OnDeconstruct() {}
@@ -49,7 +50,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			
-			_vfx.SpawnVFX(VFXFeature.VFXType.SkillLinearPower, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition());
+			_vfx.SpawnVFX(VFXFeature.VFXType.SkillLinearPower, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
 
 			entity.Remove<ActivateSkill>();
 			Debug.Log("Linear Power activated");

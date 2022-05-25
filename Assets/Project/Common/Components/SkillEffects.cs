@@ -23,4 +23,6 @@ namespace Project.Common.Components
 	public struct LinearPowerAffect : IComponent {} //component buff (non stackable) --- DONE
 	public struct WormholeHookAffect : IComponent {} //target --- DONE
 	public struct PersonalTeleportAffect : IComponent {} //self (instant) --- DONE
+
+	public struct VFXTag : IComponent {};
 }
