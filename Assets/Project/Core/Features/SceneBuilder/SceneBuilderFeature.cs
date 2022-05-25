@@ -138,22 +138,24 @@ namespace Project.Core.Features.SceneBuilder
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
             }
         }
-        private void DrawMapObjects(byte[] s)
+        private void DrawMapObjects(byte[] mapInBytes)
         {
             var i = -1;
             
-            foreach (var b in s)
+            foreach (var mapElement in mapInBytes)
             {
                 i++;
-                if(b == 0) continue;
+                if(mapElement == 0) continue;
+                if (PropsConfigs[mapElement] == null) continue;
                 
                 var entity = new Entity("Prop");
-                PropsConfigs[b].Apply(entity);
-                entity.InstantiateView(_propsViewIds[b]);
+
+                PropsConfigs[mapElement].Apply(entity);
+                entity.InstantiateView(_propsViewIds[mapElement]);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
                 if(entity.Has<Pallette>())
                     entity.SetPosition(entity.GetPosition() + new fp3(-0.15,0.2,0.15));
-                entity.SetRotation(PropsConfigs[b].Read<Rotation>().value);
+                entity.SetRotation(PropsConfigs[mapElement].Read<Rotation>().value);
                 
                 entity.Get<Owner>().Value = entity;
 
