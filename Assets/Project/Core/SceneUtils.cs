@@ -165,10 +165,6 @@ namespace Project.Core
                 }
             }
 
-            foreach (var a in ar)
-            {
-                Debug.Log(a);
-            }
             return ar;
         }
         public static fp3 GetRandomPortalPosition(fp3[] vec)
