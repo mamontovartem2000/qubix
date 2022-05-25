@@ -41,8 +41,8 @@ public class MapChanger : MonoBehaviour
             case Maps.Neon:
                 ChangeColor(23, 19, 19);
                 ChangeEmissionColor(1, 6, 6);
-                ExtraChangeColors(1, 20, 4, 19, 30);
-                ExtraChangeEmissionColors(7, 1, 1, 1, 1);
+                ExtraChangeColors(20, 20, 4, 19, 30);
+                ExtraChangeEmissionColors(1, 1, 1, 1, 1);
                 break;
         }
     }
