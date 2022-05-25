@@ -75,7 +75,8 @@ namespace Project.Core.Features.SceneBuilder
             {
                 WalkableMap = CreateSharedMap(height * width, mapData.bytes, MapType.Walkable),
                 MineMap = CreateSharedMap(height * width,mapData.bytes, MapType.Mine),
-                PortalsMap = CreateSharedMap(height * width, mapData.bytes, MapType.Portal)
+                PortalsMap = CreateSharedMap(height * width, mapData.bytes, MapType.Portal),
+                SpawnPoints = CreateSharedMap(height * width, mapData.bytes, MapType.SpawnPoint)
             });
             
             DrawMap(mapData.bytes);
@@ -169,36 +170,45 @@ namespace Project.Core.Features.SceneBuilder
             switch (t)
             {
                 case MapType.Walkable:
-                {
-                    for (var i = 0; i < m.Length; i++)
                     {
-                        a[i] = m[i] == 0 || m[i] == 1 ? m[i] : (byte)1;
+                        for (var i = 0; i < m.Length; i++)
+                        {
+                            a[i] = m[i] == 0 || m[i] == 1 ? m[i] : (byte)1;
+                        }
+
+                        break;
                     }
-                    
-                    break;
-                }
                 case MapType.Mine:
-                {
-                    for (var i = 0; i < a.Length; i++)
                     {
-                        a[i] = 0;
+                        for (var i = 0; i < a.Length; i++)
+                        {
+                            a[i] = 0;
+                        }
+
+                        break;
                     }
-                    
-                    break;
-                }
                 case MapType.Portal:
-                {
-                    for (var i = 0; i < m.Length; i++)
                     {
-                        a[i] = m[i] == 9 ? (byte)1 : (byte)0;
+                        for (var i = 0; i < m.Length; i++)
+                        {
+                            a[i] = m[i] == 9 ? (byte)1 : (byte)0;
+                        }
+
+                        break;
                     }
-                    
-                    break;
-                }
+                case MapType.SpawnPoint:
+                    {
+                        for (var i = 0; i < m.Length; i++)
+                        {
+                            a[i] = m[i] == 35 ? (byte)1 : (byte)0;
+                        }
+
+                        break;
+                    }
             }
             
             return a;
         }
-        public enum MapType {Walkable, Mine, Portal}
+        public enum MapType {Walkable, Mine, Portal, SpawnPoint}
     }
 }

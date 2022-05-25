@@ -102,6 +102,7 @@ namespace Project.Modules.Network
 				roomsInfo[i] = roomInfo;
 			}
 
+			Debug.Log("Get room list");
 			GetRoomList?.Invoke(roomsInfo);
 		}
 

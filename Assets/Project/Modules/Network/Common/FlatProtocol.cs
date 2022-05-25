@@ -24,12 +24,12 @@ public enum Payload : byte
   InvalidHash = 10,
   TimeFromStart = 11,
   GameOver = 12,
-  TeamGameOver = 13,
-  CloseRoom = 14,
-  StatsReceive = 15,
-  LeaveRoom = 16,
-  RoomList = 17,
-  ChangeRoom = 18,
+  CloseRoom = 13,
+  StatsReceive = 14,
+  LeaveRoom = 15,
+  RoomList = 16,
+  ChangeRoom = 17,
+  TeamGameOver = 18,
 };
 
 public struct JoinResult : IFlatbufferObject
@@ -736,13 +736,13 @@ public struct TeamGameOver : IFlatbufferObject
   public int StatsLength { get { int o = __p.__offset(8); return o != 0 ? __p.__vector_len(o) : 0; } }
 
   public static Offset<FlatMessages.TeamGameOver> CreateTeamGameOver(FlatBufferBuilder builder,
-      StringOffset winTeamOffset = default(StringOffset),
+      StringOffset win_teamOffset = default(StringOffset),
       int hash = 0,
       VectorOffset statsOffset = default(VectorOffset)) {
     builder.StartTable(3);
     TeamGameOver.AddStats(builder, statsOffset);
     TeamGameOver.AddHash(builder, hash);
-    TeamGameOver.AddWinTeam(builder, winTeamOffset);
+    TeamGameOver.AddWinTeam(builder, win_teamOffset);
     return TeamGameOver.EndTeamGameOver(builder);
   }
 
@@ -838,12 +838,12 @@ public struct SystemMessage : IFlatbufferObject
   public FlatMessages.InvalidHash PayloadAsInvalidHash() { return Payload<FlatMessages.InvalidHash>().Value; }
   public FlatMessages.TimeFromStart PayloadAsTimeFromStart() { return Payload<FlatMessages.TimeFromStart>().Value; }
   public FlatMessages.GameOver PayloadAsGameOver() { return Payload<FlatMessages.GameOver>().Value; }
-  public FlatMessages.TeamGameOver PayloadAsTeamGameOver() { return Payload<FlatMessages.TeamGameOver>().Value; }
   public FlatMessages.CloseRoom PayloadAsCloseRoom() { return Payload<FlatMessages.CloseRoom>().Value; }
   public FlatMessages.StatsReceive PayloadAsStatsReceive() { return Payload<FlatMessages.StatsReceive>().Value; }
   public FlatMessages.LeaveRoom PayloadAsLeaveRoom() { return Payload<FlatMessages.LeaveRoom>().Value; }
   public FlatMessages.RoomList PayloadAsRoomList() { return Payload<FlatMessages.RoomList>().Value; }
   public FlatMessages.ChangeRoom PayloadAsChangeRoom() { return Payload<FlatMessages.ChangeRoom>().Value; }
+  public FlatMessages.TeamGameOver PayloadAsTeamGameOver() { return Payload<FlatMessages.TeamGameOver>().Value; }
 
   public static Offset<FlatMessages.SystemMessage> CreateSystemMessage(FlatBufferBuilder builder,
       uint timestamp = 0,
