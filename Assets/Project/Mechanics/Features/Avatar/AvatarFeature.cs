@@ -6,6 +6,7 @@ using Project.Core;
 using Project.Core.Features.Events;
 using Project.Mechanics.Features.Avatar.Systems;
 using Project.Mechanics.Features.LifeTime.Systems.SkillsSystems;
+using Project.Modules.Network;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar
@@ -24,6 +25,8 @@ namespace Project.Mechanics.Features.Avatar
         private readonly Vector3 _trajectory = new Vector3(0f, 1f, 0f);
 
         private ViewId _playerNick;
+        private fp3[] team1 = new fp3[] { new fp3(11, 0, 5), new fp3(4, 0, 7), new fp3(3, 0, 17), new fp3(3, 0, 26), new fp3(3, 0, 34), new fp3(3, 0, 42) };
+        private fp3[] team2 = new fp3[] { new fp3(44, 0, 8), new fp3(47, 0, 13), new fp3(48, 0, 20), new fp3(48, 0, 29), new fp3(48, 0, 39), new fp3(44, 0, 43) };
 
         protected override void OnConstruct()
         {
@@ -76,7 +79,40 @@ namespace Project.Mechanics.Features.Avatar
             
             world.GetFeature<EventsFeature>().SkillImageChange.Execute(owner);
 
-            entity.SetPosition(SceneUtils.GetRandomFreePosition());
+            //TODO: КОСТЫЛЬ ЕБУЧИЙ
+            if (NetworkData.Info.map_id == 1 || NetworkData.Team == string.Empty)
+            {
+                entity.SetPosition(SceneUtils.GetRandomFreePosition());
+            }
+            else
+            {
+                var pos = fp3.zero;
+
+                if (owner.Read<PlayerTag>().Team == "red")
+                {
+                    while (!SceneUtils.IsWalkable(pos))
+                    {
+                        var rnd = Worlds.current.GetRandomRange(0, team1.Length);
+                        pos = team1[rnd];
+
+                        if (!SceneUtils.IsFree(pos)) pos = fp3.zero;
+                    }
+                }
+                else
+                {
+                    while (!SceneUtils.IsWalkable(pos))
+                    {
+                        var rnd = Worlds.current.GetRandomRange(0, team2.Length);
+                        pos = team2[rnd];
+
+                        if (!SceneUtils.IsFree(pos)) pos = fp3.zero;
+                    }
+                }
+
+                entity.SetPosition(pos);
+            }
+
+            SceneUtils.TakeTheCell(entity.GetPosition());
             entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
 
             world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(owner);

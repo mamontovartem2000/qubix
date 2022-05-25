@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Mechanics.Features.Lifetime;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.LifeTime.Systems
 {
@@ -34,6 +35,7 @@ namespace Project.Mechanics.Features.LifeTime.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
+            Debug.Log("yeet");
             var spot = new Entity("spot");
             entity.Read<ProjectileConfig>().Value.Apply(spot);
             spot.Set(new MeleeAimer());

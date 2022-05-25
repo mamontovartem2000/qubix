@@ -146,7 +146,12 @@ namespace Project.Core.Features.SceneBuilder
             foreach (var mapElement in mapInBytes)
             {
                 i++;
-                if(mapElement == 0) continue;
+                if (mapElement == 35) 
+                {
+                    Debug.Log(SceneUtils.IndexToPosition(i));
+                    continue;
+                }
+                if (mapElement == 0) continue;
                 if (PropsConfigs[mapElement] == null) continue;
                 
                 var entity = new Entity("Prop");

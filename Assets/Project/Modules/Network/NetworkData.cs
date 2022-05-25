@@ -20,7 +20,7 @@ namespace Project.Modules.Network
             SlotInRoom = 1;
             GameSeed = 1;
             FullJoinRequest = string.Empty;
-            PlayersInfo = null;
+            PlayersInfo = null; //TODO: Make Info with defaut 
             Team = string.Empty;
             BuildType = BuildTypes.PC;
         }

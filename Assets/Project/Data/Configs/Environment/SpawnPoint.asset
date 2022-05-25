@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: m_Slash
+  m_Name: SpawnPoint
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
@@ -18,16 +18,23 @@ MonoBehaviour:
   - id: 1
   - id: 2
   removeStructComponents: []
-  templates: []
+  templates:
+  - 42195f0a559d99a479384ed2079515c8
   references:
     version: 1
     00000000:
-      type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: TileView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: -536419860255057633, guid: 70fe0c5a0f4457f45b78c2a8bc467e9b, type: 3}
+        Value: {fileID: -3287261612554074478, guid: 1e77edc7a9244a645a4f3ae5f00b9bc5, type: 3}
     00000001:
-      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: TileRotation, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 35
+        Value:
+          x:
+            m_rawValue: 0
+          y:
+            m_rawValue: 0
+          z:
+            m_rawValue: 0
     00000002:
-      type: {class: CollisionDynamic, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: CollisionStatic, ns: Project.Common.Components, asm: Project.Common}
