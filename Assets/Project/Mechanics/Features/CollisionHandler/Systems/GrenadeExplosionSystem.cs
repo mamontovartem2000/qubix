@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using ME.ECS.DataConfigs;
+using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.CollisionHandler.Systems {
@@ -20,12 +21,16 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
         
         private CollisionHandlerFeature feature;
         private Filter _playerFilter;
+        private VFXFeature _vfx;
+
         
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
             this.GetFeature(out this.feature);
+            world.GetFeature(out _vfx);
+
             Filter.Create("Player-Filter")
                 .With<AvatarTag>()
                 .Push(ref _playerFilter);
@@ -70,6 +75,10 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                     }
                     debuff.SetPosition(pos);
                 }
+
+                var vfx = new Entity("vfx");
+                _vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, entity.GetPosition());
+                
                 entity.Destroy();
             }
         }

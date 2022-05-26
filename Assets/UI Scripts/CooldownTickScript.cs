@@ -19,6 +19,8 @@ public class CooldownTickScript : MonoBehaviour
 
     private void CooldownTimeChanged(in Entity entity)
     {
+        if (!entity.IsAlive()) return;
+        
         if (entity.Read<Owner>().Value != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.SlotInRoom)) return;
         var cooldownLeft = entity.Read<Cooldown>().Value;
         SkillCooldownTimer[entity.Read<SkillTag>().id].SetText(((int)cooldownLeft).ToString());
