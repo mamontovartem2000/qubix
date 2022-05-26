@@ -67,14 +67,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 				}
 			}
 
-			if (entity.Has<AvoidTeleport>())
-			{
-				var avoid = entity.Get<AvoidTeleport>().Value;
-				avoid -= deltaTime;
-				
-				if(avoid <= 0f)
-					entity.Remove<AvoidTeleport>();
-			}
+			
 			
 			var speedBase = entity.Read<PlayerMovementSpeed>().Value;
 			var speedMod = entity.Read<MoveSpeedModifier>().Value * speedBase * entity.Read<Slowness>().Value;

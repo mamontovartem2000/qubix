@@ -77,6 +77,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 				// 	}	
 				// }
 				
+				
 				player.Get<AvoidTeleport>().Value = 3;
 				
 				player.SetPosition(pos);
