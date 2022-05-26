@@ -8,6 +8,7 @@ public class GameSceneDestroyer : MonoBehaviour
 {
     private const float WaintingTime = 3f;
     private bool _needDestroyWorld;
+    private bool _worldDestroyed;
     private float _leftTime = 0;
 
     private void Awake()
@@ -23,7 +24,7 @@ public class GameSceneDestroyer : MonoBehaviour
 #endif
 
         if (Worlds.currentWorld == null) return;
-        if (_needDestroyWorld == false) return;
+        if (_needDestroyWorld == false || _worldDestroyed) return;
         
         _leftTime += Time.deltaTime;
         
@@ -44,7 +45,7 @@ public class GameSceneDestroyer : MonoBehaviour
         DestroyWorld();
         NetworkData.CloseNetwork();
         _needDestroyWorld = false;
-
+        _worldDestroyed = true;
         if (buildType != BuildTypes.Front)
         {
             SceneManager.LoadScene(0);
@@ -54,6 +55,7 @@ public class GameSceneDestroyer : MonoBehaviour
 #if UNITY_WEBGL && !UNITY_EDITOR
                     BrowserEvents.WorldDestroyed();
 #endif
+             Application.Quit();
         }
     }
 
@@ -68,5 +70,10 @@ public class GameSceneDestroyer : MonoBehaviour
         }
 
         Debug.Log("World destroyed");
+    }
+
+    private void OnDestroy()
+    {
+        SetDestroyFlag();
     }
 }
