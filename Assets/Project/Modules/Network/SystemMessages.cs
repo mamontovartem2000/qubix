@@ -9,6 +9,8 @@ namespace Project.Modules.Network
 {
     public static class SystemMessages
     {
+        public static Action DestroyWorld;
+
         public static byte[] SystemHashMessage(uint tick, int hash)
         {
             FlatBufferBuilder builder = new FlatBufferBuilder(1);
@@ -38,6 +40,7 @@ namespace Project.Modules.Network
 #if UNITY_WEBGL && !UNITY_EDITOR
                     BrowserEvents.GameIsOver();
 #endif
+                    DestroyWorld?.Invoke();
                     break;
                 default:
                     Debug.Log("Unknown system message!");

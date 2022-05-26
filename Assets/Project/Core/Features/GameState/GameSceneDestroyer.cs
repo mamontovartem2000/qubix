@@ -1,15 +1,19 @@
+using DG.Tweening;
 using ME.ECS;
 using Project.Modules.Network;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using DG.Tweening;
-using Project.Common.Components;
 
 public class GameSceneDestroyer : MonoBehaviour
 {
-    private const float WaintingTime = 2f;
-
+    private const float WaintingTime = 3f;
+    private bool _needDestroyWorld;
     private float _leftTime = 0;
+
+    private void Awake()
+    {
+        SystemMessages.DestroyWorld += SetDestroyFlag;
+    }
 
     private void Update()
     {
@@ -19,12 +23,17 @@ public class GameSceneDestroyer : MonoBehaviour
 #endif
 
         if (Worlds.currentWorld == null) return;
-        if (!Worlds.currentWorld.HasSharedData<GameFinished>()) return;
+        if (_needDestroyWorld == false) return;
         
         _leftTime += Time.deltaTime;
         
         if (_leftTime > WaintingTime)
             Disconnect();
+    }
+
+    public void SetDestroyFlag()
+    {
+        _needDestroyWorld = true;
     }
 
     private void Disconnect()
@@ -34,6 +43,7 @@ public class GameSceneDestroyer : MonoBehaviour
         DOTween.KillAll();
         DestroyWorld();
         NetworkData.CloseNetwork();
+        _needDestroyWorld = false;
 
         if (buildType != BuildTypes.Front)
         {
