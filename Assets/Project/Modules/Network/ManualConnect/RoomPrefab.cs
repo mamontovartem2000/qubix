@@ -11,6 +11,7 @@ namespace Project.Modules.Network
 
         [SerializeField] private TMP_Text _playersCount;
         [SerializeField] private TMP_Text _roomId;
+        [SerializeField] private TMP_Text _buttonText;
         [SerializeField] private Button _joinButton;
         [SerializeField] private Image _image;
 
@@ -23,28 +24,33 @@ namespace Project.Modules.Network
         [SerializeField] private Color _unselectedText;
         [SerializeField] private Color _selectedText;
 
+        private Image _buttonImage;
         private RoomInfo _roomInfo;
         private int _roomNumber;
+        private int _roomCount;
         private bool _selected = false;
 
         private void Start()
         {
+            _buttonImage = _joinButton.gameObject.GetComponent<Image>();
             _joinButton.onClick.AddListener(JoinTheRoom);
             JoinRoom += UnselectRoom;
         }
 
-        public void UpdateRoomInfo(RoomInfo info, int roomNumber)
+        public void UpdateRoomInfo(RoomInfo info, int roomNumber, int roomCount)
         {
             _roomInfo = info;
             _roomNumber = roomNumber;
-            SetRoomId();
-            SetPlayersCount();
+            _roomCount = roomCount;
             InitHoverImage();
-            UpdateButton();
+            UpdateRoomDisplay();
         }
 
-        private void UpdateButton()
+        private void UpdateRoomDisplay()
         {
+            _playersCount.text = $"{_roomInfo.PlayersCount}/{_roomInfo.MaxPlayersCount}";
+            _roomId.text = $"Room {_roomNumber}";
+
             if (_roomInfo.PlayersCount == _roomInfo.MaxPlayersCount || _selected)
             {
                 _joinButton.interactable = false;
@@ -55,24 +61,34 @@ namespace Project.Modules.Network
             }
         }
 
-        private void SetPlayersCount()
-        {
-            _playersCount.text = $"{_roomInfo.PlayersCount}/{_roomInfo.MaxPlayersCount}";
-        }
-
-        private void SetRoomId()
-        {
-            _roomId.text = $"Room {_roomNumber}";
-        }
-
         private void InitHoverImage()
         {
             if (_roomNumber == 1)
                 _image.sprite = _hoverUp;
-            else if (_roomNumber == 5)
+            else if (_roomNumber == _roomCount)
                 _image.sprite = _hoverDown;
             else
                 _image.sprite = _hoverCenter;
+        }
+
+        public void EnterHover()
+        {
+            if (_selected == false)
+            {
+                _image.enabled = true;
+                _buttonImage.sprite = _selectedButton;
+                _playersCount.color = _selectedText;
+            }
+        }
+
+        public void ExitHover()
+        {
+            if (_selected == false)
+            {
+                _image.enabled = false;
+                _buttonImage.sprite = _unselectedButton;
+                _playersCount.color = _unselectedText;
+            }
         }
 
         private void JoinTheRoom()
@@ -83,20 +99,18 @@ namespace Project.Modules.Network
 
         private void SelectRoom()
         {
+            EnterHover();
             _selected = true;
             _joinButton.interactable = false;
-            _image.enabled = true;
-            _joinButton.gameObject.GetComponent<Image>().sprite = _selectedButton;
-            _playersCount.color = _selectedText;
+            _buttonText.text = "Joined";
         }
 
         private void UnselectRoom(string id)
         {
             _selected = false;
             _joinButton.interactable = true;
-            _image.enabled = false;
-            _joinButton.gameObject.GetComponent<Image>().sprite = _unselectedButton;
-            _playersCount.color = _unselectedText;
+            _buttonText.text = "Join";
+            ExitHover();
         }
 
         private void OnDisable()

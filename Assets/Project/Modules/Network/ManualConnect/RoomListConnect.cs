@@ -47,7 +47,7 @@ namespace Project.Modules.Network
             for (int i = 0; i < 6; i++)
             {
 				text += $"{obj[i].Id} {obj[i].PlayersCount} {obj[i].MaxPlayersCount}\n";
-				_rooms[i].UpdateRoomInfo(obj[i], i + 1);
+				_rooms[i].UpdateRoomInfo(obj[i], i + 1, _rooms.Length);
 			}
 
 			if (_roomListLoaded == false)
