@@ -3,6 +3,7 @@ using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features.Events;
 using Project.Mechanics.Features.VFX;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar.Systems
 {
@@ -54,7 +55,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
             SceneUtils.ReleaseTheCell(entity.Read<PlayerMoveTarget>().Value);
             
             // _vfx.SpawnVFX(VFXFeature.VFXType.PlayerDeath + 1, entity.GetPosition());
-            _vfx.SpawnVFX(VFXFeature.VFXType.QubixDeath, entity.GetPosition());
+            _vfx.SpawnVFX(VFXFeature.VFXType.QubixDeath, entity.GetPosition() + Vector3.down);
             
             player.Remove<PlayerAvatar>();
             entity.Destroy();

@@ -34,6 +34,8 @@ namespace Project.Mechanics.Features.VFX
 
 		public void SpawnVFX(VFXType type, Vector3 position, Entity player)
 		{
+			if(!player.IsAlive()) return;
+			
 			var fx = new Entity("vfx");
 			fx.Get<LifeTimeLeft>().Value = 3;
 			fx.Set(new VFXTag());

@@ -41,6 +41,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
+            if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
             var nextPos = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<FaceDirection>().Value * 4 + (entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition());
             
             nextPos.x = (int)(nextPos.x);

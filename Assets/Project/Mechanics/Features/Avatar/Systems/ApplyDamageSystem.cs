@@ -61,7 +61,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
             }
             else health -= damage;
 
-            if (apply.ApplyTo.Get<PlayerHealth>().Value < 0)
+            if (apply.ApplyTo.Get<PlayerHealth>().Value <= 0)
             {
                 apply.ApplyTo.Get<PlayerHealth>().Value = 0;
             }
