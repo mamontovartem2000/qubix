@@ -30,11 +30,11 @@ public class MapChanger : MonoBehaviour
                 ExtraChangeEmissionColors(7, 7, 6, 5, 4, 3);
                 break;
             case Maps.Coliseum:
-                _emissionIntensity = 5;
+                _emissionIntensity = 3;
                 ChangeColor(29, 15, 0);
-                ChangeEmissionColor(7, 7, 1);
+                ChangeEmissionColor(4, 4, 4);
                 ExtraChangeColors(1, 2, 3, 4, 5);
-                ExtraChangeEmissionColors(7, 7, 6, 5, 4, 3);
+                ExtraChangeEmissionColors(4, 4, 6, 5, 4, 3);
                 break;
             case Maps.Forest:
                 _emissionIntensity = 5;
