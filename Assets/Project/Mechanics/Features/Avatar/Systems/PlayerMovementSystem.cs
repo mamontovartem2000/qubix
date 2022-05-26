@@ -85,7 +85,8 @@ namespace Project.Mechanics.Features.Avatar.Systems
 			var target = entity.Read<PlayerMoveTarget>().Value;
 			ref readonly var hover = ref entity.Read<Hover>().Amount;
 
-			entity.SetPosition(Vector3.MoveTowards(new fp3(pos.x, hover, pos.z), new fp3(target.x, hover, target.z), speed * deltaTime));     
+			entity.SetPosition(Vector3.MoveTowards(new fp3(pos.x, hover, pos.z), new fp3(target.x, hover, target.z), speed * deltaTime));
+
 		}
 	}
 }

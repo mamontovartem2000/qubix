@@ -35,7 +35,6 @@ namespace Project.Mechanics.Features.LifeTime.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            Debug.Log("yeet");
             var spot = new Entity("spot");
             entity.Read<ProjectileConfig>().Value.Apply(spot);
             spot.Set(new MeleeAimer());
