@@ -242,7 +242,7 @@ namespace Project.Core.Features.GameState.Systems
 
             foreach (var player in playersList)
             {
-                if (!player.IsAlive()) continue;
+                if (!player.Read<PlayerAvatar>().Value.IsAlive()) continue;
                 var health = player.Read<PlayerAvatar>().Value.Read<PlayerHealth>().Value;
 
                 if (health > maxHealth)
