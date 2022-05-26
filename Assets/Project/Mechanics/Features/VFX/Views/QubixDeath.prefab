@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 2152007225900099903}
   - component: {fileID: 2152007225900099902}
   - component: {fileID: 2152007225900099872}
+  - component: {fileID: 3725621374777712635}
   m_Layer: 0
   m_Name: QubixDeath
   m_TagString: Untagged
@@ -366,7 +367,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2152007225900099901}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c528c5693cde38d419997d0949b4027c, type: 2}
   m_CullingMode: 0
@@ -384,12 +385,41 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2152007225900099901}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4fb8dc5d1e3a984e8293757476222a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _material: {fileID: 2100000, guid: 2f1969dd34725cb47a3d5ef515eca8f1, type: 2}
+--- !u!114 &3725621374777712635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2152007225900099901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3780f980b7d1646498fbfa5719357631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSystemSimulation:
+    particleItems: []
+    settings:
+      simulationType: 1
+      minSimulationTime: 0.2
+      minEndingTime: 0.1
+      halfEnding: 0.5
+    hasElements: 0
+    hasDefault: 1
+  defaultParameters:
+    useDespawnTime: 0
+    despawnTime: 0
+    cacheCustomViewId: 0
+    useCache: 0
+    useCacheTimeout: 0
+    cacheTimeout: 0
+  _anim: {fileID: 0}
 --- !u!1 &2152007225937103308
 GameObject:
   m_ObjectHideFlags: 0

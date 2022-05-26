@@ -1,12 +1,15 @@
 ﻿using DG.Tweening;
 using ME.ECS;
 using ME.ECS.Views.Providers;
+using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Common.Views.Monos
 {
 	public class ObjectsMonoView : MonoBehaviourView
 	{
 		public override bool applyStateJob => true;
+		public Animator _anim;
 
 		public override void OnInitialize() {}
 		public override void OnDeInitialize() {}
@@ -14,6 +17,10 @@ namespace Project.Common.Views.Monos
 		public override void ApplyState(float deltaTime, bool immediately)
 		{
 			transform.position = entity.GetPosition();
+
+			if (!entity.Has<HealthTag>()) return;
+			
+			_anim.SetBool("Animate", true);
 		}
 	}
 }

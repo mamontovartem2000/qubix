@@ -75,8 +75,8 @@ namespace Project.Mechanics.Features.VFX
 			SkillStun,
 			SkillOffenciveBurst,
 			SkillQuickness,
-			SkillLinearPower
-			
+			SkillLinearPower,
+			QubixDeath
 		}
 	}
 }
