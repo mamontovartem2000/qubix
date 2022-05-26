@@ -14,7 +14,7 @@ public class MapChanger : MonoBehaviour
     private void Awake()
     {
         Changer = this;
-        // ChangeMap(Maps.Neon);
+        // ChangeMap(Maps.Coliseum);
     }
 
     public void ChangeMap(Maps map)
@@ -22,28 +22,28 @@ public class MapChanger : MonoBehaviour
         switch (map)
         {
             case Maps.Black:
-                ChangeColor(28, 15, 0);
+                ChangeColor(29, 15, 0);
                 ChangeEmissionColor(7, 7, 1);
                 ExtraChangeColors(1, 2, 3, 4, 5);
-                ExtraChangeEmissionColors(7, 6, 5, 4, 3);
+                ExtraChangeEmissionColors(7, 7, 6, 5, 4, 3);
                 break;
             case Maps.Coliseum:
-                ChangeColor(7, 22, 7);
-                ChangeEmissionColor(0, 4, 0);
-                ExtraChangeColors(8, 7, 6, 5, 4);
-                ExtraChangeEmissionColors(0, 1, 2, 3, 4);
+                ChangeColor(0, 15, 29);
+                ChangeEmissionColor(7, 7, 1);
+                ExtraChangeColors(29, 29, 29, 29, 29);
+                ExtraChangeEmissionColors(7, 7, 6, 5, 4, 3);
                 break;
             case Maps.Forest:
                 ChangeColor(13, 22, 14);
                 ChangeEmissionColor(3, 2, 3);
                 ExtraChangeColors(13, 13, 13, 13, 13);
-                ExtraChangeEmissionColors(3, 3, 3, 3, 3);
+                ExtraChangeEmissionColors(3, 3, 3, 3, 3, 3);
                 break;
             case Maps.Neon:
                 ChangeColor(23, 19, 19);
                 ChangeEmissionColor(1, 6, 6);
                 ExtraChangeColors(20, 20, 4, 19, 30);
-                ExtraChangeEmissionColors(1, 1, 1, 1, 1);
+                ExtraChangeEmissionColors(5, 5, 5, 5, 5, 5);
                 break;
         }
     }
@@ -57,9 +57,9 @@ public class MapChanger : MonoBehaviour
 
     private void ChangeEmissionColor(int floorColor, int propColor, int wallColor)
     {
-        foreach (var item in _mainFloors) { item.SetColor("_EmissionColor", _emissionColorPalletes[floorColor] * 5); }
-        foreach (var item in _props) { item.SetColor("_EmissionColor", _emissionColorPalletes[propColor] * 5); }
-        foreach (var item in _walls) { item.SetColor("_EmissionColor", _emissionColorPalletes[wallColor] * 5); }
+        foreach (var item in _mainFloors) { item.SetColor("_EmissionColor", _emissionColorPalletes[floorColor] * 7); }
+        foreach (var item in _props) { item.SetColor("_EmissionColor", _emissionColorPalletes[propColor] * 7); }
+        foreach (var item in _walls) { item.SetColor("_EmissionColor", _emissionColorPalletes[wallColor] * 7); }
     }
 
     private void ExtraChangeColors(int a, int b, int c, int d, int e)
@@ -71,13 +71,14 @@ public class MapChanger : MonoBehaviour
         _extraObjects[4].SetColor("_BaseColor", _colorPalletes[d]);
         _extraObjects[5].SetColor("_BaseColor", _colorPalletes[e]);
     }
-    private void ExtraChangeEmissionColors(int a, int b, int c, int d, int e)
+    private void ExtraChangeEmissionColors(int o, int a, int b, int c, int d, int e)
     {
-        _extraObjects[1].SetColor("_EmissionColor", _emissionColorPalletes[a] * 15);
-        _extraObjects[2].SetColor("_EmissionColor", _emissionColorPalletes[b] * 15);
-        _extraObjects[3].SetColor("_EmissionColor", _emissionColorPalletes[c] * 15);
-        _extraObjects[4].SetColor("_EmissionColor", _emissionColorPalletes[d] * 15);
-        _extraObjects[5].SetColor("_EmissionColor", _emissionColorPalletes[e] * 15);
+        _extraObjects[0].SetColor("_EmissionColor", _emissionColorPalletes[o] * 7);
+        _extraObjects[1].SetColor("_EmissionColor", _emissionColorPalletes[a] * 7);
+        _extraObjects[2].SetColor("_EmissionColor", _emissionColorPalletes[b] * 7);
+        _extraObjects[3].SetColor("_EmissionColor", _emissionColorPalletes[c] * 7);
+        _extraObjects[4].SetColor("_EmissionColor", _emissionColorPalletes[d] * 7);
+        _extraObjects[5].SetColor("_EmissionColor", _emissionColorPalletes[e] * 7);
     }
 }
 
