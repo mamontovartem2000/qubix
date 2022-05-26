@@ -20,6 +20,8 @@ namespace Project.Mechanics.Features.VFX
 		protected override void OnConstruct()
 		{
 			AddSystem<VFXPlayerFollowingSystem>();
+			AddSystem<PlayerHoverSystem>();
+			
 			_viewIds = new ViewId[Views.Length];
 
 			for (int i = 0; i < Views.Length; i++)

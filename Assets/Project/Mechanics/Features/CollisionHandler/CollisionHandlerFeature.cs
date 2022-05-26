@@ -45,6 +45,7 @@ namespace Project.Mechanics.Features.CollisionHandler
             entity.Set(new CollisionDynamic());
             entity.Get<ProjectileDirection>().Value = fp3.zero;
             entity.Get<Owner>().Value = owner;
+            entity.Get<FaceDirection>().Value = new fp3(1, 0, 0);
             
             return entity;
         }

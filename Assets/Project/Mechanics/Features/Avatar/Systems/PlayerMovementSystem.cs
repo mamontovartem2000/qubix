@@ -63,35 +63,29 @@ namespace Project.Mechanics.Features.Avatar.Systems
 					{
 						SceneUtils.Move(entity.Read<PlayerMoveTarget>().Value, newTarget);
 						entity.Get<PlayerMoveTarget>().Value = newTarget;
-						
-						// if (entity.Has<TeleportPlayer>())
-						// {
-						// 	if (entity.Read<TeleportPlayer>().NeedDelete)
-						// 		entity.Remove<TeleportPlayer>();
-						// 	else
-						// 		entity.Get<TeleportPlayer>().NeedDelete = true;
-						// }                      
 					}
 				}
 			}
 
 			if (entity.Has<AvoidTeleport>())
 			{
-				if (entity.Get<AvoidTeleport>().Value - deltaTime > 0f)
-				{
-					entity.Get<AvoidTeleport>().Value -= deltaTime;
-				}
-				else
-				{
+				var avoid = entity.Get<AvoidTeleport>().Value;
+				avoid -= deltaTime;
+				
+				if(avoid <= 0f)
 					entity.Remove<AvoidTeleport>();
-				}
 			}
 			
 			var speedBase = entity.Read<PlayerMovementSpeed>().Value;
 			var speedMod = entity.Read<MoveSpeedModifier>().Value * speedBase * entity.Read<Slowness>().Value;
 			var currentSpeed = speedMod;
 			var speed = entity.Has<LockTarget>() ? currentSpeed * 0.65f : currentSpeed;
-			entity.SetPosition(Vector3.MoveTowards(entity.GetPosition(), entity.Read<PlayerMoveTarget>().Value, speed * deltaTime));     
+
+			var pos = entity.GetPosition();
+			var target = entity.Read<PlayerMoveTarget>().Value;
+			ref readonly var hover = ref entity.Read<Hover>().Amount;
+
+			entity.SetPosition(Vector3.MoveTowards(new fp3(pos.x, hover, pos.z), new fp3(target.x, hover, target.z), speed * deltaTime));     
 		}
 	}
 }

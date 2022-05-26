@@ -91,7 +91,7 @@ namespace Project.Mechanics.Features.Projectile
             }
         }
 
-        public void SpawnMelee(in Entity entity)
+        public void SpawnMelee(in Entity entity, Entity gun)
         {
             ref readonly var view = ref entity.Read<ProjectileView>().Value;
 
@@ -107,6 +107,7 @@ namespace Project.Mechanics.Features.Projectile
             thing.InstantiateView(vId);
             thing.Get<LifeTimeLeft>().Value = 2f;
 
+            gun.Get<ReloadTime>().Value = gun.Read<ReloadTimeDefault>().Value;
             // var entity = new Entity("melee");
             // gun.Read<ProjectileConfig>().Value.Apply(entity);
             // entity.SetLocalPosition(position);

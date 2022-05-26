@@ -14,7 +14,7 @@ namespace Project.Core.Features.Player.Views
 
         public override void OnInitialize()
         {
-            TweenUp();
+            // TweenUp();
         }
         public override void OnDeInitialize() { }
         public override void ApplyState(float deltaTime, bool immediately)

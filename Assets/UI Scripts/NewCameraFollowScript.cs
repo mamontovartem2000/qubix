@@ -23,7 +23,7 @@ namespace UI_Scripts
             if (Worlds.currentWorld == null) return;
 
             if (_player.IsAlive())
-                transform.position = _player.GetPosition() + _offset;
+                transform.position = new Vector3(_player.GetPosition().x, 0, _player.GetPosition().z) + _offset;
         }
 
         private void SetPlayer(in Entity player)

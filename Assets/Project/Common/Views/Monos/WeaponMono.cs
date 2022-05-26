@@ -1,12 +1,16 @@
-﻿using DG.Tweening;
-using ME.ECS;
-using ME.ECS.Views.Providers;
+﻿using ME.ECS;
+using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Common.Views.Monos
 {
-	public class ObjectsMonoView : MonoBehaviourView
+	using ME.ECS.Views.Providers;
+
+	public class WeaponMono : MonoBehaviourView
 	{
 		public override bool applyStateJob => true;
+		[SerializeField] private Animator _anim;
+		private bool _isAttacking;
 
 		public override void OnInitialize() {}
 		public override void OnDeInitialize() {}
@@ -14,6 +18,11 @@ namespace Project.Common.Views.Monos
 		public override void ApplyState(float deltaTime, bool immediately)
 		{
 			transform.position = entity.GetPosition();
+			transform.rotation = entity.GetRotation();
+			
+			if(!entity.Has<MeleeWeapon>()) return;
+			
+			_anim.SetBool("Attack", entity.Has<LeftWeaponShot>());
 		}
 	}
 }

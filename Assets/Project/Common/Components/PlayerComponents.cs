@@ -45,4 +45,10 @@ namespace Project.Common.Components
         public Entity ThirdSkill;
         public Entity FourthSkill;
     }
+
+    public struct Hover : IComponent
+    {
+        public bool Direction;
+        public fp Amount;
+    }
 }

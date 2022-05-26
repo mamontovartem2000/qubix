@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3441943365050475339}
-  - component: {fileID: 2525851274780467698}
+  - component: {fileID: 8521525137883334615}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2525851274780467698
+--- !u!114 &8521525137883334615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2634585911352424945}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd959b7c6d895084abd2c49eea98c926, type: 3}
+  m_Script: {fileID: 11500000, guid: e95e3c894e65eac4cbdc2a6b14f82332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystemSimulation:
@@ -53,6 +53,14 @@ MonoBehaviour:
       halfEnding: 0.5
     hasElements: 0
     hasDefault: 1
+  defaultParameters:
+    useDespawnTime: 0
+    despawnTime: 0
+    cacheCustomViewId: 0
+    useCache: 0
+    useCacheTimeout: 0
+    cacheTimeout: 0
+  _anim: {fileID: 0}
 --- !u!1 &2904404203826853725
 GameObject:
   m_ObjectHideFlags: 0

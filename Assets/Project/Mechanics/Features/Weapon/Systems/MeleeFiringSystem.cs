@@ -57,7 +57,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
 				entity.Get<MeleeDelay>().Value = entity.Read<MeleeDelayDefault>().Value;
 				entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;
 				
-				_projectile.SpawnMelee(aim);
+				_projectile.SpawnMelee(aim, entity);
 			}
 		}
 	}

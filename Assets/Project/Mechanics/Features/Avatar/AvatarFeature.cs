@@ -56,7 +56,8 @@ namespace Project.Mechanics.Features.Avatar
             entity.InstantiateView(view);
             
             entity.Get<Owner>().Value = owner;
-
+            entity.Set(new Hover {Direction = false, Amount = 0});
+            
             if (DisplayNickname)
             {
                 var nick = new Entity("Nickname");

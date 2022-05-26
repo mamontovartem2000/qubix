@@ -50,6 +50,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealingAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealingModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealthTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Hover>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
@@ -203,6 +204,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealingAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealingModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealthTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Hover>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
@@ -351,6 +353,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.HealingAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.HealingModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.HealthTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.Hover>(false);
             structComponentsContainer.Validate<Project.Common.Components.InstantReloadAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.InstantReloadModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.LandMineAffect>(true);
@@ -504,6 +507,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.HealingAffect>(true);
             entity.ValidateData<Project.Common.Components.HealingModifier>(false);
             entity.ValidateData<Project.Common.Components.HealthTag>(true);
+            entity.ValidateData<Project.Common.Components.Hover>(false);
             entity.ValidateData<Project.Common.Components.InstantReloadAffect>(true);
             entity.ValidateData<Project.Common.Components.InstantReloadModifier>(false);
             entity.ValidateData<Project.Common.Components.LandMineAffect>(true);
