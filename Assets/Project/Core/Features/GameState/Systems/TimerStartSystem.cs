@@ -38,7 +38,7 @@ namespace Project.Core.Features.GameState.Systems
 				}
 				else if (NetworkData.BuildType == BuildTypes.Front)
 				{
-					timerEntity.Get<GameTimer>().Value = 15;
+					timerEntity.Get<GameTimer>().Value = 150;
 				}
 
 				world.RemoveSharedData<MapInitialized>();
