@@ -32,6 +32,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
         {
             return Filter.Create("Filter-PlayerHealthSystem")
                 .With<PlayerHealth>()
+                .With<AvatarTag>()
                 .WithoutShared<GameFinished>()
                 .Push();
         }

@@ -17,6 +17,8 @@ MonoBehaviour:
   - id: 0
   - id: 1
   - id: 2
+  - id: 3
+  - id: 4
   removeStructComponents: []
   templates:
   - 42195f0a559d99a479384ed2079515c8
@@ -38,3 +40,12 @@ MonoBehaviour:
             m_rawValue: 0
     00000002:
       type: {class: CollisionStatic, ns: Project.Common.Components, asm: Project.Common}
+    00000003:
+      type: {class: DestructibleLifeTime, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value:
+          m_rawValue: 12884901888
+    00000004:
+      type: {class: DestructibleView, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: -110241306403582946, guid: dfa6f01972a3d1248af867682430e8c7, type: 3}

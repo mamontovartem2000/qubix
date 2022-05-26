@@ -90,7 +90,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124080231355740867}
-  - component: {fileID: 4904778406245477206}
   - component: {fileID: -7193739043779058951}
   m_Layer: 0
   m_Name: Barrels
@@ -114,34 +113,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4904778406245477206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3634543103376566393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 568c5331562b65a408260d0c0e3be7c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystemSimulation:
-    particleItems: []
-    settings:
-      simulationType: 1
-      minSimulationTime: 0.2
-      minEndingTime: 0.1
-      halfEnding: 0.5
-    hasElements: 0
-    hasDefault: 1
-  defaultParameters:
-    useDespawnTime: 0
-    despawnTime: 0
-    cacheCustomViewId: 0
-    useCache: 0
-    useCacheTimeout: 0
-    cacheTimeout: 0
 --- !u!114 &-7193739043779058951
 MonoBehaviour:
   m_ObjectHideFlags: 0

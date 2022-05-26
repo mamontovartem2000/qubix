@@ -1225,6 +1225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4404454322113156891}
   - component: {fileID: 3914775357920464288}
+  - component: {fileID: -6252604388312348956}
   m_Layer: 0
   m_Name: Cage_Anim
   m_TagString: Untagged
@@ -1268,6 +1269,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-6252604388312348956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3914775357920464289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39b4657fb1ff614b909bc4eceebd2a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSystemSimulation:
+    particleItems: []
+    settings:
+      simulationType: 1
+      minSimulationTime: 0.2
+      minEndingTime: 0.1
+      halfEnding: 0.5
+    hasElements: 0
+    hasDefault: 1
+  defaultParameters:
+    useDespawnTime: 0
+    despawnTime: 0
+    cacheCustomViewId: 0
+    useCache: 0
+    useCacheTimeout: 0
+    cacheTimeout: 0
 --- !u!1 &3949696569316277059
 GameObject:
   m_ObjectHideFlags: 0

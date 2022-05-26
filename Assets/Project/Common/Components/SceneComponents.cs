@@ -24,4 +24,14 @@ namespace Project.Common.Components
 	}
 	
 	public struct Pallette : IComponent {}
+
+	public struct DestructibleTag : IComponent {}
+	public struct DestructibleView : IComponent
+	{
+		public MonoBehaviourViewBase Value;
+	}
+	public struct DestructibleLifeTime : IComponent
+	{
+		public fp Value;
+	}
 }

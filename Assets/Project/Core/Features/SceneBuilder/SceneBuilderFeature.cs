@@ -162,8 +162,13 @@ namespace Project.Core.Features.SceneBuilder
                 if(entity.Has<Pallette>())
                     entity.SetPosition(entity.GetPosition() + new fp3(-0.15,0.2,0.15));
                 entity.SetRotation(PropsConfigs[mapElement].Read<Rotation>().value);
-                
                 entity.Get<Owner>().Value = entity;
+                
+                if (entity.Has<DestructibleView>())
+                {
+                    entity.Get<PlayerHealth>().Value = 10;
+                    entity.Set(new DestructibleTag());
+                }
 
                 SceneUtils.TakeTheCell(i);
             }

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1011105806492005807}
-  - component: {fileID: 8659785727390810526}
   - component: {fileID: -4044692456254912944}
   m_Layer: 0
   m_Name: Wall_Cross
@@ -33,34 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8659785727390810526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379423815278145301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 568c5331562b65a408260d0c0e3be7c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystemSimulation:
-    particleItems: []
-    settings:
-      simulationType: 1
-      minSimulationTime: 0.2
-      minEndingTime: 0.1
-      halfEnding: 0.5
-    hasElements: 0
-    hasDefault: 1
-  defaultParameters:
-    useDespawnTime: 0
-    despawnTime: 0
-    cacheCustomViewId: 0
-    useCache: 0
-    useCacheTimeout: 0
-    cacheTimeout: 0
 --- !u!114 &-4044692456254912944
 MonoBehaviour:
   m_ObjectHideFlags: 0

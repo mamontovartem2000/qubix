@@ -15,7 +15,8 @@ namespace Project.Mechanics.Features.VFX
 	public sealed class VFXFeature : Feature
 	{
 		public MonoBehaviourViewBase[] Views;
-		private ViewId[] _viewIds; 
+		// public MonoBehaviourViewBase[] Destructibles;
+		private ViewId[] _viewIds;//, _destructibleIds; 
 
 		protected override void OnConstruct()
 		{
@@ -23,11 +24,17 @@ namespace Project.Mechanics.Features.VFX
 			AddSystem<PlayerHoverSystem>();
 			
 			_viewIds = new ViewId[Views.Length];
-
+			// _destructibleIds = new ViewId[Destructibles.Length];
+			
 			for (int i = 0; i < Views.Length; i++)
 			{
 				_viewIds[i] = world.RegisterViewSource(Views[i]);
 			}
+
+			// for (int i = 0; i < Destructibles.Length; i++)
+			// {
+			// 	_destructibleIds[i] = world.RegisterViewSource(Destructibles[i]);
+			// }
 		}
 
 		protected override void OnDeconstruct() {}

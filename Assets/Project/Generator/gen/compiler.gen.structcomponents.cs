@@ -31,6 +31,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleLifeTime>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, false, false, false, false, false, false);
@@ -185,6 +188,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleLifeTime>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, false, false, false, false, false, false);
@@ -334,6 +340,9 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.DamagedBy>(false);
             structComponentsContainer.Validate<Project.Common.Components.DamageSource>(true);
             structComponentsContainer.Validate<Project.Common.Components.DashAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.DestructibleLifeTime>(false);
+            structComponentsContainer.Validate<Project.Common.Components.DestructibleTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.DestructibleView>(false);
             structComponentsContainer.Validate<Project.Common.Components.DispenserTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.EffectTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.FaceDirection>(false);
@@ -488,6 +497,9 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.DamagedBy>(false);
             entity.ValidateData<Project.Common.Components.DamageSource>(true);
             entity.ValidateData<Project.Common.Components.DashAffect>(true);
+            entity.ValidateData<Project.Common.Components.DestructibleLifeTime>(false);
+            entity.ValidateData<Project.Common.Components.DestructibleTag>(true);
+            entity.ValidateData<Project.Common.Components.DestructibleView>(false);
             entity.ValidateData<Project.Common.Components.DispenserTag>(false);
             entity.ValidateData<Project.Common.Components.EffectTag>(true);
             entity.ValidateData<Project.Common.Components.FaceDirection>(false);
