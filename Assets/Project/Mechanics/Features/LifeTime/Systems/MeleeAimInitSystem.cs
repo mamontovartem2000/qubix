@@ -41,6 +41,7 @@ namespace Project.Mechanics.Features.LifeTime.Systems
             spot.Set(new MeleeAimer());
             spot.Get<Owner>().Value = entity.Get<Owner>().Value;
             entity.Get<MeleeDamageSpot>().Value = spot;
+            spot.Remove<CollisionDynamic>();
         }
     }
 }

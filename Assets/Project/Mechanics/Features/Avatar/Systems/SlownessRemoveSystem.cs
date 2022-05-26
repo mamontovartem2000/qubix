@@ -42,10 +42,12 @@ namespace Project.Mechanics.Features.Avatar.Systems {
     
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
         {
+            if(entity.Get<Slowness>().LifeTime < 0) return;
+            
             entity.Get<Slowness>().LifeTime -= deltaTime;
 
 			if (entity.Get<Slowness>().LifeTime > 0f) return;
-
+            
 			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<Slowness>().Value = 1;
         }
     
