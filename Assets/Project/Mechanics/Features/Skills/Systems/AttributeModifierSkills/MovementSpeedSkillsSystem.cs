@@ -46,6 +46,7 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			
 			var amount = entity.Read<SkillAmount>().Value / 100f;
 			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<MoveSpeedModifier>().Value += amount;
+			effect.Get<MoveSpeedModifier>().Value = amount;
 
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 

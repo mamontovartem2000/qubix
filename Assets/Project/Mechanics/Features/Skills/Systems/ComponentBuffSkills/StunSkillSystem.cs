@@ -46,7 +46,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			ref readonly var owner = ref entity.Read<Owner>().Value;
 			ref var avatar = ref owner.Get<PlayerAvatar>().Value;
 
-			avatar.Get<WeaponEntities>().RightWeapon.Set(new StunModifier());
+			avatar.Get<WeaponEntities>().RightWeapon.Set(new StunModifier{Value = 20});
 
 			avatar.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = 5;
 

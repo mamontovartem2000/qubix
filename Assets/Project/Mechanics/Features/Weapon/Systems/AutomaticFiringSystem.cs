@@ -77,7 +77,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
                 
                 if (entity.Has<StunModifier>())
                 {
-                    entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<AmmoCapacityDefault>().Value = entity.Read<StunModifier>().Value;
+                    entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = entity.Read<StunModifier>().Value;
                     entity.Remove<StunModifier>();
                 }
                 

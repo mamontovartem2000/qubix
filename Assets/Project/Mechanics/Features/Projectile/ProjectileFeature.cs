@@ -39,7 +39,7 @@ namespace Project.Mechanics.Features.Projectile
             if (gun.Has<StunModifier>())
             {
                 Debug.Log("Has stun");
-                entity.Set(new StunModifier { Value = 5 });
+                entity.Set(new StunModifier { Value = 1 });
             }
             var damageBase = entity.Read<ProjectileDamage>().Value;
             var damageMod = damageBase * gun.Get<Owner>().Value.Get<AutomaticDamageModifier>().Value;

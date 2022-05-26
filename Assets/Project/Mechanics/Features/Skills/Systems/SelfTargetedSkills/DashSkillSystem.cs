@@ -45,7 +45,8 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 			
 			entity.Remove<ActivateSkill>();
 
-            if (!SceneUtils.IsFree(nextPos)) return;
+            if (!SceneUtils.IsWalkable(nextPos)) return;
+            
             SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition(), nextPos);
             entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.SetPosition(nextPos);
             entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<PlayerMoveTarget>().Value = nextPos;
