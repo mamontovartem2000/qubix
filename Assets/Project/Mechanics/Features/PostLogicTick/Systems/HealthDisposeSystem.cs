@@ -49,7 +49,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 			var collision = new Entity("collision");
 			collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = -10f}, ComponentLifetime.NotifyAllSystems);
                     
-			//_vfx.SpawnVFX(VFXFeature.VFXType.TakeHealth, player.GetPosition());
+			_vfx.SpawnVFX(VFXFeature.VFXType.TakeHealth, player.GetPosition());
 			entity.Destroy();
 		}
 	}

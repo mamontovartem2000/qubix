@@ -54,8 +54,10 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 				if (owner.Read<PlayerTag>().Team != from.Read<PlayerTag>().Team || NetworkData.Team == string.Empty)
 				{
 					var collision = new Entity("collision");
+					
 					if (entity.Has<StunModifier>())
 					{
+					    
 						player.Set(new Stun { Value = entity.Read<StunModifier>().Value });
 					}
 					collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);

@@ -44,7 +44,7 @@ namespace Project.Mechanics.Features.VFX
 		{
 			var fx = new Entity("vfx");
 			fx.Get<LifeTimeLeft>().Value = 3;
-			fx.Set(new VFXTag());
+			// fx.Set(new VFXTag());
 			fx.SetLocalPosition(position + Vector3.up);
 			fx.InstantiateView(_viewIds[(int)type-1]);
 		}

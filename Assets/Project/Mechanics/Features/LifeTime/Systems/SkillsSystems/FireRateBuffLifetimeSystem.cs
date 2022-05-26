@@ -36,13 +36,13 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
-			lifeTime -= deltaTime;
-
-			if (lifeTime > 0f) return;
+			// ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
+			// lifeTime -= deltaTime;
+			//
+			// if (lifeTime > 0f) return;
 
 			// entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<FireRateModifier>().Value -= entity.Read<SkillAmount>().Value;
-			entity.Destroy();
+			// entity.Destroy();
 		}
 	}
 }
