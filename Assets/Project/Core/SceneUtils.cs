@@ -86,9 +86,11 @@ namespace Project.Core
         public static bool IsWalkable(fp3 pos)
         {
             if (PositionToIndex(pos) < 0 || PositionToIndex(pos) > Worlds.current.ReadSharedData<MapComponents>().WalkableMap.Count - 1) return false;
+
+            if (Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(pos)] == 1 
+                || Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(pos)] == 2) return true;
             
-            return Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(pos)] == 1 
-                   || Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(pos)] == 2;
+            return false;
         }
 
         public static bool IsFree(fp3 pos)
