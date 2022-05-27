@@ -1,5 +1,6 @@
 using DG.Tweening;
 using ME.ECS;
+using Project.Markers;
 using Project.Modules.Network;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,8 +41,9 @@ public class GameSceneDestroyer : MonoBehaviour
     private void Disconnect()
     {
         var buildType = NetworkData.BuildType;
-        
         DOTween.KillAll();
+        Worlds.currentWorld.AddMarker(new NetworkPlayerDisconnected { ActorID = NetworkData.SlotInRoom });
+
         DestroyWorld();
         NetworkData.CloseNetwork();
         _needDestroyWorld = false;
