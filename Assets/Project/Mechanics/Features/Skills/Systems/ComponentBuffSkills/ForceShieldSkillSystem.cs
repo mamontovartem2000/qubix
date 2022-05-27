@@ -44,7 +44,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			effect.Set(new EffectTag());
 
 			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Set(new ForceShieldModifier{Value = 50});
-
+		
 			effect.Set(new ForceShieldModifier());
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 			effect.Get<Owner>().Value = entity.Read<Owner>().Value;

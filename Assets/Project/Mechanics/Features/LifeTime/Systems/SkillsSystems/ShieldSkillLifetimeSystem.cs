@@ -38,6 +38,8 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			if(!entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.IsAlive()) return;
+			
 			ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
 			lifeTime -= deltaTime;
 

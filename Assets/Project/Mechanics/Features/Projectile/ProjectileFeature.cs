@@ -31,7 +31,7 @@ namespace Project.Mechanics.Features.Projectile
             gun.Read<ProjectileConfig>().Value.Apply(entity);
 
             entity.SetParent(gun);
-            entity.SetLocalPosition(new Vector3(-0.15f, 0f, 0.35f));
+            entity.SetLocalPosition(new Vector3(0f, 0f, 0.35f));
             entity.SetParent(Entity.Empty);
             
             entity.Get<ProjectileDirection>().Value = direction;
