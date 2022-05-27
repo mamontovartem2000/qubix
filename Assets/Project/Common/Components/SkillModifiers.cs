@@ -94,7 +94,6 @@ namespace Project.Common.Components
 	public struct LinearPowerModifier : IComponent
 	{
 		public float Damage;
-		public int Speed;
 	}
 
 	public struct WormholeHookModifier : IComponent

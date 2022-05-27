@@ -69,8 +69,10 @@ namespace Project.Mechanics.Features.Projectile
                 entity.Get<Linear>().EndDelay = delay * (length - i);
                 
                 var damageBase = entity.Read<ProjectileDamage>().Value;
-                var damageMod = damageBase * owner.Read<PlayerAvatar>().Value.Get<LinearPowerModifier>().Damage;
-                var currentDamage = damageBase + damageMod;
+                var damageMod = damageBase * owner.Read<PlayerAvatar>().Value.Read<LinearPowerModifier>().Damage;
+                var currentDamage = damageMod + damageBase;
+                
+                Debug.Log($"LinearDamage: {currentDamage}");
                 
                 entity.Get<ProjectileDamage>().Value = currentDamage;
                 gun.Set(new LinearActive());
