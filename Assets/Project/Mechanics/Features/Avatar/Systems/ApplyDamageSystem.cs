@@ -66,8 +66,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
                 health -= damage;
             }
 
-            Debug.Log($"ForceShieldModifier: {apply.ApplyTo.Read<ForceShieldModifier>().Value}");
-            Debug.Log($"Health: {health}");
+            
             
             if (apply.ApplyTo.Get<PlayerHealth>().Value <= 0)
             {
@@ -77,6 +76,9 @@ namespace Project.Mechanics.Features.Avatar.Systems
             {
                 apply.ApplyTo.Get<PlayerHealth>().Value = to.Read<PlayerHealthDefault>().Value;
             }
+            
+            Debug.Log($"ForceShieldModifier: {apply.ApplyTo.Read<ForceShieldModifier>().Value}");
+            Debug.Log($"Health: {health}");
             
             world.GetFeature<EventsFeature>().HealthChanged.Execute(apply.ApplyTo.Read<Owner>().Value);
         }

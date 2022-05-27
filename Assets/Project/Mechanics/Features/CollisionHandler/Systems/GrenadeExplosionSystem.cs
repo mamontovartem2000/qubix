@@ -75,9 +75,17 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                     }
                     debuff.SetPosition(pos);
                 }
-
-                var vfx = new Entity("vfx");
-                _vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, entity.GetPosition());
+                if (entity.Read<SecondaryDamage>().Value.Has<Slowness>())
+                {
+                    var vfx = new Entity("vfx");
+                    _vfx.SpawnVFX(VFXFeature.VFXType.SlowExplosion, entity.GetPosition());
+                }
+                else
+                {
+                    var vfx = new Entity("vfx");
+                    _vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, entity.GetPosition());
+                }
+                
                 
                 entity.Destroy();
             }

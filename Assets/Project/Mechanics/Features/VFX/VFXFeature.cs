@@ -44,7 +44,7 @@ namespace Project.Mechanics.Features.VFX
 			if(!player.IsAlive()) return;
 			
 			var fx = new Entity("vfx");
-			fx.Get<LifeTimeLeft>().Value = 3;
+			fx.Get<LifeTimeLeft>().Value = 5;
 			fx.Set(new VFXTag());
 			fx.Set(new Owner { Value = player.Read<Owner>().Value });
 			fx.SetLocalPosition(position + Vector3.up);
@@ -54,7 +54,7 @@ namespace Project.Mechanics.Features.VFX
 		public void SpawnVFX(VFXType type, Vector3 position)
 		{
 			var fx = new Entity("vfx");
-			fx.Get<LifeTimeLeft>().Value = 3;
+			fx.Get<LifeTimeLeft>().Value = 5;
 			// fx.Set(new VFXTag());
 			fx.SetLocalPosition(position + Vector3.up);
 			fx.InstantiateView(_viewIds[(int)type-1]);
@@ -85,7 +85,8 @@ namespace Project.Mechanics.Features.VFX
 			SkillOffenciveBurst,
 			SkillQuickness,
 			SkillLinearPower,
-			QubixDeath
+			QubixDeath,
+			SlowExplosion
 		}
 	}
 }

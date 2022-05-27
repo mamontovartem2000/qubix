@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Mechanics.Features.Lifetime;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 {
@@ -41,10 +42,12 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 			lifeTime -= deltaTime;
 
 			if (lifeTime > 0f) return;
-
+			
 			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<ForceShieldModifier>().Value = 0;
 			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Remove<ForceShieldModifier>();
+			Debug.Log("shield removed");
 			entity.Destroy();
+
 		}
 	}
 }

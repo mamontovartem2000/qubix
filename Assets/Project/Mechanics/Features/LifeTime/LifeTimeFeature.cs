@@ -29,8 +29,6 @@ namespace Project.Mechanics.Features.Lifetime
             AddSystem<MeleeAimPositionSystem>();
             AddSystem<DestructibleHealthSystem>();
             AddSystem<AvoidTeleportLifeTimeSystem>();
-
-            AddSystem<ShieldSkillLifetimeSystem>();
         }
 
         protected override void OnDeconstruct() { }

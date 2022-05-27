@@ -41,6 +41,7 @@ namespace Project.Mechanics.Features.Avatar
             AddSystem<ProjectileDamageBuffLifetimeSystem>();
             AddSystem<LinearPowerSkillLifetimeSystem>();
             AddSystem<LinearDamageBuffLifetimeSystem>();
+            AddSystem<ShieldSkillLifetimeSystem>();
 
             _playerNick = world.RegisterViewSource(NicknameView);
         }
