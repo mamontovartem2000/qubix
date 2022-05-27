@@ -84,9 +84,15 @@ namespace Project.Mechanics.Features.Projectile
                 
                 visual.SetLocalPosition(new Vector3(-0.15f,0f, 0.5f));
                 visual.SetLocalRotation(gun.GetLocalRotation());
+                if (owner.Read<PlayerAvatar>().Value.Has<LinearPowerModifier>())
+                {
+                    visual.InstantiateView(world.RegisterViewSource(gun.Read<ProjectileAlternativeView>().Value));
+                }
+                else
+                {
+                    visual.InstantiateView(world.RegisterViewSource(gun.Read<ProjectileView>().Value));
+                }
                 
-                var view = world.RegisterViewSource(gun.Read<ProjectileView>().Value);
-                visual.InstantiateView(view);
                 
                 // if (gun.Has<LinearFull>())
                 //     gun.Remove<LinearFull>();

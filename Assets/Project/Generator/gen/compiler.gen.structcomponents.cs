@@ -108,6 +108,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PortalDispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PortalTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileAlternativeView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDirection>(false, true, false, false, false, false, false, false);
@@ -265,6 +266,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PortalDispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PortalTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileAlternativeView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDirection>(false, true, false, false, false, false, false, false);
@@ -417,6 +419,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.PortalDispenserTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.PortalTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileActive>(true);
+            structComponentsContainer.Validate<Project.Common.Components.ProjectileAlternativeView>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDamage>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDirection>(false);
@@ -574,6 +577,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.PortalDispenserTag>(false);
             entity.ValidateData<Project.Common.Components.PortalTag>(true);
             entity.ValidateData<Project.Common.Components.ProjectileActive>(true);
+            entity.ValidateData<Project.Common.Components.ProjectileAlternativeView>(false);
             entity.ValidateData<Project.Common.Components.ProjectileConfig>(false);
             entity.ValidateData<Project.Common.Components.ProjectileDamage>(false);
             entity.ValidateData<Project.Common.Components.ProjectileDirection>(false);

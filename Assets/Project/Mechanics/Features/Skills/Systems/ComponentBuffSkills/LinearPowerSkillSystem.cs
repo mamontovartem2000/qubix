@@ -45,8 +45,11 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			effect.Set(new EffectTag());
 			
 			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Set(new LinearPowerModifier{Damage = 0.5f});
-			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().LeftWeapon.Set(new AmmoCapacity { Value = 0 });
+			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().LeftWeapon.Remove<LinearActive>();
+			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().LeftWeapon.Remove<LeftWeaponShot>();
+			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().LeftWeapon.Set(new AmmoCapacity { Value = 100 });
 			effect.Set(new LinearPowerModifier());
+
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;

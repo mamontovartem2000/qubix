@@ -50,6 +50,10 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
                     collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);
                 }
             }
+            if (owner.Has<DestructibleTag>())
+            {
+                owner.Get<PlayerHealth>().Value -= damage;
+            }
 
             entity.Remove<Collided>();
         }

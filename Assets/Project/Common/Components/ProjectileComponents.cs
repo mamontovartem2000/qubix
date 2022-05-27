@@ -9,7 +9,12 @@ namespace Project.Common.Components
 	{
 		public MonoBehaviourViewBase Value;
 	}
-
+	
+	public struct ProjectileAlternativeView : IComponent
+	{
+		public MonoBehaviourViewBase Value;
+	}
+	
 	public struct SecondaryDamage : IComponent
 	{
 		public DataConfig Value;
