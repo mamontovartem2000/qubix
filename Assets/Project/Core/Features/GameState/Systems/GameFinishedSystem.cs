@@ -146,8 +146,10 @@ namespace Project.Core.Features.GameState.Systems
                 if (player.Read<PlayerTag>().Team != teamColor) continue;
 
                 team.Kills += player.Read<PlayerScore>().Kills;
-                team.Deaths += player.Read<PlayerScore>().Kills;
-                team.Health += player.Read<PlayerAvatar>().Value.Read<PlayerHealth>().Value;
+                team.Deaths += player.Read<PlayerScore>().Deaths;
+
+                if (player.Read<PlayerAvatar>().Value.IsAlive())
+                    team.Health += player.Read<PlayerAvatar>().Value.Read<PlayerHealth>().Value;
             }
         }
 
@@ -158,7 +160,7 @@ namespace Project.Core.Features.GameState.Systems
             foreach (var player in _playerFilter)
             {
                 var kills = player.Read<PlayerScore>().Kills;
-                var deaths = player.Read<PlayerScore>().Kills;
+                var deaths = player.Read<PlayerScore>().Deaths;
                 var id = player.Read<PlayerTag>().PlayerServerID;
 
                 stats.Add(new PlayerStats() { Kills = (uint)kills, Deaths = (uint)deaths, PlayerId = id });
@@ -176,7 +178,7 @@ namespace Project.Core.Features.GameState.Systems
             foreach (var player in _playerFilter)
             {
                 var kills = player.Read<PlayerScore>().Kills;
-                var deaths = player.Read<PlayerScore>().Kills;
+                var deaths = player.Read<PlayerScore>().Deaths;
                 var id = player.Read<PlayerTag>().PlayerServerID;
                 var team = player.Read<PlayerTag>().Team;
 
