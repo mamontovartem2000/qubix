@@ -115,6 +115,7 @@ namespace Project.Mechanics.Features.Avatar
             }
 
             SceneUtils.TakeTheCell(entity.GetPosition());
+            entity.Get<FaceDirection>().Value = new fp3(0, 0, 1);
             entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
 
             world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(owner);

@@ -37,9 +37,12 @@ namespace Project.Modules.Network
                     SetServerTime(data.PayloadAsTimeFromStart());
                     break;
                 case Payload.StatsReceive:
+                    if (NetworkData.BuildType == BuildTypes.Front_Hub)
+                    {
 #if UNITY_WEBGL && !UNITY_EDITOR
                     BrowserEvents.GameIsOver();
 #endif
+                    }
                     DestroyWorld?.Invoke();
                     break;
                 default:
