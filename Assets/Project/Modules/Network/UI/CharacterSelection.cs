@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project.Modules.Network.UI
 {
@@ -8,15 +9,18 @@ namespace Project.Modules.Network.UI
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _descriptionText;
         [SerializeField] private GameObject[] _checkmarks;
+        [SerializeField] private Transform[] _skillDescriptions;
 
         private int _selectedIndex = -1;
-        private string[] _names = new[] { "Buller", "GoldHunter", "Powerf" };
-        private string[] _descriptions = new[]
-        {
+        private string[] _names = { "Buller", "GoldHunter", "Powerf" };
+        private string[] _descriptions = {
             "Great shooter was born with a rifle in his hands. Causes a lot of inconvenience to enemies, hitting them from a distance.",
             "Loves gold and only gold! He is proficient with ranged and melee weapons, allowing him to effectively attack the enemy from various distances.",
             "A great warrior from distant islands, armed with government technology. The ancient way of life hardened the fighter, thanks to this he is insanely hardy."
         };
+
+        public Sprite[] _bullerIcons, _goldIcons, _powerIcons;
+        public string[] _bullerDes, _goldDes, _powerDes;
 
         public void Select(int index)
         {
@@ -33,6 +37,46 @@ namespace Project.Modules.Network.UI
             for (var i = 0; i < _checkmarks.Length; i++)
             {
                 _checkmarks[i].SetActive(index == i);
+            }
+            
+            ChangeSkillDescription(index);
+            
+        }
+
+        private void ChangeSkillDescription(int index)
+        {
+            var tmpArr = new Transform[4];
+            for (int i = 0; i < _skillDescriptions.Length; i++)
+            {
+                tmpArr[i] = _skillDescriptions[index].GetChild(i);
+            }
+
+            for (int i = 0; i < tmpArr.Length; i++)
+            {
+                var icon = tmpArr[i].GetChild(0).GetComponent<Image>();
+                var descr = tmpArr[i].GetChild(1).GetComponent<TextMeshProUGUI>();
+
+                switch (index)
+                {
+                    case 0:
+                    {
+                        icon.sprite = _bullerIcons[i];
+                        descr.SetText(_bullerDes[i]);
+                        break;
+                    }
+                    case 1:
+                    {
+                        icon.sprite = _goldIcons[i];
+                        descr.SetText(_goldDes[i]);
+                        break;
+                    }
+                    case 2:
+                    {
+                        icon.sprite = _powerIcons[i];
+                        descr.SetText(_powerDes[i]);
+                        break;
+                    }
+                }
             }
         }
     }
