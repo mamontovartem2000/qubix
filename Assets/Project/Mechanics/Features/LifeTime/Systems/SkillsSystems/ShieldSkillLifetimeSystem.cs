@@ -38,15 +38,15 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			if(!entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.IsAlive()) return;
+			if(!entity.Get<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
 			
 			ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
 			lifeTime -= deltaTime;
 
 			if (lifeTime > 0f) return;
 			
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<ForceShieldModifier>().Value = 0;
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Remove<ForceShieldModifier>();
+			entity.Get<Owner>().Value.Read<PlayerAvatar>().Value.Get<ForceShieldModifier>().Value = 0;
+			entity.Get<Owner>().Value.Read<PlayerAvatar>().Value.Remove<ForceShieldModifier>();
 			Debug.Log("shield removed");
 			entity.Destroy();
 

@@ -35,12 +35,15 @@ namespace Project.Mechanics.Features.Lifetime.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
+            
             ref var delay = ref entity.Get<Linear>();
             delay.StartDelay -= deltaTime;
 
             if(!entity.Get<Owner>().Value.Has<PlayerAvatar>()) return;
+            if(!entity.IsAlive()) return;
+            if(!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+            
             ref var player = ref entity.Get<Owner>().Value.Get<PlayerAvatar>().Value;
-
             ref readonly var linIndex = ref entity.Read<LinearIndex>().Value;
             ref readonly var dir = ref player.Read<FaceDirection>().Value;
 

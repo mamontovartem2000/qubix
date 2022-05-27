@@ -37,7 +37,7 @@ namespace Project.Mechanics.Features.VFX.Systems {
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             if(entity.Read<Owner>().Value.Has<PlayerAvatar>())
-                entity.SetPosition(entity.Read<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition());
+                entity.SetPosition(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition());
         }
     
     }

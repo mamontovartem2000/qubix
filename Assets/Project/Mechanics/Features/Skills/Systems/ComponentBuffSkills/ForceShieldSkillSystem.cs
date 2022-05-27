@@ -43,14 +43,14 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			var effect = new Entity("effect");
 			effect.Set(new EffectTag());
 
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Set(new ForceShieldModifier{Value = 50});
+			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Set(new ForceShieldModifier{Value = 50});
 		
 			effect.Set(new ForceShieldModifier());
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			
-			_vfx.SpawnVFX(VFXFeature.VFXType.PlayerShield, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
+			_vfx.SpawnVFX(VFXFeature.VFXType.PlayerShield, entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition(), entity.Read<Owner>().Value.Get<PlayerAvatar>().Value);
 			entity.Remove<ActivateSkill>();
 			Debug.Log("shield activated");
 		}
