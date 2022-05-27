@@ -46,7 +46,6 @@ namespace Project.Mechanics.Features.LifeTime.Systems {
         {
             ref var avoid = ref entity.Get<AvoidTeleport>().Value;
             avoid -= deltaTime;
-            Debug.Log(entity.Get<AvoidTeleport>().Value);
             if(avoid <= 0f)
                 entity.Remove<AvoidTeleport>();
         }

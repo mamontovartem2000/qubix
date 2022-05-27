@@ -41,7 +41,8 @@ namespace Project.Mechanics.Features.Avatar.Systems
             var from = apply.ApplyFrom;
             var to = apply.ApplyTo;
             var damage = apply.Damage;
-
+            ref readonly var shield = ref to.Read<ForceShieldModifier>().Value;
+            
             if (from.Has<PlayerAvatar>())
             {
                 to.Get<Owner>().Value.Set(new DamagedBy {Value = from});
@@ -49,18 +50,25 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
             ref var health = ref to.Get<PlayerHealth>().Value;
 
-            if (apply.ApplyTo.Has<ForceShieldModifier>() && apply.ApplyTo.Get<ForceShieldModifier>().Value - damage >= 0)
+            if (to.Has<ForceShieldModifier>() && shield - damage >= 0)
             {
-                apply.ApplyTo.Get<ForceShieldModifier>().Value -= damage;
+                to.Get<ForceShieldModifier>().Value -= damage;
             }
-            else if (apply.ApplyTo.Has<ForceShieldModifier>() && apply.ApplyTo.Get<ForceShieldModifier>().Value - damage < 0)
+            else if (to.Has<ForceShieldModifier>() && shield - damage < 0)
             {
-                apply.ApplyTo.Get<ForceShieldModifier>().Value -= damage;
-                damage = -apply.ApplyTo.Get<ForceShieldModifier>().Value;
+                to.Get<ForceShieldModifier>().Value -= damage;
+                damage = -shield;
+                health -= damage;
+                to.Remove<ForceShieldModifier>();
+            }
+            else if (!apply.ApplyTo.Has<ForceShieldModifier>())
+            {
                 health -= damage;
             }
-            else health -= damage;
 
+            Debug.Log($"ForceShieldModifier: {apply.ApplyTo.Read<ForceShieldModifier>().Value}");
+            Debug.Log($"Health: {health}");
+            
             if (apply.ApplyTo.Get<PlayerHealth>().Value <= 0)
             {
                 apply.ApplyTo.Get<PlayerHealth>().Value = 0;
