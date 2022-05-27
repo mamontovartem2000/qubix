@@ -12,6 +12,7 @@ public class CooldownTickScript : MonoBehaviour
 {
     public GlobalEvent CooldownChangedEvent;
     public TextMeshProUGUI[] SkillCooldownTimer;
+    public GameObject[] InactiveSkillImage;
     private void Start()
     {
         CooldownChangedEvent.Subscribe(CooldownTimeChanged);
@@ -23,8 +24,14 @@ public class CooldownTickScript : MonoBehaviour
         
         if (entity.Read<Owner>().Value != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.SlotInRoom)) return;
         var cooldownLeft = entity.Read<Cooldown>().Value;
+        InactiveSkillImage[entity.Read<SkillTag>().id].SetActive(true);
         SkillCooldownTimer[entity.Read<SkillTag>().id].SetText(((int)cooldownLeft).ToString());
-        if(Mathf.RoundToInt(cooldownLeft) < 1) SkillCooldownTimer[entity.Read<SkillTag>().id].SetText("");
+        
+        if (Mathf.RoundToInt(cooldownLeft) < 1)
+        {
+            SkillCooldownTimer[entity.Read<SkillTag>().id].SetText("");
+            InactiveSkillImage[entity.Read<SkillTag>().id].SetActive(false);
+        }
     }
 
     private void OnDestroy()

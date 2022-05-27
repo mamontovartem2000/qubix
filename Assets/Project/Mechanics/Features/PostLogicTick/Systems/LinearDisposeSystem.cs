@@ -40,6 +40,8 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             ref var owner = ref entity.Get<Collided>().ApplyTo;
+            if(!owner.IsAlive()) return;
+            
             ref var from = ref entity.Get<Collided>().ApplyFrom;
             ref readonly var damage = ref entity.Read<ProjectileDamage>().Value;
 

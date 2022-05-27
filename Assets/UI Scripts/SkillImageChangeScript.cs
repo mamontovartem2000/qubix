@@ -14,6 +14,7 @@ public class SkillImageChangeScript : MonoBehaviour
     public Image[] SecondSkillImage;
     public Image[] ThirdSkillImage;
     public Image[] FourthSkillImage;
+   
     private void Start()
     {
         SkillImageChange.Subscribe(SkillImageChanged);

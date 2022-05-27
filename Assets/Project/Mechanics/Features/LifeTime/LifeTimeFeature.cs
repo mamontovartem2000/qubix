@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Mechanics.Features.LifeTime.Systems;
+using Project.Mechanics.Features.LifeTime.Systems.SkillsSystems;
 
 namespace Project.Mechanics.Features.Lifetime
 {
@@ -28,6 +29,8 @@ namespace Project.Mechanics.Features.Lifetime
             AddSystem<MeleeAimPositionSystem>();
             AddSystem<DestructibleHealthSystem>();
             AddSystem<AvoidTeleportLifeTimeSystem>();
+
+            AddSystem<ShieldSkillLifetimeSystem>();
         }
 
         protected override void OnDeconstruct() { }
