@@ -45,10 +45,13 @@ namespace Project.Modules.Network.UI
 
         private void ChangeSkillDescription(int index)
         {
-            var tmpArr = new Transform[4];
+            if(index < 0 || index > _skillDescriptions.Length - 1) return;
+            
+            var tmpArr = new Transform[_skillDescriptions.Length];
+            
             for (int i = 0; i < _skillDescriptions.Length; i++)
             {
-                tmpArr[i] = _skillDescriptions[index].GetChild(i);
+                tmpArr[i] = _skillDescriptions[i];
             }
 
             for (int i = 0; i < tmpArr.Length; i++)
