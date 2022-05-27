@@ -25,8 +25,8 @@ namespace Project.Mechanics.Features.Avatar
         private readonly Vector3 _trajectory = new Vector3(0f, 1f, 0f);
 
         private ViewId _playerNick;
-        private fp3[] team1 = new fp3[] { new fp3(11, 0, 5), new fp3(4, 0, 7), new fp3(3, 0, 17), new fp3(3, 0, 26), new fp3(3, 0, 34), new fp3(3, 0, 42) };
-        private fp3[] team2 = new fp3[] { new fp3(44, 0, 8), new fp3(47, 0, 13), new fp3(48, 0, 20), new fp3(48, 0, 29), new fp3(48, 0, 39), new fp3(44, 0, 43) };
+        //private fp3[] team1 = new fp3[] { new fp3(11, 0, 5), new fp3(4, 0, 7), new fp3(3, 0, 17), new fp3(3, 0, 26), new fp3(3, 0, 34), new fp3(3, 0, 42) };
+        //private fp3[] team2 = new fp3[] { new fp3(44, 0, 8), new fp3(47, 0, 13), new fp3(48, 0, 20), new fp3(48, 0, 29), new fp3(48, 0, 39), new fp3(44, 0, 43) };
 
         protected override void OnConstruct()
         {
@@ -81,38 +81,40 @@ namespace Project.Mechanics.Features.Avatar
             
             world.GetFeature<EventsFeature>().SkillImageChange.Execute(owner);
 
-            //TODO: КОСТЫЛЬ ЕБУЧИЙ
-            if (NetworkData.Info.map_id == 1 || NetworkData.Team == string.Empty)
-            {
-                entity.SetPosition(SceneUtils.GetRandomFreePosition());
-            }
-            else
-            {
-                var pos = fp3.zero;
+            entity.SetPosition(SceneUtils.GetRandomFreePosition());
 
-                if (owner.Read<PlayerTag>().Team == "red")
-                {
-                    while (!SceneUtils.IsWalkable(pos))
-                    {
-                        var rnd = Worlds.current.GetRandomRange(0, team1.Length);
-                        pos = team1[rnd];
+            ////TODO: КОСТЫЛЬ ЕБУЧИЙ
+            //if (NetworkData.Info.map_id == 1 || NetworkData.Team == string.Empty)
+            //{
+            //    entity.SetPosition(SceneUtils.GetRandomFreePosition());
+            //}
+            //else
+            //{
+            //    var pos = fp3.zero;
 
-                        if (!SceneUtils.IsFree(pos)) pos = fp3.zero;
-                    }
-                }
-                else
-                {
-                    while (!SceneUtils.IsWalkable(pos))
-                    {
-                        var rnd = Worlds.current.GetRandomRange(0, team2.Length);
-                        pos = team2[rnd];
+            //    if (owner.Read<PlayerTag>().Team == "red")
+            //    {
+            //        while (!SceneUtils.IsWalkable(pos))
+            //        {
+            //            var rnd = Worlds.current.GetRandomRange(0, team1.Length);
+            //            pos = team1[rnd];
 
-                        if (!SceneUtils.IsFree(pos)) pos = fp3.zero;
-                    }
-                }
+            //            if (!SceneUtils.IsFree(pos)) pos = fp3.zero;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        while (!SceneUtils.IsWalkable(pos))
+            //        {
+            //            var rnd = Worlds.current.GetRandomRange(0, team2.Length);
+            //            pos = team2[rnd];
 
-                entity.SetPosition(pos);
-            }
+            //            if (!SceneUtils.IsFree(pos)) pos = fp3.zero;
+            //        }
+            //    }
+
+            //    entity.SetPosition(pos);
+            //}
 
             SceneUtils.TakeTheCell(entity.GetPosition());
             entity.Get<FaceDirection>().Value = new fp3(0, 0, 1);
