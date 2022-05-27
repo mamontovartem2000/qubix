@@ -20,7 +20,7 @@ namespace Project.Mechanics.Features.CollisionHandler
         {
             AddSystem<GridCollisionDetectionSystem>();
             AddSystem<GrenadeExplosionSystem>();
-            AddSystem<SpawnMineSystem>();
+            //AddSystem<SpawnMineSystem>();
             AddSystem<NewHealthDispenserSystem>();
             AddSystem<NewPortalDispenserSystem>();
 

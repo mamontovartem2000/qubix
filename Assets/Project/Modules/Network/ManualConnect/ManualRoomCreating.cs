@@ -31,10 +31,10 @@ namespace Project.Modules.Network
             callback(info.id);
         }
 
-        public static IEnumerator LoadJoinRequest(string roomid, string nick, Action<string> callback)
+        public static IEnumerator LoadJoinRequest(string roomid, string playerId, Action<string> callback)
         {
             string url = "https://game.qubixinfinity.io/match/test/join_request";
-            Player req = new Player() { room_id = roomid, player_id = nick };
+            Player req = new Player() { room_id = roomid, player_id = playerId };
             string json = JsonUtility.ToJson(req);
 
             WWWForm formData = new WWWForm();

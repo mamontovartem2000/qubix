@@ -72,7 +72,7 @@ namespace Project.Mechanics.Features.Projectile
                 var damageMod = damageBase * owner.Read<PlayerAvatar>().Value.Read<LinearPowerModifier>().Damage;
                 var currentDamage = damageMod + damageBase;
                 
-                Debug.Log($"LinearDamage: {currentDamage}");
+                //Debug.Log($"LinearDamage: {currentDamage}");
                 
                 entity.Get<ProjectileDamage>().Value = currentDamage;
                 gun.Set(new LinearActive());
