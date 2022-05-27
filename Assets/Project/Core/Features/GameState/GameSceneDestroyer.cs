@@ -48,16 +48,17 @@ public class GameSceneDestroyer : MonoBehaviour
         NetworkData.CloseNetwork();
         _needDestroyWorld = false;
         _worldDestroyed = true;
-        if (buildType != BuildTypes.Front)
-        {
-            SceneManager.LoadScene(0);
-        }
-        else
+        
+        if (buildType == BuildTypes.Front_Hub)
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
                     BrowserEvents.WorldDestroyed();
 #endif
              Application.Quit();
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
         }
     }
 

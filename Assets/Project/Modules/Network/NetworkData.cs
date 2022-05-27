@@ -13,8 +13,11 @@ namespace Project.Modules.Network
         public static string Team = string.Empty;
         public static BuildTypes BuildType = BuildTypes.PC;
 
+
         public static void CloseNetwork()
         {
+            //Info = new GameInfo() { server_url = "url", room_id = "id777", player_icon = "www.png", player_nickname = "Dev player", map_id = 1, game_mode = "deathmatch", multiplayer_schema = null, available_characters = null, player_id = "qwerty" };
+            Info = null;
             Connect.CloseClient();
             Info = null;
             SlotInRoom = 1;
@@ -34,6 +37,7 @@ namespace Project.Modules.Network
     public enum BuildTypes
     {
         PC,
-        Front
+        Front_Hub,
+        Front_Room
     }
 }

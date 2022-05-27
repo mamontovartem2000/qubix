@@ -17,6 +17,7 @@ namespace Project.Modules.Network
 
 		private void Start()
 		{
+			NetworkData.BuildType = BuildTypes.Front_Room;
 			Stepsss.LoadMainMenuScene += ReloadMenuScene;
 			Stepsss.LoadGameScene += LoadGameScene;
 			WaitingRoomTimer.ShowCharacterSelectionWindow += SwapScreens;

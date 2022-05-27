@@ -1,6 +1,5 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Modules.Network;
 
 namespace Project.Core.Features.GameState.Systems
 {
@@ -31,16 +30,7 @@ namespace Project.Core.Features.GameState.Systems
 			if (world.HasSharedData<MapInitialized>())
 			{
 				Entity timerEntity = new Entity("Timer");
-
-				if (NetworkData.BuildType == BuildTypes.PC)
-				{
-					timerEntity.Get<GameTimer>().Value = 150;
-				}
-				else if (NetworkData.BuildType == BuildTypes.Front)
-				{
-					timerEntity.Get<GameTimer>().Value = 150;
-				}
-
+				timerEntity.Get<GameTimer>().Value = 150;
 				world.RemoveSharedData<MapInitialized>();
 			}
 		}
