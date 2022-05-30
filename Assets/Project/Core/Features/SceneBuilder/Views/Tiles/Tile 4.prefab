@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 7663538383190833034}
   m_Father: {fileID: 7134397466621635174}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4010248871694196463
 MeshFilter:
@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7663538383190833034
 Transform:
   m_ObjectHideFlags: 0
@@ -178,6 +178,87 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &8136979118723589662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6162586131247255696}
+  - component: {fileID: 1159822940983618138}
+  - component: {fileID: 2695774224286231858}
+  m_Layer: 0
+  m_Name: TriangleTile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6162586131247255696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8136979118723589662}
+  m_LocalRotation: {x: 0.000000081460335, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.486, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7134397466621635174}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1159822940983618138
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8136979118723589662}
+  m_Mesh: {fileID: 5062246478642505140, guid: e82a96b88fff87244ad71ced4e08bfad, type: 3}
+--- !u!23 &2695774224286231858
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8136979118723589662}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 7ac37a30ccd25ff40b445e94cf92df44, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8264746845256926032
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +287,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 6162586131247255696}
   - {fileID: 2427237486907722}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -236,12 +318,31 @@ MonoBehaviour:
           hasDefault: 0
         psSource: {fileID: 0}
         psRootSource: {fileID: 0}
+        mesh: {fileID: 5062246478642505140, guid: e82a96b88fff87244ad71ced4e08bfad, type: 3}
+        meshRenderer: {fileID: 2695774224286231858}
+        meshFilter: {fileID: 1159822940983618138}
+        material: {fileID: 2100000, guid: 7ac37a30ccd25ff40b445e94cf92df44, type: 2}
+        localPosition: {x: 0, y: 0, z: 0}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 1, y: 1, z: 1}
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
         mesh: {fileID: 5062246478642505140, guid: acae17ab99ff2c74e94a1e61e5c70659, type: 3}
         meshRenderer: {fileID: 1171977501005490725}
         meshFilter: {fileID: 4010248871694196463}
         material: {fileID: 2100000, guid: 6b460c765d7e3ea42a3e8282192dc561, type: 2}
-        localPosition: {x: 0, y: -0.4, z: 0}
-        localRotation: {x: 0.000009334667, y: 0, z: 0}
+        localPosition: {x: 0, y: 0, z: 0}
+        localRotation: {x: 0, y: -0, z: -0}
         localScale: {x: 1, y: 1, z: 1}
     - itemData:
         psSimulation:

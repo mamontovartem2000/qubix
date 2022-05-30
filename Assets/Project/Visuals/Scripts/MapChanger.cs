@@ -31,7 +31,7 @@ public class MapChanger : MonoBehaviour
                 ExtraChangeColors(19, 19, 30, 4, 5);
                 ExtraChangeEmissionColors(4, 6, 5, 4, 4);
                 ChangeBridge(1, 4);
-                ChangeTriangleTile(1, 1);
+                ChangeTriangleTile(1, 1, 3);
                 break;
             case Maps.Neon:
                 _emissionIntensity = 6;
@@ -40,7 +40,7 @@ public class MapChanger : MonoBehaviour
                 ExtraChangeColors(20, 20, 4, 19, 30);
                 ExtraChangeEmissionColors(5, 5, 5, 5, 5);
                 ChangeBridge(1, 1);
-                ChangeTriangleTile(1, 1);
+                ChangeTriangleTile(30, 8, 0);
                 break;
         }
     }
@@ -82,10 +82,10 @@ public class MapChanger : MonoBehaviour
         _bridge.SetColor("_EmissionColor", _emissionColorPalletes[emission] * _emissionIntensity);
     }
 
-    private void ChangeTriangleTile(int baseColor, int emission)
+    private void ChangeTriangleTile(int baseColor, int emission, int intensity)
     {
         _triangleTile.SetColor("_BaseColor", _colorPalletes[baseColor]);
-        _triangleTile.SetColor("_EmissionColor", _emissionColorPalletes[emission] * _emissionIntensity);
+        _triangleTile.SetColor("_EmissionColor", _emissionColorPalletes[emission] * intensity);
     }
 }
 
