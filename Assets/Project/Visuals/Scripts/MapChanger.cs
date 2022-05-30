@@ -30,7 +30,7 @@ public class MapChanger : MonoBehaviour
                 ChangeEmissionColor(4, 4, 4);
                 ExtraChangeColors(19, 19, 30, 4, 5);
                 ExtraChangeEmissionColors(4, 6, 5, 4, 4);
-                ChangeBridge(1, 1);
+                ChangeBridge(1, 4);
                 ChangeTriangleTile(1, 1);
                 break;
             case Maps.Neon:
