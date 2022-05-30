@@ -4,6 +4,7 @@ namespace Project.Common.Views
 {
     using ME.ECS.Views.Providers;
     using Project.Common.Components;
+    using Project.Modules.Network;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -22,11 +23,11 @@ namespace Project.Common.Views
 
             _nick.text = player.Nickname;
 
-            if (player.Team == "blue")
+            if (player.Team == TeamTypes.blue)
             {
                 _nick.color = _blue;
             }
-            else if (player.Team == "red")
+            else if (player.Team == TeamTypes.red)
             {
                 _nick.color = _red;
             }

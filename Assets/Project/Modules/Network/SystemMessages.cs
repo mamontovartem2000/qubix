@@ -86,7 +86,7 @@ namespace Project.Modules.Network
             {
                 PlayerStats player = stats[i];
                 var playerId = builder.CreateString(player.PlayerId);
-                var playerTeam = builder.CreateString(player.Team);
+                var playerTeam = builder.CreateString(player.Team.ToString());
                 var playerStats = TeamStats.CreateTeamStats(builder, player.Kills, player.Deaths, playerId, playerTeam);
                 offsets[i] = playerStats;
             }
@@ -126,7 +126,7 @@ namespace Project.Modules.Network
         public uint Kills;
         public uint Deaths;
         public string PlayerId;
-        public string Team;
+        public TeamTypes Team;
     }
 
     public struct PlayerInfo

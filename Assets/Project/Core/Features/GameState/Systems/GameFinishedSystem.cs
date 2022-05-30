@@ -37,18 +37,21 @@ namespace Project.Core.Features.GameState.Systems
         {
             if (!world.HasSharedData<GameFinished>() || _finished) return;
 
-            //TODO: use game type in join request
-            if (NetworkData.Team == string.Empty)
+            switch (NetworkData.Info.game_mode)
             {
-                DeathMatchGame();
-            }
-            else
-            {
-                TeamGame();
+                case GameTypes.deathmatch:
+                    SendDeathMatchResult();
+                    break;
+                case GameTypes.teambattle:
+                    SendTeambattleResult();
+                    break;
+                default:
+                    Debug.Log("Unknown GameType!");
+                    break;
             }
         }
 
-        private void DeathMatchGame()
+        private void SendDeathMatchResult()
         {
             var winner = GetWinnerEntity();
 
@@ -65,7 +68,7 @@ namespace Project.Core.Features.GameState.Systems
             _finished = true;
         }
 
-        private void TeamGame()
+        private void SendTeambattleResult()
         {
             var winnerTeam = GetWinnerTeam();
 
@@ -112,34 +115,34 @@ namespace Project.Core.Features.GameState.Systems
             return GetRandomWinner(mostHealthPlayers);
         }
 
-        private string GetWinnerTeam()
+        private TeamTypes GetWinnerTeam()
         {
             Team team1 = new Team();
             Team team2 = new Team();
 
-            GetTeamFullStats(team1, "blue");
-            GetTeamFullStats(team2, "red");
+            GetTeamFullStats(team1, TeamTypes.blue);
+            GetTeamFullStats(team2, TeamTypes.red);
 
             if (team1.Kills > team2.Kills)
-                return "blue";
+                return TeamTypes.blue;
             else if (team1.Kills < team2.Kills)
-                return "red";
+                return TeamTypes.red;
 
             if (team1.Deaths < team2.Deaths)
-                return "blue";
+                return TeamTypes.blue;
             else if (team1.Deaths > team2.Deaths)
-                return "red";
+                return TeamTypes.red;
 
             if (team1.Health > team2.Health)
-                return "blue";
+                return TeamTypes.blue;
             else if (team1.Health < team2.Health)
-                return "red";
+                return TeamTypes.red;
 
             //TODO: Add random
-            return "blue";
+            return TeamTypes.blue;
         }
 
-        private void GetTeamFullStats(Team team, string teamColor)
+        private void GetTeamFullStats(Team team, TeamTypes teamColor)
         {
             foreach (var player in _playerFilter)
             {
@@ -171,7 +174,7 @@ namespace Project.Core.Features.GameState.Systems
             SystemMessages.SendEndGameStats(stats, winnerId);
         }
 
-        private void SendTeamGameResult(string winnerTeam)
+        private void SendTeamGameResult(TeamTypes winnerTeam)
         {
             List<PlayerStats> stats = new List<PlayerStats>();
 
@@ -186,7 +189,7 @@ namespace Project.Core.Features.GameState.Systems
                 stats.Add(new PlayerStats() { Kills = (uint)kills, Deaths = (uint)deaths, PlayerId = id, Team = team });
             }
 
-            SystemMessages.SendTeamGameStats(stats, winnerTeam);
+            SystemMessages.SendTeamGameStats(stats, winnerTeam.ToString());
         }
 
         private List<Entity> GetPlayersWithMostKills()

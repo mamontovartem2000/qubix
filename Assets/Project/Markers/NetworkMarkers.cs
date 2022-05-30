@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Modules.Network;
 
 namespace Project.Markers
 {
@@ -7,7 +8,7 @@ namespace Project.Markers
         public int ActorLocalID;
         public string ServerID;
         public string Nickname;
-        public string Team;
+        public TeamTypes Team;
     }
 
     public struct NetworkPlayerDisconnected : IMarker

@@ -25,8 +25,6 @@ namespace Project.Modules.Network
 
     public class NetworkModule : ME.ECS.Network.NetworkModule<TState>
     {
-        public bool FakeConnect = false;
-
         protected override int GetRPCOrder()
         {
             return NetworkData.SlotInRoom;
@@ -34,7 +32,7 @@ namespace Project.Modules.Network
 
         protected override ME.ECS.Network.NetworkType GetNetworkType()
         {
-            if (FakeConnect)
+            if (NetworkData.Connect == null)
             {
                 return ME.ECS.Network.NetworkType.RunLocal;
             }
@@ -44,19 +42,19 @@ namespace Project.Modules.Network
 
         protected override void OnInitialize()
         {
-            if (!FakeConnect)
+            if (NetworkData.Connect != null)
             {
                 var instance = (ME.ECS.Network.INetworkModuleBase)this;
                 instance.SetTransporter(new NetTransporter());
                 instance.SetSerializer(new FSSerializer());
-                Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = NetworkData.SlotInRoom, 
-                    ServerID = NetworkData.Info.player_id, Nickname = NetworkData.Info.player_nickname, Team = NetworkData.Team });
             }
             else
             {
-                Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = 1, ServerID = "player_id", Nickname = "test_nickname", Team = "team" });
+                NetworkData.SetFakeSettings();
             }
-        }      
+
+            Worlds.currentWorld.AddMarker(new NetworkSetActivePlayer { ActorLocalID = NetworkData.SlotInRoom, ServerID = NetworkData.Info.player_id, Nickname = NetworkData.Info.player_nickname, Team = NetworkData.Team });
+        }
     }
 
     public class NetTransporter : ME.ECS.Network.ITransporter
@@ -72,7 +70,7 @@ namespace Project.Modules.Network
         public NetTransporter()
         {
             if (NetworkData.Connect != null)
-                NetworkData.Connect.OnMessage += GetMessage; //TODO: Unsubscribe
+                NetworkData.Connect.OnMessage += GetMessage;
             else
                 Debug.Log("Error. NetworkData.Connect is null");
         }
@@ -138,6 +136,11 @@ namespace Project.Modules.Network
         public int GetEventsReceivedCount() { return this.receivedCount; }
 
         public int GetEventsSentCount() { return this.sentCount; }
+
+        ~NetTransporter()
+        {
+            NetworkData.Connect.OnMessage -= GetMessage;
+        }
     }
 
     public class FSSerializer : ME.ECS.Network.ISerializer

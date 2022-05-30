@@ -56,7 +56,7 @@ namespace Project.Core.Features.Player
 			var player = new Entity("player_" + localId);
 			player.Set(new PlayerTag {PlayerLocalID = localId, PlayerServerID = nsap.ServerID, Nickname = nsap.Nickname, Team = nsap.Team });
 
-			if (world.GetModule<NetworkModule>().FakeConnect)
+			if (NetworkData.PlayersInfo == null) // Fake case
 			{
 				BullerConfig.Apply(player);
 				return;

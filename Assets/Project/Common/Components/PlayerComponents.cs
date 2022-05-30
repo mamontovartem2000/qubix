@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
+using Project.Modules.Network;
 
 namespace Project.Common.Components
 {
@@ -15,7 +16,7 @@ namespace Project.Common.Components
         public int PlayerLocalID;
         public string PlayerServerID;
         public string Nickname;
-        public string Team;
+        public TeamTypes Team;
     }
     public struct WeaponEntities : IComponent
     {
