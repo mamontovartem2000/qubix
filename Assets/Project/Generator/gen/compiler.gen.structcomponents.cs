@@ -98,8 +98,10 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerArmor>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerConfig>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamaged>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealth>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthDefault>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthOverlay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerMovementSpeed>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerMoveTarget>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerScore>(false, true, false, false, false, false, false, false);
@@ -256,8 +258,10 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerArmor>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerConfig>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamaged>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealth>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthDefault>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthOverlay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerMovementSpeed>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerMoveTarget>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerScore>(false, true, false, false, false, false, false, false);
@@ -409,8 +413,10 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.PlayerArmor>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerAvatar>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerConfig>(false);
+            structComponentsContainer.Validate<Project.Common.Components.PlayerDamaged>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealth>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealthDefault>(false);
+            structComponentsContainer.Validate<Project.Common.Components.PlayerHealthOverlay>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerMovementSpeed>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerMoveTarget>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerScore>(false);
@@ -567,8 +573,10 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.PlayerArmor>(false);
             entity.ValidateData<Project.Common.Components.PlayerAvatar>(false);
             entity.ValidateData<Project.Common.Components.PlayerConfig>(false);
+            entity.ValidateData<Project.Common.Components.PlayerDamaged>(false);
             entity.ValidateData<Project.Common.Components.PlayerHealth>(false);
             entity.ValidateData<Project.Common.Components.PlayerHealthDefault>(false);
+            entity.ValidateData<Project.Common.Components.PlayerHealthOverlay>(false);
             entity.ValidateData<Project.Common.Components.PlayerMovementSpeed>(false);
             entity.ValidateData<Project.Common.Components.PlayerMoveTarget>(false);
             entity.ValidateData<Project.Common.Components.PlayerScore>(false);

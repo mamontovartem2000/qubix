@@ -52,4 +52,9 @@ namespace Project.Common.Components
         public bool Direction;
         public fp Amount;
     }
+
+    public struct PlayerDamaged : IComponent
+    {
+        public float Value;
+    }
 }

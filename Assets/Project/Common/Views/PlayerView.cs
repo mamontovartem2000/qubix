@@ -1,36 +1,41 @@
 ﻿using DG.Tweening;
 using ME.ECS;
 using ME.ECS.Views.Providers;
+using Project.Common.Components;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project.Core.Features.Player.Views
 {
     public class PlayerView : MonoBehaviourView
     {
-        // [SerializeField] private Image _healthBar;
-        [SerializeField] private Transform _body;
+        public MeshRenderer[] Rends;
+        
+        private bool _swap = true;
 
-        public override bool applyStateJob => true;
-
-        public override void OnInitialize()
-        {
-            // TweenUp();
-        }
+        public override void OnInitialize() {}
         public override void OnDeInitialize() { }
         public override void ApplyState(float deltaTime, bool immediately)
         {
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetRotation();
-        }
-        
-        private void TweenUp()
-        {
-            _body.DOMoveY(0.1f, 0.5f).OnComplete(() => { TweenDown(); });
-        }
 
-        private void TweenDown()
-        {
-            _body.DOMoveY(0f, 0.5f).OnComplete(() => { TweenUp(); });
+            if (entity.Has<PlayerDamaged>())
+            {
+                foreach (var rend in Rends)
+                {
+                    rend.materials[0].EnableKeyword("_EMISSION");
+                }
+            }
+            else
+            {
+                foreach (var rend in Rends)
+                {
+                    rend.materials[0].DisableKeyword("_EMISSION");
+                }
+                
+                _swap = true;
+            }
         }
     }
 }

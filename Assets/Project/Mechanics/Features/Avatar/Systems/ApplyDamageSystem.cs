@@ -49,6 +49,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
             }
 
             ref var health = ref to.Get<PlayerHealth>().Value;
+            apply.ApplyTo.Set(new PlayerDamaged {Value = 0.3f});
 
             if (to.Has<ForceShieldModifier>() && shield - damage >= 0)
             {
