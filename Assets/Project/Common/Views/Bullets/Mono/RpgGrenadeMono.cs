@@ -1,10 +1,9 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 using Project.Common.Components;
 
-namespace Project.Common.Views.Bullets
+namespace Project.Common.Views.Bullets.Mono
 {
-    using ME.ECS.Views.Providers;
-
     public class RpgGrenadeMono : MonoBehaviourView
     {
         public override bool applyStateJob => true;

@@ -1,9 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Project.Common.Views.Bullets
+namespace Project.Common.Views.Bullets.Mono
 {
-    using ME.ECS.Views.Providers;
-
     public class SniperBulletMono : MonoBehaviourView
     {
         public override bool applyStateJob => true;

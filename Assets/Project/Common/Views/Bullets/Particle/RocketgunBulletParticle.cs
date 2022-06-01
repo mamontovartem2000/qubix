@@ -1,9 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Project.Common.Views.Bullets
+namespace Project.Common.Views.Bullets.Particle
 {
-    using ME.ECS.Views.Providers;
-
     public class RocketgunBulletParticle : ParticleViewSource<ApplyRocketgunBulletParticleStateParticle> { }
 
     [System.Serializable]

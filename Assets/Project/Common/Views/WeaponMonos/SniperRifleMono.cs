@@ -1,11 +1,10 @@
 ﻿using DG.Tweening;
 using ME.ECS;
+using ME.ECS.Views.Providers;
 using UnityEngine;
 
-namespace Assets.Dima.Scripts
+namespace Project.Common.Views.WeaponMonos
 {
-    using ME.ECS.Views.Providers;
-
     public class SniperRifleMono : MonoBehaviourView
     {
         public override bool applyStateJob => true;

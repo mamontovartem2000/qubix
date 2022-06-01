@@ -1,12 +1,11 @@
 ﻿using DG.Tweening;
 using ME.ECS;
+using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using UnityEngine;
 
-namespace Assets.Dima.Scripts
+namespace Project.Common.Views.WeaponMonos
 {
-    using ME.ECS.Views.Providers;
-
     public class WrenchMono : MonoBehaviourView
     {
         [SerializeField] private Animator _anim; 

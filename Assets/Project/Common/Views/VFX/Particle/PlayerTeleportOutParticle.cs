@@ -1,9 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Assets.Dima.Scripts
+namespace Project.Common.Views.VFX.Particle
 {
-    using ME.ECS.Views.Providers;
-
     public class PlayerTeleportOutParticle : ParticleViewSource<ApplyPlayerTeleportOutParticleStateParticle> { }
 
     [System.Serializable]

@@ -1,10 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Project.Common.Views
+namespace Project.Common.Views.VFX.Particle
 {
-
-    using ME.ECS.Views.Providers;
-
     public class TakeHealthParticle : ParticleViewSource<ApplyTakeHealthParticleStateParticle> { }
 
     [System.Serializable]

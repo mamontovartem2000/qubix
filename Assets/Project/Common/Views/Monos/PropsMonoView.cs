@@ -1,9 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Project.Common.Views
+namespace Project.Common.Views.Monos
 {
-	using ME.ECS.Views.Providers;
-
 	public class PropsMonoView : MonoBehaviourView
 	{
 		public override bool applyStateJob => true;

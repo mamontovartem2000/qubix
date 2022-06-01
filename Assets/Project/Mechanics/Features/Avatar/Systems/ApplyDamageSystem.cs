@@ -51,7 +51,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
             }
 
             if(damage > 0)
-                apply.ApplyTo.Set(new PlayerDamaged {Value = 0.1f});
+                apply.ApplyTo.Set(new PlayerDamaged {Value = 0.25f});
 
             health -= damage;
 

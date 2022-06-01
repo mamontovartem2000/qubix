@@ -1,9 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Assets.Dima.Scripts
+namespace Project.Common.Views.WeaponMonos
 {
-    using ME.ECS.Views.Providers;
-
     public class PlasmagunMono : MonoBehaviourView
     {
         public override bool applyStateJob => true;

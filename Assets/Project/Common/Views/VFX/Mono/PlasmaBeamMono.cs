@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
 using ME.ECS.Views.Providers;
 
-namespace Project.Common.Views.VFX
+namespace Project.Common.Views.VFX.Mono
 {
     public class PlasmaBeamMono : MonoBehaviourView
     {

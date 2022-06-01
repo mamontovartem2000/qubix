@@ -1,9 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Assets.Dima.Scripts
+namespace Project.Common.Views.VFX.Mono
 {
-    using ME.ECS.Views.Providers;
-
     public class PlayerTeleportOutMono : MonoBehaviourView
     {
         public override bool applyStateJob => true;

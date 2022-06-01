@@ -1,9 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Project.Common.Views
+namespace Project.Common.Views.VFX.Mono
 {
-    using ME.ECS.Views.Providers;
-
     public class PlayerTakeDamageMono : MonoBehaviourView
     {
         public override bool applyStateJob => true;
