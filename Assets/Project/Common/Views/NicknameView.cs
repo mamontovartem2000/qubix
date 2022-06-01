@@ -32,14 +32,14 @@ namespace Project.Common.Views
             {
                 _nick.color = _blue;
                 Fill.color = _blue;
-                Back.color = _blue * 0.2f;
+                Back.color = _blue * 0.4f;
 
             }
             else if (player.Team == TeamTypes.red)
             {
                 _nick.color = _red;
                 Fill.color = _red;
-                Back.color = _red * 0.2f;
+                Back.color = _red * 0.4f;
             }
         }
 
