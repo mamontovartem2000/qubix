@@ -42,8 +42,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
-            var nextPos = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<FaceDirection>().Value * 4 + (entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition());
-            
+            var nextPos = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<FaceDirection>().Value * 4 + (entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value);
             nextPos.x = (int)(nextPos.x);
             nextPos.z = (int)(nextPos.z);
 			
@@ -51,7 +50,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
             if (!SceneUtils.IsWalkable(new fp3(nextPos.x, 0, nextPos.z))) return;
             
-            SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition(), new fp3(nextPos.x, 0, nextPos.z));
+            SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, new fp3(nextPos.x, 0, nextPos.z));
             entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.SetPosition(nextPos);
             entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<PlayerMoveTarget>().Value = new fp3(nextPos.x, 0, nextPos.z);
 

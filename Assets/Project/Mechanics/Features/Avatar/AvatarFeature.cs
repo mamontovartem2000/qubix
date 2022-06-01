@@ -39,15 +39,12 @@ namespace Project.Mechanics.Features.Avatar
             AddSystem<PlayerHealthSystem>();
             AddSystem<PlayerMovementSystem>();
             AddSystem<BlinkHurtSystem>();
-
+            AddSystem<ShieldApplyDamageSystem>();
+            
             AddSystem<SlownessRemoveSystem>();
             AddSystem<StunLifeTimeSystem>();
-            AddSystem<MovementBuffLifetimeSystem>();
-            AddSystem<ProjectileDamageBuffLifetimeSystem>();
-            AddSystem<LinearPowerSkillLifetimeSystem>();
-            AddSystem<LinearDamageBuffLifetimeSystem>();
-            AddSystem<ShieldSkillLifetimeSystem>();
             AddSystem<PlayerHealthVisualSystem>();
+
 
             _playerNick = world.RegisterViewSource(NicknameView);
             _playerHealth = world.RegisterViewSource(PlayerHealthView);

@@ -1,9 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Mechanics.Features.Lifetime;
-using UnityEngine;
 
-namespace Project.Mechanics.Features.LifeTime.Systems {
+namespace Project.Mechanics.Features.Avatar.Systems {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -15,9 +13,9 @@ namespace Project.Mechanics.Features.LifeTime.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class AvoidTeleportLifeTimeSystem : ISystemFilter {
+    public sealed class ShieldApplyDamageSystem : ISystemFilter {
         
-        private LifeTimeFeature _feature;
+        private AvatarFeature _feature;
         
         public World world { get; set; }
         
@@ -34,20 +32,34 @@ namespace Project.Mechanics.Features.LifeTime.Systems {
         int ISystemFilter.jobsBatchCount => 64;
         #endif
         Filter ISystemFilter.filter { get; set; }
-        Filter ISystemFilter.CreateFilter() 
-        {
-            return Filter.Create("Filter-AvoidTeleportLifeTimeSystem")
-                .With<AvoidTeleport>()
+        Filter ISystemFilter.CreateFilter() {
+            
+            return Filter.Create("Filter-ShieldApplyDamageSystem")
+                .With<ApplyDamage>()
+                .With<ForceShieldModifier>()
                 .Push();
+            
+        }
+
+        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
+        {
+            ref var apply = ref entity.Get<ApplyDamage>();
+            var from = apply.ApplyFrom;
+            var to = apply.ApplyTo;
+            var damage = apply.Damage;
+            ref readonly var shield = ref to.Read<ForceShieldModifier>().Value;
+            
+            if (to.Has<ForceShieldModifier>() && shield - damage >= 0)
+            {
+                to.Get<ForceShieldModifier>().Value -= damage;
+            }
+            else if (to.Has<ForceShieldModifier>() && shield - damage < 0)
+            {
+                to.Get<ForceShieldModifier>().Value -= damage;
+                to.Remove<ForceShieldModifier>();
+            }
         }
     
-        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
-        {
-            ref var avoid = ref entity.Get<AvoidTeleport>().Value;
-            avoid -= deltaTime;
-            
-            if (avoid <= 0f)
-                entity.Remove<AvoidTeleport>();
-        }
     }
+    
 }

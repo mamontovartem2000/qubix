@@ -32,6 +32,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
         {
             return Filter.Create("Filter-ApplyDamageSystem")
                 .With<ApplyDamage>()
+                .Without<ForceShieldModifier>()
                 .Push();
         }
 
@@ -41,31 +42,16 @@ namespace Project.Mechanics.Features.Avatar.Systems
             var from = apply.ApplyFrom;
             var to = apply.ApplyTo;
             var damage = apply.Damage;
-            ref readonly var shield = ref to.Read<ForceShieldModifier>().Value;
+            ref var health = ref to.Get<PlayerHealth>().Value;
             
             if (from.Has<PlayerAvatar>())
             {
                 to.Get<Owner>().Value.Set(new DamagedBy {Value = from});
             }
 
-            ref var health = ref to.Get<PlayerHealth>().Value;
             apply.ApplyTo.Set(new PlayerDamaged {Value = 0.3f});
 
-            if (to.Has<ForceShieldModifier>() && shield - damage >= 0)
-            {
-                to.Get<ForceShieldModifier>().Value -= damage;
-            }
-            else if (to.Has<ForceShieldModifier>() && shield - damage < 0)
-            {
-                to.Get<ForceShieldModifier>().Value -= damage;
-                damage = -shield;
-                health -= damage;
-                to.Remove<ForceShieldModifier>();
-            }
-            else if (!apply.ApplyTo.Has<ForceShieldModifier>())
-            {
-                health -= damage;
-            }
+            health -= damage;
             
             if (apply.ApplyTo.Get<PlayerHealth>().Value <= 0)
             {

@@ -69,7 +69,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
                     }
             }
             if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
-            var tmpPos = entity.Read<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition();
+            var tmpPos = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value;
             var randomPlayerPos = new Vector3(tmpPos.x + rndX, 0, tmpPos.z + rndZ);
             
             randomPlayerPos.x = (int)(randomPlayerPos.x);
@@ -77,7 +77,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
             
             if (!SceneUtils.IsWalkable(new fp3(randomPlayerPos.x, 0, randomPlayerPos.z))) return;
             
-            SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition(), new fp3(randomPlayerPos.x, 0, randomPlayerPos.z));
+            SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, new fp3(randomPlayerPos.x, 0, randomPlayerPos.z));
             entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.SetPosition(randomPlayerPos);
             entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<PlayerMoveTarget>().Value = new fp3(randomPlayerPos.x, 0, randomPlayerPos.z);
 
