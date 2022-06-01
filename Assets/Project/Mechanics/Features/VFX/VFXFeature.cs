@@ -39,24 +39,35 @@ namespace Project.Mechanics.Features.VFX
 
 		protected override void OnDeconstruct() {}
 
+		public void SpawnVFX(VFXType type, Vector3 position, Entity player, float lifeTime)
+		{
+			if(!player.IsAlive()) return;
+			
+			var fx = new Entity("vfx");
+			fx.Get<LifeTimeLeft>().Value = 5;
+			fx.Set(new LifeTimeLeft{Value = lifeTime});
+			fx.Set(new Owner { Value = player.Read<Owner>().Value });
+			fx.SetLocalPosition(position);
+			fx.SetParent(player);
+			fx.InstantiateView(_viewIds[(int)type-1]);
+		}
 		public void SpawnVFX(VFXType type, Vector3 position, Entity player)
 		{
 			if(!player.IsAlive()) return;
 			
 			var fx = new Entity("vfx");
 			fx.Get<LifeTimeLeft>().Value = 5;
-			fx.Set(new VFXTag());
 			fx.Set(new Owner { Value = player.Read<Owner>().Value });
-			fx.SetLocalPosition(position + Vector3.up);
+			fx.SetLocalPosition(position);
+			fx.SetParent(player);
 			fx.InstantiateView(_viewIds[(int)type-1]);
 		}
-		
+
 		public void SpawnVFX(VFXType type, Vector3 position)
 		{
 			var fx = new Entity("vfx");
 			fx.Get<LifeTimeLeft>().Value = 5;
-			// fx.Set(new VFXTag());
-			fx.SetLocalPosition(position + Vector3.up);
+			fx.SetLocalPosition(position);
 			fx.InstantiateView(_viewIds[(int)type-1]);
 		}
 		
@@ -86,7 +97,8 @@ namespace Project.Mechanics.Features.VFX
 			SkillQuickness,
 			SkillLinearPower,
 			QubixDeath,
-			SlowExplosion
+			SlowExplosion,
+			SpeedTrail
 		}
 	}
 }

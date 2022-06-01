@@ -52,7 +52,8 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			_vfx.SpawnVFX(VFXFeature.VFXType.SkillQuickness, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
-
+			_vfx.SpawnVFX(VFXFeature.VFXType.SpeedTrail, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value, entity.Read<SkillDurationDefault>().Value);
+			
 			entity.Remove<ActivateSkill>();
 		}
 	}

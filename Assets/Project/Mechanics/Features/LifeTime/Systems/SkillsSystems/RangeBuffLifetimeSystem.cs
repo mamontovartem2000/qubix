@@ -40,7 +40,9 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 			lifeTime -= deltaTime;
 
 			if (lifeTime > 0f) return;
-
+			
+			if(!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+			
 			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<FiringRangeModifier>().Value -= entity.Read<SkillAmount>().Value;
 			entity.Destroy();
 		}

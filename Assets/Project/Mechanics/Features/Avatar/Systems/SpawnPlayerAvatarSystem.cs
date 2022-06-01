@@ -44,7 +44,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
             if (time <= 0)
             { 
                 entity.Get<PlayerAvatar>().Value = _feature.SpawnPlayerAvatar(entity);
-                entity.Get<RespawnTime>().Value = 5;
+                entity.Get<RespawnTime>().Value = 3;
             }
         }
     }

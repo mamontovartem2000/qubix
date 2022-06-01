@@ -32,7 +32,6 @@ namespace Project.Mechanics.Features.Avatar.Systems
         {
             return Filter.Create("Filter-ApplyDamageSystem")
                 .With<ApplyDamage>()
-                .Without<ForceShieldModifier>()
                 .Push();
         }
 
@@ -43,6 +42,8 @@ namespace Project.Mechanics.Features.Avatar.Systems
             var to = apply.ApplyTo;
             var damage = apply.Damage;
             ref var health = ref to.Get<PlayerHealth>().Value;
+            
+            if (to.Has<ForceShieldModifier>()) return;
             
             if (from.Has<PlayerAvatar>())
             {

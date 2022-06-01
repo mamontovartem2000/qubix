@@ -36,7 +36,6 @@ namespace Project.Mechanics.Features.Avatar.Systems {
             
             return Filter.Create("Filter-ShieldApplyDamageSystem")
                 .With<ApplyDamage>()
-                .With<ForceShieldModifier>()
                 .Push();
             
         }
@@ -49,11 +48,13 @@ namespace Project.Mechanics.Features.Avatar.Systems {
             var damage = apply.Damage;
             ref readonly var shield = ref to.Read<ForceShieldModifier>().Value;
             
-            if (to.Has<ForceShieldModifier>() && shield - damage >= 0)
+            if (!to.Has<ForceShieldModifier>()) return;
+            
+            if (shield - damage >= 0)
             {
                 to.Get<ForceShieldModifier>().Value -= damage;
             }
-            else if (to.Has<ForceShieldModifier>() && shield - damage < 0)
+            else if (shield - damage < 0)
             {
                 to.Get<ForceShieldModifier>().Value -= damage;
                 to.Remove<ForceShieldModifier>();

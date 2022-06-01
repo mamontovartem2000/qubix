@@ -57,7 +57,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 					
 					if (entity.Has<StunModifier>())
 					{
-					    
+						_vfx.SpawnVFX(VFXFeature.VFXType.SkillStun, pos, player, entity.Read<StunModifier>().Value);
 						player.Set(new Stun { Value = entity.Read<StunModifier>().Value });
 					}
 					collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);

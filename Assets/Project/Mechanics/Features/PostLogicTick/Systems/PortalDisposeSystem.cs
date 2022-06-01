@@ -83,7 +83,9 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 				player.SetPosition(pos);
 				player.Get<PlayerMoveTarget>().Value = pos;
 				entity.Remove<Collided>();
-
+				
+				_vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, entity.GetPosition());
+				_vfx.SpawnVFX(VFXFeature.VFXType.PlayerTeleportOut, player.GetPosition(), player);
 				// entity.Destroy();
 				// SceneUtils.TakePortal(pos);
 			}

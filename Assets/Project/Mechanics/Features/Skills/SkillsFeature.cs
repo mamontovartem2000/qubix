@@ -16,6 +16,7 @@ namespace Project.Mechanics.Features
     #endregion
     public sealed class SkillsFeature : Feature
     {
+        // ReSharper disable Unity.PerformanceAnalysis
         protected override void OnConstruct()
         {
             //attribute modifier systems

@@ -87,7 +87,8 @@ namespace Project.Mechanics.Features.Weapon.Systems
             
             ammo -= 1;
             _projectile.SpawnProjectile(entity, dir);
-            _vfx.SpawnVFX(VFXFeature.VFXType.MinigunMuzzle, dir);
+            // _vfx.SpawnVFX(VFXFeature.VFXType.MinigunMuzzle+1, entity.Read<WeaponAim>().Value.GetPosition(), entity);
+            
         }
     }
 }

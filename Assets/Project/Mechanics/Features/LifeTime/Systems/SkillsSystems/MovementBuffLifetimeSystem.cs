@@ -41,8 +41,10 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 			lifeTime -= deltaTime;
 
 			if (lifeTime > 0f) return;
-
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<MoveSpeedModifier>().Value = 1;
+			
+			if(!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+			
+			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<MoveSpeedModifier>().Value = 1;
 			entity.Destroy();
 		}
 	}
