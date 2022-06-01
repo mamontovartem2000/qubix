@@ -12,6 +12,11 @@ namespace Project.Common.Views
     public class NicknameView : MonoBehaviourView
     {
         [SerializeField] private TMP_Text _nick;
+        
+        public Image Fill;
+        public Image Overlay;
+        public Image Back;
+        
         [SerializeField] private Color _red;
         [SerializeField] private Color _blue;
 
@@ -26,10 +31,15 @@ namespace Project.Common.Views
             if (player.Team == TeamTypes.blue)
             {
                 _nick.color = _blue;
+                Fill.color = _blue;
+                Back.color = _blue * 0.2f;
+
             }
             else if (player.Team == TeamTypes.red)
             {
                 _nick.color = _red;
+                Fill.color = _red;
+                Back.color = _red * 0.2f;
             }
         }
 
@@ -40,6 +50,11 @@ namespace Project.Common.Views
         public override void ApplyState(float deltaTime, bool immediately)
         {
             transform.position = entity.GetPosition() + new Vector3(0f, 1.1f, 0f);
+            
+            var fill = entity.GetParent().Read<PlayerHealthDefault>().Value;
+            
+            Fill.fillAmount = entity.GetParent().Read<PlayerHealth>().Value / fill;
+            Overlay.fillAmount = entity.Read<PlayerHealthOverlay>().Value / fill;
         }
     }
 }

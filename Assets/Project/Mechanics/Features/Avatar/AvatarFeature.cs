@@ -19,16 +19,12 @@ namespace Project.Mechanics.Features.Avatar
 #endif
     public sealed class AvatarFeature : Feature
     {
-        public MonoBehaviourViewBase NicknameView;
         public MonoBehaviourViewBase PlayerHealthView;
-
-        public bool DisplayNickname = true;
-        public bool DisplayHealth = true;
 
         private readonly Vector3 _direction = new Vector3(0f, 0f, 1f);
         private readonly Vector3 _trajectory = new Vector3(0f, 1f, 0f);
 
-        private ViewId _playerNick, _playerHealth;
+        private ViewId _playerHealth;
         //private fp3[] team1 = new fp3[] { new fp3(11, 0, 5), new fp3(4, 0, 7), new fp3(3, 0, 17), new fp3(3, 0, 26), new fp3(3, 0, 34), new fp3(3, 0, 42) };
         //private fp3[] team2 = new fp3[] { new fp3(44, 0, 8), new fp3(47, 0, 13), new fp3(48, 0, 20), new fp3(48, 0, 29), new fp3(48, 0, 39), new fp3(44, 0, 43) };
 
@@ -46,14 +42,10 @@ namespace Project.Mechanics.Features.Avatar
             AddSystem<StunLifeTimeSystem>();
             AddSystem<PlayerHealthVisualSystem>();
 
-
-            _playerNick = world.RegisterViewSource(NicknameView);
             _playerHealth = world.RegisterViewSource(PlayerHealthView);
         }
 
-        protected override void OnDeconstruct()
-        {
-        }
+        protected override void OnDeconstruct() {}
 
         public Entity SpawnPlayerAvatar(Entity owner)
         {
@@ -66,16 +58,9 @@ namespace Project.Mechanics.Features.Avatar
             entity.Get<Owner>().Value = owner;
             entity.Set(new Hover {Direction = false, Amount = 0});
 
-            if (DisplayNickname)
-            {
-                var nick = new Entity("Nickname");
-                nick.InstantiateView(_playerNick);
-                nick.SetParent(entity);
-            }
-
             var id = world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order;
             var local = world.GetFeature<PlayerFeature>().GetPlayerByID(id);
-
+            
             var health = new Entity("Healthbar");
             health.SetParent(entity);
             health.Get<PlayerHealthOverlay>().Value = entity.Get<PlayerHealth>().Value;

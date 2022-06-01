@@ -49,7 +49,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
                 }
                 else if (over < health)
                 {
-                    over += math.max(math.abs(over - health), 25) * deltaTime;
+                    over = health;
                 }
             }
         }
