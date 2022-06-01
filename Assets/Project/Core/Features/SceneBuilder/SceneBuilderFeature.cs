@@ -73,10 +73,10 @@ namespace Project.Core.Features.SceneBuilder
 
             world.SetSharedData(new MapComponents
             {
-                WalkableMap = CreateSharedMap(height * width, mapData.bytes, MapType.Walkable),
-                MineMap = CreateSharedMap(height * width,mapData.bytes, MapType.Mine),
-                PortalsMap = CreateSharedMap(height * width, mapData.bytes, MapType.Portal),
-                SpawnPoints = CreateSharedMap(height * width, mapData.bytes, MapType.SpawnPoint)
+                WalkableMap = CreateSharedMap(mapData.bytes, MapType.Walkable),
+                MineMap = CreateSharedMap(mapData.bytes, MapType.Mine),
+                PortalsMap = CreateSharedMap(mapData.bytes, MapType.Portal),
+                SpawnPoints = GetSpawnPointsPositions(mapData.bytes)
             });
             
             DrawMap(mapData.bytes);
@@ -146,12 +146,8 @@ namespace Project.Core.Features.SceneBuilder
             foreach (var mapElement in mapInBytes)
             {
                 i++;
-                if (mapElement == 35) 
-                {
-                    Debug.Log(SceneUtils.IndexToPosition(i));
-                    continue;
-                }
-                if (mapElement == 0) continue;
+
+                if (mapElement == 0 || mapElement == 35) continue;
                 if (PropsConfigs[mapElement] == null) continue;
                 
                 var entity = new Entity("Prop");
@@ -159,8 +155,10 @@ namespace Project.Core.Features.SceneBuilder
                 PropsConfigs[mapElement].Apply(entity);
                 entity.InstantiateView(_propsViewIds[mapElement]);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
-                if(entity.Has<Pallette>())
+                if (entity.Has<Pallette>())
+                {
                     entity.SetPosition(entity.GetPosition() + new fp3(-0.15,0.2,0.15));
+                }
                 entity.SetRotation(PropsConfigs[mapElement].Read<Rotation>().value);
                 entity.Get<Owner>().Value = entity;
                 
@@ -173,9 +171,9 @@ namespace Project.Core.Features.SceneBuilder
                 SceneUtils.TakeTheCell(i);
             }
         }
-        private BufferArray<byte> CreateSharedMap(int s, byte[] m, MapType t)
+        private BufferArray<byte> CreateSharedMap(byte[] m, MapType t)
         {
-            var a = PoolArray<byte>.Spawn(s);
+            var a = PoolArray<byte>.Spawn(m.Length);
 
             switch (t)
             {
@@ -190,7 +188,7 @@ namespace Project.Core.Features.SceneBuilder
                     }
                 case MapType.Mine:
                     {
-                        for (var i = 0; i < a.Length; i++)
+                        for (var i = 0; i < m.Length; i++)
                         {
                             a[i] = 0;
                         }
@@ -206,19 +204,32 @@ namespace Project.Core.Features.SceneBuilder
 
                         break;
                     }
-                case MapType.SpawnPoint:
-                    {
-                        for (var i = 0; i < m.Length; i++)
-                        {
-                            a[i] = m[i] == 35 ? (byte)1 : (byte)0;
-                        }
-
-                        break;
-                    }
             }
             
             return a;
         }
-        public enum MapType {Walkable, Mine, Portal, SpawnPoint}
+
+        private BufferArray<int> GetSpawnPointsPositions(byte[] m)
+        {
+            ListCopyable<int> buffer = new ListCopyable<int>();
+            
+            for (var i = 0; i < m.Length; i++)
+            {
+                if (m[i] == 35)
+                {
+                    buffer.Add(i);
+                }
+            }
+
+            var a = PoolArray<int>.Spawn(buffer.Count);
+
+            for (int i = 0; i < buffer.Count; i++)
+            {
+                a[i] = buffer[i];
+            }
+
+            return a;
+        }
+        public enum MapType {Walkable, Mine, Portal}
     }
 }

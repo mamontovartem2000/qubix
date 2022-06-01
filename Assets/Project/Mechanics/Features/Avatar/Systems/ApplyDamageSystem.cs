@@ -49,8 +49,6 @@ namespace Project.Mechanics.Features.Avatar.Systems
                 to.Get<Owner>().Value.Set(new DamagedBy {Value = from});
             }
 
-            ref var health = ref to.Get<PlayerHealth>().Value;
-            
             if(damage > 0)
                 apply.ApplyTo.Set(new PlayerDamaged {Value = 0.1f});
 
