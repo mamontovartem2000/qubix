@@ -49,7 +49,6 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
             
             _vfx.SpawnVFX(VFXFeature.VFXType.SkillQuickdraw, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
 			entity.Remove<ActivateSkill>();
-            Debug.Log("weapons reloaded");
         }
     }
 }

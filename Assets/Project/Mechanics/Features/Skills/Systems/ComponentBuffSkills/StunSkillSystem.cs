@@ -59,7 +59,6 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
             _vfx.SpawnVFX(VFXFeature.VFXType.StatusStunEffect, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
 
 			entity.Remove<ActivateSkill>();
-			Debug.Log("Character is stunned");
 		}
 	}
 }

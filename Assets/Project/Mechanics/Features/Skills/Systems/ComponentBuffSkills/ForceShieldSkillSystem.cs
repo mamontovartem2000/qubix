@@ -52,7 +52,6 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			
 			_vfx.SpawnVFX(VFXFeature.VFXType.PlayerShield, entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition(), entity.Read<Owner>().Value.Get<PlayerAvatar>().Value);
 			entity.Remove<ActivateSkill>();
-			Debug.Log("shield activated");
 		}
 	}
 }

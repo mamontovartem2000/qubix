@@ -45,19 +45,15 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			effect.Get<Owner>().Value = entity.Get<Owner>().Value;
 			effect.Set(new EffectTag());
 
-			// var amount = entity.Read<SkillAmount>().Value / 100f;
-
 			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon.Get<FireRateModifier>().Value = 1;
 			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = 2;
 			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon.Get<AmmoCapacity>().Value = 2;
-			// effect.Get<SkillAmount>().Value = amount;
 			
 			world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Get<Owner>().Value);
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			_vfx.SpawnVFX(VFXFeature.VFXType.SkillOffenciveBurst, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
 			entity.Remove<ActivateSkill>();
-			Debug.Log("fire rate increased");
 		}
 	}
 }

@@ -52,7 +52,6 @@ namespace Project.Mechanics.Features.Skills.Systems.TargetedSkills
             grenade.InstantiateView(view);
 			
 			entity.Remove<ActivateSkill>();
-			Debug.Log("Fire in the hole");
 		}
 	}
 }

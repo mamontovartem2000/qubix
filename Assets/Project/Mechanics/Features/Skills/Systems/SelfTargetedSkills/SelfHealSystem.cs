@@ -42,16 +42,13 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var collision = new Entity("collision");
-            Debug.Log($"Health: {entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerHealth>().Value}");
 			collision.Set(new ApplyDamage {ApplyTo = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value, ApplyFrom = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value, Damage = -entity.Read<SkillAmount>().Value}, ComponentLifetime.NotifyAllSystems);
-            Debug.Log($"Health: {entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerHealth>().Value}");  
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
             world.GetFeature<EventsFeature>().HealthChanged.Execute(entity.Read<Owner>().Value);
             
             _vfx.SpawnVFX(VFXFeature.VFXType.SkillHeal, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
 			entity.Remove<ActivateSkill>();
-            Debug.Log("Healed");
         }
     }
 }

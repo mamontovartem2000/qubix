@@ -52,18 +52,17 @@ namespace Project.Mechanics.Features.Avatar.Systems
             apply.ApplyTo.Set(new PlayerDamaged {Value = 0.3f});
 
             health -= damage;
-            
-            if (apply.ApplyTo.Get<PlayerHealth>().Value <= 0)
+
+            if (to.Read<PlayerHealth>().Value <= 0)
             {
-                apply.ApplyTo.Get<PlayerHealth>().Value = 0;
+                to.Get<PlayerHealth>().Value = 0;
             }
-            else if(apply.ApplyTo.Get<PlayerHealth>().Value > to.Read<PlayerHealthDefault>().Value)
+            else if(to.Read<PlayerHealth>().Value > to.Read<PlayerHealthDefault>().Value)
             {
-                apply.ApplyTo.Get<PlayerHealth>().Value = to.Read<PlayerHealthDefault>().Value;
+                to.Get<PlayerHealth>().Value = to.Read<PlayerHealthDefault>().Value;
             }
-            
-            
-            world.GetFeature<EventsFeature>().HealthChanged.Execute(apply.ApplyTo.Read<Owner>().Value);
+
+            world.GetFeature<EventsFeature>().HealthChanged.Execute(to.Read<Owner>().Value);
         }
     }
 }

@@ -50,7 +50,6 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			_vfx.SpawnVFX(VFXFeature.VFXType.SkillCurcuitBurts, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
 			entity.Remove<ActivateSkill>();
-			Debug.Log("cooldown reset");
 		}
 	}
 }

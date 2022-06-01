@@ -44,8 +44,6 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-
-			Debug.Log("melee damage increased");
 		}
 	}
 }

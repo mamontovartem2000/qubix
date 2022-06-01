@@ -71,10 +71,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
             if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
             var tmpPos = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value;
             var randomPlayerPos = new Vector3(tmpPos.x + rndX, 0, tmpPos.z + rndZ);
-            
-            randomPlayerPos.x = (int)(randomPlayerPos.x);
-            randomPlayerPos.z = (int)(randomPlayerPos.z);
-            
+
             if (!SceneUtils.IsWalkable(new fp3(randomPlayerPos.x, 0, randomPlayerPos.z))) return;
             
             SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, new fp3(randomPlayerPos.x, 0, randomPlayerPos.z));
@@ -85,8 +82,6 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
             
             _vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
             entity.Remove<ActivateSkill>();
-            Debug.Log("WHZOOKH!");
-
         }
     }
 }

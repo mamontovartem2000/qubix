@@ -51,7 +51,6 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 						
 			entity.Remove<ActivateSkill>();
-			Debug.Log("range increased");
 		}
 	}
 }

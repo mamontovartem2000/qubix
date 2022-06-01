@@ -71,7 +71,6 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                     {
                         player.Get<Slowness>().Value = debuff.Get<Slowness>().Value/100;
                         player.Get<Slowness>().LifeTime = debuff.Get<Slowness>().LifeTime;
-                        
                     }
                     debuff.SetPosition(pos);
                 }

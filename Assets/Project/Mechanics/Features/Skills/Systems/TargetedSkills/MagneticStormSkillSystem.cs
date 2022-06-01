@@ -37,7 +37,6 @@ namespace Project.Mechanics.Features.Skills.Systems.TargetedSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			Debug.Log("Storm is coming");
 
 		}
 	}

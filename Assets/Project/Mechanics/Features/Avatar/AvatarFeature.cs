@@ -40,7 +40,8 @@ namespace Project.Mechanics.Features.Avatar
             AddSystem<PlayerMovementSystem>();
             AddSystem<BlinkHurtSystem>();
             AddSystem<ShieldApplyDamageSystem>();
-            
+
+            AddSystem<SlownessAfterTakeDamageSystem>();
             AddSystem<SlownessRemoveSystem>();
             AddSystem<StunLifeTimeSystem>();
             AddSystem<PlayerHealthVisualSystem>();
@@ -95,7 +96,6 @@ namespace Project.Mechanics.Features.Avatar
             skills.ThirdSkill = ConstructSkill(owner.Read<PlayerConfig>().ThirdSkillConfig, owner, 2);
             skills.FourthSkill = ConstructSkill(owner.Read<PlayerConfig>().FourthSkillConfig, owner, 3);
 
-            entity.Get<Slowness>().Value = 1;
             entity.Get<MoveSpeedModifier>().Value = 1;
 
             world.GetFeature<EventsFeature>().SkillImageChange.Execute(owner);

@@ -66,12 +66,11 @@ namespace Project.Mechanics.Features.Avatar.Systems
 					}
 				}
 			}
-
-			
 			
 			var speedBase = entity.Read<PlayerMovementSpeed>().Value;
-			var speedMod = entity.Read<MoveSpeedModifier>().Value * speedBase * entity.Read<Slowness>().Value;
-			var currentSpeed = speedMod;
+			var speedMod = entity.Read<MoveSpeedModifier>().Value * speedBase;
+			var speedDebuff = entity.Read<Slowness>().Value * speedBase;
+			var currentSpeed = speedMod - speedDebuff;
 			var speed = entity.Has<LockTarget>() ? currentSpeed * 0.65f : currentSpeed;
 
 			var pos = entity.GetPosition();

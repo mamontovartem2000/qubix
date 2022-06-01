@@ -48,7 +48,6 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			
 			entity.Remove<ActivateSkill>();
-			Debug.Log("Character is silenced");
 		}
 	}
 }

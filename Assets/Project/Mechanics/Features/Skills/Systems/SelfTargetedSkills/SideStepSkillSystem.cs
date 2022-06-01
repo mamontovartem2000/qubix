@@ -37,7 +37,6 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			Debug.Log("Sidestepped");
 		}
 	}
 }

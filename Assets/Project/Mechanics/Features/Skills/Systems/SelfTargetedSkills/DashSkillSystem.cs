@@ -43,9 +43,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
         {
             if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
             var nextPos = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<FaceDirection>().Value * 4 + (entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value);
-            nextPos.x = (int)(nextPos.x);
-            nextPos.z = (int)(nextPos.z);
-			
+
             entity.Remove<ActivateSkill>();
 
             if (!SceneUtils.IsWalkable(new fp3(nextPos.x, 0, nextPos.z))) return;
@@ -57,7 +55,6 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
             _vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
-            Debug.Log("dash activated");
         }
     }
 }
