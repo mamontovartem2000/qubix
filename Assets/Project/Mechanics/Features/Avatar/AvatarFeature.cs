@@ -74,12 +74,7 @@ namespace Project.Mechanics.Features.Avatar
             entity.Get<WeaponEntities>().LeftWeapon = ConstructWeapon(owner.Read<PlayerConfig>().LeftWeaponConfig, entity);
             entity.Get<WeaponEntities>().RightWeapon = ConstructWeapon(owner.Read<PlayerConfig>().RightWeaponConfig, entity);
 
-            ref var skills = ref entity.Get<SkillEntities>();
-
-            skills.FirstSkill = ConstructSkill(owner.Read<PlayerConfig>().FirstSkillConfig, owner, 0);
-            skills.SecondSkill = ConstructSkill(owner.Read<PlayerConfig>().SecondSkillConfig, owner, 1);
-            skills.ThirdSkill = ConstructSkill(owner.Read<PlayerConfig>().ThirdSkillConfig, owner, 2);
-            skills.FourthSkill = ConstructSkill(owner.Read<PlayerConfig>().FourthSkillConfig, owner, 3);
+            SpawnSkills(entity);
 
             entity.Get<MoveSpeedModifier>().Value = 1;
 
@@ -151,6 +146,17 @@ namespace Project.Mechanics.Features.Avatar
             return weapon;
         }
 
+        private void SpawnSkills(Entity entity)
+        {
+            ref var skills = ref entity.Get<SkillEntities>();
+            var owner = entity.Read<Owner>().Value;
+            
+            skills.FirstSkill = ConstructSkill(owner.Read<PlayerConfig>().FirstSkillConfig, owner, 0);
+            skills.SecondSkill = ConstructSkill(owner.Read<PlayerConfig>().SecondSkillConfig, owner, 1);
+            skills.ThirdSkill = ConstructSkill(owner.Read<PlayerConfig>().ThirdSkillConfig, owner, 2);
+            skills.FourthSkill = ConstructSkill(owner.Read<PlayerConfig>().FourthSkillConfig, owner, 3);
+        }
+        
         private Entity ConstructSkill(DataConfig skillConfig, Entity owner, int id)
         {
             var skill = new Entity("skill");

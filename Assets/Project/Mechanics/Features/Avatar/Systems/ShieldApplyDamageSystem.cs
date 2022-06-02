@@ -45,6 +45,8 @@ namespace Project.Mechanics.Features.Avatar.Systems {
             ref var apply = ref entity.Get<ApplyDamage>();
             var from = apply.ApplyFrom;
             var to = apply.ApplyTo;
+            if (!to.IsAlive()) return;
+            
             var damage = apply.Damage;
             ref readonly var shield = ref to.Read<ForceShieldModifier>().Value;
             

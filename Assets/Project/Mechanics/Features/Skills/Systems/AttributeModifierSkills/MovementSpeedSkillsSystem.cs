@@ -38,6 +38,7 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 				.Push();
 		}
 
+		// ReSharper disable Unity.PerformanceAnalysis
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 			var effect = new Entity("effect");

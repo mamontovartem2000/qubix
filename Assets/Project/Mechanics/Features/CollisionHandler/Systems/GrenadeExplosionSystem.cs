@@ -58,7 +58,6 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                 foreach (Entity player in _playerFilter)
                 {
                     if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > (fp)10) continue;
-                    Debug.Log("hit");
                     
                     var debuff = new Entity("debuff");
                     var index = SceneUtils.PositionToIndex(player.GetPosition());
