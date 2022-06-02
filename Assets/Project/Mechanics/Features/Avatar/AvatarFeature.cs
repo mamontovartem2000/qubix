@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using ME.ECS.Collections;
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
@@ -22,10 +23,7 @@ namespace Project.Mechanics.Features.Avatar
 
         private readonly Vector3 _direction = new Vector3(0f, 0f, 1f);
         private readonly Vector3 _trajectory = new Vector3(0f, 1f, 0f);
-
         private ViewId _playerHealth;
-        //private fp3[] team1 = new fp3[] { new fp3(11, 0, 5), new fp3(4, 0, 7), new fp3(3, 0, 17), new fp3(3, 0, 26), new fp3(3, 0, 34), new fp3(3, 0, 42) };
-        //private fp3[] team2 = new fp3[] { new fp3(44, 0, 8), new fp3(47, 0, 13), new fp3(48, 0, 20), new fp3(48, 0, 29), new fp3(48, 0, 39), new fp3(44, 0, 43) };
 
         protected override void OnConstruct()
         {
@@ -80,47 +78,9 @@ namespace Project.Mechanics.Features.Avatar
 
             entity.Get<MoveSpeedModifier>().Value = 1;
 
+            SetAvatarPosition(owner, entity);
+
             world.GetFeature<EventsFeature>().SkillImageChange.Execute(owner);
-
-            entity.SetPosition(SceneUtils.GetRandomFreePosition());
-
-            ////TODO: КОСТЫЛЬ ЕБУЧИЙ
-            //if (NetworkData.Info.map_id == 1 || NetworkData.Team == string.Empty)
-            //{
-            //    entity.SetPosition(SceneUtils.GetRandomFreePosition());
-            //}
-            //else
-            //{
-            //    var pos = fp3.zero;
-
-            //    if (owner.Read<PlayerTag>().Team == "red")
-            //    {
-            //        while (!SceneUtils.IsWalkable(pos))
-            //        {
-            //            var rnd = Worlds.current.GetRandomRange(0, team1.Length);
-            //            pos = team1[rnd];
-
-            //            if (!SceneUtils.IsFree(pos)) pos = fp3.zero;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        while (!SceneUtils.IsWalkable(pos))
-            //        {
-            //            var rnd = Worlds.current.GetRandomRange(0, team2.Length);
-            //            pos = team2[rnd];
-
-            //            if (!SceneUtils.IsFree(pos)) pos = fp3.zero;
-            //        }
-            //    }
-
-            //    entity.SetPosition(pos);
-            //}
-
-            SceneUtils.TakeTheCell(entity.GetPosition());
-            entity.Get<FaceDirection>().Value = new fp3(0, 0, 1);
-            entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
-
             world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(owner);
             return entity;
         }
@@ -166,6 +126,59 @@ namespace Project.Mechanics.Features.Avatar
             skill.Set(new SkillTag {id = id});
             skill.Get<Owner>().Value = owner;
             return skill;
+        }
+
+        private void SetAvatarPosition(Entity owner, Entity entity)
+        {
+            var redSpawnPoints = world.GetSharedData<MapComponents>().RedTeamSpawnPoints;
+            var blueSpawnPoints = world.GetSharedData<MapComponents>().BlueTeamSpawnPoints;
+            var pos = fp3.zero;
+
+            if (NetworkData.GameMode == GameModes.deathmatch)
+            {
+                pos = SceneUtils.GetRandomFreePosition();
+            }
+            else
+            {
+                if (owner.Read<PlayerTag>().Team == TeamTypes.red)
+                {
+                    pos = GetTeamSpawnPosition(redSpawnPoints);
+                    entity.SetPosition(pos);
+                }
+                else
+                {
+                    pos = GetTeamSpawnPosition(blueSpawnPoints);
+                    entity.SetPosition(pos);
+                }
+            }
+
+            entity.SetPosition(pos);
+            SceneUtils.TakeTheCell(entity.GetPosition());
+            entity.Get<FaceDirection>().Value = new fp3(0, 0, 1);
+            entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
+        }
+
+        private fp3 GetTeamSpawnPosition(BufferArray<int> spawnPoints)
+        {
+            if (spawnPoints.Length == 0)
+                return SceneUtils.GetRandomFreePosition();
+
+            fp3 pos = fp3.zero;
+            ListCopyable<int> pool = new ListCopyable<int>();
+            pool.AddRange(spawnPoints);
+
+            while (pool.Count > 0)
+            {
+                var rnd = Worlds.current.GetRandomRange(0, pool.Count);
+                pos = SceneUtils.IndexToPosition(pool[rnd]);
+
+                if (SceneUtils.IsFree(pos))
+                    break;
+                else
+                    pool.RemoveAt(rnd);
+            }
+
+            return pos;
         }
     }
 }

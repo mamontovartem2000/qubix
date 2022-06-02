@@ -10,7 +10,9 @@ namespace Project.Modules.Network
         public static IEnumerator CreateRoom(int playerNumber, Action<string> callback)
         {
             string url = "https://game.qubixinfinity.io/match/create_room";
-            Reqqq req = new Reqqq() { map_id  = 1, player_scheme = new int[] { playerNumber}, lifetime = 60 * 5, game_mode = "deathmatch" };
+            //Reqqq req = new Reqqq() { map_id = 2, player_scheme = new int[] { playerNumber, playerNumber }, lifetime = 60 * 5, game_mode = GameModes.teambattle.ToString() }; // Командная
+            Reqqq req = new Reqqq() { map_id = 2, player_scheme = new int[] { playerNumber }, lifetime = 60 * 5, game_mode = GameModes.deathmatch.ToString() }; // Дезматч
+
             string json = JsonUtility.ToJson(req);
 
             WWWForm formData = new WWWForm();
@@ -95,7 +97,7 @@ namespace Project.Modules.Network
         //public string player_icon;
         public string player_nickname;
         public int map_id;
-        public GameTypes game_mode;
+        public string game_mode;
         //public int[] multiplayer_schema;
         //public string[] available_characters;
         public string player_id;

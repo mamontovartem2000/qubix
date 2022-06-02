@@ -1,7 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
 using Project.Common.Components;
-using Project.Common.Views;
 using Project.Core.Features.Player.Modules;
 using Project.Core.Features.Player.Systems;
 using Project.Markers;

@@ -1,6 +1,5 @@
 using ME.ECS;
 using Project.Common.Components;
-using Project.Core.Features.Player;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,14 +58,6 @@ namespace Project.Core
             return y * width + x;
         }
 
-        public static fp3 IndexToPosition(int index, int width)
-        {
-            var x = index % width;
-            var y = fpmath.floor(index / (fp) width);
-
-            return new fp3(x, 0f, y);
-        }
-
         //position check methods
         public static fp3 GetRandomFreePosition()
         {
@@ -87,8 +78,7 @@ namespace Project.Core
         {
             if (PositionToIndex(pos) < 0 || PositionToIndex(pos) > Worlds.current.ReadSharedData<MapComponents>().WalkableMap.Count - 1) return false;
 
-            if (Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(pos)] == 1 
-                || Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(pos)] == 2) return true;
+            if (Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(pos)] == 1) return true;
             
             return false;
         }

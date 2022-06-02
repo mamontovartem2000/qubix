@@ -1,11 +1,11 @@
 ﻿using ME.ECS;
 using ME.ECS.Collections;
-using ME.ECS.Views.Providers;
 using ME.ECS.DataConfigs;
 using ME.ECS.Transform;
+using ME.ECS.Views.Providers;
 using Project.Common.Components;
-using UnityEngine;
 using Project.Modules.Network;
+using UnityEngine;
 
 namespace Project.Core.Features.SceneBuilder
 {
@@ -28,7 +28,6 @@ namespace Project.Core.Features.SceneBuilder
         protected override void OnConstruct()
         {
             RegisterViews();
-            world.SetSharedData(new MapInitialized());
         }
         protected override void OnConstructLate() => PrepareMaps();
         protected override void OnDeconstruct() { }
@@ -51,51 +50,62 @@ namespace Project.Core.Features.SceneBuilder
         private void PrepareMaps()
         {
             //GameMapRemoteData mapData = ParceUtils.CreateFromJSON<UniversalData<GameMapRemoteData>>(data).data;
-            GameMapRemoteData mapData = null;
+            GameMapRemoteData floorMap = null;
+            GameMapRemoteData objectsMap = null;
             TextAsset objData = null;
 
             if (NetworkData.Info.map_id == 1)
             {
-                mapData = new GameMapRemoteData(_colizei);
+                floorMap = new GameMapRemoteData(_colizei);
                 objData = _colizei_obj;
                 MapChanger.Changer.ChangeMap(Maps.Coliseum);
             }
             else if (NetworkData.Info.map_id == 2)
             {
-                mapData = new GameMapRemoteData(_neon);
+                floorMap = new GameMapRemoteData(_neon);
                 objData = _neon_obj;
                 MapChanger.Changer.ChangeMap(Maps.Neon);
             }
 
-            var height = mapData.bytes.Length / mapData.offset;
-            var width = mapData.offset;
+            var height = floorMap.bytes.Length / floorMap.offset;
+            var width = floorMap.offset;
             SceneUtils.SetWidthAndHeight(width, height);
-
-            world.SetSharedData(new MapComponents
-            {
-                WalkableMap = CreateSharedMap(mapData.bytes, MapType.Walkable),
-                MineMap = CreateSharedMap(mapData.bytes, MapType.Mine),
-                PortalsMap = CreateSharedMap(mapData.bytes, MapType.Portal),
-                SpawnPoints = GetSpawnPointsPositions(mapData.bytes)
-            });
             
-            DrawMap(mapData.bytes);
+            BufferArray<int> redPoints = new BufferArray<int>();
+            BufferArray<int> bluePoints = new BufferArray<int>();
 
             if (objData != null)
             {
-                var objects = new GameMapRemoteData(objData);
-                DrawMapObjects(objects.bytes);
+                objectsMap = new GameMapRemoteData(objData);
+                GetSpawnPointsPositions(objectsMap.bytes, out redPoints, out bluePoints);
             }
+
+            world.SetSharedData(new MapComponents
+            {
+                WalkableMap = CreateSharedMap(floorMap.bytes, MapType.Walkable),
+                MineMap = CreateSharedMap(floorMap.bytes, MapType.Mine),
+                PortalsMap = CreateSharedMap(floorMap.bytes, MapType.Portal),
+                RedTeamSpawnPoints = redPoints,
+                BlueTeamSpawnPoints = bluePoints
+            });
+
+            DrawMap(floorMap.bytes);
+
+            if (objectsMap != null)
+                DrawMapObjects(objectsMap.bytes);
+
+            var sdfg = world.GetSharedData<MapComponents>();
         }
-        private void DrawMap(byte[] s)
+
+        private void DrawMap(byte[] tiles)
         {
             var i = -1;
-            foreach (var b in s)
+            foreach (var tile in tiles)
             {
                 Entity entity = Entity.Empty;
                 i++;
                 
-                switch (b)
+                switch (tile)
                 {
                     case 0:
                     case 1:
@@ -135,7 +145,7 @@ namespace Project.Core.Features.SceneBuilder
                 
                 if (entity == Entity.Empty) continue;
 
-                entity.InstantiateView(_tileViewIds[b]);
+                entity.InstantiateView(_tileViewIds[tile]);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
             }
         }
@@ -147,7 +157,7 @@ namespace Project.Core.Features.SceneBuilder
             {
                 i++;
 
-                if (mapElement == 0 || mapElement == 35) continue;
+                if (mapElement == 0 || mapElement == 101 || mapElement == 102) continue;
                 if (PropsConfigs[mapElement] == null) continue;
                 
                 var entity = new Entity("Prop");
@@ -209,26 +219,38 @@ namespace Project.Core.Features.SceneBuilder
             return a;
         }
 
-        private BufferArray<int> GetSpawnPointsPositions(byte[] m)
+        private void GetSpawnPointsPositions(byte[] m, out BufferArray<int> redTeam, out BufferArray<int> blueTeam)
         {
-            ListCopyable<int> buffer = new ListCopyable<int>();
-            
+            ListCopyable<int> bufferRed = new ListCopyable<int>();
+            ListCopyable<int> bufferBlue = new ListCopyable<int>();
+
             for (var i = 0; i < m.Length; i++)
             {
-                if (m[i] == 35)
+                if (m[i] == 101)
                 {
-                    buffer.Add(i);
+                    bufferRed.Add(i);
+                }
+                else if (m[i] == 102)
+                {
+                    bufferBlue.Add(i);
                 }
             }
 
-            var a = PoolArray<int>.Spawn(buffer.Count);
+            var redPool = PoolArray<int>.Spawn(bufferRed.Count);
+            var bluePool = PoolArray<int>.Spawn(bufferBlue.Count);
 
-            for (int i = 0; i < buffer.Count; i++)
+            for (int i = 0; i < bufferRed.Count; i++)
             {
-                a[i] = buffer[i];
+                redPool[i] = bufferRed[i];
             }
 
-            return a;
+            for (int i = 0; i < bufferBlue.Count; i++)
+            {
+                bluePool[i] = bufferBlue[i];
+            }
+
+            blueTeam = bluePool;
+            redTeam = redPool;
         }
         public enum MapType {Walkable, Mine, Portal}
     }

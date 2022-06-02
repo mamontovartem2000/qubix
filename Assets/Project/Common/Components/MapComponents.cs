@@ -8,14 +8,17 @@ namespace Project.Common.Components
         public BufferArray<byte> WalkableMap;
         public BufferArray<byte> PortalsMap;
         public BufferArray<byte> MineMap;
-        public BufferArray<int> SpawnPoints;
+        public BufferArray<int> RedTeamSpawnPoints;
+        public BufferArray<int> BlueTeamSpawnPoints;
+
 
         void IStructCopyable<MapComponents>.CopyFrom(in MapComponents other)
         {
             ArrayUtils.Copy(other.WalkableMap, ref WalkableMap);
             ArrayUtils.Copy(other.PortalsMap, ref PortalsMap);
             ArrayUtils.Copy(other.MineMap, ref MineMap);
-            ArrayUtils.Copy(other.SpawnPoints, ref SpawnPoints);
+            ArrayUtils.Copy(other.RedTeamSpawnPoints, ref RedTeamSpawnPoints);
+            ArrayUtils.Copy(other.BlueTeamSpawnPoints, ref BlueTeamSpawnPoints);
         }
 
         void IStructCopyable<MapComponents>.OnRecycle()
@@ -23,7 +26,8 @@ namespace Project.Common.Components
             PoolArray<byte>.Recycle(ref WalkableMap);
             PoolArray<byte>.Recycle(ref PortalsMap);
             PoolArray<byte>.Recycle(ref MineMap);
-            PoolArray<int>.Recycle(ref SpawnPoints);
+            PoolArray<int>.Recycle(ref RedTeamSpawnPoints);
+            PoolArray<int>.Recycle(ref BlueTeamSpawnPoints);
         }
     }  
 }

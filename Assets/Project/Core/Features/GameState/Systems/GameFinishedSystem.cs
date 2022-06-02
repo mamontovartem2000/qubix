@@ -37,12 +37,12 @@ namespace Project.Core.Features.GameState.Systems
         {
             if (!world.HasSharedData<GameFinished>() || _finished) return;
 
-            switch (NetworkData.Info.game_mode)
+            switch (NetworkData.GameMode)
             {
-                case GameTypes.deathmatch:
+                case GameModes.deathmatch:
                     SendDeathMatchResult();
                     break;
-                case GameTypes.teambattle:
+                case GameModes.teambattle:
                     SendTeambattleResult();
                     break;
                 default:

@@ -20,6 +20,8 @@ namespace Project.Modules.Network
 			var playerJson = Encoding.UTF8.GetString(payloadInBytes);
 			GameInfo info = NetworkData.CreateFromJSON<GameInfo>(playerJson);
 			NetworkData.Info = info;
+			Enum.TryParse(info.game_mode, out GameModes gameMode);
+			NetworkData.GameMode = gameMode;
 			NetworkData.FullJoinRequest = request;
 
 			NetworkData.Connect = new WebSocketConnect(NetworkData.Info.server_url);
@@ -35,6 +37,8 @@ namespace Project.Modules.Network
 			var playerJson = Encoding.UTF8.GetString(payloadInBytes);
 			GameInfo info = NetworkData.CreateFromJSON<GameInfo>(playerJson);
 			NetworkData.Info = info;
+			Enum.TryParse(info.game_mode, out GameModes gameMode);
+			NetworkData.GameMode = gameMode;
 			NetworkData.FullJoinRequest = request;
 
 			SendJoinRequest();

@@ -11,6 +11,7 @@ namespace Project.Modules.Network
         public static uint GameSeed;
         public static PlayerInfo[] PlayersInfo;
         public static TeamTypes Team;
+        public static GameModes GameMode;
         public static BuildTypes BuildType;
 
         public static void CloseNetwork()
@@ -21,7 +22,7 @@ namespace Project.Modules.Network
 
         public static void SetFakeSettings()
         {
-            Info = new GameInfo() { server_url = "url", player_nickname = "Dev player", map_id = 1, game_mode = GameTypes.deathmatch, player_id = "qwerty" };
+            Info = new GameInfo() { server_url = "url", player_nickname = "Dev player", map_id = 2, game_mode = "deathmatch", player_id = "qwerty" };
             SlotInRoom = 1;
             GameSeed = 1;
             FullJoinRequest = string.Empty;
@@ -32,10 +33,10 @@ namespace Project.Modules.Network
 
         public static bool FriendlyFireCheck(TeamTypes firstPlayer, TeamTypes secondPlayer)
         {
-            if (Info.game_mode == GameTypes.deathmatch)
+            if (GameMode == GameModes.deathmatch)
                 return true;
 
-            if (Info.game_mode == GameTypes.teambattle && firstPlayer != secondPlayer)
+            if (GameMode == GameModes.teambattle && firstPlayer != secondPlayer)
                 return true;
             else
                 return false;
@@ -54,7 +55,7 @@ namespace Project.Modules.Network
         Front_Room
     }
 
-    public enum GameTypes
+    public enum GameModes
     {
         deathmatch,
         teambattle
