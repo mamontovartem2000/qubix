@@ -50,6 +50,8 @@ namespace Project.Input.InputHandler.Modules
             _input.Player.Skill2.performed += ctx => world.AddMarker(new SecondSkillMarker {ActorID = NetworkData.SlotInRoom});
             _input.Player.Skill3.performed += ctx => world.AddMarker(new ThirdSkillMarker {ActorID = NetworkData.SlotInRoom});
             _input.Player.Skill4.performed += ctx => world.AddMarker(new FourthSkillMarker {ActorID = NetworkData.SlotInRoom});
+            _input.Player.Tabulation.performed += ctx => world.AddMarker(new TabulationMarker {State = InputState.Pressed});
+            _input.Player.Tabulation.canceled += ctx => world.AddMarker(new TabulationMarker {State = InputState.Released});
         }
         
         private void ForwardPressed()

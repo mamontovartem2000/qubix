@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
 using Project.Common.Components;
+using Project.Core.Features.Events;
 using Project.Core.Features.Player.Modules;
 using Project.Core.Features.Player.Systems;
 using Project.Markers;
@@ -53,6 +54,7 @@ namespace Project.Core.Features.Player
 			var localId = nsap.ActorLocalID;
 			var player = new Entity("player_" + localId);
 			player.Set(new PlayerTag {PlayerLocalID = localId, PlayerServerID = nsap.ServerID, Nickname = nsap.Nickname, Team = nsap.Team });
+			
 
 			if (NetworkData.PlayersInfo == null) // Fake case
 			{

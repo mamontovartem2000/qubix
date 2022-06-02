@@ -28,6 +28,6 @@ namespace Project.Common.Components
     {
         public bool NeedDelete;
     }
-
+    
     public struct LockTarget : IComponent { }
 }

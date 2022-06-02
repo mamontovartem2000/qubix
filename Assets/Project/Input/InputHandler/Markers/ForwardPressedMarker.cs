@@ -39,4 +39,8 @@ namespace Project.Input.InputHandler.Markers
     {
         public int ActorID;
     }
+    public struct TabulationMarker : IMarker
+    {
+        public InputState State;
+    }
 }

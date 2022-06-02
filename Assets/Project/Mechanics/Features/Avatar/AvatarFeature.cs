@@ -20,7 +20,7 @@ namespace Project.Mechanics.Features.Avatar
     public sealed class AvatarFeature : Feature
     {
         public MonoBehaviourViewBase PlayerHealthView;
-
+    
         private readonly Vector3 _direction = new Vector3(0f, 0f, 1f);
         private readonly Vector3 _trajectory = new Vector3(0f, 1f, 0f);
         private ViewId _playerHealth;
@@ -55,7 +55,10 @@ namespace Project.Mechanics.Features.Avatar
 
             entity.Get<Owner>().Value = owner;
             entity.Set(new Hover {Direction = false, Amount = 0});
-
+            
+            world.GetFeature<EventsFeature>().TabulationAddPlayer.Execute(entity.Get<Owner>().Value);
+            world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(entity.Get<Owner>().Value);
+            
             var id = world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order;
             var local = world.GetFeature<PlayerFeature>().GetPlayerByID(id);
             

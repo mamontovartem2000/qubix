@@ -59,6 +59,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
                     apply.ApplyTo.Get<PlayerDamagedCounter>().Value += 0.1f;
                 }
             }
+            
 
             health -= damage;
 

@@ -42,9 +42,9 @@ namespace Project.Mechanics.Features.Avatar.Systems
             var health = entity.Read<PlayerHealth>().Value;
             if(health > 0) return;
 
+            ref var enemy = ref entity.Get<Owner>().Value.Get<DamagedBy>().Value;
             if (entity.Get<Owner>().Value.Has<DamagedBy>())
             {
-                ref var enemy = ref entity.Get<Owner>().Value.Get<DamagedBy>().Value;
                 enemy.Get<PlayerScore>().Kills += 1;
                 world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
             }
@@ -52,11 +52,13 @@ namespace Project.Mechanics.Features.Avatar.Systems
             ref var player = ref entity.Get<Owner>().Value;
             player.Get<PlayerScore>().Deaths += 1;
             
+            world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(player);
+            world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(enemy);
             world.GetFeature<EventsFeature>().PlayerDeath.Execute(player);      
+            
             SceneUtils.ReleaseTheCell(entity.Read<PlayerMoveTarget>().Value);
             
             _vfx.SpawnVFX(VFXFeature.VFXType.QubixDeath, entity.GetPosition());
-            
             player.Remove<PlayerAvatar>();
             entity.Destroy();
         }

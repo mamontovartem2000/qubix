@@ -150,6 +150,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Stun>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Tabulation>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileRotation>(false, true, false, false, false, false, false, false);
@@ -314,6 +315,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Stun>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Tabulation>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileRotation>(false, true, false, false, false, false, false, false);
@@ -473,6 +475,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Stun>(false);
             structComponentsContainer.Validate<Project.Common.Components.StunAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.StunModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.Tabulation>(true);
             structComponentsContainer.Validate<Project.Common.Components.Targeted>(true);
             structComponentsContainer.Validate<Project.Common.Components.TeleportPlayer>(false);
             structComponentsContainer.Validate<Project.Common.Components.TileRotation>(false);
@@ -637,6 +640,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Stun>(false);
             entity.ValidateData<Project.Common.Components.StunAffect>(true);
             entity.ValidateData<Project.Common.Components.StunModifier>(false);
+            entity.ValidateData<Project.Common.Components.Tabulation>(true);
             entity.ValidateData<Project.Common.Components.Targeted>(true);
             entity.ValidateData<Project.Common.Components.TeleportPlayer>(false);
             entity.ValidateData<Project.Common.Components.TileRotation>(false);

@@ -25,4 +25,5 @@ namespace Project.Common.Components
     public struct GameFinished : IComponent { }
     public struct GameTimer : IComponent {public float Value;}
     public struct MapInitialized : IComponent {}
+    public struct Tabulation : IComponent {}
 }

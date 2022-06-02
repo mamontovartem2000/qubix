@@ -33,6 +33,11 @@ namespace Project.Core.Features.Events {
 
         public GlobalEvent CooldownTick;
         public GlobalEvent SkillImageChange;
+
+        public GlobalEvent TabulationOn;
+        public GlobalEvent TabulationOff;
+        public GlobalEvent TabulationAddPlayer;
+        public GlobalEvent TabulationScreenNumbersChanged;
             
         protected override void OnConstruct() {}
         protected override void OnDeconstruct() {}

@@ -2,6 +2,7 @@
 using Project.Common.Components;
 using Project.Input.InputHandler.Markers;
 using System;
+using Project.Core.Features.Events;
 using Project.Modules.Network;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ namespace Project.Core.Features.Player.Systems
         private RPCId _movement;
         private RPCId _mouseLeft, _mouseRight, _lockDirection;
         private RPCId _firstSkill, _secondSkill, _thirdSkill, _fourthSkill;
-
+        private RPCId _tabulation;
         void ISystemBase.OnConstruct()
         {
             Net = world.GetModule<NetworkModule>();
@@ -47,13 +48,15 @@ namespace Project.Core.Features.Player.Systems
             _mouseLeft = net.RegisterRPC(new Action<MouseLeftMarker>(LeftMouse_RPC).Method);
             _mouseRight = net.RegisterRPC(new Action<MouseRightMarker>(RightMouse_RPC).Method);
             _lockDirection = net.RegisterRPC(new Action<LockDirectionMarker>(SpaceKey_RPC).Method);
-            //
+            
             _firstSkill = net.RegisterRPC(new Action<FirstSkillMarker>(FirstSkill_RPC).Method);
             _secondSkill = net.RegisterRPC(new Action<SecondSkillMarker>(SecondSkill_RPC).Method);
             _thirdSkill = net.RegisterRPC(new Action<ThirdSkillMarker>(ThirdSkill_RPC).Method);
             _fourthSkill = net.RegisterRPC(new Action<FourthSkillMarker>(FourthSkill_RPC).Method);
 
             _movement = net.RegisterRPC(new Action<MovementMarker>(Movement_RPC).Method);
+            
+            _tabulation = net.RegisterRPC(new Action<TabulationMarker>(TabKey_RPC).Method);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -71,6 +74,8 @@ namespace Project.Core.Features.Player.Systems
             if (world.GetMarker(out SecondSkillMarker second)) Net.RPC(this, _secondSkill, second);
             if (world.GetMarker(out ThirdSkillMarker third)) Net.RPC(this, _thirdSkill, third);
             if (world.GetMarker(out FourthSkillMarker fourth)) Net.RPC(this, _fourthSkill, fourth);
+            
+            if (world.GetMarker(out TabulationMarker tm)) Net.RPC(this, _tabulation, tm);
         }
 
         private void Movement_RPC(MovementMarker move)
@@ -151,6 +156,29 @@ namespace Project.Core.Features.Player.Systems
                         entity.Remove<LockTarget>();
                         break;
                     }
+            }
+        }
+        
+        private void TabKey_RPC(TabulationMarker tm)
+        {
+            var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+            // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
+            if (player.Read<PlayerAvatar>().Value == Entity.Empty) return;
+
+            ref var entity = ref player.Get<PlayerAvatar>().Value;
+
+            switch (tm.State)
+            {
+                case InputState.Pressed:
+                {
+                    world.GetFeature<EventsFeature>().TabulationOn.Execute(entity.Get<Owner>().Value);
+                    break;
+                }
+                case InputState.Released:
+                {
+                    world.GetFeature<EventsFeature>().TabulationOff.Execute(entity.Get<Owner>().Value);
+                    break;
+                }
             }
         }
 
