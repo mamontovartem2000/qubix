@@ -25,7 +25,7 @@ public class MapChanger : MonoBehaviour
     {
         switch (map)
         {
-            case Maps.Coliseum:
+            case Maps.Colizei:
                 _emissionIntensity = 3;
                 ChangeColor(20, 15, 0);
                 ChangeEmissionColor(4, 4, 4);
@@ -129,7 +129,7 @@ public class MapChanger : MonoBehaviour
 public enum Maps
 {
     Null,
-    Coliseum,
+    Colizei,
     Neon,
     Promo1,
     Promo2,

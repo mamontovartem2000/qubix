@@ -139,8 +139,8 @@ namespace Project.Core.Features.SceneBuilder
             foreach (var mapElement in mapInBytes)
             {
                 i++;
-
-                if (mapElement == 0 || mapElement == 101 || mapElement == 102) continue;
+                //TODO: 35 - xuinya
+                if (mapElement == 0 || mapElement == 101 || mapElement == 102 || mapElement == 35) continue;
                 if (PropsConfigs[mapElement] == null) continue;
                 
                 var entity = new Entity("Prop");
