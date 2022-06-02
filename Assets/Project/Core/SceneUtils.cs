@@ -184,14 +184,25 @@ namespace Project.Core
         public GameMapRemoteData(TextAsset sourceMap)
         {
             var omg = sourceMap.text.Split('\n');
+            ParseMap(omg);
+        }
+
+        public GameMapRemoteData(string sourceMap)
+        {
+            var omg = sourceMap.Split('\n');
+            ParseMap(omg);
+        }
+
+        private void ParseMap(string[] lines)
+        {
             List<byte> byteList = new List<byte>();
 
-            var arr = omg[0].Split(' ');
+            var arr = lines[0].Split(' ');
             offset = arr.Length + 2;
             var wall = CreateWalls();
             byteList.AddRange(wall);
 
-            foreach (var line in omg)
+            foreach (var line in lines)
             {
                 byteList.Add(0);
                 var stringArray = line.Split(' ');

@@ -38,8 +38,6 @@ namespace Project.Mechanics.Features.Avatar.Systems
 		{
 			ref var counter = ref entity.Get<PlayerDamagedCounter>().Value;
 
-			Debug.Log(counter);
-
 			if(counter <= 0) return;
 			counter -= deltaTime;
 		}

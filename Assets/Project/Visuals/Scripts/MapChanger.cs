@@ -1,3 +1,4 @@
+using Project.Modules.Network;
 using UnityEngine;
 
 public class MapChanger : MonoBehaviour
@@ -17,7 +18,7 @@ public class MapChanger : MonoBehaviour
     private void Awake()
     {
         Changer = this;
-        ChangeMap(Maps.Coliseum);
+        ChangeMap((Maps)NetworkData.Info.map_id);
     }
 
     public void ChangeMap(Maps map)
@@ -41,6 +42,42 @@ public class MapChanger : MonoBehaviour
                 ExtraChangeEmissionColors(5, 5, 5, 5, 5);
                 ChangeBridge(1, 1);
                 ChangeTriangleTile(30, 8, 0);
+                break;
+            case Maps.Promo1:
+                _emissionIntensity = 3;
+                ChangeColor(5, 7, 5);
+                ChangeEmissionColor(7, 7, 7);
+                ExtraChangeColors(5, 5, 3, 4, 5);
+                ExtraChangeEmissionColors(7, 6, 5, 6, 6);
+                ChangeBridge(2, 6);
+                ChangeTriangleTile(7, 2, 3);
+                break;
+            case Maps.Promo2:
+                _emissionIntensity = 4;
+                ChangeColor(14, 10, 11);
+                ChangeEmissionColor(8, 8, 8);
+                ExtraChangeColors(19, 19, 30, 4, 5);
+                ExtraChangeEmissionColors(4, 6, 5, 4, 4);
+                ChangeBridge(6, 8);
+                ChangeTriangleTile(12, 2, 3);
+                break;
+            case Maps.Promo3:
+                _emissionIntensity = 3;
+                ChangeColor(5, 7, 5);
+                ChangeEmissionColor(7, 7, 7);
+                ExtraChangeColors(5, 5, 3, 4, 5);
+                ExtraChangeEmissionColors(7, 6, 5, 6, 6);
+                ChangeBridge(2, 6);
+                ChangeTriangleTile(7, 2, 3);
+                break;
+            case Maps.Promo4:
+                _emissionIntensity = 4;
+                ChangeColor(14, 10, 11);
+                ChangeEmissionColor(8, 8, 8);
+                ExtraChangeColors(19, 19, 30, 4, 5);
+                ExtraChangeEmissionColors(4, 6, 5, 4, 4);
+                ChangeBridge(6, 8);
+                ChangeTriangleTile(12, 2, 3);
                 break;
         }
     }
@@ -89,9 +126,13 @@ public class MapChanger : MonoBehaviour
     }
 }
 
-[System.Serializable]
 public enum Maps
 {
+    Null,
     Coliseum,
     Neon,
+    Promo1,
+    Promo2,
+    Promo3,
+    Promo4
 }

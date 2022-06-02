@@ -17,20 +17,16 @@ namespace Project.Core.Features.SceneBuilder
     public sealed class SceneBuilderFeature : Feature
     {
         [Header("General")]
-        [SerializeField] private TextAsset _colizei;
-        [SerializeField] private TextAsset _colizei_obj;
-        [SerializeField] private TextAsset _neon;
-        [SerializeField] private TextAsset _neon_obj;
+        [SerializeField] private TextAsset _testFloor;
+        [SerializeField] private TextAsset _testObjects;
         [Header("Reworked Links")]
         public ParticleViewSourceBase[] TileViewSources;
         public DataConfig[] PropsConfigs;
         private ViewId[] _tileViewIds, _propsViewIds;
-        protected override void OnConstruct()
-        {
-            RegisterViews();
-        }
+        protected override void OnConstruct() => RegisterViews();
         protected override void OnConstructLate() => PrepareMaps();
         protected override void OnDeconstruct() { }
+
         private void RegisterViews()
         {
             _tileViewIds = new ViewId[TileViewSources.Length];
@@ -49,36 +45,25 @@ namespace Project.Core.Features.SceneBuilder
         }
         private void PrepareMaps()
         {
-            //GameMapRemoteData mapData = ParceUtils.CreateFromJSON<UniversalData<GameMapRemoteData>>(data).data;
             GameMapRemoteData floorMap = null;
             GameMapRemoteData objectsMap = null;
-            TextAsset objData = null;
 
-            if (NetworkData.Info.map_id == 1)
+            if (_testFloor == null)
             {
-                floorMap = new GameMapRemoteData(_colizei);
-                objData = _colizei_obj;
-                MapChanger.Changer.ChangeMap(Maps.Coliseum);
+                floorMap = new GameMapRemoteData(NetworkData.FloorMap);
+                objectsMap = new GameMapRemoteData(NetworkData.ObjectsMap);
             }
-            else if (NetworkData.Info.map_id == 2)
+            else
             {
-                floorMap = new GameMapRemoteData(_neon);
-                objData = _neon_obj;
-                MapChanger.Changer.ChangeMap(Maps.Neon);
-            }
+                floorMap = new GameMapRemoteData(_testFloor);
+                objectsMap = new GameMapRemoteData(_testObjects);
+                Debug.Log("Used Local Maps!!!");
+            }    
 
             var height = floorMap.bytes.Length / floorMap.offset;
             var width = floorMap.offset;
             SceneUtils.SetWidthAndHeight(width, height);
-            
-            BufferArray<int> redPoints = new BufferArray<int>();
-            BufferArray<int> bluePoints = new BufferArray<int>();
-
-            if (objData != null)
-            {
-                objectsMap = new GameMapRemoteData(objData);
-                GetSpawnPointsPositions(objectsMap.bytes, out redPoints, out bluePoints);
-            }
+            GetSpawnPointsPositions(objectsMap.bytes, out BufferArray<int> redPoints, out BufferArray<int> bluePoints);
 
             world.SetSharedData(new MapComponents
             {
@@ -93,8 +78,6 @@ namespace Project.Core.Features.SceneBuilder
 
             if (objectsMap != null)
                 DrawMapObjects(objectsMap.bytes);
-
-            var sdfg = world.GetSharedData<MapComponents>();
         }
 
         private void DrawMap(byte[] tiles)

@@ -8,6 +8,7 @@ namespace Project.Modules.Network
 {
     public static class Stepsss
 	{
+		public static Action LoadMapFiles;
 		public static Action LoadMainMenuScene;
 		public static Action LoadGameScene;
 		public static Action<TimeRemaining> SetTimer;
@@ -123,6 +124,7 @@ namespace Project.Modules.Network
 				NetworkData.SlotInRoom = joinResult.Slot;
 				Enum.TryParse(joinResult.Team, out TeamTypes teamType);
 				NetworkData.Team = teamType;
+				LoadMapFiles?.Invoke();
 				Debug.Log($"Join slot: {joinResult.Slot}, team {joinResult.Team};");
 			}
 			else

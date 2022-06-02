@@ -13,6 +13,8 @@ namespace Project.Modules.Network
         public static TeamTypes Team;
         public static GameModes GameMode;
         public static BuildTypes BuildType;
+        public static string FloorMap;
+        public static string ObjectsMap;
 
         public static void CloseNetwork()
         {

@@ -267,6 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 53892543}
   - component: {fileID: 53892542}
+  - component: {fileID: 53892544}
   m_Layer: 0
   m_Name: NetworkController
   m_TagString: Untagged
@@ -288,7 +289,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _loading: {fileID: 1941386127}
   _select: {fileID: 469779319}
-  _buildType: 1
 --- !u!4 &53892543
 Transform:
   m_ObjectHideFlags: 0
@@ -303,6 +303,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &53892544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53892541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f459afe6beed12c48a94eb39f2a69b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &60990151
 GameObject:
   m_ObjectHideFlags: 0
@@ -4179,7 +4191,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 52.15
+  m_fontSize: 45.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

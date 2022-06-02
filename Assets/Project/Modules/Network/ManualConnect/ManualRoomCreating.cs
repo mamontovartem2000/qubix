@@ -11,7 +11,7 @@ namespace Project.Modules.Network
         {
             string url = "https://game.qubixinfinity.io/match/create_room";
             //Reqqq req = new Reqqq() { map_id = 2, player_scheme = new int[] { playerNumber, playerNumber }, lifetime = 60 * 5, game_mode = GameModes.teambattle.ToString() }; // Командная
-            Reqqq req = new Reqqq() { map_id = 2, player_scheme = new int[] { playerNumber }, lifetime = 60 * 5, game_mode = GameModes.deathmatch.ToString() }; // Дезматч
+            Reqqq req = new Reqqq() { map_id = 4, player_scheme = new int[] { playerNumber }, lifetime = 60 * 5, game_mode = GameModes.deathmatch.ToString() }; // Дезматч
 
             string json = JsonUtility.ToJson(req);
 

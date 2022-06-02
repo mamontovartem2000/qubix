@@ -2316,6 +2316,7 @@ GameObject:
   - component: {fileID: 486836997}
   - component: {fileID: 486836996}
   - component: {fileID: 486837000}
+  - component: {fileID: 486837002}
   - component: {fileID: 486837001}
   m_Layer: 5
   m_Name: UI_CORE
@@ -2445,6 +2446,18 @@ MonoBehaviour:
   _hostPanel: {fileID: 1876595778}
   _buttons: {fileID: 398259950}
   _timer: {fileID: 1378005825}
+--- !u!114 &486837002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486836995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f459afe6beed12c48a94eb39f2a69b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &531991499
 GameObject:
   m_ObjectHideFlags: 0
@@ -5545,6 +5558,13 @@ MonoBehaviour:
   - {fileID: 632216144}
   - {fileID: 324485624}
   - {fileID: 867221979}
+  _skillDescriptions: []
+  _bullerIcons: []
+  _goldIcons: []
+  _powerIcons: []
+  _bullerDes: []
+  _goldDes: []
+  _powerDes: []
 --- !u!224 &1687076989
 RectTransform:
   m_ObjectHideFlags: 0
