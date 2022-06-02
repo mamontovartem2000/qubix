@@ -21,6 +21,7 @@ MonoBehaviour:
   - id: 4
   - id: 5
   - id: 6
+  - id: 7
   removeStructComponents: []
   templates: []
   references:
@@ -57,3 +58,10 @@ MonoBehaviour:
         Value: 1
     00000006:
       type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}
+    00000007:
+      type: {class: SoundEffect, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Sound0: {fileID: 6479598467864932581, guid: a8fab5bca2ce94847903c84c45dde418, type: 3}
+        Sound1: {fileID: 7463518222276409281, guid: 4cbe1f6556b7ea943b5bca47a0b15955, type: 3}
+        Sound2: {fileID: 735087696512997043, guid: db4e9881f48e8414381587a767ae1bbf, type: 3}
+        Sound3: {fileID: 8255929288204286805, guid: 432cea4f389d050468ed6439c96cc9a4, type: 3}

@@ -98,7 +98,8 @@ namespace Project.Mechanics.Features.VFX
 			SkillLinearPower,
 			QubixDeath,
 			SlowExplosion,
-			SpeedTrail
+			SpeedTrail,
+			MineExplosion
 		}
 	}
 }

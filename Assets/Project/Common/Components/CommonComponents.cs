@@ -1,4 +1,6 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
+using UnityEngine;
 
 namespace Project.Common.Components 
 {
@@ -26,4 +28,12 @@ namespace Project.Common.Components
     public struct GameTimer : IComponent {public float Value;}
     public struct MapInitialized : IComponent {}
     public struct Tabulation : IComponent {}
+    public struct SoundPlay : IComponent {}
+    public struct SoundEffect : IComponent
+    {
+        public MonoBehaviourViewBase Sound0;
+        public MonoBehaviourViewBase Sound1;
+        public MonoBehaviourViewBase Sound2;
+        public MonoBehaviourViewBase Sound3;
+    }
 }

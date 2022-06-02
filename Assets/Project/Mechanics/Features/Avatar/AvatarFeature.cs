@@ -34,6 +34,7 @@ namespace Project.Mechanics.Features.Avatar
             AddSystem<BlinkHurtSystem>();
             AddSystem<ShieldApplyDamageSystem>();
 
+            AddSystem<PlaySoundSystem>();
             AddSystem<SlownessAfterTakeDamageSystem>();
             AddSystem<SlownessRemoveSystem>();
             AddSystem<StunLifeTimeSystem>();

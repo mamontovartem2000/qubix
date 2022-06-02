@@ -1,9 +1,11 @@
 ﻿using ME.ECS;
-using ME.ECS.Views.Providers;
 
-namespace Project.Common.Views.VFX.Mono
+namespace Project.Visuals.Scripts.VFX
 {
-    public class FlamethrowerVFXMono : MonoBehaviourView
+
+    using ME.ECS.Views.Providers;
+
+    public class MineVFXMono : MonoBehaviourView
     {
         public override bool applyStateJob => true;
         public override void OnInitialize() { }
@@ -12,7 +14,7 @@ namespace Project.Common.Views.VFX.Mono
         public override void ApplyState(float deltaTime, bool immediately)
         {
             transform.position = entity.GetPosition();
-            transform.rotation = entity.GetParent().GetParent().GetRotation();
+            transform.rotation = entity.GetRotation();
         }
     }
 }

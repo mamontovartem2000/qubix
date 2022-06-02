@@ -51,6 +51,11 @@ namespace Project.Mechanics.Features.Projectile
 
             var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
             entity.InstantiateView(view);
+            
+            var sound = new Entity("sound");
+            sound.SetPosition(gun.GetPosition());
+			sound.Get<SoundEffect>() = gun.Get<SoundEffect>();
+			sound.Set(new SoundPlay());
 
             entity.Set(new ProjectileActive());
 

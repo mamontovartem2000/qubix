@@ -70,6 +70,10 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 			}
 			
 			_vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, pos);
+			var sound = new Entity("sound");
+			sound.SetPosition(entity.GetPosition());
+			sound.Get<SoundEffect>() = entity.Get<SoundEffect>();
+			sound.Set(new SoundPlay());
 			entity.Destroy();
 		}
 	}
