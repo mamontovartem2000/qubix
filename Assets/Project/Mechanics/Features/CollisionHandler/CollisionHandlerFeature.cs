@@ -23,6 +23,8 @@ namespace Project.Mechanics.Features.CollisionHandler
             AddSystem<SpawnMineSystem>();
             AddSystem<NewHealthDispenserSystem>();
             AddSystem<NewPortalDispenserSystem>();
+            AddSystem<MineBlinkSystem>();
+            AddSystem<MineBlinkLifeTime>();
 
             _portal = world.RegisterViewSource(Portal);
             _mine = world.RegisterViewSource(Mine);
@@ -58,6 +60,8 @@ namespace Project.Mechanics.Features.CollisionHandler
             entity.SetPosition(SceneUtils.GetRandomFreePosition());
             SceneUtils.PlantMine(entity.GetPosition());
             entity.InstantiateView(_mine);
+            entity.Get<MineBlinkTimerDefault>().Value = world.GetRandomRange(1f, 3f);
+            entity.Get<MineBlinkTimer>().Value = entity.Get<MineBlinkTimerDefault>().Value;
             
             entity.Set(new CollisionDynamic());
             entity.Get<Owner>().Value = new Entity("mineowner");

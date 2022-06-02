@@ -846,7 +846,7 @@ namespace ME.ECS.Network {
                 currentState.CopyFrom(sourceState);
                 currentState.Initialize(this.world, freeze: false, restore: true);
 
-                UnityEngine.Debug.Log($"rollback: {sourceTick - tick}");
+                // UnityEngine.Debug.Log($"rollback: {sourceTick - tick}");
                 
                 if (this.asyncMode == false) this.world.Simulate(sourceTick, tick, 0f);
             }

@@ -86,6 +86,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlink>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimer>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimerDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveInput>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
@@ -99,6 +102,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamaged>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamagedCounter>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealth>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthOverlay>(false, true, false, false, false, false, false, false);
@@ -246,6 +250,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlink>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimer>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimerDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveInput>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
@@ -259,6 +266,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamaged>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamagedCounter>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealth>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthOverlay>(false, true, false, false, false, false, false, false);
@@ -401,6 +409,9 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelay>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelayDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(true);
+            structComponentsContainer.Validate<Project.Common.Components.MineBlink>(false);
+            structComponentsContainer.Validate<Project.Common.Components.MineBlinkTimer>(false);
+            structComponentsContainer.Validate<Project.Common.Components.MineBlinkTimerDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.MineTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.MoveInput>(false);
             structComponentsContainer.Validate<Project.Common.Components.MoveSpeedAffect>(true);
@@ -414,6 +425,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.PlayerAvatar>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerDamaged>(false);
+            structComponentsContainer.Validate<Project.Common.Components.PlayerDamagedCounter>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealth>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealthDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealthOverlay>(false);
@@ -561,6 +573,9 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.MeleeDelay>(false);
             entity.ValidateData<Project.Common.Components.MeleeDelayDefault>(false);
             entity.ValidateData<Project.Common.Components.MeleeWeapon>(true);
+            entity.ValidateData<Project.Common.Components.MineBlink>(false);
+            entity.ValidateData<Project.Common.Components.MineBlinkTimer>(false);
+            entity.ValidateData<Project.Common.Components.MineBlinkTimerDefault>(false);
             entity.ValidateData<Project.Common.Components.MineTag>(true);
             entity.ValidateData<Project.Common.Components.MoveInput>(false);
             entity.ValidateData<Project.Common.Components.MoveSpeedAffect>(true);
@@ -574,6 +589,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.PlayerAvatar>(false);
             entity.ValidateData<Project.Common.Components.PlayerConfig>(false);
             entity.ValidateData<Project.Common.Components.PlayerDamaged>(false);
+            entity.ValidateData<Project.Common.Components.PlayerDamagedCounter>(false);
             entity.ValidateData<Project.Common.Components.PlayerHealth>(false);
             entity.ValidateData<Project.Common.Components.PlayerHealthDefault>(false);
             entity.ValidateData<Project.Common.Components.PlayerHealthOverlay>(false);

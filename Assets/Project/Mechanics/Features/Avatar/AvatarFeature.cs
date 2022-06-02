@@ -6,7 +6,6 @@ using Project.Core;
 using Project.Core.Features.Events;
 using Project.Core.Features.Player;
 using Project.Mechanics.Features.Avatar.Systems;
-using Project.Mechanics.Features.LifeTime.Systems.SkillsSystems;
 using Project.Modules.Network;
 using UnityEngine;
 
@@ -41,6 +40,7 @@ namespace Project.Mechanics.Features.Avatar
             AddSystem<SlownessRemoveSystem>();
             AddSystem<StunLifeTimeSystem>();
             AddSystem<PlayerHealthVisualSystem>();
+            AddSystem<BlinkIntensitySystem>();
 
             _playerHealth = world.RegisterViewSource(PlayerHealthView);
         }
@@ -65,6 +65,8 @@ namespace Project.Mechanics.Features.Avatar
             health.SetParent(entity);
             health.Get<PlayerHealthOverlay>().Value = entity.Get<PlayerHealth>().Value;
             health.Get<Owner>().Value = owner;
+
+            entity.Get<PlayerDamagedCounter>().Value = 0;
             
             if (owner != local)
             {

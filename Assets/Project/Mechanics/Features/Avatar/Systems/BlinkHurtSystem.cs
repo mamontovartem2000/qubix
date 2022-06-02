@@ -35,9 +35,13 @@ namespace Project.Mechanics.Features.Avatar.Systems
         {
             ref var time = ref entity.Get<PlayerDamaged>().Value;
             time -= deltaTime;
-
-            if (time <= 0)
+            
+            if (time > 0) return;
+            
+            if (entity.Read<PlayerHealth>().Value / entity.Read<PlayerHealthDefault>().Value > 0.25)
+            {
                 entity.Remove<PlayerDamaged>();
+            }
         }
     }
 }

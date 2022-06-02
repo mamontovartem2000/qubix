@@ -34,4 +34,19 @@ namespace Project.Common.Components
 	{
 		public fp Value;
 	}
+
+	public struct MineBlink : IComponent
+	{
+		public float Value;
+	}
+
+	public struct MineBlinkTimer : IComponent
+	{
+		public float Value;
+	}
+	
+	public struct MineBlinkTimerDefault : IComponent
+	{
+			public float Value;
+	}
 }

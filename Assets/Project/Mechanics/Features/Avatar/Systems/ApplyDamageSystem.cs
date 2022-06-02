@@ -2,6 +2,7 @@
 using Project.Common.Components;
 using Project.Core.Features.Events;
 using Project.Core.Features.Player;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar.Systems
@@ -50,8 +51,14 @@ namespace Project.Mechanics.Features.Avatar.Systems
                 to.Get<Owner>().Value.Set(new DamagedBy {Value = from});
             }
 
-            if(damage > 0)
-                apply.ApplyTo.Set(new PlayerDamaged {Value = 0.25f});
+            if (damage > 0)
+            {
+                if (health/apply.ApplyTo.Read<PlayerHealthDefault>().Value < 0.65)
+                {
+                    apply.ApplyTo.Set(new PlayerDamaged {Value = 1f});
+                    apply.ApplyTo.Get<PlayerDamagedCounter>().Value += 0.1f;
+                }
+            }
 
             health -= damage;
 

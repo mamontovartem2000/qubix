@@ -57,4 +57,9 @@ namespace Project.Common.Components
     {
         public float Value;
     }
+
+    public struct PlayerDamagedCounter : IComponent
+    {
+        public float Value;
+    }
 }
