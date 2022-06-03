@@ -46,9 +46,9 @@ namespace Project.Mechanics.Features.Avatar.Systems
             var health = entity.Read<PlayerHealth>().Value;
             if(health > 0) return;
 
-            ref var enemy = ref entity.Get<Owner>().Value.Get<DamagedBy>().Value;
             if (entity.Get<Owner>().Value.Has<DamagedBy>())
             {
+                ref var enemy = ref entity.Get<Owner>().Value.Get<DamagedBy>().Value;
                 enemy.Get<PlayerScore>().Kills += 1;
                 world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
             }

@@ -7,7 +7,7 @@ public class LoadMapFiles : MonoBehaviour
 {
     private void Awake()
     {
-        Stepsss.LoadMapFiles += StartLoadMaps;
+        //Stepsss.LoadMapFiles += StartLoadMaps;
     }
 
     private void StartLoadMaps()
@@ -26,6 +26,7 @@ public class LoadMapFiles : MonoBehaviour
         {
             string url = $"https://d3rsf7561wj274.cloudfront.net/temp_maps/{fileName}.txt";
             request = UnityWebRequest.Get(url);
+            request.SetRequestHeader("Content-Type", "application/json; charset=UTF-8");
             yield return request.SendWebRequest();
         }
 
@@ -33,6 +34,7 @@ public class LoadMapFiles : MonoBehaviour
         {
             string url2 = $"https://d3rsf7561wj274.cloudfront.net/temp_maps/{fileName2}.txt";
             request2 = UnityWebRequest.Get(url2);
+            request2.SetRequestHeader("Content-Type", "application/json; charset=UTF-8");
             yield return request2.SendWebRequest();
         }
 
