@@ -1,4 +1,5 @@
 using ME.ECS;
+using ME.ECS.Collections;
 using Project.Common.Components;
 
 namespace Project.Core
@@ -89,6 +90,30 @@ namespace Project.Core
                 }
             }
             
+            return pos;
+        }
+
+        public static fp3 GetTeamSpawnPosition(BufferArray<int> spawnPoints)
+        {
+            if (spawnPoints.Length == 0)
+                return GetRandomPosition();
+
+            fp3 pos = fp3.zero;
+            ListCopyable<int> pool = new ListCopyable<int>();
+            pool.AddRange(spawnPoints);
+
+            while (pool.Count > 0)
+            {
+                var rnd = Worlds.current.GetRandomRange(0, pool.Count);
+                pos = IndexToPosition(pool[rnd]);
+
+                if (IsWalkable(pos))
+                    return pos;
+                else
+                    pool.RemoveAt(rnd);
+            }
+
+            GetRandomPosition();
             return pos;
         }
 

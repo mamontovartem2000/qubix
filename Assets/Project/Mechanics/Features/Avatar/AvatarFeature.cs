@@ -134,8 +134,8 @@ namespace Project.Mechanics.Features.Avatar
 
         private void SetAvatarPosition(Entity owner, Entity entity)
         {
-            var redSpawnPoints = world.GetSharedData<MapComponents>().RedTeamSpawnPoints;
-            var blueSpawnPoints = world.GetSharedData<MapComponents>().BlueTeamSpawnPoints;
+            var redSpawnPoints = world.ReadSharedData<MapComponents>().RedTeamSpawnPoints;
+            var blueSpawnPoints = world.ReadSharedData<MapComponents>().BlueTeamSpawnPoints;
             var pos = fp3.zero;
 
             if (NetworkData.GameMode == GameModes.deathmatch)
@@ -146,13 +146,11 @@ namespace Project.Mechanics.Features.Avatar
             {
                 if (owner.Read<PlayerTag>().Team == TeamTypes.red)
                 {
-                    pos = GetTeamSpawnPosition(redSpawnPoints);
-                    entity.SetPosition(pos);
+                    pos = SceneUtils.GetTeamSpawnPosition(redSpawnPoints);
                 }
                 else
                 {
-                    pos = GetTeamSpawnPosition(blueSpawnPoints);
-                    entity.SetPosition(pos);
+                    pos = SceneUtils.GetTeamSpawnPosition(blueSpawnPoints);
                 }
             }
 
@@ -162,27 +160,6 @@ namespace Project.Mechanics.Features.Avatar
             entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
         }
 
-        private fp3 GetTeamSpawnPosition(BufferArray<int> spawnPoints)
-        {
-            if (spawnPoints.Length == 0)
-                return SceneUtils.GetRandomPosition();
-
-            fp3 pos = fp3.zero;
-            ListCopyable<int> pool = new ListCopyable<int>();
-            pool.AddRange(spawnPoints);
-
-            while (pool.Count > 0)
-            {
-                var rnd = Worlds.current.GetRandomRange(0, pool.Count);
-                pos = SceneUtils.IndexToPosition(pool[rnd]);
-
-                if (SceneUtils.IsFree(pos))
-                    break;
-                else
-                    pool.RemoveAt(rnd);
-            }
-
-            return pos;
-        }
+        
     }
 }

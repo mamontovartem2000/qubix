@@ -48,7 +48,7 @@ namespace Project.Core.Features.SceneBuilder
             GameMapRemoteData floorMap = null;
             GameMapRemoteData objectsMap = null;
 
-            if (_testFloor == null)
+            if (NetworkData.FloorMap != null)
             {
                 floorMap = new GameMapRemoteData(NetworkData.FloorMap);
                 objectsMap = new GameMapRemoteData(NetworkData.ObjectsMap);
@@ -184,10 +184,6 @@ namespace Project.Core.Features.SceneBuilder
             {
                 i++;
 
-                //TODO: 35 - xuinya
-                if (mapElement == 0 || mapElement == 35) continue;
-                if (PropsConfigs[mapElement] == null) continue;
-                
                 if (mapElement == 101)
                 {
                     redPool[redC] = i;
@@ -201,16 +197,16 @@ namespace Project.Core.Features.SceneBuilder
                     blueC++;
                     continue;
                 }
-                
+
+                //TODO: 35 - xuinya
+                if (mapElement == 0 || mapElement == 35) continue;
+                if (PropsConfigs[mapElement] == null) continue;
+
                 var entity = new Entity("Prop");
 
                 PropsConfigs[mapElement].Apply(entity);
                 entity.InstantiateView(_propsViewIds[mapElement]);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
-                // if (entity.Has<Pallette>())
-                // {
-                //     entity.SetPosition(entity.GetPosition() + new fp3(-0.15, 0.2, 0.15));
-                // }
                 entity.SetRotation(PropsConfigs[mapElement].Read<Rotation>().value);
                 entity.Get<Owner>().Value = entity;
                 
