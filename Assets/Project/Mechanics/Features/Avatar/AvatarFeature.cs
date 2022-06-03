@@ -57,7 +57,7 @@ namespace Project.Mechanics.Features.Avatar
             entity.Get<Owner>().Value = owner;
             entity.Set(new Hover {Direction = false, Amount = 0});
             
-            var id = world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order;
+            var id = NetworkData.SlotInRoom;
             var local = world.GetFeature<PlayerFeature>().GetPlayerByID(id);
             
             var health = new Entity("Healthbar");
@@ -66,6 +66,8 @@ namespace Project.Mechanics.Features.Avatar
             health.Get<Owner>().Value = owner;
 
             entity.Get<PlayerDamagedCounter>().Value = 0;
+
+            Debug.Log($"id: {id}//owner: {owner}, local: {local}, check:{owner != local}");
             
             if (owner != local)
             {
@@ -156,7 +158,5 @@ namespace Project.Mechanics.Features.Avatar
             entity.Get<FaceDirection>().Value = new fp3(0, 0, 1);
             entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
         }
-
-        
     }
 }

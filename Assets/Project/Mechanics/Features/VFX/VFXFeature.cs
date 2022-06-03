@@ -100,7 +100,8 @@ namespace Project.Mechanics.Features.VFX
 			QubixDeath,
 			SlowExplosion,
 			SpeedTrail,
-			MineExplosion
+			MineExplosion,
+			FUCK
 		}
 	}
 }

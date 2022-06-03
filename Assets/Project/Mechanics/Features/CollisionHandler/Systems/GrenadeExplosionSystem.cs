@@ -56,7 +56,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
             if (entity.GetPosition().y < 0f)
             {
                 var explosionSound = new Entity("explosionSound");
-                entity.Read<ExplosionSound>().Value.Apply(explosionSound);
+                // entity.Read<ExplosionSound>().Value.Apply(explosionSound);
                 explosionSound.Set(new SoundPlay());
                 explosionSound.SetPosition(entity.GetPosition());
                 
@@ -86,7 +86,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                 else
                 {
                     var vfx = new Entity("vfx");
-                    _vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, entity.GetPosition());
+                    _vfx.SpawnVFX(VFXFeature.VFXType.FUCK, entity.GetPosition());
                 }
                 
                 entity.Destroy();
