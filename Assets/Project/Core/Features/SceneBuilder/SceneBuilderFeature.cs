@@ -66,6 +66,8 @@ namespace Project.Core.Features.SceneBuilder
             
             DrawMap(floorMap.bytes);
             DrawMapObjects(objectsMap.bytes);
+
+            world.SetSharedData(new MapInitialized());
         }
 
         private void DrawMap(byte[] tiles)
