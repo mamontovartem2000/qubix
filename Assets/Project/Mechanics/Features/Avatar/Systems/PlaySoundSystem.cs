@@ -52,6 +52,9 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
+            entity.Remove<SoundPlay>();
+            if (!entity.Has<SoundEffect>()) return;
+            
             var randomSound = world.GetRandomRange(0, 4);
             entity.Get<LifeTimeLeft>().Value = 3;
             switch (randomSound)
@@ -62,28 +65,28 @@ namespace Project.Mechanics.Features.Avatar.Systems
                         entity.InstantiateView(view);
                         break;
                     }
-
+            
                 case 1:
                     {
                         var view = world.RegisterViewSource(entity.Read<SoundEffect>().Sound1);
                         entity.InstantiateView(view);
                         break;
                     }
-
+            
                 case 2:
                     {
                         var view = world.RegisterViewSource(entity.Read<SoundEffect>().Sound2);
                         entity.InstantiateView(view);
                         break;
                     }
-
+            
                 case 3:
                     {
                         var view = world.RegisterViewSource(entity.Read<SoundEffect>().Sound3);
                         entity.InstantiateView(view);
                         break;
                     }
-
+            
                 default:
                     {
                         var view = world.RegisterViewSource(entity.Read<SoundEffect>().Sound0);
@@ -91,7 +94,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
                         break;
                     }
             }
-            entity.Remove<SoundPlay>();
+            
         }
     }
 }
