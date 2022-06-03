@@ -19,6 +19,11 @@ namespace Project.Common.Components
 	{
 		public DataConfig Value;
 	}
+	
+	public struct ExplosionSound : IComponent
+	{
+		public DataConfig Value;
+	}
 
 	public struct ProjectileDirection : IComponent
 	{
@@ -62,6 +67,9 @@ namespace Project.Common.Components
 	{
 		public float Value;
 	}
+	
+	public struct Debuff : IComponent {}
+	
 	public struct Grenade : IComponent {}
 	public struct LinearVisual : IComponent {}
 	

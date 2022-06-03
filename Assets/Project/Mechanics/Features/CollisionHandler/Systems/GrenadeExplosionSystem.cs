@@ -55,6 +55,11 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
         {
             if (entity.GetPosition().y < 0f)
             {
+                var explosionSound = new Entity("explosionSound");
+                entity.Read<ExplosionSound>().Value.Apply(explosionSound);
+                explosionSound.Set(new SoundPlay());
+                explosionSound.SetPosition(entity.GetPosition());
+                
                 foreach (Entity player in _playerFilter)
                 {
                     if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > (fp)10) continue;
@@ -63,6 +68,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                     entity.Read<SecondaryDamage>().Value.Apply(debuff);
                     debuff.Set(new ProjectileActive());
                     debuff.Set(new CollisionDynamic());
+                    debuff.Set(new Debuff());
                     
                     if (debuff.Has<Slowness>())
                     {

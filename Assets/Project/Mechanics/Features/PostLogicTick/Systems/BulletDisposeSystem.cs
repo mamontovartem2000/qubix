@@ -35,6 +35,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 			return Filter.Create("Filter-BulletDisposeSystem")
 				.With<ProjectileActive>()
 				.With<Collided>()
+				.Without<Debuff>()
 				.Push();
 		}
 
