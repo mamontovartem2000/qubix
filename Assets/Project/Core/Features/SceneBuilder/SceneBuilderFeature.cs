@@ -70,25 +70,16 @@ namespace Project.Core.Features.SceneBuilder
 
         private void DrawMap(byte[] tiles)
         {
-            var i = -1;
             var freeMap = PoolArray<byte>.Spawn(tiles.Length);
             var walkableMap = PoolArray<byte>.Spawn(tiles.Length);
-            var portC = 0;
 
-            for (int idx = 0; idx < tiles.Length; idx++)
-            {
-                if (tiles[idx] == 9) portC++;
-            }
-            
-            var portalMap = PoolArray<int>.Spawn(portC);
-            portC = 0;
+            ListCopyable<int> portalMap = new ListCopyable<int>();
 
-            foreach (var tile in tiles)
+            for (int i = 0; i < tiles.Length; i++)
             {
                 Entity entity = Entity.Empty;
-                i++;
                 
-                switch (tile)
+                switch (tiles[i])
                 {
                     case 0:
                     {
@@ -123,8 +114,7 @@ namespace Project.Core.Features.SceneBuilder
                         entity.Set(new PortalDispenserTag { TimerDefault = 0.5f, Timer = 0.5f});
                         freeMap[i] = 1;
                         walkableMap[i] = 1;
-                        portalMap[portC] = i;
-                        portC++;
+                        portalMap.Add(i);
                         break;
                     }
                     case 10:
@@ -154,52 +144,37 @@ namespace Project.Core.Features.SceneBuilder
                 
                 if (entity == Entity.Empty) continue;
 
-                entity.InstantiateView(_tileViewIds[tile]);
+                entity.InstantiateView(_tileViewIds[tiles[i]]);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
             }
 
             world.GetSharedData<MapComponents>().FreeMap = freeMap;
             world.GetSharedData<MapComponents>().WalkableMap = walkableMap;
-            world.GetSharedData<MapComponents>().PortalsMap = portalMap;
+            world.GetSharedData<MapComponents>().PortalsMap = portalMap.innerArray;
         }
+
         private void DrawMapObjects(byte[] mapInBytes)
         {
-            var i = -1;
-            
-            var redC = 0;
-            var blueC = 0;
-            
-            for (int idx = 0; idx < mapInBytes.Length; idx++)
-            {
-                if (mapInBytes[idx] == 101) redC++;
-                if (mapInBytes[idx] == 102) blueC++;
-            }
+            ListCopyable<int> redPool = new ListCopyable<int>();
+            ListCopyable<int> bluePool = new ListCopyable<int>();
 
-            var redPool = PoolArray<int>.Spawn(redC);
-            var bluePool = PoolArray<int>.Spawn(blueC);
-            redC = 0;
-            blueC = 0;
-            
-            foreach (var mapElement in mapInBytes)
+            for (int i = 0; i < mapInBytes.Length; i++)
             {
-                i++;
+                var mapElement = mapInBytes[i];
 
                 if (mapElement == 101)
                 {
-                    redPool[redC] = i;
-                    redC++;
+                    redPool.Add(i);
                     continue;
                 }
 
                 if (mapElement == 102)
                 {
-                    bluePool[blueC] = i;
-                    blueC++;
+                    bluePool.Add(i);
                     continue;
                 }
 
-                //TODO: 35 - xuinya
-                if (mapElement == 0 || mapElement == 35) continue;
+                if (mapElement == 0) continue;
                 if (PropsConfigs[mapElement] == null) continue;
 
                 var entity = new Entity("Prop");
@@ -216,8 +191,8 @@ namespace Project.Core.Features.SceneBuilder
                     entity.Set(new DestructibleTag());
                 }
 
-                world.GetSharedData<MapComponents>().BlueTeamSpawnPoints = bluePool;
-                world.GetSharedData<MapComponents>().RedTeamSpawnPoints = redPool;
+                world.GetSharedData<MapComponents>().BlueTeamSpawnPoints = bluePool.innerArray;
+                world.GetSharedData<MapComponents>().RedTeamSpawnPoints = redPool.innerArray;
 
                 SceneUtils.ModifyWalkable(SceneUtils.IndexToPosition(i), false);
             }
