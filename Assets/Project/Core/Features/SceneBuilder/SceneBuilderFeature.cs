@@ -63,26 +63,26 @@ namespace Project.Core.Features.SceneBuilder
             var height = floorMap.bytes.Length / floorMap.offset;
             var width = floorMap.offset;
             SceneUtils.SetWidthAndHeight(width, height);
-            GetSpawnPointsPositions(objectsMap.bytes, out BufferArray<int> redPoints, out BufferArray<int> bluePoints);
-
-            world.SetSharedData(new MapComponents
-            {
-                WalkableMap = CreateSharedMap(floorMap.bytes, MapType.Walkable),
-                MineMap = CreateSharedMap(floorMap.bytes, MapType.Mine),
-                PortalsMap = CreateSharedMap(floorMap.bytes, MapType.Portal),
-                RedTeamSpawnPoints = redPoints,
-                BlueTeamSpawnPoints = bluePoints
-            });
-
+            
             DrawMap(floorMap.bytes);
-
-            if (objectsMap != null)
-                DrawMapObjects(objectsMap.bytes);
+            DrawMapObjects(objectsMap.bytes);
         }
 
         private void DrawMap(byte[] tiles)
         {
             var i = -1;
+            var freeMap = PoolArray<byte>.Spawn(tiles.Length);
+            var walkableMap = PoolArray<byte>.Spawn(tiles.Length);
+            var portC = 0;
+
+            for (int idx = 0; idx < tiles.Length; idx++)
+            {
+                if (tiles[idx] == 9) portC++;
+            }
+            
+            var portalMap = PoolArray<int>.Spawn(portC);
+            portC = 0;
+
             foreach (var tile in tiles)
             {
                 Entity entity = Entity.Empty;
@@ -91,37 +91,63 @@ namespace Project.Core.Features.SceneBuilder
                 switch (tile)
                 {
                     case 0:
-                    case 1:
                     {
+                        freeMap[i] = 1;
+                        walkableMap[i] = 0;
                         break;
                     }
-                    case 8: // Dispencer tile
+                    case 1:
+                    {
+                        freeMap[i] = 1;
+                        walkableMap[i] = 1;
+                        break;
+                    }
+                    case 2:
+                    {
+                        entity = new Entity("Platform-Tile");
+                        freeMap[i] = 0;
+                        walkableMap[i] = 1;
+                        break;
+                    }
+                    case 8:
                     {
                         entity = new Entity("Dispencer-Tile");
                         entity.Set(new DispenserTag {TimerDefault = 8, Timer = 8});
+                        freeMap[i] = 1;
+                        walkableMap[i] = 1;
                         break;
                     }
-                    case 9: // Teleport tile
+                    case 9:
                     {
                         entity = new Entity("Portal-Tile");
                         entity.Set(new PortalDispenserTag { TimerDefault = 0.5f, Timer = 0.5f});
+                        freeMap[i] = 1;
+                        walkableMap[i] = 1;
+                        portalMap[portC] = i;
+                        portC++;
                         break;
                     }
-                    case 10: // Bridge tile
+                    case 10:
                     {
                         entity = new Entity("Bridge-Tile");
                         entity.Get<BridgeTile>().Value = true;
+                        freeMap[i] = 1;
+                        walkableMap[i] = 1;
                         break;
                     }
                     case 11:
                     {
                         entity = new Entity("Bridge-Tile");
                         entity.Get<BridgeTile>().Value = false;
+                        freeMap[i] = 1;
+                        walkableMap[i] = 1;
                         break;
                     }
                     default:
                     {
                         entity = new Entity("Platform-Tile");
+                        freeMap[i] = 0;
+                        walkableMap[i] = 1;
                         break;
                     }
                 }
@@ -131,27 +157,60 @@ namespace Project.Core.Features.SceneBuilder
                 entity.InstantiateView(_tileViewIds[tile]);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
             }
+
+            world.GetSharedData<MapComponents>().FreeMap = freeMap;
+            world.GetSharedData<MapComponents>().WalkableMap = walkableMap;
+            world.GetSharedData<MapComponents>().PortalsMap = portalMap;
         }
         private void DrawMapObjects(byte[] mapInBytes)
         {
             var i = -1;
             
+            var redC = 0;
+            var blueC = 0;
+            
+            for (int idx = 0; idx < mapInBytes.Length; idx++)
+            {
+                if (mapInBytes[idx] == 101) redC++;
+                if (mapInBytes[idx] == 102) blueC++;
+            }
+
+            var redPool = PoolArray<int>.Spawn(redC);
+            var bluePool = PoolArray<int>.Spawn(blueC);
+            redC = 0;
+            blueC = 0;
+            
             foreach (var mapElement in mapInBytes)
             {
                 i++;
+
                 //TODO: 35 - xuinya
-                if (mapElement == 0 || mapElement == 101 || mapElement == 102 || mapElement == 35) continue;
+                if (mapElement == 0 || mapElement == 35) continue;
                 if (PropsConfigs[mapElement] == null) continue;
+                
+                if (mapElement == 101)
+                {
+                    redPool[redC] = i;
+                    redC++;
+                    continue;
+                }
+
+                if (mapElement == 102)
+                {
+                    bluePool[blueC] = i;
+                    blueC++;
+                    continue;
+                }
                 
                 var entity = new Entity("Prop");
 
                 PropsConfigs[mapElement].Apply(entity);
                 entity.InstantiateView(_propsViewIds[mapElement]);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
-                if (entity.Has<Pallette>())
-                {
-                    entity.SetPosition(entity.GetPosition() + new fp3(-0.15,0.2,0.15));
-                }
+                // if (entity.Has<Pallette>())
+                // {
+                //     entity.SetPosition(entity.GetPosition() + new fp3(-0.15, 0.2, 0.15));
+                // }
                 entity.SetRotation(PropsConfigs[mapElement].Read<Rotation>().value);
                 entity.Get<Owner>().Value = entity;
                 
@@ -161,80 +220,11 @@ namespace Project.Core.Features.SceneBuilder
                     entity.Set(new DestructibleTag());
                 }
 
-                SceneUtils.TakeTheCell(i);
+                world.GetSharedData<MapComponents>().BlueTeamSpawnPoints = bluePool;
+                world.GetSharedData<MapComponents>().RedTeamSpawnPoints = redPool;
+
+                SceneUtils.ModifyWalkable(SceneUtils.IndexToPosition(i), false);
             }
         }
-        private BufferArray<byte> CreateSharedMap(byte[] m, MapType t)
-        {
-            var a = PoolArray<byte>.Spawn(m.Length);
-
-            switch (t)
-            {
-                case MapType.Walkable:
-                    {
-                        for (var i = 0; i < m.Length; i++)
-                        {
-                            a[i] = m[i] == 0 || m[i] == 1 ? m[i] : (byte)1;
-                        }
-
-                        break;
-                    }
-                case MapType.Mine:
-                    {
-                        for (var i = 0; i < m.Length; i++)
-                        {
-                            a[i] = 0;
-                        }
-
-                        break;
-                    }
-                case MapType.Portal:
-                    {
-                        for (var i = 0; i < m.Length; i++)
-                        {
-                            a[i] = m[i] == 9 ? (byte)1 : (byte)0;
-                        }
-
-                        break;
-                    }
-            }
-            
-            return a;
-        }
-
-        private void GetSpawnPointsPositions(byte[] m, out BufferArray<int> redTeam, out BufferArray<int> blueTeam)
-        {
-            ListCopyable<int> bufferRed = new ListCopyable<int>();
-            ListCopyable<int> bufferBlue = new ListCopyable<int>();
-
-            for (var i = 0; i < m.Length; i++)
-            {
-                if (m[i] == 101)
-                {
-                    bufferRed.Add(i);
-                }
-                else if (m[i] == 102)
-                {
-                    bufferBlue.Add(i);
-                }
-            }
-
-            var redPool = PoolArray<int>.Spawn(bufferRed.Count);
-            var bluePool = PoolArray<int>.Spawn(bufferBlue.Count);
-
-            for (int i = 0; i < bufferRed.Count; i++)
-            {
-                redPool[i] = bufferRed[i];
-            }
-
-            for (int i = 0; i < bufferBlue.Count; i++)
-            {
-                bluePool[i] = bufferBlue[i];
-            }
-
-            blueTeam = bluePool;
-            redTeam = redPool;
-        }
-        public enum MapType {Walkable, Mine, Portal}
     }
 }

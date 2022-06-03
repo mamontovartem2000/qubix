@@ -49,7 +49,7 @@ namespace Project.Mechanics.Features.LifeTime.Systems
 				dVfx.SetPosition(entity.GetPosition());
 				dVfx.InstantiateView(v);
 				
-				SceneUtils.ReleaseTheCell(entity.GetPosition());
+				SceneUtils.ModifyWalkable(entity.GetPosition(), true);
 				
 				entity.Destroy();
 			}

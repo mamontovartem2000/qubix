@@ -15,7 +15,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 	public sealed class PortalDisposeSystem : ISystemFilter
 	{
 		public World world { get; set; }
-		
+
 		private PostLogicTickFeature _feature;
 		private VFXFeature _vfx;
 
@@ -32,12 +32,15 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 				.Push(ref _portalFilter);
 		}
 
-		void ISystemBase.OnDeconstruct() {}
+		void ISystemBase.OnDeconstruct()
+		{
+		}
 #if !CSHARP_8_OR_NEWER
 		bool ISystemFilter.jobs => false;
 		int ISystemFilter.jobsBatchCount => 64;
 #endif
 		Filter ISystemFilter.filter { get; set; }
+
 		Filter ISystemFilter.CreateFilter()
 		{
 			return Filter.Create("Filter-PortalDisposeSystem")
@@ -56,40 +59,19 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 				entity.Remove<Collided>();
 				return;
 			}
-			
-			var vec = SceneUtils.GetAvailablePortalPositions();
-			var pos = fp3.zero;
 
-			if (vec.Length > 1)
-			{
-				pos = SceneUtils.GetRandomPortalPosition(vec);
-				SceneUtils.Move(player.GetPosition(), pos);
+			var pos = SceneUtils.GetRandomPortal(player.GetPosition());
+			SceneUtils.ModifyWalkable(player.GetPosition(), true);
+			SceneUtils.ModifyWalkable(pos, false);
 
-				// foreach (var portal in _portalFilter)
-				// {
-				// 	if (portal.GetPosition() == pos)
-				// 	{
-				// 		Debug.Log(portal.ToSmallString());
-				// 		
-				// 		portal.Get<PortalDispenserTag>().Timer = 3;
-				// 		portal.Get<SpawnedPortal>().Value.Destroy();
-				// 		portal.Remove<SpawnedPortal>();
-				// 	}	
-				// }
-				
-				
-				player.Get<AvoidTeleport>().Value = 3;
-				
-				player.SetPosition(pos);
-				player.Get<PlayerMoveTarget>().Value = pos;
-				entity.Remove<Collided>();
-				
-				_vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, entity.GetPosition());
-				_vfx.SpawnVFX(VFXFeature.VFXType.PlayerTeleportOut, player.GetPosition(), player);
-				// entity.Destroy();
-				// SceneUtils.TakePortal(pos);
-			}
+			player.Get<AvoidTeleport>().Value = 3;
 
+			player.SetPosition(pos);
+			player.Get<PlayerMoveTarget>().Value = pos;
+			entity.Remove<Collided>();
+
+			_vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, entity.GetPosition());
+			_vfx.SpawnVFX(VFXFeature.VFXType.PlayerTeleportOut, pos);
 		}
 	}
 }

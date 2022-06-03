@@ -55,8 +55,8 @@ namespace Project.Mechanics.Features.Avatar.Systems
             world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(player);
             world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(enemy);
             world.GetFeature<EventsFeature>().PlayerDeath.Execute(player);      
-            
-            SceneUtils.ReleaseTheCell(entity.Read<PlayerMoveTarget>().Value);
+
+            SceneUtils.ModifyWalkable(entity.Read<PlayerMoveTarget>().Value, true);
             
             _vfx.SpawnVFX(VFXFeature.VFXType.QubixDeath, entity.GetPosition());
             player.Remove<PlayerAvatar>();

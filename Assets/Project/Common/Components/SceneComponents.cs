@@ -49,4 +49,9 @@ namespace Project.Common.Components
 	{
 			public float Value;
 	}
+
+	public struct MineDamage : IComponent
+	{
+		public float Value;
+	}
 }

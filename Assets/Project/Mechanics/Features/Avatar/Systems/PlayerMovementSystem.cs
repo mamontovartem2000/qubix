@@ -61,7 +61,10 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
 					if (SceneUtils.IsWalkable(newTarget))
 					{
-						SceneUtils.Move(entity.Read<PlayerMoveTarget>().Value, newTarget);
+						// SceneUtils.Move(entity.Read<PlayerMoveTarget>().Value, newTarget);
+						SceneUtils.ModifyWalkable(entity.Read<PlayerMoveTarget>().Value, true);
+						SceneUtils.ModifyWalkable(newTarget, false);
+						
 						entity.Get<PlayerMoveTarget>().Value = newTarget;
 					}
 				}

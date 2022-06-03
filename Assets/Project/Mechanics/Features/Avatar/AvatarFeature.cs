@@ -140,7 +140,7 @@ namespace Project.Mechanics.Features.Avatar
 
             if (NetworkData.GameMode == GameModes.deathmatch)
             {
-                pos = SceneUtils.GetRandomFreePosition();
+                pos = SceneUtils.GetRandomPosition();
             }
             else
             {
@@ -157,7 +157,7 @@ namespace Project.Mechanics.Features.Avatar
             }
 
             entity.SetPosition(pos);
-            SceneUtils.TakeTheCell(entity.GetPosition());
+            SceneUtils.ModifyWalkable(entity.GetPosition(), false);
             entity.Get<FaceDirection>().Value = new fp3(0, 0, 1);
             entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
         }
@@ -165,7 +165,7 @@ namespace Project.Mechanics.Features.Avatar
         private fp3 GetTeamSpawnPosition(BufferArray<int> spawnPoints)
         {
             if (spawnPoints.Length == 0)
-                return SceneUtils.GetRandomFreePosition();
+                return SceneUtils.GetRandomPosition();
 
             fp3 pos = fp3.zero;
             ListCopyable<int> pool = new ListCopyable<int>();

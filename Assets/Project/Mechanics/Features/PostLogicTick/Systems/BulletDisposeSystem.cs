@@ -54,7 +54,8 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 				if (NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team))
 				{
 					var collision = new Entity("collision");
-					
+					collision.Get<LifeTimeLeft>().Value = 2;
+
 					if (entity.Has<StunModifier>())
 					{
 						_vfx.SpawnVFX(VFXFeature.VFXType.SkillStun, pos, player, entity.Read<StunModifier>().Value);

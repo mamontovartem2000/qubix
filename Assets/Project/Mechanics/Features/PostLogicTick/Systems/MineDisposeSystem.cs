@@ -47,10 +47,14 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 				owner.Remove<DamagedBy>();
 
 			var collision = new Entity("collision");
-			collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = 25f}, ComponentLifetime.NotifyAllSystems);
+			collision.Get<LifeTimeLeft>().Value = 2;
+			
+			ref readonly var damage = ref entity.Read<MineDamage>().Value;
+			collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
 
-			_vfx.SpawnVFX(VFXFeature.VFXType.MineExplosion, entity.GetPosition());
-			SceneUtils.ReleaseMine(entity.GetPosition());
+			_vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, entity.GetPosition(), player);
+			SceneUtils.ModifyFree(entity.GetPosition(), true);
+			
 			entity.Destroy();
 		}
 	}

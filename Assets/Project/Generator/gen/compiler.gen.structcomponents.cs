@@ -89,6 +89,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlink>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimerDefault>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MineDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveInput>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
@@ -256,6 +257,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlink>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimerDefault>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MineDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveInput>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
@@ -418,6 +420,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.MineBlink>(false);
             structComponentsContainer.Validate<Project.Common.Components.MineBlinkTimer>(false);
             structComponentsContainer.Validate<Project.Common.Components.MineBlinkTimerDefault>(false);
+            structComponentsContainer.Validate<Project.Common.Components.MineDamage>(false);
             structComponentsContainer.Validate<Project.Common.Components.MineTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.MoveInput>(false);
             structComponentsContainer.Validate<Project.Common.Components.MoveSpeedAffect>(true);
@@ -585,6 +588,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.MineBlink>(false);
             entity.ValidateData<Project.Common.Components.MineBlinkTimer>(false);
             entity.ValidateData<Project.Common.Components.MineBlinkTimerDefault>(false);
+            entity.ValidateData<Project.Common.Components.MineDamage>(false);
             entity.ValidateData<Project.Common.Components.MineTag>(true);
             entity.ValidateData<Project.Common.Components.MoveInput>(false);
             entity.ValidateData<Project.Common.Components.MoveSpeedAffect>(true);

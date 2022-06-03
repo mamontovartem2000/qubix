@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.CollisionHandler.Systems 
 {
@@ -13,7 +14,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         public World world { get; set; }
 
         private CollisionHandlerFeature _feature;
-
+        private float spawnTimer;
         private Filter _mineFilter;
         void ISystemBase.OnConstruct() 
         {
@@ -28,10 +29,15 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
 
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
-            if (_mineFilter.Count < 8)
-            {
-                _feature.SpawnMine();
-            }
+            ref var time = ref _feature.MineSpawnDelay;
+
+            if (_mineFilter.Count >= _feature.MineCount) return;
+            
+            time -= deltaTime;
+            
+            if(time > 0) return;
+            _feature.SpawnMine();
+            time = _feature.MineSpawnDelayDefault;
         }
     }
 }

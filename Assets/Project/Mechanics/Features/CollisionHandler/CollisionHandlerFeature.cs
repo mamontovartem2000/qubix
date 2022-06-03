@@ -3,6 +3,7 @@ using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Core;
 using Project.Mechanics.Features.CollisionHandler.Systems;
+using UnityEngine;
 
 namespace Project.Mechanics.Features.CollisionHandler 
 {
@@ -14,6 +15,14 @@ namespace Project.Mechanics.Features.CollisionHandler
     public sealed class CollisionHandlerFeature : Feature
     {
         public MonoBehaviourViewBase Portal, Mine, Health;
+
+        [Header("Mine Configs")] 
+        public int MineCount;
+        public Vector2 MineDamage;
+        [HideInInspector] public float MineSpawnDelay;
+        public float MineSpawnDelayDefault;
+        public Vector2 MineBlinkFrequency;
+        
         private ViewId _portal, _mine, _health;
         
         protected override void OnConstruct()
@@ -57,10 +66,11 @@ namespace Project.Mechanics.Features.CollisionHandler
             var entity = new Entity("Mine");
 
             entity.Set(new MineTag());
-            entity.SetPosition(SceneUtils.GetRandomFreePosition());
-            SceneUtils.PlantMine(entity.GetPosition());
+            entity.SetPosition(SceneUtils.GetRandomPosition());
+            SceneUtils.ModifyFree(entity.GetPosition(), false);
             entity.InstantiateView(_mine);
-            entity.Get<MineBlinkTimerDefault>().Value = world.GetRandomRange(1f, 3f);
+            entity.Get<MineBlinkTimerDefault>().Value = world.GetRandomRange(MineBlinkFrequency.x, MineBlinkFrequency.y);
+            entity.Get<MineDamage>().Value = world.GetRandomRange(MineDamage.x, MineDamage.y);
             entity.Get<MineBlinkTimer>().Value = entity.Get<MineBlinkTimerDefault>().Value;
             
             entity.Set(new CollisionDynamic());

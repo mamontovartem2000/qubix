@@ -60,18 +60,19 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                     if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > (fp)10) continue;
                     
                     var debuff = new Entity("debuff");
-                    var index = SceneUtils.PositionToIndex(player.GetPosition());
-                    var pos = SceneUtils.IndexToPosition(index);
+                    
                     debuff.Get<Owner>().Value = entity.Read<Owner>().Value;
                     entity.Read<SecondaryDamage>().Value.Apply(debuff);
                     debuff.Set(new ProjectileActive());
                     debuff.Set(new CollisionDynamic());
+                    
                     if (debuff.Has<Slowness>())
                     {
                         player.Get<Slowness>().Value = debuff.Get<Slowness>().Value/100;
                         player.Get<Slowness>().LifeTime = debuff.Get<Slowness>().LifeTime;
                     }
-                    debuff.SetPosition(pos);
+                    
+                    debuff.SetPosition(SceneUtils.SafeCheckPosition(player.GetPosition()));
                 }
                 if (entity.Read<SecondaryDamage>().Value.Has<Slowness>())
                 {
@@ -83,7 +84,6 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                     var vfx = new Entity("vfx");
                     _vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, entity.GetPosition());
                 }
-                
                 
                 entity.Destroy();
             }

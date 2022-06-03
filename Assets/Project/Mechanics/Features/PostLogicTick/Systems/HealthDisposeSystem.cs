@@ -47,6 +47,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 				entity.Get<Owner>().Value.Remove<Spawned>();
 
 			var collision = new Entity("collision");
+			collision.Get<LifeTimeLeft>().Value = 2;
 			collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = -10f}, ComponentLifetime.NotifyAllSystems);
                     
 			_vfx.SpawnVFX(VFXFeature.VFXType.TakeHealth, player.GetPosition(), player);

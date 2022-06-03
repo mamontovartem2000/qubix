@@ -48,7 +48,11 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
             if (!SceneUtils.IsWalkable(new fp3(nextPos.x, 0, nextPos.z))) return;
             
-            SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, new fp3(nextPos.x, 0, nextPos.z));
+            // SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, new fp3(nextPos.x, 0, nextPos.z));
+            SceneUtils.ModifyWalkable(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, true);
+            SceneUtils.ModifyWalkable(new fp3(nextPos.x, 0, nextPos.z), false);
+
+            
             entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.SetPosition(nextPos);
             entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<PlayerMoveTarget>().Value = new fp3(nextPos.x, 0, nextPos.z);
 

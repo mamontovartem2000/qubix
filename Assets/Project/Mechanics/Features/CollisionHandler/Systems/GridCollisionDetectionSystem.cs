@@ -61,13 +61,13 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
 
 					if (fpmath.distancesq(dPos, sPos) > dist) continue;
 
-					var sIndex = SceneUtils.PositionToIndex(sPos,width);
+					var sIndex = SceneUtils.BurstConvert(sPos,width);
 					var dModPos = dPos + dir * speed * dt;
 					var dIndex = 0;
 
 					var tmp = ClosestPointToSegment(sPos.XZ(), dPos.XZ(), dModPos.XZ());
 
-					dIndex = SceneUtils.PositionToIndex(new fp3(tmp.x, 0, tmp.y), width);
+					dIndex = SceneUtils.BurstConvert(new fp3(tmp.x, 0, tmp.y), width);
 
 					if (sIndex != dIndex) continue;
 

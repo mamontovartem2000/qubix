@@ -16,3 +16,8 @@ MonoBehaviour:
   Portal: {fileID: 7720746680498297365, guid: 0518e21c2786f984f9ffddb7bb32fc73, type: 3}
   Mine: {fileID: 6383715620182903642, guid: a46ac6ad3d8c115419b4065129074340, type: 3}
   Health: {fileID: -245801661258740902, guid: b302e6f730ab0b34581626de5c10628b, type: 3}
+  MineCount: 16
+  MineDamage: {x: 5, y: 25}
+  MineSpawnDelay: 0
+  MineSpawnDelayDefault: 3
+  MineBlinkFrequency: {x: 3, y: 6}

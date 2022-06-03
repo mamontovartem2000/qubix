@@ -42,7 +42,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
 			{
 				var portal = _feature.SpawnPortal(entity);
 				portal.SetPosition(entity.GetPosition());
-				SceneUtils.ReleasePortal(portal.GetPosition());
+				// SceneUtils.ReleasePortal(portal.GetPosition());
 
 				dispenser.Timer = dispenser.TimerDefault;
 				entity.Get<SpawnedPortal>().Value = portal;
