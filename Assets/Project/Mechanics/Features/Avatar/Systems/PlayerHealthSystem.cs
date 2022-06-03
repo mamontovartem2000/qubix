@@ -16,10 +16,14 @@ namespace Project.Mechanics.Features.Avatar.Systems
     {
         public World world { get; set; }
         private VFXFeature _vfx;
+        private Filter _ownerFilter;
         
         void ISystemBase.OnConstruct() 
         {
             world.GetFeature(out _vfx);
+            Filter.Create("Filer-Owner")
+                .With<PlayerTag>()
+                .Push(ref _ownerFilter);
         }
 
         void ISystemBase.OnDeconstruct() {}
@@ -52,8 +56,11 @@ namespace Project.Mechanics.Features.Avatar.Systems
             ref var player = ref entity.Get<Owner>().Value;
             player.Get<PlayerScore>().Deaths += 1;
             
-            world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(player);
-            world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(enemy);
+            foreach (var owner in _ownerFilter)
+            {
+                world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(owner);
+            }
+            
             world.GetFeature<EventsFeature>().PlayerDeath.Execute(player);      
 
             SceneUtils.ModifyWalkable(entity.Read<PlayerMoveTarget>().Value, true);

@@ -58,9 +58,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                 foreach (Entity player in _playerFilter)
                 {
                     if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > (fp)10) continue;
-                    
                     var debuff = new Entity("debuff");
-                    
                     debuff.Get<Owner>().Value = entity.Read<Owner>().Value;
                     entity.Read<SecondaryDamage>().Value.Apply(debuff);
                     debuff.Set(new ProjectileActive());

@@ -54,7 +54,8 @@ namespace Project.Core.Features.Player
 			var localId = nsap.ActorLocalID;
 			var player = new Entity("player_" + localId);
 			player.Set(new PlayerTag {PlayerLocalID = localId, PlayerServerID = nsap.ServerID, Nickname = nsap.Nickname, Team = nsap.Team });
-			
+			world.GetFeature<EventsFeature>().TabulationAddPlayer.Execute(player);
+
 
 			if (NetworkData.PlayersInfo == null) // Fake case
 			{
