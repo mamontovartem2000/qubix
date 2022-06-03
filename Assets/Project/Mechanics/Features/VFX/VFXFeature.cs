@@ -48,6 +48,7 @@ namespace Project.Mechanics.Features.VFX
 			fx.Set(new LifeTimeLeft{Value = lifeTime});
 			fx.Set(new Owner { Value = player.Read<Owner>().Value });
 			fx.SetLocalPosition(position);
+			fx.SetLocalRotation(player.GetRotation());
 			fx.SetParent(player);
 			fx.InstantiateView(_viewIds[(int)type-1]);
 		}

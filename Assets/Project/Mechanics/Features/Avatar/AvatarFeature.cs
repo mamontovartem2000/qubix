@@ -57,9 +57,6 @@ namespace Project.Mechanics.Features.Avatar
             entity.Get<Owner>().Value = owner;
             entity.Set(new Hover {Direction = false, Amount = 0});
             
-            world.GetFeature<EventsFeature>().TabulationAddPlayer.Execute(entity.Get<Owner>().Value);
-            world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(entity.Get<Owner>().Value);
-            
             var id = world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order;
             var local = world.GetFeature<PlayerFeature>().GetPlayerByID(id);
             
