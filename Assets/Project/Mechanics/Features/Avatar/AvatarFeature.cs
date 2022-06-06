@@ -57,8 +57,7 @@ namespace Project.Mechanics.Features.Avatar
             entity.Get<Owner>().Value = owner;
             entity.Set(new Hover {Direction = false, Amount = 0});
             
-            var id = NetworkData.SlotInRoom;
-            var local = world.GetFeature<PlayerFeature>().GetPlayerByID(id);
+            
             
             var health = new Entity("Healthbar");
             health.SetParent(entity);
@@ -67,12 +66,14 @@ namespace Project.Mechanics.Features.Avatar
 
             entity.Get<PlayerDamagedCounter>().Value = 0;
 
-            Debug.Log($"id: {id}//owner: {owner}, local: {local}, check:{owner != local}");
-            
-            if (owner != local)
-            {
-                health.InstantiateView(_playerHealth);
-            }
+            //var id = NetworkData.SlotInRoom;
+            //var local = world.GetFeature<PlayerFeature>().GetPlayerByID(id);
+            //if (owner != local)
+            //{
+            //    health.InstantiateView(_playerHealth);
+            //}
+
+            health.InstantiateView(_playerHealth);
 
             entity.Get<WeaponEntities>().LeftWeapon = ConstructWeapon(owner.Read<PlayerConfig>().LeftWeaponConfig, entity);
             entity.Get<WeaponEntities>().RightWeapon = ConstructWeapon(owner.Read<PlayerConfig>().RightWeaponConfig, entity);

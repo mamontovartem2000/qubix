@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2353,8 +2353,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1497210602}
-          m_TargetAssemblyTypeName: CharacterSelection, Project
-          m_MethodName: Select
+          m_TargetAssemblyTypeName: Project.Modules.Network.UI.CharacterSelection,
+            Project
+          m_MethodName: SelectCharacter
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2773,8 +2774,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1497210602}
-          m_TargetAssemblyTypeName: CharacterSelection, Project
-          m_MethodName: Select
+          m_TargetAssemblyTypeName: Project.Modules.Network.UI.CharacterSelection,
+            Project
+          m_MethodName: SelectCharacter
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3817,10 +3819,10 @@ RectTransform:
   m_Father: {fileID: 1911609821}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1497210602
 MonoBehaviour:
@@ -3934,8 +3936,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1497210602}
-          m_TargetAssemblyTypeName: CharacterSelection, Project
-          m_MethodName: Select
+          m_TargetAssemblyTypeName: Project.Modules.Network.UI.CharacterSelection,
+            Project
+          m_MethodName: SelectCharacter
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4885,9 +4888,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6a9722c65839946848074a77eb0bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _select: {fileID: 1497210602}
   _roomListScreen: {fileID: 465202245}
   _loadingPanel: {fileID: 1941386127}
-  _select: {fileID: 1497210602}
   _rooms:
   - {fileID: 1027202391}
   - {fileID: 1796676710}

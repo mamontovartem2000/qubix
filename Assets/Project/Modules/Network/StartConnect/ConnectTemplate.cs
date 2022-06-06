@@ -1,26 +1,22 @@
-﻿using Project.Modules.Network.UI;
+using Project.Modules.Network.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Project.Modules.Network
 {
-    public class ConnectSupport : MonoBehaviour
+    public class ConnectTemplate : MonoBehaviour
 	{
-		[SerializeField] private GameObject _loading;
 		[SerializeField] private CharacterSelection _select;
-
 		private bool _needLoadGameScene, _needReloadThisScene;
+		private GameObject _objectToHide;
 
-		private void Start()
+		protected void InitTemplate(GameObject objectToHide, BuildTypes buildType)
 		{
-			NetworkData.BuildType = BuildTypes.Front_Hub;
+			_objectToHide = objectToHide;
+			NetworkData.BuildType = buildType;
 			Stepsss.LoadMainMenuScene += ReloadMenuScene;
 			Stepsss.LoadGameScene += LoadGameScene;
 			WaitingRoomTimer.ShowCharacterSelectionWindow += SwapScreens;
-
-#if UNITY_WEBGL && !UNITY_EDITOR
-			BrowserEvents.ReadyToStart();
-#endif
 		}
 
 		private void Update()
@@ -37,13 +33,6 @@ namespace Project.Modules.Network
 #endif
 		}
 
-		// Browser method
-		public void SetJoinRequest(string request)
-		{
-			Debug.Log("Request: " + request);
-			Stepsss.ProcessJoinRequest(request);
-		}
-
 		private void ReloadMenuScene()
 		{
 			_needReloadThisScene = true;
@@ -56,13 +45,15 @@ namespace Project.Modules.Network
 
 		private void SwapScreens()
 		{
-			_loading.SetActive(false);
+			if (_objectToHide != null)
+            {
+				_objectToHide.SetActive(false);
+            }
+
 			_select.gameObject.SetActive(true);
-			var rnd = Random.Range(0, 3);
-			_select.Select(rnd) ;
 		}
 
-		private void OnDestroy()
+		protected virtual void OnDestroy()
 		{
 			Stepsss.LoadMainMenuScene -= ReloadMenuScene;
 			Stepsss.LoadGameScene -= LoadGameScene;

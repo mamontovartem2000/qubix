@@ -14,6 +14,22 @@ namespace Project.Modules.Network
 		public static Action<TimeRemaining> SetTimer;
 		public static Action<RoomInfo[]> GetRoomList;
 
+		public static void ConnectWithCreateSocket(string request)
+		{
+			ProcessJoinRequest(request);
+
+			NetworkData.Connect = new WebSocketConnect(NetworkData.Info.server_url);
+			NetworkData.Connect.OnMessage += GetMessage;
+			NetworkData.Connect.ConnectSuccessful += SendJoinRequest;
+			NetworkData.Connect.ConnectError += ExitGame;
+		}
+
+		public static void ConnectWithoutCreateSocket(string request)
+		{
+			ProcessJoinRequest(request);
+			SendJoinRequest();
+		}
+
 		public static void ProcessJoinRequest(string request)
 		{
 			string payloadBase64 = NetworkData.CreateFromJSON<JoinRequestData>(request).payload;
@@ -24,25 +40,6 @@ namespace Project.Modules.Network
 			Enum.TryParse(info.game_mode, out GameModes gameMode);
 			NetworkData.GameMode = gameMode;
 			NetworkData.FullJoinRequest = request;
-
-			NetworkData.Connect = new WebSocketConnect(NetworkData.Info.server_url);
-			NetworkData.Connect.OnMessage += GetMessage;
-			NetworkData.Connect.ConnectSuccessful += SendJoinRequest;
-			NetworkData.Connect.ConnectError += ExitGame;
-		}
-
-		public static void ProcessJoinRequestWithoutSocket(string request)
-		{
-			string payloadBase64 = NetworkData.CreateFromJSON<JoinRequestData>(request).payload;
-			var payloadInBytes = Convert.FromBase64String(payloadBase64);
-			var playerJson = Encoding.UTF8.GetString(payloadInBytes);
-			GameInfo info = NetworkData.CreateFromJSON<GameInfo>(playerJson);
-			NetworkData.Info = info;
-			Enum.TryParse(info.game_mode, out GameModes gameMode);
-			NetworkData.GameMode = gameMode;
-			NetworkData.FullJoinRequest = request;
-
-			SendJoinRequest();
 		}
 
 		public static void CreateSocketConnect(string url)

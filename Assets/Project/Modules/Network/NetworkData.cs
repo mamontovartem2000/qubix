@@ -30,7 +30,7 @@ namespace Project.Modules.Network
             FullJoinRequest = string.Empty;
             PlayersInfo = null;
             Team = TeamTypes.Null;
-            BuildType = BuildTypes.PC;
+            BuildType = BuildTypes.ManualConnect;
         }
 
         public static bool FriendlyFireCheck(TeamTypes firstPlayer, TeamTypes secondPlayer)
@@ -52,9 +52,9 @@ namespace Project.Modules.Network
 
     public enum BuildTypes
     {
-        PC,
+        ManualConnect,
         Front_Hub,
-        Front_Room
+        RoomsConnect
     }
 
     public enum GameModes

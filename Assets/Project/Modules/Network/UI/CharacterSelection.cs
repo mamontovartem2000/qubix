@@ -22,7 +22,13 @@ namespace Project.Modules.Network.UI
         public Sprite[] _bullerIcons, _goldIcons, _powerIcons;
         public string[] _bullerDes, _goldDes, _powerDes;
 
-        public void Select(int index)
+        private void OnEnable()
+        {
+            var rnd = Random.Range(0, _names.Length);
+            SelectCharacter(rnd);
+        }
+
+        public void SelectCharacter(int index)
         {
             if (_selectedIndex == index) return;
 
@@ -40,7 +46,6 @@ namespace Project.Modules.Network.UI
             }
             
             ChangeSkillDescription(index);
-            
         }
 
         private void ChangeSkillDescription(int index)
