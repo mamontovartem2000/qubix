@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Common.Components;
 using Project.Mechanics.Features.Weapon.Systems;
 
 namespace Project.Mechanics.Features.Weapon
@@ -27,5 +28,11 @@ namespace Project.Mechanics.Features.Weapon
         }
 
         protected override void OnDeconstruct() {}
+
+        protected override void InjectFilter(ref FilterBuilder builder)
+        {
+            builder
+                .WithoutShared<GamePaused>();
+        }
     }
 }
