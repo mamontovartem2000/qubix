@@ -22,6 +22,7 @@ namespace Project.Mechanics.Features.VFX
 		{
 			AddSystem<VFXPlayerFollowingSystem>();
 			AddSystem<PlayerHoverSystem>();
+			AddSystem<TileGlowSystem>();
 			
 			_viewIds = new ViewId[Views.Length];
 			// _destructibleIds = new ViewId[Destructibles.Length];

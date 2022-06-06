@@ -57,12 +57,10 @@ namespace Project.Mechanics.Features.Avatar
             entity.Get<Owner>().Value = owner;
             entity.Set(new Hover {Direction = false, Amount = 0});
             
-            
-            
             var health = new Entity("Healthbar");
             health.SetParent(entity);
-            health.Get<PlayerHealthOverlay>().Value = entity.Get<PlayerHealth>().Value;
             health.Get<Owner>().Value = owner;
+            health.Get<PlayerHealthOverlay>().Value = entity.Get<PlayerHealth>().Value;
 
             entity.Get<PlayerDamagedCounter>().Value = 0;
 

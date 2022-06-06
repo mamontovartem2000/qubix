@@ -54,4 +54,10 @@ namespace Project.Common.Components
 	{
 		public float Value;
 	}
+
+	public struct GlowTile : IComponent
+	{
+		public bool Direction;
+		public fp Amount;
+	}
 }

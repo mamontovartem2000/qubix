@@ -49,6 +49,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameFinished>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GamePaused>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameTimer>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.GlowTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Grenade>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GrenadeThrowAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GrenadeThrowModifier>(false, true, false, false, false, false, false, false);
@@ -219,6 +220,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameFinished>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GamePaused>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameTimer>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.GlowTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Grenade>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GrenadeThrowAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GrenadeThrowModifier>(false, true, false, false, false, false, false, false);
@@ -384,6 +386,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.GameFinished>(true);
             structComponentsContainer.Validate<Project.Common.Components.GamePaused>(true);
             structComponentsContainer.Validate<Project.Common.Components.GameTimer>(false);
+            structComponentsContainer.Validate<Project.Common.Components.GlowTile>(false);
             structComponentsContainer.Validate<Project.Common.Components.Grenade>(true);
             structComponentsContainer.Validate<Project.Common.Components.GrenadeThrowAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.GrenadeThrowModifier>(false);
@@ -554,6 +557,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.GameFinished>(true);
             entity.ValidateData<Project.Common.Components.GamePaused>(true);
             entity.ValidateData<Project.Common.Components.GameTimer>(false);
+            entity.ValidateData<Project.Common.Components.GlowTile>(false);
             entity.ValidateData<Project.Common.Components.Grenade>(true);
             entity.ValidateData<Project.Common.Components.GrenadeThrowAffect>(true);
             entity.ValidateData<Project.Common.Components.GrenadeThrowModifier>(false);

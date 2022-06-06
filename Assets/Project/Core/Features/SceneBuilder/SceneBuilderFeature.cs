@@ -16,11 +16,13 @@ namespace Project.Core.Features.SceneBuilder
 #endif
     public sealed class SceneBuilderFeature : Feature
     {
-        [Header("General")]
+        [Header("General")] 
         [SerializeField] private TextAsset _testFloor;
         [SerializeField] private TextAsset _testObjects;
         [Header("Reworked Links")]
+        public bool UseMono;
         public ParticleViewSourceBase[] TileViewSources;
+        public MonoBehaviourView[] MonoViewSources;
         public DataConfig[] PropsConfigs;
         public MonoBehaviourView Billboard;
         private ViewId[] _tileViewIds, _propsViewIds;
@@ -31,14 +33,26 @@ namespace Project.Core.Features.SceneBuilder
 
         private void RegisterViews()
         {
-            _tileViewIds = new ViewId[TileViewSources.Length];
             _propsViewIds = new ViewId[PropsConfigs.Length];
-
             _billboardId = world.RegisterViewSource(Billboard);
 
-            for (var i = 2; i < TileViewSources.Length; i++)
+            if (UseMono)
             {
-                _tileViewIds[i] = world.RegisterViewSource(TileViewSources[i]);
+                _tileViewIds = new ViewId[MonoViewSources.Length];
+
+                for (var i = 2; i < MonoViewSources.Length; i++)
+                {
+                    _tileViewIds[i] = world.RegisterViewSource(MonoViewSources[i]);
+                }
+            }
+            else
+            {
+                _tileViewIds = new ViewId[TileViewSources.Length];
+
+                for (var i = 2; i < TileViewSources.Length; i++)
+                {
+                    _tileViewIds[i] = world.RegisterViewSource(TileViewSources[i]);
+                }
             }
 
             for (int i = 1; i < PropsConfigs.Length; i++)
@@ -104,6 +118,7 @@ namespace Project.Core.Features.SceneBuilder
                         entity = new Entity("Platform-Tile");
                         freeMap[i] = 0;
                         walkableMap[i] = 1;
+                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(0f,1f)});
                         break;
                     }
                     case 8:
@@ -112,6 +127,7 @@ namespace Project.Core.Features.SceneBuilder
                         entity.Set(new DispenserTag {TimerDefault = 8, Timer = 8});
                         freeMap[i] = 1;
                         walkableMap[i] = 1;
+                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(0f,1f)});
                         break;
                     }
                     case 9:
@@ -121,6 +137,7 @@ namespace Project.Core.Features.SceneBuilder
                         freeMap[i] = 1;
                         walkableMap[i] = 1;
                         portalMap.Add(i);
+                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(0f,1f)});
                         break;
                     }
                     case 10:
@@ -155,6 +172,7 @@ namespace Project.Core.Features.SceneBuilder
                         entity = new Entity("Platform-Tile");
                         freeMap[i] = 0;
                         walkableMap[i] = 1;
+                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(0f,1f)});
                         break;
                     }
                 }
