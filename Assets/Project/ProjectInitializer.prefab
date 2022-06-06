@@ -148,7 +148,7 @@ MonoBehaviour:
       name: ENTITY_API_VERSION1_DEPRECATED
     - enabled: 0
       name: FILTERS_STORAGE_LEGACY
-  selectedConfiguration: Debug
+  selectedConfiguration: Release
   featuresList:
     features: []
   featuresListCategories:
@@ -226,7 +226,7 @@ MonoBehaviour:
             features: []
   worldSettings:
     useJobsForSystems: 1
-    useJobsForViews: 1
+    useJobsForViews: 0
     createInstanceForFeatures: 1
     maxTicksSimulationCount: 0
     turnOffViews: 0
@@ -245,4 +245,4 @@ MonoBehaviour:
       unityParticlesProviderShowOnScene: 1
   tickTime: 0.033
   inputTicks: 3
-  entitiesCapacity: 200
+  entitiesCapacity: 3000
