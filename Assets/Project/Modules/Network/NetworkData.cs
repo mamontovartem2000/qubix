@@ -69,4 +69,28 @@ namespace Project.Modules.Network
         red,
         blue
     }
+
+    public struct PlayerStats
+    {
+        public uint Kills;
+        public uint Deaths;
+        public string PlayerId;
+        public TeamTypes Team;
+    }
+
+    public struct PlayerInfo
+    {
+        public string Id;
+        public int Slot;
+        public string Nickname;
+        public string Character;
+        public string Icon;
+    }
+
+    public struct RoomInfo
+    {
+        public string Id;
+        public uint PlayersCount;
+        public uint MaxPlayersCount;
+    }
 }

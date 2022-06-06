@@ -7,7 +7,7 @@ public class LoadMapFiles : MonoBehaviour
 {
     private void Awake()
     {
-        //TODO: Need to fix and enable
+        //TODO: Need to fix in WebGL and enable
         //Stepsss.LoadMapFiles += StartLoadMaps;
     }
 

@@ -17,7 +17,7 @@ namespace Project.Modules.Network.UI
 
         private void Start()
         {
-            Stepsss.SetTimer += SetTimer;
+            NetworkEvents.SetTimer += SetTimer;
 
         }
 
@@ -66,7 +66,7 @@ namespace Project.Modules.Network.UI
 
         private void OnDestroy()
         {
-            Stepsss.SetTimer -= SetTimer;
+            NetworkEvents.SetTimer -= SetTimer;
         }
     }
 }

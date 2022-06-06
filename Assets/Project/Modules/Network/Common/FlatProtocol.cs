@@ -12,24 +12,25 @@ using global::FlatBuffers;
 public enum Payload : byte
 {
   NONE = 0,
-  JoinRequest = 1,
-  JoinResult = 2,
-  Start = 3,
-  SetCharacter = 4,
-  PlayerList = 5,
-  TimeRemaining = 6,
-  Shutdown = 7,
-  ReplayFrom = 8,
-  SaveHash = 9,
-  InvalidHash = 10,
-  TimeFromStart = 11,
-  GameOver = 12,
-  CloseRoom = 13,
-  StatsReceive = 14,
-  LeaveRoom = 15,
-  RoomList = 16,
-  ChangeRoom = 17,
-  TeamGameOver = 18,
+  JoinResult = 1,
+  Start = 2,
+  PlayerList = 3,
+  TimeRemaining = 4,
+  Shutdown = 5,
+  RoomList = 6,
+  JoinRequest = 7,
+  ChangeRoom = 8,
+  LeaveRoom = 9,
+  CloseRoom = 10,
+  SetCharacter = 11,
+  JoinedTheGame = 12,
+  ReplayFrom = 13,
+  TimeFromStart = 14,
+  StatsReceive = 15,
+  GameOver = 16,
+  TeamGameOver = 17,
+  SaveHash = 18,
+  InvalidHash = 19,
 };
 
 public struct JoinResult : IFlatbufferObject
@@ -85,36 +86,59 @@ public struct JoinResult : IFlatbufferObject
 
 public struct Start : IFlatbufferObject
 {
-  private Struct __p;
+  private Table __p;
   public ByteBuffer ByteBuffer { get { return __p.bb; } }
-  public void __init(int _i, ByteBuffer _bb) { __p = new Struct(_i, _bb); }
+  public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_2_0_0(); }
+  public static Start GetRootAsStart(ByteBuffer _bb) { return GetRootAsStart(_bb, new Start()); }
+  public static Start GetRootAsStart(ByteBuffer _bb, Start obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
   public Start __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public bool Value { get { return 0!=__p.bb.Get(__p.bb_pos + 0); } }
-  public uint Seed { get { return __p.bb.GetUint(__p.bb_pos + 4); } }
+  public bool Value { get { int o = __p.__offset(4); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+  public uint Seed { get { int o = __p.__offset(6); return o != 0 ? __p.bb.GetUint(o + __p.bb_pos) : (uint)0; } }
 
-  public static Offset<FlatMessages.Start> CreateStart(FlatBufferBuilder builder, bool Value, uint Seed) {
-    builder.Prep(4, 8);
-    builder.PutUint(Seed);
-    builder.Pad(3);
-    builder.PutBool(Value);
-    return new Offset<FlatMessages.Start>(builder.Offset);
+  public static Offset<FlatMessages.Start> CreateStart(FlatBufferBuilder builder,
+      bool value = false,
+      uint seed = 0) {
+    builder.StartTable(2);
+    Start.AddSeed(builder, seed);
+    Start.AddValue(builder, value);
+    return Start.EndStart(builder);
+  }
+
+  public static void StartStart(FlatBufferBuilder builder) { builder.StartTable(2); }
+  public static void AddValue(FlatBufferBuilder builder, bool value) { builder.AddBool(0, value, false); }
+  public static void AddSeed(FlatBufferBuilder builder, uint seed) { builder.AddUint(1, seed, 0); }
+  public static Offset<FlatMessages.Start> EndStart(FlatBufferBuilder builder) {
+    int o = builder.EndTable();
+    return new Offset<FlatMessages.Start>(o);
   }
 };
 
 public struct Shutdown : IFlatbufferObject
 {
-  private Struct __p;
+  private Table __p;
   public ByteBuffer ByteBuffer { get { return __p.bb; } }
-  public void __init(int _i, ByteBuffer _bb) { __p = new Struct(_i, _bb); }
+  public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_2_0_0(); }
+  public static Shutdown GetRootAsShutdown(ByteBuffer _bb) { return GetRootAsShutdown(_bb, new Shutdown()); }
+  public static Shutdown GetRootAsShutdown(ByteBuffer _bb, Shutdown obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
   public Shutdown __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public bool Value { get { return 0!=__p.bb.Get(__p.bb_pos + 0); } }
+  public bool Value { get { int o = __p.__offset(4); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
 
-  public static Offset<FlatMessages.Shutdown> CreateShutdown(FlatBufferBuilder builder, bool Value) {
-    builder.Prep(1, 1);
-    builder.PutBool(Value);
-    return new Offset<FlatMessages.Shutdown>(builder.Offset);
+  public static Offset<FlatMessages.Shutdown> CreateShutdown(FlatBufferBuilder builder,
+      bool value = false) {
+    builder.StartTable(1);
+    Shutdown.AddValue(builder, value);
+    return Shutdown.EndShutdown(builder);
+  }
+
+  public static void StartShutdown(FlatBufferBuilder builder) { builder.StartTable(1); }
+  public static void AddValue(FlatBufferBuilder builder, bool value) { builder.AddBool(0, value, false); }
+  public static Offset<FlatMessages.Shutdown> EndShutdown(FlatBufferBuilder builder) {
+    int o = builder.EndTable();
+    return new Offset<FlatMessages.Shutdown>(o);
   }
 };
 
@@ -394,6 +418,33 @@ public struct LeaveRoom : IFlatbufferObject
   public static Offset<FlatMessages.LeaveRoom> EndLeaveRoom(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<FlatMessages.LeaveRoom>(o);
+  }
+};
+
+public struct JoinedTheGame : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_2_0_0(); }
+  public static JoinedTheGame GetRootAsJoinedTheGame(ByteBuffer _bb) { return GetRootAsJoinedTheGame(_bb, new JoinedTheGame()); }
+  public static JoinedTheGame GetRootAsJoinedTheGame(ByteBuffer _bb, JoinedTheGame obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
+  public JoinedTheGame __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public bool Value { get { int o = __p.__offset(4); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+
+  public static Offset<FlatMessages.JoinedTheGame> CreateJoinedTheGame(FlatBufferBuilder builder,
+      bool value = false) {
+    builder.StartTable(1);
+    JoinedTheGame.AddValue(builder, value);
+    return JoinedTheGame.EndJoinedTheGame(builder);
+  }
+
+  public static void StartJoinedTheGame(FlatBufferBuilder builder) { builder.StartTable(1); }
+  public static void AddValue(FlatBufferBuilder builder, bool value) { builder.AddBool(0, value, false); }
+  public static Offset<FlatMessages.JoinedTheGame> EndJoinedTheGame(FlatBufferBuilder builder) {
+    int o = builder.EndTable();
+    return new Offset<FlatMessages.JoinedTheGame>(o);
   }
 };
 
@@ -826,24 +877,25 @@ public struct SystemMessage : IFlatbufferObject
   public uint Timestamp { get { int o = __p.__offset(4); return o != 0 ? __p.bb.GetUint(o + __p.bb_pos) : (uint)0; } }
   public FlatMessages.Payload PayloadType { get { int o = __p.__offset(6); return o != 0 ? (FlatMessages.Payload)__p.bb.Get(o + __p.bb_pos) : FlatMessages.Payload.NONE; } }
   public TTable? Payload<TTable>() where TTable : struct, IFlatbufferObject { int o = __p.__offset(8); return o != 0 ? (TTable?)__p.__union<TTable>(o + __p.bb_pos) : null; }
-  public FlatMessages.JoinRequest PayloadAsJoinRequest() { return Payload<FlatMessages.JoinRequest>().Value; }
   public FlatMessages.JoinResult PayloadAsJoinResult() { return Payload<FlatMessages.JoinResult>().Value; }
   public FlatMessages.Start PayloadAsStart() { return Payload<FlatMessages.Start>().Value; }
-  public FlatMessages.SetCharacter PayloadAsSetCharacter() { return Payload<FlatMessages.SetCharacter>().Value; }
   public FlatMessages.PlayerList PayloadAsPlayerList() { return Payload<FlatMessages.PlayerList>().Value; }
   public FlatMessages.TimeRemaining PayloadAsTimeRemaining() { return Payload<FlatMessages.TimeRemaining>().Value; }
   public FlatMessages.Shutdown PayloadAsShutdown() { return Payload<FlatMessages.Shutdown>().Value; }
+  public FlatMessages.RoomList PayloadAsRoomList() { return Payload<FlatMessages.RoomList>().Value; }
+  public FlatMessages.JoinRequest PayloadAsJoinRequest() { return Payload<FlatMessages.JoinRequest>().Value; }
+  public FlatMessages.ChangeRoom PayloadAsChangeRoom() { return Payload<FlatMessages.ChangeRoom>().Value; }
+  public FlatMessages.LeaveRoom PayloadAsLeaveRoom() { return Payload<FlatMessages.LeaveRoom>().Value; }
+  public FlatMessages.CloseRoom PayloadAsCloseRoom() { return Payload<FlatMessages.CloseRoom>().Value; }
+  public FlatMessages.SetCharacter PayloadAsSetCharacter() { return Payload<FlatMessages.SetCharacter>().Value; }
+  public FlatMessages.JoinedTheGame PayloadAsJoinedTheGame() { return Payload<FlatMessages.JoinedTheGame>().Value; }
   public FlatMessages.ReplayFrom PayloadAsReplayFrom() { return Payload<FlatMessages.ReplayFrom>().Value; }
+  public FlatMessages.TimeFromStart PayloadAsTimeFromStart() { return Payload<FlatMessages.TimeFromStart>().Value; }
+  public FlatMessages.StatsReceive PayloadAsStatsReceive() { return Payload<FlatMessages.StatsReceive>().Value; }
+  public FlatMessages.GameOver PayloadAsGameOver() { return Payload<FlatMessages.GameOver>().Value; }
+  public FlatMessages.TeamGameOver PayloadAsTeamGameOver() { return Payload<FlatMessages.TeamGameOver>().Value; }
   public FlatMessages.SaveHash PayloadAsSaveHash() { return Payload<FlatMessages.SaveHash>().Value; }
   public FlatMessages.InvalidHash PayloadAsInvalidHash() { return Payload<FlatMessages.InvalidHash>().Value; }
-  public FlatMessages.TimeFromStart PayloadAsTimeFromStart() { return Payload<FlatMessages.TimeFromStart>().Value; }
-  public FlatMessages.GameOver PayloadAsGameOver() { return Payload<FlatMessages.GameOver>().Value; }
-  public FlatMessages.CloseRoom PayloadAsCloseRoom() { return Payload<FlatMessages.CloseRoom>().Value; }
-  public FlatMessages.StatsReceive PayloadAsStatsReceive() { return Payload<FlatMessages.StatsReceive>().Value; }
-  public FlatMessages.LeaveRoom PayloadAsLeaveRoom() { return Payload<FlatMessages.LeaveRoom>().Value; }
-  public FlatMessages.RoomList PayloadAsRoomList() { return Payload<FlatMessages.RoomList>().Value; }
-  public FlatMessages.ChangeRoom PayloadAsChangeRoom() { return Payload<FlatMessages.ChangeRoom>().Value; }
-  public FlatMessages.TeamGameOver PayloadAsTeamGameOver() { return Payload<FlatMessages.TeamGameOver>().Value; }
 
   public static Offset<FlatMessages.SystemMessage> CreateSystemMessage(FlatBufferBuilder builder,
       uint timestamp = 0,

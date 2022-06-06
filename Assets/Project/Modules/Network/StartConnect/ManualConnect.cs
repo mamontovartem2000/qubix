@@ -49,7 +49,7 @@ namespace Project.Modules.Network
 			_joinReadyButton.interactable = false;
 			_hostReadyButton.interactable = false;
 			_hostRoomID.text = roomId;
-			StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, _nickname, Stepsss.ConnectWithCreateSocket));
+			StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, _nickname, ConnectionSteps.ConnectWithCreateSocket));
 		}	
 
 		protected override void OnDestroy()

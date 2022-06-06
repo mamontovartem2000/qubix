@@ -15,9 +15,9 @@ namespace Project.Modules.Network
 		private void Start()
 		{
 			base.InitTemplate(_roomListScreen, BuildTypes.RoomsConnect);
-			Stepsss.GetRoomList += ShowRooms;
+			NetworkEvents.GetRoomList += ShowRooms;
 			RoomPrefab.JoinRoom += SelectRoom;
-			Stepsss.CreateSocketConnect("wss://game.qubixinfinity.io/match");
+			ConnectionSteps.CreateSocketConnect("wss://game.qubixinfinity.io/match");
 		}
 
         private void ShowRooms(RoomInfo[] obj)
@@ -45,11 +45,11 @@ namespace Project.Modules.Network
             {
 				_roomSelected = true;
 				var rnd = Random.Range(0f, 1f);
-				StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, "Player" + rnd, Stepsss.ConnectWithoutCreateSocket));
+				StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, "Player" + rnd, ConnectionSteps.ConnectWithoutCreateSocket));
 			}
             else
             {
-				Stepsss.ChangeRoomRequest(roomId);
+				ConnectionSteps.ChangeRoomRequest(roomId);
             }
 		}
 
@@ -62,7 +62,7 @@ namespace Project.Modules.Network
         protected override void OnDestroy()
         {
 			base.OnDestroy();
-            Stepsss.GetRoomList -= ShowRooms;
+			NetworkEvents.GetRoomList -= ShowRooms;
             RoomPrefab.JoinRoom -= SelectRoom;
         }
     }

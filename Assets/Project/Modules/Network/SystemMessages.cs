@@ -9,8 +9,6 @@ namespace Project.Modules.Network
 {
     public static class SystemMessages
     {
-        public static Action DestroyWorld;
-
         public static byte[] SystemHashMessage(uint tick, int hash)
         {
             FlatBufferBuilder builder = new FlatBufferBuilder(1);
@@ -43,10 +41,10 @@ namespace Project.Modules.Network
                     BrowserEvents.GameIsOver();
 #endif
                     }
-                    DestroyWorld?.Invoke();
+                    NetworkEvents.DestroyWorld?.Invoke();
                     break;
                 default:
-                    Debug.Log("Unknown system message!");
+                    Debug.Log($"Unknown system message! Payload type: {data.PayloadType}");
                     break;
             }
         }
@@ -111,6 +109,7 @@ namespace Project.Modules.Network
 
         private static void GetReplayHash(ReplayFrom replayFrom)
         {
+            Debug.Log("Replay! Сообщи Серёге!");
             uint ticks = replayFrom.LastTick;
             Worlds.currentWorld.RewindTo(ticks);
         }
@@ -119,29 +118,5 @@ namespace Project.Modules.Network
         {
             return (uint) new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
         }
-    }
-
-    public struct PlayerStats
-    {
-        public uint Kills;
-        public uint Deaths;
-        public string PlayerId;
-        public TeamTypes Team;
-    }
-
-    public struct PlayerInfo
-    {
-        public string Id;
-        public int Slot;
-        public string Nickname;
-        public string Character;
-        public string Icon;
-    }
-
-    public struct RoomInfo
-    {
-        public string Id;
-        public uint PlayersCount;
-        public uint MaxPlayersCount;
     }
 }

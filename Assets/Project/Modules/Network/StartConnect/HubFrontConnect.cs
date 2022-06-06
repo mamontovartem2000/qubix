@@ -19,7 +19,7 @@ namespace Project.Modules.Network
 		public void SetJoinRequest(string request)
 		{
 			Debug.Log("Get request: " + request);
-			Stepsss.ConnectWithCreateSocket(request);
+			ConnectionSteps.ConnectWithCreateSocket(request);
 		}
 
 		protected override void OnDestroy()

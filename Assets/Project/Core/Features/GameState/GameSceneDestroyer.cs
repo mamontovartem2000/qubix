@@ -14,7 +14,7 @@ public class GameSceneDestroyer : MonoBehaviour
 
     private void Awake()
     {
-        SystemMessages.DestroyWorld += SetDestroyFlag;
+        NetworkEvents.DestroyWorld += SetDestroyFlag;
     }
 
     private void Update()

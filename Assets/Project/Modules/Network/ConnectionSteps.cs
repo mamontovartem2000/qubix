@@ -6,14 +6,8 @@ using UnityEngine;
 
 namespace Project.Modules.Network
 {
-    public static class Stepsss
+    public static class ConnectionSteps
 	{
-		public static Action LoadMapFiles;
-		public static Action LoadMainMenuScene;
-		public static Action LoadGameScene;
-		public static Action<TimeRemaining> SetTimer;
-		public static Action<RoomInfo[]> GetRoomList;
-
 		public static void ConnectWithCreateSocket(string request)
 		{
 			ProcessJoinRequest(request);
@@ -53,7 +47,7 @@ namespace Project.Modules.Network
 		private static void ExitGame(string obj)
         {
 			Debug.Log("Reload Main");
-			LoadMainMenuScene?.Invoke();
+			NetworkEvents.LoadMainMenuScene?.Invoke();
 		}
 
         private static void GetMessage(byte[] bytes)
@@ -87,7 +81,7 @@ namespace Project.Modules.Network
 					ShowRoomList(data.PayloadAsRoomList());
 					break;
 				default:
-					Debug.Log("Unknown system message!");
+					Debug.Log($"Unknown system message! Payload type: {data.PayloadType}");
 					break;
 			}
 		}
@@ -105,13 +99,13 @@ namespace Project.Modules.Network
 			}
 
 			Debug.Log("Get room list");
-			GetRoomList?.Invoke(roomsInfo);
+			NetworkEvents.GetRoomList?.Invoke(roomsInfo);
 		}
 
         private static void ShutdownRoom(Shutdown shutdown)
 		{
 			Debug.Log("ShutDown");
-			LoadMainMenuScene?.Invoke();
+			NetworkEvents.LoadMainMenuScene?.Invoke();
 		}
 
 		private static void GetJoinResult(JoinResult joinResult)
@@ -121,7 +115,7 @@ namespace Project.Modules.Network
 				NetworkData.SlotInRoom = joinResult.Slot;
 				Enum.TryParse(joinResult.Team, out TeamTypes teamType);
 				NetworkData.Team = teamType;
-				LoadMapFiles?.Invoke();
+				NetworkEvents.LoadMap?.Invoke();
 				Debug.Log($"Join slot: {joinResult.Slot}, team {joinResult.Team};");
 			}
 			else
@@ -130,14 +124,14 @@ namespace Project.Modules.Network
 				//TODO: Close and clear connect
 				Debug.Log($"Join Error: {joinResult.Reason}");
 				NetworkData.CloseNetwork();
-				LoadMainMenuScene?.Invoke();
+				NetworkEvents.LoadMainMenuScene?.Invoke();
 			}
 		}
 
 		private static void SetTimeRemaining(TimeRemaining timeRemaining)
 		{
 			Debug.Log("Set Time!");
-			SetTimer?.Invoke(timeRemaining);
+			NetworkEvents.SetTimer?.Invoke(timeRemaining);
 		}
 
 		private static void SetPlayerList(PlayerList playerList)
@@ -168,7 +162,7 @@ namespace Project.Modules.Network
 		{
 			NetworkData.GameSeed = start.Seed;
 			Unsubscibe();
-			LoadGameScene?.Invoke();
+			NetworkEvents.LoadGameScene?.Invoke();
 			Debug.Log("Start");
 		}
 

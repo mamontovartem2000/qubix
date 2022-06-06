@@ -14,8 +14,8 @@ namespace Project.Modules.Network
 		{
 			_objectToHide = objectToHide;
 			NetworkData.BuildType = buildType;
-			Stepsss.LoadMainMenuScene += ReloadMenuScene;
-			Stepsss.LoadGameScene += LoadGameScene;
+			NetworkEvents.LoadMainMenuScene += ReloadMenuScene;
+			NetworkEvents.LoadGameScene += LoadGameScene;
 			WaitingRoomTimer.ShowCharacterSelectionWindow += SwapScreens;
 		}
 
@@ -55,8 +55,8 @@ namespace Project.Modules.Network
 
 		protected virtual void OnDestroy()
 		{
-			Stepsss.LoadMainMenuScene -= ReloadMenuScene;
-			Stepsss.LoadGameScene -= LoadGameScene;
+			NetworkEvents.LoadMainMenuScene -= ReloadMenuScene;
+			NetworkEvents.LoadGameScene -= LoadGameScene;
 			WaitingRoomTimer.ShowCharacterSelectionWindow -= SwapScreens;
 		}
 	}

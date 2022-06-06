@@ -36,7 +36,7 @@ namespace Project.Modules.Network.UI
             _nameText.SetText(_names[index]);
             _descriptionText.SetText(_descriptions[index]);
 
-            Stepsss.SetCharacterRequest(_names[index]);
+            ConnectionSteps.SetCharacterRequest(_names[index]);
 
             Debug.Log("Chosen character: " + _names[index]);
 
