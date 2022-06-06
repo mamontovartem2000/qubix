@@ -13,15 +13,17 @@ public class MapChanger : MonoBehaviour
     [SerializeField] private Material _triangleTile;
     [SerializeField] private Color[] _colorPalletes;
     [SerializeField] private Color[] _emissionColorPalletes;
+    [SerializeField] private Color[] _bridgesColor;
     private float _emissionIntensity;
 
     private void Awake()
     {
-        Changer = this;
-        if (NetworkData.Info != null)
-            ChangeMap((Maps)NetworkData.Info.map_id);
-        else
-            ChangeMap(Maps.Colizei); // For Fake Connect
+        // Changer = this;
+        // if (NetworkData.Info != null)
+        //     ChangeMap((Maps)NetworkData.Info.map_id);
+        // else
+        //     ChangeMap(Maps.Colizei); // For Fake Connect
+        ChangeMap(Maps.Colizei);
     }
 
     public void ChangeMap(Maps map)
@@ -34,7 +36,7 @@ public class MapChanger : MonoBehaviour
                 ChangeEmissionColor(4, 4, 4);
                 ExtraChangeColors(19, 19, 30, 4, 5);
                 ExtraChangeEmissionColors(4, 6, 5, 4, 4);
-                ChangeBridge(1, 4);
+                ChangeBridge(0, 7);
                 ChangeTriangleTile(1, 1, 3);
                 break;
             case Maps.Neon:
@@ -43,7 +45,6 @@ public class MapChanger : MonoBehaviour
                 ChangeEmissionColor(5, 5, 5);
                 ExtraChangeColors(20, 20, 4, 19, 30);
                 ExtraChangeEmissionColors(5, 5, 5, 5, 5);
-                ChangeBridge(1, 1);
                 ChangeTriangleTile(30, 8, 0);
                 break;
             case Maps.Promo1:
@@ -52,7 +53,6 @@ public class MapChanger : MonoBehaviour
                 ChangeEmissionColor(7, 7, 7);
                 ExtraChangeColors(5, 5, 3, 4, 5);
                 ExtraChangeEmissionColors(7, 6, 5, 6, 6);
-                ChangeBridge(2, 6);
                 ChangeTriangleTile(7, 2, 3);
                 break;
             case Maps.Promo2:
@@ -61,7 +61,6 @@ public class MapChanger : MonoBehaviour
                 ChangeEmissionColor(8, 8, 8);
                 ExtraChangeColors(19, 19, 30, 4, 5);
                 ExtraChangeEmissionColors(4, 6, 5, 4, 4);
-                ChangeBridge(6, 8);
                 ChangeTriangleTile(12, 2, 3);
                 break;
             case Maps.Promo3:
@@ -70,7 +69,6 @@ public class MapChanger : MonoBehaviour
                 ChangeEmissionColor(7, 7, 7);
                 ExtraChangeColors(5, 5, 3, 4, 5);
                 ExtraChangeEmissionColors(7, 6, 5, 6, 6);
-                ChangeBridge(2, 6);
                 ChangeTriangleTile(7, 2, 3);
                 break;
             case Maps.Promo4:
@@ -79,7 +77,6 @@ public class MapChanger : MonoBehaviour
                 ChangeEmissionColor(8, 8, 8);
                 ExtraChangeColors(19, 19, 30, 4, 5);
                 ExtraChangeEmissionColors(4, 6, 5, 4, 4);
-                ChangeBridge(6, 8);
                 ChangeTriangleTile(12, 2, 3);
                 break;
         }
@@ -116,10 +113,10 @@ public class MapChanger : MonoBehaviour
         _extraObjects[4].SetColor("_EmissionColor", _emissionColorPalletes[e] * _emissionIntensity);
     }
 
-    private void ChangeBridge(int baseColor, int emission)
+    private void ChangeBridge(int number, int intensity)
     {
-        _bridge.SetColor("_BaseColor", _colorPalletes[baseColor]);
-        _bridge.SetColor("_EmissionColor", _emissionColorPalletes[emission] * _emissionIntensity);
+        _bridge.color = _bridgesColor[number];
+        _bridge.SetColor("_EmissionColor", _bridgesColor[number + 1] * intensity);
     }
 
     private void ChangeTriangleTile(int baseColor, int emission, int intensity)
