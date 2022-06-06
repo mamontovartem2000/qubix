@@ -44,7 +44,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
             var damage = apply.Damage;
             ref var health = ref to.Get<PlayerHealth>().Value;
             
-            if (to.Has<ForceShieldModifier>()) return;
+            if (to.Has<ForceShieldModifier>() && damage > 0) return;
             
             if (from.Has<PlayerAvatar>())
             {

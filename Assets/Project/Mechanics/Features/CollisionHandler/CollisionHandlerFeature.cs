@@ -19,7 +19,7 @@ namespace Project.Mechanics.Features.CollisionHandler
         [Header("Mine Configs")] 
         public int MineCount;
         public Vector2 MineDamage;
-        [HideInInspector] public float MineSpawnDelay;
+        [HideInInspector] public float MineSpawnDelay = 0f;
         public float MineSpawnDelayDefault;
         public Vector2 MineBlinkFrequency;
         
@@ -29,7 +29,7 @@ namespace Project.Mechanics.Features.CollisionHandler
         {
             AddSystem<GridCollisionDetectionSystem>();
             AddSystem<GrenadeExplosionSystem>();
-            AddSystem<SpawnMineSystem>();
+            // AddSystem<SpawnMineSystem>();
             AddSystem<NewHealthDispenserSystem>();
             AddSystem<NewPortalDispenserSystem>();
             AddSystem<MineBlinkSystem>();

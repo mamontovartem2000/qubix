@@ -14,7 +14,6 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
         public World world { get; set; }
 
         private CollisionHandlerFeature _feature;
-        private float spawnTimer;
         private Filter _mineFilter;
         void ISystemBase.OnConstruct() 
         {

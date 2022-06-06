@@ -39,11 +39,19 @@ namespace Project.Mechanics.Features.Lifetime.Systems
             ref var delay = ref entity.Get<Linear>();
             delay.StartDelay -= deltaTime;
 
-            if(!entity.Read<Owner>().Value.Has<PlayerAvatar>()) return;
+            if (!entity.Read<Owner>().Value.Has<PlayerAvatar>())
+            {
+                entity.Destroy();
+                return;
+            }
             if(!entity.IsAlive()) return;
-            if(!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+            if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive())
+            {
+                entity.Destroy();
+                return;
+            }
             
-            ref var player = ref entity.Get<Owner>().Value.Get<PlayerAvatar>().Value;
+            ref readonly var player = ref entity.Read<Owner>().Value.Read<PlayerAvatar>().Value;
             ref readonly var linIndex = ref entity.Read<LinearIndex>().Value;
             ref readonly var dir = ref player.Read<FaceDirection>().Value;
 
@@ -52,8 +60,7 @@ namespace Project.Mechanics.Features.Lifetime.Systems
                 if (!entity.Has<LinearActive>())
                 {
                     //Linear weapon length testing view instantiation;
-                    //var testView = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
-                    //entity.InstantiateView(testView);
+                    // var testView = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
 
                     player.Get<ReloadTime>().Value = player.Read<ReloadTimeDefault>().Value;
                     entity.Set(new LinearActive());

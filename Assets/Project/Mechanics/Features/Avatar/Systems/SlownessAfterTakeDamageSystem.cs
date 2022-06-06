@@ -52,13 +52,11 @@ namespace Project.Mechanics.Features.Avatar.Systems {
             {
                 to.Get<Slowness>().LifeTime = 1;
             }
-            else if (damage < 0) 
+            else if (damage > 0) 
             {
                 to.Get<Slowness>().Value = Mathf.Min(damage / 100, 0.8f);
                 to.Get<Slowness>().LifeTime = 1;
             }
         }
-    
     }
-    
 }
