@@ -68,8 +68,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                     entity.Read<SecondaryDamage>().Value.Apply(debuff);
                     debuff.Set(new ProjectileActive());
                     debuff.Set(new CollisionDynamic());
-                    debuff.Set(new Debuff());
-                    
+                   
                     Debug.Log("Hit");
                     
                     if (debuff.Has<Slowness>())

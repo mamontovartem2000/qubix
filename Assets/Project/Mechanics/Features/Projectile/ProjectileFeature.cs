@@ -54,8 +54,8 @@ namespace Project.Mechanics.Features.Projectile
             
             var sound = new Entity("sound");
             sound.SetPosition(gun.GetPosition());
-			sound.Get<SoundEffect>() = gun.Get<SoundEffect>();
-			sound.Set(new SoundPlay());
+			// sound.Get<SoundEffect>() = gun.Get<SoundEffect>();
+			// sound.Set(new SoundPlay());
 
             entity.Set(new ProjectileActive());
 

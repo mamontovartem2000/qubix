@@ -35,7 +35,6 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 			return Filter.Create("Filter-BulletDisposeSystem")
 				.With<ProjectileActive>()
 				.With<Collided>()
-				.Without<Debuff>()
 				.Push();
 		}
 
@@ -75,7 +74,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 			var sound = new Entity("sound");
 			sound.SetPosition(entity.GetPosition());
 			sound.Get<SoundEffect>() = entity.Get<SoundEffect>();
-			sound.Set(new SoundPlay());
+			// sound.Set(new SoundPlay());
 			entity.Destroy();
 		}
 	}
