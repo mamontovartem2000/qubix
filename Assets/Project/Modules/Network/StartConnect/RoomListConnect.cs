@@ -10,6 +10,7 @@ namespace Project.Modules.Network
 
 		private bool _roomListLoaded;
 		private bool _roomSelected;
+		private const int MaxRoomCount = 4; 
 
 		private void Start()
 		{
@@ -23,10 +24,10 @@ namespace Project.Modules.Network
 		{
 			string text = "Rooms: \n";
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < MaxRoomCount; i++)
             {
 				text += $"{obj[i].Id} {obj[i].PlayersCount} {obj[i].MaxPlayersCount}\n";
-				_rooms[i].UpdateRoomInfo(obj[i], i + 1, _rooms.Length);
+				_rooms[i].UpdateRoomInfo(obj[i], i + 1, MaxRoomCount);
 			}
 
 			if (_roomListLoaded == false)
