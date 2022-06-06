@@ -22,7 +22,9 @@ namespace Project.Core.Features.SceneBuilder
         [Header("Reworked Links")]
         public ParticleViewSourceBase[] TileViewSources;
         public DataConfig[] PropsConfigs;
+        public MonoBehaviourView Billboard;
         private ViewId[] _tileViewIds, _propsViewIds;
+        private ViewId _billboardId;
         protected override void OnConstruct() => RegisterViews();
         protected override void OnConstructLate() => PrepareMaps();
         protected override void OnDeconstruct() { }
@@ -31,6 +33,8 @@ namespace Project.Core.Features.SceneBuilder
         {
             _tileViewIds = new ViewId[TileViewSources.Length];
             _propsViewIds = new ViewId[PropsConfigs.Length];
+
+            _billboardId = world.RegisterViewSource(Billboard);
 
             for (var i = 2; i < TileViewSources.Length; i++)
             {
@@ -133,6 +137,17 @@ namespace Project.Core.Features.SceneBuilder
                         entity.Get<BridgeTile>().Value = false;
                         freeMap[i] = 1;
                         walkableMap[i] = 1;
+                        break;
+                    }
+                    case 12:
+                    {
+                        entity = new Entity("bBoard");
+                        freeMap[i] = 1;
+                        walkableMap[i] = 0;
+                        entity.InstantiateView(_billboardId);
+                        entity.SetPosition(SceneUtils.IndexToPosition(i));
+                        
+                        entity = Entity.Empty;
                         break;
                     }
                     default:
