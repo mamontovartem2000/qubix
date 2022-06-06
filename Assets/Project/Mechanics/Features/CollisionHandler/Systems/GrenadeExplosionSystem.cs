@@ -57,8 +57,8 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
             {
                 var explosionSound = new Entity("explosionSound");
                 // entity.Read<ExplosionSound>().Value.Apply(explosionSound);
-                explosionSound.Set(new SoundPlay());
-                explosionSound.SetPosition(entity.GetPosition());
+                // explosionSound.Set(new SoundPlay());
+                // explosionSound.SetPosition(entity.GetPosition());
                 
                 foreach (Entity player in _playerFilter)
                 {
@@ -70,6 +70,8 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                     debuff.Set(new CollisionDynamic());
                     debuff.Set(new Debuff());
                     
+                    Debug.Log("Hit");
+                    
                     if (debuff.Has<Slowness>())
                     {
                         player.Get<Slowness>().Value = debuff.Get<Slowness>().Value/100;
@@ -78,6 +80,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                     
                     debuff.SetPosition(SceneUtils.SafeCheckPosition(player.GetPosition()));
                 }
+                
                 if (entity.Read<SecondaryDamage>().Value.Has<Slowness>())
                 {
                     var vfx = new Entity("vfx");
