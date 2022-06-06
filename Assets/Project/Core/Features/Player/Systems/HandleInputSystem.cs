@@ -188,7 +188,7 @@ namespace Project.Core.Features.Player.Systems
             // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
             if (!player.Has<PlayerAvatar>()) return;
 
-            ref var entity = ref player.Get<PlayerAvatar>().Value.Get<SkillEntities>().FirstSkill;
+            ref var entity = ref player.Get<SkillEntities>().FirstSkill;
 
             if(!entity.Has<Cooldown>())
                 entity.Set(new ActivateSkill());
@@ -200,7 +200,7 @@ namespace Project.Core.Features.Player.Systems
             // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
             if (!player.Has<PlayerAvatar>()) return;
 
-            ref var entity = ref player.Get<PlayerAvatar>().Value.Get<SkillEntities>().SecondSkill;
+            ref var entity = ref player.Get<SkillEntities>().SecondSkill;
 
             if(!entity.Has<Cooldown>())
                 entity.Set(new ActivateSkill());
@@ -212,7 +212,7 @@ namespace Project.Core.Features.Player.Systems
             // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
             if (!player.Has<PlayerAvatar>()) return;
 
-            ref var entity = ref player.Get<PlayerAvatar>().Value.Get<SkillEntities>().ThirdSkill;
+            ref var entity = ref player.Get<SkillEntities>().ThirdSkill;
 
             if(!entity.Has<Cooldown>())
                 entity.Set(new ActivateSkill());
@@ -224,7 +224,7 @@ namespace Project.Core.Features.Player.Systems
             // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
             if (!player.Has<PlayerAvatar>()) return;
 
-            ref var entity = ref player.Get<PlayerAvatar>().Value.Get<SkillEntities>().FourthSkill;
+            ref var entity = ref player.Get<SkillEntities>().FourthSkill;
 
             if(!entity.Has<Cooldown>())
                 entity.Set(new ActivateSkill());

@@ -23,8 +23,7 @@ public class SkillImageChangeScript : MonoBehaviour
     private void SkillImageChanged(in Entity entity)
     {
         if (entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.SlotInRoom)) return;
-        ref readonly var player = ref entity.Read<PlayerAvatar>().Value;
-        ref readonly var skills = ref player.Read<SkillEntities>();
+        ref readonly var skills = ref entity.Read<SkillEntities>();
         
         FirtSkillImage[skills.FirstSkill.Read<SkillImage>().Value].gameObject.SetActive(true);
         SecondSkillImage[skills.SecondSkill.Read<SkillImage>().Value].gameObject.SetActive(true);

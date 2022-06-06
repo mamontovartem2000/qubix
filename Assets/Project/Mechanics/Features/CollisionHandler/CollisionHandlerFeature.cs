@@ -66,7 +66,14 @@ namespace Project.Mechanics.Features.CollisionHandler
             var entity = new Entity("Mine");
 
             entity.Set(new MineTag());
+
+            var tmpPos = SceneUtils.GetRandomPosition();
+            
+            
             entity.SetPosition(SceneUtils.GetRandomPosition());
+
+            Debug.Log($"tmpPos: {tmpPos}, plrPos: {entity.GetPosition()}");
+
             SceneUtils.ModifyFree(entity.GetPosition(), false);
             entity.InstantiateView(_mine);
             entity.Get<MineBlinkTimerDefault>().Value = world.GetRandomRange(MineBlinkFrequency.x, MineBlinkFrequency.y);

@@ -45,7 +45,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 			ref readonly var owner = ref entity.Read<Owner>().Value;
 			ref var avatar = ref owner.Get<PlayerAvatar>().Value;
 			
-			ref var skills = ref avatar.Get<SkillEntities>();
+			ref var skills = ref owner.Get<SkillEntities>();
 
 			skills.FirstSkill.Get<Cooldown>().Value = 0;
 			skills.SecondSkill.Get<Cooldown>().Value = 0;
