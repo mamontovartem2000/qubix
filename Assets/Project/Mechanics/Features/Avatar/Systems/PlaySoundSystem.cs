@@ -43,11 +43,9 @@ namespace Project.Mechanics.Features.Avatar.Systems
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter()
         {
-
             return Filter.Create("Filter-PlaySoundSystem")
                 .With<SoundPlay>()
                 .Push();
-
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
@@ -94,7 +92,6 @@ namespace Project.Mechanics.Features.Avatar.Systems
                         break;
                     }
             }
-            
         }
     }
 }

@@ -38,7 +38,9 @@ namespace Project.Mechanics.Features.Skills.Systems.TargetedSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			var playerAvatar = entity.Read<Owner>().Value.Get<PlayerAvatar>().Value;
+			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+
+			ref readonly var playerAvatar = ref entity.Read<Owner>().Value.Get<PlayerAvatar>().Value;
 			var grenade = new Entity("grenade");
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			grenade.Set(new Owner{Value = entity.Read<Owner>().Value});

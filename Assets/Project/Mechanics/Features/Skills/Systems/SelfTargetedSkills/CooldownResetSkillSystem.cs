@@ -40,7 +40,12 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			ref var skills = ref entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<SkillEntities>();
+			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+
+			ref readonly var owner = ref entity.Read<Owner>().Value;
+			ref var avatar = ref owner.Get<PlayerAvatar>().Value;
+			
+			ref var skills = ref avatar.Get<SkillEntities>();
 
 			skills.FirstSkill.Get<Cooldown>().Value = 0;
 			skills.SecondSkill.Get<Cooldown>().Value = 0;
@@ -48,7 +53,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 			skills.FourthSkill.Get<Cooldown>().Value = 0;
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			_vfx.SpawnVFX(VFXFeature.VFXType.SkillCurcuitBurts, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
+			_vfx.SpawnVFX(VFXFeature.VFXType.SkillCurcuitBurts, avatar.GetPosition(), avatar);
 			entity.Remove<ActivateSkill>();
 		}
 	}

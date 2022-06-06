@@ -42,23 +42,27 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
-            var nextPos = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<FaceDirection>().Value * 4 + (entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value);
+            
+            ref readonly var owner = ref entity.Read<Owner>().Value;
+            ref var avatar = ref owner.Get<PlayerAvatar>().Value;
+            
+            var nextPos = avatar.Read<FaceDirection>().Value * 4 + (avatar.Read<PlayerMoveTarget>().Value);
 
             entity.Remove<ActivateSkill>();
 
             if (!SceneUtils.IsWalkable(new fp3(nextPos.x, 0, nextPos.z))) return;
             
             // SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, new fp3(nextPos.x, 0, nextPos.z));
-            SceneUtils.ModifyWalkable(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, true);
+            SceneUtils.ModifyWalkable(avatar.Read<PlayerMoveTarget>().Value, true);
             SceneUtils.ModifyWalkable(new fp3(nextPos.x, 0, nextPos.z), false);
 
             
-            entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.SetPosition(nextPos);
-            entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<PlayerMoveTarget>().Value = new fp3(nextPos.x, 0, nextPos.z);
+            avatar.SetPosition(nextPos);
+            avatar.Get<PlayerMoveTarget>().Value = new fp3(nextPos.x, 0, nextPos.z);
 
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
-            _vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
+            _vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, avatar.GetPosition(), avatar);
         }
     }
 }

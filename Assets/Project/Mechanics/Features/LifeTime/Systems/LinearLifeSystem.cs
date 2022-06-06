@@ -39,7 +39,7 @@ namespace Project.Mechanics.Features.Lifetime.Systems
             ref var delay = ref entity.Get<Linear>();
             delay.StartDelay -= deltaTime;
 
-            if(!entity.Get<Owner>().Value.Has<PlayerAvatar>()) return;
+            if(!entity.Read<Owner>().Value.Has<PlayerAvatar>()) return;
             if(!entity.IsAlive()) return;
             if(!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
             
@@ -62,7 +62,7 @@ namespace Project.Mechanics.Features.Lifetime.Systems
                 var linPos = player.GetPosition() + dir * linIndex;
                 entity.SetPosition(linPos);
 
-                if (!player.Get<WeaponEntities>().LeftWeapon.Has<LinearActive>())
+                if (!player.Read<WeaponEntities>().LeftWeapon.Has<LinearActive>())
                 {
                     entity.Destroy();
                 }

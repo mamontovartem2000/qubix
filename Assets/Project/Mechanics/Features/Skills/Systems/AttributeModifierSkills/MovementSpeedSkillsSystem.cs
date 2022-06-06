@@ -41,19 +41,24 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 		// ReSharper disable Unity.PerformanceAnalysis
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+
+			ref readonly var owner = ref entity.Read<Owner>().Value;
+			ref var avatar = ref owner.Get<PlayerAvatar>().Value;
+			
 			var effect = new Entity("effect");
-			effect.Get<Owner>().Value = entity.Get<Owner>().Value;
+			effect.Get<Owner>().Value = owner;
 			effect.Set(new EffectTag());
 			
 			var amount = entity.Read<SkillAmount>().Value / 100f;
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<MoveSpeedModifier>().Value += amount;
+			avatar.Get<MoveSpeedModifier>().Value += amount;
 			effect.Get<MoveSpeedModifier>().Value = amount;
 
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			_vfx.SpawnVFX(VFXFeature.VFXType.SkillQuickness, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
-			_vfx.SpawnVFX(VFXFeature.VFXType.SpeedTrail, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value, entity.Read<SkillDurationDefault>().Value);
+			_vfx.SpawnVFX(VFXFeature.VFXType.SkillQuickness, avatar.GetPosition(), avatar);
+			_vfx.SpawnVFX(VFXFeature.VFXType.SpeedTrail, avatar.GetPosition(),avatar, entity.Read<SkillDurationDefault>().Value);
 			
 			entity.Remove<ActivateSkill>();
 		}

@@ -40,6 +40,11 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
+            if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+            
+            ref readonly var owner = ref entity.Read<Owner>().Value;
+            ref var avatar = ref owner.Get<PlayerAvatar>().Value;
+            
             var rndX = world.GetRandomRange(3, 7);
             var rndZ = world.GetRandomRange(3, 7);
             switch (world.GetRandomRange(0, 3))
@@ -68,22 +73,21 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
                         break;
                     }
             }
-            if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
-            var tmpPos = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value;
+            var tmpPos = avatar.Read<PlayerMoveTarget>().Value;
             var randomPlayerPos = new Vector3(tmpPos.x + rndX, 0, tmpPos.z + rndZ);
 
             if (!SceneUtils.IsWalkable(new fp3(randomPlayerPos.x, 0, randomPlayerPos.z))) return;
             
             // SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, new fp3(randomPlayerPos.x, 0, randomPlayerPos.z));
-            SceneUtils.ModifyWalkable(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, true);
+            SceneUtils.ModifyWalkable(avatar.Read<PlayerMoveTarget>().Value, true);
             SceneUtils.ModifyWalkable(new fp3(randomPlayerPos.x, 0, randomPlayerPos.z), false);
             
-            entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.SetPosition(randomPlayerPos);
-            entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<PlayerMoveTarget>().Value = new fp3(randomPlayerPos.x, 0, randomPlayerPos.z);
+            avatar.SetPosition(randomPlayerPos);
+            avatar.Get<PlayerMoveTarget>().Value = new fp3(randomPlayerPos.x, 0, randomPlayerPos.z);
 
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
-            _vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
+            _vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, avatar.GetPosition(), avatar);
             entity.Remove<ActivateSkill>();
         }
     }

@@ -40,13 +40,14 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+			
 			var effect = new Entity("effect");
 			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
 			effect.Set(new EffectTag());
 
 			var amount = entity.Read<SkillAmount>().Value / 100f;
-
-
+			
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			
 			entity.Remove<ActivateSkill>();

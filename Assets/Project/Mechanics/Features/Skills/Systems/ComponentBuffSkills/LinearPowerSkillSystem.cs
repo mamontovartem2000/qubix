@@ -41,20 +41,27 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+
+			ref readonly var owner = ref entity.Read<Owner>().Value;
+			ref var avatar = ref owner.Get<PlayerAvatar>().Value;
+			ref readonly var leftWeapon = ref avatar.Read<WeaponEntities>().LeftWeapon;
+			
 			var effect = new Entity("effect");
+			
 			effect.Set(new EffectTag());
 			
-			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Set(new LinearPowerModifier{Damage = 0.5f});
-			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().LeftWeapon.Remove<LinearActive>();
-			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().LeftWeapon.Remove<LeftWeaponShot>();
-			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().LeftWeapon.Set(new AmmoCapacity { Value = 100 });
+			avatar.Set(new LinearPowerModifier{Damage = 0.5f});
+			leftWeapon.Remove<LinearActive>();
+			leftWeapon.Remove<LeftWeaponShot>();
+			leftWeapon.Set(new AmmoCapacity { Value = 100 });
 			effect.Set(new LinearPowerModifier());
 
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
-			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
+			effect.Get<Owner>().Value = owner;
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			
-			_vfx.SpawnVFX(VFXFeature.VFXType.SkillLinearPower, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
+			_vfx.SpawnVFX(VFXFeature.VFXType.SkillLinearPower, avatar.GetPosition(), avatar);
 
 			entity.Remove<ActivateSkill>();
 		}

@@ -43,20 +43,23 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+
 			ref readonly var owner = ref entity.Read<Owner>().Value;
 			ref var avatar = ref owner.Get<PlayerAvatar>().Value;
+			ref readonly var rightWeapon = ref avatar.Read<WeaponEntities>().RightWeapon;
 
-			avatar.Get<WeaponEntities>().RightWeapon.Set(new StunModifier{Value = 20});
+			rightWeapon.Set(new StunModifier{Value = 20});
 
-			avatar.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = 5;
+			rightWeapon.Get<AmmoCapacityDefault>().Value = 5;
 
-			avatar.Read<WeaponEntities>().RightWeapon.Get<ReloadTime>().Value = 
-			avatar.Read<WeaponEntities>().RightWeapon.Read<ReloadTimeDefault>().Value;
+			rightWeapon.Get<ReloadTime>().Value = 
+				rightWeapon.Read<ReloadTimeDefault>().Value;
 
             world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(owner);
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-            _vfx.SpawnVFX(VFXFeature.VFXType.StatusStunEffect, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
+            _vfx.SpawnVFX(VFXFeature.VFXType.StatusStunEffect, avatar.GetPosition(), avatar);
 
 			entity.Remove<ActivateSkill>();
 		}

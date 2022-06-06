@@ -42,6 +42,8 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 			
 			ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
 			lifeTime -= deltaTime;
+			
+			if(!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
 
 			if (lifeTime < 0f || entity.Get<Owner>().Value.Read<PlayerAvatar>().Value.Get<ForceShieldModifier>().Value <= 0)
 			{

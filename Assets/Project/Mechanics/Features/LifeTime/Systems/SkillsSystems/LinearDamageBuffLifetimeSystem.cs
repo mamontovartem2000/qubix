@@ -43,7 +43,7 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 			
 			if(!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
 			
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Remove<LinearPowerModifier>();;
+			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Remove<LinearPowerModifier>();;
 			entity.Destroy();
 		}
 	}

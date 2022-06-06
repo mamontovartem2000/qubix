@@ -41,18 +41,24 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+
+			ref readonly var owner = ref entity.Read<Owner>().Value;
+			ref var avatar = ref owner.Get<PlayerAvatar>().Value;
+			ref readonly var rightWeapon = ref avatar.Read<WeaponEntities>().RightWeapon;
+
 			var effect = new Entity("effect");
-			effect.Get<Owner>().Value = entity.Get<Owner>().Value;
+			effect.Get<Owner>().Value = owner;
 			effect.Set(new EffectTag());
 
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon.Get<FireRateModifier>().Value = 1;
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = 2;
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon.Get<AmmoCapacity>().Value = 2;
+			rightWeapon.Get<FireRateModifier>().Value = 1;
+			rightWeapon.Get<AmmoCapacityDefault>().Value = 2;
+			rightWeapon.Get<AmmoCapacity>().Value = 2;
 			
 			world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Get<Owner>().Value);
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			_vfx.SpawnVFX(VFXFeature.VFXType.SkillOffenciveBurst, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
+			_vfx.SpawnVFX(VFXFeature.VFXType.SkillOffenciveBurst, avatar.GetPosition(), avatar);
 			entity.Remove<ActivateSkill>();
 		}
 	}

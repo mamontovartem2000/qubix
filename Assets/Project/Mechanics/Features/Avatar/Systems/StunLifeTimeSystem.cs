@@ -44,9 +44,9 @@ namespace Project.Mechanics.Features.Avatar.Systems {
         {
 			entity.Get<Stun>().Value -= deltaTime;
 
-			if (entity.Get<Stun>().Value > 0f) return;
+			if (entity.Read<Stun>().Value > 0f) return;
 
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Remove<Stun>();
+			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Remove<Stun>();
         }
     
     }

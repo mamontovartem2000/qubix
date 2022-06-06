@@ -54,7 +54,7 @@ namespace Project.Mechanics.Features.Avatar.Systems {
             
             // if (shield - damage >= 0)
             // {
-                to.Get<ForceShieldModifier>().Value -= damage;
+            to.Get<ForceShieldModifier>().Value -= damage;
             // }
             // else if (shield - damage < 0)
             // {

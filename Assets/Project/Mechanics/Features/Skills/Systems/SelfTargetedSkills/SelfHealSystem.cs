@@ -41,13 +41,18 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
+            if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+
+            ref readonly var owner = ref entity.Read<Owner>().Value;
+            ref var avatar = ref owner.Get<PlayerAvatar>().Value;
+            
             var collision = new Entity("collision");
-			collision.Set(new ApplyDamage {ApplyTo = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value, ApplyFrom = entity.Read<Owner>().Value.Read<PlayerAvatar>().Value, Damage = -entity.Read<SkillAmount>().Value}, ComponentLifetime.NotifyAllSystems);
+			collision.Set(new ApplyDamage {ApplyTo = avatar, ApplyFrom = avatar, Damage = -entity.Read<SkillAmount>().Value}, ComponentLifetime.NotifyAllSystems);
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
-            world.GetFeature<EventsFeature>().HealthChanged.Execute(entity.Read<Owner>().Value);
+            world.GetFeature<EventsFeature>().HealthChanged.Execute(owner);
             
-            _vfx.SpawnVFX(VFXFeature.VFXType.SkillHeal, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);
+            _vfx.SpawnVFX(VFXFeature.VFXType.SkillHeal, avatar.GetPosition(), avatar);
 			entity.Remove<ActivateSkill>();
         }
     }

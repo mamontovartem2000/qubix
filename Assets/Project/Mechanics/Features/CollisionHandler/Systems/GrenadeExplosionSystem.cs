@@ -69,8 +69,6 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                     debuff.Set(new ProjectileActive());
                     debuff.Set(new CollisionDynamic());
                    
-                    Debug.Log("Hit");
-                    
                     if (debuff.Has<Slowness>())
                     {
                         player.Get<Slowness>().Value = debuff.Get<Slowness>().Value/100;

@@ -37,6 +37,8 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+
 			var effect = new Entity("effect");
 			effect.Set(new EffectTag());
 

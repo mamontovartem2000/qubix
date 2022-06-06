@@ -35,6 +35,8 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+
 			var effect = new Entity("effect");
 			effect.Set(new EffectTag());
 
