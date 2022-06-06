@@ -6,6 +6,7 @@ using Project.Core.Features.Player.Modules;
 using Project.Core.Features.Player.Systems;
 using Project.Markers;
 using Project.Modules.Network;
+using UnityEngine;
 
 namespace Project.Core.Features.Player
 {
@@ -91,6 +92,7 @@ namespace Project.Core.Features.Player
 
 		private void PlayerDisconnected_RPC(int id)
 		{
+			Debug.Log("Destroy Avatar");
 			ref var avtr = ref GetPlayerByID(id).Get<PlayerAvatar>().Value;
 			ref var weps = ref avtr.Get<WeaponEntities>();
 			

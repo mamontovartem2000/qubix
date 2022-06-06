@@ -38,6 +38,14 @@ public class GameSceneDestroyer : MonoBehaviour
         _needDestroyWorld = true;
     }
 
+
+    //TODO: Use this method for Front, not SetDestroyFlag
+    public void TryDisconnect()
+    {
+        if (_worldDestroyed == false)
+            Disconnect();
+    }
+
     private void Disconnect()
     {
         var buildType = NetworkData.BuildType;
@@ -77,6 +85,7 @@ public class GameSceneDestroyer : MonoBehaviour
 
     private void OnDestroy()
     {
-        SetDestroyFlag();
+        Debug.Log("OnDestroy");
+        TryDisconnect();
     }
 }

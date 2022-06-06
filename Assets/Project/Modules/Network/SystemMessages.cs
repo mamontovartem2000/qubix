@@ -109,7 +109,7 @@ namespace Project.Modules.Network
 
         private static void GetReplayHash(ReplayFrom replayFrom)
         {
-            Debug.Log("Replay! Сообщи Серёге!");
+            Debug.Log("Replay! Call Sergo!");
             uint ticks = replayFrom.LastTick;
             Worlds.currentWorld.RewindTo(ticks);
         }

@@ -1,10 +1,17 @@
 ﻿using ME.ECS;
 
-namespace Project.Mechanics.Features.Avatar.Systems {
-
-    #pragma warning disable
-    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
-    using Components; using Modules; using Systems; using Markers;
+namespace Project.Mechanics.Features.Avatar.Systems
+{
+    #region usage
+#pragma warning disable
+    using Project.Components;
+    using Project.Modules;
+    using Project.Systems;
+    using Project.Markers;
+    using Components;
+    using Modules;
+    using Systems;
+    using Markers;
     using Project.Common.Components;
 #pragma warning restore
 
@@ -13,42 +20,33 @@ namespace Project.Mechanics.Features.Avatar.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-    public sealed class StunLifeTimeSystem : ISystemFilter {
-        
-        private AvatarFeature _feature;
-        private float _lifeTime = 1;
+    #endregion
+
+    public sealed class StunLifeTimeSystem : ISystemFilter
+    {
         public World world { get; set; }
-        
-        void ISystemBase.OnConstruct() {
-            
-            this.GetFeature(out this._feature);
-            
-        }
-        
-        void ISystemBase.OnDeconstruct() {}
-        
-        #if !CSHARP_8_OR_NEWER
+        void ISystemBase.OnConstruct() { }
+        void ISystemBase.OnDeconstruct() { }
+
+#if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;
-        #endif
+#endif
         Filter ISystemFilter.filter { get; set; }
-        Filter ISystemFilter.CreateFilter() {
-            
+        Filter ISystemFilter.CreateFilter()
+        {
             return Filter.Create("Filter-StunLifeTimeSystem")
             .With<Stun>()
             .Push();
-            
         }
-    
-        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
+
+        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-			entity.Get<Stun>().Value -= deltaTime;
+            entity.Get<Stun>().Value -= deltaTime;
 
-			if (entity.Read<Stun>().Value > 0f) return;
+            if (entity.Read<Stun>().Value > 0f) return;
 
-			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Remove<Stun>();
+            entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Remove<Stun>();
         }
-    
     }
-    
 }
