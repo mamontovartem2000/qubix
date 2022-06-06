@@ -88,7 +88,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
                 else
                 {
                     var vfx = new Entity("vfx");
-                    _vfx.SpawnVFX(VFXFeature.VFXType.FUCK, entity.GetPosition());
+                    _vfx.SpawnVFX(VFXFeature.VFXType.GrenadeVFX, entity.GetPosition());
                 }
                 
                 entity.Destroy();

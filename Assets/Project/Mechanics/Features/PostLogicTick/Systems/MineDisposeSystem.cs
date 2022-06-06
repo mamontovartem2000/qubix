@@ -52,7 +52,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 			ref readonly var damage = ref entity.Read<MineDamage>().Value;
 			collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
 
-			_vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, entity.GetPosition(), player);
+			_vfx.SpawnVFX(VFXFeature.VFXType.MineExplosion, entity.GetPosition());
 			SceneUtils.ModifyFree(entity.GetPosition(), true);
 			
 			entity.Destroy();

@@ -101,7 +101,7 @@ namespace Project.Mechanics.Features.VFX
 			SlowExplosion,
 			SpeedTrail,
 			MineExplosion,
-			FUCK
+			GrenadeVFX
 		}
 	}
 }
