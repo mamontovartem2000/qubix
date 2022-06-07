@@ -45,8 +45,8 @@ namespace Project.Mechanics.Features.VFX.Systems {
             ref var up = ref entity.Get<GlowTile>().Direction;
             ref var amount = ref entity.Get<GlowTile>().Amount;
 
-            amount += up ? 0.025 : -0.025;
-            if (amount >= 2.0)
+            amount += up ? 0.05 : -0.05;
+            if (amount >= 1.5)
             {
                 up = false;
             }
