@@ -13,6 +13,10 @@ namespace Project.Common.Components
 		public ParticleViewSourceBase Value;
 	}
 
+	public struct TileAlternativeView : IComponent
+	{
+		public MonoBehaviourView Value;
+	}
 	public struct TileRotation : IComponent
 	{
 		public fp3 Value;

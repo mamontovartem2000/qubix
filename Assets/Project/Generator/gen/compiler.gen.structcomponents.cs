@@ -159,6 +159,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Tabulation>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TileAlternativeView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileRotation>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
@@ -330,6 +331,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Tabulation>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TileAlternativeView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileRotation>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
@@ -496,6 +498,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Tabulation>(true);
             structComponentsContainer.Validate<Project.Common.Components.Targeted>(true);
             structComponentsContainer.Validate<Project.Common.Components.TeleportPlayer>(false);
+            structComponentsContainer.Validate<Project.Common.Components.TileAlternativeView>(false);
             structComponentsContainer.Validate<Project.Common.Components.TileRotation>(false);
             structComponentsContainer.Validate<Project.Common.Components.TileView>(false);
             structComponentsContainer.Validate<Project.Common.Components.Trajectory>(false);
@@ -667,6 +670,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Tabulation>(true);
             entity.ValidateData<Project.Common.Components.Targeted>(true);
             entity.ValidateData<Project.Common.Components.TeleportPlayer>(false);
+            entity.ValidateData<Project.Common.Components.TileAlternativeView>(false);
             entity.ValidateData<Project.Common.Components.TileRotation>(false);
             entity.ValidateData<Project.Common.Components.TileView>(false);
             entity.ValidateData<Project.Common.Components.Trajectory>(false);

@@ -8,9 +8,12 @@ namespace Project.Common.Views.Monos
 	public class TileMonoView : MonoBehaviourView
 	{
 		public override bool applyStateJob => true;
-
+		
 		public MeshRenderer Rend;
-		private Color _color = new Color(0,3,3,2);
+		private Color matColor;
+		private Material mat;
+		private bool _init = false;
+		
 		private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
 		public override void OnInitialize() {}
@@ -19,17 +22,19 @@ namespace Project.Common.Views.Monos
 
 		public override void ApplyState(float deltaTime, bool immediately)
 		{
-			// if (Rend != null)
-			// {
-			// 	_color = Rend.materials[0].GetColor(EmissionColor);
-			// }
-			
 			transform.position = entity.GetPosition();
 
 			if (entity.Has<GlowTile>())
 			{
+				if (!_init)
+				{
+					mat = Rend.materials[0];
+					matColor = mat.GetColor(EmissionColor);
+					_init = true;
+				}
+				
 				var intencity = entity.Read<GlowTile>().Amount;
-				Rend.materials[0].SetColor(EmissionColor, _color * intencity);
+				mat.SetColor(EmissionColor, matColor * (intencity * 0.5));
 			}
 		}
 	}

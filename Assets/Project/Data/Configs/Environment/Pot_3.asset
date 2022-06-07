@@ -19,6 +19,7 @@ MonoBehaviour:
   - id: 2
   - id: 3
   - id: 4
+  - id: 5
   removeStructComponents: []
   templates:
   - 42195f0a559d99a479384ed2079515c8
@@ -49,3 +50,7 @@ MonoBehaviour:
       type: {class: DestructibleView, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: -3417149396602716479, guid: c776bdc2106060c478932e11cdf9cece, type: 3}
+    00000005:
+      type: {class: TileAlternativeView, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: -1639829767611388643, guid: 5a09d9e98f857c340bf9211bc5c8092b, type: 3}

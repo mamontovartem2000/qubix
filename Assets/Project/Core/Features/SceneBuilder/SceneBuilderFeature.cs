@@ -20,9 +20,12 @@ namespace Project.Core.Features.SceneBuilder
         [SerializeField] private TextAsset _testFloor;
         [SerializeField] private TextAsset _testObjects;
         [Header("Reworked Links")]
+        
         public bool UseMono;
+        
         public ParticleViewSourceBase[] TileViewSources;
         public MonoBehaviourView[] MonoViewSources;
+        
         public DataConfig[] PropsConfigs;
         public MonoBehaviourView Billboard;
         private ViewId[] _tileViewIds, _propsViewIds;
@@ -44,6 +47,12 @@ namespace Project.Core.Features.SceneBuilder
                 {
                     _tileViewIds[i] = world.RegisterViewSource(MonoViewSources[i]);
                 }
+                
+                for (int i = 1; i < PropsConfigs.Length; i++)
+                {
+                    if (PropsConfigs[i] != null) 
+                        _propsViewIds[i] = world.RegisterViewSource(PropsConfigs[i].Read<TileAlternativeView>().Value);
+                }
             }
             else
             {
@@ -53,12 +62,12 @@ namespace Project.Core.Features.SceneBuilder
                 {
                     _tileViewIds[i] = world.RegisterViewSource(TileViewSources[i]);
                 }
-            }
-
-            for (int i = 1; i < PropsConfigs.Length; i++)
-            {
-                if (PropsConfigs[i] != null) 
-                    _propsViewIds[i] = world.RegisterViewSource(PropsConfigs[i].Read<TileView>().Value);
+                
+                for (int i = 1; i < PropsConfigs.Length; i++)
+                {
+                    if (PropsConfigs[i] != null) 
+                        _propsViewIds[i] = world.RegisterViewSource(PropsConfigs[i].Read<TileView>().Value);
+                }
             }
         }
         private void PrepareMaps()
@@ -118,7 +127,7 @@ namespace Project.Core.Features.SceneBuilder
                         entity = new Entity("Platform-Tile");
                         freeMap[i] = 0;
                         walkableMap[i] = 1;
-                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(0f,1f)});
+                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(1f,2f)});
                         break;
                     }
                     case 8:
@@ -127,7 +136,7 @@ namespace Project.Core.Features.SceneBuilder
                         entity.Set(new DispenserTag {TimerDefault = 8, Timer = 8});
                         freeMap[i] = 1;
                         walkableMap[i] = 1;
-                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(0f,1f)});
+                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(1f,2f)});
                         break;
                     }
                     case 9:
@@ -137,7 +146,7 @@ namespace Project.Core.Features.SceneBuilder
                         freeMap[i] = 1;
                         walkableMap[i] = 1;
                         portalMap.Add(i);
-                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(0f,1f)});
+                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(1f,2f)});
                         break;
                     }
                     case 10:
@@ -172,7 +181,7 @@ namespace Project.Core.Features.SceneBuilder
                         entity = new Entity("Platform-Tile");
                         freeMap[i] = 0;
                         walkableMap[i] = 1;
-                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(0f,1f)});
+                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(1f,2f)});
                         break;
                     }
                 }
@@ -225,6 +234,8 @@ namespace Project.Core.Features.SceneBuilder
                     entity.Get<PlayerHealth>().Value = 100;
                     entity.Set(new DestructibleTag());
                 }
+                
+                entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(0f,4f)});
 
                 world.GetSharedData<MapComponents>().BlueTeamSpawnPoints = bluePool.innerArray;
                 world.GetSharedData<MapComponents>().RedTeamSpawnPoints = redPool.innerArray;
