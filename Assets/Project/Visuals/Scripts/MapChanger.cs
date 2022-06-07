@@ -18,12 +18,12 @@ public class MapChanger : MonoBehaviour
 
     private void Awake()
     {
-        // Changer = this;
-        // if (NetworkData.Info != null)
-        //     ChangeMap((Maps)NetworkData.Info.map_id);
-        // else
-        //     ChangeMap(Maps.Colizei); // For Fake Connect
-        ChangeMap(Maps.Colizei);
+        Changer = this;
+        if (NetworkData.Info != null)
+            ChangeMap((Maps)NetworkData.Info.map_id);
+        else
+            ChangeMap(Maps.Colizei); // For Fake Connect
+        // ChangeMap(Maps.Colizei);
     }
 
     public void ChangeMap(Maps map)
