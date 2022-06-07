@@ -38,6 +38,7 @@ namespace Project.Core.Features.Events {
         public GlobalEvent TabulationOff;
         public GlobalEvent TabulationAddPlayer;
         public GlobalEvent TabulationScreenNumbersChanged;
+        public GlobalEvent TabulationScreenNewPlayerStats;
             
         protected override void OnConstruct() {}
         protected override void OnDeconstruct() {}
