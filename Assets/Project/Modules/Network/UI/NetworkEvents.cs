@@ -10,6 +10,6 @@ namespace Project.Modules.Network
         public static Action LoadGameScene;
         public static Action<TimeRemaining> SetTimer;
         public static Action<RoomInfo[]> GetRoomList;
-        public static Action DestroyWorld;
+        public static Action EndGame;
     }
 }
