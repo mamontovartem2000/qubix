@@ -60,18 +60,25 @@ namespace Project.Mechanics.Features.Avatar.Systems
                 }
             }
             
-
             health -= damage;
-
+            
             if (to.Read<PlayerHealth>().Value <= 0)
             {
+                damage += to.Read<PlayerHealth>().Value;
                 to.Get<PlayerHealth>().Value = 0;
             }
-            else if(to.Read<PlayerHealth>().Value > to.Read<PlayerHealthDefault>().Value)
+            else if(to.Read<PlayerHealth>().Value - damage > to.Read<PlayerHealthDefault>().Value)
             {
                 to.Get<PlayerHealth>().Value = to.Read<PlayerHealthDefault>().Value;
             }
 
+            if (damage > 0)
+            {
+                from.Get<PlayerScore>().DealtDamage += damage;
+                world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(from);
+                world.GetFeature<EventsFeature>().TabulationScreenNewPlayerStats.Execute(from);
+            }
+            
             world.GetFeature<EventsFeature>().HealthChanged.Execute(to.Read<Owner>().Value);
         }
     }
