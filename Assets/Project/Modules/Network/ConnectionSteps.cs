@@ -12,10 +12,10 @@ namespace Project.Modules.Network
 		{
 			ProcessJoinRequest(request);
 
-			NetworkData.Connect = new WebSocketConnect(NetworkData.Info.server_url);
+			NetworkData.Connect = new WebSocketConnect();
 			NetworkData.Connect.OnMessage += GetMessage;
 			NetworkData.Connect.ConnectSuccessful += SendJoinRequest;
-			NetworkData.Connect.ConnectError += ExitGame;
+			//NetworkData.Connect.ConnectError += ExitGame;
 		}
 
 		public static void ConnectWithoutCreateSocket(string request)
@@ -24,7 +24,7 @@ namespace Project.Modules.Network
 			SendJoinRequest();
 		}
 
-		public static void ProcessJoinRequest(string request)
+		private static void ProcessJoinRequest(string request)
 		{
 			string payloadBase64 = NetworkData.CreateFromJSON<JoinRequestData>(request).payload;
 			var payloadInBytes = Convert.FromBase64String(payloadBase64);
@@ -41,7 +41,7 @@ namespace Project.Modules.Network
 			NetworkData.Connect = new WebSocketConnect(url);
 			NetworkData.Connect.OnMessage += GetMessage;
 			NetworkData.Connect.ConnectSuccessful += () => Debug.Log("Socket Opened");
-			NetworkData.Connect.ConnectError += ExitGame;
+			//NetworkData.Connect.ConnectError += ExitGame;
 		}
 
 		private static void ExitGame(string obj)

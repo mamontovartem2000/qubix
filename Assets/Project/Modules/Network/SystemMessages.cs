@@ -3,12 +3,15 @@ using FlatMessages;
 using ME.ECS;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace Project.Modules.Network
 {
     public static class SystemMessages
     {
+        public static Action GetSystemMessage;
+
         public static byte[] SystemHashMessage(uint tick, int hash)
         {
             FlatBufferBuilder builder = new FlatBufferBuilder(1);
@@ -21,6 +24,7 @@ namespace Project.Modules.Network
 
         public static void ProcessSystemMessage(byte[] bytes)
         {
+            GetSystemMessage?.Invoke();           
             SystemMessage data = SystemMessage.GetRootAsSystemMessage(new ByteBuffer(bytes));
 
             switch (data.PayloadType)
@@ -41,7 +45,7 @@ namespace Project.Modules.Network
                     BrowserEvents.GameIsOver();
 #endif
                     }
-                    NetworkEvents.DestroyWorld?.Invoke();
+                    NetworkEvents.EndGame?.Invoke();
                     break;
                 default:
                     Debug.Log($"Unknown system message! Payload type: {data.PayloadType}");
