@@ -48,19 +48,19 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
             if (entity.Get<Owner>().Value.Has<DamagedBy>())
             {
-                ref var enemy = ref entity.Get<Owner>().Value.Get<DamagedBy>().Value;
+                ref var enemy = ref entity.Read<Owner>().Value.Get<DamagedBy>().Value;
                 enemy.Get<PlayerScore>().Kills += 1;
                 world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
+                world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(enemy);
+                world.GetFeature<EventsFeature>().TabulationScreenNewPlayerStats.Execute(enemy);
             }
             
             ref var player = ref entity.Get<Owner>().Value;
             player.Get<PlayerScore>().Deaths += 1;
             
-            foreach (var owner in _ownerFilter)
-            {
-                world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(owner);
-            }
+            world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(entity.Read<Owner>().Value);
             
+
             world.GetFeature<EventsFeature>().PlayerDeath.Execute(player);      
 
             SceneUtils.ModifyWalkable(entity.Read<PlayerMoveTarget>().Value, true);

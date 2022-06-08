@@ -163,20 +163,17 @@ namespace Project.Core.Features.Player.Systems
         {
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
             // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
-            if (player.Read<PlayerAvatar>().Value == Entity.Empty) return;
-
-            ref var entity = ref player.Get<PlayerAvatar>().Value;
 
             switch (tm.State)
             {
                 case InputState.Pressed:
                 {
-                    world.GetFeature<EventsFeature>().TabulationOn.Execute(entity.Get<Owner>().Value);
+                    world.GetFeature<EventsFeature>().TabulationOn.Execute(player);
                     break;
                 }
                 case InputState.Released:
                 {
-                    world.GetFeature<EventsFeature>().TabulationOff.Execute(entity.Get<Owner>().Value);
+                    world.GetFeature<EventsFeature>().TabulationOff.Execute(player);
                     break;
                 }
             }
