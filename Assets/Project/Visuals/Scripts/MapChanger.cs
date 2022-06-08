@@ -33,7 +33,7 @@ public class MapChanger : MonoBehaviour
             case Maps.Colizei:
                 _emissionIntensity = 3;
                 ChangeColor(20, 15, 0);
-                ChangeEmissionColor(4, 4, 4);
+                ChangeEmissionColor(4, 5, 4);
                 ExtraChangeColors(19, 19, 30, 4, 5);
                 ExtraChangeEmissionColors(4, 6, 5, 4, 4);
                 ChangeBridge(0, 7);
