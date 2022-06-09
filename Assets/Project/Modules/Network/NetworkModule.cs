@@ -32,7 +32,7 @@ namespace Project.Modules.Network
 
         protected override ME.ECS.Network.NetworkType GetNetworkType()
         {
-            if (NetworkData.Connected)
+            if (NetworkData.Connect == null)
             {
                 return ME.ECS.Network.NetworkType.RunLocal;
             }
@@ -42,7 +42,7 @@ namespace Project.Modules.Network
 
         protected override void OnInitialize()
         {
-            if (NetworkData.Connected)
+            if (NetworkData.Connect != null)
             {
                 var instance = (ME.ECS.Network.INetworkModuleBase)this;
                 instance.SetTransporter(new NetTransporter());
@@ -69,7 +69,7 @@ namespace Project.Modules.Network
 
         public NetTransporter()
         {
-            if (NetworkData.Connected)
+            if (NetworkData.Connect != null)
                 NetworkData.Connect.OnMessage += GetMessage;
             else
                 Debug.Log("Error. NetworkData.Connect is null");
@@ -127,7 +127,7 @@ namespace Project.Modules.Network
             }
         }     
 
-        public bool IsConnected() { return NetworkData.Connected; }
+        public bool IsConnected() { return NetworkData.Connect != null; }
 
         public int GetEventsBytesReceivedCount() { return this.receivedBytesCount; }
 

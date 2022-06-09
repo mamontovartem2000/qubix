@@ -38,7 +38,7 @@ namespace Project.Core.Features.Player
 				.Push(ref _playerFilter);
 
 			var net = world.GetModule<NetworkModule>();
-			net.RegisterObject(this, 1000);
+			net.RegisterObject(this);
 
 			_onPlayerConnected = net.RegisterRPC(new System.Action<NetworkSetActivePlayer>(PlayerConnected_RPC).Method);
 			_onPlayerDisconnected = net.RegisterRPC(new System.Action<int>(PlayerDisconnected_RPC).Method);
@@ -101,7 +101,6 @@ namespace Project.Core.Features.Player
 			avtr.Destroy();
 		}
 
-
 		public Entity GetPlayerByID(int id)
 		{
 			foreach (var player in _playerFilter)
@@ -115,6 +114,6 @@ namespace Project.Core.Features.Player
 			return Entity.Empty;
 		}
 
-		protected override void OnDeconstruct() { }
+		protected override void OnDeconstruct() {}
 	}
 }
