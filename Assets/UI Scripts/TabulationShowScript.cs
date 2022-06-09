@@ -1,3 +1,4 @@
+using DG.Tweening;
 using ME.ECS;
 using Project.Common.Components;
 using Project.Core.Features.Events;
@@ -28,7 +29,7 @@ public class TabulationShowScript : MonoBehaviour
     {
         PlayerInTab[entity.Read<PlayerTag>().PlayerLocalID].death.text = entity.Read<PlayerScore>().Deaths.ToString();
         PlayerInTab[entity.Read<PlayerTag>().PlayerLocalID].kill.text = entity.Read<PlayerScore>().Kills.ToString();
-        
+        PlayerInTab[entity.Read<PlayerTag>().PlayerLocalID].dealtDamage.text = (Mathf.Round(entity.Read<PlayerScore>().DealtDamage)).ToString();
     }
     
     private void TabulationScreenAddPlayer(in Entity entity)
@@ -36,6 +37,7 @@ public class TabulationShowScript : MonoBehaviour
         var player = PlayerInTab[entity.Read<PlayerTag>().PlayerLocalID];
         player.kill.text = "0";
         player.death.text = "0";
+        player.dealtDamage.text = "0";
         player.idInTab = entity.Read<PlayerTag>().PlayerLocalID;
         player.nickname.text = entity.Read<PlayerTag>().Nickname;
     }
@@ -57,11 +59,12 @@ public class TabulationShowScript : MonoBehaviour
     [System.Serializable]
     public struct PlayerTab
     {
+        public Transform playerBlock;
         public TextMeshProUGUI nickname;
         public TextMeshProUGUI kill;
         public TextMeshProUGUI death;
+        public TextMeshProUGUI dealtDamage;
         public int idInTab;
-        public Transform playerBlock;
     }
     
     public int GetEntityIdInTab(Entity entity)
@@ -91,15 +94,25 @@ public class TabulationShowScript : MonoBehaviour
             ref var player = ref PlayerInTab[entity.Read<PlayerTag>().PlayerLocalID];
             ref var upperPlayer = ref PlayerInTab[GetPlayerById(PlayerInTab[entity.Read<PlayerTag>().PlayerLocalID].idInTab - 1)];
 
-            if (int.Parse(player.kill.text) < int.Parse(upperPlayer.kill.text))  break;
+            if (int.Parse(player.kill.text) > int.Parse(upperPlayer.kill.text))
+            {
+                (player.playerBlock.position, upperPlayer.playerBlock.position) = 
+                    (upperPlayer.playerBlock.position, player.playerBlock.position);
+                (player.idInTab, upperPlayer.idInTab) = (upperPlayer.idInTab, player.idInTab);
+            }
+            else if (int.Parse(player.dealtDamage.text) > int.Parse(upperPlayer.dealtDamage.text) && 
+                     int.Parse(player.kill.text) == int.Parse(upperPlayer.kill.text))
+            {
+                (player.playerBlock.position, upperPlayer.playerBlock.position) = 
+                    (upperPlayer.playerBlock.position, player.playerBlock.position);
+                (player.idInTab, upperPlayer.idInTab) = (upperPlayer.idInTab, player.idInTab);
+            }
+            else break;
 
-            (player.playerBlock.position, upperPlayer.playerBlock.position) = 
-                (upperPlayer.playerBlock.position, player.playerBlock.position);
-            (player.idInTab, upperPlayer.idInTab) = (upperPlayer.idInTab, player.idInTab);
             Debug.Log("swapped");
         }
     }
-    
+
     private void OnDestroy() 
     {
         _tabulationScreenOnEvent.Unsubscribe(TabulationScreenON);
@@ -107,6 +120,5 @@ public class TabulationShowScript : MonoBehaviour
         _tabulationScreenAddPlayerEvent.Unsubscribe(TabulationScreenAddPlayer);
         _tabulationScreenNumbersChangedEvent.Unsubscribe(TabulationScreenNumbersChanged);
         _tabulationScreenNewPlayerStats.Unsubscribe(ChangeTabPosition);
-
     }
 }

@@ -27,6 +27,7 @@ namespace Project.Common.Components
     {
         public int Kills;
         public int Deaths;
+        public float DealtDamage;
     }
     public struct PlayerConfig : IComponent 
     {

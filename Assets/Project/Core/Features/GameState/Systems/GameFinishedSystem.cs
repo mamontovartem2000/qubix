@@ -95,15 +95,15 @@ namespace Project.Core.Features.GameState.Systems
                 return mostKillsPlayers[0];
             }
 
-            var fewestDeathsPlayers = GetPlayersWithFewestDeaths(mostKillsPlayers);
+            var mostDamagePlayer = GetPlayersWithMostDamage(mostKillsPlayers);
 
-            if (fewestDeathsPlayers.Count == 1)
+            if (mostDamagePlayer.Count == 1)
             {
-                Debug.Log("Fewest Deaths");
-                return fewestDeathsPlayers[0];
+                Debug.Log("Most damage");
+                return mostDamagePlayer[0];
             }
 
-            var mostHealthPlayers = GetPlayersWithMostHealth(fewestDeathsPlayers);
+            var mostHealthPlayers = GetPlayersWithMostHealth(mostDamagePlayer);
 
             if (mostHealthPlayers.Count == 1)
             {
@@ -127,15 +127,15 @@ namespace Project.Core.Features.GameState.Systems
                 return TeamTypes.blue;
             else if (team1.Kills < team2.Kills)
                 return TeamTypes.red;
+            
+            if (team1.Damage > team2.Damage)
+                return TeamTypes.blue;
+            else if (team1.Damage < team2.Damage)
+                return TeamTypes.red;
 
             if (team1.Deaths < team2.Deaths)
                 return TeamTypes.blue;
             else if (team1.Deaths > team2.Deaths)
-                return TeamTypes.red;
-
-            if (team1.Health > team2.Health)
-                return TeamTypes.blue;
-            else if (team1.Health < team2.Health)
                 return TeamTypes.red;
 
             //TODO: Add random
@@ -150,7 +150,8 @@ namespace Project.Core.Features.GameState.Systems
 
                 team.Kills += player.Read<PlayerScore>().Kills;
                 team.Deaths += player.Read<PlayerScore>().Deaths;
-
+                team.Damage += player.Read<PlayerScore>().DealtDamage;
+                
                 if (player.Read<PlayerAvatar>().Value.IsAlive())
                     team.Health += player.Read<PlayerAvatar>().Value.Read<PlayerHealth>().Value;
             }
@@ -216,22 +217,22 @@ namespace Project.Core.Features.GameState.Systems
             return winners;
         }
 
-        private List<Entity> GetPlayersWithFewestDeaths(List<Entity> playersList)
+        private List<Entity> GetPlayersWithMostDamage(List<Entity> playersList)
         {
-            var minDeaths = int.MaxValue;
+            var maxDamage = int.MinValue;
             List<Entity> winners = new List<Entity>();
 
             foreach (var player in playersList)
             {
-                var deaths = player.Read<PlayerScore>().Deaths;
+                var dealtDamage = player.Read<PlayerScore>().DealtDamage;
 
-                if (deaths < minDeaths)
+                if (dealtDamage > maxDamage)
                 {
                     winners.Clear();
                     winners.Add(player);
-                    minDeaths = deaths;
+                    maxDamage = (int)dealtDamage;
                 }
-                else if (deaths == minDeaths)
+                else if (dealtDamage == maxDamage)
                 {
                     winners.Add(player);
                 }
@@ -248,7 +249,7 @@ namespace Project.Core.Features.GameState.Systems
             foreach (var player in playersList)
             {
                 if (!player.Read<PlayerAvatar>().Value.IsAlive()) continue;
-                var health = player.Read<PlayerAvatar>().Value.Read<PlayerHealth>().Value;
+                var health = player.Read<PlayerAvatar>().Value.Read<PlayerHealth>().Value / player.Read<PlayerAvatar>().Value.Read<PlayerHealthDefault>().Value;
 
                 if (health > maxHealth)
                 {
@@ -278,6 +279,7 @@ namespace Project.Core.Features.GameState.Systems
     {
         public int Kills = 0;
         public int Deaths = 0;
+        public float Damage = 0;
         public float Health = 0;
     }
 }
