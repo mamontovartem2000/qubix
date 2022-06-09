@@ -10,7 +10,6 @@ namespace Project.Common.Views.Monos
 	{
 		public override bool applyStateJob => true;
 		[SerializeField] private Animator _anim;
-		private bool _isAttacking;
 
 		public override void OnInitialize() {}
 		public override void OnDeInitialize() {}
@@ -22,6 +21,9 @@ namespace Project.Common.Views.Monos
 			
 			if(!entity.Has<MeleeWeapon>()) return;
 			
+			if(!GetComponentInChildren<ParticleSystem>().isPlaying)
+				GetComponentInChildren<ParticleSystem>().Play();
+
 			_anim.SetBool("Attack", entity.Has<LeftWeaponShot>());
 		}
 	}

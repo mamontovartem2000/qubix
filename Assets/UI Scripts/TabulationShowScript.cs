@@ -38,6 +38,15 @@ public class TabulationShowScript : MonoBehaviour
         player.death.text = "0";
         player.idInTab = entity.Read<PlayerTag>().PlayerLocalID;
         player.nickname.text = entity.Read<PlayerTag>().Nickname;
+        
+        if (entity.Read<PlayerTag>().Team == TeamTypes.blue)
+        {
+            player.nickname.color = Color.blue;
+        }
+        else if (entity.Read<PlayerTag>().Team == TeamTypes.red)
+        {
+            player.nickname.color = Color.red;
+        }
     }
     
     private void TabulationScreenON(in Entity entity)

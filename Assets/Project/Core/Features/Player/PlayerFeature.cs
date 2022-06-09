@@ -71,11 +71,13 @@ namespace Project.Core.Features.Player
 						BullerConfig.Apply(player);
 						break;
 					}
+				
 				case "GoldHunter":
 					{
 						GoldHunterConfig.Apply(player);
 						break;
 					}
+				
 				case "Powerf":
 					{
 						PowerfConfig.Apply(player);
