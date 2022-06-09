@@ -51,11 +51,8 @@ namespace Project.Mechanics.Features.Weapon.Systems
 
 			if (delay <= 0)
 			{
-				if (!entity.Has<LeftWeaponShot>())
-				{
+				if(!entity.Has<LeftWeaponShot>())
 					entity.Remove<MeleeActive>();
-					return;
-				}
 				
 				entity.Get<MeleeDelay>().Value = entity.Read<MeleeDelayDefault>().Value;
 				entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;

@@ -10,7 +10,7 @@ namespace Project.Modules.Network
         public static IEnumerator CreateRoom(int playerNumber, Action<string> callback)
         {
             string url = "https://game.qubixinfinity.io/match/create_room";
-            // Reqqq req = new Reqqq() { map_id = 2, player_scheme = new int[] { playerNumber, playerNumber }, lifetime = 60 * 5, game_mode = GameModes.teambattle.ToString() }; // teambattle
+            //Reqqq req = new Reqqq() { map_id = 2, player_scheme = new int[] { playerNumber, playerNumber }, lifetime = 60 * 5, game_mode = GameModes.teambattle.ToString() }; // teambattle
             Reqqq req = new Reqqq() { map_id = 1, player_scheme = new int[] { playerNumber }, lifetime = 60 * 5, game_mode = GameModes.deathmatch.ToString() }; // deathmatch
 
             string json = JsonUtility.ToJson(req);
