@@ -109,6 +109,7 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Impact: 0
+    - _ImpactFactor: 1
     - _ImpactSize: 0.5
     - _InvFade: 1
     - _Lighting: 0
@@ -118,6 +119,7 @@ Material:
     - _MaskCutOut: 1
     - _MaskFade: 1
     - _MaskOffsetFactor: 0.4
+    - _MaxIndex: 2
     - _Metallic: 0
     - _MixedMove: 0
     - _Mode: 3
@@ -146,9 +148,11 @@ Material:
     - _TexPosMove: 0.39
     - _TexcoordMove: 1
     - _TexcoordMoveStrength: 1
+    - _TexcoordMoveUsingCustom: 0
     - _TextureAnimate: 1
+    - _TextureAnimateAdvanced: 0
     - _TextureAnimateSpeed: 1
-    - _TextureAnimateStyle: 2
+    - _TextureAnimateStyle: 0
     - _TextureBlend: 0
     - _TextureNoise: 0
     - _UVSec: 0
@@ -167,5 +171,6 @@ Material:
     - _NoiseValue: {r: 0.1, g: 1, b: 5, a: 1}
     - _RimColor: {r: 0.9716981, g: 0, b: 0.009329386, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
-    - _TintColor: {r: 0.32941177, g: 1.2235295, b: 2.9960785, a: 1}
-    - _TintColor2: {r: 1, g: 1, b: 1, a: 1}
+    - _TintColor: {r: 0.019607848, g: 0.1882353, b: 0.11730984, a: 1}
+    - _TintColor2: {r: 0.2871746, g: 0.0315329, b: 0.0315329, a: 1}
+  m_BuildTextureStacks: []

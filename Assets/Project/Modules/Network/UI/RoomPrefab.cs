@@ -12,8 +12,10 @@ namespace Project.Modules.Network
         [SerializeField] private TMP_Text _playersCount;
         [SerializeField] private TMP_Text _roomId;
         [SerializeField] private TMP_Text _buttonText;
+        [SerializeField] private TMP_Text _ownerNameText;
         [SerializeField] private Button _joinButton;
         [SerializeField] private Image _image;
+        [SerializeField] private Image[] _ownerImage;
 
         [Header("Hover Sprites")]
         [SerializeField] private Sprite _hoverUp;
@@ -78,6 +80,11 @@ namespace Project.Modules.Network
                 _image.enabled = true;
                 _buttonImage.sprite = _selectedButton;
                 _playersCount.color = _selectedText;
+                _ownerImage[0].enabled = false;
+                _ownerImage[1].enabled = true;
+                _ownerNameText.color = Color.white;
+
+
             }
         }
 
@@ -88,6 +95,9 @@ namespace Project.Modules.Network
                 _image.enabled = false;
                 _buttonImage.sprite = _unselectedButton;
                 _playersCount.color = _unselectedText;
+                _ownerImage[0].enabled = true;
+                _ownerImage[1].enabled = false;
+                _ownerNameText.color = Color.black;
             }
         }
 
@@ -102,14 +112,14 @@ namespace Project.Modules.Network
             EnterHover();
             _selected = true;
             _joinButton.interactable = false;
-            _buttonText.text = "Joined";
+            // _buttonText.text = "Joined"; Ne vlezaet
         }
 
         private void UnselectRoom(string id)
         {
             _selected = false;
             _joinButton.interactable = true;
-            _buttonText.text = "Join";
+            // _buttonText.text = "Join";
             ExitHover();
         }
 
