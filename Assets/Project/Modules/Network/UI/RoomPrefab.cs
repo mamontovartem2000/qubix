@@ -12,7 +12,6 @@ namespace Project.Modules.Network
         [SerializeField] private TMP_Text _playersCount;
         [SerializeField] private TMP_Text _roomId;
         [SerializeField] private TMP_Text _buttonText;
-        [SerializeField] private TMP_Text _ownerNameText;
         [SerializeField] private Button _joinButton;
         [SerializeField] private Image _image;
         [SerializeField] private Image[] _ownerImage;
@@ -22,6 +21,7 @@ namespace Project.Modules.Network
         [SerializeField] private Sprite _hoverCenter;
         [SerializeField] private Sprite _hoverDown;
         [SerializeField] private Sprite _unselectedButton;
+        [SerializeField] private Sprite _hoverButton;
         [SerializeField] private Sprite _selectedButton;
         [SerializeField] private Color _unselectedText;
         [SerializeField] private Color _selectedText;
@@ -37,6 +37,7 @@ namespace Project.Modules.Network
             _buttonImage = _joinButton.gameObject.GetComponent<Image>();
             _joinButton.onClick.AddListener(JoinTheRoom);
             JoinRoom += UnselectRoom;
+            InitHoverImage();
         }
 
         public void UpdateRoomInfo(RoomInfo info, int roomNumber, int roomCount)
@@ -44,7 +45,6 @@ namespace Project.Modules.Network
             _roomInfo = info;
             _roomNumber = roomNumber;
             _roomCount = roomCount;
-            InitHoverImage();
             UpdateRoomDisplay();
         }
 
@@ -77,14 +77,7 @@ namespace Project.Modules.Network
         {
             if (_selected == false)
             {
-                _image.enabled = true;
-                _buttonImage.sprite = _selectedButton;
-                _playersCount.color = _selectedText;
-                _ownerImage[0].enabled = false;
-                _ownerImage[1].enabled = true;
-                _ownerNameText.color = Color.white;
-
-
+                _buttonImage.sprite = _hoverButton;
             }
         }
 
@@ -92,12 +85,7 @@ namespace Project.Modules.Network
         {
             if (_selected == false)
             {
-                _image.enabled = false;
                 _buttonImage.sprite = _unselectedButton;
-                _playersCount.color = _unselectedText;
-                _ownerImage[0].enabled = true;
-                _ownerImage[1].enabled = false;
-                _ownerNameText.color = Color.black;
             }
         }
 
@@ -110,16 +98,25 @@ namespace Project.Modules.Network
         private void SelectRoom()
         {
             EnterHover();
+            _buttonImage.sprite = _selectedButton;
+            _playersCount.color = _selectedText;
+            _ownerImage[0].enabled = false;
+            _ownerImage[1].enabled = true;
+            _image.enabled = true;
             _selected = true;
             _joinButton.interactable = false;
-            // _buttonText.text = "Joined"; Ne vlezaet
+            _buttonText.text = "Joined";
         }
 
         private void UnselectRoom(string id)
         {
+            _image.enabled = false;
             _selected = false;
             _joinButton.interactable = true;
-            // _buttonText.text = "Join";
+            _playersCount.color = _unselectedText;
+            _ownerImage[0].enabled = true;
+            _ownerImage[1].enabled = false;
+            _buttonText.text = "Join";
             ExitHover();
         }
 

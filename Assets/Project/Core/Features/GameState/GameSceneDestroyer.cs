@@ -50,7 +50,7 @@ public class GameSceneDestroyer : MonoBehaviour
     {
         var buildType = NetworkData.BuildType;
         DOTween.KillAll();
-        Worlds.currentWorld.AddMarker(new NetworkPlayerDisconnected { ActorID = NetworkData.SlotInRoom });
+        //Worlds.currentWorld.AddMarker(new NetworkPlayerDisconnected { ActorID = NetworkData.SlotInRoom });
 
         DestroyWorld();
         NetworkData.CloseNetwork();
