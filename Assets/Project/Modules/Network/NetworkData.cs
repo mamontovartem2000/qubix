@@ -18,8 +18,11 @@ namespace Project.Modules.Network
 
         public static void CloseNetwork()
         {
-            Connect.CloseClient();
-            Connect = null;
+            if (Connect != null)
+            {
+                Connect.CloseClient();
+                Connect = null;
+            }
         }
 
         public static void SetFakeSettings()

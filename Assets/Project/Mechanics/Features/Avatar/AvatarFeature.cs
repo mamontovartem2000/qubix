@@ -82,7 +82,9 @@ namespace Project.Mechanics.Features.Avatar
 
             world.GetFeature<EventsFeature>().SkillImageChange.Execute(owner);
             world.GetFeature<EventsFeature>().PassLocalPlayer.Execute(owner);
-            SystemMessages.PlayerJoinedWorld();
+
+            if (NetworkData.Connect != null)
+                SystemMessages.PlayerJoinedWorld();
             return entity;
         }
 
