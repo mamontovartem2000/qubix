@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SlowWall
+  m_Name: MonkeyBillboardFront
   m_Shader: {fileID: -6465566751694194690, guid: e3d48003dea4dae44829de9ecf283d07, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_48c434fec6344f7085cefc2b2bb6f21b:
-        m_Texture: {fileID: 2800000, guid: b3c7bca167690ea42a27694b6ab21da8, type: 3}
+        m_Texture: {fileID: 2800000, guid: b85eda49dad11994d959e655c7ebea5d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_66cced29ff774aedb4f1ce125fb3185e:
@@ -42,10 +42,10 @@ Material:
     m_Floats:
     - Vector1_40a794f260aa439e892d388252421ec0: 38.79
     - Vector1_73983faff07f4b0a93e784c31a65ab61: 5.5
-    - Vector1_9020afc2f3dc4162af69cb47100943ba: 0
-    - Vector1_e250bd331f9d4273ba70aa52a14b5ede: 0.324
+    - Vector1_9020afc2f3dc4162af69cb47100943ba: 1
+    - Vector1_e250bd331f9d4273ba70aa52a14b5ede: 0.904
     m_Colors:
     - Color_d9160b7f20e64be1863ed180daadbaa2: {r: 0, g: 711.4357, b: 1367.1202, a: 1}
-    - Vector2_055b0809d85f46f29dc39e86174d9829: {r: 0.13, g: 0.25, b: 0, a: 0}
-    - Vector2_444e982283e64159a4f4346944d00972: {r: 0.5, g: 0.4, b: 0, a: 0}
+    - Vector2_055b0809d85f46f29dc39e86174d9829: {r: -0.02, g: 0.25, b: 0, a: 0}
+    - Vector2_444e982283e64159a4f4346944d00972: {r: 0.42, g: 0.4, b: 0, a: 0}
   m_BuildTextureStacks: []
