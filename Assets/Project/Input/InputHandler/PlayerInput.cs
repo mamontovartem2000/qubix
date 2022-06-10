@@ -162,7 +162,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e98687d4-8194-4a6f-9da6-68c1ad8f1f0f"",
-                    ""path"": ""<Keyboard>/comma"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -371,7 +371,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ac2a40e1-6227-44cc-8925-94df221048d1"",
-                    ""path"": ""<Keyboard>/period"",
+                    ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

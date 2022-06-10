@@ -74,6 +74,17 @@ namespace Project.Modules.Network
             NetworkData.Connect.SendSystemMessage(ms);
         }
 
+        public static void PlayerJoinedWorld()
+        {
+            FlatBufferBuilder builder = new FlatBufferBuilder(1);
+            var join = JoinedTheGame.CreateJoinedTheGame(builder, true);
+            var offset = SystemMessage.CreateSystemMessage(builder, GetTime(), Payload.JoinedTheGame, join.Value);
+            builder.Finish(offset.Value);
+
+            var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
+            NetworkData.Connect.SendSystemMessage(ms);
+        }
+
         public static void SendTeamGameStats(List<PlayerStats> stats, string winnerTeam)
         {
             FlatBufferBuilder builder = new FlatBufferBuilder(1);
