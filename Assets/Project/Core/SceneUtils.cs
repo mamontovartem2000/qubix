@@ -1,6 +1,7 @@
 using ME.ECS;
 using ME.ECS.Collections;
 using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Core
 {
@@ -61,19 +62,21 @@ namespace Project.Core
 
         public static fp3 GetRandomPosition()
         {
-            var pos = fp3.zero;
-
-            while (!IsWalkable(pos))
+            while (true)
             {
                 var rnd = Worlds.current.GetRandomRange(0, _width * _height);
-                pos = IndexToPosition(rnd);
-                
-                if (!IsFree(pos)) pos = fp3.zero;
+                var pos = IndexToPosition(rnd);
+
+                if (pos == fp3.zero) //TODO: Can delete
+                    continue;
+
+                if (IsWalkable(pos) && IsFree(pos))
+                    return pos;
+
+                //TODO: А если вообще нет свободных точек?
             }
-            
-            return pos;
         }
-        
+
         public static fp3 GetRandomPortal(fp3 vec)
         {
             var pos = vec;
@@ -95,6 +98,7 @@ namespace Project.Core
 
         public static fp3 GetTeamSpawnPosition(BufferArray<int> spawnPoints)
         {
+            //TODO: NEVER EQUAL LENGHT 0
             if (spawnPoints.Length == 0)
                 return GetRandomPosition();
 
@@ -113,7 +117,6 @@ namespace Project.Core
                     pool.RemoveAt(rnd);
             }
 
-            GetRandomPosition();
             return pos;
         }
 

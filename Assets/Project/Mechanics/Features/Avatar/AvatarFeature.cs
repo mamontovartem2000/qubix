@@ -137,11 +137,7 @@ namespace Project.Mechanics.Features.Avatar
             var blueSpawnPoints = world.ReadSharedData<MapComponents>().BlueTeamSpawnPoints;
             var pos = fp3.zero;
 
-            if (NetworkData.GameMode == GameModes.deathmatch)
-            {
-                pos = SceneUtils.GetRandomPosition();
-            }
-            else
+            if (NetworkData.GameMode == GameModes.teambattle)
             {
                 if (owner.Read<PlayerTag>().Team == TeamTypes.red)
                 {
@@ -152,6 +148,9 @@ namespace Project.Mechanics.Features.Avatar
                     pos = SceneUtils.GetTeamSpawnPosition(blueSpawnPoints);
                 }
             }
+
+            if (pos == fp3.zero)
+                pos = SceneUtils.GetRandomPosition();
 
             entity.SetPosition(pos);
             SceneUtils.ModifyWalkable(entity.GetPosition(), false);
