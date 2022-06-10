@@ -27,6 +27,7 @@ namespace Project.Core
         
         public static bool IsWalkable(fp3 pos)
         {
+            if (PositionToIndex(pos) > _width * _height) return false;
             return Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(pos)] == 1;
         }
 
