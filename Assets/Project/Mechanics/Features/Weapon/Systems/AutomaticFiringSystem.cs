@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core;
 using Project.Core.Features.Events;
 using Project.Mechanics.Features.Projectile;
 using Project.Mechanics.Features.VFX;
@@ -86,6 +87,9 @@ namespace Project.Mechanics.Features.Weapon.Systems
             }
             
             ammo -= 1;
+            
+            SoundUtils.PlaySound(entity);
+            
             _projectile.SpawnProjectile(entity, dir);
             // _vfx.SpawnVFX(VFXFeature.VFXType.MinigunMuzzle, entity.Read<WeaponAim>().Value.GetPosition(), entity);
             

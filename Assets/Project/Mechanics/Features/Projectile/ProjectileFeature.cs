@@ -51,17 +51,13 @@ namespace Project.Mechanics.Features.Projectile
 
             var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
             entity.InstantiateView(view);
-            
-            var sound = new Entity("sound");
-            sound.SetPosition(gun.GetPosition());
-			// sound.Get<SoundEffect>() = gun.Get<SoundEffect>();
-			// sound.Set(new SoundPlay());
 
             entity.Set(new ProjectileActive());
 
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(gun.Get<Owner>().Value);
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         public void  SpawnLinear(Entity gun, int length, float delay)
         {
             for (int i = 1; i < length; i++)
@@ -73,7 +69,6 @@ namespace Project.Mechanics.Features.Projectile
                 
                 entity.Get<Linear>().StartDelay = delay * i;
                 entity.Get<Linear>().EndDelay = delay * (length - i);
-                // entity.SetParent(gun);
                 var damageBase = entity.Read<ProjectileDamage>().Value;
                 var damageMod = damageBase * owner.Read<PlayerAvatar>().Value.Read<LinearPowerModifier>().Damage;
                 var currentDamage = damageMod + damageBase;
@@ -90,14 +85,9 @@ namespace Project.Mechanics.Features.Projectile
             visual.SetLocalPosition(new Vector3(-0.15f,0f, 0.5f));
             visual.SetLocalRotation(gun.GetLocalRotation());
 
-            if (gun.Read<Owner>().Value.Read<PlayerAvatar>().Value.Has<LinearPowerModifier>())
-            {
-                visual.InstantiateView(world.RegisterViewSource(gun.Read<ProjectileAlternativeView>().Value));
-            }
-            else
-            {
-                visual.InstantiateView(world.RegisterViewSource(gun.Read<ProjectileView>().Value));
-            }
+            visual.InstantiateView(gun.Read<Owner>().Value.Read<PlayerAvatar>().Value.Has<LinearPowerModifier>()
+                ? world.RegisterViewSource(gun.Read<ProjectileAlternativeView>().Value)
+                : world.RegisterViewSource(gun.Read<ProjectileView>().Value));
         }
 
         public void SpawnMelee(in Entity entity, Entity gun)

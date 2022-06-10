@@ -46,13 +46,18 @@ namespace Project.Mechanics.Features.Weapon.Systems
 
 			ref var delay = ref entity.Get<MeleeDelay>().Value;
 			ref var aim = ref entity.Get<MeleeDamageSpot>().Value;
-
+			
 			delay -= deltaTime;
 
 			if (delay <= 0)
 			{
-				if(!entity.Has<LeftWeaponShot>())
+				if (!entity.Has<LeftWeaponShot>())
+				{
 					entity.Remove<MeleeActive>();
+					return;
+				}
+				
+				SoundUtils.PlaySound(entity);
 				
 				entity.Get<MeleeDelay>().Value = entity.Read<MeleeDelayDefault>().Value;
 				entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;

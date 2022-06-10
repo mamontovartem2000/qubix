@@ -20,6 +20,7 @@ MonoBehaviour:
   - id: 3
   - id: 4
   - id: 5
+  - id: 6
   removeStructComponents: []
   templates: []
   references:
@@ -54,3 +55,7 @@ MonoBehaviour:
       type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 8582505695685579999, guid: d0e9a654ac26877458939b0dca072006, type: 3}
+    00000006:
+      type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: event:/Weapon/LaserSwordActivate

@@ -147,6 +147,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Slowness>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundEffect>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPath>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPlay>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnedPortal>(false, true, false, false, false, false, false, false);
@@ -319,6 +320,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Slowness>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundEffect>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPath>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPlay>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnedPortal>(false, true, false, false, false, false, false, false);
@@ -486,6 +488,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SkillVFX>(false);
             structComponentsContainer.Validate<Project.Common.Components.Slowness>(false);
             structComponentsContainer.Validate<Project.Common.Components.SoundEffect>(false);
+            structComponentsContainer.Validate<Project.Common.Components.SoundPath>(false);
             structComponentsContainer.Validate<Project.Common.Components.SoundPlay>(true);
             structComponentsContainer.Validate<Project.Common.Components.Spawned>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpawnedPortal>(false);
@@ -658,6 +661,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SkillVFX>(false);
             entity.ValidateData<Project.Common.Components.Slowness>(false);
             entity.ValidateData<Project.Common.Components.SoundEffect>(false);
+            entity.ValidateData<Project.Common.Components.SoundPath>(false);
             entity.ValidateData<Project.Common.Components.SoundPlay>(true);
             entity.ValidateData<Project.Common.Components.Spawned>(true);
             entity.ValidateData<Project.Common.Components.SpawnedPortal>(false);

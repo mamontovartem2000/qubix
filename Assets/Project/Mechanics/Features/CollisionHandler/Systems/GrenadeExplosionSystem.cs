@@ -55,14 +55,12 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
         {
             if (entity.GetPosition().y < 0f)
             {
-                var explosionSound = new Entity("explosionSound");
-                // entity.Read<ExplosionSound>().Value.Apply(explosionSound);
-                // explosionSound.Set(new SoundPlay());
-                // explosionSound.SetPosition(entity.GetPosition());
-                
+                SoundUtils.PlaySound(entity);
+
                 foreach (Entity player in _playerFilter)
                 {
                     if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > (fp)10) continue;
+                    
                     var debuff = new Entity("debuff");
                     debuff.Get<Owner>().Value = entity.Read<Owner>().Value;
                     entity.Read<SecondaryDamage>().Value.Apply(debuff);

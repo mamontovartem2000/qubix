@@ -20,6 +20,7 @@ MonoBehaviour:
   - id: 3
   - id: 4
   - id: 5
+  - id: 6
   removeStructComponents: []
   templates: []
   references:
@@ -45,10 +46,14 @@ MonoBehaviour:
     00000003:
       type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0.9
+        Value: 1.1
     00000004:
       type: {class: MeleeDelayDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0.1
+        Value: 0.05
     00000005:
       type: {class: MeleeWeapon, ns: Project.Common.Components, asm: Project.Common}
+    00000006:
+      type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: event:/Weapon/Axe

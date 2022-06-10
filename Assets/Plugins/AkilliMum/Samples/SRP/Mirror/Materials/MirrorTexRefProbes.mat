@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: MirrorTexRefProbes
   m_Shader: {fileID: 4800000, guid: cc89c8f4b9362495c98b07fbaf9b14ff, type: 3}
-  m_ShaderKeywords: _FULLMIRROR
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -164,7 +164,7 @@ Material:
     - _ReflDistort: 0
     - _Reflection: 0.5
     - _ReflectionContribution: 0.5
-    - _ReflectionIntensity: 0.076
+    - _ReflectionIntensity: 1
     - _ReflectionRefraction: 0
     - _RippleDensity: 3
     - _RippleIntensity: 0.11

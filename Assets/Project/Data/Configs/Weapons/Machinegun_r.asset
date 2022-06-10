@@ -59,9 +59,6 @@ MonoBehaviour:
     00000006:
       type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}
     00000007:
-      type: {class: SoundEffect, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Sound0: {fileID: 4809769231608730239, guid: 14c9578645ccb3646881d897b35b79a3, type: 3}
-        Sound1: {fileID: 1333955502097504773, guid: 70adaaaab25cdb144942b2bc1dac7890, type: 3}
-        Sound2: {fileID: 6015634873907711886, guid: 6b2ec1b4ec3381c4bbfcaf3f6833a184, type: 3}
-        Sound3: {fileID: 7157118619514233114, guid: 3c5138f816ff660499922c6c800a180b, type: 3}
+        Value: event:/Weapon/Machinegun

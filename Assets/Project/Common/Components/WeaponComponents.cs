@@ -27,5 +27,5 @@ namespace Project.Common.Components
     public struct MeleeDelayDefault : IComponent {public float Value;}
     public struct WeaponPosition : IComponent {public fp3 Value;}
     public struct FiringCooldownModifier : IComponent {public float Value;}
-    
+    public struct SoundPath : IComponent {public string Value;}
 }

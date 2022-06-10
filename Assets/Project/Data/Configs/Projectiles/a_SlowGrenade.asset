@@ -20,6 +20,7 @@ MonoBehaviour:
   - id: 3
   - id: 4
   - id: 5
+  - id: 6
   removeStructComponents: []
   templates: []
   references:
@@ -46,3 +47,7 @@ MonoBehaviour:
       type: {class: SecondaryDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 11400000, guid: 3112e08ef4c1d8546a979c2126ce4b25, type: 2}
+    00000006:
+      type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: event:/Explosions/Grenade
