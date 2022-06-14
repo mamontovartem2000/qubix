@@ -55,6 +55,12 @@ namespace Project.Modules.Network
 			byte[] buffer = new byte[bytes.Length - 1];
 			Array.Copy(bytes, 1, buffer, 0, buffer.Length);
 
+			if (bytes.Length == 4)
+			{
+				if (Encoding.UTF8.GetString(bytes) == "ping") 
+					return;
+			}
+			
 			SystemMessage data = SystemMessage.GetRootAsSystemMessage(new ByteBuffer(buffer));
 
 			switch (data.PayloadType)

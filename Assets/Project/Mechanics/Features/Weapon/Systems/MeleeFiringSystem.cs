@@ -42,7 +42,11 @@ namespace Project.Mechanics.Features.Weapon.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			if(entity.GetParent().Has<Stun>()) return;
+			if (entity.GetParent().Has<Stun>())
+			{
+				entity.Remove<LeftWeaponShot>();
+				return;
+			}
 
 			ref var delay = ref entity.Get<MeleeDelay>().Value;
 			ref var aim = ref entity.Get<MeleeDamageSpot>().Value;

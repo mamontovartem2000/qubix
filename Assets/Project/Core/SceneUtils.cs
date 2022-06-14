@@ -27,7 +27,7 @@ namespace Project.Core
         
         public static bool IsWalkable(fp3 pos)
         {
-            if (PositionToIndex(pos) > _width * _height) return false;
+            // if (PositionToIndex(pos) > _width * _height || PositionToIndex(pos) < 0) return false;
             return Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(pos)] == 1;
         }
 
@@ -74,7 +74,7 @@ namespace Project.Core
                 if (IsWalkable(pos) && IsFree(pos))
                     return pos;
 
-                //TODO: А если вообще нет свободных точек?
+                //TODO: пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ?
             }
         }
 
