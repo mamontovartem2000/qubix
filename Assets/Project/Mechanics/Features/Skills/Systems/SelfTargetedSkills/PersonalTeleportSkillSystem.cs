@@ -38,6 +38,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
                 .Push();
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
@@ -82,9 +83,11 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
             SceneUtils.ModifyWalkable(avatar.Read<PlayerMoveTarget>().Value, true);
             SceneUtils.ModifyWalkable(new fp3(randomPlayerPos.x, 0, randomPlayerPos.z), false);
             
+            SoundUtils.PlaySound(avatar, "event:/VFX/TeleportIn");
             avatar.SetPosition(randomPlayerPos);
             avatar.Get<PlayerMoveTarget>().Value = new fp3(randomPlayerPos.x, 0, randomPlayerPos.z);
-
+            SoundUtils.PlaySound(avatar, "event:/VFX/TeleportOut");
+            
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
             _vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, avatar.GetPosition(), avatar);

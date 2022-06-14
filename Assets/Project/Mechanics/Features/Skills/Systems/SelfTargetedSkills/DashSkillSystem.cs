@@ -1,4 +1,5 @@
-﻿using ME.ECS;
+﻿using System.Collections.Generic;
+using ME.ECS;
 using Project.Common.Components;
 using Project.Core;
 using Project.Mechanics.Features.VFX;
@@ -56,13 +57,15 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
             SceneUtils.ModifyWalkable(avatar.Read<PlayerMoveTarget>().Value, true);
             SceneUtils.ModifyWalkable(new fp3(nextPos.x, 0, nextPos.z), false);
 
-            
+            SoundUtils.PlaySound(avatar, "event:/VFX/TeleportIn");
             avatar.SetPosition(nextPos);
+            SoundUtils.PlaySound(avatar, "event:/VFX/TeleportOut");
             avatar.Get<PlayerMoveTarget>().Value = new fp3(nextPos.x, 0, nextPos.z);
 
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
             _vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, avatar.GetPosition(), avatar);
         }
+
     }
 }

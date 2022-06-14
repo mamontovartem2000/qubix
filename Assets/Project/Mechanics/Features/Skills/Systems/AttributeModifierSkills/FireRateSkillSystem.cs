@@ -55,6 +55,8 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			rightWeapon.Get<AmmoCapacityDefault>().Value = 2;
 			rightWeapon.Get<AmmoCapacity>().Value = 2;
 			
+			SoundUtils.PlaySound(avatar, "event:/Skills/Buller/OffenciveBurst");
+			
 			world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Get<Owner>().Value);
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;

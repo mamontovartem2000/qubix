@@ -41,19 +41,24 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+			
+			ref readonly var owner = ref entity.Read<Owner>().Value;
+			ref var avatar = ref owner.Get<PlayerAvatar>().Value;
 
 			var effect = new Entity("effect");
 			effect.Set(new EffectTag());
 
-			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Set(new ForceShieldModifier{Value = 50});
+			avatar.Set(new ForceShieldModifier{Value = 50});
 		
 			effect.Set(new ForceShieldModifier());
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
-			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
-			effect.SetParent(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value);
+			effect.Get<Owner>().Value = owner;
+			effect.SetParent(avatar);
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			
-			_vfx.SpawnVFX(VFXFeature.VFXType.PlayerShield, entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.GetPosition(), effect);
+			SoundUtils.PlaySound(avatar, "event:/Skills/Powerf/Shield");
+			
+			_vfx.SpawnVFX(VFXFeature.VFXType.PlayerShield, avatar.GetPosition(), effect);
 			entity.Remove<ActivateSkill>();
 		}
 	}

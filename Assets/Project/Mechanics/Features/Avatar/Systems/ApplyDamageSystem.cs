@@ -36,6 +36,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
                 .Push();
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             ref var apply = ref entity.Get<ApplyDamage>();
@@ -58,6 +59,10 @@ namespace Project.Mechanics.Features.Avatar.Systems
                     apply.ApplyTo.Set(new PlayerDamaged {Value = 1f});
                     apply.ApplyTo.Get<PlayerDamagedCounter>().Value += 0.1f;
                 }
+            }
+            else
+            {
+                SoundUtils.PlaySound(to, "event:/VFX/Heal");
             }
             
             health -= damage;

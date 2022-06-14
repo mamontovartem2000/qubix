@@ -50,7 +50,7 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 			{
 				ref var player = ref owner.Get<PlayerAvatar>().Value;
 				pos = player.GetPosition();
-
+				
 				if (NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team))
 				{
 					var collision = new Entity("collision");
@@ -71,10 +71,9 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 			}
 			
 			_vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, pos);
-			var sound = new Entity("sound");
-			sound.SetPosition(entity.GetPosition());
-			sound.Get<SoundEffect>() = entity.Get<SoundEffect>();
-			// sound.Set(new SoundPlay());
+			
+			
+			
 			entity.Destroy();
 		}
 	}

@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core;
 using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
@@ -39,6 +40,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 				.Push();
 		}
 
+		// ReSharper disable Unity.PerformanceAnalysis
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
@@ -51,7 +53,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			
 			effect.Set(new EffectTag());
 			
-			avatar.Set(new LinearPowerModifier{Damage = 0.5f});
+			avatar.Set(new LinearPowerModifier{ Damage = 0.5f });
 			leftWeapon.Remove<LinearActive>();
 			leftWeapon.Remove<LeftWeaponShot>();
 			leftWeapon.Set(new AmmoCapacity { Value = 100 });
@@ -60,7 +62,9 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
 			effect.Get<Owner>().Value = owner;
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			
+
+			SoundUtils.PlaySound(avatar, "event:/Skills/Powerf/LinearPower");
+
 			_vfx.SpawnVFX(VFXFeature.VFXType.SkillLinearPower, avatar.GetPosition(), avatar);
 
 			entity.Remove<ActivateSkill>();

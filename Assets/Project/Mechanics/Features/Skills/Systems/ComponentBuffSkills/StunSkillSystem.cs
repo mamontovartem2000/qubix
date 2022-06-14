@@ -41,6 +41,7 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 				.Push();
 		}
 
+		// ReSharper disable Unity.PerformanceAnalysis
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
@@ -48,7 +49,10 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 			ref readonly var owner = ref entity.Read<Owner>().Value;
 			ref var avatar = ref owner.Get<PlayerAvatar>().Value;
 			ref readonly var rightWeapon = ref avatar.Read<WeaponEntities>().RightWeapon;
+			
+			SoundUtils.PlaySound(avatar, "event:/Skills/GoldHunter/StunShot");
 
+			
 			rightWeapon.Set(new StunModifier{Value = 20});
 
 			rightWeapon.Get<AmmoCapacityDefault>().Value = 5;

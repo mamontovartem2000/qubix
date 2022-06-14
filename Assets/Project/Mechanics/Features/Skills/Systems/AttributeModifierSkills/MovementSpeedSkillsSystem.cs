@@ -55,7 +55,9 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 			effect.Get<MoveSpeedModifier>().Value = amount;
 
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
-
+			
+			SoundUtils.PlaySound(avatar, "event:/Skills/Powerf/MovementSpeedIncreace");
+			
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			_vfx.SpawnVFX(VFXFeature.VFXType.SkillQuickness, avatar.GetPosition(), avatar);
 			_vfx.SpawnVFX(VFXFeature.VFXType.SpeedTrail, avatar.GetPosition(),avatar, entity.Read<SkillDurationDefault>().Value);

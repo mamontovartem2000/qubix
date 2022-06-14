@@ -63,6 +63,9 @@
 		<property name="minimumDistance">
 			<value>0</value>
 		</property>
+		<property name="maximumDistance">
+			<value>25</value>
+		</property>
 	</object>
 	<object class="MarkerTrack" id="{0d2d457c-45c7-44da-a72b-bad2ad0f1de2}" />
 	<object class="GroupTrack" id="{4f3b977a-c78d-4523-9246-28e8bf8242c6}">
@@ -82,7 +85,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{ff9380ca-292f-4d3c-8a20-849316cad24f}">
 		<property name="volume">
-			<value>-2</value>
+			<value>1</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{328748ed-e049-4aa8-95d5-d7830677278a}</destination>
@@ -196,6 +199,9 @@
 	<object class="SpatialiserEffect" id="{a3e27d8b-e1a8-4efb-bc3d-fc25a20c2a0d}">
 		<property name="minimumDistance">
 			<value>0</value>
+		</property>
+		<property name="maximumDistance">
+			<value>25</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{4e28f2d0-3687-4702-8335-b9aa478018f9}">

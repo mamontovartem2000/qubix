@@ -72,13 +72,13 @@ namespace Project.Mechanics.Features.Weapon.Systems
             {
                 if (entity.Has<FireRateModifier>())
                 {
-                    entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = entity.Read<FireRateModifier>().Value;
+                    entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = entity.Read<FireRateModifier>().Value;
                     entity.Remove<FireRateModifier>();
                 }
                 
                 if (entity.Has<StunModifier>())
                 {
-                    entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = entity.Read<StunModifier>().Value;
+                    entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = entity.Read<StunModifier>().Value;
                     entity.Remove<StunModifier>();
                 }
                 

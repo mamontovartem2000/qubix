@@ -41,12 +41,16 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
-
-            ref var weapon = ref entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Get<WeaponEntities>();
+            
+            ref readonly var owner = ref entity.Read<Owner>().Value;
+            ref var avatar = ref owner.Get<PlayerAvatar>().Value;
+            ref var weapon = ref avatar.Get<WeaponEntities>();
 
             weapon.LeftWeapon.Get<AmmoCapacity>().Value = weapon.LeftWeapon.Read<AmmoCapacityDefault>().Value;
             weapon.RightWeapon.Get<ReloadTime>().Value = 0;
-
+            
+            SoundUtils.PlaySound(avatar, "event:/Skills/Buller/Quickdraw");
+            
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
             _vfx.SpawnVFX(VFXFeature.VFXType.SkillQuickdraw, entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.GetPosition(), entity.Get<Owner>().Value.Get<PlayerAvatar>().Value);

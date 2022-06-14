@@ -38,6 +38,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 				.Push();
 		}
 
+		// ReSharper disable Unity.PerformanceAnalysis
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
@@ -51,6 +52,8 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 			skills.SecondSkill.Get<Cooldown>().Value = 0;
 			skills.ThirdSkill.Get<Cooldown>().Value = 0;
 			skills.FourthSkill.Get<Cooldown>().Value = 0;
+			
+			SoundUtils.PlaySound(avatar, "event:/Skills/GoldHunter/CurcuitBurst");
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			_vfx.SpawnVFX(VFXFeature.VFXType.SkillCurcuitBurts, avatar.GetPosition(), avatar);

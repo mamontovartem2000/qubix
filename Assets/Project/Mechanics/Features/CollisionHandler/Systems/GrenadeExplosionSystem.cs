@@ -51,6 +51,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
             
         }
     
+        // ReSharper disable Unity.PerformanceAnalysis
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
         {
             if (entity.GetPosition().y < 0f)
