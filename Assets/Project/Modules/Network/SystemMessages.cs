@@ -3,6 +3,7 @@ using FlatMessages;
 using ME.ECS;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace Project.Modules.Network
@@ -21,6 +22,12 @@ namespace Project.Modules.Network
 
         public static void ProcessSystemMessage(byte[] bytes)
         {
+            if (bytes.Length == 4)
+            {
+                if (Encoding.UTF8.GetString(bytes) == "ping") 
+                    return;
+            }
+            
             SystemMessage data = SystemMessage.GetRootAsSystemMessage(new ByteBuffer(bytes));
 
             switch (data.PayloadType)

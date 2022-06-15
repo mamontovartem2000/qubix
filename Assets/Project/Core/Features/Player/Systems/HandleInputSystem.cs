@@ -94,7 +94,7 @@ namespace Project.Core.Features.Player.Systems
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
             if (player.Read<PlayerAvatar>().Value == Entity.Empty) return;
 
-            ref var entity = ref player.Get<PlayerAvatar>().Value.Get<WeaponEntities>().LeftWeapon;
+            ref var entity = ref player.Read<PlayerAvatar>().Value.Get<WeaponEntities>().LeftWeapon;
             switch (mlm.State)
             {
                 case InputState.Pressed:
@@ -119,7 +119,7 @@ namespace Project.Core.Features.Player.Systems
             // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
             if (player.Read<PlayerAvatar>().Value == Entity.Empty) return;
 
-            ref var entity = ref player.Get<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon;
+            ref var entity = ref player.Read<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon;
 
             switch (mrm.State)
             {
