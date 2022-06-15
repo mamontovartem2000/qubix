@@ -64,9 +64,12 @@ namespace Project.Mechanics.Features.Projectile
             {
                 var entity = new Entity("linear");
                 gun.Read<ProjectileConfig>().Value.Apply(entity);
-
+                
                 var owner = entity.Get<Owner>().Value = gun.Read<Owner>().Value;
                 
+                // entity.SetParent(gun);
+                // entity.SetLocalPosition(owner.Read<PlayerAvatar>().Value.Read<FaceDirection>().Value * (i - 1));
+                // Debug.Log(entity.GetPosition());
                 entity.Get<Linear>().StartDelay = delay * i;
                 entity.Get<Linear>().EndDelay = delay * (length - i);
                 var damageBase = entity.Read<ProjectileDamage>().Value;

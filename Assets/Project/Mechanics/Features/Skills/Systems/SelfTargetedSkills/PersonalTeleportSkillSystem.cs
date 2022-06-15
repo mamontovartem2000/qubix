@@ -17,6 +17,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
         private SkillsFeature _feature;
         private VFXFeature _vfx;
+        private fp3 randomPlayerPos;
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
@@ -43,43 +44,54 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
         {
             if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
             
+            entity.Remove<ActivateSkill>();
+            
             ref readonly var owner = ref entity.Read<Owner>().Value;
             ref var avatar = ref owner.Get<PlayerAvatar>().Value;
-            
-            var rndX = world.GetRandomRange(3, 7);
-            var rndZ = world.GetRandomRange(3, 7);
-            switch (world.GetRandomRange(0, 3))
+
+            do
             {
-                case 0:
+                var rndX = world.GetRandomRange(3, 7);
+                var rndZ = world.GetRandomRange(3, 7);
+                // world.GetRandomInCircle(entity.GetPosition().XZ(), 6);
+                
+                switch (world.GetRandomRange(0, 4))
+                {
+                    case 0:
                     {
                         rndX *= -1;
                         break;
                     }
 
-                case 1:
+                    case 1:
                     {
                         rndZ *= -1;
                         break;
                     }
 
-                case 2:
+                    case 2:
                     {
                         rndX *= -1;
                         rndZ *= -1;
                         break;
                     }
-
-                default:
+                    
+                    case 3:
                     {
                         break;
                     }
+                    
+                    default:
+                    {
+                        break;
+                    }
+                }
+                var tmpPos = avatar.Read<PlayerMoveTarget>().Value;
+                randomPlayerPos = new Vector3(tmpPos.x + rndX, 0, tmpPos.z + rndZ);
+
             }
-            var tmpPos = avatar.Read<PlayerMoveTarget>().Value;
-            var randomPlayerPos = new Vector3(tmpPos.x + rndX, 0, tmpPos.z + rndZ);
+            while (!SceneUtils.IsWalkable(new fp3(randomPlayerPos.x, 0, randomPlayerPos.z)));
 
-            if (!SceneUtils.IsWalkable(new fp3(randomPlayerPos.x, 0, randomPlayerPos.z))) return;
-            
-            // SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, new fp3(randomPlayerPos.x, 0, randomPlayerPos.z));
             SceneUtils.ModifyWalkable(avatar.Read<PlayerMoveTarget>().Value, true);
             SceneUtils.ModifyWalkable(new fp3(randomPlayerPos.x, 0, randomPlayerPos.z), false);
             
@@ -91,7 +103,7 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
             _vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, avatar.GetPosition(), avatar);
-            entity.Remove<ActivateSkill>();
+            
         }
     }
 }
