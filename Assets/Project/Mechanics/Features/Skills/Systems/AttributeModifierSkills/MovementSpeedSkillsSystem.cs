@@ -41,11 +41,9 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 		// ReSharper disable Unity.PerformanceAnalysis
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+			var avatar = entity.Owner(out var owner).Avatar();
+			if (avatar.IsAlive() == false) return;
 
-			ref readonly var owner = ref entity.Read<Owner>().Value;
-			ref var avatar = ref owner.Get<PlayerAvatar>().Value;
-			
 			var effect = new Entity("effect");
 			effect.Get<Owner>().Value = owner;
 			effect.Set(new EffectTag());

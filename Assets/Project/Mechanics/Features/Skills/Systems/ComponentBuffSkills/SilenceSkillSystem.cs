@@ -38,13 +38,16 @@ namespace Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			var avatar = entity.Owner(out var owner).Avatar();
+			if (avatar.IsAlive() == false) return;
+
 			var effect = new Entity("effect");
 			effect.Set(new EffectTag());
 
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Set(new SkillSilenceModifier());
+			avatar.Set(new SkillSilenceModifier());
 				
 			effect.Get<LifeTimeLeft>().Value = entity.Read<SkillDurationDefault>().Value;
-			effect.Get<Owner>().Value = entity.Read<Owner>().Value;
+			effect.Get<Owner>().Value = owner;
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			
 			entity.Remove<ActivateSkill>();

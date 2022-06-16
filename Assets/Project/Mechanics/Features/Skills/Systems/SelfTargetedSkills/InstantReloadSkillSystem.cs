@@ -40,10 +40,9 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+            var avatar = entity.Owner().Avatar();
+            if (avatar.IsAlive() == false) return;
             
-            ref readonly var owner = ref entity.Read<Owner>().Value;
-            ref var avatar = ref owner.Get<PlayerAvatar>().Value;
             ref var weapon = ref avatar.Get<WeaponEntities>();
 
             weapon.LeftWeapon.Get<AmmoCapacity>().Value = weapon.LeftWeapon.Read<AmmoCapacityDefault>().Value;

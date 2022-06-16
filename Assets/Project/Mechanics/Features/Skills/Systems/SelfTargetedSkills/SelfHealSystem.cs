@@ -41,11 +41,9 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+            var avatar = entity.Owner(out var owner).Avatar();
+            if (avatar.IsAlive() == false) return;
 
-            ref readonly var owner = ref entity.Read<Owner>().Value;
-            ref var avatar = ref owner.Get<PlayerAvatar>().Value;
-            
             var collision = new Entity("collision");
 			collision.Set(new ApplyDamage {ApplyTo = avatar, ApplyFrom = avatar, Damage = -entity.Read<SkillAmount>().Value}, ComponentLifetime.NotifyAllSystems);
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;

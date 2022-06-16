@@ -42,11 +42,9 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
-            
-            ref readonly var owner = ref entity.Read<Owner>().Value;
-            ref var avatar = ref owner.Get<PlayerAvatar>().Value;
-            
+            var avatar = entity.Owner().Avatar();
+            if (avatar.IsAlive() == false) return;
+
             var nextPos = avatar.Read<FaceDirection>().Value * 4 + (avatar.Read<PlayerMoveTarget>().Value);
 
             entity.Remove<ActivateSkill>();

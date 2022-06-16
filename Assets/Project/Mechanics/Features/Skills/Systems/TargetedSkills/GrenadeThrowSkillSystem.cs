@@ -39,9 +39,9 @@ namespace Project.Mechanics.Features.Skills.Systems.TargetedSkills
 		// ReSharper disable Unity.PerformanceAnalysis
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+			var avatar = entity.Owner().Avatar();
+			if (avatar.IsAlive() == false) return;
 
-			ref readonly var avatar = ref entity.Read<Owner>().Value.Get<PlayerAvatar>().Value;
 			var grenade = new Entity("grenade");
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			grenade.Set(new Owner{Value = entity.Read<Owner>().Value});
