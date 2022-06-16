@@ -42,9 +42,10 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 
 			if (lifeTime > 0f) return;
 			
-			if(!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
-			
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Get<AutomaticDamageModifier>().Value -= entity.Read<SkillAmount>().Value;
+			var avatar = entity.Owner().Avatar();
+			if (avatar.IsAlive() == false) return;
+
+			avatar.Get<AutomaticDamageModifier>().Value -= entity.Read<SkillAmount>().Value;
 			entity.Destroy();
 		}
 	}

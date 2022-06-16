@@ -39,21 +39,14 @@ namespace Project.Mechanics.Features.Lifetime.Systems
             ref var delay = ref entity.Get<Linear>();
             delay.StartDelay -= deltaTime;
 
-            if (!entity.Read<Owner>().Value.Has<PlayerAvatar>())
-            {
+            var avatar = entity.Owner().Avatar();
+            if (avatar.IsAlive() == false) {
                 entity.Destroy();
                 return;
             }
-            if(!entity.IsAlive()) return;
-            if (!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive())
-            {
-                entity.Destroy();
-                return;
-            }
-            
-            ref readonly var player = ref entity.Read<Owner>().Value.Read<PlayerAvatar>().Value;
+
             ref readonly var linIndex = ref entity.Read<LinearIndex>().Value;
-            ref readonly var dir = ref player.Read<FaceDirection>().Value;
+            ref readonly var dir = ref avatar.Read<FaceDirection>().Value;
 
             if (delay.StartDelay <= 0)
             {
@@ -63,14 +56,14 @@ namespace Project.Mechanics.Features.Lifetime.Systems
                     var testView = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
                     entity.InstantiateView(testView);
 
-                    player.Get<ReloadTime>().Value = player.Read<ReloadTimeDefault>().Value;
+                    avatar.Get<ReloadTime>().Value = avatar.Read<ReloadTimeDefault>().Value;
                     entity.Set(new LinearActive());
                 }
 
-                var linPos = player.GetPosition() + dir * linIndex;
+                var linPos = avatar.GetPosition() + dir * linIndex;
                 entity.SetPosition(linPos);
 
-                if (!player.Read<WeaponEntities>().LeftWeapon.Has<LinearActive>())
+                if (!avatar.Read<WeaponEntities>().LeftWeapon.Has<LinearActive>())
                 {
                     entity.Destroy();
                 }

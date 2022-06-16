@@ -33,8 +33,8 @@ namespace Project.Mechanics.Features.LifeTime.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref readonly var avatar = ref entity.Read<Owner>().Value.Read<PlayerAvatar>().Value;
-            if(avatar == Entity.Empty) return;
+            var avatar = entity.Owner().Avatar();
+            if (avatar.IsAlive() == false) return;
             
             var newPos = avatar.Read<WeaponEntities>().LeftWeapon.Read<WeaponAim>().Value.GetPosition();
             entity.SetPosition(newPos);

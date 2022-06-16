@@ -40,15 +40,14 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			ref var owner = ref entity.Get<Collided>().ApplyTo;
-			ref var from = ref entity.Get<Collided>().ApplyFrom;
+			if (entity.TryReadCollided(out var from, out var owner) == false) return;
 			ref readonly var damage = ref entity.Read<ProjectileDamage>().Value;
 
 			var pos = owner.GetPosition();
 
 			if (owner.Has<PlayerAvatar>())
 			{
-				ref var player = ref owner.Get<PlayerAvatar>().Value;
+				var player = owner.Avatar();
 				pos = player.GetPosition();
 				
 				if (NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team))

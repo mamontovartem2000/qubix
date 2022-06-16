@@ -37,7 +37,7 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 			ref var time = ref entity.Get<MineBlinkTimer>().Value;
-			ref var defaultTime = ref entity.Get<MineBlinkTimerDefault>().Value;
+			ref readonly var defaultTime = ref entity.Read<MineBlinkTimerDefault>().Value;
 			time -= deltaTime;
 			
 			if(time > 0) return;

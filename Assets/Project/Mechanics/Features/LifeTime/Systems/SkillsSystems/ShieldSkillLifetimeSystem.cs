@@ -43,12 +43,13 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 			ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
 			lifeTime -= deltaTime;
 			
-			if(!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
+			var avatar = entity.Owner().Avatar();
+			if (avatar.IsAlive() == false) return;
 
-			if (lifeTime < 0f || entity.Get<Owner>().Value.Read<PlayerAvatar>().Value.Get<ForceShieldModifier>().Value <= 0)
+			if (lifeTime < 0f || avatar.Get<ForceShieldModifier>().Value <= 0)
 			{
-				entity.Get<Owner>().Value.Read<PlayerAvatar>().Value.Get<ForceShieldModifier>().Value = 0;
-				entity.Get<Owner>().Value.Read<PlayerAvatar>().Value.Remove<ForceShieldModifier>();
+				avatar.Get<ForceShieldModifier>().Value = 0;
+				avatar.Remove<ForceShieldModifier>();
 				Debug.Log("shield removed");
 				entity.Destroy();
 			}

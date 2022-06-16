@@ -51,8 +51,8 @@ namespace Project.Mechanics.Features.PostLogicTick.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			ref var owner = ref entity.Get<Collided>().ApplyTo;
-			ref var player = ref owner.Get<PlayerAvatar>().Value;
+			if (entity.TryReadCollided(out var from, out var owner) == false) return;
+			var player = owner.Avatar();
 
 			if (player.Has<AvoidTeleport>())
 			{

@@ -37,7 +37,6 @@ namespace Project.Mechanics.Features.Projectile.Systems
             ref var direction = ref entity.Get<ProjectileDirection>().Value;
             var speed = entity.Read<ProjectileSpeed>().Value;
 
-
             if (entity.Has<Trajectory>())
             {
                 direction -= new Vector3(0, deltaTime * entity.Read<Trajectory>().Value * 5f, 0);

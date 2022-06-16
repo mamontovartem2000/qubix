@@ -34,12 +34,13 @@ namespace Project.Mechanics.Features.Lifetime.Systems
 		{
 			return Filter.Create("Filter-NewLinearVisualsSystem")
 				.With<LinearVisual>()
+				.Parent(x => x.Without<LinearActive>())
 				.Push();
 		}
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			if (entity.GetParent().Has<LinearActive>()) return;
+			//if (entity.GetParent().Has<LinearActive>()) return;
 			entity.Destroy();
 		}
 	}

@@ -42,7 +42,10 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 
 			if (lifeTime > 0f) return;
 
-			entity.Get<Owner>().Value.Get<PlayerAvatar>().Value.Remove<SkillSilenceModifier>();
+			var avatar = entity.Owner().Avatar();
+			if (avatar.IsAlive() == false) return;
+
+			avatar.Remove<SkillSilenceModifier>();
 			entity.Destroy();
 		}
 	}

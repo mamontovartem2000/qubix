@@ -24,6 +24,17 @@ namespace Project {
 
         }
 
+        public static bool TryReadCollided(this in Entity entity, out Entity from, out Entity to) {
+
+            var col = entity.Read<Collided>();
+            to = col.ApplyTo;
+            from = col.ApplyFrom;
+            if (to.IsAlive() == false || from.IsAlive() == false) return false;
+
+            return true;
+
+        }
+
     }
 
 }
