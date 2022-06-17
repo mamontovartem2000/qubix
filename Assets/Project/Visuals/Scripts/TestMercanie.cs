@@ -1,37 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TestMercanie : MonoBehaviour
+namespace Project.Visuals.Scripts
 {
-    [SerializeField] private Material _mat;
-    [SerializeField] private float _emissionIntensity;
-
-    private bool _minus;
-
-
-    private void Update()
+    public class TestMercanie : MonoBehaviour
     {
-        _mat.SetColor("_EmissionColor", _mat.color * _emissionIntensity);
-        ChangeIntensity();
-    }
+        [SerializeField] private Material _mat;
+        [SerializeField] private float _emissionIntensity;
 
-    private void ChangeIntensity()
-    {
-        if (!_minus)
+        private bool _minus;
+
+
+        private void Update()
         {
-            _emissionIntensity += 4 * Time.deltaTime;
-            if (_emissionIntensity > 3)
-            {
-                _minus = true;
-            }
+            _mat.SetColor("_EmissionColor", _mat.color * _emissionIntensity);
+            ChangeIntensity();
         }
-        else
+
+        private void ChangeIntensity()
         {
-            _emissionIntensity -= 4 * Time.deltaTime;
-            if (_emissionIntensity < 2.6)
+            if (!_minus)
             {
-                _minus = false;
+                _emissionIntensity += 4 * Time.deltaTime;
+                if (_emissionIntensity > 3)
+                {
+                    _minus = true;
+                }
+            }
+            else
+            {
+                _emissionIntensity -= 4 * Time.deltaTime;
+                if (_emissionIntensity < 2.6)
+                {
+                    _minus = false;
+                }
             }
         }
     }

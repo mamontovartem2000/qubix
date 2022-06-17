@@ -1,6 +1,8 @@
+using Project.Modules.Network.ManualConnect;
+using Project.Modules.Network.UI;
 using UnityEngine;
 
-namespace Project.Modules.Network
+namespace Project.Modules.Network.StartConnect
 {
     public class RoomListConnect : ConnectTemplate
 	{

@@ -2,6 +2,7 @@
 using Project.Common.Components;
 using Project.Core;
 using Project.Core.Features.Player;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Avatar.Systems
@@ -41,7 +42,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 			ref readonly var moveAmount = ref entity.Read<MoveInput>().Value;
 			var direction = entity.Read<MoveInput>().Axis == MovementAxis.Vertical ? Vector3.right : Vector3.back;
 			
-			if (entity.GetRotation() != fpquaternion.Euler(entity.Read<FaceDirection>().Value))
+			if (!entity.GetRotation().Equals(quaternion.Euler(entity.Read<FaceDirection>().Value)))
 			{
 				entity.SetRotation(Quaternion.RotateTowards(entity.GetRotation(), Quaternion.LookRotation(entity.Read<FaceDirection>().Value), 40f));
 			}
@@ -53,11 +54,12 @@ namespace Project.Mechanics.Features.Avatar.Systems
 					entity.Get<FaceDirection>().Value = direction * moveAmount;
 				}
 
-				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= 0.025f)
+				// if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= 0.025f)
+				if (math.distancesq(entity.Read<PlayerMoveTarget>().Value, entity.GetPosition())<= 0.025f)
 				{
 					entity.SetPosition((Vector3)Vector3Int.CeilToInt(entity.Read<PlayerMoveTarget>().Value));
 					
-					var newTarget = entity.GetPosition() + direction * moveAmount;
+					var newTarget = entity.GetPosition() + (float3)direction * moveAmount;
 
 					if (SceneUtils.IsWalkable(newTarget))
 					{
@@ -80,7 +82,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 			var target = entity.Read<PlayerMoveTarget>().Value;
 			ref readonly var hover = ref entity.Read<Hover>().Amount;
 
-			entity.SetPosition(Vector3.MoveTowards(new fp3(pos.x, hover, pos.z), new fp3(target.x, hover, target.z), speed * deltaTime));
+			entity.SetPosition(Vector3.MoveTowards(new float3(pos.x, hover, pos.z), new float3(target.x, hover, target.z), speed * deltaTime));
 
 		}
 	}

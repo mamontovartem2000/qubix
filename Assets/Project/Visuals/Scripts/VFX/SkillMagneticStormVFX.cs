@@ -1,9 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Project.NewVisuals.Scripts
+namespace Project.Visuals.Scripts.VFX
 {
-    using ME.ECS.Views.Providers;
-
     public class SkillMagneticStormVFX : MonoBehaviourView
     {
         public override bool applyStateJob => true;

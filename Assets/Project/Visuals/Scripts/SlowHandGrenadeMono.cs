@@ -1,9 +1,7 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Project.NewVisuals.Scripts {
-    
-    using ME.ECS.Views.Providers;
-    
+namespace Project.Visuals.Scripts {
     public class SlowHandGrenadeMono : MonoBehaviourView {
         
         public override bool applyStateJob => true;

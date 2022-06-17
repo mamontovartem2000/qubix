@@ -41,7 +41,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
             
             world.GetFeature<EventsFeature>().CooldownTick.Execute(entity);
             
-            if(cooldown <= (fp)0)
+            if(cooldown <= 0f)
                 entity.Remove<Cooldown>();
         }
     }

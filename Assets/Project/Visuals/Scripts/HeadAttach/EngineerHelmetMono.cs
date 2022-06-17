@@ -1,9 +1,7 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Assets.Project.NewVisuals.Scripts.HeadAttach {
-    
-    using ME.ECS.Views.Providers;
-    
+namespace Project.Visuals.Scripts.HeadAttach {
     public class EngineerHelmetMono : MonoBehaviourView {
         
         public override bool applyStateJob => true;
@@ -16,5 +14,4 @@ namespace Assets.Project.NewVisuals.Scripts.HeadAttach {
             transform.rotation = entity.GetRotation();
         }    
     }
-    
 }

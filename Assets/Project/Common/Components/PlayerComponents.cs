@@ -2,6 +2,7 @@
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
 using Project.Modules.Network;
+using Unity.Mathematics;
 
 namespace Project.Common.Components
 {
@@ -9,7 +10,7 @@ namespace Project.Common.Components
     public struct AvatarView : IComponent {public MonoBehaviourViewBase Value;}
     public struct PlayerAvatar : IComponent {public Entity Value;}
     public struct RespawnTime : IComponent {public float Value;}
-    public struct FaceDirection : IComponent {public fp3 Value;}
+    public struct FaceDirection : IComponent {public float3 Value;}
     public struct PlayerArmor : IComponent {public float Value;}
     public struct PlayerTag : IComponent 
     {
@@ -51,7 +52,7 @@ namespace Project.Common.Components
     public struct Hover : IComponent
     {
         public bool Direction;
-        public fp Amount;
+        public float Amount;
     }
 
     public struct PlayerDamaged : IComponent

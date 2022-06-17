@@ -1,24 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DelayActive : MonoBehaviour
+namespace Project.Visuals.AssetStore.SpecialSkillsEffectsPack.Scripts
 {
-    public GameObject[] m_activeObj;
-    public float m_delayTime;
-    float m_time;
-
-    private void Start()
+    public class DelayActive : MonoBehaviour
     {
-        m_time = Time.time;
-    }
+        public GameObject[] m_activeObj;
+        public float m_delayTime;
+        float m_time;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Time.time > m_time + m_delayTime)
-            for(int i = 0; i< m_activeObj.Length; i++)
-                if(m_activeObj[i] != null)
-                    m_activeObj[i].SetActive(true);
+        private void Start()
+        {
+            m_time = Time.time;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (Time.time > m_time + m_delayTime)
+                for(int i = 0; i< m_activeObj.Length; i++)
+                    if(m_activeObj[i] != null)
+                        m_activeObj[i].SetActive(true);
+        }
     }
 }

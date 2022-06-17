@@ -3,6 +3,7 @@ using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Core;
 using Project.Mechanics.Features.CollisionHandler.Systems;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.CollisionHandler 
@@ -54,9 +55,9 @@ namespace Project.Mechanics.Features.CollisionHandler
             entity.InstantiateView(_health);
             
             entity.Set(new CollisionDynamic());
-            entity.Get<ProjectileDirection>().Value = fp3.zero;
+            entity.Get<ProjectileDirection>().Value = float3.zero;
             entity.Get<Owner>().Value = owner;
-            entity.Get<FaceDirection>().Value = new fp3(1, 0, 0);
+            entity.Get<FaceDirection>().Value = new float3(1, 0, 0);
             
             return entity;
         }

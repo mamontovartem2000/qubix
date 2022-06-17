@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Project.Modules.Network
+namespace Project.Modules.Network.ManualConnect
 {
     public static class ManualRoomCreating
     {

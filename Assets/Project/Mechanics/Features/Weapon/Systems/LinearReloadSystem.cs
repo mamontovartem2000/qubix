@@ -6,11 +6,8 @@ namespace Project.Mechanics.Features.Weapon.Systems
 {
 	#region usage
 #pragma warning disable
-	using Project.Components;
 	using Project.Modules;
-	using Project.Systems;
 	using Project.Markers;
-	using Components;
 	using Modules;
 	using Systems;
 	using Markers;

@@ -1,9 +1,7 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Project.NewVisuals.Scripts.HeadAttach {
-    
-    using ME.ECS.Views.Providers;
-    
+namespace Project.Visuals.Scripts.HeadAttach {
     public class NimbusMono : MonoBehaviourView {
         
         public override bool applyStateJob => true;

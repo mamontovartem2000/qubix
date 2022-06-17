@@ -6,8 +6,9 @@ using UnityEngine;
 namespace Project.Mechanics.Features.LifeTime.Systems {
 
     #pragma warning disable
-    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
-    using Components; using Modules; using Systems; using Markers;
+    using Project.Modules;
+    using Project.Markers;
+    using Modules; using Systems; using Markers;
     #pragma warning restore
     
     #if ECS_COMPILE_IL2CPP_OPTIONS

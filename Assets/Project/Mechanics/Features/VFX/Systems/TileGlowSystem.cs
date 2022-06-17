@@ -4,8 +4,9 @@ using Project.Common.Components;
 namespace Project.Mechanics.Features.VFX.Systems {
 
     #pragma warning disable
-    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
-    using Components; using Modules; using Systems; using Markers;
+    using Project.Modules;
+    using Project.Markers;
+    using Modules; using Systems; using Markers;
     #pragma warning restore
     
     #if ECS_COMPILE_IL2CPP_OPTIONS
@@ -47,7 +48,7 @@ namespace Project.Mechanics.Features.VFX.Systems {
 
             if (entity.Has<DestructibleTag>())
             {
-                amount += up ? 0.04 : -0.05;
+                amount += up ? 0.04f : -0.05f;
                 
                 if (amount >= 4.5)
                 {
@@ -60,7 +61,7 @@ namespace Project.Mechanics.Features.VFX.Systems {
             }
             else
             {
-                amount += up ? 0.04 : -0.04;
+                amount += up ? 0.04f : -0.04f;
                 
                 if (amount >= 2.9)
                 {

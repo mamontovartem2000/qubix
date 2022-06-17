@@ -4,6 +4,7 @@ using Project.Core;
 using Project.Core.Features.Events;
 using Project.Mechanics.Features.Projectile;
 using Project.Mechanics.Features.VFX;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Weapon.Systems
@@ -57,7 +58,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
             if (entity.Has<SpreadAmount>())
             {
                 var spread = entity.Read<SpreadAmount>().Value / 100f;
-                dir += new Vector3(world.GetRandomRange(-spread, spread), 0,world.GetRandomRange(-spread, spread));
+                dir += new float3(world.GetRandomRange(-spread, spread), 0,world.GetRandomRange(-spread, spread));
             }
 
             var cooldownBase = entity.Read<CooldownDefault>().Value;

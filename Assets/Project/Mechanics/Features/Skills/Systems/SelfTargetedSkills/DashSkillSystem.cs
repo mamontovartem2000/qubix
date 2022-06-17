@@ -3,6 +3,7 @@ using ME.ECS;
 using Project.Common.Components;
 using Project.Core;
 using Project.Mechanics.Features.VFX;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
@@ -49,16 +50,16 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
 
             entity.Remove<ActivateSkill>();
 
-            if (!SceneUtils.IsWalkable(new fp3(nextPos.x, 0, nextPos.z))) return;
+            if (!SceneUtils.IsWalkable(new float3(nextPos.x, 0, nextPos.z))) return;
             
             // SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, new fp3(nextPos.x, 0, nextPos.z));
             SceneUtils.ModifyWalkable(avatar.Read<PlayerMoveTarget>().Value, true);
-            SceneUtils.ModifyWalkable(new fp3(nextPos.x, 0, nextPos.z), false);
+            SceneUtils.ModifyWalkable(new float3(nextPos.x, 0, nextPos.z), false);
 
             SoundUtils.PlaySound(avatar, "event:/VFX/TeleportIn");
             avatar.SetPosition(nextPos);
             SoundUtils.PlaySound(avatar, "event:/VFX/TeleportOut");
-            avatar.Get<PlayerMoveTarget>().Value = new fp3(nextPos.x, 0, nextPos.z);
+            avatar.Get<PlayerMoveTarget>().Value = new float3(nextPos.x, 0, nextPos.z);
 
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             

@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TestLine : MonoBehaviour
+namespace Project.Visuals.Scripts
 {
-    [SerializeField] private LineRenderer _lr;
-
-    [SerializeField] private Transform[] _points;
-
-    private void Start()
+    public class TestLine : MonoBehaviour
     {
-        _lr.positionCount = _points.Length;
-    }
+        [SerializeField] private LineRenderer _lr;
 
-    private void Update()
-    {
-        for (int i = 0; i < _points.Length; i++)
+        [SerializeField] private Transform[] _points;
+
+        private void Start()
         {
-            _lr.SetPosition(i, _points[i].position);
+            _lr.positionCount = _points.Length;
+        }
+
+        private void Update()
+        {
+            for (int i = 0; i < _points.Length; i++)
+            {
+                _lr.SetPosition(i, _points[i].position);
+            }
         }
     }
 }

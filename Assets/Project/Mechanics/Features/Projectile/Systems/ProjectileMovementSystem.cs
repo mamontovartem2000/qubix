@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.Projectile.Systems
@@ -39,7 +40,7 @@ namespace Project.Mechanics.Features.Projectile.Systems
 
             if (entity.Has<Trajectory>())
             {
-                direction -= new Vector3(0, deltaTime * entity.Read<Trajectory>().Value * 5f, 0);
+                direction -= new float3(0, deltaTime * entity.Read<Trajectory>().Value * 5f, 0);
             }
 
             var newPosition = entity.GetPosition() + direction * (speed * deltaTime);

@@ -40,7 +40,7 @@ namespace Project.Mechanics.Features.Weapon.Systems
             ref var reload = ref entity.Get<ReloadTime>().Value;
             reload -= deltaTime;
 
-            if(reload <= (fp)0)
+            if(reload <= 0f)
             {
                 entity.Remove<ReloadTime>();
                 

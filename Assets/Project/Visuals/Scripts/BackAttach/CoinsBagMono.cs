@@ -1,9 +1,7 @@
 ﻿using ME.ECS;
+using ME.ECS.Views.Providers;
 
-namespace Project.NewVisuals.Scripts.BackAttach {
-    
-    using ME.ECS.Views.Providers;
-    
+namespace Project.Visuals.Scripts.BackAttach {
     public class CoinsBagMono : MonoBehaviourView {
         
         public override bool applyStateJob => true;

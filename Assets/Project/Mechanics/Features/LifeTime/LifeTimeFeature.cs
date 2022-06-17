@@ -5,7 +5,6 @@ using Project.Mechanics.Features.LifeTime.Systems.SkillsSystems;
 namespace Project.Mechanics.Features.Lifetime
 {
     #region usage
-    using Systems;
     namespace LifeTime.Components { }
     namespace LifeTime.Modules { }
     namespace LifeTime.Systems { }
@@ -22,9 +21,9 @@ namespace Project.Mechanics.Features.Lifetime
     {
         protected override void OnConstruct()
         {
-            AddSystem<LifeTimeSystem>();
-            AddSystem<LinearLifeSystem>();
-            AddSystem<LinearVisualLifeTimeSystem>();
+            // AddSystem<LifeTimeSystem>();
+            // AddSystem<LinearLifeSystem>();
+            // AddSystem<LinearVisualLifeTimeSystem>();
             AddSystem<MeleeAimInitSystem>();
             AddSystem<MeleeAimPositionSystem>();
             AddSystem<DestructibleHealthSystem>();

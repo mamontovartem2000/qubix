@@ -2,13 +2,15 @@
 using Project.Common.Components;
 using ME.ECS.DataConfigs;
 using Project.Mechanics.Features.VFX;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Mechanics.Features.CollisionHandler.Systems {
 
     #pragma warning disable
-    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
-    using Components; using Modules; using Systems; using Markers;
+    using Project.Modules;
+    using Project.Markers;
+    using Modules; using Systems; using Markers;
     using Project.Core;
 #pragma warning restore
 
@@ -60,7 +62,8 @@ namespace Project.Mechanics.Features.CollisionHandler.Systems {
 
                 foreach (Entity player in _playerFilter)
                 {
-                    if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > (fp)10) continue;
+                    // if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > (fp)10) continue;
+                    if (math.distancesq(player.GetPosition(),entity.GetPosition()) > 10f) continue;
                     
                     var debuff = new Entity("debuff");
                     debuff.Get<Owner>().Value = entity.Read<Owner>().Value;

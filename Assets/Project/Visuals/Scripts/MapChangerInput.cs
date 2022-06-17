@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MapChangerInput : MonoBehaviour
+namespace Project.Visuals.Scripts
 {
-    [SerializeField] private MapChanger _mapChanger;
+    public class MapChangerInput : MonoBehaviour
+    {
+        [SerializeField] private MapChanger _mapChanger;
 //     private void Update()
 //     {
 //         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -18,4 +18,5 @@ public class MapChangerInput : MonoBehaviour
 //             _mapChanger.ChangeMap();
 //         }
 //     }
+    }
 }

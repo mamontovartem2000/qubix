@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
-public class QubixDeath : MonoBehaviour
+namespace Project.Visuals.Scripts
 {
-    [SerializeField] private Material _material;
-    private void Start()
+    public class QubixDeath : MonoBehaviour
     {
-        _material.DOFloat(1, "DissolveAmount_", 5f);
+        [SerializeField] private Material _material;
+        private void Start()
+        {
+            _material.DOFloat(1, "DissolveAmount_", 5f);
+        }
     }
 }
