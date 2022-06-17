@@ -62,10 +62,9 @@ namespace UI_Scripts
 
             var entity = player.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon;
 
-            var time = entity.Read<ReloadTimeDefault>().Value;
+            var time = entity.Read<ReloadTime>().Value;
         
-            RightWeaponAmmoImage.fillAmount = 0;        
-
+            RightWeaponAmmoImage.DOKill();
             RightWeaponAmmoImage.DOFillAmount(1, time);
         }
 

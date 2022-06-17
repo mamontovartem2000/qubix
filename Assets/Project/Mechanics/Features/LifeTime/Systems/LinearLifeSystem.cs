@@ -53,8 +53,8 @@ namespace Project.Mechanics.Features.Lifetime.Systems
                 if (!entity.Has<LinearActive>())
                 {
                     //Linear weapon length testing view instantiation;
-                    var testView = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
-                    entity.InstantiateView(testView);
+                    //var testView = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
+                    //entity.InstantiateView(testView);
 
                     avatar.Get<ReloadTime>().Value = avatar.Read<ReloadTimeDefault>().Value;
                     entity.Set(new LinearActive());

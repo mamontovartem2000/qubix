@@ -43,7 +43,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 			
 			if (entity.GetRotation() != fpquaternion.Euler(entity.Read<FaceDirection>().Value))
 			{
-				entity.SetRotation(Quaternion.RotateTowards(entity.GetRotation(), Quaternion.LookRotation(entity.Read<FaceDirection>().Value), 40f));
+				entity.SetRotation(Quaternion.RotateTowards(entity.GetRotation(), Quaternion.LookRotation(entity.Read<FaceDirection>().Value), 30f));
 			}
 
 			if (moveAmount != 0)
@@ -53,7 +53,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 					entity.Get<FaceDirection>().Value = direction * moveAmount;
 				}
 
-				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= 0.025f)
+				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= 0.01f)
 				{
 					entity.SetPosition((Vector3)Vector3Int.CeilToInt(entity.Read<PlayerMoveTarget>().Value));
 					

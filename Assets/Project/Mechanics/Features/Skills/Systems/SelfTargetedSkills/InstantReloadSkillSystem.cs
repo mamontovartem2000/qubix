@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Core.Features.Events;
 using Project.Mechanics.Features.VFX;
 using UnityEngine;
 
@@ -46,7 +47,9 @@ namespace Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills
             ref var weapon = ref avatar.Get<WeaponEntities>();
 
             weapon.LeftWeapon.Get<AmmoCapacity>().Value = weapon.LeftWeapon.Read<AmmoCapacityDefault>().Value;
-            weapon.RightWeapon.Get<ReloadTime>().Value = 0;
+            weapon.RightWeapon.Get<ReloadTime>().Value = 0.2f;
+            
+            world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Get<Owner>().Value);
             
             SoundUtils.PlaySound(avatar, "event:/Skills/Buller/Quickdraw");
             

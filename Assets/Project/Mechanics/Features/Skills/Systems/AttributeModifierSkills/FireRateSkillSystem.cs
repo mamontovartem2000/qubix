@@ -52,7 +52,9 @@ namespace Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills
 
 			rightWeapon.Get<FireRateModifier>().Value = 1;
 			rightWeapon.Get<AmmoCapacityDefault>().Value = 2;
-			rightWeapon.Get<AmmoCapacity>().Value = 2;
+			rightWeapon.Get<ReloadTime>().Value = rightWeapon.Get<ReloadTimeDefault>().Value;
+            
+			world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Get<Owner>().Value);
 			
 			SoundUtils.PlaySound(avatar, "event:/Skills/Buller/OffenciveBurst");
 			
