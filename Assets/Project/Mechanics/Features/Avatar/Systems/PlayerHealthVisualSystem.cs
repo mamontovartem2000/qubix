@@ -36,9 +36,10 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<Owner>().Value.Has<PlayerAvatar>())
+            var avatar = entity.Owner().Avatar();
+            if (avatar.IsAlive())
             {
-                ref readonly var health = ref entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerHealth>().Value;
+                ref readonly var health = ref avatar.Read<PlayerHealth>().Value;
                 ref var over = ref entity.Get<PlayerHealthOverlay>().Value;
 
                 if(Math.Abs(over - health) < 0.05) return;

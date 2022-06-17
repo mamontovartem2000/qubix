@@ -46,7 +46,8 @@ namespace Project.Mechanics.Features.Avatar.Systems
             var health = entity.Read<PlayerHealth>().Value;
             if(health > 0) return;
 
-            if (entity.Get<Owner>().Value.Has<DamagedBy>())
+            var player = entity.Owner();
+            if (player.Has<DamagedBy>())
             {
                 ref var enemy = ref entity.Read<Owner>().Value.Get<DamagedBy>().Value;
                 enemy.Get<PlayerScore>().Kills += 1;
@@ -55,7 +56,6 @@ namespace Project.Mechanics.Features.Avatar.Systems
                 world.GetFeature<EventsFeature>().TabulationScreenNewPlayerStats.Execute(enemy);
             }
             
-            ref var player = ref entity.Get<Owner>().Value;
             player.Get<PlayerScore>().Deaths += 1;
             
             world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(entity.Read<Owner>().Value);

@@ -40,10 +40,11 @@ namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
 			lifeTime -= deltaTime;
 
 			if (lifeTime > 0f) return;
+
+			var avatar = entity.Owner().Avatar();
+			if(!avatar.IsAlive()) return;
 			
-			if(!entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.IsAlive()) return;
-			
-			entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Remove<LinearPowerModifier>();;
+			avatar.Remove<LinearPowerModifier>();;
 			entity.Destroy();
 		}
 	}
