@@ -148,7 +148,7 @@ MonoBehaviour:
       name: ENTITY_API_VERSION1_DEPRECATED
     - enabled: 0
       name: FILTERS_STORAGE_LEGACY
-  selectedConfiguration: Release
+  selectedConfiguration: Debug
   featuresList:
     features: []
   featuresListCategories:
@@ -194,14 +194,6 @@ MonoBehaviour:
           innerFeatures:
             features: []
         - enabled: 1
-          feature: {fileID: 11400000, guid: a244fb0790ab19443b03082ccdd8e1d5, type: 2}
-          innerFeatures:
-            features: []
-        - enabled: 1
-          feature: {fileID: 11400000, guid: a12c15e19298aac4da7b2995382101ab, type: 2}
-          innerFeatures:
-            features: []
-        - enabled: 1
           feature: {fileID: 11400000, guid: 60c8957af464b1c4a8ca81f51fc48d06, type: 2}
           innerFeatures:
             features: []
@@ -211,6 +203,18 @@ MonoBehaviour:
             features: []
         - enabled: 1
           feature: {fileID: 11400000, guid: 7937d2c685f9ccb4b9da7903e8c81b09, type: 2}
+          innerFeatures:
+            features: []
+        - enabled: 1
+          feature: {fileID: 11400000, guid: dd2a1df6a8ec7804c9f18cc512af3ef5, type: 2}
+          innerFeatures:
+            features: []
+        - enabled: 1
+          feature: {fileID: 11400000, guid: a244fb0790ab19443b03082ccdd8e1d5, type: 2}
+          innerFeatures:
+            features: []
+        - enabled: 1
+          feature: {fileID: 11400000, guid: a12c15e19298aac4da7b2995382101ab, type: 2}
           innerFeatures:
             features: []
         - enabled: 1

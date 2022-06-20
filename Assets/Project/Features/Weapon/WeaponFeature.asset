@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f2be477102cdc1418fb439c27d64e23, type: 3}
+  m_Name: WeaponFeature
+  m_EditorClassIdentifier: 
+  editorComment: 
+  AutoRifleView: {fileID: -6094980733448292169, guid: 31583a2418d76014f8ae9e8381efdfa4, type: 3}
+  RocketLauncherView: {fileID: -225728004210752103, guid: 84f1d119baec82848be00532d5297647, type: 3}
+  SniperRifleView: {fileID: -269943887775958925, guid: 98d9e6c7aabf1494e8b7acd0f7ee220e, type: 3}
+  FlamethrowerView: {fileID: -8844076188668811674, guid: e03305878b8435d419b072343c4c0b60, type: 3}
+  LaserSwordView: {fileID: -1002527746127644864, guid: 13ca16804936c77408ae6a60ddd29254, type: 3}
+  AutoRifleConfig: {fileID: 11400000, guid: 26db1752632c2524fb86933233aa905d, type: 2}
+  RocketLauncherConfig: {fileID: 11400000, guid: 8cd236aa936cb9a4aa697318c09088cf, type: 2}
+  SniperRifleConfig: {fileID: 11400000, guid: c9ffb2b3908c8594385ed72fbdd0170b, type: 2}
+  FlamethrowerConfig: {fileID: 11400000, guid: 8b458a710d81d4b44a168bdf62b70cf4, type: 2}
+  LaserSwordConfig: {fileID: 11400000, guid: aba6bb3c19da4fd4fbb8114c23a16872, type: 2}
+  CurrentLeft: 5
+  CurrentRight: 1

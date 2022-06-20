@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637909002158059051
+  lastModified: 637904763775737586
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -62,10 +62,10 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/VFX.bank
   Name: VFX
   StudioPath: bank:/VFX
-  lastModified: 637909002159539248
+  lastModified: 637904763777320351
   FileSizes:
   - Name: Desktop
-    Value: 36704
+    Value: 21792
   Exists: 1
 --- !u!114 &-7120867579258815652
 MonoBehaviour:
@@ -136,57 +136,10 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Weapons.bank
   Name: Weapons
   StudioPath: bank:/Weapons
-  lastModified: 637909002160109388
+  lastModified: 637904763777092713
   FileSizes:
   - Name: Desktop
-    Value: 428928
-  Exists: 1
---- !u!114 &-5714278374998092094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Buller/ThrowGrenade
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Buller/ThrowGrenade
-  Guid:
-    Data1: 1770466903
-    Data2: 1153380227
-    Data3: 285015731
-    Data4: -441150807
-  Banks:
-  - {fileID: -5621590837969417390}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 810
---- !u!114 &-5621590837969417390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Skills.bank
-  m_EditorClassIdentifier: 
-  Path: FMODAssets/qubix/Build/Desktop/Skills.bank
-  Name: Skills
-  StudioPath: bank:/Skills
-  lastModified: 637909002159339216
-  FileSizes:
-  - Name: Desktop
-    Value: 212224
+    Value: 429440
   Exists: 1
 --- !u!114 &-4898830788319026655
 MonoBehaviour:
@@ -215,33 +168,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 30
   Length: 8100
---- !u!114 &-4804529467173599283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Buller/OffenciveBurst
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Buller/OffenciveBurst
-  Guid:
-    Data1: -438770924
-    Data2: 1092984740
-    Data3: -1492504907
-    Data4: 1245280950
-  Banks:
-  - {fileID: -5621590837969417390}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 35
-  Length: 2000
 --- !u!114 &-3854084654202303083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +193,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
-  MaxDistance: 25
+  MaxDistance: 20
   Length: 610
 --- !u!114 &-2556903833187559581
 MonoBehaviour:
@@ -311,38 +237,11 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Explosions.bank
   Name: Explosions
   StudioPath: bank:/Explosions
-  lastModified: 637909002158039044
+  lastModified: 637904763775707562
   FileSizes:
   - Name: Desktop
     Value: 123360
   Exists: 1
---- !u!114 &-99773427649511933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/VFX/TeleportIn
-  m_EditorClassIdentifier: 
-  Path: event:/VFX/TeleportIn
-  Guid:
-    Data1: -1799169278
-    Data2: 1224011892
-    Data3: 147185816
-    Data4: -1459198838
-  Banks:
-  - {fileID: -7676096612589988698}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 440
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +261,6 @@ MonoBehaviour:
   - {fileID: -6385179338569152129}
   - {fileID: -1058113600303767864}
   - {fileID: -7676096612589988698}
-  - {fileID: -5621590837969417390}
   EditorEvents:
   - {fileID: 2163066182676903499}
   - {fileID: 7389887539325328379}
@@ -376,22 +274,12 @@ MonoBehaviour:
   - {fileID: -3854084654202303083}
   - {fileID: 704312127181691647}
   - {fileID: 5163056971121705939}
-  - {fileID: 7414998952328184253}
-  - {fileID: 7722716836944670027}
-  - {fileID: 4714281600085147210}
-  - {fileID: 1054399342067994239}
-  - {fileID: -99773427649511933}
-  - {fileID: 6381359203439318659}
-  - {fileID: 7152925632967232704}
-  - {fileID: -4804529467173599283}
-  - {fileID: 5214172767727305463}
-  - {fileID: -5714278374998092094}
   EditorParameters: []
   MasterBanks:
   - {fileID: -9002949484503957811}
   StringsBanks:
   - {fileID: 134729716896531229}
-  cacheTime: 637909002160109388
+  cacheTime: 637904763777320351
   cacheVersion: 131591
 --- !u!114 &77492493163640737
 MonoBehaviour:
@@ -435,10 +323,10 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637909002158069054
+  lastModified: 637904763775767615
   FileSizes:
   - Name: Desktop
-    Value: 2102
+    Value: 1544
   Exists: 1
 --- !u!114 &704312127181691647
 MonoBehaviour:
@@ -467,33 +355,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 25
   Length: 1000
---- !u!114 &1054399342067994239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Goldhunter/CurcuitBurst
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Goldhunter/CurcuitBurst
-  Guid:
-    Data1: 2065339449
-    Data2: 1252364795
-    Data3: 655310245
-    Data4: -624831279
-  Banks:
-  - {fileID: -5621590837969417390}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 35
-  Length: 658
 --- !u!114 &2163066182676903499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,33 +382,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 35
   Length: 2000
---- !u!114 &4714281600085147210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Powerf/LinearPower
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Powerf/LinearPower
-  Guid:
-    Data1: 1905779163
-    Data2: 1207208282
-    Data3: -1233015645
-    Data4: 2070637908
-  Banks:
-  - {fileID: -5621590837969417390}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 25
-  Length: 1964
 --- !u!114 &5163056971121705939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,33 +409,6 @@ MonoBehaviour:
   MinDistance: 0.1
   MaxDistance: 400
   Length: 533211
---- !u!114 &5214172767727305463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Buller/Quickdraw
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Buller/Quickdraw
-  Guid:
-    Data1: -940670582
-    Data2: 1285198729
-    Data3: 1115237307
-    Data4: -235534075
-  Banks:
-  - {fileID: -5621590837969417390}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 1000
 --- !u!114 &5463809685493878781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,65 +424,11 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637909002158919119
+  lastModified: 637904763776576393
   FileSizes:
   - Name: Desktop
-    Value: 8275584
+    Value: 8275328
   Exists: 1
---- !u!114 &6381359203439318659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/VFX/TeleportOut
-  m_EditorClassIdentifier: 
-  Path: event:/VFX/TeleportOut
-  Guid:
-    Data1: 585301207
-    Data2: 1270216213
-    Data3: 712009918
-    Data4: 1850375898
-  Banks:
-  - {fileID: -7676096612589988698}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 448
---- !u!114 &7152925632967232704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Goldhunter/StunShot
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Goldhunter/StunShot
-  Guid:
-    Data1: -1600126055
-    Data2: 1325106119
-    Data3: -920302694
-    Data4: 2033340469
-  Banks:
-  - {fileID: -5621590837969417390}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 2059
 --- !u!114 &7389887539325328379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -703,60 +456,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 20
   Length: 131813
---- !u!114 &7414998952328184253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Powerf/MovementSpeedIncreace
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Powerf/MovementSpeedIncreace
-  Guid:
-    Data1: 1794027909
-    Data2: 1301348914
-    Data3: 776065929
-    Data4: -880528554
-  Banks:
-  - {fileID: -5621590837969417390}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 45
-  Length: 869
---- !u!114 &7722716836944670027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Powerf/Shield
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Powerf/Shield
-  Guid:
-    Data1: 1033952443
-    Data2: 1125253557
-    Data3: 744674449
-    Data4: -865468397
-  Banks:
-  - {fileID: -5621590837969417390}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 20
-  Length: 809
 --- !u!114 &9113063801057341947
 MonoBehaviour:
   m_ObjectHideFlags: 0
