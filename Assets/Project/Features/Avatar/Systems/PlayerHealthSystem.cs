@@ -42,9 +42,10 @@ namespace Project.Features.Avatar.Systems
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var health = entity.Read<PlayerHealth>().Value;
-            if(health > 0) return;
-
+            if (health > 0) return;
+            
             var player = entity.Owner();
+            
             if (player.Has<DamagedBy>())
             {
                 ref var enemy = ref entity.Read<Owner>().Value.Get<DamagedBy>().Value;

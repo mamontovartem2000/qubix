@@ -41,13 +41,11 @@ namespace Project.Features.PostLogicTick.Systems
 			if (entity.TryReadCollided(out var from, out var owner) == false) return;
 			var player = owner.Avatar();
 			
-			if (entity.Get<Owner>().Value.Has<Spawned>())
-				entity.Get<Owner>().Value.Remove<Spawned>();
+			if (entity.Owner().Has<Spawned>())
+				entity.Owner().Remove<Spawned>();
+			
+			player.Set(new ApplyHeal{ Value = 15f }, ComponentLifetime.NotifyAllSystems);
 
-			var collision = new Entity("collision");
-			collision.Get<LifeTimeLeft>().Value = 2;
-			collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = -10f}, ComponentLifetime.NotifyAllSystems);
-                    
 			_vfx.SpawnVFX(VFXFeature.VFXType.TakeHealth, player.GetPosition(), player);
 			entity.Destroy();
 		}

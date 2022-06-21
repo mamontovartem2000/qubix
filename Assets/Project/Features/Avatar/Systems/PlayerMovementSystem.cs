@@ -1,5 +1,7 @@
-﻿using ME.ECS;
+﻿using Codice.CM.Common;
+using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using UnityEngine;
 
 namespace Project.Features.Avatar.Systems
@@ -51,7 +53,7 @@ namespace Project.Features.Avatar.Systems
 					entity.Get<FaceDirection>().Value = direction * moveAmount;
 				}
 
-				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= 0.01f)
+				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= Consts.Movement.MIN_DISTANCE)
 				{
 					entity.SetPosition((Vector3)Vector3Int.CeilToInt(entity.Read<PlayerMoveTarget>().Value));
 					
@@ -68,7 +70,7 @@ namespace Project.Features.Avatar.Systems
 			}
 			
 			var currentSpeed = entity.Read<MoveSpeedModifier>().Value;
-			var speed = entity.Has<LockTarget>() ? currentSpeed * 0.65f : currentSpeed;
+			var speed = entity.Has<LockTarget>() ? currentSpeed * Consts.Movement.LOCK_SPEED_RATIO : currentSpeed;
 
 			var pos = entity.GetPosition();
 			var target = entity.Read<PlayerMoveTarget>().Value;

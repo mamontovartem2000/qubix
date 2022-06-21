@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 
 namespace Project.Features.Avatar.Systems
 {
@@ -43,7 +44,7 @@ namespace Project.Features.Avatar.Systems
             if (time <= 0)
             { 
                 entity.Get<PlayerAvatar>().Value = _feature.SpawnPlayerAvatar(entity);
-                entity.Get<RespawnTime>().Value = 3;
+                entity.Get<RespawnTime>().Value = Consts.Main.RESPAWN_TIME;
             }
             
             if(entity.Has<SkillEntities>()) return;

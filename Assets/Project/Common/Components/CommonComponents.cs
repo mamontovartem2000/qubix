@@ -10,6 +10,11 @@ namespace Project.Common.Components
         public Entity ApplyTo;
         public Entity ApplyFrom;
     }
+
+    public struct ApplyHeal : IComponent
+    {
+        public float Value;
+    }
     public struct DamagedBy : IComponent {public Entity Value;}
     public struct Owner : IComponent {public Entity Value;}
     public struct LeftWeaponShot : IComponent{}
@@ -28,12 +33,4 @@ namespace Project.Common.Components
     public struct GameTimer : IComponent {public float Value;}
     public struct MapInitialized : IComponent {}
     public struct Tabulation : IComponent {}
-    public struct SoundPlay : IComponent {}
-    public struct SoundEffect : IComponent
-    {
-        public MonoBehaviourViewBase Sound0;
-        public MonoBehaviourViewBase Sound1;
-        public MonoBehaviourViewBase Sound2;
-        public MonoBehaviourViewBase Sound3;
-    }
 }

@@ -1,20 +1,24 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Features.VFX;
 
-namespace Project.Features.Avatar.Systems {
+namespace Project.Features.PostLogicTick.Systems {
 
     #pragma warning disable
-#pragma warning restore
+    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
+    using Components; using Modules; using Systems; using Markers;
+    #pragma warning restore
     
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class ShieldApplyDamageSystem : ISystemFilter {
+    public sealed class StunBulletDisposeSystem : ISystemFilter {
         
-        private AvatarFeature _feature;
-        
+        private PostLogicTickFeature _feature;
+        private VFXFeature _vfx;
+
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
@@ -32,23 +36,26 @@ namespace Project.Features.Avatar.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-ShieldApplyDamageSystem")
-                .With<ApplyDamage>()
+            return Filter.Create("Filter-StunBUlletDisposeSystem")
+                .With<ProjectileActive>()
+                .With<Collided>()
+                .With<StunModifier>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var apply = ref entity.Get<ApplyDamage>();
-            var to = apply.ApplyTo;
-            if (!to.IsAlive()) return;
+            if (entity.TryReadCollided(out var from, out var owner) == false) return;
+            var pos = entity.GetPosition();
             
-            var damage = apply.Damage;
-            
-            if (!to.Has<ForceShieldModifier>()) return;
-            
-            to.Get<ForceShieldModifier>().Value -= damage;
+            if (owner.Has<PlayerAvatar>())
+            {
+                var player = owner.Avatar();
+                _vfx.SpawnVFX(VFXFeature.VFXType.SkillStun, pos, player, entity.Read<StunModifier>().Value);
+                player.Set(new Stun { Value = entity.Read<StunModifier>().Value });
+            }
+            entity.Destroy();
         }
     
     }

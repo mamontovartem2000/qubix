@@ -2,6 +2,7 @@
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using Project.Features.Avatar.Systems;
 using Project.Features.Events;
 using Project.Mechanics.Features.Avatar.Systems;
@@ -27,15 +28,14 @@ namespace Project.Features.Avatar
         {
             AddSystem<SpawnPlayerAvatarSystem>();
             AddSystem<ApplyDamageSystem>();
+            AddSystem<HealSystem>();
             AddSystem<PlayerHealthSystem>();
-            // AddSystem<PlayerMovementSystem>();
             AddSystem<BlinkHurtSystem>();
             AddSystem<ShieldApplyDamageSystem>();
 
             AddSystem<AvatarMovementSystem>();
             AddSystem<AvatarRotationSystem>();
             
-            AddSystem<PlaySoundSystem>();
             AddSystem<SlownessAfterTakeDamageSystem>();
             AddSystem<SlownessRemoveSystem>();
             AddSystem<StunLifeTimeSystem>();
@@ -65,19 +65,12 @@ namespace Project.Features.Avatar
 
             entity.Get<PlayerDamagedCounter>().Value = 0;
 
-            //var id = NetworkData.SlotInRoom;
-            //var local = world.GetFeature<PlayerFeature>().GetPlayerByID(id);
-            //if (owner != local)
-            //{
-            //    health.InstantiateView(_playerHealth);
-            //}
-
             health.InstantiateView(_playerHealth);
 
             entity.Get<WeaponEntities>().LeftWeapon = ConstructWeapon(owner.Read<PlayerConfig>().LeftWeaponConfig, entity);
             entity.Get<WeaponEntities>().RightWeapon = ConstructWeapon(owner.Read<PlayerConfig>().RightWeaponConfig, entity);
 
-            entity.Get<MoveSpeedModifier>().Value = 1;
+            entity.Get<MoveSpeedModifier>().Value = Consts.Movement.DEFAULT_MOVEMENT_SPEED_MODIFIER;
 
             SetAvatarPosition(owner, entity);
 

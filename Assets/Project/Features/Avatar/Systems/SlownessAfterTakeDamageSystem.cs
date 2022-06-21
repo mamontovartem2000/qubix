@@ -1,6 +1,7 @@
-﻿using ME.ECS;
+﻿using System;
+using ME.ECS;
 using Project.Common.Components;
-using UnityEngine;
+using Project.Common.Utilities;
 
 namespace Project.Features.Avatar.Systems {
 
@@ -46,15 +47,12 @@ namespace Project.Features.Avatar.Systems {
             
             if (!to.IsAlive()) return;
             
-            if (to.Has<Slowness>())
+            if (to.Has<Slowness>() == false)
             {
-                to.Get<Slowness>().LifeTime = 1;
+                to.Get<Slowness>().Value = Math.Min(damage / 100, Consts.Movement.SLOWNESS_RATIO);
             }
-            else if (damage > 0) 
-            {
-                to.Get<Slowness>().Value = Mathf.Min(damage / 100, 0.8f);
-                to.Get<Slowness>().LifeTime = 1;
-            }
+
+            to.Get<Slowness>().LifeTime = 1;
         }
     }
 }

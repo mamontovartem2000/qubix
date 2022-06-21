@@ -68,9 +68,7 @@ namespace Project.Features.PostLogicTick.Systems
 			}
 			
 			_vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, pos);
-			
-			
-			
+
 			entity.Destroy();
 		}
 	}

@@ -1,6 +1,7 @@
 ﻿using System;
 using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using Project.Features.Avatar;
 using Unity.Mathematics;
 using UnityEngine;
@@ -54,7 +55,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
             }
 
             var newRot = quaternion.LookRotation(dir, new float3(0, 1, 0));
-            entity.SetRotation(Quaternion.RotateTowards(rot, newRot, 30f));
+            entity.SetRotation(Quaternion.RotateTowards(rot, newRot, Consts.Movement.ROTATION_SPEED));
 
         }
     }

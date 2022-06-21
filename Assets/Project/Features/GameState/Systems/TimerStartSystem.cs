@@ -1,17 +1,9 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 
 namespace Project.Features.GameState.Systems
 {
-    #region usage
-#if ECS_COMPILE_IL2CPP_OPTIONS
-    [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
-     Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
-     Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-#endif
-
-    #endregion
-
     public sealed class TimerStartSystem : ISystem, IAdvanceTick, IUpdate
 	{
 		public World world { get; set; }
@@ -30,7 +22,7 @@ namespace Project.Features.GameState.Systems
 			if (world.HasSharedData<MapInitialized>())
 			{
 				Entity timerEntity = new Entity("Timer");
-				timerEntity.Get<GameTimer>().Value = 150;
+				timerEntity.Get<GameTimer>().Value = Consts.Main.GAME_TIMER_SECONDS;
 				world.RemoveSharedData<MapInitialized>();
 			}
 		}

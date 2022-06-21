@@ -39,7 +39,6 @@ namespace Project.Features.LifeTime.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			//if (entity.GetParent().Has<LinearActive>()) return;
 			entity.Destroy();
 		}
 	}

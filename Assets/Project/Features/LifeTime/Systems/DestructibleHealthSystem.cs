@@ -36,21 +36,20 @@ namespace Project.Features.LifeTime.Systems
 		{
 			ref var hp = ref entity.Get<PlayerHealth>().Value;
 
-			if (hp <= 0)
-			{
-				ref readonly var view = ref entity.Read<DestructibleView>().Value;
-				var v = world.RegisterViewSource(view);
+			if (hp > 0) return;
+			
+			ref readonly var view = ref entity.Read<DestructibleView>().Value;
+			var v = world.RegisterViewSource(view);
 
-				var dVfx = new Entity("dVfx");
-				dVfx.Get<LifeTimeLeft>().Value = entity.Read<DestructibleLifeTime>().Value;
+			var dVfx = new Entity("dVfx");
+			dVfx.Get<LifeTimeLeft>().Value = entity.Read<DestructibleLifeTime>().Value;
 				
-				dVfx.SetPosition(entity.GetPosition());
-				dVfx.InstantiateView(v);
+			dVfx.SetPosition(entity.GetPosition());
+			dVfx.InstantiateView(v);
 				
-				SceneUtils.ModifyWalkable(entity.GetPosition(), true);
+			SceneUtils.ModifyWalkable(entity.GetPosition(), true);
 				
-				entity.Destroy();
-			}
+			entity.Destroy();
 		}
 	}
 }

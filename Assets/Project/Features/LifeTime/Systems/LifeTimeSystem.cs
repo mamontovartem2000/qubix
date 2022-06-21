@@ -41,8 +41,9 @@ namespace Project.Features.LifeTime.Systems
             ref var lifeTime = ref entity.Get<LifeTimeLeft>().Value;
             lifeTime -= deltaTime;
 
-            if (lifeTime <= 0)
-                entity.Destroy();
+            if (lifeTime > 0) return;
+            
+            entity.Destroy();
         }
     }
 }

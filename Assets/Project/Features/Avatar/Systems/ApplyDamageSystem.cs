@@ -43,26 +43,19 @@ namespace Project.Features.Avatar.Systems
             var damage = apply.Damage;
             ref var health = ref to.Get<PlayerHealth>().Value;
             
-            if (to.Has<ForceShieldModifier>() && damage > 0) return;
+            if (to.Has<ForceShieldModifier>()) return;
             
             if (from.Has<PlayerAvatar>())
             {
                 to.Get<Owner>().Value.Set(new DamagedBy {Value = from});
             }
-
-            if (damage > 0)
-            {
-                if (health/apply.ApplyTo.Read<PlayerHealthDefault>().Value < 0.65)
-                {
-                    apply.ApplyTo.Set(new PlayerDamaged {Value = 1f});
-                    apply.ApplyTo.Get<PlayerDamagedCounter>().Value += 0.1f;
-                }
-            }
-            else
-            {
-                SoundUtils.PlaySound(to, "event:/VFX/Heal");
-            }
             
+            if (health/apply.ApplyTo.Read<PlayerHealthDefault>().Value < 0.65)
+            {
+                apply.ApplyTo.Set(new PlayerDamaged {Value = 1f});
+                apply.ApplyTo.Get<PlayerDamagedCounter>().Value += 0.1f;
+            }
+
             health -= damage;
             
             if (to.Read<PlayerHealth>().Value <= 0)
@@ -70,19 +63,13 @@ namespace Project.Features.Avatar.Systems
                 damage += to.Read<PlayerHealth>().Value;
                 to.Get<PlayerHealth>().Value = 0;
             }
-            else if(to.Read<PlayerHealth>().Value - damage > to.Read<PlayerHealthDefault>().Value)
-            {
-                to.Get<PlayerHealth>().Value = to.Read<PlayerHealthDefault>().Value;
-            }
 
-            if (damage > 0)
-            {
-                from.Get<PlayerScore>().DealtDamage += damage;
-                world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(from);
-                world.GetFeature<EventsFeature>().TabulationScreenNewPlayerStats.Execute(from);
-            }
+            from.Get<PlayerScore>().DealtDamage += damage;
             
-            world.GetFeature<EventsFeature>().HealthChanged.Execute(to.Read<Owner>().Value);
+            world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(from);
+            world.GetFeature<EventsFeature>().TabulationScreenNewPlayerStats.Execute(from);
+
+            world.GetFeature<EventsFeature>().HealthChanged.Execute(to.Owner());
         }
     }
 }

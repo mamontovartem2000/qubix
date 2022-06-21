@@ -4,14 +4,16 @@ using Project.Common.Components;
 namespace Project.Features.Avatar.Systems {
 
     #pragma warning disable
-#pragma warning restore
+    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
+    using Components; using Modules; using Systems; using Markers;
+    #pragma warning restore
     
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class ShieldApplyDamageSystem : ISystemFilter {
+    public sealed class HealSystem : ISystemFilter {
         
         private AvatarFeature _feature;
         
@@ -32,25 +34,25 @@ namespace Project.Features.Avatar.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-ShieldApplyDamageSystem")
-                .With<ApplyDamage>()
+            return Filter.Create("Filter-HealSystem")
+                .With<ApplyHeal>()
+                .With<PlayerHealth>()
+                .With<AvatarTag>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var apply = ref entity.Get<ApplyDamage>();
-            var to = apply.ApplyTo;
-            if (!to.IsAlive()) return;
+            ref var playerHealth = ref entity.Get<PlayerHealth>().Value;
+            var playerMaxHealth = entity.Read<PlayerHealthDefault>().Value;
+            var healValue = entity.Read<ApplyHeal>().Value;
             
-            var damage = apply.Damage;
+            playerHealth += healValue;
             
-            if (!to.Has<ForceShieldModifier>()) return;
+            playerHealth = playerHealth >  playerMaxHealth ? playerHealth = playerMaxHealth : playerHealth;
             
-            to.Get<ForceShieldModifier>().Value -= damage;
+            SoundUtils.PlaySound(entity, "event:/VFX/Heal");
         }
-    
     }
-    
 }

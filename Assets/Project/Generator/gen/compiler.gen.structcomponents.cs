@@ -14,6 +14,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacityDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AOESkill>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyHeal>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarView>(false, true, false, false, false, false, false, false);
@@ -124,9 +125,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Slowness>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundEffect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPath>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPlay>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnedPortal>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
@@ -163,6 +162,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacityDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AOESkill>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyDamage>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyHeal>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarView>(false, true, false, false, false, false, false, false);
@@ -273,9 +273,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Slowness>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundEffect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPath>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPlay>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnedPortal>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
@@ -307,6 +305,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.AmmoCapacityDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.AOESkill>(false);
             structComponentsContainer.Validate<Project.Common.Components.ApplyDamage>(false);
+            structComponentsContainer.Validate<Project.Common.Components.ApplyHeal>(false);
             structComponentsContainer.Validate<Project.Common.Components.AutomaticWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvatarTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvatarView>(false);
@@ -417,9 +416,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SkillTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillVFX>(false);
             structComponentsContainer.Validate<Project.Common.Components.Slowness>(false);
-            structComponentsContainer.Validate<Project.Common.Components.SoundEffect>(false);
             structComponentsContainer.Validate<Project.Common.Components.SoundPath>(false);
-            structComponentsContainer.Validate<Project.Common.Components.SoundPlay>(true);
             structComponentsContainer.Validate<Project.Common.Components.Spawned>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpawnedPortal>(false);
             structComponentsContainer.Validate<Project.Common.Components.SpeedModifier>(true);
@@ -456,6 +453,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.AmmoCapacityDefault>(false);
             entity.ValidateData<Project.Common.Components.AOESkill>(false);
             entity.ValidateData<Project.Common.Components.ApplyDamage>(false);
+            entity.ValidateData<Project.Common.Components.ApplyHeal>(false);
             entity.ValidateData<Project.Common.Components.AutomaticWeapon>(true);
             entity.ValidateData<Project.Common.Components.AvatarTag>(true);
             entity.ValidateData<Project.Common.Components.AvatarView>(false);
@@ -566,9 +564,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SkillTag>(false);
             entity.ValidateData<Project.Common.Components.SkillVFX>(false);
             entity.ValidateData<Project.Common.Components.Slowness>(false);
-            entity.ValidateData<Project.Common.Components.SoundEffect>(false);
             entity.ValidateData<Project.Common.Components.SoundPath>(false);
-            entity.ValidateData<Project.Common.Components.SoundPlay>(true);
             entity.ValidateData<Project.Common.Components.Spawned>(true);
             entity.ValidateData<Project.Common.Components.SpawnedPortal>(false);
             entity.ValidateData<Project.Common.Components.SpeedModifier>(true);

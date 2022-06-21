@@ -37,14 +37,13 @@ namespace Project.Features.CollisionHandler.Systems
             ref var dispenser = ref entity.Get<DispenserTag>();
             dispenser.Timer -= deltaTime;
 
-            if (dispenser.Timer <= 0)
-            {
-                var health = _feature.SpawnHealth(entity);
-                health.SetPosition(entity.GetPosition());
+            if (dispenser.Timer > 0) return;
+            
+            var health = _feature.SpawnHealth(entity);
+            health.SetPosition(entity.GetPosition());
 
-                dispenser.Timer = dispenser.TimerDefault;
-                entity.Set(new Spawned());
-            }
+            dispenser.Timer = dispenser.TimerDefault;
+            entity.Set(new Spawned());
         }
     }
 }

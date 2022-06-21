@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using Project.Features.VFX;
 
 namespace Project.Features.PostLogicTick.Systems
@@ -60,8 +61,8 @@ namespace Project.Features.PostLogicTick.Systems
 			var pos = SceneUtils.GetRandomPortal(player.GetPosition());
 			SceneUtils.ModifyWalkable(player.GetPosition(), true);
 			SceneUtils.ModifyWalkable(pos, false);
-
-			player.Get<AvoidTeleport>().Value = 3;
+			
+			player.Get<AvoidTeleport>().Value = Consts.Main.AVOID_TELEPORT_SECONDS;
 
 			player.SetPosition(pos);
 			player.Get<PlayerMoveTarget>().Value = pos;

@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using Project.Features.Events;
 using Project.Features.VFX;
 
@@ -50,7 +51,7 @@ namespace Project.Features.Skills.Systems.Buller
 			effect.Set(new EffectTag());
 
 			rightWeapon.Get<FireRateModifier>().Value = 1;
-			rightWeapon.Get<AmmoCapacityDefault>().Value = 2;
+			rightWeapon.Get<AmmoCapacityDefault>().Value = Consts.Skills.FIRE_RATE_SKILL_AMMO_CAPACITY;
 			rightWeapon.Get<ReloadTime>().Value = rightWeapon.Get<ReloadTimeDefault>().Value;
 			
 			SoundUtils.PlaySound(avatar, "event:/Skills/Buller/OffenciveBurst");

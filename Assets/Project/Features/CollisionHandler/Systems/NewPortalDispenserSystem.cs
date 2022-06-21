@@ -37,15 +37,13 @@ namespace Project.Features.CollisionHandler.Systems
 			ref var dispenser = ref entity.Get<PortalDispenserTag>();
 			dispenser.Timer -= deltaTime;
 
-			if (dispenser.Timer <= 0)
-			{
-				var portal = _feature.SpawnPortal(entity);
-				portal.SetPosition(entity.GetPosition());
-				// SceneUtils.ReleasePortal(portal.GetPosition());
+			if (dispenser.Timer > 0) return;
+			
+			var portal = _feature.SpawnPortal(entity);
+			portal.SetPosition(entity.GetPosition());
 
-				dispenser.Timer = dispenser.TimerDefault;
-				entity.Get<SpawnedPortal>().Value = portal;
-			}
+			dispenser.Timer = dispenser.TimerDefault;
+			entity.Get<SpawnedPortal>().Value = portal;
 		}
 	}
 }

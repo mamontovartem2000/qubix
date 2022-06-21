@@ -43,8 +43,10 @@ namespace Project.Features.Skills.Systems.Powerf
             var avatar = entity.Owner(out var owner).Avatar();
             if (avatar.IsAlive() == false) return;
 
-            var collision = new Entity("collision");
-			collision.Set(new ApplyDamage {ApplyTo = avatar, ApplyFrom = avatar, Damage = -entity.Read<SkillAmount>().Value}, ComponentLifetime.NotifyAllSystems);
+            avatar.Set(new ApplyHeal { Value = entity.Read<SkillAmount>().Value });
+            
+            // var collision = new Entity("collision");
+			// collision.Set(new ApplyDamage {ApplyTo = avatar, ApplyFrom = avatar, Damage = -entity.Read<SkillAmount>().Value}, ComponentLifetime.NotifyAllSystems);
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
             world.GetFeature<EventsFeature>().HealthChanged.Execute(owner);

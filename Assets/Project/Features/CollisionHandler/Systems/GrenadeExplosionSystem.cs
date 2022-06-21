@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using Project.Features.VFX;
 
 namespace Project.Features.CollisionHandler.Systems {
@@ -49,13 +50,12 @@ namespace Project.Features.CollisionHandler.Systems {
         // ReSharper disable Unity.PerformanceAnalysis
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
         {
-            if (entity.GetPosition().y < 0f)
-            {
-                SoundUtils.PlaySound(entity);
+            if (entity.GetPosition().y > 0f) return;
+            SoundUtils.PlaySound(entity);
 
                 foreach (Entity player in _playerFilter)
                 {
-                    if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > (fp)10) continue;
+                    if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > (fp) Consts.Weapons.GRENADE_EXPLOSION_SQUARED_RADIUS) continue;
                     
                     var debuff = new Entity("debuff");
                     debuff.Get<Owner>().Value = entity.Read<Owner>().Value;
@@ -65,8 +65,8 @@ namespace Project.Features.CollisionHandler.Systems {
                    
                     if (debuff.Has<Slowness>())
                     {
-                        player.Get<Slowness>().Value = debuff.Get<Slowness>().Value/100;
-                        player.Get<Slowness>().LifeTime = debuff.Get<Slowness>().LifeTime;
+                        player.Get<Slowness>().Value = debuff.Read<Slowness>().Value/100;
+                        player.Get<Slowness>().LifeTime = debuff.Read<Slowness>().LifeTime;
                     }
                     
                     debuff.SetPosition(SceneUtils.SafeCheckPosition(player.GetPosition()));
@@ -84,7 +84,7 @@ namespace Project.Features.CollisionHandler.Systems {
                 }
                 
                 entity.Destroy();
-            }
+            
         }
     }
 }

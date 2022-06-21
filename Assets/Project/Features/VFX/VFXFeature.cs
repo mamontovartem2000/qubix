@@ -44,13 +44,12 @@ namespace Project.Features.VFX
 			if(!player.IsAlive()) return;
 			
 			var fx = new Entity("vfx");
-			fx.Get<LifeTimeLeft>().Value = 5;
 			fx.Set(new LifeTimeLeft{Value = lifeTime});
 			fx.Set(new Owner { Value = player.Read<Owner>().Value });
 			fx.SetLocalPosition(position);
 			fx.SetLocalRotation(player.GetRotation());
 			fx.SetParent(player);
-			fx.InstantiateView(_viewIds[(int)type-1]);
+			fx.InstantiateView(_viewIds[(int)type]);
 		}
 		public void SpawnVFX(VFXType type, Vector3 position, Entity player)
 		{
@@ -61,7 +60,7 @@ namespace Project.Features.VFX
 			fx.Set(new Owner { Value = player.Read<Owner>().Value });
 			fx.SetLocalPosition(position);
 			fx.SetParent(player);
-			fx.InstantiateView(_viewIds[(int)type-1]);
+			fx.InstantiateView(_viewIds[(int)type]);
 		}
 
 		public void SpawnVFX(VFXType type, Vector3 position)
@@ -69,7 +68,7 @@ namespace Project.Features.VFX
 			var fx = new Entity("vfx");
 			fx.Get<LifeTimeLeft>().Value = 5;
 			fx.SetLocalPosition(position);
-			fx.InstantiateView(_viewIds[(int)type-1]);
+			fx.InstantiateView(_viewIds[(int)type]);
 		}
 		
 		public enum VFXType
@@ -79,7 +78,6 @@ namespace Project.Features.VFX
 			MinigunMuzzle,
 			MingunShoot,
 			PlayerDeath,
-			PlayerDeath2,
 			PlayerFire,
 			PlayerShield,
 			PlayerTakeDamage,

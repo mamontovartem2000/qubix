@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 
 namespace Project.Features.CollisionHandler.Systems
 {
@@ -42,7 +43,7 @@ namespace Project.Features.CollisionHandler.Systems
 			
 			if(time > 0) return;
 			
-			entity.Get<MineBlink>().Value = 0.15f;
+			entity.Get<MineBlink>().Value = Consts.Scene.MINE_BLINK_TIME;
 			time = defaultTime;
 		}
 	}

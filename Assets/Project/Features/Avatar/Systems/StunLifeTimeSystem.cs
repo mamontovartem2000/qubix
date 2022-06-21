@@ -38,7 +38,7 @@ namespace Project.Features.Avatar.Systems
 
             if (entity.Read<Stun>().Value > 0f) return;
 
-            entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Remove<Stun>();
+            entity.Remove<Stun>();
         }
     }
 }

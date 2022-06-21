@@ -50,7 +50,7 @@ namespace Project.Features.Skills.Systems.GoldHunter
 			SoundUtils.PlaySound(avatar, "event:/Skills/GoldHunter/StunShot");
 
 			
-			rightWeapon.Set(new StunModifier{Value = 20});
+			rightWeapon.Set(new StunModifier{Value = rightWeapon.Read<AmmoCapacityDefault>().Value});
 
 			rightWeapon.Get<AmmoCapacityDefault>().Value = 5;
 

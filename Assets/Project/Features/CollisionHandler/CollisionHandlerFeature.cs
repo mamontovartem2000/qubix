@@ -66,12 +66,7 @@ namespace Project.Features.CollisionHandler
 
             entity.Set(new MineTag());
 
-            var tmpPos = SceneUtils.GetRandomPosition();
-            
-            
             entity.SetPosition(SceneUtils.GetRandomPosition());
-
-            Debug.Log($"tmpPos: {tmpPos}, plrPos: {entity.GetPosition()}");
 
             SceneUtils.ModifyFree(entity.GetPosition(), false);
             entity.InstantiateView(_mine);
