@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Core.Features.Events;
-using Project.Core.Features.Player;
+using Project.Features.Events;
+using Project.Features.Player;
 
 namespace Project.Features.Avatar.Systems
 {

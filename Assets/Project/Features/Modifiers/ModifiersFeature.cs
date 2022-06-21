@@ -1,10 +1,7 @@
 ﻿using ME.ECS;
+using Project.Features.Modifiers.Systems;
 
-namespace Project.Mechanics.Features {
-
-    using Components; using Modules; using Systems; using Features; using Markers;
-    using Modifiers.Components; using Modifiers.Modules; using Modifiers.Systems; using Modifiers.Markers;
-    
+namespace Project.Features.Modifiers {
     namespace Modifiers.Components {}
     namespace Modifiers.Modules {}
     namespace Modifiers.Systems {}

@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 
-namespace Project.Mechanics.Features.Lifetime.Systems
+namespace Project.Features.LifeTime.Systems
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS

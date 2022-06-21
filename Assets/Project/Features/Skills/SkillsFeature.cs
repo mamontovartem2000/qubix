@@ -1,11 +1,12 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Mechanics.Features.Skills.Systems.AttributeModifierSkills;
-using Project.Mechanics.Features.Skills.Systems.ComponentBuffSkills;
-using Project.Mechanics.Features.Skills.Systems.SelfTargetedSkills;
-using Project.Mechanics.Features.Skills.Systems.TargetedSkills;
+using Project.Features.Skills.Systems.Buller;
+using Project.Features.Skills.Systems.GoldHunter;
+using Project.Features.Skills.Systems.Noname;
+using Project.Features.Skills.Systems.Powerf;
+using Project.Features.Skills.Systems.Universal;
 
-namespace Project.Mechanics.Features.Skills
+namespace Project.Features.Skills
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS
@@ -19,23 +20,26 @@ namespace Project.Mechanics.Features.Skills
         // ReSharper disable Unity.PerformanceAnalysis
         protected override void OnConstruct()
         {
-            //attribute modifier systems
-            AddSystem<MovementSpeedSkillsSystem>();
+            //Buller
             AddSystem<FireRateSkillSystem>();
+            AddSystem<PersonalTeleportSkillSystem>();
+            AddSystem<InstantReloadSkillSystem>();
             
-            //component buff systems
-            AddSystem<ForceShieldSkillSystem>();
-            AddSystem<LinearPowerSkillSystem>();
+            //Goldhunter
             AddSystem<StunSkillSystem>();
-            
-            //self targeted systems
             AddSystem<CooldownResetSkillSystem>();
             AddSystem<DashSkillSystem>();
-            AddSystem<InstantReloadSkillSystem>();
-            AddSystem<PersonalTeleportSkillSystem>();
+            
+            //Powerf
+            AddSystem<MovementSpeedSkillsSystem>();
+            AddSystem<LinearPowerSkillSystem>();
+            AddSystem<ForceShieldSkillSystem>();
             AddSystem<SelfHealSystem>();
             
-            //targeted systems
+            //Noname
+            AddSystem<MineLandingSkillSystem>();
+            
+            //Universal
             AddSystem<GrenadeThrowSkillSystem>();
             
         }

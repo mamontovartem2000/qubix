@@ -1,14 +1,14 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
 using Project.Common.Components;
-using Project.Core.Features.Events;
-using Project.Core.Features.Player.Modules;
-using Project.Core.Features.Player.Systems;
+using Project.Features.Events;
+using Project.Features.Player.Modules;
+using Project.Features.Player.Systems;
 using Project.Markers;
 using Project.Modules.Network;
 using UnityEngine;
 
-namespace Project.Core.Features.Player
+namespace Project.Features.Player
 {
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),

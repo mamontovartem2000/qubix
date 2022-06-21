@@ -1,9 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Core;
-using Project.Mechanics.Features.Lifetime;
 
-namespace Project.Mechanics.Features.LifeTime.Systems
+namespace Project.Features.LifeTime.Systems
 {
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),

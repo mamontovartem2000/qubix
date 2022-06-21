@@ -2,7 +2,7 @@
 using Project.Common.Components;
 using UnityEngine;
 
-namespace Project.Mechanics.Features.Projectile.Systems
+namespace Project.Features.Projectile.Systems
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS

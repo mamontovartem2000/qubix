@@ -1,8 +1,7 @@
 using DG.Tweening;
 using ME.ECS;
 using Project.Common.Components;
-using Project.Core.Features.Events;
-using Project.Core.Features.Player;
+using Project.Features.Player;
 using Project.Modules.Network;
 using UnityEngine;
 using TMPro;

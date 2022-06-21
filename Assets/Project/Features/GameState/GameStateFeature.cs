@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
-using Project.Core.Features.GameState.Systems;
+using Project.Features.GameState.Systems;
 
-namespace Project.Core.Features.GameState
+namespace Project.Features.GameState
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS

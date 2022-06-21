@@ -1,12 +1,10 @@
 ﻿using ME.ECS;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
-using Project.Core;
 using Project.Features.CollisionHandler.Systems;
-using Project.Mechanics.Features.CollisionHandler.Systems;
 using UnityEngine;
 
-namespace Project.Mechanics.Features.CollisionHandler 
+namespace Project.Features.CollisionHandler 
 {
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
@@ -30,7 +28,7 @@ namespace Project.Mechanics.Features.CollisionHandler
         {
             AddSystem<GridCollisionDetectionSystem>();
             AddSystem<GrenadeExplosionSystem>();
-            // AddSystem<SpawnMineSystem>();
+            AddSystem<SpawnMineSystem>();
             AddSystem<NewHealthDispenserSystem>();
             AddSystem<NewPortalDispenserSystem>();
             AddSystem<MineBlinkSystem>();

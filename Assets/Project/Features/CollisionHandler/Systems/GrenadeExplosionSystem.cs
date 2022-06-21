@@ -1,15 +1,10 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using ME.ECS.DataConfigs;
-using Project.Mechanics.Features.VFX;
-using UnityEngine;
+using Project.Features.VFX;
 
-namespace Project.Mechanics.Features.CollisionHandler.Systems {
+namespace Project.Features.CollisionHandler.Systems {
 
     #pragma warning disable
-    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
-    using Components; using Modules; using Systems; using Markers;
-    using Project.Core;
 #pragma warning restore
 
 #if ECS_COMPILE_IL2CPP_OPTIONS

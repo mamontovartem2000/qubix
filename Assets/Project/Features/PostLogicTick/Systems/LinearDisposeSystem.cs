@@ -1,9 +1,9 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Mechanics.Features.VFX;
+using Project.Features.VFX;
 using Project.Modules.Network;
 
-namespace Project.Mechanics.Features.PostLogicTick.Systems
+namespace Project.Features.PostLogicTick.Systems
 {
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),

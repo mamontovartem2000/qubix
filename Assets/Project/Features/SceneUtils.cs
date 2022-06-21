@@ -1,9 +1,8 @@
 using ME.ECS;
 using ME.ECS.Collections;
 using Project.Common.Components;
-using UnityEngine;
 
-namespace Project.Core
+namespace Project.Features
 {
     public static class SceneUtils
     {

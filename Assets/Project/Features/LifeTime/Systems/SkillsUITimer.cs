@@ -1,9 +1,8 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Core.Features.Events;
-using Project.Mechanics.Features.Lifetime;
+using Project.Features.Events;
 
-namespace Project.Mechanics.Features.LifeTime.Systems {
+namespace Project.Features.LifeTime.Systems {
 
     #pragma warning disable
 #pragma warning restore

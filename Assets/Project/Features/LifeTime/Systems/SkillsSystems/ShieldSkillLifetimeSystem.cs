@@ -1,9 +1,8 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Mechanics.Features.Lifetime;
 using UnityEngine;
 
-namespace Project.Mechanics.Features.LifeTime.Systems.SkillsSystems
+namespace Project.Features.LifeTime.Systems.SkillsSystems
 {
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),

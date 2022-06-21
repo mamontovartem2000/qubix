@@ -1,6 +1,6 @@
 using ME.ECS;
 using Project.Common.Components;
-using Project.Core.Features.Player;
+using Project.Features.Player;
 using Project.Modules.Network;
 using TMPro;
 using UnityEngine;

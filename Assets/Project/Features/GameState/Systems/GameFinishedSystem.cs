@@ -1,11 +1,11 @@
-﻿using ME.ECS;
+﻿using System.Collections.Generic;
+using ME.ECS;
 using Project.Common.Components;
-using Project.Core.Features.Events;
-using System.Collections.Generic;
-using UnityEngine;
+using Project.Features.Events;
 using Project.Modules.Network;
+using UnityEngine;
 
-namespace Project.Core.Features.GameState.Systems
+namespace Project.Features.GameState.Systems
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS

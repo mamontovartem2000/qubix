@@ -2,14 +2,12 @@
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
-using Project.Core;
-using Project.Core.Features.Events;
 using Project.Features.Avatar.Systems;
-using Project.Mechanics.Features.Avatar.Systems;
+using Project.Features.Events;
 using Project.Modules.Network;
 using UnityEngine;
 
-namespace Project.Mechanics.Features.Avatar
+namespace Project.Features.Avatar
 {
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),

@@ -1,11 +1,10 @@
 ﻿using ME.ECS;
-using Project.Mechanics.Features.LifeTime.Systems;
-using Project.Mechanics.Features.LifeTime.Systems.SkillsSystems;
+using Project.Features.LifeTime.Systems;
+using Project.Features.LifeTime.Systems.SkillsSystems;
 
-namespace Project.Mechanics.Features.Lifetime
+namespace Project.Features.LifeTime
 {
     #region usage
-    using Systems;
     namespace LifeTime.Components { }
     namespace LifeTime.Modules { }
     namespace LifeTime.Systems { }

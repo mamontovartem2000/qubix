@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
 using Project.Markers;
 
-namespace Project.Core.Features.Player.Modules
+namespace Project.Features.Player.Modules
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS

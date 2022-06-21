@@ -1,10 +1,8 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Core;
-using Project.Core.Features.Player;
 using UnityEngine;
 
-namespace Project.Mechanics.Features.Avatar.Systems
+namespace Project.Features.Avatar.Systems
 {
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),

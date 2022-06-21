@@ -1,12 +1,10 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 
-namespace Project.Mechanics.Features.VFX.Systems {
+namespace Project.Features.VFX.Systems {
 
     #pragma warning disable
-    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
-    using Components; using Modules; using Systems; using Markers;
-    #pragma warning restore
+#pragma warning restore
     
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),

@@ -1,5 +1,5 @@
 using ME.ECS;
-using Project.Core.Features.Player;
+using Project.Features.Player;
 using Project.Modules.Network;
 using UnityEngine;
 

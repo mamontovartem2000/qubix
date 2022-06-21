@@ -1,12 +1,10 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 
-namespace Project.Mechanics.Features.Modifiers.Systems {
+namespace Project.Features.Modifiers.Systems {
 
     #pragma warning disable
-    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
-    using Components; using Modules; using Systems; using Markers;
-    #pragma warning restore
+#pragma warning restore
     
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
@@ -43,6 +41,8 @@ namespace Project.Mechanics.Features.Modifiers.Systems {
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var avatar = entity.Owner().Avatar();
+            if (avatar.IsAlive() == false) return;
+            
             var startSpeed = avatar.Read<PlayerMovementSpeed>().Value;
             entity.Get<MoveSpeedModifier>().Value -= startSpeed * entity.Read<Slowness>().Value;
         }

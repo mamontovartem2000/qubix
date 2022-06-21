@@ -1,18 +1,10 @@
 ﻿using ME.ECS;
+using Project.Common.Components;
 
-namespace Project.Mechanics.Features.Avatar.Systems
+namespace Project.Features.Avatar.Systems
 {
     #region usage
 #pragma warning disable
-    using Project.Components;
-    using Project.Modules;
-    using Project.Systems;
-    using Project.Markers;
-    using Components;
-    using Modules;
-    using Systems;
-    using Markers;
-    using Project.Common.Components;
 #pragma warning restore
 
 #if ECS_COMPILE_IL2CPP_OPTIONS

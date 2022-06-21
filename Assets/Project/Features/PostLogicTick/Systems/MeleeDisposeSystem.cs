@@ -1,9 +1,8 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Modules.Network;
-using UnityEngine;
 
-namespace Project.Mechanics.Features.PostLogicTick.Systems
+namespace Project.Features.PostLogicTick.Systems
 {
 #pragma warning disable
 #if ECS_COMPILE_IL2CPP_OPTIONS

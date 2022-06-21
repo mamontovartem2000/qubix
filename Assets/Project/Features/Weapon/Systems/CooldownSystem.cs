@@ -1,9 +1,7 @@
 ﻿using ME.ECS;
-using ME.ECS.Transform;
 using Project.Common.Components;
-using Project.Core.Features.Events;
 
-namespace Project.Mechanics.Features.Weapon.Systems
+namespace Project.Features.Weapon.Systems
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS

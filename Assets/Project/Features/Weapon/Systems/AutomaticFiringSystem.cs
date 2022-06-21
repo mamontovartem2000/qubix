@@ -1,12 +1,11 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Core;
-using Project.Core.Features.Events;
-using Project.Mechanics.Features.Projectile;
-using Project.Mechanics.Features.VFX;
+using Project.Features.Events;
+using Project.Features.Projectile;
+using Project.Features.VFX;
 using UnityEngine;
 
-namespace Project.Mechanics.Features.Weapon.Systems
+namespace Project.Features.Weapon.Systems
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS

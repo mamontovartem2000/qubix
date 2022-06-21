@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
-using Project.Mechanics.Features.PostLogicTick.Systems;
+using Project.Features.PostLogicTick.Systems;
 
-namespace Project.Mechanics.Features.PostLogicTick
+namespace Project.Features.PostLogicTick
 {
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),

@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a0e13efcdbfb4d3fb2a189867f5f509, type: 3}
+  m_Name: -TemplateTile
+  m_EditorClassIdentifier: 
+  sharedGroupId: 0
+  structComponents:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  removeStructComponents: []
+  templates: []
+  editorComment: 
+  usedIn:
+  - {fileID: 11400000, guid: 178bf8046fb063e45821aea6f6eb00db, type: 2}
+  - {fileID: 11400000, guid: 5b31189e31a026c4190a80a4100129ab, type: 2}
+  - {fileID: 11400000, guid: bf8e3022bbcdf0342a291946774c6191, type: 2}
+  - {fileID: 11400000, guid: 08fed65177f23074784859e0af688446, type: 2}
+  - {fileID: 11400000, guid: 25c18208ca263074a80511130c8621e6, type: 2}
+  - {fileID: 11400000, guid: 7c38b03e93ebc414389919e84d5527bb, type: 2}
+  - {fileID: 11400000, guid: 7e6222195afc456478d6fdb21b15b7f4, type: 2}
+  - {fileID: 11400000, guid: 676bb721220dcb544928879cee734f3f, type: 2}
+  - {fileID: 11400000, guid: 15a543fa8c64aed429768adfa322cdb1, type: 2}
+  - {fileID: 11400000, guid: 6f10afa0c9fc96843ab50a094c358399, type: 2}
+  - {fileID: 11400000, guid: 82626c4900a594241a2bbe5aeb507033, type: 2}
+  - {fileID: 11400000, guid: bb5fb735f46630f4694705ebd902a802, type: 2}
+  - {fileID: 11400000, guid: 45b78176879b2254f849060cbe7d581f, type: 2}
+  - {fileID: 11400000, guid: d50f4a305c8d8d64596e6218e3c1278c, type: 2}
+  - {fileID: 11400000, guid: fc7b0cbe41b92c640a9bf4f74142c49e, type: 2}
+  - {fileID: 11400000, guid: 5fea3e4e7cf3f714d861b4d104a71e9d, type: 2}
+  - {fileID: 11400000, guid: 99b3dc7642f50e64188564fa4c727ad0, type: 2}
+  - {fileID: 11400000, guid: 5702f620c17ed87478ded07205f59452, type: 2}
+  - {fileID: 11400000, guid: f1e26f7a9b05d1b4889d6c279121d915, type: 2}
+  - {fileID: 11400000, guid: ea9bfa95e81308d4a9789883dbe4186e, type: 2}
+  - {fileID: 11400000, guid: 0dd60169b9f2aa14abf2913df60f01e1, type: 2}
+  - {fileID: 11400000, guid: 2e2d423f2ad460f448bf5179ec91d353, type: 2}
+  references:
+    version: 1
+    00000000:
+      type: {class: TileView, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 0}
+    00000001:
+      type: {class: TileRotation, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value:
+          x:
+            m_rawValue: 0
+          y:
+            m_rawValue: 0
+          z:
+            m_rawValue: 0
+    00000002:
+      type: {class: CollisionStatic, ns: Project.Common.Components, asm: Project.Common}
+    00000003:
+      type: {class: TileAlternativeView, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 0}

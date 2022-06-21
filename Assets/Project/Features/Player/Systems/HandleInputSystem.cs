@@ -1,12 +1,11 @@
-﻿using ME.ECS;
+﻿using System;
+using ME.ECS;
 using Project.Common.Components;
+using Project.Features.Events;
 using Project.Input.InputHandler.Markers;
-using System;
-using Project.Core.Features.Events;
 using Project.Modules.Network;
-using UnityEngine;
 
-namespace Project.Core.Features.Player.Systems
+namespace Project.Features.Player.Systems
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS

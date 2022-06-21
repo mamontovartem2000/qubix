@@ -1,8 +1,8 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Mechanics.Features.Weapon.Systems;
+using Project.Features.Weapon.Systems;
 
-namespace Project.Mechanics.Features.Weapon
+namespace Project.Features.Weapon
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS

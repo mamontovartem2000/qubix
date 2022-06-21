@@ -1,8 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using UnityEngine;
 
-namespace Project.Mechanics.Features.Lifetime.Systems
+namespace Project.Features.LifeTime.Systems
 {
 	#region usage
 

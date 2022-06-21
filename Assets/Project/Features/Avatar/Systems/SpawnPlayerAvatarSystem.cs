@@ -1,8 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using UnityEngine;
 
-namespace Project.Mechanics.Features.Avatar.Systems
+namespace Project.Features.Avatar.Systems
 {
     #region usage
 #if ECS_COMPILE_IL2CPP_OPTIONS

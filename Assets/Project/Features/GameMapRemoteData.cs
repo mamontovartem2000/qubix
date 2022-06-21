@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Project.Core
+namespace Project.Features
 {
 	[Serializable]
 	public class GameMapRemoteData

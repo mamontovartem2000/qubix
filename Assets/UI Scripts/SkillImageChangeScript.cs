@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ME.ECS;
 using Project.Common.Components;
-using Project.Core.Features.Player;
+using Project.Features.Player;
 using Project.Modules.Network;
 using UnityEngine;
 using UnityEngine.UI;

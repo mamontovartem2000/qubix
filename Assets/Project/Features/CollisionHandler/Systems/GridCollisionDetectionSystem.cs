@@ -2,8 +2,6 @@
 using ME.ECS.Buffers;
 using ME.ECS.Transform;
 using Project.Common.Components;
-using Project.Core;
-using Project.Mechanics.Features.CollisionHandler;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;

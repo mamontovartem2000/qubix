@@ -7,7 +7,7 @@ using Project.Common.Components;
 using Project.Modules.Network;
 using UnityEngine;
 
-namespace Project.Core.Features.SceneBuilder
+namespace Project.Features.SceneBuilder
 {
 #if ECS_COMPILE_IL2CPP_OPTIONS
      [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
