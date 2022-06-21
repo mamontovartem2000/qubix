@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Features.Weapon.Systems;
+using Project.Mechanics.Features.Weapon.Systems;
 
 namespace Project.Features.Weapon
 {
@@ -19,6 +20,7 @@ namespace Project.Features.Weapon
             AddSystem<LinearFiringSystem>();
             AddSystem<MeleeFiringSystem>();
             AddSystem<AmmoCapacityDefaultRestoreSystem>();
+            AddSystem<NewFiringSystem>();
 
             AddSystem<CooldownSystem>();
             AddSystem<LinearReloadSystem>();

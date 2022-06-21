@@ -4,6 +4,7 @@ using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Features.Avatar.Systems;
 using Project.Features.Events;
+using Project.Mechanics.Features.Avatar.Systems;
 using Project.Modules.Network;
 using UnityEngine;
 
@@ -27,10 +28,13 @@ namespace Project.Features.Avatar
             AddSystem<SpawnPlayerAvatarSystem>();
             AddSystem<ApplyDamageSystem>();
             AddSystem<PlayerHealthSystem>();
-            AddSystem<PlayerMovementSystem>();
+            // AddSystem<PlayerMovementSystem>();
             AddSystem<BlinkHurtSystem>();
             AddSystem<ShieldApplyDamageSystem>();
 
+            AddSystem<AvatarMovementSystem>();
+            AddSystem<AvatarRotationSystem>();
+            
             AddSystem<PlaySoundSystem>();
             AddSystem<SlownessAfterTakeDamageSystem>();
             AddSystem<SlownessRemoveSystem>();

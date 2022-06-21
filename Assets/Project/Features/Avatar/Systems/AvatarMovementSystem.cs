@@ -1,15 +1,20 @@
-﻿using ME.ECS;
+﻿using System;
+using ME.ECS;
+using Unity.Mathematics;
 using Project.Common.Components;
+using Project.Features;
+using Project.Features.Avatar;
 using UnityEngine;
 
-namespace Project.Features.Avatar.Systems
+namespace Project.Mechanics.Features.Avatar.Systems
 {
+	using static SceneUtils;
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-	public sealed class PlayerMovementSystem : ISystemFilter
+	public sealed class AvatarMovementSystem : ISystemFilter
 	{
 		private AvatarFeature _feature;
 
@@ -29,38 +34,26 @@ namespace Project.Features.Avatar.Systems
 		Filter ISystemFilter.CreateFilter()
 		{
 			return Filter.Create("Filter-PlayerMovementSystem")
-				.WithoutShared<GameFinished>()
-				.With<PlayerTag>()
-				.With<MoveInput>()
+				.With<AvatarTag>()
+				.Without<Stun>()
 				.Push();
 		}
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			ref readonly var moveAmount = ref entity.Read<MoveInput>().Value;
-			var direction = entity.Read<MoveInput>().Axis == MovementAxis.Vertical ? Vector3.right : Vector3.back;
+			ref readonly var input = ref entity.Owner().Read<MoveInput>();
+			var direction = input.Axis == MovementAxis.Vertical ? new float3(1, 0, 0) : new float3(0, 0, -1);
 			
-			if (entity.GetRotation() != fpquaternion.Euler(entity.Read<FaceDirection>().Value))
-			{
-				entity.SetRotation(Quaternion.RotateTowards(entity.GetRotation(), Quaternion.LookRotation(entity.Read<FaceDirection>().Value), 30f));
-			}
-
-			if (moveAmount != 0)
-			{
-				if (!entity.Has<LockTarget>())
-				{
-					entity.Get<FaceDirection>().Value = direction * moveAmount;
-				}
-
+			if (input.Value != 0)
+			{				
 				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= 0.01f)
 				{
 					entity.SetPosition((Vector3)Vector3Int.CeilToInt(entity.Read<PlayerMoveTarget>().Value));
-					
-					var newTarget = entity.GetPosition() + direction * moveAmount;
+					var newTarget = entity.GetPosition() + direction * input.Value;
 
-					if (SceneUtils.IsWalkable(newTarget))
+					if (IsWalkable(newTarget))
 					{
-						SceneUtils.ModifyWalkable(entity.Read<PlayerMoveTarget>().Value, true);
-						SceneUtils.ModifyWalkable(newTarget, false);
+						ModifyWalkable(entity.Read<PlayerMoveTarget>().Value, true);
+						ModifyWalkable(newTarget, false);
 						
 						entity.Get<PlayerMoveTarget>().Value = newTarget;
 					}
@@ -68,14 +61,16 @@ namespace Project.Features.Avatar.Systems
 			}
 			
 			var currentSpeed = entity.Read<MoveSpeedModifier>().Value;
-			var speed = entity.Has<LockTarget>() ? currentSpeed * 0.65f : currentSpeed;
+			var speed = entity.Owner().Has<LockTarget>() ? currentSpeed * 0.65f : currentSpeed;
 
 			var pos = entity.GetPosition();
 			var target = entity.Read<PlayerMoveTarget>().Value;
 			ref readonly var hover = ref entity.Read<Hover>().Amount;
 
-			entity.SetPosition(Vector3.MoveTowards(new fp3(pos.x, hover, pos.z), new fp3(target.x, hover, target.z), speed * deltaTime));
-
+			var posDelta = Vector3.MoveTowards(new Vector3((float)pos.x, (float)hover, (float)pos.z),
+				new Vector3((float)target.x, (float)hover, (float)target.z), (float)(speed * deltaTime));
+			
+			entity.SetPosition(posDelta);
 		}
 	}
 }

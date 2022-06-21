@@ -54,8 +54,9 @@ namespace Project.Features.Weapon.Systems
 				}
 				else
 				{
-					entity.Remove<LinearActive>();
-					entity.Remove<LeftWeaponShot>();
+					entity.Owner().Remove<LeftWeaponShot>();
+					// entity.Remove<LinearActive>();
+					// entity.Remove<LeftWeaponShot>();
 				}
 			}
 			else

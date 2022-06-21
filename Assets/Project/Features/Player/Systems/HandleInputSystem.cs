@@ -80,33 +80,24 @@ namespace Project.Features.Player.Systems
         private void Movement_RPC(MovementMarker move)
         {
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
-            if (player.Read<PlayerAvatar>().Value == Entity.Empty) return;
 
-            ref var entity = ref player.Get<PlayerAvatar>().Value;
-            entity.Set(new MoveInput { Axis = move.Axis, Value = move.Value });
+            player.Set(new MoveInput { Axis = move.Axis, Value = move.Value });
         }
 
         private void LeftMouse_RPC(MouseLeftMarker mlm)
         {
-            // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            if (player.Read<PlayerAvatar>().Value == Entity.Empty) return;
 
-            ref var entity = ref player.Read<PlayerAvatar>().Value.Get<WeaponEntities>().LeftWeapon;
             switch (mlm.State)
             {
                 case InputState.Pressed:
                     {
-                        entity.Set(new LeftWeaponShot());
-                        entity.Set(new MeleeActive());
-
+                        player.Set(new LeftWeaponShot());
                         break;
                     }
                 case InputState.Released:
                     {
-                        entity.Remove<LeftWeaponShot>();
-                        entity.Remove<LinearActive>();
+                        player.Remove<LeftWeaponShot>();
                         break;
                     }
             }
@@ -115,21 +106,17 @@ namespace Project.Features.Player.Systems
         private void RightMouse_RPC(MouseRightMarker mrm)
         {
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
-            if (player.Read<PlayerAvatar>().Value == Entity.Empty) return;
-
-            ref var entity = ref player.Read<PlayerAvatar>().Value.Get<WeaponEntities>().RightWeapon;
 
             switch (mrm.State)
             {
                 case InputState.Pressed:
                     {
-                        entity.Set(new RightWeaponShot());
+                        player.Set(new RightWeaponShot());
                         break;
                     }
                 case InputState.Released:
                     {
-                        entity.Remove<RightWeaponShot>();
+                        player.Remove<RightWeaponShot>();
                         break;
                     }
             }
@@ -138,21 +125,17 @@ namespace Project.Features.Player.Systems
         private void SpaceKey_RPC(LockDirectionMarker sm)
         {
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
-            if (player.Read<PlayerAvatar>().Value == Entity.Empty) return;
-
-            ref var entity = ref player.Get<PlayerAvatar>().Value;
 
             switch (sm.State)
             {
                 case InputState.Pressed:
                     {
-                        entity.Set(new LockTarget());
+                        player.Set(new LockTarget());
                         break;
                     }
                 case InputState.Released:
                     {
-                        entity.Remove<LockTarget>();
+                        player.Remove<LockTarget>();
                         break;
                     }
             }
@@ -161,7 +144,6 @@ namespace Project.Features.Player.Systems
         private void TabKey_RPC(TabulationMarker tm)
         {
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
 
             switch (tm.State)
             {
