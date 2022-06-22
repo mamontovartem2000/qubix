@@ -12,7 +12,7 @@
         public static class Movement
         {
             public const float LOCK_SPEED_RATIO = 0.65f;
-            public const float MIN_DISTANCE = 0.01f;
+            public const float MIN_DISTANCE = 0.025f;
             public const float ROTATION_SPEED = 30f;
             public const float SLOWNESS_RATIO = 0.8f;
             public const float DEFAULT_MOVEMENT_SPEED_MODIFIER = 1;
