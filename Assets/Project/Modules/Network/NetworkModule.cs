@@ -104,6 +104,11 @@ namespace Project.Modules.Network
             this.sentBytesCount += bytes.Length;
         }
 
+        public void SendSystem(byte[] bytes)
+        {
+            // throw new NotImplementedException();
+        }
+
         public byte[] Receive()
         {
             if (this._queue.Count == 0)

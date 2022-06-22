@@ -2,7 +2,7 @@ using Project.Modules.Network.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Project.Modules.Network
+namespace Project.Modules.Network.StartConnect
 {
     public class ConnectTemplate : MonoBehaviour
 	{

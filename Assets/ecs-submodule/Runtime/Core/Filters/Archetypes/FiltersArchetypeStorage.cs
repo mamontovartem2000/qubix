@@ -30,7 +30,7 @@ namespace ME.ECS.FiltersArchetype {
                 #if INLINE_METHODS
                 [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
                 #endif
-                public void Copy(Archetype @from, ref Archetype to) {
+                public void Copy(in Archetype @from, ref Archetype to) {
 
                     to.CopyFrom(in from);
 
@@ -39,9 +39,10 @@ namespace ME.ECS.FiltersArchetype {
                 #if INLINE_METHODS
                 [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
                 #endif
-                public void Recycle(Archetype item) {
+                public void Recycle(ref Archetype item) {
 
                     item.Recycle();
+                    item = default;
 
                 }
 
@@ -352,7 +353,7 @@ namespace ME.ECS.FiltersArchetype {
             
             if (this.dead == null) return 0;
             
-            return this.versions.GetHashCode() ^ this.aliveCount ^ this.nextEntityId ^ this.dead.Count ^ this.allArchetypes.Count;
+            return this.versions.GetHashCode() ^ this.flags.GetHashCode() ^ this.aliveCount ^ this.nextEntityId ^ this.dead.Count ^ this.allArchetypes.Count;
 
         }
 
@@ -482,7 +483,9 @@ namespace ME.ECS.FiltersArchetype {
         [ME.ECS.Serializer.SerializeField]
         internal ListCopyable<FilterData> filters;
         [ME.ECS.Serializer.SerializeField]
-        internal EntityVersions versions;
+        internal ME.ECS.EntityVersions versions;
+        [ME.ECS.Serializer.SerializeField]
+        internal ME.ECS.EntityFlags flags;
         [ME.ECS.Serializer.SerializeField]
         internal BufferArray<int> entitiesArrIndex;
         [ME.ECS.Serializer.SerializeField]
@@ -505,7 +508,7 @@ namespace ME.ECS.FiltersArchetype {
         [ME.ECS.Serializer.SerializeField]
         private int aliveCount;
         [ME.ECS.Serializer.SerializeField]
-        private int nextEntityId;
+        internal int nextEntityId;
         [ME.ECS.Serializer.SerializeField]
         internal bool isCreated;
 
@@ -538,7 +541,8 @@ namespace ME.ECS.FiltersArchetype {
             this.dead = PoolListCopyable<int>.Spawn(capacity);
             this.alive = PoolListCopyable<int>.Spawn(capacity);
             this.deadPrepared = PoolListCopyable<int>.Spawn(capacity);
-            this.versions = new EntityVersions();
+            this.versions = new ME.ECS.EntityVersions(capacity);
+            this.flags = new ME.ECS.EntityFlags(capacity);
             this.aliveCount = 0;
             this.nextEntityId = -1;
             this.isCreated = true;
@@ -587,6 +591,7 @@ namespace ME.ECS.FiltersArchetype {
             this.aliveCount = other.aliveCount;
             this.nextEntityId = other.nextEntityId;
             this.versions.CopyFrom(other.versions);
+            this.flags.CopyFrom(other.flags);
             this.isArchetypesDirty = other.isArchetypesDirty;
 
             ArrayUtils.Copy(other.dirtyArchetypes, ref this.dirtyArchetypes);
@@ -595,14 +600,14 @@ namespace ME.ECS.FiltersArchetype {
             ArrayUtils.Copy(other.index, ref this.index);
             
             ArrayUtils.Copy(other.allArchetypes, ref this.allArchetypes, new Archetype.CopyData());
-
+            
         }
 
         #if INLINE_METHODS
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         #endif
         public void Recycle() {
-
+            
             if (this.allArchetypes != null) {
 
                 for (int i = 0; i < this.allArchetypes.Count; ++i) {
@@ -615,6 +620,9 @@ namespace ME.ECS.FiltersArchetype {
 
             this.versions.Recycle();
             this.versions = default;
+            
+            this.flags.Recycle();
+            this.flags = default;
             
             this.root = default;
             PoolDictionaryULong<int>.Recycle(ref this.index);
@@ -681,6 +689,7 @@ namespace ME.ECS.FiltersArchetype {
             }
 
             this.versions.Reset(id);
+            this.flags.Reset(id);
 
             this.nextEntityId += count;
 
@@ -715,6 +724,7 @@ namespace ME.ECS.FiltersArchetype {
             }
 
             this.versions.Reset(id);
+            this.flags.Reset(id);
 
             this.OnAlloc(e.id);
             
@@ -1071,14 +1081,19 @@ namespace ME.ECS.FiltersArchetype {
         #endif
         public int Count(FilterData filter) {
 
+            var filterStaticData = Worlds.current.GetFilterStaticData(filter.id);
+            if (FiltersArchetype.FiltersArchetypeStorage.CheckStaticShared(filterStaticData.data.containsShared, filterStaticData.data.notContainsShared) == false) {
+                return 0;
+            }
+
             if (this.forEachMode == 0) {
                 this.UpdateFilters();
             }
 
-            var onChanged = filter.data.onChanged;
+            var onChanged = filterStaticData.data.onChanged;
             var changedTracked = onChanged.Count;
             
-            var connectedFilters = filter.data.connectedFilters;
+            var connectedFilters = filterStaticData.data.connectedFilters;
             var connectedTracked = connectedFilters.Count;
 
             var count = 0;
@@ -1169,6 +1184,7 @@ namespace ME.ECS.FiltersArchetype {
             if (this.isArchetypesDirty == true) {
 
                 this.isArchetypesDirty = false;
+                var world = Worlds.current;
                 for (int idx = 0, cnt = this.filters.Count; idx < cnt; ++idx) {
                     
                     ref var item = ref this.filters[idx];
@@ -1176,13 +1192,14 @@ namespace ME.ECS.FiltersArchetype {
                         
                         if (item.archetypes.Contains(archId) == true) continue;
                         
+                        var filterStaticData = world.GetFilterStaticData(item.id);
                         ref var arch = ref this.allArchetypes[archId];
-                        if (arch.HasAll(item.data.contains) == true &&
-                            arch.HasNotAll(item.data.notContains) == true &&
-                            arch.HasAnyPair(item.data.anyPair2) == true &&
-                            arch.HasAnyPair(item.data.anyPair3) == true &&
-                            arch.HasAnyPair(item.data.anyPair4) == true &&
-                            FiltersArchetypeStorage.CheckLambdas(in arch, item.data.lambdas) == true) {
+                        if (arch.HasAll(filterStaticData.data.contains) == true &&
+                            arch.HasNotAll(filterStaticData.data.notContains) == true &&
+                            arch.HasAnyPair(filterStaticData.data.anyPair2) == true &&
+                            arch.HasAnyPair(filterStaticData.data.anyPair3) == true &&
+                            arch.HasAnyPair(filterStaticData.data.anyPair4) == true &&
+                            FiltersArchetypeStorage.CheckLambdas(in arch, filterStaticData.data.lambdas) == true) {
 
                             item.archetypes.Add(archId);
                             item.archetypesList.Add(archId);
@@ -1241,19 +1258,23 @@ namespace ME.ECS.FiltersArchetype {
 
             filterData = default;
 
+            var world = Worlds.current;
             for (int i = 0, cnt = this.filters.Count; i < cnt; ++i) {
 
                 var filter = this.filters[i];
-                if (FiltersArchetypeStorage.IsEquals(filter.data.contains, filterBuilder.data.contains) == true &&
-                    FiltersArchetypeStorage.IsEquals(filter.data.notContains, filterBuilder.data.notContains) == true &&
-                    FiltersArchetypeStorage.IsEquals(filter.data.notContainsShared, filterBuilder.data.notContainsShared) == true &&
-                    FiltersArchetypeStorage.IsEquals(filter.data.containsShared, filterBuilder.data.containsShared) == true &&
-                    FiltersArchetypeStorage.IsEquals(filter.data.onChanged, filterBuilder.data.onChanged) == true &&
-                    FiltersArchetypeStorage.IsEquals(filter.data.anyPair2, filterBuilder.data.anyPair2) == true &&
-                    FiltersArchetypeStorage.IsEquals(filter.data.anyPair3, filterBuilder.data.anyPair3) == true &&
-                    FiltersArchetypeStorage.IsEquals(filter.data.anyPair4, filterBuilder.data.anyPair4) == true &&
-                    FiltersArchetypeStorage.IsEquals(filter.data.connectedFilters, filterBuilder.data.connectedFilters) == true &&
-                    FiltersArchetypeStorage.IsEquals(filter.data.lambdas, filterBuilder.data.lambdas) == true) {
+                var filterStaticData = world.GetFilterStaticData(filter.id);
+                if (filterStaticData.isCreated == false) continue;
+                
+                if (FiltersArchetypeStorage.IsEquals(filterStaticData.data.contains, filterBuilder.data.contains) == true &&
+                    FiltersArchetypeStorage.IsEquals(filterStaticData.data.notContains, filterBuilder.data.notContains) == true &&
+                    FiltersArchetypeStorage.IsEquals(filterStaticData.data.notContainsShared, filterBuilder.data.notContainsShared) == true &&
+                    FiltersArchetypeStorage.IsEquals(filterStaticData.data.containsShared, filterBuilder.data.containsShared) == true &&
+                    FiltersArchetypeStorage.IsEquals(filterStaticData.data.onChanged, filterBuilder.data.onChanged) == true &&
+                    FiltersArchetypeStorage.IsEquals(filterStaticData.data.anyPair2, filterBuilder.data.anyPair2) == true &&
+                    FiltersArchetypeStorage.IsEquals(filterStaticData.data.anyPair3, filterBuilder.data.anyPair3) == true &&
+                    FiltersArchetypeStorage.IsEquals(filterStaticData.data.anyPair4, filterBuilder.data.anyPair4) == true &&
+                    FiltersArchetypeStorage.IsEquals(filterStaticData.data.connectedFilters, filterBuilder.data.connectedFilters) == true &&
+                    FiltersArchetypeStorage.IsEquals(filterStaticData.data.lambdas, filterBuilder.data.lambdas) == true) {
 
                     filterData = filter;
                     return true;

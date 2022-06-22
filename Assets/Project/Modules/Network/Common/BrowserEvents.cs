@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace Project.Modules.Network
+namespace Project.Modules.Network.Common
 {
 	public static class BrowserEvents
 	{

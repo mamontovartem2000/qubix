@@ -22,5 +22,5 @@ namespace Project.Common.Components
 
     public struct PortalTag : IComponent { }
 
-    public struct AvoidTeleport : IComponent{public fp Value;}
+    public struct AvoidTeleport : IComponent{public float Value;}
 }

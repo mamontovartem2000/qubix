@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using ME.ECS.Mathematics;
 using Project.Common.Components;
 using Project.Common.Utilities;
 using Project.Features.VFX;
@@ -55,7 +56,7 @@ namespace Project.Features.CollisionHandler.Systems {
 
                 foreach (Entity player in _playerFilter)
                 {
-                    if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > (fp) Consts.Weapons.GRENADE_EXPLOSION_SQUARED_RADIUS) continue;
+                    if (math.distancesq(player.GetPosition(), entity.GetPosition()) > Consts.Weapons.GRENADE_EXPLOSION_SQUARED_RADIUS) continue;
                     
                     var debuff = new Entity("debuff");
                     debuff.Get<Owner>().Value = entity.Read<Owner>().Value;

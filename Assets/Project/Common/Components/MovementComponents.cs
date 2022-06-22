@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Common.Components 
@@ -10,7 +11,7 @@ namespace Project.Common.Components
     
     public struct PlayerMoveTarget : IComponent
     {
-        public fp3 Value;
+        public float3 Value;
     }
 
     public struct MoveInput : IComponent

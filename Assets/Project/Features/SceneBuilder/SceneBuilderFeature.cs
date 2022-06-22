@@ -4,6 +4,7 @@ using ME.ECS.DataConfigs;
 using ME.ECS.Transform;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using Project.Modules.Network;
 using UnityEngine;
 
@@ -226,12 +227,13 @@ namespace Project.Features.SceneBuilder
                 PropsConfigs[mapElement].Apply(entity);
                 entity.InstantiateView(_propsViewIds[mapElement]);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
-                entity.SetRotation(PropsConfigs[mapElement].Read<Rotation>().value);
+                entity.SetRotation(Quaternion.Euler(PropsConfigs[mapElement].Read<TileRotation>().Value));
                 entity.Get<Owner>().Value = entity;
                 
                 if (entity.Has<DestructibleView>())
                 {
-                    entity.Get<PlayerHealth>().Value = 100;
+                    entity.Get<PlayerHealth>().Value = Consts.Main.DEFAULT_HEALTH;
+                    entity.Get<DestructibleLifeTime>().Value = Consts.Main.DEFAULT_LIFETIME;
                     entity.Set(new DestructibleTag());
                 }
                 

@@ -2,6 +2,7 @@
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Features.CollisionHandler.Systems;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Features.CollisionHandler 
@@ -28,7 +29,7 @@ namespace Project.Features.CollisionHandler
         {
             AddSystem<GridCollisionDetectionSystem>();
             AddSystem<GrenadeExplosionSystem>();
-            AddSystem<SpawnMineSystem>();
+            // AddSystem<SpawnMineSystem>();
             AddSystem<NewHealthDispenserSystem>();
             AddSystem<NewPortalDispenserSystem>();
             AddSystem<MineBlinkSystem>();
@@ -53,9 +54,9 @@ namespace Project.Features.CollisionHandler
             entity.InstantiateView(_health);
             
             entity.Set(new CollisionDynamic());
-            entity.Get<ProjectileDirection>().Value = fp3.zero;
+            entity.Get<ProjectileDirection>().Value = float3.zero;
             entity.Get<Owner>().Value = owner;
-            entity.Get<FaceDirection>().Value = new fp3(1, 0, 0);
+            entity.Get<FaceDirection>().Value = new float3(1, 0, 0);
             
             return entity;
         }

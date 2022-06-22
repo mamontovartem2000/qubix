@@ -4,6 +4,7 @@ using Project.Common.Components;
 using Project.Features.Events;
 using Project.Input.InputHandler.Markers;
 using Project.Modules.Network;
+using UnityEngine;
 
 namespace Project.Features.Player.Systems
 {
@@ -80,7 +81,7 @@ namespace Project.Features.Player.Systems
         private void Movement_RPC(MovementMarker move)
         {
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-
+            // Debug.LogError("bad word");
             player.Set(new MoveInput { Axis = move.Axis, Value = move.Value });
         }
 

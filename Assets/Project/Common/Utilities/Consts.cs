@@ -7,6 +7,8 @@
             public const float RESPAWN_TIME = 3f;
             public const float AVOID_TELEPORT_SECONDS = 3f;
             public const float GAME_TIMER_SECONDS = 150f;
+            public const float DEFAULT_LIFETIME = 3f;
+            public const float DEFAULT_HEALTH = 100f;
         }
 
         public static class Movement
@@ -26,6 +28,7 @@
         public static class Scene
         {
             public const float MINE_BLINK_TIME = 0.15f;
+            
         }
         
         public static class Skills

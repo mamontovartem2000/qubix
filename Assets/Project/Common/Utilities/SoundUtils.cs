@@ -3,19 +3,22 @@ using ME.ECS;
 using Project.Common.Components;
 using UnityEngine;
 
-public class SoundUtils : MonoBehaviour
+namespace Project.Common.Utilities
 {
-    // ReSharper disable Unity.PerformanceAnalysis
-    public static void PlaySound(Entity entity)
+    public class SoundUtils : MonoBehaviour
     {
-        if (!entity.Has<SoundPath>()) return;
+        // ReSharper disable Unity.PerformanceAnalysis
+        public static void PlaySound(Entity entity)
+        {
+            if (!entity.Has<SoundPath>()) return;
         
-        RuntimeManager.PlayOneShot(entity.Read<SoundPath>().Value, entity.GetPosition());
-    }
+            RuntimeManager.PlayOneShot(entity.Read<SoundPath>().Value, entity.GetPosition());
+        }
     
-    // ReSharper disable Unity.PerformanceAnalysis
-    public static void PlaySound(Entity entity, string path)
-    {
-        RuntimeManager.PlayOneShot(path, entity.GetPosition());
+        // ReSharper disable Unity.PerformanceAnalysis
+        public static void PlaySound(Entity entity, string path)
+        {
+            RuntimeManager.PlayOneShot(path, entity.GetPosition());
+        }
     }
 }

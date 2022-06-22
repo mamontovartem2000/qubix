@@ -1,7 +1,6 @@
 using UnityEngine;
-using System.Collections;
 
-namespace ParticleFX03 {
+namespace Project.Visuals.AssetStore.NeatWolf.ParticleFX03._Scripts {
 	public class Rotating : MonoBehaviour {
 		public Vector3 rotationSpeed=Vector3.zero;
 		public Space relativeTo=Space.Self;

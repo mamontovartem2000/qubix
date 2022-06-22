@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using Project.Features.Events;
 using Project.Features.VFX;
 
@@ -43,7 +44,7 @@ namespace Project.Features.Skills.Systems.Powerf
             var avatar = entity.Owner(out var owner).Avatar();
             if (avatar.IsAlive() == false) return;
 
-            avatar.Set(new ApplyHeal { Value = entity.Read<SkillAmount>().Value });
+            avatar.Set(new ApplyHeal { Value = entity.Read<SkillAmount>().Value }, ComponentLifetime.NotifyAllSystems);
             
             // var collision = new Entity("collision");
 			// collision.Set(new ApplyDamage {ApplyTo = avatar, ApplyFrom = avatar, Damage = -entity.Read<SkillAmount>().Value}, ComponentLifetime.NotifyAllSystems);

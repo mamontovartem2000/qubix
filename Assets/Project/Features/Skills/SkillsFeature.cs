@@ -37,7 +37,7 @@ namespace Project.Features.Skills
             AddSystem<SelfHealSystem>();
             
             //Noname
-            AddSystem<MineLandingSkillSystem>();
+            // AddSystem<MineLandingSkillSystem>();
             
             //Universal
             AddSystem<GrenadeThrowSkillSystem>();

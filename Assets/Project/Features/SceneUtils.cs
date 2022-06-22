@@ -1,5 +1,6 @@
 using ME.ECS;
 using ME.ECS.Collections;
+using ME.ECS.Mathematics;
 using Project.Common.Components;
 
 namespace Project.Features
@@ -8,10 +9,10 @@ namespace Project.Features
     {
         private static int _width;
         private static int _height;
-        private static int PositionToIndex(fp3 vec)
+        private static int PositionToIndex(float3 vec)
         {
-            var x = (int)fpmath.round(vec.x);
-            var y = (int)fpmath.round(vec.z);
+            var x = (int)math.round(vec.x);
+            var y = (int)math.round(vec.z);
 
             return y * _width + x;
         }
@@ -24,50 +25,50 @@ namespace Project.Features
             _height = height;
         }
         
-        public static bool IsWalkable(fp3 pos)
+        public static bool IsWalkable(float3 pos)
         {
             if ((int)pos.x >= _width || (int)pos.x <= 0 || (int)pos.z >= _height || (int)pos.z <= 0) return false;
             return Worlds.current.ReadSharedData<MapComponents>().WalkableMap[PositionToIndex(pos)] == 1;
         }
 
-        public static bool IsFree(fp3 pos)
+        public static bool IsFree(float3 pos)
         {
             return Worlds.current.ReadSharedData<MapComponents>().FreeMap[PositionToIndex(pos)] == 0;
         }
         
-        public static fp3 SafeCheckPosition(fp3 vec)
+        public static float3 SafeCheckPosition(float3 vec)
         {
             return IndexToPosition(PositionToIndex(vec));
         }
         
-        public static void ModifyWalkable(fp3 position, bool release)
+        public static void ModifyWalkable(float3 position, bool release)
         {
             var i = PositionToIndex(position);
             Worlds.current.GetSharedData<MapComponents>().WalkableMap[i] = release ? (byte)1 : (byte)0;
         }
 
-        public static void ModifyFree(fp3 position, bool release)
+        public static void ModifyFree(float3 position, bool release)
         {
             var i = PositionToIndex(position);
             Worlds.current.GetSharedData<MapComponents>().FreeMap[i] = release ? (byte)0 : (byte)1;
         }
 
-        public static fp3 IndexToPosition(int index)
+        public static float3 IndexToPosition(int index)
         {
             var x = index % _width;
-            var y = fpmath.floor(index / (fp) _width);
+            var y = math.floor(index / _width);
 
-            return new fp3(x, 0f, y);
+            return new float3(x, 0f, y);
         }
 
-        public static fp3 GetRandomPosition()
+        public static float3 GetRandomPosition()
         {
             while (true)
             {
                 var rnd = Worlds.current.GetRandomRange(0, _width * _height);
                 var pos = IndexToPosition(rnd);
 
-                if (pos == fp3.zero) //TODO: Can delete
+                if (pos.Equals(float3.zero)) //TODO: Can delete
                     continue;
 
                 if (IsWalkable(pos) && IsFree(pos))
@@ -77,12 +78,12 @@ namespace Project.Features
             }
         }
 
-        public static fp3 GetRandomPortal(fp3 vec)
+        public static float3 GetRandomPortal(float3 vec)
         {
             var pos = vec;
             var portals = Worlds.current.ReadSharedData<MapComponents>().PortalsMap;
             
-            while (pos == vec)
+            while (pos.Equals(vec))
             {
                 var rnd = Worlds.current.GetRandomRange(0, portals.Length);
                 pos = IndexToPosition(portals[rnd]);
@@ -96,13 +97,13 @@ namespace Project.Features
             return pos;
         }
 
-        public static fp3 GetTeamSpawnPosition(BufferArray<int> spawnPoints)
+        public static float3 GetTeamSpawnPosition(BufferArray<int> spawnPoints)
         {
             //TODO: NEVER EQUAL LENGHT 0
             if (spawnPoints.Length == 0)
                 return GetRandomPosition();
 
-            fp3 pos = fp3.zero;
+            float3 pos = float3.zero;
             ListCopyable<int> pool = new ListCopyable<int>();
             pool.AddRange(spawnPoints);
 
@@ -120,10 +121,10 @@ namespace Project.Features
             return pos;
         }
 
-        public static int BurstConvert(fp3 vec, int width)
+        public static int BurstConvert(float3 vec, int width)
         {
-            var x = (int)fpmath.round(vec.x);
-            var y = (int)fpmath.round(vec.z);
+            var x = (int)math.round(vec.x);
+            var y = (int)math.round(vec.z);
 
             return y * width + x;
         }

@@ -1,7 +1,10 @@
 ﻿using ME.ECS;
+using ME.ECS.Name;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using Project.Features.VFX;
 using Project.Modules.Network;
+using UnityEngine;
 
 namespace Project.Features.PostLogicTick.Systems
 {
@@ -38,6 +41,8 @@ namespace Project.Features.PostLogicTick.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
+			// Debug.LogError($"ent: {entity.Read<Name>().value}");
+			
 			if (entity.TryReadCollided(out var from, out var owner) == false) return;
 			ref readonly var damage = ref entity.Read<ProjectileDamage>().Value;
 

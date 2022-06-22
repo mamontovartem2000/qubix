@@ -2,6 +2,7 @@
 using ME.ECS;
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Common.Components
@@ -25,7 +26,7 @@ namespace Project.Common.Components
     public struct SpreadAmount : IComponent {public float Value;}
     public struct MeleeDelay : IComponent {public float Value;}
     public struct MeleeDelayDefault : IComponent {public float Value;}
-    public struct WeaponPosition : IComponent {public fp3 Value;}
+    public struct WeaponPosition : IComponent {public float3 Value;}
     public struct FiringCooldownModifier : IComponent {public float Value;}
     public struct SoundPath : IComponent {public string Value;}
 }

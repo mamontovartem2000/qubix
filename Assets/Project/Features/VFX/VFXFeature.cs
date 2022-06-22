@@ -2,6 +2,7 @@
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Features.VFX.Systems;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Features.VFX
@@ -63,7 +64,7 @@ namespace Project.Features.VFX
 			fx.InstantiateView(_viewIds[(int)type]);
 		}
 
-		public void SpawnVFX(VFXType type, Vector3 position)
+		public void SpawnVFX(VFXType type, float3 position)
 		{
 			var fx = new Entity("vfx");
 			fx.Get<LifeTimeLeft>().Value = 5;
