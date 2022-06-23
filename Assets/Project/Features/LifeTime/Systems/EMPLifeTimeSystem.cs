@@ -1,23 +1,18 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
+using Project.Features.VFX;
+using Project.Modules.Network;
 
-namespace Project.Features.Skills.Systems.Noname {
-
-    #pragma warning disable
-    using Project.Modules;
-    using Project.Markers;
-    using Modules; using Systems; using Markers;
-    #pragma warning restore
-    
-    #if ECS_COMPILE_IL2CPP_OPTIONS
+namespace Project.Features.LifeTime.Systems {
+#if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class MineLandingSkillSystem : ISystemFilter {
+    public sealed class EMPLifeTimeSystem : ISystemFilter {
         
-        private SkillsFeature _feature;
+        private LifeTimeFeature _feature;
         
         public World world { get; set; }
         
@@ -36,19 +31,19 @@ namespace Project.Features.Skills.Systems.Noname {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-MIneLandingSkillSystem")
-                .With<EffectTag>()
-                .With<LandMineAffect>()
+            return Filter.Create("Filter-EMPLifeTimeSystem")
+                .With<EMP>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var avatar = entity.Owner().Avatar();
-            if (avatar.IsAlive() == false) return;
+            entity.Get<EMP>().LifeTime -= deltaTime;
+
+            if (entity.Read<EMP>().LifeTime > 0f) return;
+
+            entity.Remove<EMP>();
         }
-    
     }
-    
 }

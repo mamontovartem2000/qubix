@@ -36,6 +36,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleView>(false, true, false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DispenserTag>(false, true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EMP>(false, true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPAffect>(true, true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateModifier>(false, true, true, false, false, false, false, false, false);
@@ -183,6 +186,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleView>(false, true, false, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DispenserTag>(false, true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EMP>(false, true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPAffect>(true, true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateModifier>(false, true, true, false, false, false, false, false, false);
@@ -325,6 +331,9 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.DestructibleView>(false);
             structComponentsContainer.ValidateBlittable<Project.Common.Components.DispenserTag>(false);
             structComponentsContainer.ValidateBlittable<Project.Common.Components.EffectTag>(true);
+            structComponentsContainer.ValidateBlittable<Project.Common.Components.EMP>(false);
+            structComponentsContainer.ValidateBlittable<Project.Common.Components.EMPAffect>(true);
+            structComponentsContainer.ValidateBlittable<Project.Common.Components.EMPModifier>(false);
             structComponentsContainer.ValidateBlittable<Project.Common.Components.FaceDirection>(false);
             structComponentsContainer.ValidateBlittable<Project.Common.Components.FireRateAffect>(true);
             structComponentsContainer.ValidateBlittable<Project.Common.Components.FireRateModifier>(false);
@@ -472,6 +481,9 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.DestructibleView>(false);
             entity.ValidateDataBlittable<Project.Common.Components.DispenserTag>(false);
             entity.ValidateDataBlittable<Project.Common.Components.EffectTag>(true);
+            entity.ValidateDataBlittable<Project.Common.Components.EMP>(false);
+            entity.ValidateDataBlittable<Project.Common.Components.EMPAffect>(true);
+            entity.ValidateDataBlittable<Project.Common.Components.EMPModifier>(false);
             entity.ValidateDataBlittable<Project.Common.Components.FaceDirection>(false);
             entity.ValidateDataBlittable<Project.Common.Components.FireRateAffect>(true);
             entity.ValidateDataBlittable<Project.Common.Components.FireRateModifier>(false);

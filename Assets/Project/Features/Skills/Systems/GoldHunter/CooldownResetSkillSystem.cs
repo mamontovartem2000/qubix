@@ -34,7 +34,6 @@ namespace Project.Features.Skills.Systems.GoldHunter
 		{
 			return Filter.Create("Filter-CooldownResetSkillSystem")
 				.With<SkillsResetAffect>()
-				.With<ActivateSkill>()
 				.Push();
 		}
 

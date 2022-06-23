@@ -35,7 +35,6 @@ namespace Project.Features.Skills.Systems.GoldHunter
         {
             return Filter.Create("Filter-DashSkillSystem")
                 .With<DashAffect>()
-                .With<ActivateSkill>()
                 .Push();
         }
 

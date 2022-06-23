@@ -2,8 +2,8 @@
 using Project.Common.Components;
 using Project.Features.Skills.Systems.Buller;
 using Project.Features.Skills.Systems.GoldHunter;
-using Project.Features.Skills.Systems.Noname;
 using Project.Features.Skills.Systems.Powerf;
+using Project.Features.Skills.Systems.Silen;
 using Project.Features.Skills.Systems.Universal;
 
 namespace Project.Features.Skills
@@ -36,8 +36,8 @@ namespace Project.Features.Skills
             AddSystem<ForceShieldSkillSystem>();
             AddSystem<SelfHealSystem>();
             
-            //Noname
-            // AddSystem<MineLandingSkillSystem>();
+            //Silen
+            AddSystem<EMPSkillSystem>();
             
             //Universal
             AddSystem<GrenadeThrowSkillSystem>();
@@ -48,7 +48,9 @@ namespace Project.Features.Skills
         {
             builder
                 .With<SkillTag>()
-                .Without<Cooldown>();
+                .With<ActivateSkill>()
+                .Without<Cooldown>()
+                .Without<EMP>();
         }
         
         protected override void OnDeconstruct() {}

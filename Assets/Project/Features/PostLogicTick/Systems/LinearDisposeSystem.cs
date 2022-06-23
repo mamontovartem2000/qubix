@@ -45,10 +45,9 @@ namespace Project.Features.PostLogicTick.Systems
 
             if (owner.Has<PlayerAvatar>())
             {
-                var player = owner.Avatar();
-
                 if (NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team))
                 {
+                    var player = owner.Avatar();
                     var collision = new Entity("collision");
                     collision.Get<LifeTimeLeft>().Value = 2;
                     collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);

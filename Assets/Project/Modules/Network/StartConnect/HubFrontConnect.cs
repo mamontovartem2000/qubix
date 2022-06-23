@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Project.Modules.Network.Common;
+using UnityEngine;
 
 namespace Project.Modules.Network.StartConnect
 {

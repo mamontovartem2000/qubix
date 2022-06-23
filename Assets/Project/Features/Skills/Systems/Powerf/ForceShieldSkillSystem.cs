@@ -34,7 +34,6 @@ namespace Project.Features.Skills.Systems.Powerf
 		{
 			return Filter.Create("Filter-ForceShieldSkillSystem")
 				.With<ForceShieldAffect>()
-				.With<ActivateSkill>()
 				.Push();
 		}
 

@@ -35,7 +35,6 @@ namespace Project.Features.Skills.Systems.Buller
 		{
 			return Filter.Create("Filter-FireRateSkillSystem")
 				.With<FireRateAffect>()
-				.With<ActivateSkill>()
 				.Push();
 		}
 
@@ -52,6 +51,7 @@ namespace Project.Features.Skills.Systems.Buller
 
 			rightWeapon.Get<FireRateModifier>().Value = 1;
 			rightWeapon.Get<AmmoCapacityDefault>().Value = Consts.Skills.FIRE_RATE_SKILL_AMMO_CAPACITY;
+			rightWeapon.Get<AmmoCapacity>().Value = 0;
 			rightWeapon.Get<ReloadTime>().Value = rightWeapon.Get<ReloadTimeDefault>().Value;
 			
 			SoundUtils.PlaySound(avatar, "event:/Skills/Buller/OffenciveBurst");

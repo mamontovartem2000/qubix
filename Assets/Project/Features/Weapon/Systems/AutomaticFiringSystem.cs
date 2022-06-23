@@ -55,15 +55,13 @@ namespace Project.Features.Weapon.Systems
             ref var ammo = ref entity.Get<AmmoCapacity>().Value;
             var dir = entity.Read<WeaponAim>().Value.GetPosition() - entity.GetPosition();
             
-            if (entity.Has<SpreadAmount>())
-            {
-                var spread = entity.Read<SpreadAmount>().Value / 100f;
-                dir += new float3(world.GetRandomRange(-spread, spread), 0,world.GetRandomRange(-spread, spread));
-            }
-
-            var cooldownBase = entity.Read<CooldownDefault>().Value;
-            var cooldownMod = cooldownBase;
-            var currentCooldown = cooldownMod;
+            // if (entity.Has<SpreadAmount>())
+            // {
+            //     var spread = entity.Read<SpreadAmount>().Value / 100f;
+            //     dir += new float3(world.GetRandomRange(-spread, spread), 0,world.GetRandomRange(-spread, spread));
+            // }
+            
+            var currentCooldown = entity.Read<CooldownDefault>().Value;
             
             if (ammo - 1 > 0)
             {
@@ -73,16 +71,22 @@ namespace Project.Features.Weapon.Systems
             {
                 if (entity.Has<FireRateModifier>())
                 {
-                    entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = entity.Read<FireRateModifier>().Value;
+                    entity.Get<AmmoCapacityDefault>().Value = entity.Read<FireRateModifier>().Value;
                     entity.Remove<FireRateModifier>();
                 }
                 
                 if (entity.Has<StunModifier>())
                 {
-                    entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = entity.Read<StunModifier>().Value;
+                    entity.Get<AmmoCapacityDefault>().Value = entity.Read<StunModifier>().Value;
                     entity.Remove<StunModifier>();
                 }
-                
+
+                if (entity.Has<EMPModifier>())
+                {
+                    entity.Get<AmmoCapacityDefault>().Value = entity.Read<EMPModifier>().AmmoCapacityDefault;
+                    entity.Remove<EMPModifier>();
+                }
+
                 entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;
                 world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Get<Owner>().Value);
             }

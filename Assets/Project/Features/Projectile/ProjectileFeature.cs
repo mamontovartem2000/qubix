@@ -41,7 +41,11 @@ namespace Project.Features.Projectile
             {
                 entity.Set(new StunModifier { Value = 1 });
             }
-            
+
+            if (gun.Has<EMPModifier>())
+            {
+                entity.Set(new EMPModifier { LifeTime = gun.Read<EMPModifier>().LifeTime });
+            }
             var currentDamage = entity.Read<ProjectileDamage>().Value;
 
             entity.Get<ProjectileDamage>().Value = currentDamage;

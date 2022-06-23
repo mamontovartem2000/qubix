@@ -36,7 +36,6 @@ namespace Project.Features.Skills.Systems.GoldHunter
 		{
 			return Filter.Create("Filter-StunSkillSystem")
 				.With<StunAffect>()
-				.With<ActivateSkill>()
 				.Push();
 		}
 
@@ -49,16 +48,17 @@ namespace Project.Features.Skills.Systems.GoldHunter
 			ref readonly var rightWeapon = ref avatar.Read<WeaponEntities>().RightWeapon;
 			
 			SoundUtils.PlaySound(avatar, "event:/Skills/GoldHunter/StunShot");
-
 			
 			rightWeapon.Set(new StunModifier{Value = rightWeapon.Read<AmmoCapacityDefault>().Value});
 
 			rightWeapon.Get<AmmoCapacityDefault>().Value = 5;
+			rightWeapon.Get<AmmoCapacity>().Value = 0;
 
 			rightWeapon.Get<ReloadTime>().Value = 
 				rightWeapon.Read<ReloadTimeDefault>().Value;
-
-            world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(owner);
+			
+			world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Owner());
+			world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(owner);
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             _vfx.SpawnVFX(VFXFeature.VFXType.StatusStunEffect, avatar.GetPosition(), avatar);

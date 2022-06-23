@@ -54,7 +54,7 @@ namespace Project.Features.CollisionHandler.Systems {
             if (entity.GetPosition().y > 0f) return;
             SoundUtils.PlaySound(entity);
 
-                foreach (Entity player in _playerFilter)
+                foreach (var player in _playerFilter)
                 {
                     if (math.distancesq(player.GetPosition(), entity.GetPosition()) > Consts.Weapons.GRENADE_EXPLOSION_SQUARED_RADIUS) continue;
                     
@@ -64,26 +64,20 @@ namespace Project.Features.CollisionHandler.Systems {
                     debuff.Set(new ProjectileActive());
                     debuff.Set(new CollisionDynamic());
                    
-                    if (debuff.Has<Slowness>())
-                    {
-                        player.Get<Slowness>().Value = debuff.Read<Slowness>().Value/100;
-                        player.Get<Slowness>().LifeTime = debuff.Read<Slowness>().LifeTime;
-                    }
                     
                     debuff.SetPosition(SceneUtils.SafeCheckPosition(player.GetPosition()));
+
+                    if (!debuff.Has<Slowness>()) continue;
+                    
+                    player.Get<Slowness>().Value = debuff.Read<Slowness>().Value/100;
+                    player.Get<Slowness>().LifeTime = debuff.Read<Slowness>().LifeTime;
                 }
-                
-                if (entity.Read<SecondaryDamage>().Value.Has<Slowness>())
-                {
-                    var vfx = new Entity("vfx");
-                    _vfx.SpawnVFX(VFXFeature.VFXType.SlowExplosion, entity.GetPosition());
-                }
-                else
-                {
-                    var vfx = new Entity("vfx");
-                    _vfx.SpawnVFX(VFXFeature.VFXType.GrenadeVFX, entity.GetPosition());
-                }
-                
+
+                _vfx.SpawnVFX(
+                    entity.Read<SecondaryDamage>().Value.Has<Slowness>()
+                        ? VFXFeature.VFXType.SlowExplosion
+                        : VFXFeature.VFXType.GrenadeVFX, entity.GetPosition());
+
                 entity.Destroy();
             
         }

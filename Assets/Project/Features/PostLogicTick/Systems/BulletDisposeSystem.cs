@@ -58,11 +58,11 @@ namespace Project.Features.PostLogicTick.Systems
 					var collision = new Entity("collision");
 					collision.Get<LifeTimeLeft>().Value = 2;
 
-					if (entity.Has<StunModifier>())
-					{
-						_vfx.SpawnVFX(VFXFeature.VFXType.SkillStun, pos, player, entity.Read<StunModifier>().Value);
-						player.Set(new Stun { Value = entity.Read<StunModifier>().Value });
-					}
+					// if (entity.Has<StunModifier>())
+					// {
+					// 	_vfx.SpawnVFX(VFXFeature.VFXType.SkillStun, pos, player, entity.Read<StunModifier>().Value);
+					// 	player.Set(new Stun { Value = entity.Read<StunModifier>().Value });
+					// }
 					collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);
 				}
 			}

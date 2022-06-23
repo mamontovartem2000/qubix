@@ -35,7 +35,6 @@ namespace Project.Features.Skills.Systems.Powerf
         {
             return Filter.Create("Filter-SkillActivationSystem")
                 .With<HealingAffect>()
-                .With<ActivateSkill>()
                 .Push();
         }
 

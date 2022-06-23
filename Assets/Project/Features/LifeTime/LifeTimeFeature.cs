@@ -22,6 +22,7 @@ namespace Project.Features.LifeTime
         protected override void OnConstruct()
         {
             AddSystem<LifeTimeSystem>();
+            AddSystem<EMPLifeTimeSystem>();
             AddSystem<LinearLifeSystem>();
             AddSystem<LinearVisualLifeTimeSystem>();
             AddSystem<MeleeAimInitSystem>();
