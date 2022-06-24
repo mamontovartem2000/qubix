@@ -81,7 +81,7 @@ namespace Project.Features.Player.Systems
         {
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
 
-            player.Set(new MoveInput { Axis = move.Axis, Value = move.Value });
+            player.Set(new MoveInput { Axis = move.Axis, Amount = move.Value });
         }
 
         private void LeftMouse_RPC(MouseLeftMarker mlm)

@@ -44,12 +44,12 @@ namespace Project.Mechanics.Features.Avatar.Systems
 			ref readonly var input = ref entity.Owner().Read<MoveInput>();
 			var direction = input.Axis == MovementAxis.Vertical ? new float3(1, 0, 0) : new float3(0, 0, -1);
 			
-			if (input.Value != 0)
+			if (input.Amount != 0)
 			{				
 				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= Consts.Movement.MIN_DISTANCE)
 				{
 					entity.SetPosition((Vector3)Vector3Int.CeilToInt(entity.Read<PlayerMoveTarget>().Value));
-					var newTarget = entity.GetPosition() + direction * input.Value;
+					var newTarget = entity.GetPosition() + direction * input.Amount;
 
 					if (IsWalkable(newTarget))
 					{

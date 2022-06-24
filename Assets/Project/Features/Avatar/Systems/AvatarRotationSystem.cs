@@ -46,11 +46,11 @@ namespace Project.Mechanics.Features.Avatar.Systems
 
             var rot = entity.GetRotation();
 
-            if (input.Value != 0)
+            if (input.Amount != 0)
             {
                 if (!entity.Owner().Has<LockTarget>())
                 {
-                    entity.Get<FaceDirection>().Value = direction * input.Value;
+                    entity.Get<FaceDirection>().Value = direction * input.Amount;
                 }
             }
 

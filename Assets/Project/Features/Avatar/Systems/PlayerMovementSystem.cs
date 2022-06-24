@@ -38,7 +38,7 @@ namespace Project.Features.Avatar.Systems
 		}
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			ref readonly var moveAmount = ref entity.Read<MoveInput>().Value;
+			ref readonly var moveAmount = ref entity.Read<MoveInput>().Amount;
 			var direction = entity.Read<MoveInput>().Axis == MovementAxis.Vertical ? Vector3.right : Vector3.back;
 			
 			if (entity.GetRotation() != fpquaternion.Euler(entity.Read<FaceDirection>().Value))

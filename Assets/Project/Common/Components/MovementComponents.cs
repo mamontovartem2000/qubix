@@ -15,7 +15,7 @@ namespace Project.Common.Components
 
     public struct MoveInput : IComponent
     {
-        public int Value;
+        public int Amount;
         public MovementAxis Axis;
     }
 
