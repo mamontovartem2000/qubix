@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ME.ECS.Mathematics;
 
 namespace ME.ECS.Pathfinding {
 
@@ -151,7 +150,7 @@ namespace ME.ECS.Pathfinding {
                         
                         var node = path.graph.GetNearest(pos, cons);
                         if ( //node.walkable == false ||
-                            math.abs(node.node.penalty - current.penalty) > sfloat.Epsilon ||
+                            Mathf.Abs(node.node.penalty - current.penalty) > Mathf.Epsilon ||
                             node.node.IsSuitable(constraint) == false) {
 
                             allWalkable = false;
@@ -159,7 +158,7 @@ namespace ME.ECS.Pathfinding {
 
                         }
                         
-                    } while (math.distancesq(pos, next.worldPosition) > 0.01f);
+                    } while ((pos - next.worldPosition).sqrMagnitude > 0.01f);
                     
                     if (allWalkable == true) {
 

@@ -2,7 +2,17 @@
 #define INLINE_METHODS
 #endif
 
-using ME.ECS.Mathematics;
+#if FIXED_POINT_MATH
+using FLOAT2 = ME.ECS.fp2;
+using FLOAT3 = ME.ECS.fp3;
+using FLOAT4 = ME.ECS.fp4;
+using QUATERNION = ME.ECS.fpquaternion;
+#else
+using FLOAT2 = UnityEngine.Vector2;
+using FLOAT3 = UnityEngine.Vector3;
+using FLOAT4 = UnityEngine.Vector4;
+using QUATERNION = UnityEngine.Quaternion;
+#endif
 
 using Unity.Jobs;
 using UnityEngine;
@@ -90,14 +100,14 @@ namespace ME.ECS.Pathfinding {
 
         private struct CopyNode : IArrayElementCopy<Node> {
 
-            public void Copy(in Node from, ref Node to) {
+            public void Copy(Node from, ref Node to) {
 
                 if (to == null) to = PoolClass<GridNode>.Spawn();
                 to.CopyFrom(from);
 
             }
 
-            public void Recycle(ref Node item) {
+            public void Recycle(Node item) {
 
                 var g = (GridNode)item;
                 PoolClass<GridNode>.Recycle(ref g);
@@ -366,26 +376,26 @@ namespace ME.ECS.Pathfinding {
                     
                     var force = false;
                     var maxSlope = this.maxSlope;
-                    var angle = VecMath.Angle(targetNode.worldPosition - node.worldPosition, new float3(targetNode.worldPosition.x, node.worldPosition.y, targetNode.worldPosition.z) - node.worldPosition);
+                    var angle = VecMath.Angle(targetNode.worldPosition - node.worldPosition, new Vector3(targetNode.worldPosition.x, node.worldPosition.y, targetNode.worldPosition.z) - node.worldPosition);
                     if (this.useSlopePhysics == true) {
 
                         var f1 = false;
                         var f2 = false;
-                        float3 p1 = float3.zero;
-                        float3 p2 = float3.zero;
+                        Vector3 p1 = Vector3.zero;
+                        Vector3 p2 = Vector3.zero;
                         
-                        var orig = math.lerp(node.worldPosition, targetNode.worldPosition, 0.25f) + (float3)Vector3.up * (this.agentHeight * 0.5f);
-                        if (Physics.Raycast(new Ray((Vector3)orig, Vector3.down), out var hit, this.agentHeight, this.checkMask) == true) {
+                        var orig = VecMath.Lerp(node.worldPosition, targetNode.worldPosition, 0.25f) + Vector3.up * (this.agentHeight * 0.5f);
+                        if (Physics.Raycast(new Ray(orig, Vector3.down), out var hit, this.agentHeight, this.checkMask) == true) {
 
-                            p1 = (float3)hit.point;
+                            p1 = hit.point;
                             f1 = true;
 
                         }
 
-                        orig = math.lerp(node.worldPosition, targetNode.worldPosition, 0.75f) + (float3)Vector3.up * (this.agentHeight * 0.5f);
-                        if (Physics.Raycast(new Ray((Vector3)orig, Vector3.down), out hit, this.agentHeight, this.checkMask) == true) {
+                        orig = VecMath.Lerp(node.worldPosition, targetNode.worldPosition, 0.75f) + Vector3.up * (this.agentHeight * 0.5f);
+                        if (Physics.Raycast(new Ray(orig, Vector3.down), out hit, this.agentHeight, this.checkMask) == true) {
 
-                            p2 = (float3)hit.point;
+                            p2 = hit.point;
                             f2 = true;
 
                         }
@@ -394,7 +404,7 @@ namespace ME.ECS.Pathfinding {
                             
                             //UnityEngine.Debug.DrawLine(p1, p1 + Vector3.up, Color.cyan, 5f);
                             //UnityEngine.Debug.DrawLine(p2, p2 + Vector3.up, Color.red, 5f);
-                            angle = VecMath.Angle(p2 - p1, new float3(p2.x, p1.y, p2.z) - p1);
+                            angle = VecMath.Angle(p2 - p1, new Vector3(p2.x, p1.y, p2.z) - p1);
                             if (angle <= maxSlope) force = true;
                             
                         }
@@ -403,7 +413,7 @@ namespace ME.ECS.Pathfinding {
 
                     if (force == true || angle <= maxSlope) {
 
-                        var cost = math.distancesq(node.worldPosition, targetNode.worldPosition);
+                        var cost = (node.worldPosition - targetNode.worldPosition).sqrMagnitude;
                         connection.cost = (cost + targetNode.penalty) * (GridGraphUtilities.IsDiagonalDirection(direction) == true ? this.diagonalCostFactor : 1f);
                         connection.index = target;
 
@@ -411,7 +421,7 @@ namespace ME.ECS.Pathfinding {
 
                 } else {
 
-                    if (math.distancesq(node.worldPosition, targetNode.worldPosition) <= this.agentHeight * 0.1f) {
+                    if ((node.worldPosition - targetNode.worldPosition).sqrMagnitude <= this.agentHeight * 0.1f) {
 
                         connection.cost = 0f;
                         connection.index = target;
@@ -426,7 +436,7 @@ namespace ME.ECS.Pathfinding {
 
         }
 
-        public override bool ClampPosition(float3 worldPosition, Constraint constraint, out float3 position) {
+        public override bool ClampPosition(FLOAT3 worldPosition, Constraint constraint, out FLOAT3 position) {
 
             var node = this.GetNearest(worldPosition, constraint);
             if (node.node != null) {
@@ -441,15 +451,15 @@ namespace ME.ECS.Pathfinding {
 
         }
 
-        public override NodeInfo GetNearest(float3 worldPosition, Constraint constraint) {
+        public override NodeInfo GetNearest(FLOAT3 worldPosition, Constraint constraint) {
 
             if (this.nodes == null) return default;
 
-            var clamped = new float3(
-                math.clamp(worldPosition.x - this.graphCenter.x, -this.nodeSize * this.size.x * 0.5f + this.nodeSize * 0.5f,
+            var clamped = new FLOAT3(
+                Mathf.Clamp(worldPosition.x - this.graphCenter.x, -this.nodeSize * this.size.x * 0.5f + this.nodeSize * 0.5f,
                             this.nodeSize * this.size.x * 0.5f - this.nodeSize * 0.5f),
-                math.clamp(worldPosition.y - this.graphCenter.y, -this.agentHeight * this.size.y * 0.5f, this.agentHeight * this.size.y * 0.5f),
-                math.clamp(worldPosition.z - this.graphCenter.z, -this.nodeSize * this.size.z * 0.5f + this.nodeSize * 0.5f,
+                Mathf.Clamp(worldPosition.y - this.graphCenter.y, -this.agentHeight * this.size.y * 0.5f, this.agentHeight * this.size.y * 0.5f),
+                Mathf.Clamp(worldPosition.z - this.graphCenter.z, -this.nodeSize * this.size.z * 0.5f + this.nodeSize * 0.5f,
                             this.nodeSize * this.size.z * 0.5f - this.nodeSize * 0.5f));
 
             var x = (int)((clamped.x + this.nodeSize * this.size.x * 0.5f) / this.nodeSize);
@@ -490,12 +500,12 @@ namespace ME.ECS.Pathfinding {
         #endif
         public override void GetNodesInBounds(ListCopyable<Node> result, Bounds bounds, Constraint constraint) {
 
-            var min = (float3)bounds.min;
-            var max = (float3)bounds.max;
+            var min = bounds.min;
+            var max = bounds.max;
 
-            var minNode = this.GetNearest(min + (float3)this.graphCenter, Constraint.Empty);
+            var minNode = this.GetNearest(min + this.graphCenter, Constraint.Empty);
             if (minNode.node == null) return;
-            var maxNode = this.GetNearest(max + (float3)this.graphCenter, Constraint.Empty);
+            var maxNode = this.GetNearest(max + this.graphCenter, Constraint.Empty);
             if (maxNode.node == null) return;
 
             var ggNodeMin = (GridNode)minNode.node;
@@ -509,7 +519,7 @@ namespace ME.ECS.Pathfinding {
                         var index = GridGraphUtilities.GetIndexByPosition(this, new Vector3Int(z, y, x));
                         var n = this.nodes[index];
                         //Debug.DrawLine(n.worldPosition + Vector3.up * 5f, n.worldPosition + Vector3.up * 10f, Color.red, 5f);
-                        if (bounds.Contains((Vector3)n.worldPosition) == true && n.IsSuitable(constraint) == true) {
+                        if (bounds.Contains(n.worldPosition) == true && n.IsSuitable(constraint) == true) {
 
                             //Debug.DrawLine(n.worldPosition + Vector3.up * 10f, n.worldPosition + Vector3.up * 15f, Color.magenta, 5f);
                             result.Add(n);
@@ -533,7 +543,7 @@ namespace ME.ECS.Pathfinding {
 
             var borderColor = new Color(1f, 1f, 1f, 1f);
             Gizmos.color = borderColor;
-            Gizmos.DrawWireCube((Vector3)center, new Vector3(this.size.x * this.nodeSize, this.size.y * this.agentHeight, this.size.z * this.nodeSize));
+            Gizmos.DrawWireCube(center, new Vector3(this.size.x * this.nodeSize, this.size.y * this.agentHeight, this.size.z * this.nodeSize));
 
             if (this.drawMode != DrawMode.None) {
 
@@ -599,20 +609,20 @@ namespace ME.ECS.Pathfinding {
                     if (node.walkable == true || this.drawNonwalkableNodes == true) {
 
                         Gizmos.color = (node.walkable == true ? nodeColor : nodeColorUnwalkable);
-                        Gizmos.DrawCube((Vector3)worldPos, new Vector3(this.nodeSize, this.agentHeight, this.nodeSize));
+                        Gizmos.DrawCube(worldPos, new Vector3(this.nodeSize, this.agentHeight, this.nodeSize));
 
                         Gizmos.color = (node.walkable == true ? nodeBorderColor : nodeBorderColorUnwalkable);
-                        Gizmos.DrawWireCube((Vector3)worldPos, new Vector3(this.nodeSize, this.agentHeight, this.nodeSize));
+                        Gizmos.DrawWireCube(worldPos, new Vector3(this.nodeSize, this.agentHeight, this.nodeSize));
 
                     }
 
                     if (node.walkable == true) {
 
                         Gizmos.color = nodeColorWalkableWorld;
-                        Gizmos.DrawCube((Vector3)worldPos, new Vector3(0.9f, 0f, 0.9f) * this.nodeSize);
+                        Gizmos.DrawCube(worldPos, new Vector3(0.9f, 0f, 0.9f) * this.nodeSize);
 
                         Gizmos.color = nodeBorderColorWalkableWorld;
-                        Gizmos.DrawWireCube((Vector3)worldPos, new Vector3(0.9f, 0f, 0.9f) * this.nodeSize);
+                        Gizmos.DrawWireCube(worldPos, new Vector3(0.9f, 0f, 0.9f) * this.nodeSize);
 
                     }
 
@@ -627,8 +637,8 @@ namespace ME.ECS.Pathfinding {
                                 var n = this.GetNodeByIndex<GridNode>(conn.index);
                                 if (n != null && (this.drawConnectionsToUnwalkable == true || n.walkable == true)) {
 
-                                    Gizmos.DrawRay((Vector3)node.worldPosition + Vector3.up * 0.1f, (Vector3)(n.worldPosition - node.worldPosition) * 0.5f + Vector3.up * 0.1f);
-                                    Gizmos.DrawRay((Vector3)node.worldPosition, (Vector3)(n.worldPosition - node.worldPosition) * 0.5f);
+                                    Gizmos.DrawRay(node.worldPosition + Vector3.up * 0.1f, (n.worldPosition - node.worldPosition) * 0.5f + Vector3.up * 0.1f);
+                                    Gizmos.DrawRay(node.worldPosition, (n.worldPosition - node.worldPosition) * 0.5f);
 
                                 }
 
@@ -646,7 +656,7 @@ namespace ME.ECS.Pathfinding {
                                 var n = this.GetNodeByIndex<GridNode>(conn.index);
                                 if (n != null) {
                                 
-                                    Gizmos.DrawLine((Vector3)n.worldPosition, (Vector3)node.worldPosition);
+                                    Gizmos.DrawLine(n.worldPosition, node.worldPosition);
                                     
                                 }
 
@@ -837,7 +847,7 @@ namespace ME.ECS.Pathfinding {
 
             const float offset = 0.01f;
             var minSize = Mathf.Min(0.01f, this.collisionCheckRadius);
-            if (Physics.CheckBox((Vector3)worldPos,
+            if (Physics.CheckBox(worldPos,
                                  new Vector3(minSize, this.agentHeight - offset * 2f, minSize),
                                  Quaternion.identity,
                                  this.collisionMask) == true) {
@@ -851,11 +861,11 @@ namespace ME.ECS.Pathfinding {
             RaycastHit hit;
             if (this.collisionCheckRadius <= 0f) {
 
-                raycastResult = Physics.Raycast((Vector3)worldPos + Vector3.up * (this.agentHeight * 0.5f - offset), Vector3.down, out hit, this.agentHeight, this.checkMask);
+                raycastResult = Physics.Raycast(worldPos + Vector3.up * (this.agentHeight * 0.5f - offset), Vector3.down, out hit, this.agentHeight, this.checkMask);
 
             } else {
 
-                if (Physics.CheckBox((Vector3)worldPos + Vector3.up * (this.agentHeight - this.collisionCheckRadius),
+                if (Physics.CheckBox(worldPos + Vector3.up * (this.agentHeight - this.collisionCheckRadius),
                                      new Vector3(this.collisionCheckRadius, this.agentHeight - this.collisionCheckRadius * 2f, this.collisionCheckRadius),
                                      Quaternion.identity,
                                      this.collisionMask) == true) {
@@ -865,7 +875,7 @@ namespace ME.ECS.Pathfinding {
 
                 }
                 
-                raycastResult = Physics.BoxCast((Vector3)worldPos + Vector3.up * (this.agentHeight * 0.5f - offset),
+                raycastResult = Physics.BoxCast(worldPos + Vector3.up * (this.agentHeight * 0.5f - offset),
                                                 new Vector3(this.collisionCheckRadius, this.agentHeight * 0.5f, this.collisionCheckRadius),
                                                 Vector3.down,
                                                 out hit,
@@ -904,7 +914,7 @@ namespace ME.ECS.Pathfinding {
 
             this.nodes = PoolListCopyable<Node>.Spawn(this.size.x * this.size.y * this.size.z);
 
-            var center = (float3)this.graphCenter - new float3(this.size.x * this.nodeSize * 0.5f, this.size.y * this.agentHeight * 0.5f, this.size.z * this.nodeSize * 0.5f);
+            var center = this.graphCenter - new FLOAT3(this.size.x * this.nodeSize * 0.5f, this.size.y * this.agentHeight * 0.5f, this.size.z * this.nodeSize * 0.5f);
 
             var i = 0;
             for (int y = 0; y < this.size.y; ++y) {
@@ -913,7 +923,7 @@ namespace ME.ECS.Pathfinding {
 
                     for (int z = 0; z < this.size.z; ++z) {
 
-                        var nodePosition = new float3(x * this.nodeSize + this.nodeSize * 0.5f, y * this.agentHeight + this.agentHeight * 0.5f,
+                        var nodePosition = new FLOAT3(x * this.nodeSize + this.nodeSize * 0.5f, y * this.agentHeight + this.agentHeight * 0.5f,
                                                       z * this.nodeSize + this.nodeSize * 0.5f);
                         var worldPos = center + nodePosition;
 
@@ -1142,9 +1152,8 @@ namespace ME.ECS.Pathfinding {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public static GridGraph.Direction GetDirection(float3 dir) {
+        public static GridGraph.Direction GetDirection(Vector3 direction) {
 
-            var direction = (Vector3)dir;
             direction = direction.normalized.XZ().XZ();
             var x = direction.z;
             direction.z = direction.x;
@@ -1355,16 +1364,16 @@ namespace ME.ECS.Pathfinding {
         public int graphIndex;
         public int index;
         public Vector3Int position;
-        public float3 worldPosition;
+        public fp3 worldPosition;
         public int penalty;
         public byte walkable;
         public int area;
         public int tag;
         public int erosion;
-        public sfloat height;
+        public fp height;
         public ConnectionsArray connections;
         
-        public bool IsSuitable(BurstConstraint constraint, Unity.Collections.NativeArray<GridNodeData> nodes, Vector3Int graphSize, float3 graphCenter) {
+        public bool IsSuitable(BurstConstraint constraint, Unity.Collections.NativeArray<GridNodeData> nodes, Vector3Int graphSize, fp3 graphCenter) {
 
             if (constraint.checkWalkability == 1 && this.walkable != constraint.walkable) return false;
             if (constraint.checkArea == 1 && (constraint.areaMask & (1 << this.area)) == 0) return false;

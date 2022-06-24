@@ -21,7 +21,7 @@
 #CONTENT3#
 
             ComponentsInitializerWorld.Setup(ComponentsInitializerWorldGen.Init);
-            CoreComponentsInitializer.Init(ref structComponentsContainer, ref noStateStructComponentsContainer);
+            CoreComponentsInitializer.Init(ref structComponentsContainer);
 
 #CONTENT#
 

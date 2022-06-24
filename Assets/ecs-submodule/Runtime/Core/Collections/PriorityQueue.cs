@@ -1,4 +1,19 @@
-﻿using ME.ECS.Mathematics;
+﻿
+#if FIXED_POINT_MATH
+using MATH = ME.ECS.fpmath;
+using FLOAT = ME.ECS.fp;
+using FLOAT2 = ME.ECS.fp2;
+using FLOAT3 = ME.ECS.fp3;
+using FLOAT4 = ME.ECS.fp4;
+using QUATERNION = ME.ECS.fpquaternion;
+#else
+using MATH = Unity.Mathematics.math;
+using FLOAT = System.Single;
+using FLOAT2 = UnityEngine.Vector2;
+using FLOAT3 = UnityEngine.Vector3;
+using FLOAT4 = UnityEngine.Vector4;
+using QUATERNION = UnityEngine.Quaternion;
+#endif
 
 namespace ME.ECS.Collections {
 
@@ -14,7 +29,7 @@ namespace ME.ECS.Collections {
 
         private struct Node {
 
-            public sfloat priority;
+            public FLOAT priority;
             public T @object;
 
         }
@@ -52,7 +67,7 @@ namespace ME.ECS.Collections {
         /// </summary>
         /// <param name="priority"></param>
         /// <param name="obj"></param>
-        public void Enqueue(sfloat priority, T obj) {
+        public void Enqueue(FLOAT priority, T obj) {
             var node = new Node() { priority = priority, @object = obj };
             this.queue.Add(node);
             this.heapSize++;
@@ -92,7 +107,7 @@ namespace ME.ECS.Collections {
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="priority"></param>
-        public void UpdatePriority(T obj, sfloat priority) {
+        public void UpdatePriority(T obj, int priority) {
             var i = 0;
             for (; i <= this.heapSize; i++) {
                 var node = this.queue[i];
@@ -197,7 +212,7 @@ namespace ME.ECS.Collections {
 
         private struct Node {
 
-            public sfloat priority;
+            public fp priority;
             public T @object;
 
         }
@@ -240,7 +255,7 @@ namespace ME.ECS.Collections {
         /// </summary>
         /// <param name="priority"></param>
         /// <param name="obj"></param>
-        public void Enqueue(sfloat priority, T obj) {
+        public void Enqueue(FLOAT priority, T obj) {
             var node = new Node() { priority = priority, @object = obj };
             this.queue.Add(node);
             this.heapSize++;

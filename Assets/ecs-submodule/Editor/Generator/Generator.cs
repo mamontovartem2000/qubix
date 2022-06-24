@@ -394,7 +394,6 @@ namespace ME.ECSEditor {
                     var isShared = typeof(ME.ECS.IComponentShared).IsAssignableFrom(type);
                     var isVersioned = typeof(ME.ECS.IVersioned).IsAssignableFrom(type);
                     var isVersionedNoState = typeof(ME.ECS.IVersionedNoState).IsAssignableFrom(type);
-                    var isBlittable = isDisposable == false && isOneShot == false && Generator.HasManagedTypes(type, true, out _) == false;
                     var isSimple = true;
                     if (isCopyable == true ||
                         isDisposable == true ||
@@ -403,11 +402,11 @@ namespace ME.ECSEditor {
                         isSimple = false;
 
                     }
-
-                    if (isCopyable == false && hasFields == true && isStatic == false && isOneShot == false) {
+                    
+                    if (isCopyable == false && hasFields == true && isStatic == false) {
                         
                         // Check for managed types
-                        if (Generator.HasManagedTypes(type, false, out var failedFieldInfo) == true) {
+                        if (Generator.HasManagedTypes(type, out var failedFieldInfo) == true) {
                             
                             UnityEngine.Debug.LogError($"[ME.ECS] Generator for type `{type}` failed because it is not blittable (field `{failedFieldInfo.Name}`). Use IStructCopyable to create manual copy.");
                             
@@ -419,10 +418,8 @@ namespace ME.ECSEditor {
                     resItem = resItem.Replace("#ISTAG#", hasFields == true ? "false" : "true");
                     resItem = resItem.Replace("#ISSHARED#", isShared == true ? "true" : "false");
                     resItem = resItem.Replace("#ISSIMPLE#", isSimple == true ? "true" : "false");
-                    resItem = resItem.Replace("#ISBLITTABLE#", isBlittable == true ? "true" : "false");
                     resItem = resItem.Replace("#TYPENAME#", entityType);
                     resItem = resItem.Replace("#COPYABLE#", isCopyable == true ? "Copyable" : "");
-                    resItem = resItem.Replace("#BLITTABLE#", isBlittable == true ? "Blittable" : "");
                     resItem = resItem.Replace("#DISPOSABLE#", isDisposable == true ? "Disposable" : "");
                     resItem = resItem.Replace("#ONESHOT#", isOneShot == true ? "OneShot" : "");
                     resItem = resItem.Replace("#CONTAINER#", isOneShot == true ? "noStateStructComponentsContainer" : "structComponentsContainer");
@@ -446,9 +443,7 @@ namespace ME.ECSEditor {
                         resItem2 = resItem2.Replace("#ISTAG#", hasFields == true ? "false" : "true");
                         resItem2 = resItem2.Replace("#ISSHARED#", isShared == true ? "true" : "false");
                         resItem2 = resItem2.Replace("#ISSIMPLE#", isSimple == true ? "true" : "false");
-                        resItem2 = resItem2.Replace("#ISBLITTABLE#", isBlittable == true ? "true" : "false");
                         resItem2 = resItem2.Replace("#COPYABLE#", isCopyable == true ? "Copyable" : "");
-                        resItem2 = resItem2.Replace("#BLITTABLE#", isBlittable == true ? "Blittable" : "");
                         resItem2 = resItem2.Replace("#DISPOSABLE#", isDisposable == true ? "Disposable" : "");
                         resItem2 = resItem2.Replace("#ONESHOT#", isOneShot == true ? "OneShot" : "");
                         resItem2 = resItem2.Replace("#CONTAINER#", isOneShot == true ? "noStateStructComponentsContainer" : "structComponentsContainer");
@@ -474,7 +469,6 @@ namespace ME.ECSEditor {
                         resItem3 = resItem3.Replace("#ISTAG#", hasFields == true ? "false" : "true");
                         resItem3 = resItem3.Replace("#ISSHARED#", isShared == true ? "true" : "false");
                         resItem3 = resItem3.Replace("#ISSIMPLE#", isSimple == true ? "true" : "false");
-                        resItem3 = resItem3.Replace("#ISBLITTABLE#", isBlittable == true ? "true" : "false");
                         resItem3 = resItem3.Replace("#ISCOPYABLE#", isCopyable == true ? "true" : "false");
                         resItem3 = resItem3.Replace("#ISDISPOSABLE#", isDisposable == true ? "true" : "false");
                         resItem3 = resItem3.Replace("#ISONESHOT#", isOneShot == true ? "true" : "false");
@@ -512,39 +506,35 @@ namespace ME.ECSEditor {
 
         }
 
-        private static bool HasManagedTypes(System.Type type, bool checkForBlittable, out System.Reflection.FieldInfo failedFieldInfo) {
+        private static bool HasManagedTypes(System.Type type, out System.Reflection.FieldInfo failedFieldInfo) {
 
             failedFieldInfo = null;
-            if (type.IsPointer == true) return false;
-            if (type.IsPrimitive == true) return false;
             //if (Unity.Collections.LowLevel.Unsafe.UnsafeUtility.IsBlittable(type) == true) return false;
 
-            var fields = type.GetFields(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
+            var fields = type.GetFields(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
             foreach (var field in fields) {
 
                 var attrs = field.GetCustomAttributes(typeof(ME.ECS.GeneratorIgnoreManagedType), true);
-                if (checkForBlittable == false && attrs.Length > 0) continue;
+                if (attrs.Length > 0) continue;
 
                 var itemType = field.FieldType;
-                if (checkForBlittable == false && itemType == typeof(string)) continue;
-                if (itemType.IsPointer == true) continue;
-                if (itemType.IsPrimitive == true) continue;
-
+                if (itemType == typeof(string)) continue;
+                
                 attrs = itemType.GetCustomAttributes(typeof(ME.ECS.GeneratorIgnoreManagedType), true);
-                if (checkForBlittable == false && attrs.Length > 0) continue;
+                if (attrs.Length > 0) continue;
                 
                 if (itemType.IsClass == true ||
                     itemType.IsInterface == true ||
                     itemType.IsArrayOrList() == true) {
                     
-                    if (checkForBlittable == false && typeof(UnityEngine.Object).IsAssignableFrom(itemType) == true) continue;
+                    if (typeof(UnityEngine.Object).IsAssignableFrom(itemType) == true) continue;
 
                     failedFieldInfo = field;
                     return true;
                     
                 } else {
 
-                    if (Generator.HasManagedTypes(itemType, checkForBlittable, out failedFieldInfo) == true) return true;
+                    if (Generator.HasManagedTypes(itemType, out failedFieldInfo) == true) return true;
 
                 }
 

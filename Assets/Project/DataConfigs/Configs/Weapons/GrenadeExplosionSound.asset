@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
+  m_Name: GrenadeExplosionSound
+  m_EditorClassIdentifier: 
+  sharedGroupId: 0
+  structComponents:
+  - id: 0
+  removeStructComponents: []
+  templates: []
+  references:
+    version: 1
+    00000000:
+      type: {class: SoundEffect, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Sound0: {fileID: -3325464251638610041, guid: 368a7ecce7ed05d4687b36cda1fa72fc, type: 3}
+        Sound1: {fileID: 1260614443189408737, guid: bcde36375107f6c4cba79fe4035ab52d, type: 3}
+        Sound2: {fileID: 2583182008089590140, guid: 7124d9d7e07191e44b73bcca6d3c4be8, type: 3}
+        Sound3: {fileID: 7939063258389495659, guid: 2d81cb490b4500349ab4c4a06068af42, type: 3}

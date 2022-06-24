@@ -6,7 +6,6 @@ using Project.Common.Utilities;
 using Project.Features;
 using Project.Features.Avatar;
 using UnityEngine;
-using math = ME.ECS.Mathematics.math;
 
 namespace Project.Mechanics.Features.Avatar.Systems
 {
@@ -47,7 +46,7 @@ namespace Project.Mechanics.Features.Avatar.Systems
 			
 			if (input.Value != 0)
 			{				
-				if(math.distancesq(entity.Read<PlayerMoveTarget>().Value, entity.GetPosition()) <= Consts.Movement.MIN_DISTANCE)
+				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= Consts.Movement.MIN_DISTANCE)
 				{
 					entity.SetPosition((Vector3)Vector3Int.CeilToInt(entity.Read<PlayerMoveTarget>().Value));
 					var newTarget = entity.GetPosition() + direction * input.Value;

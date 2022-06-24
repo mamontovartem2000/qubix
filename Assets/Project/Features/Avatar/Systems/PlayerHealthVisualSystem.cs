@@ -1,7 +1,6 @@
 ﻿using System;
 using ME.ECS;
 using Project.Common.Components;
-using Project.Common.Utilities;
 using Unity.Mathematics;
 
 namespace Project.Features.Avatar.Systems

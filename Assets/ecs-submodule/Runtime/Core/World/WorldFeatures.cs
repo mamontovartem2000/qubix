@@ -5,7 +5,7 @@ namespace ME.ECS {
 
         public System.Collections.Generic.List<FeaturesListCategory> items = new System.Collections.Generic.List<FeaturesListCategory>();
 
-        public void Initialize(World world, bool callLateInitialization) {
+        public void Initialize(World world) {
 
             for (int i = 0; i < this.items.Count; ++i) {
                 
@@ -19,14 +19,10 @@ namespace ME.ECS {
                 
             }
 
-            if (callLateInitialization == true) {
-
-                for (int i = 0; i < this.items.Count; ++i) {
-
-                    this.items[i].features.InitializeLate(world);
-
-                }
-
+            for (int i = 0; i < this.items.Count; ++i) {
+                
+                this.items[i].features.InitializeLate(world);
+                
             }
 
         }
@@ -47,63 +43,9 @@ namespace ME.ECS {
     public sealed class FeaturesListCategory {
 
         public string folderCaption;
-        public FeaturesList<FeatureData> features = new FeaturesList<FeatureData>();
+        public FeaturesList features = new FeaturesList();
 
     }
-
-    [System.Serializable]
-    public sealed class SubFeaturesList {
-
-        public System.Collections.Generic.List<SubFeatureData> features = new System.Collections.Generic.List<SubFeatureData>();
-
-    }
-    
-    public interface IFeatureData {
-
-        FeatureBase featureInstance { get; set; }
-
-        FeatureBase GetSource();
-        bool IsEnabled();
-        SubFeaturesList GetSubFeatures();
-
-    }
-
-    #if ECS_COMPILE_IL2CPP_OPTIONS
-    [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false)]
-    [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false)]
-    [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
-    [System.Serializable]
-    public abstract class BaseFeatureData : IFeatureData {
-
-        public bool enabled;
-        public FeatureBase feature;
-        public FeatureBase featureInstance { get; set; }
-            
-        public bool IsEnabled() => this.enabled;
-        public FeatureBase GetSource() => this.feature;
-
-        public virtual SubFeaturesList GetSubFeatures() => null;
-
-    }
-
-    [System.Serializable]
-    public class FeatureData : BaseFeatureData {
-            
-        public SubFeaturesList innerFeatures;
-
-        public override SubFeaturesList GetSubFeatures() => this.innerFeatures;
-            
-    }
-
-    [System.Serializable]
-    public class SubFeatureData : BaseFeatureData {
-
-        public override SubFeaturesList GetSubFeatures() => null;
-
-    }
-
-    public abstract class FeaturesListBase {}
     
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false)]
@@ -111,48 +53,67 @@ namespace ME.ECS {
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     [System.Serializable]
-    public sealed class FeaturesList<T> : FeaturesListBase where T : BaseFeatureData {
+    public sealed class FeaturesList {
 
-        public System.Collections.Generic.List<T> features = new System.Collections.Generic.List<T>();
-        
+        public interface IFeatureData {
+
+            FeatureBase featureInstance { get; set; }
+
+            FeatureBase GetSource();
+            bool IsEnabled();
+            FeaturesList GetSubFeatures();
+
+        }
+
+        #if ECS_COMPILE_IL2CPP_OPTIONS
+        [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false)]
+        [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false)]
+        [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
+        #endif
+        [System.Serializable]
+        public sealed class FeatureData : IFeatureData {
+
+            public bool enabled;
+            public FeatureBase feature;
+            public FeatureBase featureInstance { get; set; }
+            public FeaturesList innerFeatures;
+
+            public bool IsEnabled() => this.enabled;
+            public FeatureBase GetSource() => this.feature;
+            public FeaturesList GetSubFeatures() => this.innerFeatures;
+
+        }
+
+        public System.Collections.Generic.List<FeatureData> features = new System.Collections.Generic.List<FeatureData>();
+
         internal void Initialize(World world) {
 
             this.InitializePre(world, this.features);
             
         }
 
-        private void InitializePre(World world, System.Collections.Generic.List<T> features) {
+        private void InitializePre(World world, System.Collections.Generic.List<FeatureData> features) {
 
             for (int i = 0; i < features.Count; ++i) {
 
                 var item = features[i];
-                this.InitializePre(world, item);
-                
-            }
-            
-        }
-        
-        private void InitializePre(World world, BaseFeatureData item) {
+                if (item.IsEnabled() == true) {
 
-            if (item.IsEnabled() == true) {
+                    var instance = (world.settings.createInstanceForFeatures == true ? UnityEngine.Object.Instantiate(item.GetSource()) : item.GetSource());
+                    if (world.settings.createInstanceForFeatures == true) instance.name = item.GetSource().name;
+                    item.featureInstance = instance;
+                    world.AddFeature(instance, doConstruct: false);
 
-                var instance = (world.settings.createInstanceForFeatures == true ? UnityEngine.Object.Instantiate(item.GetSource()) : item.GetSource());
-                if (world.settings.createInstanceForFeatures == true) instance.name = item.GetSource().name;
-                item.featureInstance = instance;
-                world.AddFeature(instance, doConstruct: false);
+                    if (item.GetSubFeatures() != null) {
 
-                if (item.GetSubFeatures() != null) {
-
-                    foreach (var subItem in item.GetSubFeatures().features) {
-
-                        this.InitializePre(world, subItem);
+                        this.InitializePre(world, item.GetSubFeatures().features);
 
                     }
-
+                    
                 }
-                
-            }
 
+            }
+            
         }
 
         public void InitializePost(World world) {
@@ -161,31 +122,21 @@ namespace ME.ECS {
             
         }
 
-        public void InitializePost(World world, System.Collections.Generic.List<T> features) {
+        public void InitializePost(World world, System.Collections.Generic.List<FeatureData> features) {
 
             for (int i = 0; i < features.Count; ++i) {
                 
                 var item = features[i];
-                this.InitializePost(world, item);
-
-            }
-
-        }
-        
-        private void InitializePost(World world, BaseFeatureData item) {
-
-            if (item.IsEnabled() == true) {
-
-                item.featureInstance.DoConstruct();
+                if (item.IsEnabled() == true) {
                     
-                if (item.GetSubFeatures() != null) {
+                    item.featureInstance.DoConstruct();
+                    
+                    if (item.GetSubFeatures() != null) {
 
-                    foreach (var subItem in item.GetSubFeatures().features) {
-
-                        this.InitializePost(world, subItem);
+                        this.InitializePost(world, item.GetSubFeatures().features);
 
                     }
-
+                    
                 }
                 
             }
@@ -198,31 +149,21 @@ namespace ME.ECS {
             
         }
 
-        public void InitializeLate(World world, System.Collections.Generic.List<T> features) {
+        public void InitializeLate(World world, System.Collections.Generic.List<FeatureData> features) {
 
             for (int i = 0; i < features.Count; ++i) {
                 
                 var item = features[i];
-                this.InitializeLate(world, item);
-                
-            }
+                if (item.IsEnabled() == true) {
+                    
+                    item.featureInstance.DoConstructLate();
+                    
+                    if (item.GetSubFeatures() != null) {
 
-        }
-        
-        public void InitializeLate(World world, BaseFeatureData item) {
-
-            if (item.IsEnabled() == true) {
-                
-                item.featureInstance.DoConstructLate();
-                
-                if (item.GetSubFeatures() != null) {
-
-                    foreach (var subItem in item.GetSubFeatures().features) {
-
-                        this.InitializeLate(world, subItem);
+                        this.InitializeLate(world, item.GetSubFeatures().features);
 
                     }
-
+                    
                 }
                 
             }
@@ -235,38 +176,27 @@ namespace ME.ECS {
             
         }
 
-        internal void DeInitialize(World world, System.Collections.Generic.List<T> features) {
+        internal void DeInitialize(World world, System.Collections.Generic.List<FeatureData> features) {
             
             for (int i = features.Count - 1; i >= 0; --i) {
                 
                 var item = features[i];
-                this.DeInitialize(world, item);
+                if (item.IsEnabled() == true) {
+                    
+                    if (item.GetSubFeatures() != null) {
 
-            }
-
-        }
-        
-        private void DeInitialize(World world, BaseFeatureData item) {
-            
-            if (item.IsEnabled() == true) {
-                
-                if (item.GetSubFeatures() != null) {
-
-                    for (int i = item.GetSubFeatures().features.Count - 1; i >= 0; --i) {
-
-                        var subItem = item.GetSubFeatures().features[i];
-                        this.DeInitialize(world, subItem);
+                        this.DeInitialize(world, item.GetSubFeatures().features);
 
                     }
-                    
+
+                    world.RemoveFeature(item.featureInstance);
+                    if (world.settings.createInstanceForFeatures == true) UnityEngine.Object.DestroyImmediate(item.featureInstance);
+                    item.featureInstance = null;
+
                 }
-
-                world.RemoveFeature(item.featureInstance);
-                if (world.settings.createInstanceForFeatures == true) UnityEngine.Object.DestroyImmediate(item.featureInstance);
-                item.featureInstance = null;
-
+                
             }
-            
+
         }
 
     }
@@ -292,21 +222,6 @@ namespace ME.ECS {
             
             Filter.RegisterInject(this.InjectFilter);
             this.OnConstructLate();
-
-            if (this.systemGroup.runtimeSystem.allSystems != null) {
-
-                // Update systems
-                foreach (var system in this.systemGroup.runtimeSystem.allSystems) {
-
-                    if (system is ISystemConstructLate systemConstructLate) {
-
-                        systemConstructLate.OnConstructLate();
-
-                    }
-                
-                }
-
-            }
             Filter.UnregisterInject(this.InjectFilter);
             
         }

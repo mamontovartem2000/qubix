@@ -9,7 +9,6 @@ namespace ME.ECS {
 
         public uint id;
         public bool debugMode;
-        public bool callOnRollback = true;
         public GlobalEvent[] callOthers = new GlobalEvent[0];
         
         public delegate void GlobalEventDelegate(in Entity entity);
@@ -138,7 +137,7 @@ namespace ME.ECS {
             var evt = GlobalEvent.GetInstance(this);
             
             // If we are reverting - skip visual events
-            if (this.callOnRollback == false && globalEventType == World.GlobalEventType.Visual) {
+            /*if (globalEventType == World.GlobalEventType.Visual) {
 
                 if (Worlds.currentWorld.HasResetState() == true) {
 
@@ -150,7 +149,7 @@ namespace ME.ECS {
 
                 }
 
-            }
+            }*/
 
             if (evt.debugMode == true) {
                 

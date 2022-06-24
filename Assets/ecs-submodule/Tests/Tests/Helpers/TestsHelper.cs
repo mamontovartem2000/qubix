@@ -40,9 +40,8 @@ namespace ME.ECS.Tests {
                 world.SetSeed(1u);
                 {
                     ref var str = ref world.GetStructComponents();
-                    ref var str2 = ref world.GetNoStateStructComponents();
                     CoreComponentsInitializer.InitTypeId();
-                    CoreComponentsInitializer.Init(ref str, ref str2);
+                    CoreComponentsInitializer.Init(ref str);
                     setupWorld?.Invoke(world);
                 }
                 

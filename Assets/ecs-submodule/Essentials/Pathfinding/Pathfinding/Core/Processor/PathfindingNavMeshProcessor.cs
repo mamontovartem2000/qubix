@@ -1,73 +1,9 @@
 ﻿using Unity.Jobs;
 using UnityEngine;
-using ME.ECS.Mathematics;
 
 namespace ME.ECS.Pathfinding {
 
     public struct PathfindingNavMeshProcessor : IPathfindingProcessor {
-        
-        private struct Cache {
-
-            private struct Entry {
-
-                public Tick tick;
-                public int hash;
-
-                public float3 from;
-                public float3 to;
-                public int constraintKey;
-                public Path path;
-
-            }
-            
-            private const int maxCacheSize = 20;
-            private static Entry[] pool = new Entry[Cache.maxCacheSize];
-            private static int currentIndex = 0;
-
-            public static bool Get(in float3 from, in float3 to, int constraintKey, in NavMeshGraph graph, out Path path) {
-
-                path = default;
-
-                var hash = graph.lastGraphUpdateHash;
-                var tick = Worlds.currentWorld.GetCurrentTick();
-
-                for (int i = 0; i < Cache.pool.Length; i++) {
-                    ref readonly var entry = ref Cache.pool[i];
-
-                    if (entry.hash == hash && entry.tick == tick) {
-                        if (math.all(entry.from == from) && math.all(entry.to == to) && entry.constraintKey == constraintKey) {
-                            path = Path.Clone(entry.path);
-
-                            return true;
-                        }
-                    }
-                }
-
-                return false;
-            }
-
-            public static void Set(in float3 from, in float3 to, int constraintKey, in NavMeshGraph graph, in Path path) {
-                
-                if (path.result == PathCompleteState.Complete) {
-
-                    ref var entry = ref Cache.pool[Cache.currentIndex];
-                    
-                    entry.hash = graph.lastGraphUpdateHash;
-                    entry.tick = Worlds.currentWorld.GetCurrentTick();
-                    entry.from = from;
-                    entry.to = to;
-                    entry.constraintKey = constraintKey;
-                    
-                    entry.path.Recycle();
-                    entry.path = Path.Clone(path);
-
-                    Cache.currentIndex = (Cache.currentIndex + 1) % Cache.maxCacheSize;
-
-                }
-                
-            }
-
-        }
 
         private struct PathInternal {
 
@@ -126,8 +62,8 @@ namespace ME.ECS.Pathfinding {
         private struct BuildPathJob : IJob {
 
             public UnityEngine.Experimental.AI.NavMeshQuery query;
-            public float3 fromPoint;
-            public float3 toPoint;
+            public Vector3 fromPoint;
+            public Vector3 toPoint;
             public int agentTypeId;
             public int areas;
             
@@ -140,13 +76,13 @@ namespace ME.ECS.Pathfinding {
                 this.pathResults[1] = default;
 
                 //UnityEngine.Debug.Log("Exec1");
-                var from = this.query.MapLocation((Vector3)this.fromPoint, new Vector3(100f, 100f, 100f), this.agentTypeId, this.areas);
+                var from = this.query.MapLocation(this.fromPoint, new Vector3(100f, 100f, 100f), this.agentTypeId, this.areas);
                 if (from.polygon.IsNull() == true) {
                     return;
                 }
                 
                 //UnityEngine.Debug.Log("Exec2");
-                var to = this.query.MapLocation((Vector3)this.toPoint, new Vector3(100f, 100f, 100f), this.agentTypeId, this.areas);
+                var to = this.query.MapLocation(this.toPoint, new Vector3(100f, 100f, 100f), this.agentTypeId, this.areas);
                 if (to.polygon.IsNull() == true) {
                     return;
                 }
@@ -198,17 +134,12 @@ namespace ME.ECS.Pathfinding {
         private const int MAX_ITERATIONS = 1024;
         private const int MAX_PATH_SIZE = 1024;
 
-        public Path Run<TMod>(LogLevel pathfindingLogLevel, float3 fromPoint, float3 toPoint, Constraint constraint, Graph graph, TMod pathModifier, int threadIndex = 0,
+        public Path Run<TMod>(LogLevel pathfindingLogLevel, Vector3 fromPoint, Vector3 toPoint, Constraint constraint, Graph graph, TMod pathModifier, int threadIndex = 0,
                               bool burstEnabled = true, bool cacheEnabled = false) where TMod : struct, IPathModifier {
-            
-            var navMeshGraph = (NavMeshGraph)graph;
 
-            if (Cache.Get(fromPoint, toPoint, constraint.GetKey(), navMeshGraph, out var path) == true) {
-                return path;
-            }
-
+            var path = new Path();
             var pathResult = new PathInternal();
-            
+            var navMeshGraph = (NavMeshGraph)graph;
 
             var areas = -1;
             if (constraint.checkArea == true) {
@@ -249,10 +180,10 @@ namespace ME.ECS.Pathfinding {
 
                     if (cornerCount >= 2) {
 
-                        path.navMeshPoints = PoolListCopyable<float3>.Spawn(cornerCount);
+                        path.navMeshPoints = PoolListCopyable<Vector3>.Spawn(cornerCount);
                         for (var i = 0; i < cornerCount; ++i) {
 
-                            path.navMeshPoints.Add((float3)results[i].position);
+                            path.navMeshPoints.Add(results[i].position);
 
                         }
 
@@ -298,31 +229,28 @@ namespace ME.ECS.Pathfinding {
                     }
 
                 }
-                
-                Cache.Set(fromPoint, toPoint, constraint.GetKey(), navMeshGraph, path);
-                
                 results.Dispose();
                 query.Dispose();
                 return path;
                 
             }
             
-            UnityEngine.AI.NavMesh.SamplePosition((Vector3)fromPoint, out var hitFrom, 1000f, new UnityEngine.AI.NavMeshQueryFilter() {
+            UnityEngine.AI.NavMesh.SamplePosition(fromPoint, out var hitFrom, 1000f, new UnityEngine.AI.NavMeshQueryFilter() {
                 agentTypeID = navMeshGraph.agentTypeId,
                 areaMask = areas,
             });
-            fromPoint = (float3)hitFrom.position;
-            var from = query.MapLocation((Vector3)fromPoint, Vector3.one * 10f, navMeshGraph.agentTypeId, areas);
+            fromPoint = hitFrom.position;
+            var from = query.MapLocation(fromPoint, Vector3.one * 10f, navMeshGraph.agentTypeId, areas);
             if (from.polygon.IsNull() == true) {
                 return path;
             }
 
-            UnityEngine.AI.NavMesh.SamplePosition((Vector3)toPoint, out var hitTo, 1000f, new UnityEngine.AI.NavMeshQueryFilter() {
+            UnityEngine.AI.NavMesh.SamplePosition(toPoint, out var hitTo, 1000f, new UnityEngine.AI.NavMeshQueryFilter() {
                 agentTypeID = navMeshGraph.agentTypeId,
                 areaMask = areas,
             });
-            toPoint = (float3)hitTo.position;
-            var to = query.MapLocation((Vector3)toPoint, Vector3.one * 10f, navMeshGraph.agentTypeId, areas);
+            toPoint = hitTo.position;
+            var to = query.MapLocation(toPoint, Vector3.one * 10f, navMeshGraph.agentTypeId, areas);
             if (to.polygon.IsNull() == true) {
                 return path;
             }
@@ -382,10 +310,10 @@ namespace ME.ECS.Pathfinding {
 
                     if (cornerCount >= 2) {
 
-                        path.navMeshPoints = PoolListCopyable<float3>.Spawn(cornerCount);
+                        path.navMeshPoints = PoolListCopyable<Vector3>.Spawn(cornerCount);
                         for (var i = 0; i < cornerCount; ++i) {
 
-                            path.navMeshPoints.Add((float3)results[i].position);
+                            path.navMeshPoints.Add(results[i].position);
 
                         }
 
@@ -467,8 +395,6 @@ namespace ME.ECS.Pathfinding {
             }
 
             query.Dispose();
-            
-            Cache.Set(fromPoint, toPoint, constraint.GetKey(), navMeshGraph, path);
 
             return path;
 

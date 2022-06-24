@@ -4,8 +4,7 @@ using ME.ECS.Transform;
 using Project.Common.Components;
 using Unity.Burst;
 using Unity.Collections;
-using Unity.Mathematics;
-using UnityEngine;
+using Unity.Jobs;
 
 namespace Project.Features.CollisionHandler.Systems
 {
@@ -17,9 +16,9 @@ namespace Project.Features.CollisionHandler.Systems
 	public sealed class GridCollisionDetectionSystem : ISystem, IAdvanceTick
 	{
 		public World world { get; set; }
-
+		
 		private CollisionHandlerFeature _feature;
-		private Filter _dynamicFilter, _staticFilter;
+		private Filter _dynamicFilter,_staticFilter;
 
 		void ISystemBase.OnConstruct()
 		{
@@ -27,86 +26,78 @@ namespace Project.Features.CollisionHandler.Systems
 			Filter.Create("Filter-PlayerFilter")
 				.With<CollisionDynamic>()
 				.Push(ref _dynamicFilter);
-
+			
 			Filter.Create("Filter-GridCollisionDetectionSystem")
 				.With<CollisionStatic>()
 				.Push(ref _staticFilter);
 		}
-
-		void ISystemBase.OnDeconstruct()
-		{
-		}
-
-		public void AdvanceTick(in float deltaTime)
-		{
-			var staticBag = new FilterBag<Position, Owner>(_staticFilter, Allocator.TempJob);
-			var dynamicBag = new FilterBag<Position, Owner, ProjectileSpeed, ProjectileDirection, Collided>(_dynamicFilter, Allocator.TempJob);
-
-			var job = new CollisionJob { staticBag = staticBag, dt = deltaTime, width = SceneUtils.Width };
-			job.Schedule(dynamicBag).Complete();
-
-			staticBag.Revert();
-			dynamicBag.Push();
-		}
+		void ISystemBase.OnDeconstruct() {}
 
 		[BurstCompile(FloatPrecision.Low, FloatMode.Fast, CompileSynchronously = true)]
-		private struct CollisionJob : IJobParallelForFilterBag<FilterBag<Position, Owner, ProjectileSpeed, ProjectileDirection, Collided>>
+		public struct CollisionJob : IJobParallelFor
 		{
+			public FilterBag<Position, Owner, ProjectileSpeed, ProjectileDirection, Collided> dynamicBag;
 			public FilterBag<Position, Owner> staticBag;
-			public float dt;
+			public fp dt;
 			public int width;
-
-			public void Execute(ref FilterBag<Position, Owner, ProjectileSpeed, ProjectileDirection, Collided> bag, int index)
+			
+			public void Execute(int index)
 			{
-				var dist = 2f * 2f;
+				var sPos = staticBag.ReadT0(index).ToVector3();
+				var sOwner = staticBag.ReadT1(index).Value;
+				var dist = (fp)2 * 2;
 
-				for (var i = 0; i < staticBag.Length; i++)
+				for (int i = 0; i < dynamicBag.Length; i++)
 				{
-					ref readonly var sOwner = ref staticBag.ReadT1(i).Value;
-					ref readonly var dOwner = ref bag.ReadT1(index).Value;
+					var dPos = dynamicBag.ReadT0(i).ToVector3();
+					var dOwner = dynamicBag.ReadT1(i).Value;
+					var speed = dynamicBag.ReadT2(i).Value;
+					var dir = dynamicBag.ReadT3(i).Value;
 
 					if (dOwner == sOwner) continue;
 
-					ref readonly var dPos = ref bag.ReadT0(index).value;
-					ref readonly var sPos = ref staticBag.ReadT0(i).value;
-					
-					if (math.distancesq(dPos, sPos) > dist) continue;
+					if (fpmath.distancesq(dPos, sPos) > dist) continue;
 
-					ref readonly var speed = ref bag.ReadT2(index).Value;
-					ref readonly var dir = ref bag.ReadT3(index).Value;
-
-					var sIndex = SceneUtils.BurstConvert(sPos, width);
-
+					var sIndex = SceneUtils.BurstConvert(sPos,width);
 					var dModPos = dPos + dir * speed * dt;
-
 					var dIndex = 0;
 
 					var tmp = ClosestPointToSegment(sPos.XZ(), dPos.XZ(), dModPos.XZ());
 
-					dIndex = SceneUtils.BurstConvert(new float3(tmp.x, 0, tmp.y), width);
+					dIndex = SceneUtils.BurstConvert(new fp3(tmp.x, 0, tmp.y), width);
+
 					if (sIndex != dIndex) continue;
-					bag.GetT4(index).ApplyTo = sOwner;
-					bag.GetT4(index).ApplyFrom = dOwner;
+
+					dynamicBag.Set(i, new Collided {ApplyTo = sOwner, ApplyFrom = dOwner});
 				}
 			}
 		}
-
-		private static float2 ClosestPointToSegment(float2 P, float2 A, float2 B)
+		
+		public void AdvanceTick(in float deltaTime)
 		{
-			if (math.distancesq(A, B) <= math.EPSILON) return A;
-			var a_to_p = new float2();
-			var a_to_b = new float2();
+			var staticBag = new FilterBag<Position, Owner>(_staticFilter, Allocator.TempJob);
+			var dynamicBag = new FilterBag<Position, Owner,ProjectileSpeed,ProjectileDirection,Collided>(_dynamicFilter, Allocator.TempJob);
 
+			var job = new CollisionJob() {dynamicBag = dynamicBag, staticBag = staticBag, dt = deltaTime, width = SceneUtils.Width};
+			job.Schedule(staticBag.Length, 50).Complete();
+			
+			staticBag.Revert();
+			dynamicBag.Push();
+		}
+		
+		private static fp2 ClosestPointToSegment(fp2 P, fp2 A, fp2 B)
+		{
+			fp2 a_to_p = new fp2(), a_to_b = new fp2();
 			
 			a_to_p.x = P.x - A.x;
 			a_to_p.y = P.y - A.y; //     # Storing vector A->P  
 			a_to_b.x = B.x - A.x;
 			a_to_b.y = B.y - A.y; //     # Storing vector A->B
 
-			var atb2 = a_to_b.x * a_to_b.x + a_to_b.y * a_to_b.y;
-			var atp_dot_atb = a_to_p.x * a_to_b.x + a_to_p.y * a_to_b.y; // The dot product of a_to_p and a_to_b
-			var t = atp_dot_atb / atb2; //  # The normalized "distance" from a to the closest point
-			return new float2(A.x + a_to_b.x * t, A.y + a_to_b.y * t);
+			float atb2 = a_to_b.x * a_to_b.x + a_to_b.y * a_to_b.y;
+			float atp_dot_atb = a_to_p.x * a_to_b.x + a_to_p.y * a_to_b.y; // The dot product of a_to_p and a_to_b
+			float t = atp_dot_atb / atb2;  //  # The normalized "distance" from a to the closest point
+			return new fp2(A.x + a_to_b.x * t, A.y + a_to_b.y * t);
 		}
 	}
 }

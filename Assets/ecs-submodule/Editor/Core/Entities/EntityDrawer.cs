@@ -22,21 +22,19 @@ namespace ME.ECSEditor {
         public static void Draw(Rect position, Entity entity, GUIContent label) {
 
             const float buttonWidth = 60f;
+            const float offsetRight = 5f;
 
-            var origPosition = position;
-            var intendedPosition = EditorGUI.IndentedRect(position);
-
-            position.x = intendedPosition.x;
             var labelRect = position;
-            labelRect.width = EditorGUIUtility.labelWidth - EditorGUI.indentLevel * 15f - 1f;
+            //labelRect.x += EditorGUI.indentLevel * 14f;
+            labelRect.width = EditorGUIUtility.labelWidth - labelRect.x;
             var contentRect = position;
-            contentRect.x = labelRect.x + labelRect.width;
+            contentRect.x = labelRect.width + labelRect.x - EditorGUI.indentLevel * 14f;
             contentRect.y -= 4f;
-            contentRect.width = origPosition.width - labelRect.width - buttonWidth - labelRect.x;
+            contentRect.width = EditorGUIUtility.currentViewWidth - labelRect.width - buttonWidth - position.x - labelRect.x;// - EditorGUI.indentLevel * 14f;
             var contentRectDescr = contentRect;
             contentRectDescr.y += 14f;
             var buttonRect = contentRect;
-            buttonRect.x = contentRect.x + contentRect.width;
+            buttonRect.x += contentRect.width - offsetRight - buttonWidth;
             buttonRect.y += 36f - 24f;
             buttonRect.width = buttonWidth;
             buttonRect.height = 24f;
@@ -45,12 +43,12 @@ namespace ME.ECSEditor {
             if (entity.IsAliveWithBoundsCheck() == false) {
 
                 using (new GUILayoutExt.GUIAlphaUsing(0.7f)) {
-                    GUI.Label(contentRect, "Null");
+                    GUI.Label(contentRect, "Empty");
                 }
 
-                if (entity == Entity.Null) {
+                if (entity == Entity.Empty) {
 
-                    GUI.Label(contentRectDescr, "\u2014", EditorStyles.miniLabel);
+                    GUI.Label(contentRectDescr, "---", EditorStyles.miniLabel);
 
                 } else {
                     

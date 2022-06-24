@@ -137,58 +137,44 @@ namespace ME.ECS {
         public System.Collections.Generic.List<Configuration> configurations = new System.Collections.Generic.List<Configuration>();
         public string selectedConfiguration;
 
+        public FeaturesList featuresList = new FeaturesList();
         public FeaturesListCategories featuresListCategories = new FeaturesListCategories();
         public WorldSettings worldSettings = WorldSettings.Default;
         public WorldDebugSettings worldDebugSettings = WorldDebugSettings.Default;
         public EndOfBaseClass endOfBaseClass;
 
-        protected void Initialize(World world, bool callLateInitialization = true) {
+        protected virtual void OnValidate() {
+
+            if (this.featuresList.features.Count > 0 && this.featuresListCategories.items.Count == 0) {
+
+                this.ConvertVersionFrom1To2();
+
+            }
+
+        }
+
+        public void ConvertVersionFrom1To2() {
+            
+            this.featuresListCategories.items = new List<FeaturesListCategory>() {
+                new FeaturesListCategory() {
+                    features = new FeaturesList() { features = this.featuresList.features.ToList() }
+                }
+            };
+            this.featuresList = new FeaturesList();
+
+        }
+        
+        protected void Initialize(World world) {
 
             world.SetSettings(this.worldSettings);
             world.SetDebugSettings(this.worldDebugSettings);
-            world.TryInitializeDefaults();
-
-            // Initialize features
-            this.InitializeFeatures(world, callLateInitialization);
+            this.InitializeFeatures(world);
             
-            // Initialize scene
-            this.InitializeScene(world);
-
         }
 
-        private void InitializeScene(World world) {
+        protected void InitializeFeatures(World world) {
 
-            var sceneEntityViews = InitializerBase.FindObjectsOfType<ME.ECS.Views.Providers.SceneViewInitializer>();
-            var list = PoolList<ME.ECS.Views.Providers.SceneViewInitializer>.Spawn(sceneEntityViews.Length);
-            for (int i = 0; i < sceneEntityViews.Length; ++i) {
-
-                var view = sceneEntityViews[i];
-                if (view != null) {
-
-                    var parent = view.GetComponentsInParent<ME.ECS.Views.Providers.SceneViewInitializer>(true);
-                    if (parent.Length <= 1) {
-
-                        list.Add(view);
-
-                    }
-
-                }
-
-            }
-            for (int i = 0; i < list.Count; ++i) {
-
-                var view = list[i];
-                ((ME.ECS.Views.Providers.ISceneView)view).Initialize(world);
-                
-            }
-            
-            PoolList<ME.ECS.Views.Providers.SceneViewInitializer>.Recycle(ref list);
-
-        }
-
-        protected void InitializeFeatures(World world, bool callLateInitialization) {
-
-            this.featuresListCategories.Initialize(world, callLateInitialization);
+            this.featuresListCategories.Initialize(world);
 
         }
 

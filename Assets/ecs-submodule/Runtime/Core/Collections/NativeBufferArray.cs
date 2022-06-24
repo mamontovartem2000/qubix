@@ -22,12 +22,6 @@ namespace ME.ECS.Collections {
 
     }
 
-    public interface INativeBufferArray : IBufferArray {
-
-        
-
-    }
-
     /// <summary>
     /// NativeBufferArray<T> for native array
     /// Note: Beware of readonly instruction - it will readonly in build, but in editor it is non-readonly because of PropertyDrawer
@@ -39,26 +33,21 @@ namespace ME.ECS.Collections {
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     [System.Serializable]
-    public struct NativeBufferArray<T> : System.IEquatable<NativeBufferArray<T>>, INativeBufferArray where T : struct {
+    public struct NativeBufferArray<T> : System.IEquatable<NativeBufferArray<T>>, IBufferArray where T : struct {
 
         public static NativeBufferArray<T> Empty = new NativeBufferArray<T>();
 
-        [ME.ECS.Serializer.SerializeFieldAttribute]
         [Unity.Collections.NativeDisableParallelForRestrictionAttribute]
         internal NativeArray<T> arr;
-        [ME.ECS.Serializer.SerializeFieldAttribute]
         public readonly int Length;
         public readonly bool isCreated => this.arr.IsCreated;
 
-        public readonly unsafe void* GetUnsafePtr() {
-            return this.arr.GetUnsafePtr();
+        public unsafe System.IntPtr GetUnsafePtr() {
+            return (System.IntPtr)this.arr.GetUnsafePtr();
         }
 
-        #if INLINE_METHODS
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
-        public readonly unsafe void* GetUnsafeReadOnlyPtr() {
-            return this.arr.GetUnsafeReadOnlyPtr();
+        public readonly unsafe System.IntPtr GetUnsafeReadOnlyPtr() {
+            return (System.IntPtr)this.arr.GetUnsafeReadOnlyPtr();
         }
 
         [System.Diagnostics.ConditionalAttribute("ENABLE_UNITY_COLLECTIONS_CHECKS")]
@@ -76,9 +65,6 @@ namespace ME.ECS.Collections {
             }
         }
 
-        #if INLINE_METHODS
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         public readonly ref readonly T Read(int index) {
             this.CheckBounds(index);
             return ref this.arr.GetRefRead(index);
@@ -87,24 +73,30 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        internal NativeBufferArray(NativeArray<T> arr, int length) {
-            
+        internal NativeBufferArray(T[] arr, int length) : this(arr, length, -1) { }
+
+        #if INLINE_METHODS
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        internal NativeBufferArray(NativeArray<T> arr, int length) : this(arr, length, -1) { }
+
+        #if INLINE_METHODS
+        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        internal NativeBufferArray(NativeArray<T> arr, int length, int realLength) {
+
             this.Length = length;
             this.arr = arr;
-
+            
         }
 
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        internal NativeBufferArray(T[] arr, int length, int realSize) {
+        internal NativeBufferArray(T[] arr, int length, int realLength) {
 
             this.Length = length;
-            if (arr == null) {
-                this.arr = default;
-            } else {
-                this.arr = new NativeArray<T>(arr, Allocator.Persistent);
-            }
+            this.arr = new NativeArray<T>(arr, Allocator.Persistent);
 
         }
 
@@ -212,27 +204,6 @@ namespace ME.ECS.Collections {
 
         }
 
-        public NativeBufferArray<T> Resize(int index, bool resizeWithOffset, out bool result) {
-
-            var newSize = index + 1;
-            result = false;
-            if (newSize > this.Length) {
-
-                if (newSize > this.arr.Length) {
-
-                    NativeArrayUtils.Resize(newSize, ref this.arr, Allocator.Persistent, resizeWithOffset);
-
-                }
-                
-                result = true;
-                return new NativeBufferArray<T>(this.arr, newSize);
-
-            }
-
-            return this;
-
-        }
-        
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif

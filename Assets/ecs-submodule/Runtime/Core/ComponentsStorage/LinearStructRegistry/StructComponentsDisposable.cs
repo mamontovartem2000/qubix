@@ -7,12 +7,6 @@ namespace ME.ECS {
     #endif
     public sealed class StructComponentsDisposable<TComponent> : StructComponents<TComponent> where TComponent : struct, IComponentBase, IComponentDisposable {
 
-        public override void Recycle() {
-            
-            PoolRegistries.Recycle(this);
-
-        }
-
         public override bool IsNeedToDispose() {
 
             return true;

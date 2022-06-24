@@ -93,7 +93,7 @@ namespace ME.ECSEditor {
                     }
                 }
 
-                if (hasInstance == false && viewSource is Object) {
+                if (hasInstance == false) {
 
                     UnityEditor.EditorGUI.BeginDisabledGroup(true);
                     UnityEditor.EditorGUI.ObjectField(position, new GUIContent("View Source"), (Object)viewSource, typeof(Object), allowSceneObjects: false);

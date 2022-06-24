@@ -2,8 +2,6 @@
 using FlatMessages;
 using System;
 using System.Text;
-using Project.Modules.Network.ManualConnect;
-using Project.Modules.Network.UI;
 using UnityEngine;
 
 namespace Project.Modules.Network

@@ -80,12 +80,12 @@ namespace ME.ECS.Collections {
         [ME.ECS.Serializer.SerializeField]
         private IntrusiveListGeneric<T> list;
 
-        public readonly int Count => this.list.Count;
+        public int Count => this.list.Count;
 
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly Enumerator GetEnumerator() {
+        public Enumerator GetEnumerator() {
 
             return new Enumerator(this);
 
@@ -98,7 +98,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly BufferArray<T> ToArray() {
+        public BufferArray<T> ToArray() {
 
             var arr = PoolArray<T>.Spawn(this.Count);
             var i = 0;
@@ -120,7 +120,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly bool Contains(in T entityData) {
+        public bool Contains(in T entityData) {
 
             return this.list.Contains(in entityData);
 
@@ -209,7 +209,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly T Peek() {
+        public T Peek() {
 
             if (this.list.Count == 0) return default;
 

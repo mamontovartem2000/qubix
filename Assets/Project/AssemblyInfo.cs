@@ -1,18 +1,25 @@
 #region Namespaces
-
-namespace Project
-{
-    public partial struct Dummy {}
-
-    public partial struct Dummy {}
-
-    public partial struct Dummy {}
-
-    public partial struct Dummy {}
-
-    public partial struct Dummy {}
-
-    public partial struct Dummy {}
-
-    #endregion
+namespace Project.Systems {
+    public struct Dummy {}
 }
+
+namespace Project.Components {
+    public struct Dummy {}
+}
+
+namespace Project.Modules {
+    public struct Dummy {}
+}
+
+namespace Project.Features {
+    public struct Dummy {}
+}
+
+namespace Project.Markers {
+    public struct Dummy {}
+}
+
+namespace Project.Views {
+    public struct Dummy {}
+}
+#endregion

@@ -90,6 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2947104274558177077}
+  - component: {fileID: -5000872838529558496}
   - component: {fileID: 4731377992031589198}
   m_Layer: 0
   m_Name: Balloon
@@ -113,6 +114,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5000872838529558496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2570965042692560271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28052540b51422b4bbcaf2084b255436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: 6339110513867660364, guid: 75388bc2360775d45bca2072a199cb80, type: 3}
+        meshRenderer: {fileID: 1032062133680730369}
+        meshFilter: {fileID: 1032062133680730430}
+        material: {fileID: 2100000, guid: ffda6ba6af2dd7848a33f4296018929f, type: 2}
+        localPosition: {x: 0, y: -0.4, z: 0}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 1, y: 1, z: 1}
 --- !u!114 &4731377992031589198
 MonoBehaviour:
   m_ObjectHideFlags: 0

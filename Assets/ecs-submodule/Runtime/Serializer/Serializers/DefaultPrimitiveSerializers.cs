@@ -408,13 +408,15 @@ namespace ME.ECS.Serializer {
         
         [INLINE(256)] public static void PackDirect(Packer packer, double value) {
 
-            Serializer.PackDouble(packer, value);
+            const int size = 8;
+            Serializer.PackBlittable(packer, value, size);
             
         }
         
         [INLINE(256)] public static double UnpackDirect(Packer packer) {
 
-            return Serializer.UnpackDouble(packer);
+            const int size = 8;
+            return Serializer.UnpackBlittable<double>(packer, size);
             
         }
 
@@ -439,13 +441,15 @@ namespace ME.ECS.Serializer {
 
         [INLINE(256)] public static void PackDirect(Packer packer, float value) {
 
-            Serializer.PackSingle(packer, value);
+            const int size = 4;
+            Serializer.PackBlittable(packer, value, size);
             
         }
         
         [INLINE(256)] public static float UnpackDirect(Packer packer) {
 
-            return Serializer.UnpackSingle(packer);
+            const int size = 4;
+            return Serializer.UnpackBlittable<float>(packer, size);
             
         }
 
@@ -558,27 +562,26 @@ namespace ME.ECS.Serializer {
 
     }
     
-    #if UNITY
     public struct FPSerializer : ITypeSerializer {
 
         [INLINE(256)] public byte GetTypeValue() { return (byte)TypeValue.FPFloat; }
-        [INLINE(256)] public System.Type GetTypeSerialized() { return typeof(sfloat); }
+        [INLINE(256)] public System.Type GetTypeSerialized() { return typeof(fp); }
 
-        [INLINE(256)] public static void PackDirect(Packer packer, sfloat obj) {
+        [INLINE(256)] public static void PackDirect(Packer packer, fp obj) {
 
-            UInt32Serializer.PackDirect(packer, obj.RawValue);
+            Int64Serializer.PackDirect(packer, obj.RawValue);
             
         }
         
-        [INLINE(256)] public static sfloat UnpackDirect(Packer packer) {
+        [INLINE(256)] public static fp UnpackDirect(Packer packer) {
 
-            return sfloat.FromRaw(UInt32Serializer.UnpackDirect(packer));
+            return new fp(Int64Serializer.UnpackDirect(packer));
 
         }
 
         [INLINE(256)] public void Pack(Packer packer, object obj) {
 
-            FPSerializer.PackDirect(packer, (sfloat)obj);
+            FPSerializer.PackDirect(packer, (fp)obj);
             
         }
 
@@ -589,6 +592,5 @@ namespace ME.ECS.Serializer {
         }
 
     }
-    #endif
 
 }

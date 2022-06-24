@@ -9,12 +9,6 @@ namespace ME.ECS {
     }
     
     public interface ILoadableSync {}
-
-    public interface ISystemConstructLate {
-
-        void OnConstructLate();
-
-    }
     
     public interface ISystemBase : IContext {
         
@@ -57,21 +51,21 @@ namespace ME.ECS {
 
     }
 
-    public interface IUpdateLate : IContext {
+    public interface IUpdatePreLate : IContext {
 
-        void UpdateLate(in float deltaTime);
-
-    }
-
-    public interface IUpdatePost : IContext {
-
-        void UpdatePost(in float deltaTime);
+        void UpdatePreLate(in float deltaTime);
 
     }
 
     public interface IDrawGizmos {
 
         void OnDrawGizmos();
+
+    }
+
+    public interface IUpdatePost : IContext {
+
+        void UpdatePost(in float deltaTime);
 
     }
 

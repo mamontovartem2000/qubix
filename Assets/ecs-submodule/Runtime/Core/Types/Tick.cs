@@ -3,11 +3,19 @@
 #endif
 
 #if FIXED_POINT_MATH
-using ME.ECS.Mathematics;
-using tfloat = sfloat;
+using MATH = ME.ECS.fpmath;
+using FLOAT = ME.ECS.fp;
+using FLOAT2 = ME.ECS.fp2;
+using FLOAT3 = ME.ECS.fp3;
+using FLOAT4 = ME.ECS.fp4;
+using QUATERNION = ME.ECS.fpquaternion;
 #else
-using Unity.Mathematics;
-using tfloat = System.Single;
+using MATH = Unity.Mathematics.math;
+using FLOAT = System.Single;
+using FLOAT2 = UnityEngine.Vector2;
+using FLOAT3 = UnityEngine.Vector3;
+using FLOAT4 = UnityEngine.Vector4;
+using QUATERNION = UnityEngine.Quaternion;
 #endif
 
 namespace ME.ECS {
@@ -262,7 +270,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public static TName operator *(TName value, tfloat value2) {
+        public static TName operator *(TName value, FLOAT value2) {
 
             return (TType)value * (TType)(float)value2;
 
@@ -430,9 +438,9 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public static implicit operator tfloat(TName value) {
+        public static implicit operator FLOAT(TName value) {
 
-            return (tfloat)(float)value.v;
+            return (FLOAT)(float)value.v;
 
         }
         
@@ -460,7 +468,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public static implicit operator TName(tfloat value) {
+        public static implicit operator TName(FLOAT value) {
 
             return new TName((TType)value);
 

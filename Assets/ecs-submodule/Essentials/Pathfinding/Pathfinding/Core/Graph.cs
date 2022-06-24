@@ -2,8 +2,20 @@
 #define INLINE_METHODS
 #endif
 
-using ME.ECS.Mathematics;
+#if FIXED_POINT_MATH
+using FLOAT2 = ME.ECS.fp2;
+using FLOAT3 = ME.ECS.fp3;
+using FLOAT4 = ME.ECS.fp4;
+using QUATERNION = ME.ECS.fpquaternion;
+#else
+using FLOAT2 = UnityEngine.Vector2;
+using FLOAT3 = UnityEngine.Vector3;
+using FLOAT4 = UnityEngine.Vector4;
+using QUATERNION = UnityEngine.Quaternion;
+#endif
+
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ME.ECS.Pathfinding {
 
@@ -19,7 +31,7 @@ namespace ME.ECS.Pathfinding {
 
     public struct NodeInfo {
 
-        public float3 worldPosition;
+        public Vector3 worldPosition;
         public Graph graph;
         public Node node;
 
@@ -30,26 +42,26 @@ namespace ME.ECS.Pathfinding {
         [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false)]
         [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public abstract class Graph : UnityEngine.MonoBehaviour {
+    public abstract class Graph : MonoBehaviour {
 
         public LogLevel pathfindingLogLevel;
 
         public int index;
         public string graphName;
 
-        public UnityEngine.Vector3 graphCenter;
+        public Vector3 graphCenter;
 
         public BuildingState buildingState;
         public ListCopyable<Node> nodes;
         public List<Pathfinding.ModificatorItem> modifiers = new List<Pathfinding.ModificatorItem>();
 
-        public sfloat minPenalty { get; private set; }
-        public sfloat maxPenalty { get; private set; }
+        public float minPenalty { get; private set; }
+        public float maxPenalty { get; private set; }
 
-        public sfloat minHeight { get; private set; }
-        public sfloat maxHeight { get; private set; }
+        public float minHeight { get; private set; }
+        public float maxHeight { get; private set; }
 
-        public void SetMinMaxHeight(sfloat min, sfloat max) {
+        public void SetMinMaxHeight(float min, float max) {
             
             this.minHeight = min;
             this.maxHeight = max;
@@ -181,7 +193,7 @@ namespace ME.ECS.Pathfinding {
                 var node = nodes[i];
                 if (graphUpdateObject.checkRadius == true) {
                     
-                    if (math.distancesq(node.worldPosition, graphUpdateObject.center) > graphUpdateObject.radius * graphUpdateObject.radius) continue;
+                    if ((node.worldPosition - graphUpdateObject.center).sqrMagnitude > graphUpdateObject.radius * graphUpdateObject.radius) continue;
                     
                 }
                 
@@ -192,24 +204,24 @@ namespace ME.ECS.Pathfinding {
             
         }
 
-        public NodeInfo GetNearest(float3 worldPosition) {
+        public NodeInfo GetNearest(FLOAT3 worldPosition) {
 
             return this.GetNearest(worldPosition, Constraint.Default);
 
         }
 
-        public abstract NodeInfo GetNearest(float3 worldPosition, Constraint constraint);
+        public abstract NodeInfo GetNearest(FLOAT3 worldPosition, Constraint constraint);
 
-        public abstract bool ClampPosition(float3 worldPosition, Constraint constraint, out float3 position);
+        public abstract bool ClampPosition(FLOAT3 worldPosition, Constraint constraint, out FLOAT3 position);
 
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public abstract void GetNodesInBounds(ListCopyable<Node> output, UnityEngine.Bounds bounds, Constraint constraint);
+        public abstract void GetNodesInBounds(ListCopyable<Node> output, Bounds bounds, Constraint constraint);
 
-        private Dictionary<int, UnityEngine.Color> areaColors = new Dictionary<int, UnityEngine.Color>();
+        private Dictionary<int, Color> areaColors = new Dictionary<int, Color>();
 
-        protected UnityEngine.Color GetAreaColor(int area) {
+        protected Color GetAreaColor(int area) {
 
             if (this.areaColors.TryGetValue(area, out var color) == false) {
 
@@ -259,12 +271,12 @@ namespace ME.ECS.Pathfinding {
 
         }
 
-        protected UnityEngine.Color GetSColor() {
+        protected Color GetSColor() {
 
-            var rgb = new UnityEngine.Vector3Int();
-            rgb[0] = UnityEngine.Random.Range(0, 256); // red
-            rgb[1] = UnityEngine.Random.Range(0, 256); // green
-            rgb[2] = UnityEngine.Random.Range(0, 256); // blue
+            var rgb = new Vector3Int();
+            rgb[0] = Random.Range(0, 256); // red
+            rgb[1] = Random.Range(0, 256); // green
+            rgb[2] = Random.Range(0, 256); // blue
 
             int max, min;
             if (rgb[0] > rgb[1]) {
@@ -283,33 +295,33 @@ namespace ME.ECS.Pathfinding {
             rgb[max] = 255;
             rgb[min] = 0;
 
-            return new UnityEngine.Color32((byte)rgb[0], (byte)rgb[1], (byte)rgb[2], 255);
+            return new Color32((byte)rgb[0], (byte)rgb[1], (byte)rgb[2], 255);
 
         }
 
-        protected UnityEngine.Color GetPenaltyColor(sfloat penalty) {
+        protected Color GetPenaltyColor(float penalty) {
 
             var min = this.minPenalty;
             var max = this.maxPenalty;
 
-            var from = new UnityEngine.Color(0f, 1f, 0f, 0.05f);
-            var to = new UnityEngine.Color(1f, 0f, 0f, 0.05f);
+            var from = new Color(0f, 1f, 0f, 0.05f);
+            var to = new Color(1f, 0f, 0f, 0.05f);
 
-            var t = math.clamp((penalty - min) / (min == max ? 1f : max - min), 0, 1);
-            return UnityEngine.Color.Lerp(from, to, (float)t);
+            var t = Mathf.Clamp01((penalty - min) / (min == max ? 1f : max - min));
+            return Color.Lerp(from, to, t);
 
         }
 
-        protected UnityEngine.Color GetHeightColor(sfloat height) {
+        protected Color GetHeightColor(float height) {
 
             var min = this.minHeight;
             var max = this.maxHeight;
 
-            var from = new UnityEngine.Color(0f, 0f, 0f, 0.05f);
-            var to = new UnityEngine.Color(1f, 1f, 1f, 0.05f);
+            var from = new Color(0f, 0f, 0f, 0.05f);
+            var to = new Color(1f, 1f, 1f, 0.05f);
 
-            var t = math.clamp((height - min) / (min == max ? 1f : max - min), 0, 1);
-            return UnityEngine.Color.Lerp(from, to, (float)t);
+            var t = Mathf.Clamp01((height - min) / (min == max ? 1f : max - min));
+            return Color.Lerp(from, to, t);
 
         }
 
@@ -330,11 +342,11 @@ namespace ME.ECS.Pathfinding {
 
             this.buildingState = BuildingState.Building;
 
-            this.minPenalty = sfloat.MaxValue;
-            this.maxPenalty = sfloat.MinValue;
+            this.minPenalty = fp.MaxValue;
+            this.maxPenalty = fp.MinValue;
 
-            this.minHeight = sfloat.MaxValue;
-            this.maxHeight = sfloat.MinValue;
+            this.minHeight = fp.MaxValue;
+            this.maxHeight = fp.MinValue;
 
             System.Diagnostics.Stopwatch swBuildNodes = null;
             if ((pathfindingLogLevel & LogLevel.GraphBuild) != 0) swBuildNodes = System.Diagnostics.Stopwatch.StartNew();

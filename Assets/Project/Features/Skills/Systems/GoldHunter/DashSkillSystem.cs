@@ -1,8 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Common.Utilities;
 using Project.Features.VFX;
-using Unity.Mathematics;
 
 namespace Project.Features.Skills.Systems.GoldHunter
 {
@@ -45,16 +43,16 @@ namespace Project.Features.Skills.Systems.GoldHunter
 
             var nextPos = avatar.Read<FaceDirection>().Value * 4 + (avatar.Read<PlayerMoveTarget>().Value);
 
-            if (!SceneUtils.IsWalkable(new float3(nextPos.x, 0, nextPos.z))) return;
+            if (!SceneUtils.IsWalkable(new fp3(nextPos.x, 0, nextPos.z))) return;
             
             // SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, new fp3(nextPos.x, 0, nextPos.z));
             SceneUtils.ModifyWalkable(avatar.Read<PlayerMoveTarget>().Value, true);
-            SceneUtils.ModifyWalkable(new float3(nextPos.x, 0, nextPos.z), false);
+            SceneUtils.ModifyWalkable(new fp3(nextPos.x, 0, nextPos.z), false);
 
             SoundUtils.PlaySound(avatar, "event:/VFX/TeleportIn");
             avatar.SetPosition(nextPos);
             SoundUtils.PlaySound(avatar, "event:/VFX/TeleportOut");
-            avatar.Get<PlayerMoveTarget>().Value = new float3(nextPos.x, 0, nextPos.z);
+            avatar.Get<PlayerMoveTarget>().Value = new fp3(nextPos.x, 0, nextPos.z);
 
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             

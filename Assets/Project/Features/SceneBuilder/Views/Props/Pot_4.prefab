@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1558949677048010152}
+  - component: {fileID: 5470666782826615441}
   - component: {fileID: -7293432139878346129}
   m_Layer: 0
   m_Name: Pot_4
@@ -32,6 +33,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5470666782826615441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558949677048010157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28052540b51422b4bbcaf2084b255436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: -2628482395200241503, guid: b44780efe3bce6140a0965dc6fa745d7, type: 3}
+        meshRenderer: {fileID: 128500815666728253}
+        meshFilter: {fileID: 2750698294722771447}
+        material: {fileID: 2100000, guid: dd9e7c11084094b498e919f994736769, type: 2}
+        localPosition: {x: 0, y: -0.454, z: 0}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 1, y: 1, z: 1}
 --- !u!114 &-7293432139878346129
 MonoBehaviour:
   m_ObjectHideFlags: 0

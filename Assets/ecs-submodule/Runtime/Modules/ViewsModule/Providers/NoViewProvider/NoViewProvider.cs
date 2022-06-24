@@ -1,7 +1,6 @@
 ﻿#if ENABLE_IL2CPP
 #define INLINE_METHODS
 #endif
-using Unity.Jobs;
 
 namespace ME.ECS {
 
@@ -47,7 +46,7 @@ namespace ME.ECS.Views.Providers {
 
     using ME.ECS;
     using ME.ECS.Views;
-    using ME.ECS.Collections;
+    using Unity.Jobs;
 
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
@@ -80,16 +79,17 @@ namespace ME.ECS.Views.Providers {
         }
 
         public World world { get; private set; }
+        public Entity entity { get; private set; }
         public uint entityVersion { get; set; }
-        public Entity entity => this.info.entity;
-        public ViewId prefabSourceId => this.info.prefabSourceId;
-        public Tick creationTick => this.info.creationTick;
-        public ViewInfo info { get; private set; }
+        public ViewId prefabSourceId { get; private set; }
+        public Tick creationTick { get; private set; }
 
         void IViewBaseInternal.Setup(World world, ViewInfo viewInfo) {
 
             this.world = world;
-            this.info = viewInfo;
+            this.entity = viewInfo.entity;
+            this.prefabSourceId = viewInfo.prefabSourceId;
+            this.creationTick = viewInfo.creationTick;
 
         }
 
@@ -130,18 +130,17 @@ namespace ME.ECS.Views.Providers {
 
         internal struct NullState {}
         
-        private DictionaryCopyable<ViewId, PoolInternalBase> pools;
-        private static ME.ECS.Collections.BufferArray<Views> currentList;
+        private PoolInternalBase pool;
 
         public override void OnConstruct() {
 
-            this.pools = PoolDictionaryCopyable<ViewId, PoolInternalBase>.Spawn(100);
+            this.pool = new PoolInternalBase(typeof(NoView));
 
         }
 
         public override void OnDeconstruct() {
 
-            PoolDictionaryCopyable<ViewId, PoolInternalBase>.Recycle(ref this.pools);
+            this.pool = null;
 
         }
 
@@ -149,14 +148,7 @@ namespace ME.ECS.Views.Providers {
 
             var prefabSource = (NoView)prefab;
 
-            if (this.pools.TryGetValue(prefabSourceId, out var pool) == false) {
-                
-                pool = new PoolInternalBase(typeof(NoView));
-                this.pools.Add(prefabSourceId, pool);
-                
-            }
-
-            var obj = pool.Spawn(new NullState());
+            var obj = this.pool.Spawn(new NullState());
             if (obj == null) {
 
                 obj = System.Activator.CreateInstance(prefab.GetType());
@@ -164,7 +156,7 @@ namespace ME.ECS.Views.Providers {
             }
 
             var particleViewBase = (IViewBaseInternal)obj;
-            particleViewBase.Setup(this.world, prefabSource.info);
+            particleViewBase.Setup(this.world, new ViewInfo(prefabSource.entity, prefabSource.prefabSourceId, prefabSource.creationTick));
 
             return (IView)obj;
 
@@ -172,22 +164,14 @@ namespace ME.ECS.Views.Providers {
 
         public override bool Destroy(ref IView instance) {
 
-            var prefabSourceId = instance.info.prefabSourceId;
-            if (this.pools.TryGetValue(prefabSourceId, out var pool) == false) {
-                
-                pool = new PoolInternalBase(typeof(DrawMeshViewBase));
-                this.pools.Add(prefabSourceId, pool);
-                
-            }
-
-            pool.Recycle(instance);
+            this.pool.Recycle(instance);
             instance = null;
 
             return true;
 
         }
 
-        private struct Job : IJobParallelFor {
+        private struct Job : Unity.Jobs.IJobParallelFor {
 
             public float deltaTime;
 
@@ -209,6 +193,8 @@ namespace ME.ECS.Views.Providers {
 
         }
 
+        private static ME.ECS.Collections.BufferArray<Views> currentList;
+
         public override void Update(ViewsModule module, ME.ECS.Collections.BufferArray<Views> list, float deltaTime, bool hasChanged) {
 
             if (this.world.settings.useJobsForViews == true && this.world.settings.viewsSettings.unityNoViewProviderDisableJobs == false) {
@@ -216,7 +202,7 @@ namespace ME.ECS.Views.Providers {
                 NoViewProvider.currentList = list;
 
                 var job = new Job() {
-                    deltaTime = deltaTime,
+                    deltaTime = deltaTime
                 };
                 var handle = job.Schedule(list.Length, 16);
                 handle.Complete();

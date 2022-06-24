@@ -97,7 +97,7 @@ namespace ME.ECS.Collections {
 
                 public TValueCopy copy;
                 
-                public void Copy(in Node @from, ref Node to) {
+                public void Copy(Node @from, ref Node to) {
 
                     if (from == null && to == null) return;
                     if (from == null && to != null) {
@@ -111,10 +111,9 @@ namespace ME.ECS.Collections {
                     
                 }
 
-                public void Recycle(ref Node item) {
+                public void Recycle(Node item) {
                     
-                    this.copy.Recycle(ref item.m_value);
-                    item = default;
+                    this.copy.Recycle(item.m_value);
 
                 }
 

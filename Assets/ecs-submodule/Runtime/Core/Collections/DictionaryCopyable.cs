@@ -207,8 +207,7 @@ namespace ME.ECS.Collections {
         public void Clear<TElementCopy>(TElementCopy copy) where TElementCopy : IArrayElementCopy<TValue> {
 
             foreach (var item in this) {
-                var val = item.Value;
-                copy.Recycle(ref val);
+                copy.Recycle(item.Value);
             }
 
             this.Clear();

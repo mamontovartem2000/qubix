@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 
 #if FIXED_POINT_MATH
-using ME.ECS.Mathematics;
-using tfloat = sfloat;
+using MATH = ME.ECS.fpmath;
+using FLOAT = ME.ECS.fp;
+using FLOAT2 = ME.ECS.fp2;
+using FLOAT3 = ME.ECS.fp3;
+using FLOAT4 = ME.ECS.fp4;
+using QUATERNION = ME.ECS.fpquaternion;
 #else
-using Unity.Mathematics;
-using tfloat = System.Single;
+using MATH = Unity.Mathematics.math;
+using FLOAT = System.Single;
+using FLOAT2 = UnityEngine.Vector2;
+using FLOAT3 = UnityEngine.Vector3;
+using FLOAT4 = UnityEngine.Vector4;
+using QUATERNION = UnityEngine.Quaternion;
 #endif
 
 namespace ME.ECS {
@@ -245,7 +253,6 @@ namespace ME.ECS.StatesHistory {
         void AddEvents(IList<HistoryEvent> historyEvents);
         void AddEvent(HistoryEvent historyEvent);
         void CancelEvent(HistoryEvent historyEvent);
-        void CancelEvents(Tick from, Tick to);
 
         HistoryEvent[] GetEvents();
         
@@ -287,8 +294,8 @@ namespace ME.ECS.StatesHistory {
         private Dictionary<Tick, Dictionary<int, int>> syncHashTable;
         
         private bool prewarmed;
-        //private int beginAddEventsCount;
-        //private bool beginAddEvents;
+        private int beginAddEventsCount;
+        private bool beginAddEvents;
         private int statEventsAdded;
         private int statPlayedEvents;
         private Tick oldestTick;
@@ -305,8 +312,8 @@ namespace ME.ECS.StatesHistory {
             this.pauseStoreStateSinceTick = Tick.Invalid;
             
             this.prewarmed = false;
-            //this.beginAddEventsCount = 0;
-            //this.beginAddEvents = false;
+            this.beginAddEventsCount = 0;
+            this.beginAddEvents = false;
             this.statEventsAdded = 0;
             this.statPlayedEvents = 0;
             
@@ -323,8 +330,8 @@ namespace ME.ECS.StatesHistory {
             this.eventRunner = default;
 
             this.prewarmed = false;
-            //this.beginAddEventsCount = 0;
-            //this.beginAddEvents = false;
+            this.beginAddEventsCount = 0;
+            this.beginAddEvents = false;
             this.statEventsAdded = 0;
             this.statPlayedEvents = 0;
             this.oldestTick = Tick.Invalid;
@@ -510,9 +517,9 @@ namespace ME.ECS.StatesHistory {
 
         public void BeginAddEvents() {
 
-            //this.beginAddEventsCount = 0;
+            this.beginAddEventsCount = 0;
             //this.beginAddEventsTick = this.currentTick;
-            //this.beginAddEvents = true;
+            this.beginAddEvents = true;
 
         }
 
@@ -535,7 +542,7 @@ namespace ME.ECS.StatesHistory {
 
             }*/
             
-            //this.beginAddEvents = false;
+            this.beginAddEvents = false;
             
         }
 
@@ -667,7 +674,7 @@ namespace ME.ECS.StatesHistory {
 
             this.oldestTick = (this.oldestTick == Tick.Invalid || historyEvent.tick < this.oldestTick ? (Tick)historyEvent.tick : this.oldestTick);
             
-            //++this.beginAddEventsCount;
+            ++this.beginAddEventsCount;
             
             /*
             if (this.currentTick >= historyEvent.tick) {
@@ -688,43 +695,6 @@ namespace ME.ECS.StatesHistory {
 
             }*/
 
-        }
-
-        /// <summary>
-        /// Remove all events from [tick..to)
-        /// </summary>
-        /// <param name="from">Include</param>
-        /// <param name="to">Exclude</param>
-        public void CancelEvents(Tick from, Tick to) {
-
-            for (var tick = from; tick < to; ++tick) {
-
-                ME.ECS.Collections.SortedList<long, HistoryEvent> list;
-                if (this.events.TryGetValue(tick, out list) == true) {
-
-                    var keys = PoolList<long>.Spawn(list.Count);
-                    foreach (var evt in list) {
-
-                        keys.Add(evt.Key);
-
-                    }
-
-                    for (int i = 0; i < keys.Count; ++i) {
-
-                        if (list.Remove(keys[i]) == true) {
-                            
-                            --this.statEventsAdded;
-                            this.oldestTick = (this.oldestTick == Tick.Invalid || tick < this.oldestTick ? tick : this.oldestTick);
-
-                        }
-                        
-                    }
-                    PoolList<long>.Recycle(ref keys);
-                    
-                }
-                
-            }
-            
         }
 
         public void CancelEvent(HistoryEvent historyEvent) {
@@ -916,8 +886,8 @@ namespace ME.ECS.StatesHistory {
 
         public Tick GetTickByTime(double seconds) {
 
-            var tick = (seconds / (float)this.world.GetTickTime());
-            return (Tick)math.floor((float)tick);
+            var tick = (seconds / this.world.GetTickTime());
+            return MATH.floor(tick);
 
         }
 

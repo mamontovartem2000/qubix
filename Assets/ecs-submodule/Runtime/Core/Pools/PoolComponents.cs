@@ -37,19 +37,13 @@ namespace ME.ECS {
 			
 		}
 
-		public static StructComponentsBlittable<T> SpawnBlittable<T>() where T : struct, IComponentBase {
+		public static void Recycle(StructRegistryBase dic) {
 
-			return Pools.current.PoolSpawn(new Data(), (data) => new StructComponentsBlittable<T>(), null);
+			Pools.current.PoolRecycle(ref dic);
 			
 		}
 
-		public static StructComponentsBlittableCopyable<T> SpawnBlittableCopyable<T>() where T : struct, IComponentBase, IStructCopyable<T> {
-
-			return Pools.current.PoolSpawn(new Data(), (data) => new StructComponentsBlittableCopyable<T>(), null);
-			
-		}
-
-		public static void Recycle<T>(T dic) where T : StructRegistryBase {
+		public static void Recycle(ref StructRegistryBase dic) {
 
 			Pools.current.PoolRecycle(ref dic);
 			

@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Project.Modules.Network.UI
+namespace Project.Modules.Network
 {
     public class RoomPrefab : MonoBehaviour
     {

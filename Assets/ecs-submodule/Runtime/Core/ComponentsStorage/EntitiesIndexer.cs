@@ -2,95 +2,127 @@ namespace ME.ECS {
     
     using Collections;
 
+    #if ECS_COMPILE_IL2CPP_OPTIONS
+    [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
+     Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
+     Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
+    #endif
     public struct EntitiesIndexer {
 
-        public struct CopyItem : IArrayElementCopy<HashSetCopyable<int>> {
-        
-            public void Copy(in HashSetCopyable<int> @from, ref HashSetCopyable<int> to) {
-            
-                ArrayUtils.Copy(from, ref to);
-            
-            }
+        private struct RemoveAllData {
 
-            public void Recycle(ref HashSetCopyable<int> item) {
-            
-                PoolHashSetCopyable<int>.Recycle(ref item);
-                item = null;
-            
-            }
+            public EntitiesIndexer indexer;
+            public int entityId;
 
         }
 
+        public readonly struct KeyValuePair : System.IEquatable<KeyValuePair> {
+
+            public readonly int entityId;
+            public readonly int componentId;
+
+            public KeyValuePair(int entityId, int componentId) {
+                this.entityId = entityId;
+                this.componentId = componentId;
+            }
+
+            public bool Equals(KeyValuePair other) {
+                return this.entityId == other.entityId && this.componentId == other.componentId;
+            }
+
+            public override bool Equals(object obj) {
+                return obj is KeyValuePair other && this.Equals(other);
+            }
+
+            public override int GetHashCode() {
+                unchecked {
+                    return (this.entityId * 397) ^ this.componentId;
+                }
+            }
+
+        }
+        
         [ME.ECS.Serializer.SerializeField]
-        private BufferArray<HashSetCopyable<int>> data;
+        private HashSetCopyable<KeyValuePair> data;
+        [ME.ECS.Serializer.SerializeField]
+        private HashSetCopyable<long> index;
 
-        internal void Initialize(int capacity) {
+        public void Initialize(int capacity) {
 
-            if (this.data.isCreated == false) this.data = PoolArray<HashSetCopyable<int>>.Spawn(capacity);
-
-        }
-
-        internal void Validate(int entityId) {
-
-            ArrayUtils.Resize(entityId, ref this.data);
+            if (this.data == null) this.data = PoolHashSetCopyable<KeyValuePair>.Spawn(capacity);
+            if (this.index == null) this.index = PoolHashSetCopyable<long>.Spawn(capacity);
 
         }
 
-        public readonly int GetCount(int entityId) {
+        public void Validate(int capacity) {
 
-            var arr = this.data.arr[entityId];
-            if (arr == null) return 0;
-            
-            return arr.Count;
-
-        }
-
-        public readonly bool Has(int entityId, int componentId) {
-
-            var arr = this.data.arr[entityId];
-            if (arr == null) return false;
-
-            return arr.Contains(componentId);
-
-        }
-        
-        public readonly HashSetCopyable<int> Get(int entityId) {
-
-            return this.data[entityId];
-
-        }
-
-        internal void Set(int entityId, int componentId) {
-
-            ref var item = ref this.data[entityId];
-            if (item == null) item = PoolHashSetCopyable<int>.Spawn(64);
-            item.Add(componentId);
-
-        }
-
-        internal void Remove(int entityId, int componentId) {
-            
-            ref var item = ref this.data[entityId];
-            if (item != null) item.Remove(componentId);
+            if (this.data != null) this.data.SetCapacity(capacity);
+            if (this.index != null) this.index.SetCapacity(capacity);
             
         }
 
-        internal void RemoveAll(int entityId) {
+        public bool Has(int entityId, int componentId) {
+
+            var key = MathUtils.GetKey(entityId, componentId);
+            return this.index.Contains(key);
+
+        }
+
+        public HashSetCopyable<KeyValuePair> Get() {
+
+            return this.data;
+
+        }
+
+        public void Set(int entityId, int componentId) {
+
+            var key = MathUtils.GetKey(entityId, componentId);
+            if (this.index.Add(key) == true) {
+                
+                this.data.Add(new KeyValuePair(entityId, componentId));
+                
+            }
+
+        }
+
+        public void Remove(int entityId, int componentId) {
             
-            ref var item = ref this.data[entityId];
-            if (item != null) item.Clear();
+            var key = MathUtils.GetKey(entityId, componentId);
+            if (this.index.Remove(key) == true) {
+
+                this.data.Remove(new KeyValuePair(entityId, componentId));
+                
+            }
+
+        }
+
+        public void Remove(int entityId) {
+
+            this.data.RemoveWhere(new RemoveAllData() {
+                indexer = this,
+                entityId = entityId,
+            }, (data, kv) => {
+                
+                var key = MathUtils.GetKey(data.entityId, kv.componentId);
+                data.indexer.index.Remove(key);
+
+                return kv.entityId == data.entityId;
+
+            });
             
         }
 
-        internal void CopyFrom(in EntitiesIndexer other) {
+        public void CopyFrom(in EntitiesIndexer other) {
             
-            ArrayUtils.Copy(other.data, ref this.data, new CopyItem());
+            ArrayUtils.Copy(other.data, ref this.data);
+            ArrayUtils.Copy(other.index, ref this.index);
             
         }
 
-        internal void Recycle() {
+        public void Recycle() {
             
-            ArrayUtils.Recycle(ref this.data, new CopyItem());
+            PoolHashSetCopyable<KeyValuePair>.Recycle(ref this.data);
+            PoolHashSetCopyable<long>.Recycle(ref this.index);
             
         }
 

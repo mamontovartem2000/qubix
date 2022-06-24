@@ -1,6 +1,5 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Common.Utilities;
 using Project.Features.Events;
 using Project.Features.Projectile.Systems;
 using UnityEngine;

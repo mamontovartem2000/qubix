@@ -80,6 +80,7 @@ namespace #NAMESPACE# {
                 var dt = Time.deltaTime;
                 this.world.PreUpdate(dt);
                 this.world.Update(dt);
+                this.world.LateUpdate(dt);
 
             }
 

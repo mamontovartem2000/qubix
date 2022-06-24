@@ -1,5 +1,4 @@
 ﻿using ME.ECS;
-using Unity.Mathematics;
 
 namespace Project.Common.Views
 {
@@ -50,7 +49,7 @@ namespace Project.Common.Views
 
         public override void ApplyState(float deltaTime, bool immediately)
         {
-            transform.position = entity.GetPosition() + new float3(0f, 1.1f, 0f);
+            transform.position = entity.GetPosition() + new Vector3(0f, 1.1f, 0f);
             
             var fill = entity.GetParent().Read<PlayerHealthDefault>().Value;
             

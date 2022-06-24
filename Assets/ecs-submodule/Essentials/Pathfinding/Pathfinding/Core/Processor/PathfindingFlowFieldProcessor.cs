@@ -1,6 +1,5 @@
 ﻿using Unity.Jobs;
 using UnityEngine;
-using ME.ECS.Mathematics;
 
 namespace ME.ECS.Pathfinding {
     
@@ -24,7 +23,7 @@ namespace ME.ECS.Pathfinding {
             
         }
         
-        public Path Run<TMod>(LogLevel pathfindingLogLevel, float3 from, float3 to, Constraint constraint, Graph graph, TMod pathModifier, int threadIndex = 0, bool burstEnabled = true, bool cacheEnabled = false) where TMod : struct, IPathModifier {
+        public Path Run<TMod>(LogLevel pathfindingLogLevel, Vector3 from, Vector3 to, Constraint constraint, Graph graph, TMod pathModifier, int threadIndex = 0, bool burstEnabled = true, bool cacheEnabled = false) where TMod : struct, IPathModifier {
 
             if (threadIndex < 0) threadIndex = 0;
             threadIndex = threadIndex % Pathfinding.THREADS_COUNT;
@@ -199,7 +198,7 @@ namespace ME.ECS.Pathfinding {
             public Unity.Collections.NativeArray<int> results;
             public PathCustomWalkableField pathCustomWalkableField;
             public Vector3Int graphSize;
-            public float3 graphCenter;
+            public fp3 graphCenter;
             
             public int endNodeIndex;
 
@@ -372,7 +371,7 @@ namespace ME.ECS.Pathfinding {
                 results = results,
                 pathCustomWalkableField = pathCustomWalkableField,
                 graphSize = graph.size,
-                graphCenter = (float3)graph.graphCenter,
+                graphCenter = graph.graphCenter,
             };
             job.Schedule().Complete();
 

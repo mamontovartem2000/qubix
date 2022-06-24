@@ -1,7 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Common.Components
@@ -20,10 +19,15 @@ namespace Project.Common.Components
 	{
 		public DataConfig Value;
 	}
+	
+	public struct ExplosionSound : IComponent
+	{
+		public DataConfig Value;
+	}
 
 	public struct ProjectileDirection : IComponent
 	{
-		public float3 Value;
+		public fp3 Value;
 	}
 
 	public struct ProjectileSpeed : IComponent

@@ -1,7 +1,7 @@
 ﻿using Project.Modules.Network.Common;
 using UnityEngine;
 
-namespace Project.Modules.Network.StartConnect
+namespace Project.Modules.Network
 {
     public class HubFrontConnect : ConnectTemplate
 	{

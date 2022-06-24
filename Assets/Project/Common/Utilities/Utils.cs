@@ -1,7 +1,7 @@
 using ME.ECS;
 using Project.Common.Components;
 
-namespace Project.Common.Utilities {
+namespace Project {
 
     public static class Utils {
 

@@ -197,10 +197,10 @@ namespace ME.ECS.Tests {
 
             TestsHelper.Do((w) => {
                 
-                WorldUtilities.InitComponentTypeId<TestComponent>(false, isBlittable: true);
+                WorldUtilities.InitComponentTypeId<TestComponent>(false);
                 ComponentsInitializerWorld.Setup((e) => {
                             
-                    e.ValidateDataBlittable<TestComponent>();
+                    e.ValidateData<TestComponent>();
                             
                 });
                 
@@ -218,10 +218,10 @@ namespace ME.ECS.Tests {
 
             TestsHelper.Do((w) => {
                 
-                WorldUtilities.InitComponentTypeId<TestComponent>(false, isBlittable: true);
+                WorldUtilities.InitComponentTypeId<TestComponent>(false);
                 ComponentsInitializerWorld.Setup((e) => {
                             
-                    e.ValidateDataBlittable<TestComponent>();
+                    e.ValidateData<TestComponent>();
                             
                 });
                 
@@ -239,10 +239,10 @@ namespace ME.ECS.Tests {
 
             TestsHelper.Do((w) => {
                 
-                WorldUtilities.InitComponentTypeId<TestComponent>(false, isBlittable: true);
+                WorldUtilities.InitComponentTypeId<TestComponent>(false);
                 ComponentsInitializerWorld.Setup((e) => {
                             
-                    e.ValidateDataBlittable<TestComponent>();
+                    e.ValidateData<TestComponent>();
                             
                 });
                 
@@ -260,10 +260,10 @@ namespace ME.ECS.Tests {
 
             TestsHelper.Do((w) => {
                 
-                WorldUtilities.InitComponentTypeId<TestComponent>(false, isBlittable: true);
+                WorldUtilities.InitComponentTypeId<TestComponent>(false);
                 ComponentsInitializerWorld.Setup((e) => {
                             
-                    e.ValidateDataBlittable<TestComponent>();
+                    e.ValidateData<TestComponent>();
                             
                 });
                 

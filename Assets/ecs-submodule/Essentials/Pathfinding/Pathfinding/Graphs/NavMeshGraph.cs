@@ -1,4 +1,14 @@
-using ME.ECS.Mathematics;
+#if FIXED_POINT_MATH
+using FLOAT2 = ME.ECS.fp2;
+using FLOAT3 = ME.ECS.fp3;
+using FLOAT4 = ME.ECS.fp4;
+using QUATERNION = ME.ECS.fpquaternion;
+#else
+using FLOAT2 = UnityEngine.Vector2;
+using FLOAT3 = UnityEngine.Vector3;
+using FLOAT4 = UnityEngine.Vector4;
+using QUATERNION = UnityEngine.Quaternion;
+#endif
 
 namespace ME.ECS.Pathfinding {
     
@@ -65,8 +75,6 @@ namespace ME.ECS.Pathfinding {
         private ME.ECS.Collections.DictionaryCopyable<Key<Entity, int>, NavMeshBuildSource> buildSourcesEntities;
         [System.NonSerializedAttribute]
         private List<NavMeshBuildSource> tempSources;
-        
-        public int lastGraphUpdateHash { get; private set;  }
 
         public bool drawMesh;
         
@@ -155,7 +163,7 @@ namespace ME.ECS.Pathfinding {
 
         public bool UpdateGraph(List<NavMeshBuildSource> sources) {
 
-            return this.UpdateGraph(sources, new UnityEngine.Bounds((Vector3)this.graphCenter, this.size));
+            return this.UpdateGraph(sources, new UnityEngine.Bounds(this.graphCenter, this.size));
             
         }
 
@@ -188,7 +196,7 @@ namespace ME.ECS.Pathfinding {
 
         public bool UpdateGraph(ME.ECS.Collections.ListCopyable<NavMeshBuildSource> sources) {
 
-            return this.UpdateGraph(sources, new UnityEngine.Bounds((Vector3)this.graphCenter, this.size));
+            return this.UpdateGraph(sources, new UnityEngine.Bounds(this.graphCenter, this.size));
             
         }
 
@@ -200,15 +208,6 @@ namespace ME.ECS.Pathfinding {
             this.tempSources.Clear();
             if (this.buildSources != null) this.tempSources.AddRange(this.buildSources);
             if (sources != null) this.tempSources.AddRange(sources);
-
-
-            var hash = 0;
-            for (int i = 0; i < this.tempSources.Count; i++) {
-                hash ^= this.tempSources[i].transform.GetHashCode();
-            }
-
-            this.lastGraphUpdateHash = hash;
-            
             if (NavMeshBuilder.UpdateNavMeshData(this.navMeshData, this.buildSettings, this.tempSources, bounds) == false) {
 
                 return false;
@@ -229,7 +228,7 @@ namespace ME.ECS.Pathfinding {
                     area = this.floorArea,
                     shape = UnityEngine.AI.NavMeshBuildSourceShape.Box,
                     size = new Vector3(this.size.x, 0f, this.size.z),
-                    transform = Matrix4x4.TRS((Vector3)new float3(this.graphCenter.x, this.floorHeight, this.graphCenter.z), Quaternion.identity, Vector3.one),
+                    transform = Matrix4x4.TRS(new Vector3(this.graphCenter.x, this.floorHeight, this.graphCenter.z), Quaternion.identity, Vector3.one),
                 });
 
             }
@@ -240,7 +239,7 @@ namespace ME.ECS.Pathfinding {
             
             if (this.buildSources == null) return;
             
-            var bounds = new UnityEngine.Bounds((Vector3)this.graphCenter, this.size);
+            var bounds = new UnityEngine.Bounds(this.graphCenter, this.size);
             var buildSettings = UnityEngine.AI.NavMesh.GetSettingsByID(this.agentTypeId);
             buildSettings.agentRadius = this.agentRadius;
             buildSettings.agentHeight = this.agentHeight;
@@ -284,14 +283,14 @@ namespace ME.ECS.Pathfinding {
 
         }
 
-        public override bool ClampPosition(float3 worldPosition, Constraint constraint, out float3 position) {
+        public override bool ClampPosition(FLOAT3 worldPosition, Constraint constraint, out FLOAT3 position) {
 
-            if (UnityEngine.AI.NavMesh.SamplePosition((Vector3)worldPosition, out var hit, 1000f, new NavMeshQueryFilter() {
+            if (UnityEngine.AI.NavMesh.SamplePosition(worldPosition, out var hit, 1000f, new NavMeshQueryFilter() {
                 agentTypeID = this.agentTypeId,
                 areaMask = constraint.checkArea == true ? (int)constraint.areaMask : -1,
             }) == true) {
 
-                position = (float3)hit.position;
+                position = hit.position;
                 return true;
 
             }
@@ -350,7 +349,7 @@ namespace ME.ECS.Pathfinding {
         
         }
 
-        public override NodeInfo GetNearest(float3 worldPosition, Constraint constraint) {
+        public override NodeInfo GetNearest(FLOAT3 worldPosition, Constraint constraint) {
 
             if (this.ClampPosition(worldPosition, constraint, out var pos) == true) {
 
@@ -401,7 +400,7 @@ namespace ME.ECS.Pathfinding {
         protected override void DrawGizmos() {
 
             Gizmos.color = Color.white;
-            Gizmos.DrawWireCube((Vector3)this.graphCenter, this.size);
+            Gizmos.DrawWireCube(this.graphCenter, this.size);
 
         }
 

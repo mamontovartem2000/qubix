@@ -1,7 +1,7 @@
-using System;
 using FlatMessages;
+using System;
 
-namespace Project.Modules.Network.UI
+namespace Project.Modules.Network
 {
     public class NetworkEvents
     {

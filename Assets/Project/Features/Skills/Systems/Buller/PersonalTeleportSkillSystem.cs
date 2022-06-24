@@ -1,8 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Common.Utilities;
 using Project.Features.VFX;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Features.Skills.Systems.Buller
@@ -18,7 +16,7 @@ namespace Project.Features.Skills.Systems.Buller
 
         private SkillsFeature _feature;
         private VFXFeature _vfx;
-        private float3 randomPlayerPos;
+        private fp3 randomPlayerPos;
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
@@ -83,17 +81,17 @@ namespace Project.Features.Skills.Systems.Buller
                     }
                 }
                 var tmpPos = avatar.Read<PlayerMoveTarget>().Value;
-                randomPlayerPos = new float3(tmpPos.x + rndX, 0, tmpPos.z + rndZ);
+                randomPlayerPos = new Vector3(tmpPos.x + rndX, 0, tmpPos.z + rndZ);
 
             }
-            while (!SceneUtils.IsWalkable(new float3(randomPlayerPos.x, 0, randomPlayerPos.z)));
+            while (!SceneUtils.IsWalkable(new fp3(randomPlayerPos.x, 0, randomPlayerPos.z)));
 
             SceneUtils.ModifyWalkable(avatar.Read<PlayerMoveTarget>().Value, true);
-            SceneUtils.ModifyWalkable(new float3(randomPlayerPos.x, 0, randomPlayerPos.z), false);
+            SceneUtils.ModifyWalkable(new fp3(randomPlayerPos.x, 0, randomPlayerPos.z), false);
             
             SoundUtils.PlaySound(avatar, "event:/VFX/TeleportIn");
             avatar.SetPosition(randomPlayerPos);
-            avatar.Get<PlayerMoveTarget>().Value = new float3(randomPlayerPos.x, 0, randomPlayerPos.z);
+            avatar.Get<PlayerMoveTarget>().Value = new fp3(randomPlayerPos.x, 0, randomPlayerPos.z);
             SoundUtils.PlaySound(avatar, "event:/VFX/TeleportOut");
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;

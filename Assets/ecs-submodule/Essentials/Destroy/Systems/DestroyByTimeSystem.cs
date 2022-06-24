@@ -32,17 +32,18 @@ namespace ME.ECS.Essentials.Destroy.Systems {
         void ISystemBase.OnDeconstruct() {}
 
         [BurstCompile(FloatPrecision.High, FloatMode.Deterministic, CompileSynchronously = true)]
-        private struct Job : IJobParallelForFilterBag<FilterBag<DestroyByTime>> {
+        private struct Job : IJobParallelFor {
             
+            public FilterBag<DestroyByTime> bag;
             public float deltaTime;
 
-            public void Execute(ref FilterBag<DestroyByTime> bag, int index) {
+            public void Execute(int index) {
 
-                ref var timer = ref bag.GetT0(index);
+                ref var timer = ref this.bag.GetT0(index);
                 timer.time -= this.deltaTime;
                 if (timer.time <= 0f) {
                 
-                    bag.DestroyEntity(index);
+                    this.bag.DestroyEntity(index);
                 
                 }
 
@@ -52,10 +53,11 @@ namespace ME.ECS.Essentials.Destroy.Systems {
         
         void IAdvanceTick.AdvanceTick(in float deltaTime) {
 
-            var bag = new FilterBag<DestroyByTime>(this.filter, Allocator.TempJob);
+            var bag = new FilterBag<DestroyByTime>(this.filter, Allocator.Temp);
             new Job() {
+                bag = bag,
                 deltaTime = deltaTime,
-            }.Schedule(bag).Complete();
+            }.Schedule(bag.Length, 8).Complete();
             bag.Push();
 
         }

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 107345713315295072}
+  - component: {fileID: 2149764949289681119}
   - component: {fileID: 8481829191226845472}
   m_Layer: 0
   m_Name: TrashCan
@@ -32,6 +33,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2149764949289681119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107345713315295073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28052540b51422b4bbcaf2084b255436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: -6267059943751326332, guid: 10c7f9ee4f5e63746a8c29d099277ee0, type: 3}
+        meshRenderer: {fileID: 2237713928247912335}
+        meshFilter: {fileID: 4100813058064634693}
+        material: {fileID: 2100000, guid: f7073ef8d259b874ca394e5d492a345b, type: 2}
+        localPosition: {x: 0, y: 0.445, z: 0}
+        localRotation: {x: -0, y: 0, z: -0}
+        localScale: {x: 1, y: 1, z: 1}
 --- !u!114 &8481829191226845472
 MonoBehaviour:
   m_ObjectHideFlags: 0

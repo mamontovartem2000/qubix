@@ -1,21 +1,13 @@
 ﻿
 namespace ME.ECS {
 
-    public struct IsEntityOneShot : IComponentOneShot {}
-    public struct IsEntityEmptyOneShot : IComponentOneShot {}
-    
     public static class CoreComponentsInitializer {
 
         public static void InitTypeId() {
             
-            WorldUtilities.InitComponentTypeId<IsEntityOneShot>(true, isOneShot: true);
-            WorldUtilities.InitComponentTypeId<IsEntityEmptyOneShot>(true, isOneShot: true);
-            WorldUtilities.InitComponentTypeId<ME.ECS.Views.ViewComponent>(false, isBlittable: true);
-            WorldUtilities.InitComponentTypeId<ME.ECS.Collections.IntrusiveData>(false, isBlittable: true);
-            WorldUtilities.InitComponentTypeId<ME.ECS.Collections.IntrusiveSortedListData>(false, isBlittable: true);
-            WorldUtilities.InitComponentTypeId<ME.ECS.Collections.IntrusiveListNode>(false, isBlittable: true);
-            WorldUtilities.InitComponentTypeId<ME.ECS.Collections.IntrusiveHashSetBucket>(false, isBlittable: true);
-            WorldUtilities.InitComponentTypeId<ME.ECS.Collections.IntrusiveHashSetData>(false, isBlittable: true);
+            WorldUtilities.InitComponentTypeId<ME.ECS.Views.ViewComponent>(false);
+            WorldUtilities.InitComponentTypeId<ME.ECS.Collections.IntrusiveListNode>(false);
+            WorldUtilities.InitComponentTypeId<ME.ECS.Collections.IntrusiveHashSetBucket>(false);
             
             ME.ECS.DataConfigs.DataConfig.InitTypeId();
             TransformComponentsInitializer.InitTypeId();
@@ -25,16 +17,11 @@ namespace ME.ECS {
 
         }
         
-        public static void Init(ref ME.ECS.StructComponentsContainer structComponentsContainer, ref ME.ECS.StructComponentsContainer noStateStructComponentsContainer) {
+        public static void Init(ref ME.ECS.StructComponentsContainer structComponentsContainer) {
             
-            noStateStructComponentsContainer.Validate<IsEntityOneShot>(true);
-            noStateStructComponentsContainer.Validate<IsEntityEmptyOneShot>(true);
-            structComponentsContainer.ValidateBlittable<ME.ECS.Views.ViewComponent>(false);
-            structComponentsContainer.ValidateBlittable<ME.ECS.Collections.IntrusiveData>(false);
-            structComponentsContainer.ValidateBlittable<ME.ECS.Collections.IntrusiveSortedListData>(false);
-            structComponentsContainer.ValidateBlittable<ME.ECS.Collections.IntrusiveListNode>(false);
-            structComponentsContainer.ValidateBlittable<ME.ECS.Collections.IntrusiveHashSetBucket>(false);
-            structComponentsContainer.ValidateBlittable<ME.ECS.Collections.IntrusiveHashSetData>(false);
+            structComponentsContainer.Validate<ME.ECS.Views.ViewComponent>(false);
+            structComponentsContainer.Validate<ME.ECS.Collections.IntrusiveListNode>(false);
+            structComponentsContainer.Validate<ME.ECS.Collections.IntrusiveHashSetBucket>(false);
 
             ME.ECS.DataConfigs.DataConfig.Init(ref structComponentsContainer);
             TransformComponentsInitializer.Init(ref structComponentsContainer);
@@ -46,11 +33,9 @@ namespace ME.ECS {
 
         public static void Init(in Entity entity) {
             
-            entity.ValidateDataOneShot<IsEntityOneShot>(true);
-            entity.ValidateDataOneShot<IsEntityEmptyOneShot>(true);
-            entity.ValidateDataBlittable<ME.ECS.Views.ViewComponent>(false);
-            entity.ValidateDataBlittable<ME.ECS.Collections.IntrusiveListNode>(false);
-            entity.ValidateDataBlittable<ME.ECS.Collections.IntrusiveHashSetBucket>(false);
+            entity.ValidateData<ME.ECS.Views.ViewComponent>(false);
+            entity.ValidateData<ME.ECS.Collections.IntrusiveListNode>(false);
+            entity.ValidateData<ME.ECS.Collections.IntrusiveHashSetBucket>(false);
 
             ME.ECS.DataConfigs.DataConfig.Init(in entity);
             TransformComponentsInitializer.Init(in entity);
@@ -86,7 +71,6 @@ namespace ME.ECS {
 
         public static void Init(in Entity entity) {
             
-            CoreComponentsInitializer.InitTypeId();
             CoreComponentsInitializer.Init(in entity);
             
             if (ComponentsInitializerWorld.onEntity != null) ComponentsInitializerWorld.onEntity.Invoke(entity);

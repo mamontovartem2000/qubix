@@ -4,7 +4,6 @@ using ME.ECS;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Project.Modules.Network.UI;
 using UnityEngine;
 using Project.Modules.Network.Common;
 

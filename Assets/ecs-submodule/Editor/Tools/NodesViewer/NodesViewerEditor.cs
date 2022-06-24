@@ -1208,22 +1208,22 @@ namespace ME.ECSEditor {
             }
 
             #if FPS_MODULE_SUPPORT
-            var fpsModule = graph.world.GetModule<IFPSModuleBase>();
-            if (fpsModule != null) {
-
-                px += 100f;
-                {
-                    var frameTime = graph.graph.sumPreviousFrame;
-                    var tick = graph.world.GetTickTime();
-                    var requiredFps = 1f / tick;
-                    GUI.Label(new Rect(px, py, 100f, pHeight),
-                              string.Format("FPS: <color=#{2}>{0:#0.0}</color>/{1:#0.0}",
-                                            fpsModule.fps,
-                                            requiredFps,
-                                            WorldGraph.Styles.ColorToHex(WorldGraph.Styles.GetColorForMeasuring(graph.world.GetTickTime(), frameTime))), WorldGraph.Styles.fixedFontLabel);
-                }
-
-            }
+            // var fpsModule = graph.world.GetModule<IFPSModuleBase>();
+            // if (fpsModule != null) {
+            //
+            //     px += 100f;
+            //     {
+            //         var frameTime = graph.graph.sumPreviousFrame;
+            //         var tick = graph.world.GetTickTime();
+            //         var requiredFps = 1f / tick;
+            //         GUI.Label(new Rect(px, py, 100f, pHeight),
+            //                   string.Format("FPS: <color=#{2}>{0:#0.0}</color>/{1:#0.0}",
+            //                                 fpsModule.fps,
+            //                                 requiredFps,
+            //                                 WorldGraph.Styles.ColorToHex(WorldGraph.Styles.GetColorForMeasuring(graph.world.GetTickTime(), frameTime))), WorldGraph.Styles.fixedFontLabel);
+            //     }
+            //
+            // }
             #endif
 
             px += 100f;

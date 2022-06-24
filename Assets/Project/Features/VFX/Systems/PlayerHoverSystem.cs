@@ -35,7 +35,7 @@ namespace Project.Features.VFX.Systems
 			ref var up = ref entity.Get<Hover>().Direction;
 			ref var amount = ref entity.Get<Hover>().Amount;
 
-			amount += up ? 0.005f : -0.005f;
+			amount += up ? 0.005 : -0.005;
 			if (amount >= 0.1)
 			{
 				up = false;

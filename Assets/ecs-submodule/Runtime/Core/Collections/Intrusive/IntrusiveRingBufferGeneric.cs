@@ -26,7 +26,7 @@ namespace ME.ECS.Collections {
     #endif
     public struct IntrusiveRingBufferGeneric<T> : IIntrusiveRingBufferGeneric<T> where T : struct, System.IEquatable<T> {
 
-        private const int DEFAULT_CAPACITY = 4;
+        private const int DEFAULT_CAPACTIY = 4;
 
         #if ECS_COMPILE_IL2CPP_OPTIONS
         [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false)]
@@ -78,55 +78,15 @@ namespace ME.ECS.Collections {
         }
 
         [ME.ECS.Serializer.SerializeField]
-        private Entity data;
-        
-        private IntrusiveListGeneric<T> list {
-            set {
-                this.ValidateData();
-                this.data.Get<IntrusiveRingBufferGenericData<T>>().list = value;
-            }
-            readonly get {
-                if (this.data == Entity.Null) return default;
-                return this.data.Read<IntrusiveRingBufferGenericData<T>>().list;
-            }
-        }
+        private IntrusiveListGeneric<T> list;
+        [ME.ECS.Serializer.SerializeField]
+        private int capacity;
 
-        private int capacity {
-            set {
-                this.ValidateData();
-                this.data.Get<IntrusiveRingBufferGenericData<T>>().capacity = value;
-            }
-            readonly get {
-                if (this.data == Entity.Null) return default;
-                return this.data.Read<IntrusiveRingBufferGenericData<T>>().capacity;
-            }
-        }
+        public int Capacity => this.capacity;
+        public int Count => this.list.Count;
 
-        public readonly int Capacity => this.capacity;
-        public readonly int Count => this.list.Count;
-        
-        #if INLINE_METHODS
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
-        private void ValidateData() {
-
-            IntrusiveRingBufferGeneric<T>.InitializeComponents();
-            
-            if (this.data == Entity.Null) {
-                this.data = new Entity(EntityFlag.None);
-                this.data.ValidateData<IntrusiveRingBufferGenericData<T>>();
-                var list = new IntrusiveListGeneric<T>();
-                list.ValidateData();
-                this.data.Set(new IntrusiveRingBufferGenericData<T>() {
-                    list = list,
-                });
-            }
-            
-        }
-        
         public IntrusiveRingBufferGeneric(int capacity) {
 
-            this = default;
             this.capacity = capacity;
             this.list = default;
 
@@ -135,7 +95,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly Enumerator GetEnumerator() {
+        public Enumerator GetEnumerator() {
 
             return new Enumerator(this);
 
@@ -148,7 +108,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly BufferArray<T> ToArray() {
+        public BufferArray<T> ToArray() {
 
             var arr = PoolArray<T>.Spawn(this.Count);
             var i = 0;
@@ -170,7 +130,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly bool Contains(in T entityData) {
+        public bool Contains(in T entityData) {
 
             return this.list.Contains(in entityData);
 
@@ -194,9 +154,9 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly T GetValue(int index) {
+        public T GetValue(int index) {
 
-            var idx = index % (this.capacity <= 0 ? IntrusiveRingBufferGeneric<T>.DEFAULT_CAPACITY : this.capacity);
+            var idx = index % (this.capacity <= 0 ? IntrusiveRingBufferGeneric<T>.DEFAULT_CAPACTIY : this.capacity);
             if (idx >= this.list.Count) return default;
             return this.list.GetValue(idx);
 
@@ -211,9 +171,7 @@ namespace ME.ECS.Collections {
         #endif
         public void Push(in T entityData) {
 
-            this.ValidateData();
-            
-            if (this.list.Count >= (this.capacity <= 0 ? IntrusiveRingBufferGeneric<T>.DEFAULT_CAPACITY : this.capacity)) {
+            if (this.list.Count >= (this.capacity <= 0 ? IntrusiveRingBufferGeneric<T>.DEFAULT_CAPACTIY : this.capacity)) {
 
                 this.list.RemoveLast();
 
@@ -223,24 +181,6 @@ namespace ME.ECS.Collections {
 
         }
 
-        private static void InitializeComponents() {
-
-            IntrusiveComponents.Initialize();
-            WorldUtilities.InitComponentTypeId<IntrusiveRingBufferGenericData<T>>();
-            ComponentInitializer.Init(ref Worlds.currentWorld.GetStructComponents());
-
-        }
-
-        private static class ComponentInitializer {
-
-            public static void Init(ref ME.ECS.StructComponentsContainer structComponentsContainer) {
-
-                structComponentsContainer.Validate<IntrusiveRingBufferGenericData<T>>(false);
-
-            }
-
-        }
-        
     }
 
 }

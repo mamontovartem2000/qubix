@@ -94,14 +94,12 @@ MonoBehaviour:
       name: ME_ECS_COLLECT_WEAK_REFERENCES
     - enabled: 0
       name: FILTERS_STORAGE_ARCHETYPES
-    - enabled: 0
+    - enabled: 1
       name: FIXED_POINT_MATH
     - enabled: 0
       name: ENTITY_API_VERSION1_DEPRECATED
     - enabled: 0
       name: FILTERS_STORAGE_LEGACY
-    - enabled: 0
-      name: BUFFER_SLICED_DISABLED
   - name: Release
     isDirty: 0
     configurationType: 1
@@ -150,9 +148,9 @@ MonoBehaviour:
       name: ENTITY_API_VERSION1_DEPRECATED
     - enabled: 0
       name: FILTERS_STORAGE_LEGACY
-    - enabled: 0
-      name: BUFFER_SLICED_DISABLED
-  selectedConfiguration: Release
+  selectedConfiguration: Debug
+  featuresList:
+    features: []
   featuresListCategories:
     items:
     - folderCaption: PreTick

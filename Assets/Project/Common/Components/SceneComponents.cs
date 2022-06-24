@@ -1,6 +1,5 @@
 ﻿using ME.ECS;
 using ME.ECS.Views.Providers;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Common.Components
@@ -20,7 +19,7 @@ namespace Project.Common.Components
 	}
 	public struct TileRotation : IComponent
 	{
-		public float3 Value;
+		public fp3 Value;
 	}
 
 	public struct BridgeTile : IComponent
@@ -37,7 +36,7 @@ namespace Project.Common.Components
 	}
 	public struct DestructibleLifeTime : IComponent
 	{
-		public float Value;
+		public fp Value;
 	}
 
 	public struct MineBlink : IComponent
@@ -63,6 +62,6 @@ namespace Project.Common.Components
 	public struct GlowTile : IComponent
 	{
 		public bool Direction;
-		public float Amount;
+		public fp Amount;
 	}
 }

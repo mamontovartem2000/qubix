@@ -15,7 +15,7 @@ namespace Project.Common.Views.Monos
 		{
 			transform.position = entity.GetPosition();
 			transform.rotation = entity.GetRotation();
-			// transform.forward = entity.Read<ProjectileDirection>().Value;
+			transform.forward = entity.Read<ProjectileDirection>().Value;
 		}
 	}
 }

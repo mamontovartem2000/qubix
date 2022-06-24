@@ -1,7 +1,6 @@
 ﻿using ME.ECS;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Common.Views.Monos
@@ -31,7 +30,7 @@ namespace Project.Common.Views.Monos
 				if (!_rot)
 				{
 					var rot = entity.Read<TileRotation>().Value;
-					transform.rotation *= Quaternion.Euler(rot + new float3(0,180,0));
+					transform.rotation *= Quaternion.Euler(rot + new Vector3(0,180,0));
 					_rot = true;
 				}
 			}
@@ -46,7 +45,7 @@ namespace Project.Common.Views.Monos
 				}
 
 				var intencity = entity.Read<GlowTile>().Amount;
-				mat.SetColor(EmissionColor, matColor * (intencity * 0.5f));
+				mat.SetColor(EmissionColor, matColor * (intencity * 0.5));
 			}
 		}
 	}

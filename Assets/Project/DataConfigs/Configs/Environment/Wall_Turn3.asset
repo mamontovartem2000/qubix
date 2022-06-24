@@ -17,21 +17,29 @@ MonoBehaviour:
   - id: 0
   - id: 1
   - id: 2
+  - id: 3
   removeStructComponents: []
   templates:
   - 42195f0a559d99a479384ed2079515c8
   references:
     version: 1
     00000000:
+      type: {class: TileView, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 6802779263229907568, guid: f42e0187619dfc14f9aa748458dcaa9b, type: 3}
+    00000001:
       type: {class: TileRotation, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value:
-          x: 0
-          y: 90
-          z: 0
-    00000001:
-      type: {class: CollisionStatic, ns: Project.Common.Components, asm: Project.Common}
+          x:
+            m_rawValue: 0
+          y:
+            m_rawValue: 386547056640
+          z:
+            m_rawValue: 0
     00000002:
+      type: {class: CollisionStatic, ns: Project.Common.Components, asm: Project.Common}
+    00000003:
       type: {class: TileAlternativeView, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 4619573818923134876, guid: f42e0187619dfc14f9aa748458dcaa9b, type: 3}

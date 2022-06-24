@@ -23,7 +23,6 @@ namespace Project.Common.Views.Monos
 		public override void ApplyState(float deltaTime, bool immediately)
 		{
 			transform.position = entity.GetPosition();
-			transform.rotation = entity.GetRotation();
 
 			if (entity.Has<GlowTile>())
 			{
@@ -35,7 +34,7 @@ namespace Project.Common.Views.Monos
 				}
 				
 				var intencity = entity.Read<GlowTile>().Amount;
-				mat.SetColor(EmissionColor, matColor * (intencity * 0.5f));
+				mat.SetColor(EmissionColor, matColor * (intencity * 0.5));
 			}
 		}
 	}

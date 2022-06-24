@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1011105806492005807}
+  - component: {fileID: -4044692456254912944}
   - component: {fileID: -121550654373616922}
   m_Layer: 0
   m_Name: Wall_Cross
@@ -32,6 +33,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4044692456254912944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379423815278145301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28052540b51422b4bbcaf2084b255436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    items:
+    - itemData:
+        psSimulation:
+          particleItem:
+            particleSystem: {fileID: 0}
+          settings:
+            simulationType: 0
+            minSimulationTime: 0
+            minEndingTime: 0
+            halfEnding: 0
+          hasDefault: 0
+        psSource: {fileID: 0}
+        psRootSource: {fileID: 0}
+        mesh: {fileID: -7295146597600393256, guid: fd168dd558e196d4c8555d7addb490b0, type: 3}
+        meshRenderer: {fileID: 3407995299296231331}
+        meshFilter: {fileID: 3407995299296231330}
+        material: {fileID: 2100000, guid: b7075ef9ab4286f4b8066c7b3df13e16, type: 2}
+        localPosition: {x: 0, y: -0.4, z: 0}
+        localRotation: {x: 0, y: 0, z: 0}
+        localScale: {x: 1, y: 1, z: 1}
 --- !u!114 &-121550654373616922
 MonoBehaviour:
   m_ObjectHideFlags: 0

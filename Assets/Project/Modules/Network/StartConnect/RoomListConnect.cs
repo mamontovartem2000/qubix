@@ -1,8 +1,6 @@
-using Project.Modules.Network.ManualConnect;
-using Project.Modules.Network.UI;
 using UnityEngine;
 
-namespace Project.Modules.Network.StartConnect
+namespace Project.Modules.Network
 {
     public class RoomListConnect : ConnectTemplate
 	{
@@ -19,7 +17,7 @@ namespace Project.Modules.Network.StartConnect
 			base.InitTemplate(_roomListScreen, BuildTypes.RoomsConnect);
 			NetworkEvents.GetRoomList += ShowRooms;
 			RoomPrefab.JoinRoom += SelectRoom;
-			ConnectionSteps.CreateSocketConnect("wss://dev.match.qubixinfinity.io/match");
+			ConnectionSteps.CreateSocketConnect("wss://game.qubixinfinity.io/match");
 		}
 
         private void ShowRooms(RoomInfo[] obj)

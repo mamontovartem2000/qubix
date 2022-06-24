@@ -2,14 +2,6 @@
 #define INLINE_METHODS
 #endif
 
-#if FIXED_POINT_MATH
-using ME.ECS.Mathematics;
-using tfloat = sfloat;
-#else
-using Unity.Mathematics;
-using tfloat = System.Single;
-#endif
-
 namespace ME.ECS {
 
     using ME.ECS.Collections;
@@ -121,10 +113,6 @@ namespace ME.ECS {
         public abstract StructRegistryBase Clone();
 
         public abstract int GetCustomHash();
-
-        public virtual UnsafeData CreateObjectUnsafe(in Entity entity) {
-            throw new System.Exception("Object must be unmanaged to use CreateObjectUnsafe");
-        }
 
     }
 
@@ -238,8 +226,7 @@ namespace ME.ECS {
 
                     foreach (var kv in this.sharedGroups) {
                         
-                        var item = kv.Value;
-                        copy.Recycle(ref item);
+                        copy.Recycle(kv.Value);
                         
                     }
                     #if MULTITHREAD_SUPPORT
@@ -365,6 +352,12 @@ namespace ME.ECS {
 
         }
 
+        public override void Recycle() {
+
+            PoolRegistries.Recycle(this);
+
+        }
+
         public override StructRegistryBase Clone() {
 
             var reg = this.SpawnInstance();
@@ -483,18 +476,16 @@ namespace ME.ECS {
 
         private struct ElementCopy : IArrayElementCopy<SharedGroupData> {
 
-            public void Copy(in SharedGroupData @from, ref SharedGroupData to) {
+            public void Copy(SharedGroupData @from, ref SharedGroupData to) {
                 
                 to.data = from.data;
                 ArrayUtils.Copy(from.states, ref to.states);
                 
             }
 
-            public void Recycle(ref SharedGroupData item) {
+            public void Recycle(SharedGroupData item) {
                 
                 PoolArray<bool>.Recycle(ref item.states);
-                item.data = default;
-                item = default;
                 
             }
 
@@ -568,8 +559,7 @@ namespace ME.ECS {
             public int dataIndex;
             public ComponentLifetime lifetime;
             public StorageType storageType;
-            public tfloat secondsLifetime;
-            public bool destroyEntity;
+            public float secondsLifetime;
             
             public ComponentLifetime GetStep() => this.lifetime;
             
@@ -579,7 +569,7 @@ namespace ME.ECS {
                     
                     if (this.lifetime == ComponentLifetime.NotifyAllSystemsBelow) return;
 
-                    if (this.dataIndex >= 0) Worlds.currentWorld.SetData(this.entity, this.data, this.dataIndex, this.storageType);
+                    Worlds.currentWorld.SetData(this.entity, this.data, this.dataIndex, this.storageType);
                     
                     if (this.lifetime == ComponentLifetime.NotifyAllSystems) {
                         this.lifetime = ComponentLifetime.NotifyAllSystemsBelow;
@@ -589,19 +579,15 @@ namespace ME.ECS {
 
             }
 
-            public bool Update(tfloat deltaTime) {
+            public bool Update(float deltaTime) {
 
                 if (this.entity.IsAlive() == false) return true;
                 
                 this.secondsLifetime -= deltaTime;
                 if (this.secondsLifetime <= 0f) {
 
-                    if (this.destroyEntity == false) {
-
-                        Worlds.currentWorld.RemoveData(this.entity, this.dataIndex, this.storageType);
-
-                    }
-
+                    Worlds.currentWorld.RemoveData(this.entity, this.dataIndex, this.storageType);
+                    
                     return true;
 
                 }
@@ -624,7 +610,6 @@ namespace ME.ECS {
                 this.data.CopyFrom(in other.data);
                 this.lifetime = other.lifetime;
                 this.secondsLifetime = other.secondsLifetime;
-                this.destroyEntity = other.destroyEntity;
 
             }
             
@@ -635,7 +620,6 @@ namespace ME.ECS {
                 this.entity = default;
                 this.lifetime = default;
                 this.secondsLifetime = default;
-                this.destroyEntity = default;
                 this.data.Dispose();
 
             }
@@ -649,12 +633,7 @@ namespace ME.ECS {
             }
 
             public bool Equals(NextTickTask other) {
-                return this.entity.Equals(other.entity) &&
-                       this.dataIndex == other.dataIndex &&
-                       this.lifetime == other.lifetime &&
-                       this.storageType == other.storageType &&
-                       this.secondsLifetime == other.secondsLifetime &&
-                       this.destroyEntity == other.destroyEntity;
+                return this.entity.Equals(other.entity) && this.dataIndex == other.dataIndex && this.lifetime == other.lifetime && this.storageType == other.storageType;
             }
 
             public override bool Equals(object obj) {
@@ -663,7 +642,7 @@ namespace ME.ECS {
 
             public override int GetHashCode() {
                 unchecked {
-                    return (this.entity.GetHashCode() * 397) ^ this.dataIndex ^ (int)this.lifetime ^ (int)this.storageType ^ (int)(this.destroyEntity ? 1 : 0) ^ (int)(this.secondsLifetime * 1000f);
+                    return (this.entity.GetHashCode() * 397) ^ this.dataIndex ^ (int)this.lifetime ^ (int)this.storageType;
                 }
             }
 
@@ -675,7 +654,7 @@ namespace ME.ECS {
         [ME.ECS.Serializer.SerializeField]
         internal BufferArray<StructRegistryBase> list;
         [ME.ECS.Serializer.SerializeField]
-        public EntitiesIndexer entitiesIndexer;
+        internal EntitiesIndexer entitiesIndexer;
         [ME.ECS.Serializer.SerializeField]
         private bool isCreated;
 
@@ -805,7 +784,7 @@ namespace ME.ECS {
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
          Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
         #endif
-        public unsafe void RemoveAll(in Entity entity) {
+        public void RemoveAll(in Entity entity) {
 
             #if WORLD_EXCEPTIONS
             if (entity.IsAlive() == false) {
@@ -815,7 +794,7 @@ namespace ME.ECS {
             }
             #endif
 
-            /*if (this.nextTickTasks != null) {
+            if (this.nextTickTasks != null) {
 
                 var nullCnt = 0;
                 foreach (ref var task in this.nextTickTasks) {
@@ -843,25 +822,16 @@ namespace ME.ECS {
                     
                 }
 
-            }*/
+            }
 
-            /*
-            for (int i = 0; i < this.list.Length; ++i) {
-
-                var item = this.list.arr[i];
-                if (item != null) {
-
-                    item.Remove(in entity, clearAll: true);
-
-                }
-
-            }*/
-            
-            var list = this.entitiesIndexer.Get(entity.id);
+            var list = this.entitiesIndexer.Get();
             if (list != null) {
+                
+                foreach (var kv in list) {
 
-                foreach (var index in list) {
+                    if (kv.entityId != entity.id) continue;
 
+                    var index = kv.componentId;
                     var item = this.list.arr[index];
                     if (item != null) {
 
@@ -871,7 +841,7 @@ namespace ME.ECS {
 
                 }
 
-                list.Clear();
+                this.entitiesIndexer.Remove(entity.id);
 
             }
 
@@ -977,114 +947,6 @@ namespace ME.ECS {
             if (this.list.arr[code] == null) {
 
                 var instance = PoolRegistries.SpawnOneShot<TComponent>();
-                this.list.arr[code] = instance;
-
-            }
-
-        }
-        #endregion
-
-        #region Blittable
-        #if ECS_COMPILE_IL2CPP_OPTIONS
-        [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
-         Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
-         Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-        #endif
-        public void ValidateBlittable<TComponent>(bool isTag = false) where TComponent : struct, IComponentBase {
-
-            var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
-            if (isTag == true) WorldUtilities.SetComponentAsTag<TComponent>();
-            this.ValidateBlittable<TComponent>(code, isTag);
-
-        }
-
-        #if ECS_COMPILE_IL2CPP_OPTIONS
-        [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
-         Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
-         Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-        #endif
-        public void ValidateBlittable<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase {
-
-            var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
-            this.ValidateBlittable<TComponent>(code, isTag);
-            var reg = (StructComponentsBlittable<TComponent>)this.list.arr[code];
-            reg.Validate(in entity);
-
-        }
-
-        #if ECS_COMPILE_IL2CPP_OPTIONS
-        [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
-         Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
-         Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-        #endif
-        #if INLINE_METHODS
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
-        private void ValidateBlittable<TComponent>(int code, bool isTag) where TComponent : struct, IComponentBase {
-
-            if (ArrayUtils.WillResize(code, ref this.list) == true) {
-
-                ArrayUtils.Resize(code, ref this.list, true);
-
-            }
-
-            if (this.list.arr[code] == null) {
-
-                var instance = PoolRegistries.SpawnBlittable<TComponent>();
-                this.list.arr[code] = instance;
-
-            }
-
-        }
-        #endregion
-
-        #region BlittableCopyable
-        #if ECS_COMPILE_IL2CPP_OPTIONS
-        [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
-         Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
-         Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-        #endif
-        public void ValidateBlittableCopyable<TComponent>(bool isTag = false) where TComponent : struct, IComponentBase, IStructCopyable<TComponent> {
-
-            var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
-            if (isTag == true) WorldUtilities.SetComponentAsTag<TComponent>();
-            this.ValidateBlittableCopyable<TComponent>(code, isTag);
-
-        }
-
-        #if ECS_COMPILE_IL2CPP_OPTIONS
-        [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
-         Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
-         Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-        #endif
-        public void ValidateBlittableCopyable<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase, IStructCopyable<TComponent> {
-
-            var code = WorldUtilities.GetAllComponentTypeId<TComponent>();
-            this.ValidateBlittableCopyable<TComponent>(code, isTag);
-            var reg = (StructComponentsBlittableCopyable<TComponent>)this.list.arr[code];
-            reg.Validate(in entity);
-
-        }
-
-        #if ECS_COMPILE_IL2CPP_OPTIONS
-        [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
-         Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
-         Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-        #endif
-        #if INLINE_METHODS
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
-        private void ValidateBlittableCopyable<TComponent>(int code, bool isTag) where TComponent : struct, IComponentBase, IStructCopyable<TComponent> {
-
-            if (ArrayUtils.WillResize(code, ref this.list) == true) {
-
-                ArrayUtils.Resize(code, ref this.list, true);
-
-            }
-
-            if (this.list.arr[code] == null) {
-
-                var instance = PoolRegistries.SpawnBlittableCopyable<TComponent>();
                 this.list.arr[code] = instance;
 
             }
@@ -1280,16 +1142,15 @@ namespace ME.ECS {
 
         private struct CopyTask : IArrayElementCopy<NextTickTask> {
 
-            public void Copy(in NextTickTask @from, ref NextTickTask to) {
+            public void Copy(NextTickTask @from, ref NextTickTask to) {
 
                 to.CopyFrom(from);
 
             }
 
-            public void Recycle(ref NextTickTask item) {
+            public void Recycle(NextTickTask item) {
 
                 item.Recycle();
-                item = default;
 
             }
 
@@ -1297,7 +1158,7 @@ namespace ME.ECS {
 
         private struct CopyRegistry : IArrayElementCopy<StructRegistryBase> {
 
-            public void Copy(in StructRegistryBase @from, ref StructRegistryBase to) {
+            public void Copy(StructRegistryBase @from, ref StructRegistryBase to) {
 
                 if (from == null && to == null) return;
 
@@ -1319,10 +1180,9 @@ namespace ME.ECS {
 
             }
 
-            public void Recycle(ref StructRegistryBase item) {
+            public void Recycle(StructRegistryBase item) {
 
                 PoolRegistries.Recycle(item);
-                item = default;
 
             }
 
@@ -1364,8 +1224,6 @@ namespace ME.ECS {
     #endif
     public partial class World {
 
-        private Filter entitiesOneShotFilter;
-        
         public ref StructComponentsContainer GetStructComponents() {
 
             return ref this.currentState.structComponents;
@@ -1467,18 +1325,6 @@ namespace ME.ECS {
 
         }
 
-        public void ValidateDataBlittable<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase {
-
-            this.currentState.structComponents.ValidateBlittable<TComponent>(in entity, isTag);
-
-        }
-
-        public void ValidateDataBlittableCopyable<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentBase, IStructCopyable<TComponent> {
-
-            this.currentState.structComponents.ValidateBlittableCopyable<TComponent>(in entity, isTag);
-
-        }
-
         public void ValidateDataDisposable<TComponent>(in Entity entity, bool isTag = false) where TComponent : struct, IComponentDisposable {
 
             this.currentState.structComponents.ValidateDisposable<TComponent>(in entity, isTag);
@@ -1488,7 +1334,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        private void UseLifetimeStep(ComponentLifetime step, tfloat deltaTime) {
+        private void UseLifetimeStep(ComponentLifetime step, float deltaTime) {
 
             if (step == ComponentLifetime.NotifyAllSystemsBelow) {
                 
@@ -1500,32 +1346,15 @@ namespace ME.ECS {
             this.UseLifetimeStep(step, deltaTime, ref this.structComponentsNoState);
             
         }
-
-        #if INLINE_METHODS
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
-        private void UseEntityFlags() {
-
-            foreach (var entity in this.entitiesOneShotFilter) {
-
-                entity.Destroy();
-
-            }
-            
-        }
         
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        private unsafe void UseLifetimeStep(ComponentLifetime step, tfloat deltaTime, ref StructComponentsContainer structComponentsContainer) {
+        private void UseLifetimeStep(ComponentLifetime step, float deltaTime, ref StructComponentsContainer structComponentsContainer) {
 
             var list = structComponentsContainer.nextTickTasks;
             if (list.Count > 0) {
 
-                // We need to allocate temporary list to store entities
-                // because on entity.Destroy we clean up all data including tasks list
-                var tempList = stackalloc Entity[list.Count];
-                var k = 0;
                 var cnt = 0;
                 foreach (ref var task in list) {
                     
@@ -1537,7 +1366,6 @@ namespace ME.ECS {
                         if (task.Update(deltaTime) == true) {
                             
                             // Remove task on complete
-                            if (task.destroyEntity == true) tempList[k++] = task.entity;
                             task.Recycle();
                             task = default;
                             ++cnt;
@@ -1550,10 +1378,6 @@ namespace ME.ECS {
                         
                     }
                     
-                }
-
-                for (int i = 0; i < k; ++i) {
-                    tempList[i].Destroy();
                 }
                 
                 if (cnt == list.Count) {
@@ -1600,7 +1424,7 @@ namespace ME.ECS {
             #endif
 
             if (AllComponentTypes<TComponent>.isVersionedNoState == false) return 0u;
-            var reg = (StructComponentsBase<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
+            var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
             return reg.versionsNoState.arr[entity.id];
             
         }
@@ -1658,7 +1482,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public void SetSharedData<TComponent>(in TComponent data, ComponentLifetime lifetime) where TComponent : unmanaged, IStructComponent {
+        public void SetSharedData<TComponent>(in TComponent data, ComponentLifetime lifetime) where TComponent : struct, IStructComponent {
 
             this.SetData(in this.sharedEntity, data, lifetime);
 
@@ -1706,7 +1530,7 @@ namespace ME.ECS {
             }
             
             // Inline all manually
-            var reg = (StructComponentsBase<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
+            var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
             #if WORLD_EXCEPTIONS
             if (reg.sharedGroups.Has(entity.id, groupId) == false) {
                 
@@ -1743,7 +1567,7 @@ namespace ME.ECS {
             }
 
             // Inline all manually
-            var reg = (StructComponentsBase<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
+            var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
             if (reg.sharedGroups.Has(entity.id, groupId) == false) return false;
             return true;
 
@@ -1752,7 +1576,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public ref TComponent GetSharedData<TComponent>(in Entity entity, uint groupId = 0u) where TComponent : struct, IComponentShared {
+        public ref TComponent GetSharedData<TComponent>(in Entity entity, uint groupId = 0u, bool createIfNotExists = true) where TComponent : struct, IComponentShared {
 
             #if WORLD_EXCEPTIONS
             if (entity.IsAlive() == false) {
@@ -1780,10 +1604,10 @@ namespace ME.ECS {
             }
 
             // Inline all manually
-            var reg = (StructComponentsBase<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
+            var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
             ref var state = ref reg.sharedGroups.Has(entity.id, groupId);
             var incrementVersion = (this.HasStep(WorldStep.LogicTick) == true || this.HasResetState() == false);
-            if (state == false) {
+            if (state == false && createIfNotExists == true) {
 
                 #if WORLD_EXCEPTIONS
                 if (this.HasStep(WorldStep.LogicTick) == false && this.HasResetState() == true) {
@@ -1793,11 +1617,6 @@ namespace ME.ECS {
                 }
                 #endif
 
-                if (this.currentState.structComponents.entitiesIndexer.GetCount(entity.id) == 0 &&
-                    (this.currentState.storage.flags.Get(entity.id) & (byte)EntityFlag.DestroyWithoutComponents) != 0) {
-                    entity.RemoveOneShot<IsEntityEmptyOneShot>();
-                }
-                
                 incrementVersion = true;
                 reg.sharedGroups.Set(entity.id, groupId);
                 this.currentState.structComponents.entitiesIndexer.Set(entity.id, AllComponentTypes<TComponent>.typeId);
@@ -1827,20 +1646,8 @@ namespace ME.ECS {
                     }
                 }
 
-                if (AllComponentTypes<TComponent>.isBlittable == true) {
-
-                    var regType = (StructComponentsBlittable<TComponent>)reg;
-                    ref var bucket = ref regType.components[entity.id];
-                    reg.UpdateVersion(ref bucket);
-
-                } else {
-                
-                    var regType = (StructComponents<TComponent>)reg;
-                    ref var bucket = ref regType.components[entity.id];
-                    reg.UpdateVersion(ref bucket);
-
-                }
-                
+                ref var bucket = ref reg.components[entity.id];
+                reg.UpdateVersion(ref bucket);
                 if (AllComponentTypes<TComponent>.isVersionedNoState == true) ++reg.versionsNoState.arr[entity.id];
                 if (ComponentTypes<TComponent>.isFilterVersioned == true) this.UpdateFilterByStructComponentVersioned<TComponent>(in entity);
 
@@ -1932,7 +1739,7 @@ namespace ME.ECS {
             #endif
 
             // Inline all manually
-            var reg = (StructComponentsBase<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
+            var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
             if (AllComponentTypes<TComponent>.isTag == false) {
                 
                 reg.sharedGroups.Set(entity.id, groupId, data);
@@ -1968,20 +1775,8 @@ namespace ME.ECS {
                 
             }
             
-            if (AllComponentTypes<TComponent>.isBlittable == true) {
-
-                var regType = (StructComponentsBlittable<TComponent>)reg;
-                ref var bucket = ref regType.components[entity.id];
-                reg.UpdateVersion(ref bucket);
-
-            } else {
-                
-                var regType = (StructComponents<TComponent>)reg;
-                ref var bucket = ref regType.components[entity.id];
-                reg.UpdateVersion(ref bucket);
-
-            }
-
+            ref var bucket = ref reg.components[entity.id];
+            reg.UpdateVersion(ref bucket);
             if (AllComponentTypes<TComponent>.isVersionedNoState == true) ++reg.versionsNoState.arr[entity.id];
             if (ComponentTypes<TComponent>.isFilterVersioned == true) this.UpdateFilterByStructComponentVersioned<TComponent>(in entity);
 
@@ -1992,9 +1787,52 @@ namespace ME.ECS {
         #endif
         public void SetSharedData<TComponent>(in Entity entity, uint groupId = 0u) where TComponent : struct, IComponentShared {
 
-            TComponent data = default;
-            this.SetSharedData<TComponent>(in entity, in data, groupId);
+            #if WORLD_STATE_CHECK
+            if (this.HasStep(WorldStep.LogicTick) == false && this.HasResetState() == true) {
+
+                OutOfStateException.ThrowWorldStateCheck();
+                
+            }
+            #endif
+
+            #if WORLD_EXCEPTIONS
+            if (entity.IsAlive() == false) {
+                
+                EmptyEntityException.Throw(entity);
+                
+            }
+            #endif
+
+            // Inline all manually
+            var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
+            if (AllComponentTypes<TComponent>.isTag == false) reg.sharedGroups.Set(entity.id, groupId);
+            ref var state = ref reg.sharedGroups.Has(entity.id, groupId);
+            if (state == false) {
+
+                state = true;
+                this.currentState.structComponents.entitiesIndexer.Set(entity.id, AllComponentTypes<TComponent>.typeId);
+                if (ComponentTypes<TComponent>.typeId >= 0) {
+
+                    this.currentState.storage.archetypes.Set<TComponent>(in entity);
+                    this.AddFilterByStructComponent<TComponent>(in entity);
+                    this.UpdateFilterByStructComponent<TComponent>(in entity);
+
+                }
+
+            }
             
+            if (ComponentTypes<TComponent>.isFilterLambda == true && ComponentTypes<TComponent>.typeId >= 0) {
+
+                this.ValidateFilterByStructComponent<TComponent>(in entity);
+                
+            }
+            
+            this.currentState.storage.versions.Increment(in entity);
+            ref var bucket = ref reg.components[entity.id];
+            reg.UpdateVersion(ref bucket);
+            if (AllComponentTypes<TComponent>.isVersionedNoState == true) ++reg.versionsNoState.arr[entity.id];
+            if (ComponentTypes<TComponent>.isFilterVersioned == true) this.UpdateFilterByStructComponentVersioned<TComponent>(in entity);
+
         }
         
         public void SetSharedData(in Entity entity, in IComponentBase data, int dataIndex, uint groupId = 0u) {
@@ -2032,7 +1870,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public void SetTimer(in Entity entity, int index, tfloat time) {
+        public void SetTimer(in Entity entity, int index, float time) {
 
             this.currentState.timers.Set(in entity, index, time);
 
@@ -2041,7 +1879,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public ref tfloat GetTimer(in Entity entity, int index) {
+        public ref float GetTimer(in Entity entity, int index) {
 
             return ref this.currentState.timers.Get(in entity, index);
 
@@ -2050,7 +1888,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public tfloat ReadTimer(in Entity entity, int index) {
+        public float ReadTimer(in Entity entity, int index) {
 
             return this.currentState.timers.Read(in entity, index);
 
@@ -2086,22 +1924,10 @@ namespace ME.ECS {
             }
             #endif
 
-            if (AllComponentTypes<TComponent>.isBlittable == true) {
-                
-                // Inline all manually
-                var reg = (StructComponentsBlittable<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-                var c = reg.components[entity.id];
-                component = c.data;
-                return c.state > 0;
-
-            } else {
-
-                var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-                var c = reg.components[entity.id];
-                component = c.data;
-                return c.state > 0;
-
-            }
+            var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
+            var c = reg.components[entity.id];
+            component = c.data;
+            return c.state > 0;
 
         }
         
@@ -2141,19 +1967,9 @@ namespace ME.ECS {
             }
             #endif
 
-            if (AllComponentTypes<TComponent>.isBlittable == true) {
-                
-                // Inline all manually
-                var reg = (StructComponentsBlittable<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-                return ref reg.components[entity.id].data;
-
-            } else {
-
-                // Inline all manually
-                var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-                return ref reg.components[entity.id].data;
-
-            }
+            // Inline all manually
+            var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
+            return ref reg.components[entity.id].data;
 
         }
 
@@ -2201,20 +2017,10 @@ namespace ME.ECS {
             }
             #endif
 
-            if (AllComponentTypes<TComponent>.isBlittable == true) {
-                
-                // Inline all manually
-                var reg = (StructComponentsBlittable<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-                return ref DataBlittableBufferUtils.PushGet_INTERNAL(this, in entity, reg, StorageType.Default);
-
-            } else {
-
-                // Inline all manually
-                var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-                return ref DataBufferUtils.PushGet_INTERNAL(this, in entity, reg, StorageType.Default);
-
-            }
-
+            // Inline all manually
+            var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
+            return ref DataBufferUtils.PushGet_INTERNAL(this, in entity, reg, StorageType.Default);
+            
         }
 
         #if INLINE_METHODS
@@ -2222,8 +2028,7 @@ namespace ME.ECS {
         #endif
         public void SetData<TComponent>(in Entity entity) where TComponent : struct, IStructComponent {
 
-            TComponent data = default;
-            this.SetData(in entity, data);
+            this.SetData(in entity, new TComponent());
             
         }
 
@@ -2255,26 +2060,16 @@ namespace ME.ECS {
             }
             #endif
 
-            if (AllComponentTypes<TComponent>.isBlittable == true) {
-                
-                // Inline all manually
-                var reg = (StructComponentsBlittable<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-                DataBlittableBufferUtils.PushSet_INTERNAL(this, in entity, reg, in data, StorageType.Default);
-
-            } else {
-
-                // Inline all manually
-                var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-                DataBufferUtils.PushSet_INTERNAL(this, in entity, reg, in data, StorageType.Default);
-
-            }
-
+            // Inline all manually
+            var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
+            DataBufferUtils.PushSet_INTERNAL(this, in entity, reg, in data, StorageType.Default);
+            
         }
 
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public void SetData<TComponent>(in Entity entity, ComponentLifetime lifetime) where TComponent : unmanaged, IStructComponent {
+        public void SetData<TComponent>(in Entity entity, ComponentLifetime lifetime) where TComponent : struct, IStructComponent {
 
             TComponent data = default;
             this.SetData(in entity, in data, lifetime);
@@ -2284,7 +2079,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public void SetData<TComponent>(in Entity entity, in TComponent data, ComponentLifetime lifetime) where TComponent : unmanaged, IStructComponent {
+        public void SetData<TComponent>(in Entity entity, in TComponent data, ComponentLifetime lifetime) where TComponent : struct, IStructComponent {
 
             this.SetData(in entity, in data, lifetime, 0f);
 
@@ -2293,7 +2088,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public void SetData<TComponent>(in Entity entity, in TComponent data, ComponentLifetime lifetime, tfloat secondsLifetime) where TComponent : unmanaged, IStructComponent {
+        public void SetData<TComponent>(in Entity entity, in TComponent data, ComponentLifetime lifetime, float secondsLifetime) where TComponent : struct, IStructComponent {
 
             this.SetData(ref this.currentState.structComponents, in entity, in data, lifetime, secondsLifetime);
 
@@ -2302,7 +2097,7 @@ namespace ME.ECS {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        internal void SetData<TComponent>(ref StructComponentsContainer container, in Entity entity, in TComponent data, ComponentLifetime lifetime, tfloat secondsLifetime, bool addTaskOnly = false) where TComponent : unmanaged, IStructComponent {
+        internal void SetData<TComponent>(ref StructComponentsContainer container, in Entity entity, in TComponent data, ComponentLifetime lifetime, float secondsLifetime, bool addTaskOnly = false) where TComponent : struct, IStructComponent {
             
             #if WORLD_STATE_CHECK
             if (this.HasStep(WorldStep.LogicTick) == false && this.HasResetState() == true) {
@@ -2382,18 +2177,9 @@ namespace ME.ECS {
             }
             #endif
 
-            if (AllComponentTypes<TComponent>.isBlittable == true) {
-             
-                var reg = (StructComponentsBlittable<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-                DataBlittableBufferUtils.PushRemove_INTERNAL(this, in entity, reg, StorageType.Default);
-   
-            } else {
-
-                var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
-                DataBufferUtils.PushRemove_INTERNAL(this, in entity, reg, StorageType.Default);
-
-            }
-
+            var reg = (StructComponents<TComponent>)this.currentState.structComponents.list.arr[AllComponentTypes<TComponent>.typeId];
+            DataBufferUtils.PushRemove_INTERNAL(this, in entity, reg, StorageType.Default);
+            
         }
 
         #if INLINE_METHODS

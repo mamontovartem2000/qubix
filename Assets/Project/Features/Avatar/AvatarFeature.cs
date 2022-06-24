@@ -7,7 +7,6 @@ using Project.Features.Avatar.Systems;
 using Project.Features.Events;
 using Project.Mechanics.Features.Avatar.Systems;
 using Project.Modules.Network;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Features.Avatar
@@ -130,7 +129,7 @@ namespace Project.Features.Avatar
         {
             var redSpawnPoints = world.ReadSharedData<MapComponents>().RedTeamSpawnPoints;
             var blueSpawnPoints = world.ReadSharedData<MapComponents>().BlueTeamSpawnPoints;
-            var pos = float3.zero;
+            var pos = fp3.zero;
 
             if (NetworkData.GameMode == GameModes.teambattle)
             {
@@ -144,12 +143,12 @@ namespace Project.Features.Avatar
                 }
             }
 
-            if (pos.Equals(float3.zero))
+            if (pos == fp3.zero)
                 pos = SceneUtils.GetRandomPosition();
 
             entity.SetPosition(pos);
             SceneUtils.ModifyWalkable(entity.GetPosition(), false);
-            entity.Get<FaceDirection>().Value = new float3(0, 0, 1);
+            entity.Get<FaceDirection>().Value = new fp3(0, 0, 1);
             entity.Get<PlayerMoveTarget>().Value = entity.GetPosition();
         }
     }

@@ -1,7 +1,6 @@
-﻿#if UNITY
-using UnityEngine;
+﻿using UnityEngine;
 using INLINE = System.Runtime.CompilerServices.MethodImplAttribute;
-    
+
 namespace ME.ECS.Serializer {
 
     public struct Vector2IntSerializer : ITypeSerializer {
@@ -119,4 +118,3 @@ namespace ME.ECS.Serializer {
     }
 
 }
-#endif

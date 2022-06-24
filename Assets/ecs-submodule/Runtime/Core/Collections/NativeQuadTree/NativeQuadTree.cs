@@ -1,13 +1,22 @@
 ﻿using System;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
+using Unity.Mathematics;
 
 #if FIXED_POINT_MATH
-using ME.ECS.Mathematics;
-using tfloat = sfloat;
+using MATH = ME.ECS.fpmath;
+using FLOAT = ME.ECS.fp;
+using FLOAT2 = ME.ECS.fp2;
+using FLOAT3 = ME.ECS.fp3;
+using FLOAT4 = ME.ECS.fp4;
+using QUATERNION = ME.ECS.fpquaternion;
 #else
-using Unity.Mathematics;
-using tfloat = System.Single;
+using MATH = Unity.Mathematics.math;
+using FLOAT = System.Single;
+using FLOAT2 = Unity.Mathematics.float2;
+using FLOAT3 = Unity.Mathematics.float3;
+using FLOAT4 = Unity.Mathematics.float4;
+using QUATERNION = UnityEngine.Quaternion;
 #endif
 
 namespace ME.ECS.Collections {
@@ -15,7 +24,7 @@ namespace ME.ECS.Collections {
     // Represents an element node in the quadtree.
     public struct QuadElement<T> where T : unmanaged {
 
-        public float2 pos;
+        public FLOAT2 pos;
         public T element;
 
     }
@@ -103,7 +112,6 @@ namespace ME.ECS.Collections {
         }
 
         public void ClearAndBulkInsert(NativeArray<QuadElement<T>> incomingElements, int incomingElementsLength) {
-
             // Always have to clear before bulk insert as otherwise the lookup and node allocations need to account
             // for existing data.
             this.Clear();
@@ -207,7 +215,7 @@ namespace ME.ECS.Collections {
             new QuadTreeRangeQuery().Query(this, bounds, results);
         }
 
-        public void RangeRadiusQuery(AABB2D bounds, tfloat radius, NativeList<QuadElement<T>> results) {
+        public void RangeRadiusQuery(AABB2D bounds, FLOAT radius, NativeList<QuadElement<T>> results) {
             #if ENABLE_UNITY_COLLECTIONS_CHECKS
             AtomicSafetyHandle.CheckReadAndThrow(this.safetyHandle);
             #endif

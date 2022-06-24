@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project.Modules.Network.ManualConnect
+namespace Project.Modules.Network
 {
 
 	public class LoginScreenCore : MonoBehaviour

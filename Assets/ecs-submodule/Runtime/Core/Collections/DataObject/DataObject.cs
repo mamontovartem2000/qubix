@@ -191,14 +191,6 @@ namespace ME.ECS.Collections {
         #endif
         public void Dispose() {
 
-            if (this.disposeSentinel.tick == Tick.Invalid || this.disposeSentinel.tick != Worlds.currentWorld.GetLastSavedTick()) {
-                
-                // Just make this DataObject as not created
-                this.isCreated = false;
-                return;
-                
-            }
-
             this.disposeSentinel.Dispose();
             this.isCreated = false;
 

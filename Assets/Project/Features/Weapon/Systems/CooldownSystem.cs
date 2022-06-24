@@ -37,9 +37,8 @@ namespace Project.Features.Weapon.Systems
             ref var cooldown = ref entity.Get<Cooldown>().Value;
             cooldown -= deltaTime;
 
-            if(cooldown > 0) return;
-            
-            entity.Remove<Cooldown>();
+            if(cooldown <= (fp)0)
+                entity.Remove<Cooldown>();
         }
     }
 }

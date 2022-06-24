@@ -34,24 +34,20 @@ namespace ME.ECS.Network {
         None = 0x0,
         SendToNet = 0x1,
         RunLocal = 0x2,
-
     }
 
     public interface ITransporter {
 
         bool IsConnected();
         void Send(byte[] bytes);
-
         void SendSystemHash(uint tick, int hash);
-        void SendSystem(byte[] bytes);
+
         byte[] Receive();
 
         int GetEventsSentCount();
         int GetEventsBytesSentCount();
         int GetEventsReceivedCount();
         int GetEventsBytesReceivedCount();
-
-
     }
 
     public interface ISerializer {
@@ -151,7 +147,7 @@ namespace ME.ECS.Network {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public abstract class NetworkModule<TState> : INetworkModule<TState>, IUpdateLate, IUpdatePost, StatesHistory.IEventRunner, IModuleValidation where TState : State, new() {
+    public abstract class NetworkModule<TState> : INetworkModule<TState>, IUpdatePreLate, IUpdatePost, StatesHistory.IEventRunner, IModuleValidation where TState : State, new() {
 
         private static readonly RPCId CANCEL_EVENT_RPC_ID = -11;
         private static readonly RPCId PING_RPC_ID = -1;
@@ -560,33 +556,21 @@ namespace ME.ECS.Network {
 
                         if (this.transporter != null && this.serializer != null) {
 
-                            if (storeInHistory == false) {
-
-                                this.transporter.SendSystem(this.serializer.Serialize(evt));
-
-                            } else {
-
+                            if (storeInHistory == true)
                                 this.transporter.Send(this.serializer.Serialize(evt));
-
-                            }
-
                         }
-
                     }
-
                 }
 
                 if (storedInHistory == false && parameters != null) {
 
                     // Return parameters into pool if we are not storing them locally
                     PoolArray<object>.Recycle(ref parameters);
-
                 }
 
             } else {
 
                 throw new RegisterObjectMissingException(instance, rpcId);
-
             }
 
         }
@@ -678,8 +662,6 @@ namespace ME.ECS.Network {
 
             if (historyEvent.storeInHistory == true) {
 
-                historyEvent.tick += this.statesHistoryModule.GetEventForwardReceiveTick();
-                
                 // Run event normally on certain tick
                 this.statesHistoryModule.AddEvent(historyEvent);
 
@@ -694,23 +676,9 @@ namespace ME.ECS.Network {
 
         }
 
-        /// <summary>
-        /// Remove event from history
-        /// </summary>
         protected void CancelEvent(ME.ECS.StatesHistory.HistoryEvent historyEvent) {
 
             this.statesHistoryModule.CancelEvent(historyEvent);
-
-        }
-
-        /// <summary>
-        /// Remove all events from [tick..to)
-        /// </summary>
-        /// <param name="from">Include</param>
-        /// <param name="to">Exclude</param>
-        protected void CancelEvents(Tick from, Tick to) {
-
-            this.statesHistoryModule.CancelEvents(from, to);
 
         }
 
@@ -747,7 +715,7 @@ namespace ME.ECS.Network {
             }
 
         }
-        
+
         protected virtual void SendMySync(float deltaTime)
         {
             this.syncTime += deltaTime;
@@ -768,7 +736,7 @@ namespace ME.ECS.Network {
                 this.syncTime -= 2f;
             }
         }
-        
+
         public int GetSyncHash()
         {
             return syncHash;
@@ -825,7 +793,7 @@ namespace ME.ECS.Network {
             var tick = this.world.GetCurrentTick();
 
             var timeSinceGameStart = (long)(this.world.GetTimeSinceStart() * 1000L);
-            var targetTick = (Tick)System.Math.Floor(timeSinceGameStart / (double)((float)this.world.GetTickTime() * 1000d));
+            var targetTick = (Tick)System.Math.Floor(timeSinceGameStart / (this.world.GetTickTime() * 1000d));
             var oldestEventTick = this.statesHistoryModule.GetAndResetOldestTick(tick);
             //UnityEngine.Debug.LogError("Tick: " + tick + ", timeSinceGameStart: " + timeSinceGameStart + ", targetTick: " + targetTick + ", oldestEventTick: " + oldestEventTick);
             if (oldestEventTick == Tick.Invalid || oldestEventTick >= tick) {
@@ -848,10 +816,10 @@ namespace ME.ECS.Network {
 
                 }
                 sourceState = this.world.GetResetState<TState>();
-                sourceTick = Tick.Zero;
 
             }
-            //UnityEngine.Debug.LogWarning("Rollback. Oldest: " + oldestEventTick + ", sourceTick: " + sourceTick + " (hash: " + sourceState.GetHash() + " rnd: " + sourceState.randomState + "), targetTick: " + targetTick + ", currentTick: " + tick + ", timeSinceGameStart: " + timeSinceGameStart);
+            
+            // UnityEngine.Debug.LogWarning("Rollback. Oldest: " + oldestEventTick + ", sourceTick: " + sourceTick + " (hash: " + sourceState.GetHash() + " rnd: " + sourceState.randomState + "), targetTick: " + targetTick + ", currentTick: " + tick + ", timeSinceGameStart: " + timeSinceGameStart);
             
             this.statesHistoryModule.InvalidateEntriesAfterTick(sourceTick);
 
@@ -877,7 +845,10 @@ namespace ME.ECS.Network {
                 this.revertingTo = tick;
                 currentState.CopyFrom(sourceState);
                 currentState.Initialize(this.world, freeze: false, restore: true);
-                if (this.asyncMode == false) this.world.Simulate(sourceTick, tick);
+
+                // UnityEngine.Debug.Log($"rollback: {sourceTick - tick}");
+                
+                if (this.asyncMode == false) this.world.Simulate(sourceTick, tick, 0f);
             }
             this.isReverting = false;
             this.OnRevertingEnd();
@@ -901,14 +872,14 @@ namespace ME.ECS.Network {
             
             if (this.GetNetworkType() != NetworkType.RunLocal) {
 
-                this.SendPing(deltaTime);
-                this.SendSync(deltaTime);
-
+                //this.SendPing(deltaTime);
+                //this.SendSync(deltaTime);
+                this.SendMySync(deltaTime);
             }
 
         }
 
-        public virtual void UpdateLate(in float deltaTime) {
+        public virtual void UpdatePreLate(in float deltaTime) {
 
             this.ReceiveEventsAndApply();
             this.ApplyTicksByState();

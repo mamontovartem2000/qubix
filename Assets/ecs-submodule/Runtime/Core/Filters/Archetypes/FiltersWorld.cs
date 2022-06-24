@@ -19,20 +19,9 @@ namespace ME.ECS {
     [Il2Cpp(Option.DivideByZeroChecks, false)]
     public partial class World {
 
-        private BufferArray<FilterStaticData> filtersStaticData;
-        
         internal void OnSpawnFilters() { }
 
-        internal void OnRecycleFilters() {
-
-            for (int i = 0; i < this.filtersStaticData.Length; ++i) {
-                
-                this.filtersStaticData[i].data.Recycle();
-                
-            }
-            PoolArray<FilterStaticData>.Recycle(ref this.filtersStaticData);
-            
-        }
+        internal void OnRecycleFilters() { }
 
         public void Register(ref FiltersArchetypeStorage storageRef, bool freeze, bool restore) {
 
@@ -180,23 +169,6 @@ namespace ME.ECS {
         public FilterData GetFilter(int id) {
 
             return this.currentState.filters.GetFilter(id);
-
-        }
-
-        internal void SetFilterStaticData(int id, FilterInternalData data) {
-
-            ArrayUtils.Resize(id, ref this.filtersStaticData, true);
-            this.filtersStaticData.arr[id] = new FilterStaticData() {
-                isCreated = true,
-                data = data,
-            };
-
-        }
-
-        internal FilterStaticData GetFilterStaticData(int id) {
-            
-            ArrayUtils.Resize(id, ref this.filtersStaticData, true);
-            return this.filtersStaticData.arr[id];
 
         }
 

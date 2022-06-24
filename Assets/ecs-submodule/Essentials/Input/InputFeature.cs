@@ -1,11 +1,15 @@
 ﻿using ME.ECS;
 
 #if FIXED_POINT_MATH
-using ME.ECS.Mathematics;
-using tfloat = sfloat;
+using FLOAT2 = ME.ECS.fp2;
+using FLOAT3 = ME.ECS.fp3;
+using FLOAT4 = ME.ECS.fp4;
+using QUATERNION = ME.ECS.fpquaternion;
 #else
-using Unity.Mathematics;
-using tfloat = System.Single;
+using FLOAT2 = UnityEngine.Vector2;
+using FLOAT3 = UnityEngine.Vector3;
+using FLOAT4 = UnityEngine.Vector4;
+using QUATERNION = UnityEngine.Quaternion;
 #endif
 
 namespace ME.ECS.Essentials {
@@ -18,13 +22,13 @@ namespace ME.ECS.Essentials {
     namespace Input.Markers {}
 
     public delegate InputPointerData MarkerModifier(InputPointerData data);
-    public delegate bool GetWorldPointerCallback(int pointerId, UnityEngine.Camera camera, out float3 result);
+    public delegate bool GetWorldPointerCallback(int pointerId, UnityEngine.Camera camera, out FLOAT3 result);
     
     public interface IEventMarker : IMarker {}
 
     public interface IGestureMarker : IMarker {
 
-        float3 worldPosition { get; }
+        FLOAT3 worldPosition { get; }
 
     }
 
@@ -49,11 +53,11 @@ namespace ME.ECS.Essentials {
     public struct InputPointerData {
 
         public int pointerId;
-        public float3 worldPosition;
-        public float3 pressWorldPosition;
+        public FLOAT3 worldPosition;
+        public FLOAT3 pressWorldPosition;
         public InputEventType eventType;
 
-        public InputPointerData(int pointerId, float3 worldPosition, InputEventType eventType) {
+        public InputPointerData(int pointerId, FLOAT3 worldPosition, InputEventType eventType) {
 
             this.pointerId = pointerId;
             this.worldPosition = worldPosition;
@@ -64,19 +68,16 @@ namespace ME.ECS.Essentials {
 
     }
 
-    public struct InputAction<TMarker, TComponent> where TMarker : struct, ME.ECS.Essentials.Input.Input.Markers.IInputPointerMarker where TComponent : unmanaged, IInputPointerComponent {
+    public struct InputAction<TMarker, TComponent> where TMarker : struct, ME.ECS.Essentials.Input.Input.Markers.IInputPointerMarker where TComponent : struct, IInputPointerComponent {
 
         private readonly ME.ECS.Network.INetworkModuleBase networkModule;
         private readonly RPCId rpcId;
         private readonly InputFeature networkObject;
         private readonly object tag;
         private readonly InputEventType inputEventType;
-        private readonly float delayBetweenEvents;
         private System.Func<Entity> getEntity;
-        private float delayTimer;
-        private TMarker? currentMarker;
 
-        public InputAction(InputFeature feature, float delayBetweenEvents, InputEventType inputEventType, ME.ECS.Network.INetworkModuleBase networkModule, System.Action<Entity, TMarker> rpc) {
+        public InputAction(InputFeature feature, InputEventType inputEventType, ME.ECS.Network.INetworkModuleBase networkModule, System.Action<Entity, TMarker> rpc) {
 
             this.networkModule = networkModule;
             this.networkObject = feature;
@@ -84,9 +85,6 @@ namespace ME.ECS.Essentials {
             this.rpcId = default;
             this.tag = default;
             this.inputEventType = inputEventType;
-            this.delayBetweenEvents = delayBetweenEvents;
-            this.delayTimer = 0f;
-            this.currentMarker = null;
             
             this.tag = this.networkObject;
             this.rpcId = this.networkModule.RegisterRPC(rpc.Method);
@@ -99,27 +97,13 @@ namespace ME.ECS.Essentials {
 
         }
 
-        public void Execute(in float deltaTime) {
+        public void Execute() {
 
             var world = Worlds.currentWorld;
             if (world.GetMarker(out TMarker marker) == true) {
 
-                this.currentMarker = marker;
+                this.Execute(marker);
 
-            }
-
-            if (this.delayTimer > 0f) {
-                this.delayTimer -= deltaTime;
-            }
-
-            if (this.delayTimer <= 0f) {
-
-                if (this.currentMarker.HasValue == true) {
-                    
-                    this.Execute(this.currentMarker.Value);
-                    this.currentMarker = null;
-                    this.delayTimer = this.delayBetweenEvents;
-                }
             }
 
         }
@@ -151,19 +135,16 @@ namespace ME.ECS.Essentials {
 
     }
     
-    public struct InputGesture<TMarker, TComponent> where TMarker : struct, ME.ECS.Essentials.Input.Input.Markers.IInputGesture2FingersMarker where TComponent : unmanaged, IInputGesture2FingersComponent {
+    public struct InputGesture<TMarker, TComponent> where TMarker : struct, ME.ECS.Essentials.Input.Input.Markers.IInputGesture2FingersMarker where TComponent : struct, IInputGesture2FingersComponent {
 
         private readonly ME.ECS.Network.INetworkModuleBase networkModule;
         private readonly RPCId rpcId;
         private readonly InputFeature networkObject;
         private readonly object tag;
         private readonly InputEventType inputEventType;
-        private readonly float delayBetweenEvents;
         private System.Func<Entity> getEntity;
-        private float delayTimer;
-        private TMarker? currentMarker;
         
-        public InputGesture(InputFeature feature, float delayBetweenEvents, InputEventType inputEventType, ME.ECS.Network.INetworkModuleBase networkModule, System.Action<Entity, TMarker> rpc) {
+        public InputGesture(InputFeature feature, InputEventType inputEventType, ME.ECS.Network.INetworkModuleBase networkModule, System.Action<Entity, TMarker> rpc) {
 
             this.networkModule = networkModule;
             this.networkObject = feature;
@@ -171,9 +152,6 @@ namespace ME.ECS.Essentials {
             this.rpcId = default;
             this.tag = default;
             this.inputEventType = inputEventType;
-            this.delayBetweenEvents = delayBetweenEvents;
-            this.delayTimer = 0f;
-            this.currentMarker = null;
             
             this.tag = this.networkObject;
             this.rpcId = this.networkModule.RegisterRPC(rpc.Method);
@@ -186,27 +164,13 @@ namespace ME.ECS.Essentials {
 
         }
 
-        public void Execute(in float deltaTime) {
+        public void Execute() {
 
             var world = Worlds.currentWorld;
             if (world.GetMarker(out TMarker marker) == true) {
 
-                this.currentMarker = marker;
+                this.Execute(marker);
 
-            }
-
-            if (this.delayTimer > 0f) {
-                this.delayTimer -= deltaTime;
-            }
-
-            if (this.delayTimer <= 0f) {
-
-                if (this.currentMarker.HasValue == true) {
-                    
-                    this.Execute(this.currentMarker.Value);
-                    this.currentMarker = null;
-                    this.delayTimer = this.delayBetweenEvents;
-                }
             }
 
         }
@@ -245,10 +209,6 @@ namespace ME.ECS.Essentials {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
     public sealed class InputFeature : Feature {
-        
-        [UnityEngine.Header("Common")]
-        public float delayBetweenEvents = 0.2f;
-        public float delayBetweenMoveEvents = 0.05f;
 
         [UnityEngine.Header("World raycast")]
         public UnityEngine.LayerMask raycastMask = -1;
@@ -306,17 +266,17 @@ namespace ME.ECS.Essentials {
             
             var net = this.world.GetModule<ME.ECS.Network.INetworkModuleBase>();
             net.RegisterObject(this);
-            if (this.pointerClick == true) this.pointerClickEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerClick, InputPointerClick>(this, this.delayBetweenEvents, InputEventType.PointerClick, net, this.RPC);
-            if (this.pointerDoubleClick == true) this.pointerDoubleClickEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerDoubleClick, InputPointerDoubleClick>(this, this.delayBetweenEvents, InputEventType.PointerDoubleClick, net, this.RPC);
-            if (this.pointerDragBegin == true) this.pointerDragBeginEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerDragBegin, InputPointerDragBegin>(this, this.delayBetweenEvents, InputEventType.PointerDragBegin, net, this.RPC);
-            if (this.pointerDragMove == true) this.pointerDragMoveEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerDragMove, InputPointerDragMove>(this, this.delayBetweenMoveEvents, InputEventType.PointerDragMove, net, this.RPC);
-            if (this.pointerDragEnd == true) this.pointerDragEndEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerDragEnd, InputPointerDragEnd>(this, this.delayBetweenEvents, InputEventType.PointerDragEnd, net, this.RPC);
-            if (this.pointerUp == true) this.pointerUpEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerUp, InputPointerUp>(this, this.delayBetweenEvents, InputEventType.PointerUp, net, this.RPC);
-            if (this.pointerDown == true) this.pointerDownEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerDown, InputPointerDown>(this, this.delayBetweenEvents, InputEventType.PointerDown, net, this.RPC);
+            if (this.pointerClick == true) this.pointerClickEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerClick, InputPointerClick>(this, InputEventType.PointerClick, net, this.RPC);
+            if (this.pointerDoubleClick == true) this.pointerDoubleClickEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerDoubleClick, InputPointerDoubleClick>(this, InputEventType.PointerDoubleClick, net, this.RPC);
+            if (this.pointerDragBegin == true) this.pointerDragBeginEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerDragBegin, InputPointerDragBegin>(this, InputEventType.PointerDragBegin, net, this.RPC);
+            if (this.pointerDragMove == true) this.pointerDragMoveEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerDragMove, InputPointerDragMove>(this, InputEventType.PointerDragMove, net, this.RPC);
+            if (this.pointerDragEnd == true) this.pointerDragEndEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerDragEnd, InputPointerDragEnd>(this, InputEventType.PointerDragEnd, net, this.RPC);
+            if (this.pointerUp == true) this.pointerUpEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerUp, InputPointerUp>(this, InputEventType.PointerUp, net, this.RPC);
+            if (this.pointerDown == true) this.pointerDownEvent = new InputAction<ME.ECS.Essentials.Input.Input.Markers.InputPointerDown, InputPointerDown>(this, InputEventType.PointerDown, net, this.RPC);
 
-            if (this.gesturePitchDown == true) this.gesturePitchDownEvent = new InputGesture<ME.ECS.Essentials.Input.Input.Markers.InputGesturePitchDown, InputGesturePitchDown>(this, this.delayBetweenEvents, InputEventType.GesturePitchDown, net, this.RPC);
-            if (this.gesturePitchMove == true) this.gesturePitchMoveEvent = new InputGesture<ME.ECS.Essentials.Input.Input.Markers.InputGesturePitchMove, InputGesturePitchMove>(this, this.delayBetweenMoveEvents, InputEventType.GesturePitchMove, net, this.RPC);
-            if (this.gesturePitchUp == true) this.gesturePitchUpEvent = new InputGesture<ME.ECS.Essentials.Input.Input.Markers.InputGesturePitchUp, InputGesturePitchUp>(this, this.delayBetweenEvents, InputEventType.GesturePitchUp, net, this.RPC);
+            if (this.gesturePitchDown == true) this.gesturePitchDownEvent = new InputGesture<ME.ECS.Essentials.Input.Input.Markers.InputGesturePitchDown, InputGesturePitchDown>(this, InputEventType.GesturePitchDown, net, this.RPC);
+            if (this.gesturePitchMove == true) this.gesturePitchMoveEvent = new InputGesture<ME.ECS.Essentials.Input.Input.Markers.InputGesturePitchMove, InputGesturePitchMove>(this, InputEventType.GesturePitchMove, net, this.RPC);
+            if (this.gesturePitchUp == true) this.gesturePitchUpEvent = new InputGesture<ME.ECS.Essentials.Input.Input.Markers.InputGesturePitchUp, InputGesturePitchUp>(this, InputEventType.GesturePitchUp, net, this.RPC);
 
             this.AddModule<ME.ECS.Essentials.Input.Input.Modules.InputModule>();
             this.AddSystem<ME.ECS.Essentials.Input.Input.Systems.SendMessagesSystem>();
@@ -352,7 +312,7 @@ namespace ME.ECS.Essentials {
 
         }
 
-        public bool IsAllowed(in Entity player, InputEventType inputEventType, in float3 worldPosition) {
+        public bool IsAllowed(in Entity player, InputEventType inputEventType, in FLOAT3 worldPosition) {
 
             if (this.inputMaskFilter.Count == 0) return true;
 
@@ -383,7 +343,7 @@ namespace ME.ECS.Essentials {
                         isAllowed = true;
                         if (mask.checkRect == true) {
 
-                            var inMask = mask.rect.Contains((UnityEngine.Vector2)posRect);
+                            var inMask = mask.rect.Contains(posRect);
                             if ((mask.insideRect == true && inMask == false) ||
                                 (mask.insideRect == false && inMask == true)) {
 
@@ -398,7 +358,7 @@ namespace ME.ECS.Essentials {
                         isAllowed = false;
                         if (mask.checkRect == true) {
 
-                            var inMask = mask.rect.Contains((UnityEngine.Vector2)posRect);
+                            var inMask = mask.rect.Contains(posRect);
                             if ((mask.insideRect == true && inMask == false) ||
                                 (mask.insideRect == false && inMask == true)) {
 
@@ -494,22 +454,22 @@ namespace ME.ECS.Essentials {
 
         }
 
-        public void Execute(in float deltaTime) {
+        public void Execute() {
             
             var networkModule = this.world.GetModule<ME.ECS.Network.INetworkModuleBase>();
             if (networkModule != null && networkModule.IsReplayMode() == true) return;
             
-            if (this.pointerClick == true) this.pointerClickEvent.Execute(deltaTime);
-            if (this.pointerDoubleClick == true) this.pointerDoubleClickEvent.Execute(deltaTime);
-            if (this.pointerDragBegin == true) this.pointerDragBeginEvent.Execute(deltaTime);
-            if (this.pointerDragMove == true) this.pointerDragMoveEvent.Execute(deltaTime);
-            if (this.pointerDragEnd == true) this.pointerDragEndEvent.Execute(deltaTime);
-            if (this.pointerUp == true) this.pointerUpEvent.Execute(deltaTime);
-            if (this.pointerDown == true) this.pointerDownEvent.Execute(deltaTime);
+            if (this.pointerClick == true) this.pointerClickEvent.Execute();
+            if (this.pointerDoubleClick == true) this.pointerDoubleClickEvent.Execute();
+            if (this.pointerDragBegin == true) this.pointerDragBeginEvent.Execute();
+            if (this.pointerDragMove == true) this.pointerDragMoveEvent.Execute();
+            if (this.pointerDragEnd == true) this.pointerDragEndEvent.Execute();
+            if (this.pointerUp == true) this.pointerUpEvent.Execute();
+            if (this.pointerDown == true) this.pointerDownEvent.Execute();
             
-            if (this.gesturePitchDown == true) this.gesturePitchDownEvent.Execute(deltaTime);
-            if (this.gesturePitchMove == true) this.gesturePitchMoveEvent.Execute(deltaTime);
-            if (this.gesturePitchUp == true) this.gesturePitchUpEvent.Execute(deltaTime);
+            if (this.gesturePitchDown == true) this.gesturePitchDownEvent.Execute();
+            if (this.gesturePitchMove == true) this.gesturePitchMoveEvent.Execute();
+            if (this.gesturePitchUp == true) this.gesturePitchUpEvent.Execute();
 
         }
         
@@ -530,7 +490,7 @@ namespace ME.ECS.Essentials {
 
         }
         
-        public bool GetWorldPointer(int pointerId, out float3 result) {
+        public bool GetWorldPointer(int pointerId, out FLOAT3 result) {
 
             result = default;
             if (this.camera == null) return false;
@@ -545,7 +505,7 @@ namespace ME.ECS.Essentials {
             var ray = this.camera.ScreenPointToRay(pos);
             if (UnityEngine.Physics.Raycast(ray, out var hit, this.raycastDistance, this.raycastMask) == true) {
 
-                result = (float3)hit.point;
+                result = hit.point;
                 return true;
 
             }
@@ -554,7 +514,7 @@ namespace ME.ECS.Essentials {
 
         }
         
-        public bool GetWorldPointer(out float3 result) {
+        public bool GetWorldPointer(out FLOAT3 result) {
 
             return this.GetWorldPointer(0, out result);
             

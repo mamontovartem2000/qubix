@@ -128,7 +128,7 @@ namespace ME.ECS.Views {
 
             if (instance is IViewBaseInternal @internal) {
 
-                @internal.Setup(instance.world, instance.info);
+                @internal.Setup(instance.world, new ViewInfo(instance.entity, sourceId, instance.creationTick));
 
             }
 
@@ -140,7 +140,7 @@ namespace ME.ECS.Views {
         public bool Recycle(ref T instance, uint customViewId, float respawnTimeout) {
 
             var immediately = true;
-            var key = this.GetKey(instance.info.prefabSourceId, customViewId);
+            var key = this.GetKey(instance.prefabSourceId, customViewId);
             if (this.prefabToInstances.TryGetValue(key, out var list) == true) {
 
                 if (instance != null) {
@@ -160,7 +160,7 @@ namespace ME.ECS.Views {
 
             } else {
 
-                if (instance != null) UnityObjectUtils.Destroy(instance.gameObject);
+                UnityObjectUtils.Destroy(instance.gameObject);
 
             }
 

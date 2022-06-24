@@ -6,6 +6,14 @@ namespace ME.ECS.Collections {
 
     using System.Collections.Generic;
 
+    public struct IntrusiveSortedListGenericNode<T> : IComponent {
+
+        public Entity next;
+        public Entity prev;
+        public T data;
+
+    }
+
     public interface IIntrusiveSortedListGeneric<T> where T : struct, System.IEquatable<T>, System.IComparable<T> {
 
         int Count { get; }
@@ -24,7 +32,6 @@ namespace ME.ECS.Collections {
         bool RemoveFirst();
 
         IEnumerator<T> GetRange(int from, int to);
-        void GetRange(int from, int to, ListCopyable<T> results);
         BufferArray<T> ToArray();
         IntrusiveSortedListGeneric<T>.Enumerator GetEnumerator();
 
@@ -70,7 +77,7 @@ namespace ME.ECS.Collections {
                 if (this.head.IsAlive() == false) return false;
 
                 this.id = this.head.id;
-                this.head = this.head.Read<IntrusiveSortedListGenericNode<T>>().next;
+                this.head = this.head.Get<IntrusiveSortedListGenericNode<T>>().next;
                 return true;
 
             }
@@ -96,73 +103,18 @@ namespace ME.ECS.Collections {
         }
 
         [ME.ECS.Serializer.SerializeField]
-        private Entity data;
-
-        private Entity root {
-            readonly get {
-                if (this.data == Entity.Null) return Entity.Null;
-                return this.data.Read<IntrusiveData>().root;
-            }
-            set {
-                this.ValidateData();
-                this.data.Get<IntrusiveData>().root = value;
-            }
-        }
-
-        private Entity head {
-            readonly get {
-                if (this.data == Entity.Null) return Entity.Null;
-                return this.data.Read<IntrusiveData>().head;
-            }
-            set {
-                this.ValidateData();
-                this.data.Get<IntrusiveData>().head = value;
-            }
-        }
-
-        private int count {
-            readonly get {
-                if (this.data == Entity.Null) return 0;
-                return this.data.Read<IntrusiveData>().count;
-            }
-            set {
-                this.ValidateData();
-                this.data.Get<IntrusiveData>().count = value;
-            }
-        }
+        private Entity root;
         [ME.ECS.Serializer.SerializeField]
-        private bool descending {
-            readonly get {
-                if (this.data == Entity.Null) return false;
-                return this.data.Read<IntrusiveSortedListData>().descending;   
-            }
-            set {
-                this.ValidateData();
-                this.data.Get<IntrusiveSortedListData>().descending = value;
-            }
-        }
+        private Entity head;
+        [ME.ECS.Serializer.SerializeField]
+        private int count;
+        [ME.ECS.Serializer.SerializeField]
+        private bool descending;
 
-        public readonly int Count => this.count;
-        
-        #if INLINE_METHODS
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
-        private void ValidateData() {
+        public int Count => this.count;
 
-            IntrusiveSortedListGeneric<T>.InitializeComponents();
-            
-            if (this.data == Entity.Null) {
-                this.data = new Entity(EntityFlag.None);
-                this.data.ValidateDataBlittable<IntrusiveData>();
-                this.data.ValidateDataBlittable<IntrusiveSortedListData>();
-                this.data.Set(new IntrusiveSortedListData());
-            }
-            
-        }
-        
         public IntrusiveSortedListGeneric(bool descending) {
 
-            this = default;
             this.descending = descending;
             this.root = default;
             this.head = default;
@@ -173,7 +125,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly Enumerator GetEnumerator() {
+        public Enumerator GetEnumerator() {
 
             IntrusiveSortedListGeneric<T>.InitializeComponents();
 
@@ -188,7 +140,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly BufferArray<T> ToArray() {
+        public BufferArray<T> ToArray() {
 
             IntrusiveSortedListGeneric<T>.InitializeComponents();
 
@@ -212,7 +164,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly bool Contains(in T entityData) {
+        public bool Contains(in T entityData) {
 
             if (this.count == 0) return false;
 
@@ -261,7 +213,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly IEnumerator<T> GetRange(int from, int to) {
+        public IEnumerator<T> GetRange(int from, int to) {
 
             IntrusiveSortedListGeneric<T>.InitializeComponents();
 
@@ -271,34 +223,6 @@ namespace ME.ECS.Collections {
                 if (node.IsAlive() == true) {
 
                     yield return node.Get<IntrusiveSortedListGenericNode<T>>().data;
-
-                } else {
-
-                    ++from;
-
-                }
-
-            }
-
-        }
-        
-        /// <summary>
-        /// Returns enumeration of nodes in range [from..to)
-        /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <param name="results"></param>
-        #if INLINE_METHODS
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
-        public readonly void GetRange(int from, int to, ListCopyable<T> results) {
-
-            while (from < to) {
-
-                var node = this.FindNode(from);
-                if (node.IsAlive() == true) {
-
-                    results.Add(node.Get<IntrusiveSortedListGenericNode<T>>().data);
 
                 } else {
 
@@ -387,7 +311,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public readonly T GetValue(int index) {
+        public T GetValue(int index) {
 
             if (this.count == 0) return default;
 
@@ -396,7 +320,7 @@ namespace ME.ECS.Collections {
             var node = this.FindNode(index);
             if (node.IsAlive() == true) {
 
-                return node.Read<IntrusiveSortedListGenericNode<T>>().data;
+                return node.Get<IntrusiveSortedListGenericNode<T>>().data;
 
             }
 
@@ -473,7 +397,6 @@ namespace ME.ECS.Collections {
         #endif
         public void Add(in T entityData) {
 
-            this.ValidateData();
             IntrusiveSortedListGeneric<T>.InitializeComponents();
 
             var node = IntrusiveSortedListGeneric<T>.CreateNode(in entityData);
@@ -530,7 +453,7 @@ namespace ME.ECS.Collections {
         /// Returns first element.
         /// </summary>
         /// <returns>Returns instance, default if not found</returns>
-        public readonly T GetFirst() {
+        public T GetFirst() {
 
             if (this.root.IsAlive() == false) return default;
 
@@ -542,7 +465,7 @@ namespace ME.ECS.Collections {
         /// Returns last element.
         /// </summary>
         /// <returns>Returns instance, default if not found</returns>
-        public readonly T GetLast() {
+        public T GetLast() {
 
             if (this.head.IsAlive() == false) return default;
 
@@ -558,7 +481,7 @@ namespace ME.ECS.Collections {
 
             if (this.head.IsAlive() == false) return false;
 
-            this.RemoveNode(this.head);
+            this.RemoveNode(in this.head);
             return true;
 
         }
@@ -571,7 +494,7 @@ namespace ME.ECS.Collections {
 
             if (this.head.IsAlive() == false) return false;
 
-            this.RemoveNode(this.root);
+            this.RemoveNode(in this.root);
             return true;
 
         }
@@ -580,7 +503,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        private readonly Entity FindNodeToAddBefore(in T entityData) {
+        private Entity FindNodeToAddBefore(in T entityData) {
 
             if (this.count == 0) return Entity.Empty;
 
@@ -608,7 +531,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        private readonly Entity FindNode(in T entityData) {
+        private Entity FindNode(in T entityData) {
 
             if (this.count == 0) return Entity.Empty;
 
@@ -634,7 +557,7 @@ namespace ME.ECS.Collections {
         #if INLINE_METHODS
         [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        private readonly Entity FindNode(int index) {
+        private Entity FindNode(int index) {
 
             var idx = 0;
             var node = this.root;
@@ -693,7 +616,7 @@ namespace ME.ECS.Collections {
         #endif
         private static Entity CreateNode(in T data) {
 
-            var node = new Entity(EntityFlag.None);
+            var node = new Entity("IntrusiveSortedListGenericNode<T>");
             node.ValidateData<IntrusiveSortedListGenericNode<T>>();
             ref var nodeLink = ref node.Get<IntrusiveSortedListGenericNode<T>>();
             nodeLink.data = data;
@@ -704,7 +627,6 @@ namespace ME.ECS.Collections {
 
         private static void InitializeComponents() {
 
-            IntrusiveComponents.Initialize();
             WorldUtilities.InitComponentTypeId<IntrusiveSortedListGenericNode<T>>();
             ComponentInitializer.Init(ref Worlds.currentWorld.GetStructComponents());
 

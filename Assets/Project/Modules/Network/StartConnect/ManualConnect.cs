@@ -1,10 +1,9 @@
 using System;
-using Project.Modules.Network.ManualConnect;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Project.Modules.Network.StartConnect
+namespace Project.Modules.Network
 {
     public class ManualConnect : ConnectTemplate
 	{

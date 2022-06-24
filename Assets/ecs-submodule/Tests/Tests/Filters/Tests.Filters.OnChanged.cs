@@ -83,10 +83,10 @@ namespace ME.ECS.Tests {
 
             TestsHelper.Do((w) => {
                 
-                WorldUtilities.InitComponentTypeId<TestComponent>(false, isVersioned: true, isBlittable: true);
+                WorldUtilities.InitComponentTypeId<TestComponent>(false, isVersioned: true);
                 ComponentsInitializerWorld.Setup((e) => {
                             
-                    e.ValidateDataBlittable<TestComponent>();
+                    e.ValidateData<TestComponent>();
                             
                 });
                 

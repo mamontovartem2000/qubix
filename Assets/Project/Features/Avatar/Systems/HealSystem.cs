@@ -1,13 +1,11 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Common.Utilities;
 
 namespace Project.Features.Avatar.Systems {
 
     #pragma warning disable
-    using Project.Modules;
-    using Project.Markers;
-    using Modules; using Systems; using Markers;
+    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
+    using Components; using Modules; using Systems; using Markers;
     #pragma warning restore
     
     #if ECS_COMPILE_IL2CPP_OPTIONS
