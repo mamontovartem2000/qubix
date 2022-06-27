@@ -32,7 +32,8 @@
         {
             public const int FIRE_RATE_SKILL_AMMO_CAPACITY = 2;
             public const float INSTANT_RELOAD_TIME = 0.1f;
-            public const int DASH_LENGTH = 5;
+            public const int DASH_LENGTH = 3;
+            public const float EMP_DURATION_DEFAULT = 2;
         }
     }
 }

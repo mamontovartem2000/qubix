@@ -52,7 +52,7 @@ namespace Project.Features.PostLogicTick.Systems
             if (!NetworkData.FriendlyFireCheck(@from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team)) return;
             
             var player = owner.Avatar();
-            _vfx.SpawnVFX(VFXFeature.VFXType.SkillStun, pos, player, entity.Read<StunModifier>().Value);
+            // _vfx.SpawnVFX(VFXFeature.VFXType.SkillStun, pos, player, entity.Read<StunModifier>().Value);
             player.Set(new Stun {Value = entity.Read<StunModifier>().Value});
             player.Remove<DashModifier>();
         }

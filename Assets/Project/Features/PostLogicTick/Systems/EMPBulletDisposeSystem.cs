@@ -3,6 +3,7 @@ using Project.Common.Components;
 using Project.Common.Utilities;
 using Project.Features.VFX;
 using Project.Modules.Network;
+using UnityEngine;
 
 namespace Project.Features.PostLogicTick.Systems {
 
@@ -50,13 +51,12 @@ namespace Project.Features.PostLogicTick.Systems {
             
             if (!NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team)) return;
             
-            var player = owner.Avatar();
-            ref var skills = ref player.Get<SkillEntities>();
-                    
-            skills.FirstSkill.Set(new EMP {LifeTime = entity.Read<EMPModifier>().LifeTime});
-            skills.SecondSkill.Set(new EMP {LifeTime = entity.Read<EMPModifier>().LifeTime});
-            skills.ThirdSkill.Set(new EMP {LifeTime = entity.Read<EMPModifier>().LifeTime});
-            skills.FourthSkill.Set(new EMP {LifeTime = entity.Read<EMPModifier>().LifeTime});
+            ref var skills = ref owner.Get<SkillEntities>();
+            
+            skills.FirstSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
+            skills.SecondSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
+            skills.ThirdSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
+            skills.FourthSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
             // _vfx.SpawnVFX(VFXFeature.VFXType.SkillStun, pos, player, entity.Read<EMPModifier>().LifeTime);
         }
     }

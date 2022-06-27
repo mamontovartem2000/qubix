@@ -43,7 +43,7 @@ namespace Project.Features.Modifiers.Systems {
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             ref var speed = ref entity.Get<MoveSpeedModifier>().Value;
-            speed *= 10;
+            speed *= 20;
             
             if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= Consts.Movement.MIN_DISTANCE)
             {

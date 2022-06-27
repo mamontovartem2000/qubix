@@ -52,7 +52,7 @@ namespace Project.Features.Avatar.Systems {
                 to.Get<Slowness>().Value = Math.Min(damage / 100, Consts.Movement.SLOWNESS_RATIO);
             }
 
-            to.Get<Slowness>().LifeTime = 1;
+            to.Get<Slowness>().LifeTime = 2f;
         }
     }
 }

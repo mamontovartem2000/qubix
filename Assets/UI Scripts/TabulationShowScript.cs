@@ -108,7 +108,6 @@ public class TabulationShowScript : MonoBehaviour
             }
             else break;
 
-            Debug.Log("swapped");
         }
     }
 

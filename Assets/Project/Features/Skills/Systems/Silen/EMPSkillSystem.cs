@@ -51,7 +51,7 @@ namespace Project.Features.Skills.Systems.Silen {
 			
             // SoundUtils.PlaySound(avatar, "event:/Skills/GoldHunter/StunShot");
             
-            rightWeapon.Set(new EMPModifier{AmmoCapacityDefault = rightWeapon.Read<AmmoCapacityDefault>().Value});
+            rightWeapon.Set(new EMPModifier{AmmoCapacityDefault = rightWeapon.Read<AmmoCapacityDefault>().Value, LifeTime = Consts.Skills.EMP_DURATION_DEFAULT});
 
             rightWeapon.Get<AmmoCapacity>().Value = 0;
             

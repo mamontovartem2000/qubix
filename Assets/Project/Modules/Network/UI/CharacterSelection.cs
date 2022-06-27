@@ -12,7 +12,7 @@ namespace Project.Modules.Network.UI
         [SerializeField] private Transform[] _skillDescriptions;
 
         private int _selectedIndex = -1;
-        private string[] _names = { "Buller", "GoldHunter", "Powerf" };
+        private string[] _names = { "Buller", "GoldHunter", "Powerf", "Silen" };
         private string[] _descriptions = {
             "Great shooter was born with a rifle in his hands. Causes a lot of inconvenience to enemies, hitting them from a distance.",
             "Loves gold and only gold! He is proficient with ranged and melee weapons, allowing him to effectively attack the enemy from various distances.",
@@ -25,18 +25,23 @@ namespace Project.Modules.Network.UI
         private void OnEnable()
         {
             var rnd = Random.Range(0, _names.Length);
+            rnd = 3;
             SelectCharacter(rnd);
         }
 
         public void SelectCharacter(int index)
         {
+            ConnectionSteps.SetCharacterRequest(_names[index]);
+            
+            if (index.Equals(3)) return; // TODO: crutch for choosing Silen
+            
             if (_selectedIndex == index) return;
 
             _selectedIndex = index;
             _nameText.SetText(_names[index]);
             _descriptionText.SetText(_descriptions[index]);
 
-            ConnectionSteps.SetCharacterRequest(_names[index]);
+            
 
             Debug.Log("Chosen character: " + _names[index]);
 
