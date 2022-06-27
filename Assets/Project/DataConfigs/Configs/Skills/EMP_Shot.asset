@@ -17,6 +17,8 @@ MonoBehaviour:
   - id: 0
   - id: 1
   - id: 2
+  - id: 3
+  - id: 4
   removeStructComponents: []
   templates: []
   references:
@@ -33,3 +35,9 @@ MonoBehaviour:
       type: {class: SkillDurationDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 1
+    00000003:
+      type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 3
+    00000004:
+      type: {class: EMPAffect, ns: Project.Common.Components, asm: Project.Common}

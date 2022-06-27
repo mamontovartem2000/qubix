@@ -53,14 +53,16 @@ namespace Project.Features.Skills.Systems.Silen {
             
             rightWeapon.Set(new EMPModifier{AmmoCapacityDefault = rightWeapon.Read<AmmoCapacityDefault>().Value});
 
-            rightWeapon.Get<AmmoCapacityDefault>().Value = 7;
             rightWeapon.Get<AmmoCapacity>().Value = 0;
+            
+            rightWeapon.Get<AmmoCapacityDefault>().Value = 7;
 
             rightWeapon.Get<ReloadTime>().Value = 
                 rightWeapon.Read<ReloadTimeDefault>().Value;
 
+            world.GetFeature<EventsFeature>().rightWeaponFired.Execute(owner);
             world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(owner);
-            
+
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             // _vfx.SpawnVFX(VFXFeature.VFXType.StatusStunEffect, avatar.GetPosition(), avatar);
         }

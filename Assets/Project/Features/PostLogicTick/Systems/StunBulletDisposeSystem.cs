@@ -54,6 +54,7 @@ namespace Project.Features.PostLogicTick.Systems
             var player = owner.Avatar();
             _vfx.SpawnVFX(VFXFeature.VFXType.SkillStun, pos, player, entity.Read<StunModifier>().Value);
             player.Set(new Stun {Value = entity.Read<StunModifier>().Value});
+            player.Remove<DashModifier>();
         }
     }
 }

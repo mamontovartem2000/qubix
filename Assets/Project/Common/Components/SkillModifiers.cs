@@ -16,6 +16,11 @@ namespace Project.Common.Components
 		public int Value;
 	}
 
+	public struct DashModifier : IComponent
+	{
+		public int Step;
+	}
+	
 	public struct EMP : IComponent
 	{
 		public float LifeTime;

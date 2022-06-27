@@ -1,13 +1,10 @@
-﻿using System;
-using ME.ECS;
-using Unity.Mathematics;
+﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
-using Project.Features;
-using Project.Features.Avatar;
+using Unity.Mathematics;
 using UnityEngine;
 
-namespace Project.Mechanics.Features.Avatar.Systems
+namespace Project.Features.Avatar.Systems
 {
 	using static SceneUtils;
 #if ECS_COMPILE_IL2CPP_OPTIONS
@@ -37,8 +34,10 @@ namespace Project.Mechanics.Features.Avatar.Systems
 			return Filter.Create("Filter-PlayerMovementSystem")
 				.With<AvatarTag>()
 				.Without<Stun>()
+				.Without<DashModifier>()
 				.Push();
 		}
+		
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 			ref readonly var input = ref entity.Owner().Read<MoveInput>();
@@ -63,14 +62,17 @@ namespace Project.Mechanics.Features.Avatar.Systems
 			
 			var currentSpeed = entity.Read<MoveSpeedModifier>().Value;
 
-			var speed = entity.Owner().Has<LockTarget>() ? currentSpeed * Consts.Movement.LOCK_SPEED_RATIO : currentSpeed;
+			if (entity.Owner().Has<LockTarget>())
+			{
+				currentSpeed *= Consts.Movement.LOCK_SPEED_RATIO;
+			}
 
 			var pos = entity.GetPosition();
 			var target = entity.Read<PlayerMoveTarget>().Value;
 			ref readonly var hover = ref entity.Read<Hover>().Amount;
 
 			var posDelta = Vector3.MoveTowards(new Vector3((float)pos.x, (float)hover, (float)pos.z),
-				new Vector3((float)target.x, (float)hover, (float)target.z), (float)(speed * deltaTime));
+				new Vector3((float)target.x, (float)hover, (float)target.z), (float)(currentSpeed * deltaTime));
 			
 			entity.SetPosition(posDelta);
 		}

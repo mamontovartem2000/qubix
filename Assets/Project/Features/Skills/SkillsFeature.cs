@@ -28,7 +28,7 @@ namespace Project.Features.Skills
             //Goldhunter
             AddSystem<StunSkillSystem>();
             AddSystem<CooldownResetSkillSystem>();
-            AddSystem<DashSkillSystem>();
+            AddSystem<BlinkSkillSystem>();
             
             //Powerf
             AddSystem<MovementSpeedSkillsSystem>();
@@ -38,6 +38,7 @@ namespace Project.Features.Skills
             
             //Silen
             AddSystem<EMPSkillSystem>();
+            AddSystem<DashSkillSystem>();
             
             //Universal
             AddSystem<GrenadeThrowSkillSystem>();

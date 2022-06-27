@@ -9,7 +9,7 @@ namespace Project.Features.Skills.Systems.GoldHunter
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-    public sealed class DashSkillSystem : ISystemFilter
+    public sealed class BlinkSkillSystem : ISystemFilter
     {
         public World world { get; set; }
 
@@ -32,7 +32,7 @@ namespace Project.Features.Skills.Systems.GoldHunter
         Filter ISystemFilter.CreateFilter()
         {
             return Filter.Create("Filter-DashSkillSystem")
-                .With<DashAffect>()
+                .With<BlinkAffect>()
                 .Push();
         }
 

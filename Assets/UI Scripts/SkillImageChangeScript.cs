@@ -10,10 +10,11 @@ using UnityEngine.UI;
 public class SkillImageChangeScript : MonoBehaviour
 {
     public GlobalEvent SkillImageChange;
-    public Image[] FirtSkillImage;
-    public Image[] SecondSkillImage;
-    public Image[] ThirdSkillImage;
-    public Image[] FourthSkillImage;
+    public GameObject FirtSkillImage;
+    public GameObject SecondSkillImage;
+    public GameObject ThirdSkillImage;
+    public GameObject FourthSkillImage;
+    
    
     private void Start()
     {
@@ -25,10 +26,24 @@ public class SkillImageChangeScript : MonoBehaviour
         if (entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.SlotInRoom)) return;
         ref readonly var skills = ref entity.Read<SkillEntities>();
         
-        FirtSkillImage[skills.FirstSkill.Read<SkillImage>().Value].gameObject.SetActive(true);
-        SecondSkillImage[skills.SecondSkill.Read<SkillImage>().Value].gameObject.SetActive(true);
-        ThirdSkillImage[skills.ThirdSkill.Read<SkillImage>().Value].gameObject.SetActive(true);
-        FourthSkillImage[skills.FourthSkill.Read<SkillImage>().Value].gameObject.SetActive(true);
+        GetImage(FirtSkillImage, skills.FirstSkill.Read<SkillImage>().Value).SetActive(true);
+        GetImage(SecondSkillImage, skills.SecondSkill.Read<SkillImage>().Value).SetActive(true);
+        GetImage(ThirdSkillImage, skills.ThirdSkill.Read<SkillImage>().Value).SetActive(true);
+        GetImage(FourthSkillImage, skills.FourthSkill.Read<SkillImage>().Value).SetActive(true);
+    }
+
+    private GameObject GetImage(GameObject parent, int number)
+    {
+        var totalChildren = parent.transform.childCount;
+
+        var itemsArray = new GameObject[totalChildren];
+
+        for(var i = 0; i < totalChildren; i++)
+        {
+            itemsArray[i] = parent.transform.GetChild(i).gameObject;
+        }
+
+        return itemsArray[number];
     }
 
     private void OnDestroy()

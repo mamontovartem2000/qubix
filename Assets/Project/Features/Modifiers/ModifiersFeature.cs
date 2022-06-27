@@ -18,7 +18,8 @@ namespace Project.Features.Modifiers {
         {
             AddSystem<SlownessModifier>();
             AddSystem<MovementSkillModifier>();
-
+            AddSystem<DashSkillModifier>();
+            
             AddSystem<LinearWeaponModifier>();
         }
 

@@ -21,6 +21,7 @@ namespace Project.Features.Player
 		public DataConfig BullerConfig;
 		public DataConfig GoldHunterConfig;
 		public DataConfig PowerfConfig;
+		public DataConfig SilenConfig;
 
 		private RPCId _onPlayerConnected, _onPlayerDisconnected;
 		private Filter _playerFilter;
@@ -60,7 +61,7 @@ namespace Project.Features.Player
 
 			if (NetworkData.PlayersInfo == null) // Fake case
 			{
-				BullerConfig.Apply(player);
+				SilenConfig.Apply(player);
 				return;
 			}
 
@@ -79,6 +80,11 @@ namespace Project.Features.Player
 				case "Powerf":
 					{
 						PowerfConfig.Apply(player);
+						break;
+					}
+				case "Silen":
+					{
+						SilenConfig.Apply(player);
 						break;
 					}
 			}

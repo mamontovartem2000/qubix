@@ -1,9 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Features.Weapon;
-using UnityEngine;
 
-namespace Project.Mechanics.Features.Weapon.Systems
+namespace Project.Features.Weapon.Systems
 {
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),

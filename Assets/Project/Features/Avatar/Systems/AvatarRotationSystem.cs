@@ -1,12 +1,10 @@
-﻿using System;
-using ME.ECS;
+﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
-using Project.Features.Avatar;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Project.Mechanics.Features.Avatar.Systems
+namespace Project.Features.Avatar.Systems
 {
 #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
@@ -51,6 +49,10 @@ namespace Project.Mechanics.Features.Avatar.Systems
                 if (!entity.Owner().Has<LockTarget>())
                 {
                     entity.Get<FaceDirection>().Value = direction * input.Amount;
+                }
+                else
+                {
+                    entity.Get<FaceDirection>().Value = direction * input.Amount * -1;
                 }
             }
 

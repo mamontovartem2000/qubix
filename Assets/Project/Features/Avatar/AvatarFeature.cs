@@ -5,7 +5,6 @@ using Project.Common.Components;
 using Project.Common.Utilities;
 using Project.Features.Avatar.Systems;
 using Project.Features.Events;
-using Project.Mechanics.Features.Avatar.Systems;
 using Project.Modules.Network;
 using UnityEngine;
 
