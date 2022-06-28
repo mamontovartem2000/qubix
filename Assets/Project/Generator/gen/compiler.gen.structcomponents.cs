@@ -41,6 +41,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMP>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPStormAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplosionSound>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, false, false, false, false, false, false);
@@ -136,6 +137,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpreadAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StatsBuff>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Storm>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Stun>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunModifier>(false, true, false, false, false, false, false, false);
@@ -194,6 +196,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMP>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPStormAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplosionSound>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, false, false, false, false, false, false);
@@ -289,6 +292,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpreadAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StatsBuff>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Storm>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Stun>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunModifier>(false, true, false, false, false, false, false, false);
@@ -342,6 +346,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.EMP>(false);
             structComponentsContainer.Validate<Project.Common.Components.EMPAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.EMPModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.EMPStormAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.ExplosionSound>(false);
             structComponentsContainer.Validate<Project.Common.Components.FaceDirection>(false);
             structComponentsContainer.Validate<Project.Common.Components.FireRateAffect>(true);
@@ -437,6 +442,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SpeedModifier>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpreadAmount>(false);
             structComponentsContainer.Validate<Project.Common.Components.StatsBuff>(true);
+            structComponentsContainer.Validate<Project.Common.Components.Storm>(true);
             structComponentsContainer.Validate<Project.Common.Components.Stun>(false);
             structComponentsContainer.Validate<Project.Common.Components.StunAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.StunModifier>(false);
@@ -495,6 +501,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.EMP>(false);
             entity.ValidateData<Project.Common.Components.EMPAffect>(true);
             entity.ValidateData<Project.Common.Components.EMPModifier>(false);
+            entity.ValidateData<Project.Common.Components.EMPStormAffect>(true);
             entity.ValidateData<Project.Common.Components.ExplosionSound>(false);
             entity.ValidateData<Project.Common.Components.FaceDirection>(false);
             entity.ValidateData<Project.Common.Components.FireRateAffect>(true);
@@ -590,6 +597,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SpeedModifier>(true);
             entity.ValidateData<Project.Common.Components.SpreadAmount>(false);
             entity.ValidateData<Project.Common.Components.StatsBuff>(true);
+            entity.ValidateData<Project.Common.Components.Storm>(true);
             entity.ValidateData<Project.Common.Components.Stun>(false);
             entity.ValidateData<Project.Common.Components.StunAffect>(true);
             entity.ValidateData<Project.Common.Components.StunModifier>(false);

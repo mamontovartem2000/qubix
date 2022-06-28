@@ -46,7 +46,6 @@ namespace Project.Features.PostLogicTick.Systems {
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             if (entity.TryReadCollided(out var from, out var owner) == false) return;
-            var pos = entity.GetPosition();
 
             if (!owner.Has<PlayerAvatar>()) return;
             

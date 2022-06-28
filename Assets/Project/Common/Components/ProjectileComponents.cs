@@ -71,6 +71,9 @@ namespace Project.Common.Components
 	public struct Debuff : IComponent {}
 	
 	public struct Grenade : IComponent {}
+	
+	public struct Storm : IComponent {}
+
 	public struct LinearVisual : IComponent {}
 	
 	public struct DamageSource : IComponent {}

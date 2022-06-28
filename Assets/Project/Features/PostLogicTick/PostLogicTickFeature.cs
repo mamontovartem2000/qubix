@@ -12,10 +12,11 @@ namespace Project.Features.PostLogicTick
 	{
 		protected override void OnConstruct()
 		{
+			AddSystem<StormDisposeSystem>();
 			AddSystem<StunBulletDisposeSystem>();
 			AddSystem<EMPBulletDisposeSystem>();
 			AddSystem<BulletDisposeSystem>();
-			
+
 			AddSystem<HealthDisposeSystem>();
 			AddSystem<MineDisposeSystem>();
 			AddSystem<LinearDisposeSystem>();

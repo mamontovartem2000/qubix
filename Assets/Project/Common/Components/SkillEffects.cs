@@ -16,5 +16,7 @@ namespace Project.Common.Components
 	public struct LinearPowerAffect : IComponent {} 
 	public struct PersonalTeleportAffect : IComponent {} 
 	public struct EMPAffect : IComponent {}
+	public struct EMPStormAffect : IComponent {}
+	
 	public struct VFXTag : IComponent {};
 }

@@ -46,7 +46,6 @@ namespace Project.Features.PostLogicTick.Systems
 			if (owner.Has<PlayerAvatar>())
 			{
 				var player = owner.Avatar();
-				pos = player.GetPosition();
 				
 				if (NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team))
 				{
@@ -55,13 +54,17 @@ namespace Project.Features.PostLogicTick.Systems
 					collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);
 				}
 			}
+			else
+			{
+				_vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, pos);
+			}
 
 			if (owner.Has<DestructibleTag>())
 			{
 				owner.Get<PlayerHealth>().Value -= damage;
 			}
 			
-			_vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, pos);
+			
 
 			entity.Destroy();
 		}

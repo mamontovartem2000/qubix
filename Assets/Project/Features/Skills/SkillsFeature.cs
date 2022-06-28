@@ -42,6 +42,7 @@ namespace Project.Features.Skills
             
             //Universal
             AddSystem<GrenadeThrowSkillSystem>();
+            AddSystem<SphereAttackSkill>();
             
         }
         
