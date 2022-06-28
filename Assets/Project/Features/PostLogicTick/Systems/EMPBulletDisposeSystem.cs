@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
+using Project.Features.Events;
 using Project.Features.VFX;
 using Project.Modules.Network;
 using UnityEngine;
@@ -53,6 +54,8 @@ namespace Project.Features.PostLogicTick.Systems {
             
             ref var skills = ref owner.Get<SkillEntities>();
             
+            world.GetFeature<EventsFeature>().EMPActive.Execute(owner);
+
             skills.FirstSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
             skills.SecondSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
             skills.ThirdSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;

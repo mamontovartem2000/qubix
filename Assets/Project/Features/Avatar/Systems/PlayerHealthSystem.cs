@@ -48,7 +48,7 @@ namespace Project.Features.Avatar.Systems
             
             if (player.Has<DamagedBy>())
             {
-                ref var enemy = ref entity.Read<Owner>().Value.Get<DamagedBy>().Value;
+                ref var enemy = ref player.Get<DamagedBy>().Value;
                 enemy.Get<PlayerScore>().Kills += 1;
                 world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
                 world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(enemy);
@@ -57,9 +57,7 @@ namespace Project.Features.Avatar.Systems
             
             player.Get<PlayerScore>().Deaths += 1;
             
-            world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(entity.Read<Owner>().Value);
-            
-
+            world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(player);
             world.GetFeature<EventsFeature>().PlayerDeath.Execute(player);      
 
             SceneUtils.ModifyWalkable(entity.Read<PlayerMoveTarget>().Value, true);
