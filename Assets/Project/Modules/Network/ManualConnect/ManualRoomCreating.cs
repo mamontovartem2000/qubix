@@ -36,6 +36,8 @@ namespace Project.Modules.Network
         public static IEnumerator LoadJoinRequest(string roomid, string playerId, Action<string> callback)
         {
             string url = "https://game.qubixinfinity.io/match/test/join_request";
+            //string url = "http://localhost:8000/test/join_request"; // Local connect for Ilusha
+
             Player req = new Player() { room_id = roomid, player_id = playerId };
             string json = JsonUtility.ToJson(req);
 
