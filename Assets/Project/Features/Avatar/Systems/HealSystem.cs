@@ -51,7 +51,7 @@ namespace Project.Features.Avatar.Systems {
             playerHealth += healValue;
             
             playerHealth = playerHealth >  playerMaxHealth ? playerHealth = playerMaxHealth : playerHealth;
-            
+            entity.Remove<ApplyHeal>();
             SoundUtils.PlaySound(entity, "event:/VFX/Heal");
         }
     }
