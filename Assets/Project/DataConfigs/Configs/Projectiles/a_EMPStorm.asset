@@ -17,22 +17,17 @@ MonoBehaviour:
   - id: 0
   - id: 1
   - id: 2
-  - id: 3
   removeStructComponents: []
   templates: []
   references:
     version: 1
     00000000:
-      type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: {fileID: -8512600830712622292, guid: dc72713185826c249b836588be368d46, type: 3}
-    00000001:
       type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 0.5
-    00000002:
+    00000001:
       type: {class: ProjectileActive, ns: Project.Common.Components, asm: Project.Common}
-    00000003:
+    00000002:
       type: {class: EMPModifier, ns: Project.Common.Components, asm: Project.Common}
       data:
         LifeTime: 3

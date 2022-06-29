@@ -1,5 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Features.VFX;
+using UnityEngine;
 
 namespace Project.Features.Skills.Systems.Silen
 {
@@ -23,6 +25,7 @@ namespace Project.Features.Skills.Systems.Silen
     public sealed class DashSkillSystem : ISystemFilter
     {
         private SkillsFeature feature;
+        private VFXFeature _vfx;
 
         public World world { get; set; }
 
@@ -50,7 +53,7 @@ namespace Project.Features.Skills.Systems.Silen
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var avatar = entity.Owner(out var owner).Avatar();
+            var avatar = entity.Owner().Avatar();
             if (avatar.IsAlive() == false) return;
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;

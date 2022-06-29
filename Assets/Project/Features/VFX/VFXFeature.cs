@@ -67,7 +67,7 @@ namespace Project.Features.VFX
 		{
 			var fx = new Entity("vfx");
 			fx.Get<LifeTimeLeft>().Value = 5;
-			fx.SetLocalPosition(position);
+			fx.SetPosition(position);
 			fx.InstantiateView(_viewIds[(int)type]);
 		}
 		
@@ -99,7 +99,9 @@ namespace Project.Features.VFX
 			SlowExplosion,
 			SpeedTrail,
 			MineExplosion,
-			GrenadeVFX
+			GrenadeVFX,
+			EMPExplosion,
+			SkillDash
 		}
 	}
 }

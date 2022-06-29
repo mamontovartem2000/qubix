@@ -75,10 +75,18 @@ namespace Project.Features.CollisionHandler.Systems
                 player.Get<Slowness>().LifeTime = debuff.Read<Slowness>().LifeTime;
             }
 
-            _vfx.SpawnVFX(
-                entity.Read<SecondaryDamage>().Value.Has<Slowness>()
-                    ? VFXFeature.VFXType.SlowExplosion
-                    : VFXFeature.VFXType.GrenadeVFX, entity.GetPosition());
+            if (entity.Read<SecondaryDamage>().Value.Has<Slowness>())
+            {
+                _vfx.SpawnVFX(VFXFeature.VFXType.SlowExplosion, entity.GetPosition());
+            } 
+            else if (entity.Read<SecondaryDamage>().Value.Has<EMPModifier>())
+            {
+                _vfx.SpawnVFX(VFXFeature.VFXType.EMPExplosion, entity.GetPosition());
+            }
+            else
+            {
+                _vfx.SpawnVFX(VFXFeature.VFXType.GrenadeVFX, entity.GetPosition());
+            }
 
             entity.Destroy();
         }

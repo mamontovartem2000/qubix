@@ -44,7 +44,7 @@ namespace Project.Features.Skills.Systems.Universal
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			grenade.Set(new Owner{Value = entity.Read<Owner>().Value});
 			grenade.Set(new Grenade());
-            grenade.Get<ProjectileDirection>().Value = new Vector3(avatar.Read<FaceDirection>().Value.x * 1.2f, 2, avatar.Read<FaceDirection>().Value.z * 1.2f) ;
+            grenade.Get<ProjectileDirection>().Value = new Vector3(avatar.Read<FaceDirection>().Value.x * 1f, 2, avatar.Read<FaceDirection>().Value.z * 1f) ;
 
 			entity.Read<ProjectileConfig>().Value.Apply(grenade);
 			grenade.SetPosition(avatar.GetPosition());

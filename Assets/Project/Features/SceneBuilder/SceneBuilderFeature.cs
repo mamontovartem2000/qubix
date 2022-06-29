@@ -231,7 +231,7 @@ namespace Project.Features.SceneBuilder
                 
                 if (entity.Has<DestructibleView>())
                 {
-                    entity.Get<PlayerHealth>().Value = 100;
+                    entity.Get<PlayerHealth>().Value = 50;
                     entity.Set(new DestructibleTag());
                 }
                 

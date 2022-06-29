@@ -5,6 +5,7 @@ using Project.Common.Components;
 using Project.Common.Utilities;
 using Project.Features;
 using Project.Features.Avatar;
+using Project.Features.VFX;
 using UnityEngine;
 namespace Project.Features.Modifiers.Systems {
 
@@ -16,7 +17,7 @@ namespace Project.Features.Modifiers.Systems {
     public sealed class DashSkillModifier : ISystemFilter {
         
         private ModifiersFeature _feature;
-        
+        private VFXFeature _vfx;
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
@@ -64,7 +65,7 @@ namespace Project.Features.Modifiers.Systems {
                     return;
                 }
             }
-            
+
             var pos = entity.GetPosition();
             var target = entity.Read<PlayerMoveTarget>().Value;
             ref readonly var hover = ref entity.Read<Hover>().Amount;
