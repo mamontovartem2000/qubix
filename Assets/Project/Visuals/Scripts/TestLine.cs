@@ -13,7 +13,7 @@ public class TestLine : MonoBehaviour
         _lr.positionCount = _points.Length;
     }
 
-    private void Update()
+    public void Update()
     {
         for (int i = 0; i < _points.Length; i++)
         {
