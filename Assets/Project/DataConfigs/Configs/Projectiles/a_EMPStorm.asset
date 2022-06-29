@@ -18,7 +18,6 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
-  - id: 4
   removeStructComponents: []
   templates: []
   references:
@@ -32,12 +31,8 @@ MonoBehaviour:
       data:
         Value: 0.5
     00000002:
-      type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0
-    00000003:
       type: {class: ProjectileActive, ns: Project.Common.Components, asm: Project.Common}
-    00000004:
+    00000003:
       type: {class: EMPModifier, ns: Project.Common.Components, asm: Project.Common}
       data:
         LifeTime: 3

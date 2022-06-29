@@ -65,9 +65,9 @@ namespace Project.Features.Projectile
             {
                 var entity = new Entity("linear");
                 gun.Read<ProjectileConfig>().Value.Apply(entity);
-                
-                entity.Get<Linear>().StartDelay = delay * i;
-                entity.Get<Linear>().EndDelay = delay * (length - i);
+                entity.Get<Linear>();
+                // entity.Get<Linear>().StartDelay = delay * i;
+                // entity.Get<Linear>().EndDelay = delay * (length - i);
                 entity.Get<Owner>().Value = gun.Owner();
                 var currentDamage = gun.Read<LinearPowerModifier>().Damage;
                 
