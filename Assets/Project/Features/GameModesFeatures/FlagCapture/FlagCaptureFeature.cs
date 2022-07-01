@@ -12,6 +12,7 @@ namespace Project.Features.GameModesFeatures
     using FlagCapture.Modules;
     using FlagCapture.Systems;
     using FlagCapture.Markers;
+    using ME.ECS.Views.Providers;
 
     namespace FlagCapture.Components { }
     namespace FlagCapture.Modules { }
@@ -27,10 +28,16 @@ namespace Project.Features.GameModesFeatures
 
     public sealed class FlagCaptureFeature : Feature
     {
+        public MonoBehaviourView Flag;
+        public ViewId FlagId;
 
         protected override void OnConstruct()
         {
+            FlagId = world.RegisterViewSource(Flag);
+
             AddSystem<FlagRespawn>();
+            AddSystem<DropFlagSystem>();
+
         }
 
         protected override void OnDeconstruct()

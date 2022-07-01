@@ -22,14 +22,15 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 #endif
     #endregion
 
-    public sealed class FlagRespawn : ISystemFilter
+    public sealed class DropFlagSystem : ISystemFilter
     {
-        private FlagCaptureFeature feature;
+        private FlagCaptureFeature _feature;
+
         public World world { get; set; }
 
         void ISystemBase.OnConstruct()
         {
-            this.GetFeature(out this.feature);
+            this.GetFeature(out this._feature);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -41,16 +42,20 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-FlagRespawn")
-                .With<FlagSpawnerTag>()
+            return Filter.Create("Filter-DropFlagSystem")
+                .With<PlayerDead>()
+                .With<GotTeamFlag>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
-        { 
-
+        {
+            var pos = entity.Read<PlayerMoveTarget>().Value;
+            Entity flag = new Entity("Dropped-Flag");
+            flag.Set(new DroppedFlag());
+            flag.InstantiateView(_feature.FlagId);
+            flag.SetPosition(pos);
+            SceneUtils.ModifyFree(pos, false);
         }
-
     }
-
 }

@@ -176,6 +176,15 @@ namespace Project.Features.SceneBuilder
                         entity = Entity.Empty;
                         break;
                     }
+                    case 13:
+                        {
+                            entity = new Entity("Flag_Spawn-Tile");
+                            entity.Set(new FlagSpawnerTag());
+                            freeMap[i] = 1;
+                            walkableMap[i] = 1;
+                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
+                            break;
+                        }
                     default:
                     {
                         entity = new Entity("Platform-Tile");
