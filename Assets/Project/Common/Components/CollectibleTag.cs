@@ -2,7 +2,7 @@
 
 namespace Project.Common.Components 
 {
-    public struct HealthTag : IComponent {}
+    public struct HealthDispenserTag : IComponent {}
 
     public struct MineTag : IComponent {}
 

@@ -63,7 +63,8 @@ namespace Project.Modules.Network
     public enum GameModes
     {
         deathmatch,
-        teambattle
+        teambattle,
+        flagCapture
     }
 
     public enum TeamTypes

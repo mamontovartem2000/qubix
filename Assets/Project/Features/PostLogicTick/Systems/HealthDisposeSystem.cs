@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using Project.Features.VFX;
 
 namespace Project.Features.PostLogicTick.Systems
@@ -31,7 +32,7 @@ namespace Project.Features.PostLogicTick.Systems
 		Filter ISystemFilter.CreateFilter()
 		{
 			return Filter.Create("Filter-HealthDisposeSystem")
-				.With<HealthTag>()
+				.With<HealthDispenserTag>()
 				.With<Collided>()
 				.Push();
 		}
@@ -44,7 +45,7 @@ namespace Project.Features.PostLogicTick.Systems
 			if (entity.Owner().Has<Spawned>())
 				entity.Owner().Remove<Spawned>();
 			
-			player.Set(new ApplyHeal{ Value = 15f }, ComponentLifetime.NotifyAllSystems);
+			player.Set(new ApplyHeal{ Value = Consts.Scene.HEAL_DISPENSER_VALUE }, ComponentLifetime.NotifyAllSystems);
 
 			_vfx.SpawnVFX(VFXFeature.VFXType.TakeHealth, player.GetPosition(), player);
 			entity.Destroy();

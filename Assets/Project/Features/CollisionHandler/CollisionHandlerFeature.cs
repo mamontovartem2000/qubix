@@ -49,7 +49,7 @@ namespace Project.Features.CollisionHandler
         public Entity SpawnHealth(Entity owner)
         {
             var entity = new Entity("Health");
-            entity.Set(new HealthTag());
+            entity.Set(new HealthDispenserTag());
             entity.InstantiateView(_health);
             
             entity.Set(new CollisionDynamic());

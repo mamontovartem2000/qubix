@@ -27,10 +27,10 @@ namespace Project.Features.Avatar
         {
             AddSystem<SpawnPlayerAvatarSystem>();
             AddSystem<ApplyDamageSystem>();
-            AddSystem<HealSystem>();
-            AddSystem<PlayerHealthSystem>();
+            AddSystem<ApplyHealthSystem>();
             AddSystem<BlinkHurtSystem>();
             AddSystem<ShieldApplyDamageSystem>();
+            AddSystem<PlayerDeathSystem>();
 
             AddSystem<AvatarMovementSystem>();
             AddSystem<AvatarRotationSystem>();

@@ -10,7 +10,7 @@ namespace Project.Features.Avatar.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-    public sealed class PlayerHealthSystem : ISystemFilter 
+    public sealed class PlayerDeathSystem : ISystemFilter 
     {
         public World world { get; set; }
         private VFXFeature _vfx;
@@ -33,17 +33,13 @@ namespace Project.Features.Avatar.Systems
         Filter ISystemFilter.CreateFilter() 
         {
             return Filter.Create("Filter-PlayerHealthSystem")
-                .With<PlayerHealth>()
-                .With<AvatarTag>()
+                .With<PlayerDeath>()
                 .WithoutShared<GameFinished>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
-        {
-            var health = entity.Read<PlayerHealth>().Value;
-            if (health > 0) return;
-            
+        {           
             var player = entity.Owner();
             
             if (player.Has<DamagedBy>())

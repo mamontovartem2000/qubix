@@ -50,21 +50,24 @@ namespace Project.Features.Avatar.Systems
                 to.Get<Owner>().Value.Set(new DamagedBy {Value = from});
             }
             
-            if (health/apply.ApplyTo.Read<PlayerHealthDefault>().Value < 0.65f) // TODO: hueta
+            if (health/apply.ApplyTo.Read<PlayerHealthDefault>().Value < 0.65f) // TODO: hueta movew this
             {
-                apply.ApplyTo.Set(new PlayerDamaged {Value = 1f});
+                apply.ApplyTo.Set(new PlayerDamaged { Value = 1f });
                 apply.ApplyTo.Get<PlayerDamagedCounter>().Value += 0.1f;
             }
 
             health -= damage;
-            
-            if (to.Read<PlayerHealth>().Value <= 0)
+
+            var dealtDamage = damage;
+
+            if (health <= 0)
             {
-                damage += to.Read<PlayerHealth>().Value;
-                to.Get<PlayerHealth>().Value = 0;
+                to.Set(new PlayerDeath(), ComponentLifetime.NotifyAllSystems);
+                dealtDamage += health;
+                health = 0;
             }
 
-            from.Get<PlayerScore>().DealtDamage += damage;
+            from.Get<PlayerScore>().DealtDamage += dealtDamage;
             
             world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(from);
             world.GetFeature<EventsFeature>().TabulationScreenNewPlayerStats.Execute(from);

@@ -29,7 +29,7 @@ namespace Project.Common.Views.Monos
 		{
 			transform.position = entity.GetPosition();
 
-			if (entity.Has<HealthTag>())
+			if (entity.Has<HealthDispenserTag>())
 			{
 				_anim.SetBool("Animate", true);
 			}

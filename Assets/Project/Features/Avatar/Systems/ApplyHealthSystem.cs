@@ -13,7 +13,7 @@ namespace Project.Features.Avatar.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class HealSystem : ISystemFilter {
+    public sealed class ApplyHealthSystem : ISystemFilter {
         
         private AvatarFeature _feature;
         
@@ -22,7 +22,6 @@ namespace Project.Features.Avatar.Systems {
         void ISystemBase.OnConstruct() {
             
             this.GetFeature(out this._feature);
-            
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -39,7 +38,6 @@ namespace Project.Features.Avatar.Systems {
                 .With<PlayerHealth>()
                 .With<AvatarTag>()
                 .Push();
-            
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
@@ -50,8 +48,7 @@ namespace Project.Features.Avatar.Systems {
             
             playerHealth += healValue;
             
-            playerHealth = playerHealth >  playerMaxHealth ? playerHealth = playerMaxHealth : playerHealth;
-            entity.Remove<ApplyHeal>();
+            playerHealth = playerHealth > playerMaxHealth ? playerHealth = playerMaxHealth : playerHealth;
             SoundUtils.PlaySound(entity, "event:/VFX/Heal");
         }
     }

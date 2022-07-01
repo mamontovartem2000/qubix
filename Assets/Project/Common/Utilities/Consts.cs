@@ -26,8 +26,9 @@
         public static class Scene
         {
             public const float MINE_BLINK_TIME = 0.15f;
+            public const float HEAL_DISPENSER_VALUE = 15f;
         }
-        
+
         public static class Skills
         {
             public const int FIRE_RATE_SKILL_AMMO_CAPACITY = 2;

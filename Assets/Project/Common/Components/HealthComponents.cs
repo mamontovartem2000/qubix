@@ -7,6 +7,8 @@ namespace Project.Common.Components
         public float Value;
     }
 
+    public struct PlayerDeath : IComponent { }
+
     public struct PlayerHealthOverlay : IComponent
     {
         public float Value;
