@@ -56,7 +56,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Grenade>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GrenadeThrowAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealingAffect>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.HealthTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.HealthDispenserTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Hover>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
@@ -98,6 +98,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamaged>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamagedCounter>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDeath>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealth>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthOverlay>(false, true, false, false, false, false, false, false);
@@ -214,7 +215,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Grenade>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GrenadeThrowAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealingAffect>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.HealthTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.HealthDispenserTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Hover>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
@@ -256,6 +257,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamaged>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamagedCounter>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDeath>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealth>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthOverlay>(false, true, false, false, false, false, false, false);
@@ -367,7 +369,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Grenade>(true);
             structComponentsContainer.Validate<Project.Common.Components.GrenadeThrowAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.HealingAffect>(true);
-            structComponentsContainer.Validate<Project.Common.Components.HealthTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.HealthDispenserTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.Hover>(false);
             structComponentsContainer.Validate<Project.Common.Components.InstantReloadAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.LandMineAffect>(true);
@@ -409,6 +411,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.PlayerConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerDamaged>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerDamagedCounter>(false);
+            structComponentsContainer.Validate<Project.Common.Components.PlayerDeath>(true);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealth>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealthDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealthOverlay>(false);
@@ -525,7 +528,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Grenade>(true);
             entity.ValidateData<Project.Common.Components.GrenadeThrowAffect>(true);
             entity.ValidateData<Project.Common.Components.HealingAffect>(true);
-            entity.ValidateData<Project.Common.Components.HealthTag>(true);
+            entity.ValidateData<Project.Common.Components.HealthDispenserTag>(true);
             entity.ValidateData<Project.Common.Components.Hover>(false);
             entity.ValidateData<Project.Common.Components.InstantReloadAffect>(true);
             entity.ValidateData<Project.Common.Components.LandMineAffect>(true);
@@ -567,6 +570,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.PlayerConfig>(false);
             entity.ValidateData<Project.Common.Components.PlayerDamaged>(false);
             entity.ValidateData<Project.Common.Components.PlayerDamagedCounter>(false);
+            entity.ValidateData<Project.Common.Components.PlayerDeath>(true);
             entity.ValidateData<Project.Common.Components.PlayerHealth>(false);
             entity.ValidateData<Project.Common.Components.PlayerHealthDefault>(false);
             entity.ValidateData<Project.Common.Components.PlayerHealthOverlay>(false);
