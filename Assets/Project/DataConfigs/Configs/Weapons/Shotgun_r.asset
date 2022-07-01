@@ -47,18 +47,18 @@ MonoBehaviour:
     00000003:
       type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 1
     00000004:
       type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 0.5
     00000005:
       type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 7
     00000006:
-      type: {class: SpreadAmount, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0
-    00000007:
       type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}
+    00000007:
+      type: {class: Shotgun, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        AmmoCount: 7

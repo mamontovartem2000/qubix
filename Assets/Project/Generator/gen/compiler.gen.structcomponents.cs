@@ -121,6 +121,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RightWeaponShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondaryDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SelfTrigger>(true, false, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Shotgun>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SingleBullet>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillDuration>(false, true, false, false, false, false, false, false);
@@ -132,6 +134,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Slowness>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPath>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnBullet>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnedPortal>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
@@ -276,6 +279,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RightWeaponShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondaryDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SelfTrigger>(true, false, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Shotgun>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SingleBullet>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillDuration>(false, true, false, false, false, false, false, false);
@@ -287,6 +292,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Slowness>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPath>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnBullet>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnedPortal>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
@@ -426,6 +432,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.RightWeaponShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.SecondaryDamage>(false);
             noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.SelfTrigger>(true);
+            structComponentsContainer.Validate<Project.Common.Components.Shotgun>(false);
+            structComponentsContainer.Validate<Project.Common.Components.SingleBullet>(true);
             structComponentsContainer.Validate<Project.Common.Components.SkillAmount>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillDuration>(false);
@@ -437,6 +445,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SkillVFX>(false);
             structComponentsContainer.Validate<Project.Common.Components.Slowness>(false);
             structComponentsContainer.Validate<Project.Common.Components.SoundPath>(false);
+            structComponentsContainer.Validate<Project.Common.Components.SpawnBullet>(true);
             structComponentsContainer.Validate<Project.Common.Components.Spawned>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpawnedPortal>(false);
             structComponentsContainer.Validate<Project.Common.Components.SpeedModifier>(true);
@@ -581,6 +590,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.RightWeaponShot>(true);
             entity.ValidateData<Project.Common.Components.SecondaryDamage>(false);
             entity.ValidateDataOneShot<Project.Common.Components.SelfTrigger>(true);
+            entity.ValidateData<Project.Common.Components.Shotgun>(false);
+            entity.ValidateData<Project.Common.Components.SingleBullet>(true);
             entity.ValidateData<Project.Common.Components.SkillAmount>(false);
             entity.ValidateData<Project.Common.Components.SkillConfig>(false);
             entity.ValidateData<Project.Common.Components.SkillDuration>(false);
@@ -592,6 +603,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SkillVFX>(false);
             entity.ValidateData<Project.Common.Components.Slowness>(false);
             entity.ValidateData<Project.Common.Components.SoundPath>(false);
+            entity.ValidateData<Project.Common.Components.SpawnBullet>(true);
             entity.ValidateData<Project.Common.Components.Spawned>(true);
             entity.ValidateData<Project.Common.Components.SpawnedPortal>(false);
             entity.ValidateData<Project.Common.Components.SpeedModifier>(true);

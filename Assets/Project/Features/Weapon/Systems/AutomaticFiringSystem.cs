@@ -53,13 +53,6 @@ namespace Project.Features.Weapon.Systems
             if(entity.GetParent().Has<Stun>()) return;
             
             ref var ammo = ref entity.Get<AmmoCapacity>().Value;
-            var dir = entity.Read<WeaponAim>().Value.GetPosition() - entity.GetPosition();
-            
-            // if (entity.Has<SpreadAmount>())
-            // {
-            //     var spread = entity.Read<SpreadAmount>().Value / 100f;
-            //     dir += new float3(world.GetRandomRange(-spread, spread), 0,world.GetRandomRange(-spread, spread));
-            // }
             
             var currentCooldown = entity.Read<CooldownDefault>().Value;
             
@@ -91,13 +84,10 @@ namespace Project.Features.Weapon.Systems
                 world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Get<Owner>().Value);
             }
             
-            ammo -= 1;
+            ammo--;
             
             SoundUtils.PlaySound(entity);
-            
-            _projectile.SpawnProjectile(entity, dir);
-            // _vfx.SpawnVFX(VFXFeature.VFXType.MinigunMuzzle, entity.Read<WeaponAim>().Value.GetPosition(), entity);
-            
+            entity.Set(new SpawnBullet(),ComponentLifetime.NotifyAllSystems);
         }
     }
 }

@@ -26,18 +26,18 @@ MonoBehaviour:
     00000000:
       type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: -8595713138264810336, guid: 6c59eeb93a8dda043a9c94432fb09a63, type: 3}
+        Value: {fileID: -3269953783144916446, guid: c08957f3a19eefa439bb1cd70cb5fb6d, type: 3}
     00000001:
       type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 1
+        Value: 8
     00000002:
       type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 15
     00000003:
       type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 1
+        Value: 0.2
     00000004:
       type: {class: CollisionDynamic, ns: Project.Common.Components, asm: Project.Common}

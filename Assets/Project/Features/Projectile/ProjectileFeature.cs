@@ -24,18 +24,17 @@ namespace Project.Features.Projectile
 
         protected override void OnDeconstruct() {}
 
-        public void SpawnProjectile(Entity gun, Vector3 direction)
+        public void SpawnProjectile(Entity gun)
         {
             var entity = new Entity("projectile");
             gun.Read<ProjectileConfig>().Value.Apply(entity);
 
-            entity.SetParent(gun);
-            entity.SetLocalPosition(new Vector3(0f, 0f, 0.35f));
-            entity.SetParent(Entity.Empty);
-            
-            entity.Get<ProjectileDirection>().Value = direction;
+            entity.SetPosition(gun.GetPosition());
+            entity.Get<ProjectileDirection>().Value = gun.Read<WeaponAim>().Value.GetPosition() - gun.GetPosition();
             entity.Get<Owner>().Value = gun.Read<Owner>().Value;
-            
+            entity.Set(new DamageSource());
+            entity.Set(new ProjectileActive());
+
             if (gun.Has<StunModifier>())
             {
                 entity.Set(new StunModifier { Value = 1 });
@@ -45,20 +44,50 @@ namespace Project.Features.Projectile
             {
                 entity.Set(new EMPModifier { LifeTime = gun.Read<EMPModifier>().LifeTime });
             }
-            var currentDamage = entity.Read<ProjectileDamage>().Value;
-
-            entity.Get<ProjectileDamage>().Value = currentDamage;
-            entity.Set(new DamageSource());
 
             var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
             entity.InstantiateView(view);
-
-            entity.Set(new ProjectileActive());
-
+            
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(gun.Get<Owner>().Value);
         }
 
-        // ReSharper disable Unity.PerformanceAnalysis
+        public void SpawnShotgunBullet(Entity gun)
+        {
+            
+            for (var i = 0; i < gun.Read<Shotgun>().AmmoCount; i++)
+            {
+                var directionAngle = 0.5f;
+                var directionStep = ((i * 1f)  / (gun.Read<Shotgun>().AmmoCount - 1)) * directionAngle;
+                var aimPoint = gun.Read<WeaponAim>().Value;
+                var entity = new Entity("projectile");
+                gun.Read<ProjectileConfig>().Value.Apply(entity);
+                
+                gun.Get<WeaponAim>().Value.SetLocalPosition(Vector3.forward);
+                aimPoint.SetLocalPosition(aimPoint.GetLocalPosition() + new Vector3(directionStep - directionAngle * directionAngle, 0, 0));
+                Debug.Log(aimPoint.GetLocalPosition());
+                entity.SetPosition(gun.GetPosition());
+                entity.Get<ProjectileDirection>().Value = aimPoint.GetPosition() - gun.GetPosition();
+                entity.Get<Owner>().Value = gun.Read<Owner>().Value;
+                entity.Set(new DamageSource());
+                entity.Set(new ProjectileActive());
+
+                if (gun.Has<StunModifier>())
+                {
+                    entity.Set(new StunModifier { Value = 1 });
+                }
+
+                if (gun.Has<EMPModifier>())
+                {
+                    entity.Set(new EMPModifier { LifeTime = gun.Read<EMPModifier>().LifeTime });
+                }
+
+                var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
+                entity.InstantiateView(view);
+            }
+            
+            world.GetFeature<EventsFeature>().rightWeaponFired.Execute(gun.Get<Owner>().Value);
+        }
+
         public void  SpawnLinear(Entity gun, int length, float delay)
         {
             for (int i = 1; i < length; i++)
@@ -66,8 +95,7 @@ namespace Project.Features.Projectile
                 var entity = new Entity("linear");
                 gun.Read<ProjectileConfig>().Value.Apply(entity);
                 entity.Get<Linear>();
-                // entity.Get<Linear>().StartDelay = delay * i;
-                // entity.Get<Linear>().EndDelay = delay * (length - i);
+
                 entity.Get<Owner>().Value = gun.Owner();
                 var currentDamage = gun.Read<LinearPowerModifier>().Damage;
                 

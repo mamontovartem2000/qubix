@@ -1,26 +1,31 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Features.Projectile;
 
 namespace Project.Features.Weapon.Systems {
 
     #pragma warning disable
-#pragma warning restore
-
-#if ECS_COMPILE_IL2CPP_OPTIONS
+    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
+    using Components; using Modules; using Systems; using Markers;
+    #pragma warning restore
+    
+    #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-#endif
-    public sealed class AmmoCapacityDefaultRestoreSystem : ISystemFilter {
+    #endif
+    public sealed class ShotgunFiringSystem : ISystemFilter {
         
         private WeaponFeature feature;
-        
+        private ProjectileFeature _projectile;
+
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
-            this.GetFeature(out this.feature);
-            
+            this.GetFeature(out this.feature);           
+            world.GetFeature(out _projectile);
+
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -32,16 +37,16 @@ namespace Project.Features.Weapon.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-AmmoCapacityDefaultRestoreSystem")
-                .With<StunModifier>()
+            return Filter.Create("Filter-ShotgunFiringSystem")
+                .With<Shotgun>()
+                .With<SpawnBullet>()
                 .Push();
             
         }
-    
-        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
+
+        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            // if(entity.Read<WeaponEntities>().RightWeapon.Read<AmmoCapacity>().Value <= 1)
-                // entity.Read<WeaponEntities>().RightWeapon.Get<AmmoCapacityDefault>().Value = 20;
+            _projectile.SpawnShotgunBullet(entity);
         }
     
     }

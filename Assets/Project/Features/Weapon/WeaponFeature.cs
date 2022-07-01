@@ -15,11 +15,14 @@ namespace Project.Features.Weapon
     {
         protected override void OnConstruct()
         {
+            AddSystem<NewFiringSystem>();
+            
             AddSystem<AutomaticFiringSystem>();
             AddSystem<LinearFiringSystem>();
             AddSystem<MeleeFiringSystem>();
-            AddSystem<AmmoCapacityDefaultRestoreSystem>();
-            AddSystem<NewFiringSystem>();
+
+            AddSystem<SingleBulletShotSystem>();
+            AddSystem<ShotgunFiringSystem>();
 
             AddSystem<CooldownSystem>();
             AddSystem<LinearReloadSystem>();

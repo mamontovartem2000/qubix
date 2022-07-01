@@ -50,7 +50,7 @@ namespace Project.Features.Avatar.Systems
                 to.Get<Owner>().Value.Set(new DamagedBy {Value = from});
             }
             
-            if (health/apply.ApplyTo.Read<PlayerHealthDefault>().Value < 0.65)
+            if (health/apply.ApplyTo.Read<PlayerHealthDefault>().Value < 0.65f) // TODO: hueta
             {
                 apply.ApplyTo.Set(new PlayerDamaged {Value = 1f});
                 apply.ApplyTo.Get<PlayerDamagedCounter>().Value += 0.1f;

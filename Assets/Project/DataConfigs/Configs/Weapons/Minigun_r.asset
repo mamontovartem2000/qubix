@@ -58,12 +58,10 @@ MonoBehaviour:
       data:
         Value: 60
     00000006:
-      type: {class: SpreadAmount, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 0.2
-    00000007:
       type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}
-    00000008:
+    00000007:
       type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: event:/Weapon/Minigun
+    00000008:
+      type: {class: SingleBullet, ns: Project.Common.Components, asm: Project.Common}
