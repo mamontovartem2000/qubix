@@ -35,6 +35,7 @@ namespace Project.Features.Skills.Systems.Buller
         {
             return Filter.Create("Filter-InstantReloadSkillSystem")
                 .With<InstantReloadAffect>()
+                .With<ActivateSkill>()
                 .Push();
         }
 

@@ -163,7 +163,6 @@ namespace Project.Features.Player.Systems
         private void FirstSkill_RPC(FirstSkillMarker fsm)
         {
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
             if (!player.Has<PlayerAvatar>()) return;
 
             ref var entity = ref player.Get<SkillEntities>().FirstSkill;
@@ -175,7 +174,6 @@ namespace Project.Features.Player.Systems
         private void SecondSkill_RPC(SecondSkillMarker ssm)
         {
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
             if (!player.Has<PlayerAvatar>()) return;
 
             ref var entity = ref player.Get<SkillEntities>().SecondSkill;
@@ -187,7 +185,6 @@ namespace Project.Features.Player.Systems
         private void ThirdSkill_RPC(ThirdSkillMarker tsm)
         {
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
             if (!player.Has<PlayerAvatar>()) return;
 
             ref var entity = ref player.Get<SkillEntities>().ThirdSkill;
@@ -199,7 +196,6 @@ namespace Project.Features.Player.Systems
         private void FourthSkill_RPC(FourthSkillMarker fsm)
         {
             var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-            // var player = _feature.GetPlayerByID(NetworkData.PlayerIdInRoom);
             if (!player.Has<PlayerAvatar>()) return;
 
             ref var entity = ref player.Get<SkillEntities>().FourthSkill;

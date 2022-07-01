@@ -35,6 +35,7 @@ namespace Project.Features.Skills.Systems.Buller
 		{
 			return Filter.Create("Filter-FireRateSkillSystem")
 				.With<FireRateAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

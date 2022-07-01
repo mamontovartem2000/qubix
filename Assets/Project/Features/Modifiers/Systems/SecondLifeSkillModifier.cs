@@ -1,8 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using UnityEngine;
 
-namespace Project.Features.Skills.Systems.Universal {
+namespace Project.Features.Modifiers.Systems {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -14,9 +13,9 @@ namespace Project.Features.Skills.Systems.Universal {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class SphereAttackSkill : ISystemFilter {
+    public sealed class SecondLifeSkillModifier : ISystemFilter {
         
-        private SkillsFeature feature;
+        private ModifiersFeature feature;
         
         public World world { get; set; }
         
@@ -35,31 +34,16 @@ namespace Project.Features.Skills.Systems.Universal {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-SphereAttackSkill")
-                .With<EMPStormAffect>()
-                .With<ActivateSkill>()
+            return Filter.Create("Filter-SecondLifeSkillModifier")
+                .With<SecondLifeModifier>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var avatar = entity.Owner().Avatar();
-            if (avatar.IsAlive() == false) return;
-
-            var storm = new Entity("storm");
-            entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-            storm.Set(new Owner{Value = entity.Owner()});
-            storm.Get<ProjectileDirection>().Value = new Vector3(avatar.Read<FaceDirection>().Value.x * 1.2f, 0, avatar.Read<FaceDirection>().Value.z * 1.2f) ;
-            
-            entity.Read<ProjectileConfig>().Value.Apply(storm);
-
-            storm.SetPosition(avatar.GetPosition());
-			
-            SoundUtils.PlaySound(avatar, "event:/Skills/Buller/ThrowGrenade");
-			
-            var view = world.RegisterViewSource(storm.Read<ProjectileView>().Value);
-            storm.InstantiateView(view);
+            entity.Get<PlayerHealth>().Value = entity.Read<PlayerHealthDefault>().Value * 0.2f;
+            entity.Remove<PlayerDead>();
         }
     }
 }

@@ -16,6 +16,8 @@ namespace Project.Features.Modifiers {
 
         protected override void OnConstruct()
         {
+            AddSystem<SecondLifeSkillModifier>();
+            
             AddSystem<SlownessModifier>();
             AddSystem<MovementSkillModifier>();
             AddSystem<DashSkillModifier>();

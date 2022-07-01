@@ -38,6 +38,7 @@ namespace Project.Features.Skills.Systems.Silen {
             
             return Filter.Create("Filter-EMPShotSystem")
                 .With<EMPAffect>()
+                .With<ActivateSkill>()
                 .Push();
             
         }

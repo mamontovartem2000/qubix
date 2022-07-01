@@ -1,8 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using UnityEngine;
 
-namespace Project.Features.Skills.Systems.Universal {
+namespace Project.Features.Skills.Systems.Solaray {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -14,7 +13,7 @@ namespace Project.Features.Skills.Systems.Universal {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class SphereAttackSkill : ISystemFilter {
+    public sealed class SecondLifeSkillSystem : ISystemFilter {
         
         private SkillsFeature feature;
         
@@ -35,31 +34,21 @@ namespace Project.Features.Skills.Systems.Universal {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-SphereAttackSkill")
-                .With<EMPStormAffect>()
-                .With<ActivateSkill>()
+            return Filter.Create("Filter-SecondLifeSkillSystem")
+                .With<SecondLifeAffect>()
+                .With<PassiveSkill>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var avatar = entity.Owner().Avatar();
+            var avatar = entity.Owner(out var owner).Avatar();
             if (avatar.IsAlive() == false) return;
-
-            var storm = new Entity("storm");
-            entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-            storm.Set(new Owner{Value = entity.Owner()});
-            storm.Get<ProjectileDirection>().Value = new Vector3(avatar.Read<FaceDirection>().Value.x * 1.2f, 0, avatar.Read<FaceDirection>().Value.z * 1.2f) ;
+            if (!avatar.Has<PlayerDead>()) return;
             
-            entity.Read<ProjectileConfig>().Value.Apply(storm);
-
-            storm.SetPosition(avatar.GetPosition());
-			
-            SoundUtils.PlaySound(avatar, "event:/Skills/Buller/ThrowGrenade");
-			
-            var view = world.RegisterViewSource(storm.Read<ProjectileView>().Value);
-            storm.InstantiateView(view);
+            entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+            avatar.Set(new SecondLifeModifier());
         }
     }
 }

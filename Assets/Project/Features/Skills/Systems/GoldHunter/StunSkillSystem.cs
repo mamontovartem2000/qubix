@@ -35,6 +35,7 @@ namespace Project.Features.Skills.Systems.GoldHunter
 		{
 			return Filter.Create("Filter-StunSkillSystem")
 				.With<StunAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

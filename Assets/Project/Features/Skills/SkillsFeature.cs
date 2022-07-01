@@ -4,6 +4,7 @@ using Project.Features.Skills.Systems.Buller;
 using Project.Features.Skills.Systems.GoldHunter;
 using Project.Features.Skills.Systems.Powerf;
 using Project.Features.Skills.Systems.Silen;
+using Project.Features.Skills.Systems.Solaray;
 using Project.Features.Skills.Systems.Universal;
 
 namespace Project.Features.Skills
@@ -39,6 +40,9 @@ namespace Project.Features.Skills
             //Silen
             AddSystem<EMPSkillSystem>();
             AddSystem<DashSkillSystem>();
+            
+            //Solaray
+            AddSystem<SecondLifeSkillSystem>();
             
             //Universal
             AddSystem<GrenadeThrowSkillSystem>();

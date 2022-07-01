@@ -14,7 +14,7 @@ namespace Project.Features.Avatar.Systems
     {
         public World world { get; set; }
         
-        private PlayerFeature _feature;
+        private AvatarFeature _feature;
 
         void ISystemBase.OnConstruct() 
         {
@@ -52,8 +52,8 @@ namespace Project.Features.Avatar.Systems
             
             if (health/apply.ApplyTo.Read<PlayerHealthDefault>().Value < 0.65f) // TODO: hueta movew this
             {
-                apply.ApplyTo.Set(new PlayerDamaged { Value = 1f });
-                apply.ApplyTo.Get<PlayerDamagedCounter>().Value += 0.1f;
+                to.Set(new PlayerDamaged { Value = 1f });
+                to.Get<PlayerDamagedCounter>().Value += 0.1f;
             }
 
             health -= damage;
@@ -62,7 +62,7 @@ namespace Project.Features.Avatar.Systems
 
             if (health <= 0)
             {
-                to.Set(new PlayerDeath(), ComponentLifetime.NotifyAllSystems);
+                to.Set(new PlayerDead(), ComponentLifetime.NotifyAllSystems);
                 dealtDamage += health;
                 health = 0;
             }

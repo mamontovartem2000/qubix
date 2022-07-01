@@ -33,7 +33,7 @@ namespace Project.Features.Avatar.Systems
         Filter ISystemFilter.CreateFilter() 
         {
             return Filter.Create("Filter-PlayerHealthSystem")
-                .With<PlayerDeath>()
+                .With<PlayerDead>()
                 .WithoutShared<GameFinished>()
                 .Push();
         }

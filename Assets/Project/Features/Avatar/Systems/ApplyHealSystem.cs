@@ -13,7 +13,7 @@ namespace Project.Features.Avatar.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class ApplyHealthSystem : ISystemFilter {
+    public sealed class ApplyHealSystem : ISystemFilter {
         
         private AvatarFeature _feature;
         

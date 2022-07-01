@@ -34,6 +34,7 @@ namespace Project.Features.Skills.Systems.Buller
         {
             return Filter.Create("Filter-PersonalTeleportSkillSystem")
                 .With<PersonalTeleportAffect>()
+                .With<ActivateSkill>()
                 .Push();
         }
 

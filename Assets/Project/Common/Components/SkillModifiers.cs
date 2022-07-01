@@ -20,6 +20,8 @@ namespace Project.Common.Components
 	{
 		public int Step;
 	}
+
+	public struct SecondLifeModifier : IComponent {}
 	
 	public struct EMP : IComponent
 	{

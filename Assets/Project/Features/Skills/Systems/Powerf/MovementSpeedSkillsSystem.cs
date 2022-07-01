@@ -33,6 +33,7 @@ namespace Project.Features.Skills.Systems.Powerf
 		{
 			return Filter.Create("Filter-MovementSpeedSkillsSystem")
 				.With<MoveSpeedAffect>()
+				.With<ActivateSkill>()
 				.Push();
 		}
 

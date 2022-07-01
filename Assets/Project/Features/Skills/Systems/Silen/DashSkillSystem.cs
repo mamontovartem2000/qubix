@@ -48,6 +48,7 @@ namespace Project.Features.Skills.Systems.Silen
         {
             return Filter.Create("Filter-DashSkillSystem")
                 .With<DashAffect>()
+                .With<ActivateSkill>()
                 .Push();
         }
 

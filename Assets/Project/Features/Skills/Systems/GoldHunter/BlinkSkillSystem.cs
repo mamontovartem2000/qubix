@@ -33,6 +33,7 @@ namespace Project.Features.Skills.Systems.GoldHunter
         {
             return Filter.Create("Filter-DashSkillSystem")
                 .With<BlinkAffect>()
+                .With<ActivateSkill>()
                 .Push();
         }
 

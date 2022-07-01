@@ -26,11 +26,14 @@ namespace Project.Features.Avatar
         protected override void OnConstruct()
         {
             AddSystem<SpawnPlayerAvatarSystem>();
+
+            AddSystem<PlayerDeathSystem>();
+
+            AddSystem<ApplyHealSystem>();
             AddSystem<ApplyDamageSystem>();
-            AddSystem<ApplyHealthSystem>();
+
             AddSystem<BlinkHurtSystem>();
             AddSystem<ShieldApplyDamageSystem>();
-            AddSystem<PlayerDeathSystem>();
 
             AddSystem<AvatarMovementSystem>();
             AddSystem<AvatarRotationSystem>();
