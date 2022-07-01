@@ -35,6 +35,7 @@ namespace Project.Features.Avatar.Systems
 				.With<AvatarTag>()
 				.Without<Stun>()
 				.Without<DashModifier>()
+				.WithoutShared<GameFinished>()
 				.Push();
 		}
 		

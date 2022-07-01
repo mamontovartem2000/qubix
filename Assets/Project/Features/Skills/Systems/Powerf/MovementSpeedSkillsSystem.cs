@@ -55,7 +55,7 @@ namespace Project.Features.Skills.Systems.Powerf
 			
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			_vfx.SpawnVFX(VFXFeature.VFXType.SkillQuickness, avatar.GetPosition(), avatar);
-			_vfx.SpawnVFX(VFXFeature.VFXType.SpeedTrail, avatar.GetPosition(),avatar, entity.Read<SkillDurationDefault>().Value);
+			_vfx.SpawnVFX(VFXFeature.VFXType.SpeedTrail, avatar.GetPosition(),avatar);
 		}
 	}
 }

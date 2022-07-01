@@ -14,9 +14,8 @@ namespace Project.Features.VFX
 	public sealed class VFXFeature : Feature
 	{
 		public MonoBehaviourViewBase[] Views;
-		// public MonoBehaviourViewBase[] Destructibles;
-		private ViewId[] _viewIds;//, _destructibleIds; 
-
+		private ViewId[] _viewIds;
+		
 		protected override void OnConstruct()
 		{
 			AddSystem<VFXPlayerFollowingSystem>();
@@ -24,40 +23,22 @@ namespace Project.Features.VFX
 			AddSystem<TileGlowSystem>();
 			
 			_viewIds = new ViewId[Views.Length];
-			// _destructibleIds = new ViewId[Destructibles.Length];
 			
 			for (int i = 0; i < Views.Length; i++)
 			{
 				_viewIds[i] = world.RegisterViewSource(Views[i]);
 			}
-
-			// for (int i = 0; i < Destructibles.Length; i++)
-			// {
-			// 	_destructibleIds[i] = world.RegisterViewSource(Destructibles[i]);
-			// }
 		}
 
 		protected override void OnDeconstruct() {}
-
-		public void SpawnVFX(VFXType type, Vector3 position, Entity player, float lifeTime)
-		{
-			if(!player.IsAlive()) return;
-			
-			var fx = new Entity("vfx");
-			fx.Set(new LifeTimeLeft{Value = lifeTime});
-			fx.Set(new Owner { Value = player.Read<Owner>().Value });
-			fx.SetLocalPosition(position);
-			fx.SetLocalRotation(player.GetRotation());
-			fx.SetParent(player);
-			fx.InstantiateView(_viewIds[(int)type]);
-		}
+		
 		public void SpawnVFX(VFXType type, Vector3 position, Entity player)
 		{
 			if(!player.IsAlive()) return;
 			
 			var fx = new Entity("vfx");
-			fx.Get<LifeTimeLeft>().Value = 5;
-			fx.Set(new Owner { Value = player.Read<Owner>().Value });
+			fx.Get<LifeTimeLeft>().Value = 4;
+			fx.Set(new Owner { Value = player.Owner() });
 			fx.SetLocalPosition(position);
 			fx.SetParent(player);
 			fx.InstantiateView(_viewIds[(int)type]);
@@ -66,8 +47,8 @@ namespace Project.Features.VFX
 		public void SpawnVFX(VFXType type, Vector3 position)
 		{
 			var fx = new Entity("vfx");
-			fx.Get<LifeTimeLeft>().Value = 5;
-			fx.SetPosition(position);
+			fx.Get<LifeTimeLeft>().Value = 4;
+			fx.SetLocalPosition(position);
 			fx.InstantiateView(_viewIds[(int)type]);
 		}
 		
@@ -101,7 +82,8 @@ namespace Project.Features.VFX
 			MineExplosion,
 			GrenadeVFX,
 			EMPExplosion,
-			SkillDash
+			SkillDash,
+			SkillEMPBullets
 		}
 	}
 }

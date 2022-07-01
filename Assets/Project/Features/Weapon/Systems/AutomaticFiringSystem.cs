@@ -62,23 +62,7 @@ namespace Project.Features.Weapon.Systems
             }
             else
             {
-                if (entity.Has<FireRateModifier>())
-                {
-                    entity.Get<AmmoCapacityDefault>().Value = entity.Read<FireRateModifier>().Value;
-                    entity.Remove<FireRateModifier>();
-                }
-                
-                if (entity.Has<StunModifier>())
-                {
-                    entity.Get<AmmoCapacityDefault>().Value = entity.Read<StunModifier>().Value;
-                    entity.Remove<StunModifier>();
-                }
-
-                if (entity.Has<EMPModifier>())
-                {
-                    entity.Get<AmmoCapacityDefault>().Value = entity.Read<EMPModifier>().AmmoCapacityDefault;
-                    entity.Remove<EMPModifier>();
-                }
+                entity.Set(new ModifiersCheck(), ComponentLifetime.NotifyAllSystems);
 
                 entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;
                 world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Get<Owner>().Value);

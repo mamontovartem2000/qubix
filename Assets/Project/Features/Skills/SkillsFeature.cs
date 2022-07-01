@@ -39,7 +39,7 @@ namespace Project.Features.Skills
             
             //Silen
             AddSystem<EMPSkillSystem>();
-            AddSystem<DashSkillSystem>();
+            AddSystem<DashSystem>();
             
             //Solaray
             AddSystem<SecondLifeSkillSystem>();

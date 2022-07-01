@@ -17,6 +17,12 @@ namespace Project.Features.Weapon
         {
             AddSystem<NewFiringSystem>();
             
+            //Modifiers reload systems
+            AddSystem<EMPModifierBulletRecoverySystem>();
+            AddSystem<StunModifierBulletRecoverySystem>();
+            AddSystem<FireRateModifierBulletRecoverySystem>();
+            
+            //Firing systems
             AddSystem<AutomaticFiringSystem>();
             AddSystem<LinearFiringSystem>();
             AddSystem<MeleeFiringSystem>();
@@ -24,10 +30,12 @@ namespace Project.Features.Weapon
             AddSystem<SingleBulletShotSystem>();
             AddSystem<ShotgunFiringSystem>();
 
+            //Reload systems
             AddSystem<CooldownSystem>();
             AddSystem<LinearReloadSystem>();
             AddSystem<WeaponReloadSystem>();
 
+            //UI systems
             AddSystem<RefreshLinearUISystem>();
         }
 

@@ -22,7 +22,7 @@ namespace Project.Common.Components
     public struct CooldownDefault : IComponent {public float Value;}
     public struct AmmoCapacity : IComponent {public int Value;}
     public struct AmmoCapacityDefault : IComponent {public int Value;}
-    public struct SpreadAmount : IComponent {public float Value;}
+    public struct ModifiersCheck : IComponent {public float Value;}
     public struct MeleeDelay : IComponent {public float Value;}
     public struct MeleeDelayDefault : IComponent {public float Value;}
     public struct WeaponPosition : IComponent {public fp3 Value;}
