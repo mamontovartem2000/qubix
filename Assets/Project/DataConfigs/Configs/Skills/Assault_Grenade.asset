@@ -18,8 +18,6 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
-  - id: 4
-  - id: 5
   removeStructComponents: []
   templates: []
   references:
@@ -29,20 +27,12 @@ MonoBehaviour:
       data:
         Value: 20
     00000001:
-      type: {class: SkillAmount, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 1
-    00000002:
       type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 11400000, guid: 21727310213d34a43bdb47b67c8dc1dc, type: 2}
-    00000003:
-      type: {class: SkillDurationDefault, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 1
-    00000004:
+    00000002:
       type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 1
-    00000005:
+    00000003:
       type: {class: GrenadeThrowAffect, ns: Project.Common.Components, asm: Project.Common}

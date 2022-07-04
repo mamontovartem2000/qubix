@@ -45,10 +45,10 @@ namespace Project.Features.Skills.Systems.Universal
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			grenade.Set(new Owner{Value = entity.Read<Owner>().Value});
 			grenade.Set(new Grenade());
-            grenade.Get<ProjectileDirection>().Value = new Vector3(avatar.Read<FaceDirection>().Value.x * 1f, 2, avatar.Read<FaceDirection>().Value.z * 1f) ;
-
 			entity.Read<ProjectileConfig>().Value.Apply(grenade);
-			grenade.SetPosition(avatar.GetPosition());
+			
+            grenade.Get<ProjectileDirection>().Value = new Vector3(avatar.Read<FaceDirection>().Value.x * 1f, grenade.Read<Trajectory>().Value, avatar.Read<FaceDirection>().Value.z * 1f) ;
+            grenade.SetPosition(avatar.GetPosition());
 			
 			SoundUtils.PlaySound(avatar, "event:/Skills/Buller/ThrowGrenade");
 			

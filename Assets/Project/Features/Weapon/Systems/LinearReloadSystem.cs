@@ -43,7 +43,7 @@ namespace Project.Features.Weapon.Systems
 			var ammoCap = entity.Read<AmmoCapacityDefault>().Value;
 			ref var ammo = ref entity.Get<AmmoCapacity>().Value;
 			
-			var mod = entity.Read<LinearPowerModifier>().Damage > 1.3f ? 1 : 0;
+			var mod = entity.Read<LinearPowerModifier>().Damage > 1.4f ? 1 : 0;
 			var deplete = 1 + mod;
 
 			if (entity.Has<LinearActive>())

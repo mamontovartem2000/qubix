@@ -28,21 +28,21 @@ MonoBehaviour:
     00000000:
       type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 7835914630144697959, guid: 9bdf16518097bbe4a95eddd1205db3d9, type: 3}
+        Value: {fileID: 7835914630144697959, guid: 7644c1f564527e44086a5c0195ab3fa3, type: 3}
     00000001:
-      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 5
-    00000002:
       type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 8
+    00000002:
+      type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 6
     00000003:
       type: {class: ProjectileActive, ns: Project.Common.Components, asm: Project.Common}
     00000004:
       type: {class: Trajectory, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 1
+        Value: 2
     00000005:
       type: {class: SecondaryDamage, ns: Project.Common.Components, asm: Project.Common}
       data:

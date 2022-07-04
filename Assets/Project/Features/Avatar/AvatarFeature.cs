@@ -25,25 +25,31 @@ namespace Project.Features.Avatar
 
         protected override void OnConstruct()
         {
+            //(De-)spawn systems
             AddSystem<SpawnPlayerAvatarSystem>();
-
             AddSystem<PlayerDeathSystem>();
 
+            //Damage systems
             AddSystem<ApplyHealSystem>();
             AddSystem<ApplyDamageSystem>();
 
+            //Visual health bar
             AddSystem<BlinkHurtSystem>();
-            AddSystem<ShieldApplyDamageSystem>();
+            AddSystem<PlayerHealthVisualSystem>();
 
+            //Avatar control
             AddSystem<AvatarMovementSystem>();
             AddSystem<AvatarRotationSystem>();
-            
+
+            //Skills remover
             AddSystem<SlownessAfterTakeDamageSystem>();
             AddSystem<SlownessRemoveSystem>();
             AddSystem<StunLifeTimeSystem>();
-            AddSystem<PlayerHealthVisualSystem>();
-            AddSystem<BlinkIntensitySystem>();
+            AddSystem<ShieldApplyDamageSystem>();
 
+            //Other
+            AddSystem<BlinkIntensitySystem>();
+            
             _playerHealth = world.RegisterViewSource(PlayerHealthView);
         }
 
@@ -135,14 +141,7 @@ namespace Project.Features.Avatar
 
             if (NetworkData.GameMode == GameModes.teambattle)
             {
-                if (owner.Read<PlayerTag>().Team == TeamTypes.red)
-                {
-                    pos = SceneUtils.GetTeamSpawnPosition(redSpawnPoints);
-                }
-                else
-                {
-                    pos = SceneUtils.GetTeamSpawnPosition(blueSpawnPoints);
-                }
+                pos = SceneUtils.GetTeamSpawnPosition(owner.Read<PlayerTag>().Team == TeamTypes.red ? redSpawnPoints : blueSpawnPoints);
             }
 
             if (pos == fp3.zero)

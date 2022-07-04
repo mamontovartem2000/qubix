@@ -33,6 +33,7 @@ namespace Project.Features.LifeTime.Systems
         {
             return Filter.Create("Filter-LifeTimeSystem")
                 .With<LifeTimeLeft>()
+                .Without<Grenade>()
                 .Push();
         }
 

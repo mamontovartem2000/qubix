@@ -30,19 +30,19 @@ MonoBehaviour:
       data:
         Value: {fileID: -8512600830712622292, guid: 6b5cc8d5d0589294e96ffd940a328c59, type: 3}
     00000001:
-      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 50
-    00000002:
       type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 8
+    00000002:
+      type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 6
     00000003:
       type: {class: ProjectileActive, ns: Project.Common.Components, asm: Project.Common}
     00000004:
       type: {class: Trajectory, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 1
+        Value: 2
     00000005:
       type: {class: SecondaryDamage, ns: Project.Common.Components, asm: Project.Common}
       data:

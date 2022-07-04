@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: Slow_Grenade
+  m_Name: Freeze_Grenade
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
@@ -18,7 +18,6 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
-  - id: 4
   removeStructComponents: []
   templates: []
   references:
@@ -28,16 +27,12 @@ MonoBehaviour:
       data:
         Value: 20
     00000001:
-      type: {class: SkillAmount, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 30
-    00000002:
       type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 11400000, guid: 58f7a2f82de603340ba89df09d294015, type: 2}
-    00000003:
+        Value: {fileID: 11400000, guid: 7fd2d5f8fbe5ad54a98f1b7a504b618f, type: 2}
+    00000002:
       type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
-    00000004:
+        Value: 4
+    00000003:
       type: {class: GrenadeThrowAffect, ns: Project.Common.Components, asm: Project.Common}

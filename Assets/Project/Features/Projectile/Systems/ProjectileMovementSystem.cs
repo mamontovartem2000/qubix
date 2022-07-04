@@ -39,7 +39,7 @@ namespace Project.Features.Projectile.Systems
 
             if (entity.Has<Trajectory>())
             {
-                direction -= new Vector3(0, deltaTime * entity.Read<Trajectory>().Value * 5f, 0);
+                direction -= new Vector3(0, deltaTime * entity.Read<Trajectory>().Value * 3f, 0);
             }
 
             var newPosition = entity.GetPosition() + direction * (speed * deltaTime);

@@ -50,8 +50,6 @@ namespace Project.Features.Weapon.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if(entity.GetParent().Has<Stun>()) return;
-            
             ref var ammo = ref entity.Get<AmmoCapacity>().Value;
             
             var currentCooldown = entity.Read<CooldownDefault>().Value;

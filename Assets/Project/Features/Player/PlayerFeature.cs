@@ -22,6 +22,7 @@ namespace Project.Features.Player
 		public DataConfig GoldHunterConfig;
 		public DataConfig PowerfConfig;
 		public DataConfig SilenConfig;
+		public DataConfig SolarayConfig;
 
 		private RPCId _onPlayerConnected, _onPlayerDisconnected;
 		private Filter _playerFilter;
@@ -61,7 +62,7 @@ namespace Project.Features.Player
 
 			if (NetworkData.PlayersInfo == null) // Fake case
 			{
-				SilenConfig.Apply(player);
+				SolarayConfig.Apply(player);
 				return;
 			}
 
@@ -87,6 +88,11 @@ namespace Project.Features.Player
 						SilenConfig.Apply(player);
 						break;
 					}
+				case "Solaray":
+					{
+						SolarayConfig.Apply(player);
+						break;
+					}
 			}
 		}
 
@@ -99,12 +105,12 @@ namespace Project.Features.Player
 		private void PlayerDisconnected_RPC(int id)
 		{
 			Debug.Log("Destroy Avatar");
-			ref var avtr = ref GetPlayerByID(id).Get<PlayerAvatar>().Value;
-			ref var weps = ref avtr.Get<WeaponEntities>();
+			ref var avatar = ref GetPlayerByID(id).Get<PlayerAvatar>().Value;
+			ref var weapons = ref avatar.Get<WeaponEntities>();
 			
-			weps.LeftWeapon.Destroy();
-			weps.RightWeapon.Destroy();
-			avtr.Destroy();
+			weapons.LeftWeapon.Destroy();
+			weapons.RightWeapon.Destroy();
+			avatar.Destroy();
 		}
 
 		public Entity GetPlayerByID(int id)

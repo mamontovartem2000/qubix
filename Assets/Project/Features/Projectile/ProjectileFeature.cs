@@ -64,7 +64,6 @@ namespace Project.Features.Projectile
                 
                 gun.Get<WeaponAim>().Value.SetLocalPosition(Vector3.forward);
                 aimPoint.SetLocalPosition(aimPoint.GetLocalPosition() + new Vector3(directionStep - directionAngle * directionAngle, 0, 0));
-                Debug.Log(aimPoint.GetLocalPosition());
                 entity.SetPosition(gun.GetPosition());
                 entity.Get<ProjectileDirection>().Value = aimPoint.GetPosition() - gun.GetPosition();
                 entity.Get<Owner>().Value = gun.Read<Owner>().Value;
@@ -111,7 +110,7 @@ namespace Project.Features.Projectile
             visual.SetLocalPosition(new Vector3(-0.15f,0f, 0.5f));
             visual.SetLocalRotation(gun.GetLocalRotation());
 
-            visual.InstantiateView(gun.Read<LinearPowerModifier>().Damage > 1.3f
+            visual.InstantiateView(gun.Read<LinearPowerModifier>().Damage > 1.4f
                 ? world.RegisterViewSource(gun.Read<ProjectileAlternativeView>().Value)
                 : world.RegisterViewSource(gun.Read<ProjectileView>().Value));
         }

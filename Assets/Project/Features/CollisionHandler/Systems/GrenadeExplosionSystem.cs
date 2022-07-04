@@ -46,13 +46,13 @@ namespace Project.Features.CollisionHandler.Systems
         {
             return Filter.Create("Filter-GrenadeExplosionSystem")
                 .With<Grenade>()
+                .With<GrenadeExplode>()
                 .Push();
         }
 
         // ReSharper disable Unity.PerformanceAnalysis
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.GetPosition().y > 0f) return;
             SoundUtils.PlaySound(entity);
 
             foreach (var player in _playerFilter)
@@ -65,8 +65,7 @@ namespace Project.Features.CollisionHandler.Systems
                 entity.Read<SecondaryDamage>().Value.Apply(debuff);
                 debuff.Set(new ProjectileActive());
                 debuff.Set(new CollisionDynamic());
-
-
+                
                 debuff.SetPosition(SceneUtils.SafeCheckPosition(player.GetPosition()));
                 
                 if (!debuff.Has<Slowness>()) continue;

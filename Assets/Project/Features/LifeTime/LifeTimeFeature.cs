@@ -21,6 +21,8 @@ namespace Project.Features.LifeTime
     {
         protected override void OnConstruct()
         {
+            AddSystem<CheckGrenadePositionSystem>();
+            AddSystem<GrenadeLifeTimeSystem>();
             AddSystem<LifeTimeSystem>();
             AddSystem<EMPLifeTimeSystem>();
             AddSystem<LinearLifeSystem>();
@@ -31,6 +33,7 @@ namespace Project.Features.LifeTime
             AddSystem<AvoidTeleportLifeTimeSystem>();
             AddSystem<ShieldSkillLifetimeSystem>();
             AddSystem<SkillsUITimer>();
+            AddSystem<FreezeLifeTimeSystem>();
         }
 
         protected override void OnDeconstruct() { }

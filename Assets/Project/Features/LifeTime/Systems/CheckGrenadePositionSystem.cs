@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 
-namespace Project.Features.Skills.Systems.Solaray {
+namespace Project.Features.LifeTime.Systems {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -13,9 +13,9 @@ namespace Project.Features.Skills.Systems.Solaray {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class SecondLifeSkillSystem : ISystemFilter {
+    public sealed class CheckGrenadePositionSystem : ISystemFilter {
         
-        private SkillsFeature feature;
+        private LifeTimeFeature feature;
         
         public World world { get; set; }
         
@@ -34,21 +34,18 @@ namespace Project.Features.Skills.Systems.Solaray {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-SecondLifeSkillSystem")
-                .With<SecondLifeAffect>()
-                .With<PassiveSkill>()
+            return Filter.Create("Filter-CheckGrenadePositionSystem")
+                .With<Grenade>()
+                .With<Trajectory>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var avatar = entity.Owner().Avatar();
-            if (avatar.IsAlive() == false) return;
-            if (!avatar.Has<PlayerDead>()) return;
-            
-            entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-            avatar.Set(new SecondLifeModifier());
+            if (entity.GetPosition().y > 0f) return;
+
+            entity.Set(new GrenadeExplode());
         }
     }
 }

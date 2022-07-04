@@ -33,12 +33,13 @@ namespace Project.Features.Avatar.Systems
 		{
 			return Filter.Create("Filter-PlayerMovementSystem")
 				.With<AvatarTag>()
+				.Without<Freeze>()
 				.Without<Stun>()
 				.Without<DashModifier>()
 				.WithoutShared<GameFinished>()
 				.Push();
 		}
-		
+
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 			ref readonly var input = ref entity.Owner().Read<MoveInput>();
@@ -60,7 +61,7 @@ namespace Project.Features.Avatar.Systems
 					}
 				}
 			}
-			
+
 			var currentSpeed = entity.Read<MoveSpeedModifier>().Value;
 
 			if (entity.Owner().Has<LockTarget>())

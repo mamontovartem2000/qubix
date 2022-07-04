@@ -43,6 +43,11 @@ namespace Project.Common.Components
 	public struct Slowness : IComponent
 	{
 		public float Value;
+		public float LifeTime;		
+	}
+
+	public struct Freeze : IComponent
+	{
 		public float LifeTime;
 	}
 
@@ -71,6 +76,7 @@ namespace Project.Common.Components
 	public struct Debuff : IComponent {}
 	
 	public struct Grenade : IComponent {}
+	public struct GrenadeExplode : IComponent {}
 	
 	public struct Storm : IComponent {}
 

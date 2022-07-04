@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: a_Shot
+  m_Name: a_FrozenGrenade
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
@@ -19,6 +19,9 @@ MonoBehaviour:
   - id: 2
   - id: 3
   - id: 4
+  - id: 5
+  - id: 6
+  - id: 7
   removeStructComponents: []
   templates: []
   references:
@@ -26,18 +29,28 @@ MonoBehaviour:
     00000000:
       type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: -3269953783144916446, guid: c08957f3a19eefa439bb1cd70cb5fb6d, type: 3}
+        Value: {fileID: 7835914630144697959, guid: 7644c1f564527e44086a5c0195ab3fa3, type: 3}
     00000001:
-      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 8
-    00000002:
       type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 20
-    00000003:
+        Value: 6
+    00000002:
       type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0.2
-    00000004:
+        Value: 1
+    00000003:
       type: {class: CollisionDynamic, ns: Project.Common.Components, asm: Project.Common}
+    00000004:
+      type: {class: ProjectileActive, ns: Project.Common.Components, asm: Project.Common}
+    00000005:
+      type: {class: Trajectory, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 0
+    00000006:
+      type: {class: SecondaryDamage, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: 01507ec7086e036489695536dcb9c884, type: 2}
+    00000007:
+      type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: event:/Explosions/Grenade

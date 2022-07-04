@@ -42,9 +42,6 @@ namespace Project.Features.LifeTime.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            // ref var delay = ref entity.Get<Linear>();
-            // delay.StartDelay -= deltaTime;
-
             var avatar = entity.Owner().Avatar();
             if (avatar.IsAlive() == false)
             {
@@ -54,9 +51,7 @@ namespace Project.Features.LifeTime.Systems
 
             ref readonly var linIndex = ref entity.Read<LinearIndex>().Value;
             ref readonly var dir = ref avatar.Read<FaceDirection>().Value;
-
-            // if (delay.StartDelay <= 0)
-            // {
+            
             if (!entity.Has<LinearActive>())
             {
                 //Linear weapon length testing view instantiation;
@@ -74,8 +69,6 @@ namespace Project.Features.LifeTime.Systems
             {
                 entity.Destroy();
             }
-
-            // }
         }
     }
 }
