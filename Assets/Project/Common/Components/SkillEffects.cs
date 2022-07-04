@@ -18,6 +18,7 @@ namespace Project.Common.Components
 	public struct EMPAffect : IComponent {}
 	public struct EMPStormAffect : IComponent {}
 	public struct SecondLifeAffect : IComponent {}
+	public struct CriticalHitAffect : IComponent {}
 	
 	public struct VFXTag : IComponent {};
 }

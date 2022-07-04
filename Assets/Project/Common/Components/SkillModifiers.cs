@@ -6,6 +6,21 @@ namespace Project.Common.Components
 		public float Value;
 	}
 
+	public struct WeaponCritChanceDefault : IComponent
+	{
+		public float Value;
+	}
+	public struct CriticalHitModifier : IComponent
+	{
+		public float LifeTime;
+		public float Value;
+	}
+	
+	public struct CriticalHit : IComponent
+	{
+		public float Value;
+	}
+
 	public struct Stun : IComponent
 	{
 		public float Value;

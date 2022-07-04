@@ -45,6 +45,11 @@ namespace Project.Features.Projectile
                 entity.Set(new EMPModifier { LifeTime = gun.Read<EMPModifier>().LifeTime });
             }
 
+            if (Worlds.current.GetRandomValue() < gun.Read<CriticalHitModifier>().Value)
+            {
+                entity.Set(new CriticalHit());
+            }
+            
             var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
             entity.InstantiateView(view);
             
@@ -53,7 +58,6 @@ namespace Project.Features.Projectile
 
         public void SpawnShotgunBullet(Entity gun)
         {
-            
             for (var i = 0; i < gun.Read<Shotgun>().AmmoCount; i++)
             {
                 var directionAngle = 0.5f;
@@ -78,6 +82,11 @@ namespace Project.Features.Projectile
                 if (gun.Has<EMPModifier>())
                 {
                     entity.Set(new EMPModifier { LifeTime = gun.Read<EMPModifier>().LifeTime });
+                }
+                
+                if (Worlds.current.GetRandomValue() < gun.Read<CriticalHitModifier>().Value)
+                {
+                    entity.Set(new CriticalHit());
                 }
 
                 var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);

@@ -43,6 +43,7 @@ namespace Project.Features.Skills
             
             //Solaray
             AddSystem<SecondLifeSkillSystem>();
+            AddSystem<CriticalHitSkillSystem>();
             
             //Universal
             AddSystem<GrenadeThrowSkillSystem>();
@@ -54,7 +55,6 @@ namespace Project.Features.Skills
         {
             builder
                 .With<SkillTag>()
-                .With<ActivateSkill>()
                 .Without<Cooldown>()
                 .Without<EMP>();
         }

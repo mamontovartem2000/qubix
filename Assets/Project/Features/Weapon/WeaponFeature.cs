@@ -15,6 +15,7 @@ namespace Project.Features.Weapon
     {
         protected override void OnConstruct()
         {
+            //Firing inputs
             AddSystem<NewFiringSystem>();
             
             //Modifiers reload systems

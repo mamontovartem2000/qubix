@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Common.Components;
 using Project.Features.LifeTime.Systems;
 using Project.Features.LifeTime.Systems.SkillsSystems;
 
@@ -34,6 +35,7 @@ namespace Project.Features.LifeTime
             AddSystem<ShieldSkillLifetimeSystem>();
             AddSystem<SkillsUITimer>();
             AddSystem<FreezeLifeTimeSystem>();
+            AddSystem<CriticalHitLifeTimeSystem>();
         }
 
         protected override void OnDeconstruct() { }

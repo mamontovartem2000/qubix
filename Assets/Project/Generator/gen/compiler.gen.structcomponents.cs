@@ -28,6 +28,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ComponentBuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Cooldown>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CriticalHit>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CriticalHitAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CriticalHitModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
@@ -162,6 +165,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.VFXTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponCritChanceDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponView>(false, true, false, false, false, false, false, false);
@@ -194,6 +198,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ComponentBuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Cooldown>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CooldownDefault>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CriticalHit>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CriticalHitAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CriticalHitModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
@@ -328,6 +335,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.VFXTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponCritChanceDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponView>(false, true, false, false, false, false, false, false);
@@ -355,6 +363,9 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ComponentBuff>(true);
             structComponentsContainer.Validate<Project.Common.Components.Cooldown>(false);
             structComponentsContainer.Validate<Project.Common.Components.CooldownDefault>(false);
+            structComponentsContainer.Validate<Project.Common.Components.CriticalHit>(false);
+            structComponentsContainer.Validate<Project.Common.Components.CriticalHitAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.CriticalHitModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.DamagedBy>(false);
             structComponentsContainer.Validate<Project.Common.Components.DamageSource>(true);
             structComponentsContainer.Validate<Project.Common.Components.DashAffect>(true);
@@ -489,6 +500,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.TrajectoryWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.VFXTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.WeaponAim>(false);
+            structComponentsContainer.Validate<Project.Common.Components.WeaponCritChanceDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponEntities>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponPosition>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponView>(false);
@@ -521,6 +533,9 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ComponentBuff>(true);
             entity.ValidateData<Project.Common.Components.Cooldown>(false);
             entity.ValidateData<Project.Common.Components.CooldownDefault>(false);
+            entity.ValidateData<Project.Common.Components.CriticalHit>(false);
+            entity.ValidateData<Project.Common.Components.CriticalHitAffect>(true);
+            entity.ValidateData<Project.Common.Components.CriticalHitModifier>(false);
             entity.ValidateData<Project.Common.Components.DamagedBy>(false);
             entity.ValidateData<Project.Common.Components.DamageSource>(true);
             entity.ValidateData<Project.Common.Components.DashAffect>(true);
@@ -655,6 +670,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.TrajectoryWeapon>(true);
             entity.ValidateData<Project.Common.Components.VFXTag>(true);
             entity.ValidateData<Project.Common.Components.WeaponAim>(false);
+            entity.ValidateData<Project.Common.Components.WeaponCritChanceDefault>(false);
             entity.ValidateData<Project.Common.Components.WeaponEntities>(false);
             entity.ValidateData<Project.Common.Components.WeaponPosition>(false);
             entity.ValidateData<Project.Common.Components.WeaponView>(false);

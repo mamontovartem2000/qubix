@@ -1,9 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Features.VFX;
-using UnityEngine;
 
-namespace Project.Features.Skills.Systems.Silen {
+namespace Project.Features.PostLogicTick.Systems {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -15,16 +13,16 @@ namespace Project.Features.Skills.Systems.Silen {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class DashSystem : ISystemFilter {
+    public sealed class CritBulletDisposeSystem : ISystemFilter {
         
-        private SkillsFeature feature;
-        private VFXFeature _vfx;
+        private PostLogicTickFeature feature;
+        
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
             this.GetFeature(out this.feature);
-            world.GetFeature(out _vfx);
+            
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -36,27 +34,17 @@ namespace Project.Features.Skills.Systems.Silen {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-DashSystem")
-                .With<DashAffect>()
-                .With<ActivateSkill>()
+            return Filter.Create("Filter-CritBulletDisposeSystem")
+                .With<ProjectileActive>()
+                .With<Collided>()
+                .With<CriticalHit>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var avatar = entity.Owner().Avatar();
-            if (avatar.IsAlive() == false) return;
-            
-            avatar.SetPosition(avatar.Read<PlayerMoveTarget>().Value);
-            avatar.Remove<Slowness>();
-            avatar.Set(new DashModifier());
-            
-            entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-
-            _vfx.SpawnVFX(VFXFeature.VFXType.SkillDash, avatar.GetPosition(), avatar);
+            entity.Get<ProjectileDamage>().Value *= 2f;
         }
-    
     }
-    
 }

@@ -2,6 +2,7 @@
 using Project.Common.Components;
 using Project.Input.InputHandler.Markers;
 using Project.Modules.Network;
+using UnityEngine;
 
 namespace Project.Input.InputHandler.Modules
 {
@@ -52,8 +53,19 @@ namespace Project.Input.InputHandler.Modules
             _input.Player.Skill4.performed += ctx => world.AddMarker(new FourthSkillMarker {ActorID = NetworkData.SlotInRoom});
             _input.Player.Tabulation.performed += ctx => world.AddMarker(new TabulationMarker {State = InputState.Pressed});
             _input.Player.Tabulation.canceled += ctx => world.AddMarker(new TabulationMarker {State = InputState.Released});
+            
+            _input.Player.Screenshot.performed += ctx => Screenshot();
         }
-        
+
+        private void Screenshot()
+        {
+            string date = System.DateTime.Now.ToString();
+            date = date.Replace("/","-");
+            date = date.Replace(" ","_");
+            date = date.Replace(":","-");
+            ScreenCapture.CaptureScreenshot( date + ".png", 2);
+        }
+
         private void ForwardPressed()
         {
             var direction = MovementAxis.Vertical;
@@ -233,6 +245,7 @@ namespace Project.Input.InputHandler.Modules
 
             SendMarker(direction, value);
         }
+        
 
         private void SendMarker(MovementAxis vec, int val)
         {

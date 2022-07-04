@@ -16,6 +16,7 @@ namespace Project.Features.PostLogicTick
 			AddSystem<StormDisposeSystem>();
 			AddSystem<StunBulletDisposeSystem>();
 			AddSystem<EMPBulletDisposeSystem>();
+			AddSystem<CritBulletDisposeSystem>();
 			
 			//Gun systems
 			AddSystem<BulletDisposeSystem>();

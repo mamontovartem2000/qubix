@@ -48,7 +48,5 @@ namespace Project.Features.Modifiers.Systems {
             var startSpeed = avatar.Read<PlayerMovementSpeed>().Value;
             avatar.Get<MoveSpeedModifier>().Value += entity.Read<MoveSpeedModifier>().Value * startSpeed;
         }
-    
     }
-    
 }

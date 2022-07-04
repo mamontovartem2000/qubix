@@ -1,9 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Features.VFX;
-using UnityEngine;
 
-namespace Project.Features.Skills.Systems.Silen {
+namespace Project.Features.Skills.Systems.Solaray {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -15,16 +13,16 @@ namespace Project.Features.Skills.Systems.Silen {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class DashSystem : ISystemFilter {
+    public sealed class CriticalHitSkillSystem : ISystemFilter {
         
         private SkillsFeature feature;
-        private VFXFeature _vfx;
+        
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
             this.GetFeature(out this.feature);
-            world.GetFeature(out _vfx);
+            
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -36,8 +34,8 @@ namespace Project.Features.Skills.Systems.Silen {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-DashSystem")
-                .With<DashAffect>()
+            return Filter.Create("Filter-CriticalHitSystem")
+                .With<CriticalHitAffect>()
                 .With<ActivateSkill>()
                 .Push();
             
@@ -45,16 +43,18 @@ namespace Project.Features.Skills.Systems.Silen {
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var avatar = entity.Owner().Avatar();
+            var avatar = entity.Owner(out var owner).Avatar();
             if (avatar.IsAlive() == false) return;
-            
-            avatar.SetPosition(avatar.Read<PlayerMoveTarget>().Value);
-            avatar.Remove<Slowness>();
-            avatar.Set(new DashModifier());
-            
-            entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+			
+            var effect = new Entity("effect");
+            effect.Get<Owner>().Value = owner;
+            effect.Set(new EffectTag());
 
-            _vfx.SpawnVFX(VFXFeature.VFXType.SkillDash, avatar.GetPosition(), avatar);
+            var amount = entity.Read<SkillAmount>().Value / 100f;
+            effect.Get<CriticalHitModifier>().Value = amount;
+            effect.Get<CriticalHitModifier>().LifeTime = entity.Read<SkillDurationDefault>().Value;
+			
+            entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
         }
     
     }

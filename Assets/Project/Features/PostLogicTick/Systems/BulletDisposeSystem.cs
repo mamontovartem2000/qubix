@@ -64,8 +64,6 @@ namespace Project.Features.PostLogicTick.Systems
 				owner.Get<PlayerHealth>().Value -= damage;
 			}
 			
-			
-
 			entity.Destroy();
 		}
 	}
