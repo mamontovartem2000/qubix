@@ -1,7 +1,7 @@
 ﻿using System;
 using ME.ECS;
 using Project.Common.Components;
-using Project.Features.Events;
+using Project.Common.Events;
 using Project.Input.InputHandler.Markers;
 using Project.Modules.Network;
 

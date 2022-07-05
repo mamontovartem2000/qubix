@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ME.ECS;
 using Project.Common.Components;
-using Project.Features.Events;
+using Project.Common.Events;
 using Project.Modules.Network;
 using UnityEngine;
 

@@ -50,11 +50,8 @@ namespace Project.Features.CollisionHandler.Systems
                 .Push();
         }
 
-        // ReSharper disable Unity.PerformanceAnalysis
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            SoundUtils.PlaySound(entity);
-
             foreach (var player in _playerFilter)
             {
                 if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude >
@@ -81,6 +78,10 @@ namespace Project.Features.CollisionHandler.Systems
             else if (entity.Read<SecondaryDamage>().Value.Has<EMPModifier>())
             {
                 _vfx.SpawnVFX(VFXFeature.VFXType.EMPExplosion, entity.GetPosition());
+            }
+            else if (entity.Read<SecondaryDamage>().Value.Has<FreezeModifier>())
+            {
+                _vfx.SpawnVFX(VFXFeature.VFXType.FreezeGrenade, entity.GetPosition());
             }
             else
             {

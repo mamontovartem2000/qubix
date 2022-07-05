@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 
 namespace Project.Features.LifeTime.Systems {
 
@@ -46,6 +47,7 @@ namespace Project.Features.LifeTime.Systems {
             if (entity.GetPosition().y > 0f) return;
 
             entity.Set(new GrenadeExplode());
+            SoundUtils.PlaySound(entity);
         }
     }
 }

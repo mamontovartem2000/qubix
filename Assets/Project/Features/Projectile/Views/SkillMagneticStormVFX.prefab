@@ -28913,6 +28913,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2995719120076447405}
   - component: {fileID: 6486003975746481240}
+  - component: {fileID: -8606049811813922246}
   m_Layer: 0
   m_Name: SkillMagneticStormVFX
   m_TagString: Untagged
@@ -28971,6 +28972,36 @@ MonoBehaviour:
     useCache: 0
     useCacheTimeout: 0
     cacheTimeout: 0
+--- !u!114 &-8606049811813922246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2992336502423429235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -744760219
+      Data2: 1281537531
+      Data3: -2123270985
+      Data4: -1880665
+    Path: event:/Skills/Silen/EMPStrom
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 30
 --- !u!1 &2992552057442124495
 GameObject:
   m_ObjectHideFlags: 0

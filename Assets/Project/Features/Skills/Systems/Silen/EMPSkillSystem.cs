@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Events;
 using Project.Common.Utilities;
-using Project.Features.Events;
 using Project.Features.VFX;
 
 namespace Project.Features.Skills.Systems.Silen {
@@ -52,16 +52,16 @@ namespace Project.Features.Skills.Systems.Silen {
 			
             ref readonly var rightWeapon = ref avatar.Read<WeaponEntities>().RightWeapon;
 			
-            // SoundUtils.PlaySound(avatar, "event:/Skills/GoldHunter/StunShot");
-            
             rightWeapon.Set(new EMPModifier{AmmoCapacityDefault = rightWeapon.Read<AmmoCapacityDefault>().Value, LifeTime = Consts.Skills.EMP_DURATION_DEFAULT});
 
             rightWeapon.Get<AmmoCapacity>().Value = 0;
-            rightWeapon.Get<AmmoCapacityDefault>().Value = 7;
-
+            rightWeapon.Get<AmmoCapacityDefault>().Value = 15;
+            
             rightWeapon.Get<ReloadTime>().Value = 
                 rightWeapon.Read<ReloadTimeDefault>().Value;
-
+            
+            SoundUtils.PlaySound(avatar, "event:/Skills/Silen/EMPBullets");
+            
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(owner);
             world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(owner);
 

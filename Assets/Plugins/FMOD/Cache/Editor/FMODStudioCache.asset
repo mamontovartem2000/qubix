@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637909002158059051
+  lastModified: 637926357868312738
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -89,11 +89,38 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/VFX.bank
   Name: VFX
   StudioPath: bank:/VFX
-  lastModified: 637909002159539248
+  lastModified: 637926357869398283
   FileSizes:
   - Name: Desktop
     Value: 36704
   Exists: 1
+--- !u!114 &-7642603907774053433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Silen/EMPStrom
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Silen/EMPStrom
+  Guid:
+    Data1: -744760219
+    Data2: 1281537531
+    Data3: -2123270985
+    Data4: -1880665
+  Banks:
+  - {fileID: -2301094129356379418}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 30
+  Length: 6000
 --- !u!114 &-7120867579258815652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +190,7 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Weapons.bank
   Name: Weapons
   StudioPath: bank:/Weapons
-  lastModified: 637909002160109388
+  lastModified: 637926357869744270
   FileSizes:
   - Name: Desktop
     Value: 428928
@@ -345,10 +372,10 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Skills.bank
   Name: Skills
   StudioPath: bank:/Skills
-  lastModified: 637909002159339216
+  lastModified: 637926357869198237
   FileSizes:
   - Name: Desktop
-    Value: 212224
+    Value: 351136
   Exists: 1
 --- !u!114 &-2127646443716587366
 MonoBehaviour:
@@ -419,7 +446,7 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Explosions.bank
   Name: Explosions
   StudioPath: bank:/Explosions
-  lastModified: 637909002158039044
+  lastModified: 637926357868292722
   FileSizes:
   - Name: Desktop
     Value: 123360
@@ -467,12 +494,15 @@ MonoBehaviour:
   - {fileID: -1369304617171992375}
   - {fileID: 3382200047308914417}
   - {fileID: -5316339670533645009}
+  - {fileID: 8240763659249938617}
+  - {fileID: -7642603907774053433}
+  - {fileID: 870282348730730421}
   EditorParameters: []
   MasterBanks:
   - {fileID: -9002949484503957811}
   StringsBanks:
   - {fileID: 134729716896531229}
-  cacheTime: 637909002160109388
+  cacheTime: 637926357869744270
   cacheVersion: 131591
 --- !u!114 &77492493163640737
 MonoBehaviour:
@@ -516,10 +546,10 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637909002158069054
+  lastModified: 637926357868322741
   FileSizes:
   - Name: Desktop
-    Value: 2102
+    Value: 2244
   Exists: 1
 --- !u!114 &704312127181691647
 MonoBehaviour:
@@ -548,6 +578,33 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 25
   Length: 1000
+--- !u!114 &870282348730730421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Silen/EMPBullets
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Silen/EMPBullets
+  Guid:
+    Data1: -1412623916
+    Data2: 1152929426
+    Data3: -1531324235
+    Data4: 1293471099
+  Banks:
+  - {fileID: -2301094129356379418}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 30
+  Length: 1175
 --- !u!114 &2163066182676903499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,7 +728,7 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637909002158919119
+  lastModified: 637926357868835499
   FileSizes:
   - Name: Desktop
     Value: 8275584
@@ -730,6 +787,33 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 20
   Length: 131813
+--- !u!114 &8240763659249938617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Silen/Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Silen/Dash
+  Guid:
+    Data1: -652550503
+    Data2: 1292480251
+    Data3: 259777463
+    Data4: -1199686783
+  Banks:
+  - {fileID: -2301094129356379418}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 25
+  Length: 1123
 --- !u!114 &9028326420407419352
 MonoBehaviour:
   m_ObjectHideFlags: 0

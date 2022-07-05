@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Events;
 using Project.Common.Utilities;
-using Project.Features.Events;
 using Project.Features.Projectile;
 using Project.Features.VFX;
 using Unity.Mathematics;
@@ -63,7 +63,7 @@ namespace Project.Features.Weapon.Systems
                 entity.Set(new ModifiersCheck(), ComponentLifetime.NotifyAllSystems);
 
                 entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;
-                world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Get<Owner>().Value);
+                world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Owner());
             }
             
             ammo--;

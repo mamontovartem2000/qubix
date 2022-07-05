@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Features.Events;
+using Project.Common.Events;
+using Project.Common.Utilities;
 using Project.Features.Player;
 
 namespace Project.Features.Avatar.Systems
@@ -37,6 +38,7 @@ namespace Project.Features.Avatar.Systems
         // ReSharper disable Unity.PerformanceAnalysis
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
+            
             ref var apply = ref entity.Get<ApplyDamage>();
             var from = apply.ApplyFrom;
             var to = apply.ApplyTo;

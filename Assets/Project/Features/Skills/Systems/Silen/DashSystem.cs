@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using Project.Features.VFX;
 using UnityEngine;
 
@@ -53,7 +54,9 @@ namespace Project.Features.Skills.Systems.Silen {
             avatar.Set(new DashModifier());
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-
+            
+            SoundUtils.PlaySound(avatar, "event:/Skills/Silen/Dash");
+            
             _vfx.SpawnVFX(VFXFeature.VFXType.SkillDash, avatar.GetPosition(), avatar);
         }
     

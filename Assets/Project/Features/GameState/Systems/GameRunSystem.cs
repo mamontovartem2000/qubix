@@ -1,6 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Features.Events;
+using Project.Common.Events;
 
 namespace Project.Features.GameState.Systems 
 {

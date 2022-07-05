@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using Project.Features.VFX.Systems;
 using UnityEngine;
 
@@ -40,6 +41,7 @@ namespace Project.Features.VFX
 			fx.Get<LifeTimeLeft>().Value = 4;
 			fx.Set(new Owner { Value = player.Owner() });
 			fx.SetLocalPosition(position);
+			fx.SetLocalRotation(player.GetRotation());
 			fx.SetParent(player);
 			fx.InstantiateView(_viewIds[(int)type]);
 		}
@@ -96,7 +98,8 @@ namespace Project.Features.VFX
 			EMPExplosion,
 			SkillDash,
 			SkillEMPBullets,
-			EMP
+			EMP,
+			FreezeGrenade
 		}
 	}
 }

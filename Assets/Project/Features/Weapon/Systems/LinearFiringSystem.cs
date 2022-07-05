@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using Project.Features.Projectile;
 
 namespace Project.Features.Weapon.Systems
@@ -43,7 +44,7 @@ namespace Project.Features.Weapon.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            SoundUtils.PlaySound(entity);
+            // SoundUtils.PlaySound(entity);
             
             var len = entity.Read<LinearWeapon>().Value;
             _projectile.SpawnLinear(entity, len, deltaTime);

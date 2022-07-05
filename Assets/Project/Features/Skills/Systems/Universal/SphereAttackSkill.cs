@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using UnityEngine;
 
 namespace Project.Features.Skills.Systems.Universal {
@@ -55,8 +56,6 @@ namespace Project.Features.Skills.Systems.Universal {
             entity.Read<ProjectileConfig>().Value.Apply(storm);
 
             storm.SetPosition(avatar.GetPosition());
-			
-            SoundUtils.PlaySound(avatar, "event:/Skills/Buller/ThrowGrenade");
 			
             var view = world.RegisterViewSource(storm.Read<ProjectileView>().Value);
             storm.InstantiateView(view);

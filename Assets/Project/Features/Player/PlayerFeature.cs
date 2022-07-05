@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
 using ME.ECS.DataConfigs;
 using Project.Common.Components;
-using Project.Features.Events;
+using Project.Common.Events;
 using Project.Features.Player.Modules;
 using Project.Features.Player.Systems;
 using Project.Markers;

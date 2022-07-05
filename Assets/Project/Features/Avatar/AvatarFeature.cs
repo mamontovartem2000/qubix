@@ -2,9 +2,9 @@
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
+using Project.Common.Events;
 using Project.Common.Utilities;
 using Project.Features.Avatar.Systems;
-using Project.Features.Events;
 using Project.Modules.Network;
 using UnityEngine;
 
@@ -27,7 +27,7 @@ namespace Project.Features.Avatar
         {
             //(De-)spawn systems
             AddSystem<SpawnPlayerAvatarSystem>();
-            AddSystem<PlayerDeathSystem>();
+            
 
             //Damage systems
             AddSystem<ApplyHealSystem>();
@@ -49,6 +49,9 @@ namespace Project.Features.Avatar
 
             //Other
             AddSystem<BlinkIntensitySystem>();
+                
+            AddSystem<PlayerDeathSystem>();
+            
             
             _playerHealth = world.RegisterViewSource(PlayerHealthView);
         }

@@ -1,6 +1,6 @@
 ﻿using ME.ECS;
 
-namespace Project.Features.Events {
+namespace Project.Common.Events {
     #region usage
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
@@ -10,7 +10,7 @@ namespace Project.Features.Events {
     #endregion
     public sealed class EventsFeature : Feature
     {
-        // public GlobalEvent PassLocalPlayer;
+        
         public GlobalEvent HealthChanged;
         public GlobalEvent AllPlayersReady;
         public GlobalEvent OnGameStarted;
@@ -18,29 +18,38 @@ namespace Project.Features.Events {
 
         public GlobalEvent TimerTick;
         
+        //Match result 
         public GlobalEvent Defeat;
         public GlobalEvent Victory;
-        
         public GlobalEvent OnGameFinished;
+        
+        //Player death
         public GlobalEvent PlayerDeath;
         public GlobalEvent PlayerKill;
 
+        //Weapon control
         public GlobalEvent leftWeaponFired;
         public GlobalEvent rightWeaponFired;
         public GlobalEvent LeftweaponDepleted;
         public GlobalEvent RightWeaponDepleted;
 
+        //Skills UI  
         public GlobalEvent CooldownTick;
         public GlobalEvent SkillImageChange;
 
+        //Tab 
         public GlobalEvent TabulationOn;
         public GlobalEvent TabulationOff;
         public GlobalEvent TabulationAddPlayer;
         public GlobalEvent TabulationScreenNumbersChanged;
         public GlobalEvent TabulationScreenNewPlayerStats;
 
+        //EMP UI effects
         public GlobalEvent EMPActive;
         public GlobalEvent EMPInactive;
+        
+        //Sound control
+        public GlobalEvent PlaySound;
             
         protected override void OnConstruct() {}
         protected override void OnDeconstruct() {}

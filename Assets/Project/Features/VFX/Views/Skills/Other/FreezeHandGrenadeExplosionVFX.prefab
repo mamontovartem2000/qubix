@@ -4895,8 +4895,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1834072574068095817}
+  - component: {fileID: 2608418524356930484}
   m_Layer: 0
-  m_Name: SolarayDefenceGrenadeExplosionVFX
+  m_Name: FreezeHandGrenadeExplosionVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4917,6 +4918,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2608418524356930484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3352935700055083846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a22ff289a0ad2419fdb0bc8d310dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSystemSimulation:
+    particleItems:
+    - particleSystem: {fileID: 3524157713238906570}
+    - particleSystem: {fileID: 7148795034036982856}
+    - particleSystem: {fileID: 8199577484689155355}
+    - particleSystem: {fileID: 7778087929451363835}
+    settings:
+      simulationType: 1
+      minSimulationTime: 0.2
+      minEndingTime: 0.1
+      halfEnding: 0.5
+    hasElements: 1
+    hasDefault: 1
+  defaultParameters:
+    useDespawnTime: 0
+    despawnTime: 0
+    cacheCustomViewId: 0
+    useCache: 0
+    useCacheTimeout: 0
+    cacheTimeout: 0
 --- !u!1 &5284570272738752460
 GameObject:
   m_ObjectHideFlags: 0
