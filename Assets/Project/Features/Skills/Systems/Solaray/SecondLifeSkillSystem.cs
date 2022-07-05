@@ -36,7 +36,6 @@ namespace Project.Features.Skills.Systems.Solaray {
             
             return Filter.Create("Filter-SecondLifeSkillSystem")
                 .With<SecondLifeAffect>()
-                .With<PassiveSkill>()
                 .Push();
             
         }

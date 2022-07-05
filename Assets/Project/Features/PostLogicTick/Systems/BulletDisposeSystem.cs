@@ -54,14 +54,11 @@ namespace Project.Features.PostLogicTick.Systems
 					collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);
 				}
 			}
-			else
-			{
-				_vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, pos);
-			}
 
 			if (owner.Has<DestructibleTag>())
 			{
 				owner.Get<PlayerHealth>().Value -= damage;
+				_vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, pos);
 			}
 			
 			entity.Destroy();

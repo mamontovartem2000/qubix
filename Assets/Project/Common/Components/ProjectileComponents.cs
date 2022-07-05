@@ -50,6 +50,10 @@ namespace Project.Common.Components
 	{
 		public float LifeTime;
 	}
+	public struct FreezeModifier : IComponent
+	{
+		public float LifeTime;
+	}
 
 	public struct Linear : IComponent
 	{

@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7587495097459952757}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.79, y: 0, z: -1.98}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7587495097915366723}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &7587495097459952752
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4873,6 +4873,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7587495097915366723}
+  - component: {fileID: -8278886583717917037}
   m_Layer: 0
   m_Name: SkillSilenceVFX
   m_TagString: Untagged
@@ -4888,10 +4889,39 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7587495097915366722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9, y: 0, z: 2.87}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7587495097459952758}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8278886583717917037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7587495097915366722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b5cc2932943cbe4ca77c353f0c008da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSystemSimulation:
+    particleItems:
+    - particleSystem: {fileID: 7587495097459952752}
+    settings:
+      simulationType: 1
+      minSimulationTime: 0.2
+      minEndingTime: 0.1
+      halfEnding: 0.5
+    hasElements: 1
+    hasDefault: 1
+  defaultParameters:
+    useDespawnTime: 0
+    despawnTime: 0
+    cacheCustomViewId: 0
+    useCache: 0
+    useCacheTimeout: 0
+    cacheTimeout: 0

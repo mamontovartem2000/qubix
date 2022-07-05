@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Features.PostLogicTick.Systems {
 
@@ -45,6 +46,7 @@ namespace Project.Features.PostLogicTick.Systems {
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             entity.Get<ProjectileDamage>().Value *= 2f;
+            Debug.Log("CRIT!");
         }
     }
 }

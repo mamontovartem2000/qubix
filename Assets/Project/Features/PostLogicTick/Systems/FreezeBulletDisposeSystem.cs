@@ -1,29 +1,29 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Common.Utilities;
-using Project.Features.Events;
 using Project.Features.VFX;
 using Project.Modules.Network;
 using UnityEngine;
 
 namespace Project.Features.PostLogicTick.Systems {
 
-#if ECS_COMPILE_IL2CPP_OPTIONS
+    #pragma warning disable
+    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
+    using Components; using Modules; using Systems; using Markers;
+    #pragma warning restore
+    
+    #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class EMPBulletDisposeSystem : ISystemFilter {
+    public sealed class FreezeBulletDisposeSystem : ISystemFilter {
         
-        private PostLogicTickFeature _feature;
-        private VFXFeature _vfx;
-
+        private PostLogicTickFeature feature;
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
-            this.GetFeature(out this._feature);
-            world.GetFeature(out _vfx);
+            this.GetFeature(out this.feature);
 
         }
         
@@ -36,10 +36,10 @@ namespace Project.Features.PostLogicTick.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-EMPBulletDisposeSystem")
+            return Filter.Create("Filter-FreezeBulletDisposeSystem")
                 .With<ProjectileActive>()
                 .With<Collided>()
-                .With<EMPModifier>()
+                .With<FreezeModifier>()
                 .Push();
             
         }
@@ -51,17 +51,9 @@ namespace Project.Features.PostLogicTick.Systems {
             if (!owner.Has<PlayerAvatar>()) return;
             
             if (!NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team)) return;
-            
-            ref var skills = ref owner.Get<SkillEntities>();
-            
-            world.GetFeature<EventsFeature>().EMPActive.Execute(owner);
-            _vfx.SpawnVFX(VFXFeature.VFXType.EMP, owner.Avatar().GetPosition(), owner.Avatar(), entity.Read<EMPModifier>().LifeTime);
-            
-            skills.FirstSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
-            skills.SecondSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
-            skills.ThirdSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
-            skills.FourthSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
-            // _vfx.SpawnVFX(VFXFeature.VFXType.SkillStun, pos, player, entity.Read<EMPModifier>().LifeTime);
+
+            owner.Avatar().Get<Freeze>().LifeTime = entity.Read<FreezeModifier>().LifeTime;
+            Debug.Log("Freeze");
         }
     }
 }

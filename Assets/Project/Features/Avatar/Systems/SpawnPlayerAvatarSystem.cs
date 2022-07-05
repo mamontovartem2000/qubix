@@ -48,6 +48,7 @@ namespace Project.Features.Avatar.Systems
             }
             
             if(entity.Has<SkillEntities>()) return;
+            
             _feature.SpawnSkills(entity);
         }
     }

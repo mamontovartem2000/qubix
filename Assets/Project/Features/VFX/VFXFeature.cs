@@ -43,6 +43,18 @@ namespace Project.Features.VFX
 			fx.SetParent(player);
 			fx.InstantiateView(_viewIds[(int)type]);
 		}
+		
+		public void SpawnVFX(VFXType type, Vector3 position, Entity player, float lifeTime)
+		{
+			if(!player.IsAlive()) return;
+
+			var fx = new Entity("vfx");
+			fx.Get<LifeTimeLeft>().Value = lifeTime;
+			fx.Set(new Owner { Value = player.Owner() });
+			fx.SetLocalPosition(position);
+			fx.SetParent(player);
+			fx.InstantiateView(_viewIds[(int)type]);
+		}
 
 		public void SpawnVFX(VFXType type, Vector3 position)
 		{
@@ -83,7 +95,8 @@ namespace Project.Features.VFX
 			GrenadeVFX,
 			EMPExplosion,
 			SkillDash,
-			SkillEMPBullets
+			SkillEMPBullets,
+			EMP
 		}
 	}
 }

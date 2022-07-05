@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Features.Modifiers.Systems {
 
@@ -42,8 +43,9 @@ namespace Project.Features.Modifiers.Systems {
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            entity.Get<PlayerHealth>().Value = entity.Read<PlayerHealthDefault>().Value * 0.2f;
+            entity.Get<PlayerHealth>().Value = entity.Read<PlayerHealthDefault>().Value * 0.3f;
             entity.Remove<PlayerDead>();
+            entity.Remove<SecondLifeModifier>();
         }
     }
 }
