@@ -48,6 +48,8 @@ namespace Project.Common.Components
 		public float LifeTime;
 		public int AmmoCapacityDefault;
 	}
+	
+	public struct EMPEffect : IComponent {}
 
 	public struct FireRateModifier : IComponent
 	{

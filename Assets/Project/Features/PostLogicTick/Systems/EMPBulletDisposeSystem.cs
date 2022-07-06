@@ -24,7 +24,6 @@ namespace Project.Features.PostLogicTick.Systems {
             
             this.GetFeature(out this._feature);
             world.GetFeature(out _vfx);
-
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -56,7 +55,7 @@ namespace Project.Features.PostLogicTick.Systems {
             
             world.GetFeature<EventsFeature>().EMPActive.Execute(owner);
 
-            _vfx.SpawnVFX(VFXFeature.VFXType.EMP, owner.Avatar().GetPosition(), owner.Avatar(), entity.Read<EMPModifier>().LifeTime);
+            // _vfx.SpawnVFX(VFXFeature.VFXType.EMP, owner.Avatar().GetPosition(), owner.Avatar(), entity.Read<EMPModifier>().LifeTime);
             
             skills.FirstSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
             skills.SecondSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;

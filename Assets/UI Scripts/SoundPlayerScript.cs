@@ -31,6 +31,8 @@ public class SoundPlayerScript : MonoBehaviour
     
     private void PlaySoundPrivate(in Entity entity)
     {
+        if (entity.IsAlive() == false) return;
+        
         if (entity.Owner().Read<PlayerTag>().PlayerLocalID == NetworkData.SlotInRoom)
         {
             RuntimeManager.PlayOneShot(entity.Read<PrivateSoundPath>().Value, entity.GetPosition());

@@ -20,7 +20,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1036
   Exists: 1
---- !u!114 &-8296360552062544532
+--- !u!114 &-8401349043197460659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,24 +30,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapons/Minigun
+  m_Name: event:/VFX/Heal
   m_EditorClassIdentifier: 
-  Path: event:/Weapons/Minigun
+  Path: event:/VFX/Heal
   Guid:
-    Data1: 1305848044
-    Data2: 1149061262
-    Data3: 2042186416
-    Data4: -875800053
+    Data1: 422835114
+    Data2: 1163751737
+    Data3: 1442629545
+    Data4: -72109888
   Banks:
-  - {fileID: -6385179338569152129}
+  - {fileID: 4703980774469302188}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
-  MaxDistance: 35
-  Length: 2000
---- !u!114 &-7847412367433252554
+  MaxDistance: 25
+  Length: 610
+--- !u!114 &-7721975160762043263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,7 +66,7 @@ MonoBehaviour:
     Data3: -1492504907
     Data4: 1245280950
   Banks:
-  - {fileID: -2301094129356379418}
+  - {fileID: -3696928525799396931}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -74,27 +74,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 35
   Length: 2000
---- !u!114 &-7676096612589988698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/VFX.bank
-  m_EditorClassIdentifier: 
-  Path: FMODAssets/qubix/Build/Desktop/VFX.bank
-  Name: VFX
-  StudioPath: bank:/VFX
-  lastModified: 637927179667022782
-  FileSizes:
-  - Name: Desktop
-    Value: 36704
-  Exists: 1
---- !u!114 &-7642603907774053433
+--- !u!114 &-7326728676794566463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,23 +84,77 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Silen/EMPStrom
+  m_Name: event:/Weapons/LaserSword
   m_EditorClassIdentifier: 
-  Path: event:/Skills/Silen/EMPStrom
+  Path: event:/Weapons/LaserSword
   Guid:
-    Data1: -744760219
-    Data2: 1281537531
-    Data3: -2123270985
-    Data4: -1880665
+    Data1: -757885378
+    Data2: 1108410243
+    Data3: 1739146155
+    Data4: 1720763795
   Banks:
-  - {fileID: -2301094129356379418}
+  - {fileID: -5910116475118719040}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 30
+  Length: 15092
+--- !u!114 &-6984848707784197707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Goldhunter/CurcuitBurst
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Goldhunter/CurcuitBurst
+  Guid:
+    Data1: 2065339449
+    Data2: 1252364795
+    Data3: 655310245
+    Data4: -624831279
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 35
+  Length: 658
+--- !u!114 &-6933964983626744232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VFX/TeleportOut
+  m_EditorClassIdentifier: 
+  Path: event:/VFX/TeleportOut
+  Guid:
+    Data1: 585301207
+    Data2: 1270216213
+    Data3: 712009918
+    Data4: 1850375898
+  Banks:
+  - {fileID: 4703980774469302188}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 30
-  Length: 6000
+  Length: 448
 --- !u!114 &-6919003069572023004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +182,61 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 35
   Length: 0
---- !u!114 &-6385179338569152129
+--- !u!114 &-6724463165044938226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VFX/TeleportIn
+  m_EditorClassIdentifier: 
+  Path: event:/VFX/TeleportIn
+  Guid:
+    Data1: -1799169278
+    Data2: 1224011892
+    Data3: 147185816
+    Data4: -1459198838
+  Banks:
+  - {fileID: 4703980774469302188}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 30
+  Length: 440
+--- !u!114 &-6292929536566106559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Weapons/HotFlamethower
+  m_EditorClassIdentifier: 
+  Path: event:/Weapons/HotFlamethower
+  Guid:
+    Data1: 856752891
+    Data2: 1139920691
+    Data3: 234471590
+    Data4: -2059362040
+  Banks:
+  - {fileID: -5910116475118719040}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 35
+  Length: 8100
+--- !u!114 &-5910116475118719040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,61 +256,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 433504
   Exists: 1
---- !u!114 &-6231673593471016703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Powerf/Shield
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Powerf/Shield
-  Guid:
-    Data1: 1033952443
-    Data2: 1125253557
-    Data3: 744674449
-    Data4: -865468397
-  Banks:
-  - {fileID: -2301094129356379418}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 20
-  Length: 809
---- !u!114 &-5316339670533645009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/VFX/TeleportOut
-  m_EditorClassIdentifier: 
-  Path: event:/VFX/TeleportOut
-  Guid:
-    Data1: 585301207
-    Data2: 1270216213
-    Data3: 712009918
-    Data4: 1850375898
-  Banks:
-  - {fileID: -7676096612589988698}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 448
---- !u!114 &-5170323426963742502
+--- !u!114 &-5110700983590786848
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,7 +275,7 @@ MonoBehaviour:
     Data3: -723584088
     Data4: 1103659273
   Banks:
-  - {fileID: -6385179338569152129}
+  - {fileID: -5910116475118719040}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -249,7 +283,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 25
   Length: 1000
---- !u!114 &-5067977581396594587
+--- !u!114 &-4580453567192736212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,24 +293,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapons/HotFlamethower
+  m_Name: event:/Weapons/Minigun
   m_EditorClassIdentifier: 
-  Path: event:/Weapons/HotFlamethower
+  Path: event:/Weapons/Minigun
   Guid:
-    Data1: 856752891
-    Data2: 1139920691
-    Data3: 234471590
-    Data4: -2059362040
+    Data1: 1305848044
+    Data2: 1149061262
+    Data3: 2042186416
+    Data4: -875800053
   Banks:
-  - {fileID: -6385179338569152129}
-  IsStream: 1
+  - {fileID: -5910116475118719040}
+  IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 35
-  Length: 8100
---- !u!114 &-3854084654202303083
+  Length: 2000
+--- !u!114 &-3854848288030805964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -286,51 +320,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/VFX/Heal
+  m_Name: event:/Skills/Powerf/LinearPower
   m_EditorClassIdentifier: 
-  Path: event:/VFX/Heal
+  Path: event:/Skills/Powerf/LinearPower
   Guid:
-    Data1: 422835114
-    Data2: 1163751737
-    Data3: 1442629545
-    Data4: -72109888
+    Data1: 1905779163
+    Data2: 1207208282
+    Data3: -1233015645
+    Data4: 2070637908
   Banks:
-  - {fileID: -7676096612589988698}
+  - {fileID: -3696928525799396931}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 25
-  Length: 610
---- !u!114 &-3086206121881551462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Goldhunter/CurcuitBurst
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Goldhunter/CurcuitBurst
-  Guid:
-    Data1: 2065339449
-    Data2: 1252364795
-    Data3: 655310245
-    Data4: -624831279
-  Banks:
-  - {fileID: -2301094129356379418}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 35
-  Length: 658
---- !u!114 &-2301094129356379418
+  Length: 1964
+--- !u!114 &-3696928525799396931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -350,7 +357,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 351136
   Exists: 1
---- !u!114 &-2127646443716587366
+--- !u!114 &-3173792611366176143
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -360,24 +367,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Goldhunter/StunShot
+  m_Name: event:/Skills/Buller/Quickdraw
   m_EditorClassIdentifier: 
-  Path: event:/Skills/Goldhunter/StunShot
+  Path: event:/Skills/Buller/Quickdraw
   Guid:
-    Data1: -1600126055
-    Data2: 1325106119
-    Data3: -920302694
-    Data4: 2033340469
+    Data1: -940670582
+    Data2: 1285198729
+    Data3: 1115237307
+    Data4: -235534075
   Banks:
-  - {fileID: -2301094129356379418}
+  - {fileID: -3696928525799396931}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 30
-  Length: 2059
---- !u!114 &-1369304617171992375
+  Length: 1000
+--- !u!114 &-2954715595384588471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -387,23 +394,131 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Powerf/LinearPower
+  m_Name: event:/Weapons/Axe
   m_EditorClassIdentifier: 
-  Path: event:/Skills/Powerf/LinearPower
+  Path: event:/Weapons/Axe
   Guid:
-    Data1: 1905779163
-    Data2: 1207208282
-    Data3: -1233015645
-    Data4: 2070637908
+    Data1: 464507388
+    Data2: 1195054494
+    Data3: 915635385
+    Data4: 1581420627
   Banks:
-  - {fileID: -2301094129356379418}
+  - {fileID: -5910116475118719040}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
-  MaxDistance: 25
-  Length: 1964
+  MaxDistance: 20
+  Length: 700
+--- !u!114 &-2870578292105307003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Powerf/MovementSpeedIncreace
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Powerf/MovementSpeedIncreace
+  Guid:
+    Data1: 1794027909
+    Data2: 1301348914
+    Data3: 776065929
+    Data4: -880528554
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 45
+  Length: 869
+--- !u!114 &-1904133006455770980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Weapons/SniperRifle
+  m_EditorClassIdentifier: 
+  Path: event:/Weapons/SniperRifle
+  Guid:
+    Data1: -804500030
+    Data2: 1099774518
+    Data3: -958062199
+    Data4: -1069070105
+  Banks:
+  - {fileID: -5910116475118719040}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 45
+  Length: 2000
+--- !u!114 &-1634420315023878760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Powerf/Shield
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Powerf/Shield
+  Guid:
+    Data1: 1033952443
+    Data2: 1125253557
+    Data3: 744674449
+    Data4: -865468397
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 20
+  Length: 809
+--- !u!114 &-1146944845574773636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Weapons/FlameThrower
+  m_EditorClassIdentifier: 
+  Path: event:/Weapons/FlameThrower
+  Guid:
+    Data1: 1988551493
+    Data2: 1332667913
+    Data3: -88590949
+    Data4: 778604739
+  Banks:
+  - {fileID: -5910116475118719040}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 35
+  Length: 13720
 --- !u!114 &-1058113600303767864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +539,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 123360
   Exists: 1
+--- !u!114 &-483444053278341382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Weapons/Machinegun
+  m_EditorClassIdentifier: 
+  Path: event:/Weapons/Machinegun
+  Guid:
+    Data1: -2041103451
+    Data2: 1140834939
+    Data3: 1392832640
+    Data4: -509324319
+  Banks:
+  - {fileID: -5910116475118719040}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 35
+  Length: 2200
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,37 +582,37 @@ MonoBehaviour:
   - {fileID: 134729716896531229}
   - {fileID: -9002949484503957811}
   - {fileID: 5463809685493878781}
-  - {fileID: -6385179338569152129}
   - {fileID: -1058113600303767864}
-  - {fileID: -7676096612589988698}
-  - {fileID: -2301094129356379418}
+  - {fileID: -3696928525799396931}
+  - {fileID: 4703980774469302188}
+  - {fileID: -5910116475118719040}
   EditorEvents:
   - {fileID: 7389887539325328379}
   - {fileID: -6919003069572023004}
-  - {fileID: -3854084654202303083}
   - {fileID: 5163056971121705939}
-  - {fileID: -7847412367433252554}
-  - {fileID: -3086206121881551462}
-  - {fileID: 9028326420407419352}
-  - {fileID: 6494077562196695049}
-  - {fileID: 3450120202713072761}
-  - {fileID: -2127646443716587366}
-  - {fileID: -6231673593471016703}
-  - {fileID: -1369304617171992375}
-  - {fileID: 3382200047308914417}
-  - {fileID: -5316339670533645009}
-  - {fileID: 8240763659249938617}
-  - {fileID: -7642603907774053433}
-  - {fileID: 870282348730730421}
-  - {fileID: 5351223092501059831}
-  - {fileID: 8443879771441016492}
-  - {fileID: 2809437393540504867}
-  - {fileID: 3618314004959977302}
-  - {fileID: -5170323426963742502}
-  - {fileID: 2047963311371448425}
-  - {fileID: -8296360552062544532}
-  - {fileID: -5067977581396594587}
-  - {fileID: 688822622744090968}
+  - {fileID: -7721975160762043263}
+  - {fileID: -6984848707784197707}
+  - {fileID: 4157160672658433609}
+  - {fileID: 6355957973301490999}
+  - {fileID: -2870578292105307003}
+  - {fileID: -3173792611366176143}
+  - {fileID: 175175130361115837}
+  - {fileID: 722721562612759796}
+  - {fileID: -1634420315023878760}
+  - {fileID: 4080335643209938791}
+  - {fileID: -3854848288030805964}
+  - {fileID: -6724463165044938226}
+  - {fileID: -8401349043197460659}
+  - {fileID: -6933964983626744232}
+  - {fileID: -7326728676794566463}
+  - {fileID: -1146944845574773636}
+  - {fileID: -483444053278341382}
+  - {fileID: 9198860962706604597}
+  - {fileID: -5110700983590786848}
+  - {fileID: -1904133006455770980}
+  - {fileID: -4580453567192736212}
+  - {fileID: -6292929536566106559}
+  - {fileID: -2954715595384588471}
   EditorParameters: []
   MasterBanks:
   - {fileID: -9002949484503957811}
@@ -498,7 +640,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 2296
   Exists: 1
---- !u!114 &688822622744090968
+--- !u!114 &175175130361115837
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -508,24 +650,51 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapons/Axe
+  m_Name: event:/Skills/Goldhunter/StunShot
   m_EditorClassIdentifier: 
-  Path: event:/Weapons/Axe
+  Path: event:/Skills/Goldhunter/StunShot
   Guid:
-    Data1: 464507388
-    Data2: 1195054494
-    Data3: 915635385
-    Data4: 1581420627
+    Data1: -1600126055
+    Data2: 1325106119
+    Data3: -920302694
+    Data4: 2033340469
   Banks:
-  - {fileID: -6385179338569152129}
+  - {fileID: -3696928525799396931}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
-  MaxDistance: 20
-  Length: 700
---- !u!114 &870282348730730421
+  MaxDistance: 30
+  Length: 2059
+--- !u!114 &722721562612759796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Silen/Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Silen/Dash
+  Guid:
+    Data1: -652550503
+    Data2: 1292480251
+    Data3: 259777463
+    Data4: -1199686783
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 25
+  Length: 1123
+--- !u!114 &4080335643209938791
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -544,7 +713,7 @@ MonoBehaviour:
     Data3: -1531324235
     Data4: 1293471099
   Banks:
-  - {fileID: -2301094129356379418}
+  - {fileID: -3696928525799396931}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -552,7 +721,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 30
   Length: 1175
---- !u!114 &2047963311371448425
+--- !u!114 &4157160672658433609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -562,24 +731,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapons/SniperRifle
+  m_Name: event:/Skills/Buller/ThrowGrenade
   m_EditorClassIdentifier: 
-  Path: event:/Weapons/SniperRifle
+  Path: event:/Skills/Buller/ThrowGrenade
   Guid:
-    Data1: -804500030
-    Data2: 1099774518
-    Data3: -958062199
-    Data4: -1069070105
+    Data1: 1770466903
+    Data2: 1153380227
+    Data3: 285015731
+    Data4: -441150807
   Banks:
-  - {fileID: -6385179338569152129}
+  - {fileID: -3696928525799396931}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
-  MinDistance: 0
-  MaxDistance: 45
-  Length: 2000
---- !u!114 &2809437393540504867
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 810
+--- !u!114 &4703980774469302188
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -588,105 +757,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapons/Machinegun
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/VFX.bank
   m_EditorClassIdentifier: 
-  Path: event:/Weapons/Machinegun
-  Guid:
-    Data1: -2041103451
-    Data2: 1140834939
-    Data3: 1392832640
-    Data4: -509324319
-  Banks:
-  - {fileID: -6385179338569152129}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 35
-  Length: 2200
---- !u!114 &3382200047308914417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/VFX/TeleportIn
-  m_EditorClassIdentifier: 
-  Path: event:/VFX/TeleportIn
-  Guid:
-    Data1: -1799169278
-    Data2: 1224011892
-    Data3: 147185816
-    Data4: -1459198838
-  Banks:
-  - {fileID: -7676096612589988698}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 440
---- !u!114 &3450120202713072761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Buller/Quickdraw
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Buller/Quickdraw
-  Guid:
-    Data1: -940670582
-    Data2: 1285198729
-    Data3: 1115237307
-    Data4: -235534075
-  Banks:
-  - {fileID: -2301094129356379418}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 1000
---- !u!114 &3618314004959977302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapons/HitMarker
-  m_EditorClassIdentifier: 
-  Path: event:/Weapons/HitMarker
-  Guid:
-    Data1: 1189396657
-    Data2: 1302256882
-    Data3: -256267862
-    Data4: 755264869
-  Banks:
-  - {fileID: -6385179338569152129}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 80
-  Length: 130
+  Path: FMODAssets/qubix/Build/Desktop/VFX.bank
+  Name: VFX
+  StudioPath: bank:/VFX
+  lastModified: 637927179667022782
+  FileSizes:
+  - Name: Desktop
+    Value: 36704
+  Exists: 1
 --- !u!114 &5163056971121705939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,33 +795,6 @@ MonoBehaviour:
   MinDistance: 0.1
   MaxDistance: 400
   Length: 533211
---- !u!114 &5351223092501059831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapons/LaserSword
-  m_EditorClassIdentifier: 
-  Path: event:/Weapons/LaserSword
-  Guid:
-    Data1: -757885378
-    Data2: 1108410243
-    Data3: 1739146155
-    Data4: 1720763795
-  Banks:
-  - {fileID: -6385179338569152129}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 15092
 --- !u!114 &5463809685493878781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,7 +815,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 8275584
   Exists: 1
---- !u!114 &6494077562196695049
+--- !u!114 &6355957973301490999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -771,23 +825,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Powerf/MovementSpeedIncreace
+  m_Name: event:/Skills/Silen/EMPStrom
   m_EditorClassIdentifier: 
-  Path: event:/Skills/Powerf/MovementSpeedIncreace
+  Path: event:/Skills/Silen/EMPStrom
   Guid:
-    Data1: 1794027909
-    Data2: 1301348914
-    Data3: 776065929
-    Data4: -880528554
+    Data1: -744760219
+    Data2: 1281537531
+    Data3: -2123270985
+    Data4: -1880665
   Banks:
-  - {fileID: -2301094129356379418}
+  - {fileID: -3696928525799396931}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
-  MaxDistance: 45
-  Length: 869
+  MaxDistance: 30
+  Length: 6000
 --- !u!114 &7389887539325328379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,7 +869,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 20
   Length: 131813
---- !u!114 &8240763659249938617
+--- !u!114 &9198860962706604597
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -825,74 +879,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Silen/Dash
+  m_Name: event:/Weapons/HitMarker
   m_EditorClassIdentifier: 
-  Path: event:/Skills/Silen/Dash
+  Path: event:/Weapons/HitMarker
   Guid:
-    Data1: -652550503
-    Data2: 1292480251
-    Data3: 259777463
-    Data4: -1199686783
+    Data1: 1189396657
+    Data2: 1302256882
+    Data3: -256267862
+    Data4: 755264869
   Banks:
-  - {fileID: -2301094129356379418}
+  - {fileID: -5910116475118719040}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
-  MaxDistance: 25
-  Length: 1123
---- !u!114 &8443879771441016492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapons/FlameThrower
-  m_EditorClassIdentifier: 
-  Path: event:/Weapons/FlameThrower
-  Guid:
-    Data1: 1988551493
-    Data2: 1332667913
-    Data3: -88590949
-    Data4: 778604739
-  Banks:
-  - {fileID: -6385179338569152129}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 35
-  Length: 13720
---- !u!114 &9028326420407419352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Buller/ThrowGrenade
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Buller/ThrowGrenade
-  Guid:
-    Data1: 1770466903
-    Data2: 1153380227
-    Data3: 285015731
-    Data4: -441150807
-  Banks:
-  - {fileID: -2301094129356379418}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 810
+  MaxDistance: 80
+  Length: 130

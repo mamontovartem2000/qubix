@@ -44,6 +44,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMP>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPEffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPStormAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplosionSound>(false, true, false, false, false, false, false, false);
@@ -216,6 +217,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMP>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPEffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPStormAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplosionSound>(false, true, false, false, false, false, false, false);
@@ -383,6 +385,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.EffectTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.EMP>(false);
             structComponentsContainer.Validate<Project.Common.Components.EMPAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.EMPEffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.EMPModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.EMPStormAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.ExplosionSound>(false);
@@ -555,6 +558,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.EffectTag>(true);
             entity.ValidateData<Project.Common.Components.EMP>(false);
             entity.ValidateData<Project.Common.Components.EMPAffect>(true);
+            entity.ValidateData<Project.Common.Components.EMPEffect>(true);
             entity.ValidateData<Project.Common.Components.EMPModifier>(false);
             entity.ValidateData<Project.Common.Components.EMPStormAffect>(true);
             entity.ValidateData<Project.Common.Components.ExplosionSound>(false);

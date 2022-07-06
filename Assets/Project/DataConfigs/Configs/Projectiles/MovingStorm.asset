@@ -19,7 +19,6 @@ MonoBehaviour:
   - id: 2
   - id: 3
   - id: 4
-  - id: 5
   removeStructComponents: []
   templates: []
   references:
@@ -33,14 +32,10 @@ MonoBehaviour:
       data:
         Value: 1
     00000002:
-      type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 6
-    00000003:
       type: {class: ProjectileActive, ns: Project.Common.Components, asm: Project.Common}
-    00000004:
+    00000003:
       type: {class: SecondaryDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 11400000, guid: 923ad7f0026173f4cbd689d050490b0d, type: 2}
-    00000005:
+    00000004:
       type: {class: Storm, ns: Project.Common.Components, asm: Project.Common}
