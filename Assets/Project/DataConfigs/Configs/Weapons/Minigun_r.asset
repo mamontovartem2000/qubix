@@ -52,7 +52,7 @@ MonoBehaviour:
     00000004:
       type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0.12
+        Value: 0.16
     00000005:
       type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -62,6 +62,6 @@ MonoBehaviour:
     00000007:
       type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: event:/Weapon/Minigun
+        Value: event:/Weapons/Minigun
     00000008:
       type: {class: SingleBullet, ns: Project.Common.Components, asm: Project.Common}

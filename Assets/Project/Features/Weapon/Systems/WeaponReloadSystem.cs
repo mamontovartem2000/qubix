@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Events;
+using Project.Common.Utilities;
 
 namespace Project.Features.Weapon.Systems
 {
@@ -35,19 +36,20 @@ namespace Project.Features.Weapon.Systems
                 .With<ReloadTime>()
                 .Push();
         }
+        
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             ref var reload = ref entity.Get<ReloadTime>().Value;
             reload -= deltaTime;
 
-            if (!(reload <= 0)) return;
+            if (reload > 0) return;
             
             entity.Remove<ReloadTime>();
 
             if (entity.Has<LinearWeapon>()) return;
             
             entity.Get<AmmoCapacity>().Value = entity.Read<AmmoCapacityDefault>().Value;
-            world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Get<Owner>().Value);
+            world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Owner());
         }
     }
 }

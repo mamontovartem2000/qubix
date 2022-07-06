@@ -55,13 +55,14 @@ namespace Project.Features.PostLogicTick.Systems {
             ref var skills = ref owner.Get<SkillEntities>();
             
             world.GetFeature<EventsFeature>().EMPActive.Execute(owner);
+
             _vfx.SpawnVFX(VFXFeature.VFXType.EMP, owner.Avatar().GetPosition(), owner.Avatar(), entity.Read<EMPModifier>().LifeTime);
             
             skills.FirstSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
             skills.SecondSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
             skills.ThirdSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
             skills.FourthSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
-            // _vfx.SpawnVFX(VFXFeature.VFXType.SkillStun, pos, player, entity.Read<EMPModifier>().LifeTime);
+            
         }
     }
 }

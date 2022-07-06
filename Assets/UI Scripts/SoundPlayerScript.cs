@@ -3,28 +3,43 @@ using System.Collections.Generic;
 using DG.Tweening;
 using FMODUnity;
 using ME.ECS;
+using ME.ECS.Network;
 using Project.Common.Components;
 using Project.Common.Utilities;
+using Project.Features.Player;
+using Project.Modules.Network;
 using UnityEngine;
 
 public class SoundPlayerScript : MonoBehaviour
 {
     [SerializeField] private GlobalEvent _playSoundEvent;
+    [SerializeField] private GlobalEvent _playSoundPrivateEvent;
+    private PlayerFeature _feature;
 
     private void Start()
     {
-        _playSoundEvent.Subscribe(Play);
+        _playSoundEvent.Subscribe(PlaySound);
+        _playSoundPrivateEvent.Subscribe(PlaySoundPrivate);
     }
 
-    private void Play(in Entity entity)
+    private void PlaySound(in Entity entity)
     {
         if (entity.IsAlive() == false) return;
         
         RuntimeManager.PlayOneShot(entity.Read<SoundPath>().Value, entity.GetPosition());
     }
+    
+    private void PlaySoundPrivate(in Entity entity)
+    {
+        if (entity.Owner().Read<PlayerTag>().PlayerLocalID == NetworkData.SlotInRoom)
+        {
+            RuntimeManager.PlayOneShot(entity.Read<PrivateSoundPath>().Value, entity.GetPosition());
+        }
+    }
 
     private void OnDestroy()
     {
-        _playSoundEvent.Unsubscribe(Play);
+        _playSoundEvent.Unsubscribe(PlaySound);
+        _playSoundPrivateEvent.Unsubscribe(PlaySoundPrivate);
     }
 }

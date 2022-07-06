@@ -50,6 +50,7 @@ namespace Project.Common.Events {
         
         //Sound control
         public GlobalEvent PlaySound;
+        public GlobalEvent PlaySoundPrivate;
             
         protected override void OnConstruct() {}
         protected override void OnDeconstruct() {}

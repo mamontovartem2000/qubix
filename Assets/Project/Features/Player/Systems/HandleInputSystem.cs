@@ -2,6 +2,7 @@
 using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Events;
+using Project.Common.Utilities;
 using Project.Input.InputHandler.Markers;
 using Project.Modules.Network;
 
@@ -29,6 +30,7 @@ namespace Project.Features.Player.Systems
         private RPCId _mouseLeft, _mouseRight, _lockDirection;
         private RPCId _firstSkill, _secondSkill, _thirdSkill, _fourthSkill;
         private RPCId _tabulation;
+        private RPCId _reload;
         void ISystemBase.OnConstruct()
         {
             Net = world.GetModule<NetworkModule>();
@@ -56,6 +58,8 @@ namespace Project.Features.Player.Systems
             _movement = net.RegisterRPC(new Action<MovementMarker>(Movement_RPC).Method);
             
             _tabulation = net.RegisterRPC(new Action<TabulationMarker>(TabKey_RPC).Method);
+            
+            _reload = net.RegisterRPC(new Action<ReloadMarker>(Reload_RPC).Method);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -75,6 +79,9 @@ namespace Project.Features.Player.Systems
             if (world.GetMarker(out FourthSkillMarker fourth)) Net.RPC(this, _fourthSkill, fourth);
             
             if (world.GetMarker(out TabulationMarker tm)) Net.RPC(this, _tabulation, tm);
+            
+            if (world.GetMarker(out ReloadMarker rm)) Net.RPC(this, _reload, rm);
+            
         }
 
         private void Movement_RPC(MovementMarker move)
@@ -158,6 +165,21 @@ namespace Project.Features.Player.Systems
                     break;
                 }
             }
+        }
+
+        private void Reload_RPC(ReloadMarker rm)
+        {
+            var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+
+            ref readonly var rightWeapon = ref player.Avatar().Read<WeaponEntities>().RightWeapon;
+            rightWeapon.Get<AmmoCapacity>().Value = 0;
+
+            rightWeapon.Get<ReloadTime>().Value = 
+                rightWeapon.Read<ReloadTimeDefault>().Value;
+			
+            world.GetFeature<EventsFeature>().rightWeaponFired.Execute(player);
+            world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(player);
+
         }
 
         private void FirstSkill_RPC(FirstSkillMarker fsm)

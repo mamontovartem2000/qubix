@@ -40,7 +40,6 @@ namespace Project.Features.Skills.Systems.GoldHunter
 				.Push();
 		}
 
-		// ReSharper disable Unity.PerformanceAnalysis
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 			var avatar = entity.Owner(out var owner).Avatar();
@@ -58,7 +57,7 @@ namespace Project.Features.Skills.Systems.GoldHunter
 			rightWeapon.Get<ReloadTime>().Value = 
 				rightWeapon.Read<ReloadTimeDefault>().Value;
 			
-			world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Owner());
+			world.GetFeature<EventsFeature>().rightWeaponFired.Execute(owner);
 			world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(owner);
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;

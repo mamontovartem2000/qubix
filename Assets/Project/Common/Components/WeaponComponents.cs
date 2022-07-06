@@ -31,4 +31,5 @@ namespace Project.Common.Components
     public struct SpawnBullet : IComponent {}
     public struct Shotgun : IComponent  { public int AmmoCount; }
     public struct SoundPath : IComponent {public string Value;}
+    public struct PrivateSoundPath : IComponent {public string Value;}
 }

@@ -55,6 +55,7 @@ namespace Project.Input.InputHandler.Modules
             _input.Player.Tabulation.canceled += ctx => world.AddMarker(new TabulationMarker {State = InputState.Released});
             
             _input.Player.Screenshot.performed += ctx => Screenshot();
+            _input.Player.Reload.performed += ctx => world.AddMarker(new ReloadMarker());
         }
 
         private void Screenshot()

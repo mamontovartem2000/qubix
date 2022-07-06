@@ -45,7 +45,7 @@ namespace Project.Features.CollisionHandler.Systems
 			{
 				var sPos = staticBag.ReadT0(index).ToVector3();
 				var sOwner = staticBag.ReadT1(index).Value;
-				var dist = (fp)2 * 2;
+				var dist =  1f;
 
 				for (int i = 0; i < dynamicBag.Length; i++)
 				{

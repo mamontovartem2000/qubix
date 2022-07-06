@@ -1,4 +1,5 @@
-﻿using ME.ECS;
+﻿using FlatBuffers;
+using ME.ECS;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Common.Utilities;

@@ -64,12 +64,14 @@ namespace Project.Features.Weapon.Systems
 
                 entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;
                 world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Owner());
+                world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Owner());
             }
             
             ammo--;
             
-            SoundUtils.PlaySound(entity);
-            entity.Set(new SpawnBullet(),ComponentLifetime.NotifyAllSystems);
+            Worlds.current.GetFeature<EventsFeature>().PlaySound.Execute(entity);
+
+            entity.Set(new SpawnBullet(), ComponentLifetime.NotifyAllSystems);
         }
     }
 }

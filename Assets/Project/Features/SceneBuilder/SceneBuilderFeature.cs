@@ -226,7 +226,7 @@ namespace Project.Features.SceneBuilder
                     bluePool.Add(i);
                     continue;
                 }
-
+                
                 if (mapElement == 0) continue;
                 if (PropsConfigs[mapElement] == null) continue;
 
@@ -240,7 +240,7 @@ namespace Project.Features.SceneBuilder
                 
                 if (entity.Has<DestructibleView>())
                 {
-                    entity.Get<PlayerHealth>().Value = 40;
+                    entity.Get<PlayerHealth>().Value = 35;
                     entity.Set(new DestructibleTag());
                 }
                 

@@ -65,10 +65,10 @@ namespace Project.Features.CollisionHandler.Systems
                 
                 debuff.SetPosition(SceneUtils.SafeCheckPosition(player.GetPosition()));
                 
-                if (!debuff.Has<Slowness>()) continue;
-                
-                player.Get<Slowness>().Value = debuff.Read<Slowness>().Value / 100;
-                player.Get<Slowness>().LifeTime = debuff.Read<Slowness>().LifeTime;
+                // if (!debuff.Has<Slowness>()) continue;
+                //
+                // player.Get<Slowness>().Value = debuff.Read<Slowness>().Value / 100;
+                // player.Get<Slowness>().LifeTime = debuff.Read<Slowness>().LifeTime;
             }
 
             if (entity.Read<SecondaryDamage>().Value.Has<Slowness>())

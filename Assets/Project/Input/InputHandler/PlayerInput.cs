@@ -143,6 +143,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""48817636-feb7-442e-9a26-d35fa08920d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -530,6 +539,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Screenshot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""46268bbb-b12d-4b88-ae72-6caf95e334eb"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -579,6 +599,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Skill4 = m_Player.FindAction("Skill4", throwIfNotFound: true);
         m_Player_Tabulation = m_Player.FindAction("Tabulation", throwIfNotFound: true);
         m_Player_Screenshot = m_Player.FindAction("Screenshot", throwIfNotFound: true);
+        m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -651,6 +672,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Skill4;
     private readonly InputAction m_Player_Tabulation;
     private readonly InputAction m_Player_Screenshot;
+    private readonly InputAction m_Player_Reload;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -668,6 +690,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Skill4 => m_Wrapper.m_Player_Skill4;
         public InputAction @Tabulation => m_Wrapper.m_Player_Tabulation;
         public InputAction @Screenshot => m_Wrapper.m_Player_Screenshot;
+        public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -716,6 +739,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Screenshot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScreenshot;
                 @Screenshot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScreenshot;
                 @Screenshot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScreenshot;
+                @Reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -759,6 +785,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Screenshot.started += instance.OnScreenshot;
                 @Screenshot.performed += instance.OnScreenshot;
                 @Screenshot.canceled += instance.OnScreenshot;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
@@ -796,5 +825,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnSkill4(InputAction.CallbackContext context);
         void OnTabulation(InputAction.CallbackContext context);
         void OnScreenshot(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }

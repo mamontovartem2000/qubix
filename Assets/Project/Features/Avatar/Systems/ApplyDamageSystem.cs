@@ -50,8 +50,10 @@ namespace Project.Features.Avatar.Systems
             if (from.Has<PlayerAvatar>())
             {
                 to.Get<Owner>().Value.Set(new DamagedBy {Value = from});
+                from.Avatar().Get<PrivateSoundPath>().Value = "event:/Weapons/HitMarker";
+                Worlds.current.GetFeature<EventsFeature>().PlaySoundPrivate.Execute(from.Avatar());
             }
-            
+
             if (health/apply.ApplyTo.Read<PlayerHealthDefault>().Value < 0.65f) // TODO: hueta movew this
             {
                 to.Set(new PlayerDamaged { Value = 1f });
@@ -59,7 +61,7 @@ namespace Project.Features.Avatar.Systems
             }
 
             health -= damage;
-
+            
             var dealtDamage = damage;
 
             if (health <= 0)
