@@ -31,6 +31,7 @@ namespace Project.Features.Player.Systems
         private RPCId _firstSkill, _secondSkill, _thirdSkill, _fourthSkill;
         private RPCId _tabulation;
         private RPCId _reload;
+        private RPCId _screenshot;
         void ISystemBase.OnConstruct()
         {
             Net = world.GetModule<NetworkModule>();
@@ -60,6 +61,8 @@ namespace Project.Features.Player.Systems
             _tabulation = net.RegisterRPC(new Action<TabulationMarker>(TabKey_RPC).Method);
             
             _reload = net.RegisterRPC(new Action<ReloadMarker>(Reload_RPC).Method);
+            
+            _screenshot = net.RegisterRPC(new Action<ScreenshotMarker>(Screenshot_RPC).Method);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -81,6 +84,8 @@ namespace Project.Features.Player.Systems
             if (world.GetMarker(out TabulationMarker tm)) Net.RPC(this, _tabulation, tm);
             
             if (world.GetMarker(out ReloadMarker rm)) Net.RPC(this, _reload, rm);
+            
+            if (world.GetMarker(out ScreenshotMarker scrnm)) Net.RPC(this, _screenshot, scrnm);
             
         }
 
@@ -179,6 +184,14 @@ namespace Project.Features.Player.Systems
 			
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(player);
             world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(player);
+
+        }
+        
+        private void Screenshot_RPC(ScreenshotMarker scrnm)
+        {
+            var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
+            
+            world.GetFeature<EventsFeature>().Screenshot.Execute(player);
 
         }
 

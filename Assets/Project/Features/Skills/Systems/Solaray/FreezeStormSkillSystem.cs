@@ -14,7 +14,7 @@ namespace Project.Features.Skills.Systems.Solaray {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class SecondLifeSkillSystem : ISystemFilter {
+    public sealed class FreezeStormSkillSystem : ISystemFilter {
         
         private SkillsFeature feature;
         
@@ -35,19 +35,25 @@ namespace Project.Features.Skills.Systems.Solaray {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-SecondLifeSkillSystem")
-                .With<SecondLifeAffect>()
+            return Filter.Create("Filter-FreezeStormSkillSystem")
+                .With<FreezeStormАffect>()
+                .With<ActivateSkill>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var avatar = entity.Owner().Avatar();
-            if (!avatar.Has<SecondLifeModifier>()) return;
-            
+            var avatar = entity.Owner(out var owner).Avatar();
+            if (avatar.IsAlive() == false) return;
+			
+            var effect = new Entity("effect");
+            effect.Get<Owner>().Value = owner;
+            effect.Set(new GrenadeExplode());
+            effect.Set(new Grenade());
+
+            entity.Read<ProjectileConfig>().Value.Apply(effect);
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-            avatar.Remove<SecondLifeModifier>();
         }
     }
 }

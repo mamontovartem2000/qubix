@@ -48,7 +48,7 @@ namespace Project.Features.LifeTime.Systems {
 
             if (lifeTime > 0) return;
             
-            entity.Remove<LifeTimeLeft>();
+            entity.Remove<CriticalHitModifier>();
         }
     }
 }

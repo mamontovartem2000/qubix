@@ -43,6 +43,7 @@ namespace Project.Features.LifeTime.Systems {
             entity.Get<EMP>().LifeTime -= deltaTime;
 
             if (entity.Read<EMP>().LifeTime > 0f) return;
+            
             world.GetFeature<EventsFeature>().EMPInactive.Execute(entity.Owner());
             entity.Remove<EMP>();
         }

@@ -50,7 +50,7 @@ namespace Project.Features.PostLogicTick.Systems {
         {
             foreach (var player in _playerFilter)
             {
-                if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > (fp) Consts.Weapons.GRENADE_EXPLOSION_SQUARED_RADIUS) continue;
+                if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > entity.Read<ExplodeSquaredRadius>().Value) continue;
 
                 if (player.Owner() == entity.Owner()) continue;
                 
@@ -58,8 +58,9 @@ namespace Project.Features.PostLogicTick.Systems {
                 debuff.Get<Owner>().Value = entity.Owner();
                 entity.Read<SecondaryDamage>().Value.Apply(debuff);
                 debuff.Set(new CollisionDynamic());
+                debuff.Set(new LifeTimeLeft { Value = 0.5f});
 
-                debuff.SetPosition(SceneUtils.SafeCheckPosition(player.GetPosition()));
+                debuff.SetPosition(player.GetPosition());
             }
         }
     }

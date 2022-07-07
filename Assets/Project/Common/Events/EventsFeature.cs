@@ -15,8 +15,10 @@ namespace Project.Common.Events {
         public GlobalEvent AllPlayersReady;
         public GlobalEvent OnGameStarted;
         public GlobalEvent PassLocalPlayer;
-
+        
+        //UI control
         public GlobalEvent TimerTick;
+        public GlobalEvent Screenshot;
         
         //Match result 
         public GlobalEvent Defeat;

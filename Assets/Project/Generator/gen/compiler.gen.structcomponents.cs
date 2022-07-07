@@ -47,6 +47,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPEffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPStormAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplodeSquaredRadius>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplosionSound>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, false, false, false, false, false, false);
@@ -57,6 +58,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Freeze>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FreezeModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.FreezeStormАffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameFinished>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GamePaused>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameTimer>(false, true, false, false, false, false, false, false);
@@ -220,6 +222,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPEffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPStormAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplodeSquaredRadius>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplosionSound>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, false, false, false, false, false, false);
@@ -230,6 +233,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Freeze>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FreezeModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.FreezeStormАffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameFinished>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GamePaused>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameTimer>(false, true, false, false, false, false, false, false);
@@ -388,6 +392,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.EMPEffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.EMPModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.EMPStormAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.ExplodeSquaredRadius>(false);
             structComponentsContainer.Validate<Project.Common.Components.ExplosionSound>(false);
             structComponentsContainer.Validate<Project.Common.Components.FaceDirection>(false);
             structComponentsContainer.Validate<Project.Common.Components.FireRateAffect>(true);
@@ -398,6 +403,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ForceShieldModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.Freeze>(false);
             structComponentsContainer.Validate<Project.Common.Components.FreezeModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.FreezeStormАffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.GameFinished>(true);
             structComponentsContainer.Validate<Project.Common.Components.GamePaused>(true);
             structComponentsContainer.Validate<Project.Common.Components.GameTimer>(false);
@@ -561,6 +567,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.EMPEffect>(true);
             entity.ValidateData<Project.Common.Components.EMPModifier>(false);
             entity.ValidateData<Project.Common.Components.EMPStormAffect>(true);
+            entity.ValidateData<Project.Common.Components.ExplodeSquaredRadius>(false);
             entity.ValidateData<Project.Common.Components.ExplosionSound>(false);
             entity.ValidateData<Project.Common.Components.FaceDirection>(false);
             entity.ValidateData<Project.Common.Components.FireRateAffect>(true);
@@ -571,6 +578,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ForceShieldModifier>(false);
             entity.ValidateData<Project.Common.Components.Freeze>(false);
             entity.ValidateData<Project.Common.Components.FreezeModifier>(false);
+            entity.ValidateData<Project.Common.Components.FreezeStormАffect>(true);
             entity.ValidateData<Project.Common.Components.GameFinished>(true);
             entity.ValidateData<Project.Common.Components.GamePaused>(true);
             entity.ValidateData<Project.Common.Components.GameTimer>(false);

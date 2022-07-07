@@ -44,6 +44,7 @@ namespace Project.Features.Skills
             //Solaray
             AddSystem<SecondLifeSkillSystem>();
             AddSystem<CriticalHitSkillSystem>();
+            AddSystem<FreezeStormSkillSystem>();
             
             //Universal
             AddSystem<GrenadeThrowSkillSystem>();

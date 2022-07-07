@@ -57,7 +57,5 @@ namespace Project.Features.Skills.Systems.Solaray {
 			
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
         }
-    
     }
-    
 }

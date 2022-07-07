@@ -84,6 +84,11 @@ namespace Project.Common.Components
 	
 	public struct Storm : IComponent {}
 
+	public struct ExplodeSquaredRadius : IComponent
+	{
+		public float Value;
+	}
+	
 	public struct LinearVisual : IComponent {}
 	
 	public struct DamageSource : IComponent {}

@@ -1,22 +1,20 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using UnityEngine;
+using Project.Common.Utilities;
 
-namespace Project.Features.Modifiers.Systems {
+namespace Project.Features.Avatar.Systems {
 
     #pragma warning disable
-    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
-    using Components; using Modules; using Systems; using Markers;
-    #pragma warning restore
+#pragma warning restore
     
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class SecondLifeSkillModifier : ISystemFilter {
+    public sealed class SecondLifeReset : ISystemFilter {
         
-        private ModifiersFeature feature;
+        private AvatarFeature feature;
         
         public World world { get; set; }
         
@@ -36,16 +34,20 @@ namespace Project.Features.Modifiers.Systems {
         Filter ISystemFilter.CreateFilter() {
             
             return Filter.Create("Filter-SecondLifeSkillModifier")
-                .With<SecondLifeModifier>()
+                .With<SecondLifeAffect>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            entity.Get<PlayerHealth>().Value = entity.Read<PlayerHealthDefault>().Value * 0.3f;
-            entity.Remove<PlayerDead>();
-            entity.Remove<SecondLifeModifier>();
+            var avatar = entity.Owner().Avatar();
+
+            if(!avatar.Has<PlayerDead>()) return;
+            
+            avatar.Get<PlayerHealth>().Value = avatar.Read<PlayerHealthDefault>().Value * 0.3f;
+            avatar.Remove<PlayerDead>();
+            avatar.Set<SecondLifeModifier>();
         }
     }
 }

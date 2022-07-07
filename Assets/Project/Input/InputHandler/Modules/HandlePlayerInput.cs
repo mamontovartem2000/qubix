@@ -53,18 +53,9 @@ namespace Project.Input.InputHandler.Modules
             _input.Player.Skill4.performed += ctx => world.AddMarker(new FourthSkillMarker {ActorID = NetworkData.SlotInRoom});
             _input.Player.Tabulation.performed += ctx => world.AddMarker(new TabulationMarker {State = InputState.Pressed});
             _input.Player.Tabulation.canceled += ctx => world.AddMarker(new TabulationMarker {State = InputState.Released});
-            
-            _input.Player.Screenshot.performed += ctx => Screenshot();
-            _input.Player.Reload.performed += ctx => world.AddMarker(new ReloadMarker());
-        }
 
-        private void Screenshot()
-        {
-            string date = System.DateTime.Now.ToString();
-            date = date.Replace("/","-");
-            date = date.Replace(" ","_");
-            date = date.Replace(":","-");
-            ScreenCapture.CaptureScreenshot( date + ".png", 2);
+            _input.Player.Screenshot.performed += ctx => world.AddMarker(new ScreenshotMarker());
+            _input.Player.Reload.performed += ctx => world.AddMarker(new ReloadMarker());
         }
 
         private void ForwardPressed()

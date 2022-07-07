@@ -27,12 +27,12 @@ namespace Project.Features.Avatar
         {
             //(De-)spawn systems
             AddSystem<SpawnPlayerAvatarSystem>();
-            
 
             //Damage systems
             AddSystem<ApplyHealSystem>();
             AddSystem<ApplyDamageSystem>();
-
+            AddSystem<SecondLifeReset>();
+            
             //Visual health bar
             AddSystem<BlinkHurtSystem>();
             AddSystem<PlayerHealthVisualSystem>();

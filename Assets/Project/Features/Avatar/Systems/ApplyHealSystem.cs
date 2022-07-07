@@ -38,6 +38,7 @@ namespace Project.Features.Avatar.Systems {
                 .With<ApplyHeal>()
                 .With<PlayerHealth>()
                 .With<AvatarTag>()
+                .WithoutShared<GameFinished>()
                 .Push();
         }
 

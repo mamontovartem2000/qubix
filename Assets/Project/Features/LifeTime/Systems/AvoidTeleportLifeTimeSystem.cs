@@ -39,11 +39,12 @@ namespace Project.Features.LifeTime.Systems {
     
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
         {
-            ref var avoid = ref entity.Get<AvoidTeleport>().Value;
-            avoid -= deltaTime;
+            ref var avoidTime = ref entity.Get<AvoidTeleport>().Value;
+            avoidTime -= deltaTime;
             
-            if (avoid <= 0f)
-                entity.Remove<AvoidTeleport>();
+            if (avoidTime > 0f) return;
+            
+            entity.Remove<AvoidTeleport>();
         }
     }
 }

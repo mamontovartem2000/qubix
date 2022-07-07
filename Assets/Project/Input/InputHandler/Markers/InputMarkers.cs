@@ -44,5 +44,6 @@ namespace Project.Input.InputHandler.Markers
         public InputState State;
     }
     public struct ReloadMarker : IMarker {}
+    public struct ScreenshotMarker : IMarker {}
     
 }

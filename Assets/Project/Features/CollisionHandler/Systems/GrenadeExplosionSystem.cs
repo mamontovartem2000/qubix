@@ -54,21 +54,16 @@ namespace Project.Features.CollisionHandler.Systems
         {
             foreach (var player in _playerFilter)
             {
-                if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude >
-                    (fp) Consts.Weapons.GRENADE_EXPLOSION_SQUARED_RADIUS) continue;
+                if ((player.GetPosition() - entity.GetPosition()).sqrMagnitude > entity.Read<ExplodeSquaredRadius>().Value) continue;
 
                 var debuff = new Entity("debuff");
                 debuff.Get<Owner>().Value = entity.Read<Owner>().Value;
                 entity.Read<SecondaryDamage>().Value.Apply(debuff);
                 debuff.Set(new ProjectileActive());
                 debuff.Set(new CollisionDynamic());
+                debuff.Set(new LifeTimeLeft { Value = 0.5f});
                 
-                debuff.SetPosition(SceneUtils.SafeCheckPosition(player.GetPosition()));
-                
-                // if (!debuff.Has<Slowness>()) continue;
-                //
-                // player.Get<Slowness>().Value = debuff.Read<Slowness>().Value / 100;
-                // player.Get<Slowness>().LifeTime = debuff.Read<Slowness>().LifeTime;
+                debuff.SetPosition(player.GetPosition());
             }
 
             if (entity.Read<SecondaryDamage>().Value.Has<Slowness>())

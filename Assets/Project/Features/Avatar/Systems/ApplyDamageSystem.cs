@@ -32,6 +32,7 @@ namespace Project.Features.Avatar.Systems
         {
             return Filter.Create("Filter-ApplyDamageSystem")
                 .With<ApplyDamage>()
+                .WithoutShared<GameFinished>()
                 .Push();
         }
 
@@ -54,7 +55,7 @@ namespace Project.Features.Avatar.Systems
                 Worlds.current.GetFeature<EventsFeature>().PlaySoundPrivate.Execute(from.Avatar());
             }
 
-            if (health/apply.ApplyTo.Read<PlayerHealthDefault>().Value < 0.65f) // TODO: hueta movew this
+            if (health/apply.ApplyTo.Read<PlayerHealthDefault>().Value < 0.65f) // TODO: hueta move this
             {
                 to.Set(new PlayerDamaged { Value = 1f });
                 to.Get<PlayerDamagedCounter>().Value += 0.1f;
