@@ -7,7 +7,6 @@ using UnityEngine;
 namespace Project.Common.Components
 {
     public struct AvatarTag : IComponent {}
-    public struct AvatarView : IComponent {public MonoBehaviourViewBase Value;}
     public struct PlayerAvatar : IComponent {public Entity Value;}
     public struct RespawnTime : IComponent {public float Value;}
     public struct FaceDirection : IComponent {public Vector3 Value;}

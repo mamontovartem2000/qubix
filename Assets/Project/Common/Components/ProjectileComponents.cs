@@ -5,11 +5,6 @@ using UnityEngine;
 
 namespace Project.Common.Components
 {
-	public struct ProjectileView : IComponent
-	{
-		public MonoBehaviourViewBase Value;
-	}
-	
 	public struct ProjectileAlternativeView : IComponent
 	{
 		public MonoBehaviourViewBase Value;

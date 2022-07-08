@@ -17,7 +17,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyHeal>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvoidTeleport>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BlinkAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BridgeTile>(false, true, false, false, false, false, false, false);
@@ -129,7 +128,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDirection>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileSpeed>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RespawnTime>(false, true, false, false, false, false, false, false);
@@ -168,12 +166,13 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.VFXConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.VFXTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ViewModel>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponCritChanceDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponView>(false, true, false, false, false, false, false, false);
 
         }
 
@@ -192,7 +191,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ApplyHeal>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvoidTeleport>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BlinkAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BridgeTile>(false, true, false, false, false, false, false, false);
@@ -304,7 +302,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDirection>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileSpeed>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RespawnTime>(false, true, false, false, false, false, false, false);
@@ -343,12 +340,13 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TrajectoryWeapon>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.VFXConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.VFXTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ViewModel>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponCritChanceDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponView>(false, true, false, false, false, false, false, false);
 
             ComponentsInitializerWorld.Setup(ComponentsInitializerWorldGen.Init);
             CoreComponentsInitializer.Init(ref structComponentsContainer);
@@ -362,7 +360,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ApplyHeal>(false);
             structComponentsContainer.Validate<Project.Common.Components.AutomaticWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvatarTag>(true);
-            structComponentsContainer.Validate<Project.Common.Components.AvatarView>(false);
             structComponentsContainer.Validate<Project.Common.Components.AvoidTeleport>(false);
             structComponentsContainer.Validate<Project.Common.Components.BlinkAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.BridgeTile>(false);
@@ -474,7 +471,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDamage>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDirection>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileSpeed>(false);
-            structComponentsContainer.Validate<Project.Common.Components.ProjectileView>(false);
             structComponentsContainer.Validate<Project.Common.Components.ReloadTime>(false);
             structComponentsContainer.Validate<Project.Common.Components.ReloadTimeDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.RespawnTime>(false);
@@ -513,12 +509,13 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.TileView>(false);
             structComponentsContainer.Validate<Project.Common.Components.Trajectory>(false);
             structComponentsContainer.Validate<Project.Common.Components.TrajectoryWeapon>(true);
+            structComponentsContainer.Validate<Project.Common.Components.VFXConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.VFXTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.ViewModel>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponAim>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponCritChanceDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponEntities>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponPosition>(false);
-            structComponentsContainer.Validate<Project.Common.Components.WeaponView>(false);
 
         }
 
@@ -537,7 +534,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ApplyHeal>(false);
             entity.ValidateData<Project.Common.Components.AutomaticWeapon>(true);
             entity.ValidateData<Project.Common.Components.AvatarTag>(true);
-            entity.ValidateData<Project.Common.Components.AvatarView>(false);
             entity.ValidateData<Project.Common.Components.AvoidTeleport>(false);
             entity.ValidateData<Project.Common.Components.BlinkAffect>(true);
             entity.ValidateData<Project.Common.Components.BridgeTile>(false);
@@ -649,7 +645,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ProjectileDamage>(false);
             entity.ValidateData<Project.Common.Components.ProjectileDirection>(false);
             entity.ValidateData<Project.Common.Components.ProjectileSpeed>(false);
-            entity.ValidateData<Project.Common.Components.ProjectileView>(false);
             entity.ValidateData<Project.Common.Components.ReloadTime>(false);
             entity.ValidateData<Project.Common.Components.ReloadTimeDefault>(false);
             entity.ValidateData<Project.Common.Components.RespawnTime>(false);
@@ -688,12 +683,13 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.TileView>(false);
             entity.ValidateData<Project.Common.Components.Trajectory>(false);
             entity.ValidateData<Project.Common.Components.TrajectoryWeapon>(true);
+            entity.ValidateData<Project.Common.Components.VFXConfig>(false);
             entity.ValidateData<Project.Common.Components.VFXTag>(true);
+            entity.ValidateData<Project.Common.Components.ViewModel>(false);
             entity.ValidateData<Project.Common.Components.WeaponAim>(false);
             entity.ValidateData<Project.Common.Components.WeaponCritChanceDefault>(false);
             entity.ValidateData<Project.Common.Components.WeaponEntities>(false);
             entity.ValidateData<Project.Common.Components.WeaponPosition>(false);
-            entity.ValidateData<Project.Common.Components.WeaponView>(false);
 
         }
 

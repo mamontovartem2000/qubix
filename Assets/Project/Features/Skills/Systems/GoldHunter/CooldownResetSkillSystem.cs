@@ -54,7 +54,7 @@ namespace Project.Features.Skills.Systems.GoldHunter
 			SoundUtils.PlaySound(avatar, "event:/Skills/GoldHunter/CurcuitBurst");
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			_vfx.SpawnVFX(VFXFeature.VFXType.SkillCurcuitBurts, avatar.GetPosition(), avatar);
+			_vfx.SpawnVFX(VFXFeature.VFXType.SkillReloadVFX, avatar.GetPosition(), avatar);
 		}
 	}
 }

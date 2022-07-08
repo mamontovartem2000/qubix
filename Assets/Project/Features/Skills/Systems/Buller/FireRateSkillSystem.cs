@@ -61,7 +61,7 @@ namespace Project.Features.Skills.Systems.Buller
 			world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Owner());
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			_vfx.SpawnVFX(VFXFeature.VFXType.SkillOffenciveBurst, avatar.GetPosition(), avatar);
+			_vfx.SpawnVFX(VFXFeature.VFXType.SkillMoreAmmoVFX, avatar.GetPosition(), avatar);
 		}
 	}
 }

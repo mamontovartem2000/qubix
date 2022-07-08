@@ -57,7 +57,7 @@ namespace Project.Features.Skills.Systems.Universal {
 
             storm.SetPosition(avatar.GetPosition());
 			
-            var view = world.RegisterViewSource(storm.Read<ProjectileView>().Value);
+            var view = world.RegisterViewSource(storm.Read<ViewModel>().Value);
             storm.InstantiateView(view);
         }
     }

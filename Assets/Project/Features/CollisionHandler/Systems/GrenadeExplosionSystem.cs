@@ -65,23 +65,25 @@ namespace Project.Features.CollisionHandler.Systems
                 
                 debuff.SetPosition(player.GetPosition());
             }
-
-            if (entity.Read<SecondaryDamage>().Value.Has<Slowness>())
-            {
-                _vfx.SpawnVFX(VFXFeature.VFXType.SlowExplosion, entity.GetPosition());
-            } 
-            else if (entity.Read<SecondaryDamage>().Value.Has<EMPModifier>())
-            {
-                _vfx.SpawnVFX(VFXFeature.VFXType.EMPExplosion, entity.GetPosition());
-            }
-            else if (entity.Read<SecondaryDamage>().Value.Has<FreezeModifier>())
-            {
-                _vfx.SpawnVFX(VFXFeature.VFXType.FreezeGrenade, entity.GetPosition());
-            }
-            else
-            {
-                _vfx.SpawnVFX(VFXFeature.VFXType.GrenadeVFX, entity.GetPosition());
-            }
+            
+            _vfx.SpawnVFX(entity);
+            
+            // if (entity.Read<SecondaryDamage>().Value.Has<Slowness>())
+            // {
+            //     _vfx.SpawnVFX(VFXFeature.VFXType.SlowGrenadeExplosionVFX, entity.GetPosition());
+            // } 
+            // else if (entity.Read<SecondaryDamage>().Value.Has<EMPModifier>())
+            // {
+            //     _vfx.SpawnVFX(VFXFeature.VFXType.EMPGrenadeExplosionVFX, entity.GetPosition());
+            // }
+            // else if (entity.Read<SecondaryDamage>().Value.Has<FreezeModifier>())
+            // {
+            //     _vfx.SpawnVFX(VFXFeature.VFXType.FreezeGrenadeExplosionVFX, entity.GetPosition());
+            // }
+            // else
+            // {
+            //     _vfx.SpawnVFX(VFXFeature.VFXType.AssaultGrenadeExplosionVFX, entity.GetPosition());
+            // }
 
             entity.Destroy();
         }

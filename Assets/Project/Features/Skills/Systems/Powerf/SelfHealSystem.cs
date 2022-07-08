@@ -52,7 +52,7 @@ namespace Project.Features.Skills.Systems.Powerf
             
             world.GetFeature<EventsFeature>().HealthChanged.Execute(owner);
             
-            _vfx.SpawnVFX(VFXFeature.VFXType.SkillHeal, avatar.GetPosition(), avatar);
+            _vfx.SpawnVFX(VFXFeature.VFXType.SkillHealVFX, avatar.GetPosition(), avatar);
         }
     }
 }

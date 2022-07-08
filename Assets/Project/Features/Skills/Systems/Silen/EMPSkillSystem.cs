@@ -66,7 +66,7 @@ namespace Project.Features.Skills.Systems.Silen {
             world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(owner);
 
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-            _vfx.SpawnVFX(VFXFeature.VFXType.SkillEMPBullets, avatar.GetPosition(), avatar);
+            _vfx.SpawnVFX(VFXFeature.VFXType.SkillEMPBulletsVFX, avatar.GetPosition(), avatar);
         }
     
     }

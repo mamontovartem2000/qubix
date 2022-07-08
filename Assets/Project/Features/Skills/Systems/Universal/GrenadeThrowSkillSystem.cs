@@ -53,7 +53,7 @@ namespace Project.Features.Skills.Systems.Universal
 			
 			SoundUtils.PlaySound(avatar, "event:/Skills/Buller/ThrowGrenade");
 			
-			var view = world.RegisterViewSource(grenade.Read<ProjectileView>().Value);
+			var view = world.RegisterViewSource(grenade.Read<ViewModel>().Value);
             grenade.InstantiateView(view);
 		}
 	}

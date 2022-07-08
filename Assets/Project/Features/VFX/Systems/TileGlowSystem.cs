@@ -45,26 +45,26 @@ namespace Project.Features.VFX.Systems {
 
             if (entity.Has<DestructibleTag>())
             {
-                amount += up ? 0.04 : -0.05;
+                amount += up ? 0.04f : -0.05f;
                 
-                if (amount >= 4.5)
+                if (amount >= 4.5f)
                 {
                     up = false;
                 }
-                else if (amount <= 1.5)
+                else if (amount <= 1.5f)
                 {
                     up = true;
                 }
             }
             else
             {
-                amount += up ? 0.04 : -0.04;
+                amount += up ? 0.04f : -0.04f;
                 
-                if (amount >= 2.9)
+                if (amount >= 2.9f)
                 {
                     up = false;
                 }
-                else if (amount <= 1.0)
+                else if (amount <= 1.0f)
                 {
                     up = true;
                 }

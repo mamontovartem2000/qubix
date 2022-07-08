@@ -15,21 +15,20 @@ namespace Project.Features.VFX
 #endif
 	public sealed class VFXFeature : Feature
 	{
-		public MonoBehaviourViewBase[] Views;
-		private ViewId[] _viewIds;
+		// public MonoBehaviourViewBase[] Views;
+		// private ViewId[] _viewIds;
 		
 		protected override void OnConstruct()
 		{
-			AddSystem<VFXPlayerFollowingSystem>();
 			AddSystem<PlayerHoverSystem>();
 			AddSystem<TileGlowSystem>();
 			
-			_viewIds = new ViewId[Views.Length];
-			
-			for (int i = 0; i < Views.Length; i++)
-			{
-				_viewIds[i] = world.RegisterViewSource(Views[i]);
-			}
+			// _viewIds = new ViewId[Views.Length];
+			//
+			// for (int i = 0; i < Views.Length; i++)
+			// {
+			// 	_viewIds[i] = world.RegisterViewSource(Views[i]);
+			// }
 		}
 
 		protected override void OnDeconstruct() {}
@@ -37,70 +36,74 @@ namespace Project.Features.VFX
 		public void SpawnVFX(VFXType type, Vector3 position, Entity player)
 		{
 			if(!player.IsAlive()) return;
-			
+			//
+			// var fx = new Entity("vfx");
+			// fx.Get<LifeTimeLeft>().Value = 4;
+			// fx.Set(new Owner { Value = player.Owner() });
+			// fx.SetPosition(position);
+			// fx.SetRotation(player.GetRotation());
+			// fx.SetParent(player);
+			// fx.InstantiateView(_viewIds[(int)type]);
+		}
+
+		public void SpawnVFX(Entity parent)
+		{
 			var fx = new Entity("vfx");
+			parent.Read<VFXConfig>().Value.Apply(fx);
+
 			fx.Get<LifeTimeLeft>().Value = 4;
-			fx.Set(new Owner { Value = player.Owner() });
-			fx.SetLocalPosition(position);
-			fx.SetLocalRotation(player.GetRotation());
-			fx.SetParent(player);
-			fx.InstantiateView(_viewIds[(int)type]);
+			fx.SetPosition(parent.GetPosition());
+			
+			var _viewId = world.RegisterViewSource(fx.Read<ViewModel>().Value);
+			fx.InstantiateView(_viewId);
 		}
 		
-		public void SpawnVFX(VFXType type, Vector3 position, Entity player, float lifeTime)
-		{
-			if(!player.IsAlive()) return;
-
-			var fx = new Entity("vfx");
-			fx.Get<LifeTimeLeft>().Value = lifeTime;
-			fx.Set(new Owner { Value = player.Owner() });
-			fx.SetLocalPosition(position);
-			fx.SetParent(player);
-			fx.InstantiateView(_viewIds[(int)type]);
-		}
-
-		public void SpawnVFX(VFXType type, Vector3 position)
+		public void SpawnVFX(Entity parent, Vector3 position)
 		{
 			var fx = new Entity("vfx");
+			parent.Read<VFXConfig>().Value.Apply(fx);
+
 			fx.Get<LifeTimeLeft>().Value = 4;
-			fx.SetLocalPosition(position);
-			fx.InstantiateView(_viewIds[(int)type]);
+			fx.SetPosition(position);
+
+			var _viewId = world.RegisterViewSource(fx.Read<ViewModel>().Value);
+			fx.InstantiateView(_viewId);
 		}
 		
 		public enum VFXType
 		{
 			BulletExplosion,
-			BulletWallVFX,
+			BulletHitWallVFX,
 			MinigunMuzzle,
 			MingunShoot,
 			PlayerDeath,
 			PlayerFire,
-			PlayerShield,
+			HardShieldVFX,
 			PlayerTakeDamage,
-			PlayerTelerortIn,
-			PlayerTeleportOut,
+			TelerortInVFX,
+			TeleportOutVFX,
 			ShotgunMuzzle,
-			TakeHealth,
+			HealVFX,
 			SkillBlink,
-			SkillCurcuitBurts,
-			SkillHeal,
-			SkillQuickdraw,
+			SkillReloadVFX,
+			SkillHealVFX,
+			SkillGunsReloadVFX,
 			SkillSlow,
-			StatusStunEffect,
-			SkillStun,
-			SkillOffenciveBurst,
-			SkillQuickness,
-			SkillLinearPower,
-			QubixDeath,
-			SlowExplosion,
-			SpeedTrail,
-			MineExplosion,
-			GrenadeVFX,
-			EMPExplosion,
-			SkillDash,
-			SkillEMPBullets,
-			EMP,
-			FreezeGrenade
+			SkillStunVFX,
+			StunEffect,
+			SkillMoreAmmoVFX,
+			SkillSpeedIncreaseVFX,
+			SkillLinearPowerIncreaceVFX,
+			QubixDeathVFX,
+			SlowGrenadeExplosionVFX,
+			SpeedTrailVFX,
+			MineExplosionVFX,
+			AssaultGrenadeExplosionVFX,
+			EMPGrenadeExplosionVFX,
+			SkillDashVFX,
+			SkillEMPBulletsVFX,
+			EMPVFX,
+			FreezeGrenadeExplosionVFX
 		}
 	}
 }

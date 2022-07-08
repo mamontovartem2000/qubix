@@ -59,7 +59,7 @@ namespace Project.Features.Avatar.Systems
 
             SceneUtils.ModifyWalkable(entity.Read<PlayerMoveTarget>().Value, true);
             
-            _vfx.SpawnVFX(VFXFeature.VFXType.QubixDeath, entity.GetPosition());
+            // _vfx.SpawnVFX(VFXFeature.VFXType.QubixDeathVFX, entity.GetPosition());
             player.Remove<PlayerAvatar>();
             entity.Destroy();
         }

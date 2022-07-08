@@ -62,6 +62,6 @@ namespace Project.Common.Components
 	public struct GlowTile : IComponent
 	{
 		public bool Direction;
-		public fp Amount;
+		public float Amount;
 	}
 }

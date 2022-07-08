@@ -68,8 +68,8 @@ namespace Project.Features.PostLogicTick.Systems
 			player.Get<PlayerMoveTarget>().Value = pos;
 			entity.Remove<Collided>();
 
-			_vfx.SpawnVFX(VFXFeature.VFXType.PlayerTelerortIn, entity.GetPosition());
-			_vfx.SpawnVFX(VFXFeature.VFXType.PlayerTeleportOut, pos);
+			// _vfx.SpawnVFX(VFXFeature.VFXType.TelerortInVFX, entity.GetPosition());
+			// _vfx.SpawnVFX(VFXFeature.VFXType.TeleportOutVFX, pos);
 		}
 	}
 }

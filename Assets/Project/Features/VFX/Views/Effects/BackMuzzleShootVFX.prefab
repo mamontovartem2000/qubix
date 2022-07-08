@@ -4845,7 +4845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7135187816430425593}
-  - component: {fileID: 4930256591724359593}
+  - component: {fileID: -205547591058239183}
   m_Layer: 0
   m_Name: BackMuzzleShootVFX
   m_TagString: Untagged
@@ -4868,7 +4868,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4930256591724359593
+--- !u!114 &-205547591058239183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4877,7 +4877,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7135187816430425594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a39d772bc1e4d554db9d2fc7f73cd6f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 657038ccf4379e84483bc1ed9d19f547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystemSimulation:

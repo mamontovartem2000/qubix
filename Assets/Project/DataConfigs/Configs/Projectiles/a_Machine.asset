@@ -19,12 +19,13 @@ MonoBehaviour:
   - id: 2
   - id: 3
   - id: 4
+  - id: 5
   removeStructComponents: []
   templates: []
   references:
     version: 1
     00000000:
-      type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: ViewModel, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: -3269953783144916446, guid: c08957f3a19eefa439bb1cd70cb5fb6d, type: 3}
     00000001:
@@ -41,3 +42,7 @@ MonoBehaviour:
         Value: 1.5
     00000004:
       type: {class: CollisionDynamic, ns: Project.Common.Components, asm: Project.Common}
+    00000005:
+      type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: dd40bd13da181e442b84eae343273551, type: 2}

@@ -21,12 +21,13 @@ MonoBehaviour:
   - id: 4
   - id: 5
   - id: 6
+  - id: 7
   removeStructComponents: []
   templates: []
   references:
     version: 1
     00000000:
-      type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: ViewModel, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: -9175002760059649703, guid: dd4f011eb23e9864cb3a8e2bfe355954, type: 3}
     00000001:
@@ -51,3 +52,7 @@ MonoBehaviour:
       type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: event:/Explosions/Grenade
+    00000007:
+      type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: 5bf4b00b6ddcae8499aa330ee501a522, type: 2}

@@ -51,7 +51,7 @@ namespace Project.Features.Projectile
                 entity.Set(new CriticalHit());
             }
             
-            var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
+            var view = world.RegisterViewSource(entity.Read<ViewModel>().Value);
             entity.InstantiateView(view);
             
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(gun.Get<Owner>().Value);
@@ -90,7 +90,7 @@ namespace Project.Features.Projectile
                     entity.Set(new CriticalHit());
                 }
 
-                var view = world.RegisterViewSource(entity.Read<ProjectileView>().Value);
+                var view = world.RegisterViewSource(entity.Read<ViewModel>().Value);
                 entity.InstantiateView(view);
             }
             
@@ -121,13 +121,13 @@ namespace Project.Features.Projectile
             visual.SetLocalRotation(gun.GetLocalRotation());
 
             visual.InstantiateView(gun.Read<LinearPowerModifier>().Damage > 1.4f
-                ? world.RegisterViewSource(gun.Read<ProjectileAlternativeView>().Value)
-                : world.RegisterViewSource(gun.Read<ProjectileView>().Value));
+                ? world.RegisterViewSource(gun.Read<ProjectileConfig>().Value.Read<ProjectileAlternativeView>().Value)
+                : world.RegisterViewSource(gun.Read<ProjectileConfig>().Value.Read<ViewModel>().Value));
         }
 
         public void SpawnMelee(in Entity entity, Entity gun)
         {
-            ref readonly var view = ref entity.Read<ProjectileView>().Value;
+            ref readonly var view = ref entity.Read<ViewModel>().Value;
 
             var vId = world.RegisterViewSource(view);
             entity.Set(new CollisionDynamic(), ComponentLifetime.NotifyAllSystems);

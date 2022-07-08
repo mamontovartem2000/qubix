@@ -61,7 +61,7 @@ namespace Project.Features.Skills.Systems.GoldHunter
 			world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(owner);
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-            _vfx.SpawnVFX(VFXFeature.VFXType.StatusStunEffect, avatar.GetPosition(), avatar);
+            _vfx.SpawnVFX(VFXFeature.VFXType.SkillStunVFX, avatar.GetPosition(), avatar);
 		}
 	}
 }

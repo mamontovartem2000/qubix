@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 770650862806399737}
-  - component: {fileID: 8582505695685579999}
+  - component: {fileID: 3776925797203418963}
   m_Layer: 0
   m_Name: LaserBeam
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8582505695685579999
+--- !u!114 &3776925797203418963
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 770650862806399738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef1a0307999310d4287c74afdbf010d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 657038ccf4379e84483bc1ed9d19f547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystemSimulation:

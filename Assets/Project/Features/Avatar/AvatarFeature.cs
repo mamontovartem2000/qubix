@@ -63,7 +63,7 @@ namespace Project.Features.Avatar
             var entity = new Entity("avatar");
             owner.Read<PlayerConfig>().AvatarConfig.Apply(entity);
 
-            var view = world.RegisterViewSource(entity.Read<AvatarView>().Value);
+            var view = world.RegisterViewSource(entity.Read<ViewModel>().Value);
             entity.InstantiateView(view);
 
             entity.Get<Owner>().Value = owner;
@@ -109,7 +109,7 @@ namespace Project.Features.Avatar
             weapon.Get<WeaponAim>().Value = aim;
             weapon.Get<AmmoCapacity>().Value = weapon.Read<AmmoCapacityDefault>().Value;
 
-            var view = world.RegisterViewSource(weapon.Read<WeaponView>().Value);
+            var view = world.RegisterViewSource(weapon.Read<ViewModel>().Value);
             weapon.InstantiateView(view);
 
             weapon.Get<Owner>().Value = parent.Get<Owner>().Value;

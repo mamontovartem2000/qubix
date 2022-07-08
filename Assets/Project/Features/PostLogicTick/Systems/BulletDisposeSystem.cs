@@ -42,8 +42,6 @@ namespace Project.Features.PostLogicTick.Systems
 			if (entity.TryReadCollided(out var from, out var owner) == false) return;
 			ref readonly var damage = ref entity.Read<ProjectileDamage>().Value;
 
-			var pos = owner.GetPosition();
-
 			if (owner.Has<PlayerAvatar>())
 			{
 				var player = owner.Avatar();
@@ -57,7 +55,7 @@ namespace Project.Features.PostLogicTick.Systems
 			}
 			else
 			{
-				_vfx.SpawnVFX(VFXFeature.VFXType.BulletWallVFX, pos);
+				_vfx.SpawnVFX(entity, owner.GetPosition());
 			}
 
 			if (owner.Has<DestructibleTag>())

@@ -21,12 +21,13 @@ MonoBehaviour:
   - id: 4
   - id: 5
   - id: 6
+  - id: 7
   removeStructComponents: []
   templates: []
   references:
     version: 1
     00000000:
-      type: {class: ProjectileView, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: ViewModel, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 7835914630144697959, guid: 7644c1f564527e44086a5c0195ab3fa3, type: 3}
     00000001:
@@ -51,3 +52,7 @@ MonoBehaviour:
       type: {class: ExplodeSquaredRadius, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 10
+    00000007:
+      type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: 7f4454e7b1063e64c921aec6aeb37318, type: 2}

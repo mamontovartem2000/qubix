@@ -9841,7 +9841,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5115368095046013359}
-  - component: {fileID: 5891438525712314593}
+  - component: {fileID: 5198779510413680352}
   m_Layer: 0
   m_Name: PlayerTeleport
   m_TagString: Untagged
@@ -9865,7 +9865,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5891438525712314593
+--- !u!114 &5198779510413680352
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9874,7 +9874,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2558371715665421771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2a2f49690ad39e4d8862898bcde7bc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 657038ccf4379e84483bc1ed9d19f547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystemSimulation:
