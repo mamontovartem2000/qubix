@@ -55,7 +55,7 @@ namespace Project.Features.Skills.Systems.Buller
             
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
-            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar.GetPosition());
+            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar, 2);
         }
     }
 }

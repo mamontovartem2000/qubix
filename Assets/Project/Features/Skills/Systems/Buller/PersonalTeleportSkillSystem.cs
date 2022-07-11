@@ -86,6 +86,8 @@ namespace Project.Features.Skills.Systems.Buller
             }
             while (!SceneUtils.IsWalkable(new fp3(randomPlayerPos.x, 0, randomPlayerPos.z)));
 
+            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar.GetPosition());
+            
             SceneUtils.ModifyWalkable(avatar.Read<PlayerMoveTarget>().Value, true);
             SceneUtils.ModifyWalkable(new fp3(randomPlayerPos.x, 0, randomPlayerPos.z), false);
             
@@ -95,9 +97,6 @@ namespace Project.Features.Skills.Systems.Buller
             SoundUtils.PlaySound(avatar, "event:/VFX/TeleportOut");
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-            
-            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar.GetPosition());
-            
         }
     }
 }
