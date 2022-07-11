@@ -19,6 +19,7 @@ MonoBehaviour:
   - id: 2
   - id: 3
   - id: 4
+  - id: 5
   removeStructComponents: []
   templates: []
   references:
@@ -40,4 +41,8 @@ MonoBehaviour:
       data:
         Value: 4
     00000004:
+      type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: 91563a2f3cf8bc3409f044522fa34037, type: 2}
+    00000005:
       type: {class: CriticalHitAffect, ns: Project.Common.Components, asm: Project.Common}

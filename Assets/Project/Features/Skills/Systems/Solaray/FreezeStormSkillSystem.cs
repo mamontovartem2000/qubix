@@ -49,6 +49,7 @@ namespace Project.Features.Skills.Systems.Solaray {
 			
             var effect = new Entity("effect");
             effect.Get<Owner>().Value = owner;
+            effect.SetPosition(avatar.GetPosition());
             effect.Set(new GrenadeExplode());
             effect.Set(new Grenade());
 

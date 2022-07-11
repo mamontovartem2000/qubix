@@ -62,7 +62,7 @@ namespace Project.Features.Skills.Systems.Powerf
 
 			SoundUtils.PlaySound(avatar, "event:/Skills/Powerf/LinearPower");
 
-			_vfx.SpawnVFX(VFXFeature.VFXType.SkillLinearPowerIncreaceVFX, avatar.GetPosition(), avatar);
+			_vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar.GetPosition());
 		}
 	}
 }

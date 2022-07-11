@@ -45,14 +45,11 @@ namespace Project.Features.Skills.Systems.Powerf
             if (avatar.IsAlive() == false) return;
 
             avatar.Set(new ApplyHeal { Value = entity.Read<SkillAmount>().Value}, ComponentLifetime.NotifyAllSystems);
-            
-            // var collision = new Entity("collision");
-			// collision.Set(new ApplyDamage {ApplyTo = avatar, ApplyFrom = avatar, Damage = -entity.Read<SkillAmount>().Value}, ComponentLifetime.NotifyAllSystems);
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
             world.GetFeature<EventsFeature>().HealthChanged.Execute(owner);
             
-            _vfx.SpawnVFX(VFXFeature.VFXType.SkillHealVFX, avatar.GetPosition(), avatar);
+            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar.GetPosition());
         }
     }
 }

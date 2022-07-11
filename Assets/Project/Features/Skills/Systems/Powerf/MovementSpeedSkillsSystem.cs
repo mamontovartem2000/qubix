@@ -55,7 +55,7 @@ namespace Project.Features.Skills.Systems.Powerf
 			SoundUtils.PlaySound(avatar, "event:/Skills/Powerf/MovementSpeedIncreace");
 			
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-			_vfx.SpawnVFX(VFXFeature.VFXType.SkillSpeedIncreaseVFX, avatar.GetPosition(),avatar);
+			_vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar, entity.Read<SkillDurationDefault>().Value);
 		}
 	}
 }

@@ -18,11 +18,10 @@ namespace Project.Features.Skills
     #endregion
     public sealed class SkillsFeature : Feature
     {
-        // ReSharper disable Unity.PerformanceAnalysis
         protected override void OnConstruct()
         {
             //Buller
-            AddSystem<FireRateSkillSystem>();
+            AddSystem<AmmoCapacityIncreaceSkillSystem>();
             AddSystem<PersonalTeleportSkillSystem>();
             AddSystem<InstantReloadSkillSystem>();
             

@@ -1,5 +1,6 @@
 ﻿using FlatBuffers;
 using ME.ECS;
+using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Common.Utilities;
@@ -15,95 +16,40 @@ namespace Project.Features.VFX
 #endif
 	public sealed class VFXFeature : Feature
 	{
-		// public MonoBehaviourViewBase[] Views;
-		// private ViewId[] _viewIds;
-		
 		protected override void OnConstruct()
 		{
 			AddSystem<PlayerHoverSystem>();
 			AddSystem<TileGlowSystem>();
-			
-			// _viewIds = new ViewId[Views.Length];
-			//
-			// for (int i = 0; i < Views.Length; i++)
-			// {
-			// 	_viewIds[i] = world.RegisterViewSource(Views[i]);
-			// }
 		}
 
 		protected override void OnDeconstruct() {}
 		
-		public void SpawnVFX(VFXType type, Vector3 position, Entity player)
+		public void SpawnVFX(DataConfig vfxConfig, Entity parent, float lifeTime)
 		{
-			if(!player.IsAlive()) return;
-			//
-			// var fx = new Entity("vfx");
-			// fx.Get<LifeTimeLeft>().Value = 4;
-			// fx.Set(new Owner { Value = player.Owner() });
-			// fx.SetPosition(position);
-			// fx.SetRotation(player.GetRotation());
-			// fx.SetParent(player);
-			// fx.InstantiateView(_viewIds[(int)type]);
-		}
-
-		public void SpawnVFX(Entity parent)
-		{
+			if(!parent.IsAlive()) return;
+			
 			var fx = new Entity("vfx");
-			parent.Read<VFXConfig>().Value.Apply(fx);
+			vfxConfig.Apply(fx);
 
-			fx.Get<LifeTimeLeft>().Value = 4;
+			fx.Get<LifeTimeLeft>().Value = lifeTime;
 			fx.SetPosition(parent.GetPosition());
+			fx.SetRotation(parent.GetRotation());
+			fx.SetParent(parent);
 			
 			var _viewId = world.RegisterViewSource(fx.Read<ViewModel>().Value);
 			fx.InstantiateView(_viewId);
 		}
-		
-		public void SpawnVFX(Entity parent, Vector3 position)
+
+		public void SpawnVFX(DataConfig vfxConfig, Vector3 position)
 		{
 			var fx = new Entity("vfx");
-			parent.Read<VFXConfig>().Value.Apply(fx);
+			vfxConfig.Apply(fx);
 
-			fx.Get<LifeTimeLeft>().Value = 4;
+			fx.Get<LifeTimeLeft>().Value = Consts.Main.DEFAULT_LIFETIME;
 			fx.SetPosition(position);
 
 			var _viewId = world.RegisterViewSource(fx.Read<ViewModel>().Value);
 			fx.InstantiateView(_viewId);
-		}
-		
-		public enum VFXType
-		{
-			BulletExplosion,
-			BulletHitWallVFX,
-			MinigunMuzzle,
-			MingunShoot,
-			PlayerDeath,
-			PlayerFire,
-			HardShieldVFX,
-			PlayerTakeDamage,
-			TelerortInVFX,
-			TeleportOutVFX,
-			ShotgunMuzzle,
-			HealVFX,
-			SkillBlink,
-			SkillReloadVFX,
-			SkillHealVFX,
-			SkillGunsReloadVFX,
-			SkillSlow,
-			SkillStunVFX,
-			StunEffect,
-			SkillMoreAmmoVFX,
-			SkillSpeedIncreaseVFX,
-			SkillLinearPowerIncreaceVFX,
-			QubixDeathVFX,
-			SlowGrenadeExplosionVFX,
-			SpeedTrailVFX,
-			MineExplosionVFX,
-			AssaultGrenadeExplosionVFX,
-			EMPGrenadeExplosionVFX,
-			SkillDashVFX,
-			SkillEMPBulletsVFX,
-			EMPVFX,
-			FreezeGrenadeExplosionVFX
 		}
 	}
 }

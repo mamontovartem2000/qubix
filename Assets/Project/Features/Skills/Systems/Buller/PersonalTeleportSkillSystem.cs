@@ -39,7 +39,6 @@ namespace Project.Features.Skills.Systems.Buller
                 .Push();
         }
 
-        // ReSharper disable Unity.PerformanceAnalysis
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var avatar = entity.Owner().Avatar();
@@ -49,7 +48,6 @@ namespace Project.Features.Skills.Systems.Buller
             {
                 var rndX = world.GetRandomRange(3, 7);
                 var rndZ = world.GetRandomRange(3, 7);
-                // world.GetRandomInCircle(entity.GetPosition().XZ(), 6);
                 
                 switch (world.GetRandomRange(0, 4))
                 {
@@ -98,7 +96,7 @@ namespace Project.Features.Skills.Systems.Buller
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
-            _vfx.SpawnVFX(VFXFeature.VFXType.TelerortInVFX, avatar.GetPosition(), avatar);
+            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar.GetPosition());
             
         }
     }

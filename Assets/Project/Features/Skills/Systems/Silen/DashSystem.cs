@@ -57,7 +57,7 @@ namespace Project.Features.Skills.Systems.Silen {
             
             SoundUtils.PlaySound(avatar, "event:/Skills/Silen/Dash");
             
-            _vfx.SpawnVFX(VFXFeature.VFXType.SkillDashVFX, avatar.GetPosition(), avatar);
+            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar, 4f);
         }
     
     }

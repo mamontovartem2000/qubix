@@ -47,7 +47,7 @@ namespace Project.Features.PostLogicTick.Systems
 			
 			player.Set(new ApplyHeal{ Value = Consts.Scene.HEAL_DISPENSER_VALUE }, ComponentLifetime.NotifyAllSystems);
 
-			_vfx.SpawnVFX(VFXFeature.VFXType.HealVFX, player.GetPosition(), player);
+			// _vfx.SpawnVFX(VFXFeature.VFXType.HealVFX, player.GetPosition(), player);
 			entity.Destroy();
 		}
 	}

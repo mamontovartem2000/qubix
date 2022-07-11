@@ -57,7 +57,7 @@ namespace Project.Features.Skills.Systems.Powerf
 			
 			SoundUtils.PlaySound(avatar, "event:/Skills/Powerf/Shield");
 			
-			_vfx.SpawnVFX(VFXFeature.VFXType.HardShieldVFX, avatar.GetPosition(), effect);
+			_vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar, entity.Read<SkillDurationDefault>().Value);
 		}
 	}
 }

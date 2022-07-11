@@ -49,13 +49,13 @@ namespace Project.Features.PostLogicTick.Systems
 				if (NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team))
 				{
 					var collision = new Entity("collision");
-					collision.Get<LifeTimeLeft>().Value = 2;
+					collision.Get<LifeTimeLeft>().Value = Consts.Main.DEFAULT_LIFETIME;
 					collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);
 				}
 			}
 			else
 			{
-				_vfx.SpawnVFX(entity, owner.GetPosition());
+				_vfx.SpawnVFX(entity.Read<VFXConfig>().Value, owner.GetPosition());
 			}
 
 			if (owner.Has<DestructibleTag>())

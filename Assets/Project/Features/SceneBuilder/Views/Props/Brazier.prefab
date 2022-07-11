@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3857169842271833835}
-  - component: {fileID: 5038563308935423391}
   - component: {fileID: -4061146372926303827}
   m_Layer: 0
   m_Name: Brazier
@@ -33,39 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5038563308935423391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3857169842271833832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28052540b51422b4bbcaf2084b255436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 5198166854516329792, guid: c415be820e5596b4797c74c30d920ad7, type: 3}
-        meshRenderer: {fileID: 2542192673770659822}
-        meshFilter: {fileID: 334209261303474980}
-        material: {fileID: 2100000, guid: a80a8a47b2760f94b95efc8e27373e74, type: 2}
-        localPosition: {x: 0, y: -0.25, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 1, y: 1, z: 1}
 --- !u!114 &-4061146372926303827
 MonoBehaviour:
   m_ObjectHideFlags: 0

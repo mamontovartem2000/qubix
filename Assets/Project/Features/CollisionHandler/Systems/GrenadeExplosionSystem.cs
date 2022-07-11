@@ -66,24 +66,7 @@ namespace Project.Features.CollisionHandler.Systems
                 debuff.SetPosition(player.GetPosition());
             }
             
-            _vfx.SpawnVFX(entity);
-            
-            // if (entity.Read<SecondaryDamage>().Value.Has<Slowness>())
-            // {
-            //     _vfx.SpawnVFX(VFXFeature.VFXType.SlowGrenadeExplosionVFX, entity.GetPosition());
-            // } 
-            // else if (entity.Read<SecondaryDamage>().Value.Has<EMPModifier>())
-            // {
-            //     _vfx.SpawnVFX(VFXFeature.VFXType.EMPGrenadeExplosionVFX, entity.GetPosition());
-            // }
-            // else if (entity.Read<SecondaryDamage>().Value.Has<FreezeModifier>())
-            // {
-            //     _vfx.SpawnVFX(VFXFeature.VFXType.FreezeGrenadeExplosionVFX, entity.GetPosition());
-            // }
-            // else
-            // {
-            //     _vfx.SpawnVFX(VFXFeature.VFXType.AssaultGrenadeExplosionVFX, entity.GetPosition());
-            // }
+            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, entity.GetPosition());
 
             entity.Destroy();
         }

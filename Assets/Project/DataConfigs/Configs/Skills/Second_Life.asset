@@ -17,6 +17,7 @@ MonoBehaviour:
   - id: 0
   - id: 1
   - id: 2
+  - id: 3
   removeStructComponents: []
   templates: []
   references:
@@ -30,4 +31,8 @@ MonoBehaviour:
       data:
         Value: 4
     00000002:
+      type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: 08b048d237032d74da18eaf635061a3b, type: 2}
+    00000003:
       type: {class: SecondLifeAffect, ns: Project.Common.Components, asm: Project.Common}

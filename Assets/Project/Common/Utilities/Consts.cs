@@ -7,6 +7,7 @@
             public const float RESPAWN_TIME = 3f;
             public const float AVOID_TELEPORT_SECONDS = 3f;
             public const float GAME_TIMER_SECONDS = 150f;
+            public const float DEFAULT_LIFETIME = 4f;
         }
 
         public static class Movement
@@ -17,12 +18,7 @@
             public const float SLOWNESS_RATIO = 0.8f;
             public const float DEFAULT_MOVEMENT_SPEED_MODIFIER = 1;
         }
-        
-        public static class Weapons
-        {
-            public const float GRENADE_EXPLOSION_SQUARED_RADIUS = 10f;
-        }
-        
+
         public static class Scene
         {
             public const float MINE_BLINK_TIME = 0.15f;

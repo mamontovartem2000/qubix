@@ -47,7 +47,6 @@ namespace Project.Features.Skills.Systems.GoldHunter
 
             if (!SceneUtils.IsWalkable(new fp3(nextPos.x, 0, nextPos.z))) return;
             
-            // SceneUtils.Move(entity.Read<Owner>().Value.Read<PlayerAvatar>().Value.Read<PlayerMoveTarget>().Value, new fp3(nextPos.x, 0, nextPos.z));
             SceneUtils.ModifyWalkable(avatar.Read<PlayerMoveTarget>().Value, true);
             SceneUtils.ModifyWalkable(new fp3(nextPos.x, 0, nextPos.z), false);
 
@@ -58,7 +57,7 @@ namespace Project.Features.Skills.Systems.GoldHunter
 
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
-            _vfx.SpawnVFX(VFXFeature.VFXType.TelerortInVFX, avatar.GetPosition(), avatar);
+            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar.GetPosition());
         }
 
     }

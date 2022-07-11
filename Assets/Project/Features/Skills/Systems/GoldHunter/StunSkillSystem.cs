@@ -54,14 +54,14 @@ namespace Project.Features.Skills.Systems.GoldHunter
 			rightWeapon.Get<AmmoCapacityDefault>().Value = 5;
 			rightWeapon.Get<AmmoCapacity>().Value = 0;
 
-			rightWeapon.Get<ReloadTime>().Value = 
-				rightWeapon.Read<ReloadTimeDefault>().Value;
+			rightWeapon.Get<ReloadTime>().Value = rightWeapon.Read<ReloadTimeDefault>().Value;
 			
 			world.GetFeature<EventsFeature>().rightWeaponFired.Execute(owner);
 			world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(owner);
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
-            _vfx.SpawnVFX(VFXFeature.VFXType.SkillStunVFX, avatar.GetPosition(), avatar);
+            
+            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar.GetPosition());
 		}
 	}
 }

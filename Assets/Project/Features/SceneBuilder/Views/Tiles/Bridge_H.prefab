@@ -90,7 +90,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9193877247605172175}
-  - component: {fileID: -6262837668116356532}
   - component: {fileID: -3464907218300655706}
   m_Layer: 0
   m_Name: Bridge_H
@@ -114,39 +113,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6262837668116356532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8420858332402498933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 232f74a8af3e52b4eb91dcebfb621f42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 5249106230429462917, guid: f04e9233263695a48ab8198273ce8aa5, type: 3}
-        meshRenderer: {fileID: 6589018719255802022}
-        meshFilter: {fileID: 5916519675479082086}
-        material: {fileID: 2100000, guid: 221d8d15cd21dab4e89221c1ad926ded, type: 2}
-        localPosition: {x: 1, y: -0.4, z: 0.5}
-        localRotation: {x: 0, y: 90, z: -0}
-        localScale: {x: 1.0000002, y: 1, z: 1.0000002}
 --- !u!114 &-3464907218300655706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,3 +141,4 @@ MonoBehaviour:
     useCache: 0
     useCacheTimeout: 0
     cacheTimeout: 0
+  Rend: {fileID: 0}
