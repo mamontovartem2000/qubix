@@ -62,7 +62,7 @@ namespace Project.Features.Player
 
 			if (NetworkData.PlayersInfo == null) // Fake case
 			{
-				SolarayConfig.Apply(player);
+				GoldHunterConfig.Apply(player);
 				return;
 			}
 
