@@ -49,15 +49,18 @@ namespace Project.Features.Weapon.Systems
             {
                 weapon.LeftWeapon.Remove<LeftWeaponShot>();
                 weapon.LeftWeapon.Remove<LinearActive>();
+               
             }
 
             if (entity.Owner().Has<RightWeaponShot>())
             {
                 weapon.RightWeapon.Set(new RightWeaponShot());
+                weapon.RightWeapon.Set(new MeleeActive());
             }
             else
             {
-                weapon.RightWeapon.Remove<RightWeaponShot>();
+                weapon.RightWeapon.Remove<RightWeaponShot>();                
+                
             }
         }
     }

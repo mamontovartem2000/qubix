@@ -6,9 +6,10 @@ namespace Project.Common.Views.Monos
 {
 	using ME.ECS.Views.Providers;
 
-	public class WeaponMono : MonoBehaviourView
+	public class MeleeWeaponMono : MonoBehaviourView
 	{
 		public override bool applyStateJob => true;
+		[SerializeField] private Animator _anim;
 
 		public override void OnInitialize() {}
 		public override void OnDeInitialize() {}
@@ -17,7 +18,8 @@ namespace Project.Common.Views.Monos
 		{
 			transform.position = entity.GetPosition();
 			transform.rotation = entity.GetRotation();
-			
+
+			_anim.SetBool("Attack", entity.Has<MeleeActive>());
 		}
 	}
 }

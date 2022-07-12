@@ -50,7 +50,7 @@ ParticleSystem:
   prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
-  autoRandomSeed: 1
+  autoRandomSeed: 0
   useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2
@@ -108,7 +108,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 0
+  randomSeed: 3
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4974,7 +4974,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4023487806031585772}
-  - component: {fileID: -3280396323137995656}
+  - component: {fileID: -2983682303780223491}
   m_Layer: 0
   m_Name: Slasher
   m_TagString: Untagged
@@ -4997,7 +4997,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-3280396323137995656
+--- !u!114 &-2983682303780223491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5006,7 +5006,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4367819265815919446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e95e3c894e65eac4cbdc2a6b14f82332, type: 3}
+  m_Script: {fileID: 11500000, guid: dbe685792d110c34fac45ffc7c1b6c4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystemSimulation:

@@ -3,6 +3,7 @@ using Project.Common.Components;
 using Project.Common.Events;
 using Project.Common.Utilities;
 using Project.Features.Projectile;
+using UnityEngine;
 
 namespace Project.Features.Weapon.Systems
 {
@@ -46,19 +47,13 @@ namespace Project.Features.Weapon.Systems
 			ref var delay = ref entity.Get<MeleeDelay>().Value;
 			ref var aim = ref entity.Get<MeleeDamageSpot>().Value;
 			
-			delay -= deltaTime;
-
-			if (delay > 0) return;
+			delay += deltaTime;
 			
-			if (!entity.Has<LeftWeaponShot>())
-			{
-				entity.Remove<MeleeActive>();
-				return;
-			}
-				
+			if (delay < entity.Read<MeleeDelayDefault>().Value) return;
+
 			Worlds.current.GetFeature<EventsFeature>().PlaySound.Execute(entity);
 
-			entity.Get<MeleeDelay>().Value = entity.Read<MeleeDelayDefault>().Value;
+			entity.Get<MeleeDelay>().Value = 0;
 			entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;
 				
 			_projectile.SpawnMelee(aim, entity);

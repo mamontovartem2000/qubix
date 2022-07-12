@@ -127,19 +127,21 @@ namespace Project.Features.Projectile
 
         public void SpawnMelee(in Entity entity, Entity gun)
         {
-            ref readonly var view = ref entity.Read<ViewModel>().Value;
-
-            var vId = world.RegisterViewSource(view);
             entity.Set(new CollisionDynamic(), ComponentLifetime.NotifyAllSystems);
-
-            var thing = new Entity("thing");
             
-            thing.SetPosition(SceneUtils.SafeCheckPosition(entity.GetPosition()));
-            thing.InstantiateView(vId);
-            thing.Get<LifeTimeLeft>().Value = 2f;
+            var bullet = new Entity("thing");
+            gun.Read<ProjectileConfig>().Value.Apply(bullet);
+            bullet.Set(new ProjectileActive());
+            bullet.Set(new MeleeProjectile());
+            bullet.SetPosition(gun.Get<MeleeDamageSpot>().Value.GetPosition());
+            bullet.Get<MeleeDamageSpot>().Value = gun.Get<MeleeDamageSpot>().Value;
+            bullet.Get<Owner>().Value = gun.Owner();
+            ref readonly var view = ref bullet.Read<ViewModel>().Value;
+            var vId = world.RegisterViewSource(view);
+            bullet.InstantiateView(vId);
+            bullet.Get<LifeTimeLeft>().Value = 0.2f;
 
             gun.Get<ReloadTime>().Value = gun.Read<ReloadTimeDefault>().Value;
         }
-
     }
 }

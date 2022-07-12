@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: Scyt_l
+  m_Name: Scyt_r
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
@@ -32,13 +32,13 @@ MonoBehaviour:
     00000001:
       type: {class: ViewModel, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 6148348372077365552, guid: 4229ae41a509c1c499c9c9a67d0fede2, type: 3}
+        Value: {fileID: -1756312933564610124, guid: 2aac0ba0d22534f48ae9de1ac0153ee9, type: 3}
     00000002:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value:
           x:
-            m_rawValue: -2362232064
+            m_rawValue: 2362232064
           y:
             m_rawValue: 0
           z:

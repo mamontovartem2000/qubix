@@ -35,6 +35,7 @@ namespace Project.Features.Weapon
             AddSystem<CooldownSystem>();
             AddSystem<LinearReloadSystem>();
             AddSystem<WeaponReloadSystem>();
+            AddSystem<MeleeReloadSystem>();
 
             //UI systems
             AddSystem<RefreshLinearUISystem>();

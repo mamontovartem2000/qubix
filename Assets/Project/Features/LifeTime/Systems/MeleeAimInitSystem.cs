@@ -1,5 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
+using UnityEngine;
 
 namespace Project.Features.LifeTime.Systems
 {
@@ -34,11 +36,10 @@ namespace Project.Features.LifeTime.Systems
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var spot = new Entity("spot");
-            entity.Read<ProjectileConfig>().Value.Apply(spot);
             spot.Set(new MeleeAimer());
-            spot.Get<Owner>().Value = entity.Get<Owner>().Value;
+            spot.SetLocalPosition(entity.Owner().Avatar().GetPosition() + new Vector3(0, 0, 1f));
+            spot.SetParent(entity.Owner().Avatar());
             entity.Get<MeleeDamageSpot>().Value = spot;
-            spot.Remove<CollisionDynamic>();
         }
     }
 }

@@ -91,6 +91,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageSpot>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeProjectile>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlink>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimer>(false, true, false, false, false, false, false, false);
@@ -265,6 +266,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageSpot>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelay>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDelayDefault>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeProjectile>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlink>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimer>(false, true, false, false, false, false, false, false);
@@ -434,6 +436,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.MeleeDamageSpot>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelay>(false);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDelayDefault>(false);
+            structComponentsContainer.Validate<Project.Common.Components.MeleeProjectile>(true);
             structComponentsContainer.Validate<Project.Common.Components.MeleeWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.MineBlink>(false);
             structComponentsContainer.Validate<Project.Common.Components.MineBlinkTimer>(false);
@@ -608,6 +611,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.MeleeDamageSpot>(false);
             entity.ValidateData<Project.Common.Components.MeleeDelay>(false);
             entity.ValidateData<Project.Common.Components.MeleeDelayDefault>(false);
+            entity.ValidateData<Project.Common.Components.MeleeProjectile>(true);
             entity.ValidateData<Project.Common.Components.MeleeWeapon>(true);
             entity.ValidateData<Project.Common.Components.MineBlink>(false);
             entity.ValidateData<Project.Common.Components.MineBlinkTimer>(false);

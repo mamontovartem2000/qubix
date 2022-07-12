@@ -4872,6 +4872,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1630000967397126055}
+  - component: {fileID: 6148348372077365552}
   m_Layer: 0
   m_Name: Scythe_l
   m_TagString: Untagged
@@ -4894,6 +4895,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6148348372077365552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630000967397126048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe685792d110c34fac45ffc7c1b6c4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSystemSimulation:
+    particleItems:
+    - particleSystem: {fileID: 1630000966741035253}
+    settings:
+      simulationType: 1
+      minSimulationTime: 0.2
+      minEndingTime: 0.1
+      halfEnding: 0.5
+    hasElements: 1
+    hasDefault: 1
+  defaultParameters:
+    useDespawnTime: 0
+    despawnTime: 0
+    cacheCustomViewId: 0
+    useCache: 0
+    useCacheTimeout: 0
+    cacheTimeout: 0
+  _anim: {fileID: 2100077370330857437}
 --- !u!1 &2100077370330857438
 GameObject:
   m_ObjectHideFlags: 0

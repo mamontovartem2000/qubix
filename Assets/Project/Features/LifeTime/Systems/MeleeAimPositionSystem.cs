@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
+using UnityEngine;
 
 namespace Project.Features.LifeTime.Systems
 {
@@ -33,11 +34,12 @@ namespace Project.Features.LifeTime.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var avatar = entity.Owner().Avatar();
-            if (avatar.IsAlive() == false) return;
-            
-            var newPos = avatar.Read<WeaponEntities>().LeftWeapon.Read<WeaponAim>().Value.GetPosition();
-            entity.SetPosition(newPos);
+            // var avatar = entity.Owner().Avatar();
+            // if (avatar.IsAlive() == false) return;
+            //
+            // var newPos = avatar.GetPosition() + avatar.Read<FaceDirection>().Value * 1.2f;
+            //
+            // entity.SetPosition(newPos);
         }
     }
 }

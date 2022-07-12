@@ -36,26 +36,26 @@ namespace Project.Features.PostLogicTick.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.TryReadCollided(out var from, out var owner) == false) return;
-            ref readonly var damage = ref entity.Read<ProjectileDamage>().Value;
-
-            if (owner.Has<PlayerAvatar>())
-            {
-                var player = owner.Avatar();
-
-                if (NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team))
-                {
-                    var collision = new Entity("collision");
-                    collision.Get<LifeTimeLeft>().Value = 2;
-                    collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);
-                }
-            }
-            if (owner.Has<DestructibleTag>())
-            {
-                owner.Get<PlayerHealth>().Value -= damage;
-            }
-
-            entity.Remove<Collided>();
+            // if (entity.TryReadCollided(out var from, out var owner) == false) return;
+            // ref readonly var damage = ref entity.Read<ProjectileDamage>().Value;
+            //
+            // if (owner.Has<PlayerAvatar>())
+            // {
+            //     var player = owner.Avatar();
+            //
+            //     if (NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team))
+            //     {
+            //         var collision = new Entity("collision");
+            //         collision.Get<LifeTimeLeft>().Value = 2;
+            //         collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);
+            //     }
+            // }
+            // if (owner.Has<DestructibleTag>())
+            // {
+            //     owner.Get<PlayerHealth>().Value -= damage;
+            // }
+            //
+            // entity.Remove<Collided>();
         }
     }
 }

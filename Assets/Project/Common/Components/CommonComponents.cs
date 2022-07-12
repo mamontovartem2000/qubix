@@ -15,8 +15,8 @@ namespace Project.Common.Components
     {
         public float Value;
     }
-    public struct DamagedBy : IComponent {public Entity Value;}
-    public struct Owner : IComponent {public Entity Value;}
+    public struct DamagedBy : IComponent { public Entity Value; }
+    public struct Owner : IComponent { public Entity Value; }
     public struct LeftWeaponShot : IComponent{}
     public struct RightWeaponShot : IComponent{}
     public struct SpeedModifier : IComponent {}
@@ -30,7 +30,7 @@ namespace Project.Common.Components
     public struct PortalActive : IComponent {}
     public struct GamePaused : IComponent {}
     public struct GameFinished : IComponent { }
-    public struct GameTimer : IComponent {public float Value;}
+    public struct GameTimer : IComponent { public float Value; }
     public struct MapInitialized : IComponent {}
     public struct Tabulation : IComponent {}
 }
