@@ -18,6 +18,7 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
+  - id: 4
   removeStructComponents: []
   templates: []
   references:
@@ -33,15 +34,19 @@ MonoBehaviour:
         ThirdSkillConfig: {fileID: 11400000, guid: c90934e9dfd6adb4da0b31d388385478, type: 2}
         FourthSkillConfig: {fileID: 11400000, guid: c90934e9dfd6adb4da0b31d388385478, type: 2}
     00000001:
+      type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: 021572a52e5be7745b38cecea21c6568, type: 2}
+    00000002:
       type: {class: PlayerScore, ns: Project.Common.Components, asm: Project.Common}
       data:
         Kills: 0
         Deaths: 0
         DealtDamage: 0
-    00000002:
+    00000003:
       type: {class: DamagedBy, ns: Project.Common.Components, asm: Project.Common}
       data: {}
-    00000003:
+    00000004:
       type: {class: MoveInput, ns: Project.Common.Components, asm: Project.Common}
       data:
         Amount: 0

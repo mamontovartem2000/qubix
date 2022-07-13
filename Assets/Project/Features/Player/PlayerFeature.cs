@@ -23,6 +23,7 @@ namespace Project.Features.Player
 		public DataConfig PowerfConfig;
 		public DataConfig SilenConfig;
 		public DataConfig SolarayConfig;
+		public DataConfig BloodlovConfig;
 
 		private RPCId _onPlayerConnected, _onPlayerDisconnected;
 		private Filter _playerFilter;
@@ -62,7 +63,7 @@ namespace Project.Features.Player
 
 			if (NetworkData.PlayersInfo == null) // Fake case
 			{
-				GoldHunterConfig.Apply(player);
+				BloodlovConfig.Apply(player);
 				return;
 			}
 

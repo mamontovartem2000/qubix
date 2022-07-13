@@ -129,17 +129,19 @@ namespace Project.Features.Projectile
         {
             entity.Set(new CollisionDynamic(), ComponentLifetime.NotifyAllSystems);
             
-            var bullet = new Entity("thing");
+            var bullet = new Entity("meleeBullet");
             gun.Read<ProjectileConfig>().Value.Apply(bullet);
             bullet.Set(new ProjectileActive());
             bullet.Set(new MeleeProjectile());
             bullet.SetPosition(gun.Get<MeleeDamageSpot>().Value.GetPosition());
             bullet.Get<MeleeDamageSpot>().Value = gun.Get<MeleeDamageSpot>().Value;
             bullet.Get<Owner>().Value = gun.Owner();
-            ref readonly var view = ref bullet.Read<ViewModel>().Value;
-            var vId = world.RegisterViewSource(view);
-            bullet.InstantiateView(vId);
-            bullet.Get<LifeTimeLeft>().Value = 0.2f;
+            
+            // Test viewModel for projectile
+            // ref readonly var view = ref bullet.Read<ViewModel>().Value;
+            // var vId = world.RegisterViewSource(view);
+            // bullet.InstantiateView(vId);
+            bullet.Get<LifeTimeLeft>().Value = 0.5f;
 
             gun.Get<ReloadTime>().Value = gun.Read<ReloadTimeDefault>().Value;
         }
