@@ -90,7 +90,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8829382211568797223}
-  - component: {fileID: 6753020464308408048}
   - component: {fileID: 4930994818782664531}
   m_Layer: 0
   m_Name: BoxBase
@@ -114,39 +113,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6753020464308408048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8197559556663303325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28052540b51422b4bbcaf2084b255436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: -3262789968867269347, guid: bb923d00b29dd3b499b7b2a414ba133a, type: 3}
-        meshRenderer: {fileID: 6936190325572111194}
-        meshFilter: {fileID: 6936190325572111197}
-        material: {fileID: 2100000, guid: 32261d61eee00bb4ea95c31e6b7dca47, type: 2}
-        localPosition: {x: 0, y: -0.4, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 1, y: 1, z: 1}
 --- !u!114 &4930994818782664531
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -171,7 +171,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7134397466621635174}
-  - component: {fileID: 856375118798865959}
   - component: {fileID: 6987057215521332013}
   m_Layer: 0
   m_Name: Tile 4
@@ -196,58 +195,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &856375118798865959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8264746845256926032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 232f74a8af3e52b4eb91dcebfb621f42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 5062246478642505140, guid: acae17ab99ff2c74e94a1e61e5c70659, type: 3}
-        meshRenderer: {fileID: 1171977501005490725}
-        meshFilter: {fileID: 4010248871694196463}
-        material: {fileID: 2100000, guid: 6b460c765d7e3ea42a3e8282192dc561, type: 2}
-        localPosition: {x: 0, y: -0.4, z: 0}
-        localRotation: {x: 0.000009334667, y: 0, z: 0}
-        localScale: {x: 1, y: 1, z: 1}
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 5062246478642505140, guid: e82a96b88fff87244ad71ced4e08bfad, type: 3}
-        meshRenderer: {fileID: 2695774224286231858}
-        meshFilter: {fileID: 1159822940983618138}
-        material: {fileID: 2100000, guid: 7ac37a30ccd25ff40b445e94cf92df44, type: 2}
-        localPosition: {x: 0, y: -0.486, z: 0}
-        localRotation: {x: 0.000009334667, y: -0, z: -0}
-        localScale: {x: 1, y: 1, z: 1}
 --- !u!114 &6987057215521332013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,5 +224,3 @@ MonoBehaviour:
     useCacheTimeout: 0
     cacheTimeout: 0
   Rend: {fileID: 1171977501005490725}
-  matColor: {r: 0, g: 0, b: 0, a: 0}
-  mat: {fileID: 2100000, guid: 6b460c765d7e3ea42a3e8282192dc561, type: 2}

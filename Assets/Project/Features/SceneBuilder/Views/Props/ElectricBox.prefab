@@ -90,7 +90,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6298511160363660456}
-  - component: {fileID: 3007901830009066470}
   - component: {fileID: -5736469650074286955}
   m_Layer: 0
   m_Name: ElectricBox
@@ -114,39 +113,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3007901830009066470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6639183446209949202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28052540b51422b4bbcaf2084b255436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: -3272245730837884829, guid: 10acb7baea3e0b3418c37534ca3eb1f0, type: 3}
-        meshRenderer: {fileID: 1942507980128982170}
-        meshFilter: {fileID: 1942507980128982169}
-        material: {fileID: 2100000, guid: 7c51ffd7a677c98489bf232d86cf8366, type: 2}
-        localPosition: {x: 0, y: -0.4, z: 0}
-        localRotation: {x: 0, y: 0, z: 0}
-        localScale: {x: 1, y: 1, z: 1}
 --- !u!114 &-5736469650074286955
 MonoBehaviour:
   m_ObjectHideFlags: 0
