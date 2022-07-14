@@ -129,6 +129,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDirection>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileParent>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileSpeed>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, true, false, false, false, false, false, false);
@@ -138,6 +139,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondLifeAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondLifeModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SelfTrigger>(true, false, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoDamageSpot>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoProjectile>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoWeapon>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Shotgun>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SingleBullet>(true, true, false, false, false, false, false, false);
@@ -306,6 +310,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileDirection>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileParent>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileSpeed>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, true, false, false, false, false, false, false);
@@ -315,6 +320,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondLifeAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondLifeModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SelfTrigger>(true, false, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoDamageSpot>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoProjectile>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoWeapon>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Shotgun>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SingleBullet>(true, true, false, false, false, false, false, false);
@@ -478,6 +486,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ProjectileConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDamage>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileDirection>(false);
+            structComponentsContainer.Validate<Project.Common.Components.ProjectileParent>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileSpeed>(false);
             structComponentsContainer.Validate<Project.Common.Components.ReloadTime>(false);
             structComponentsContainer.Validate<Project.Common.Components.ReloadTimeDefault>(false);
@@ -487,6 +496,9 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SecondLifeAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.SecondLifeModifier>(true);
             noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.SelfTrigger>(true);
+            structComponentsContainer.Validate<Project.Common.Components.ShengbiaoDamageSpot>(false);
+            structComponentsContainer.Validate<Project.Common.Components.ShengbiaoProjectile>(true);
+            structComponentsContainer.Validate<Project.Common.Components.ShengbiaoShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.ShengbiaoWeapon>(false);
             structComponentsContainer.Validate<Project.Common.Components.Shotgun>(false);
             structComponentsContainer.Validate<Project.Common.Components.SingleBullet>(true);
@@ -655,6 +667,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ProjectileConfig>(false);
             entity.ValidateData<Project.Common.Components.ProjectileDamage>(false);
             entity.ValidateData<Project.Common.Components.ProjectileDirection>(false);
+            entity.ValidateData<Project.Common.Components.ProjectileParent>(false);
             entity.ValidateData<Project.Common.Components.ProjectileSpeed>(false);
             entity.ValidateData<Project.Common.Components.ReloadTime>(false);
             entity.ValidateData<Project.Common.Components.ReloadTimeDefault>(false);
@@ -664,6 +677,9 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SecondLifeAffect>(true);
             entity.ValidateData<Project.Common.Components.SecondLifeModifier>(true);
             entity.ValidateDataOneShot<Project.Common.Components.SelfTrigger>(true);
+            entity.ValidateData<Project.Common.Components.ShengbiaoDamageSpot>(false);
+            entity.ValidateData<Project.Common.Components.ShengbiaoProjectile>(true);
+            entity.ValidateData<Project.Common.Components.ShengbiaoShot>(true);
             entity.ValidateData<Project.Common.Components.ShengbiaoWeapon>(false);
             entity.ValidateData<Project.Common.Components.Shotgun>(false);
             entity.ValidateData<Project.Common.Components.SingleBullet>(true);

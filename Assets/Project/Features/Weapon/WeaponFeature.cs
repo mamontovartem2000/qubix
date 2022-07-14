@@ -27,6 +27,7 @@ namespace Project.Features.Weapon
             AddSystem<AutomaticFiringSystem>();
             AddSystem<LinearFiringSystem>();
             AddSystem<MeleeFiringSystem>();
+            AddSystem<ShengbiaoDamageSpotInitSystem>();
             AddSystem<ShengbiaoViewSystem>();
 
             AddSystem<SingleBulletShotSystem>();
@@ -38,7 +39,7 @@ namespace Project.Features.Weapon
             AddSystem<WeaponReloadSystem>();
             AddSystem<MeleeReloadSystem>();
             AddSystem<ShengbiaoReloadSystem>();
-
+            
             //UI systems
             AddSystem<RefreshLinearUISystem>();
         }

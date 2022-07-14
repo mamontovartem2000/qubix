@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
+using UnityEngine;
 
 namespace Project.Features.Weapon.Systems {
 
@@ -14,7 +15,7 @@ namespace Project.Features.Weapon.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class ShengbiaoViewSystem : ISystemFilter {
+    public sealed class ShengbiaoDamageSpotInitSystem : ISystemFilter {
         
         private WeaponFeature feature;
         
@@ -35,28 +36,20 @@ namespace Project.Features.Weapon.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-ShengbiaoViewSystem")
+            return Filter.Create("Filter-ShengbiaoDamageSpotInitSystem")
                 .With<ShengbiaoWeapon>()
-                .With<ReloadTime>()
+                .Without<ShengbiaoDamageSpot>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var offset = ref entity.Get<ShengbiaoWeapon>().Offset;
-            var returnTime = entity.Read<ReloadTimeDefault>().Value - Consts.Weapons.SHENGBIAO_ATTACK_SECONDS;
-            var shengbiaoDamageSpot = entity.Read<ShengbiaoDamageSpot>().Value;
-
-            if (entity.Read<ReloadTimeDefault>().Value - entity.Read<ReloadTime>().Value < Consts.Weapons.SHENGBIAO_ATTACK_SECONDS)
-            {
-                offset -= deltaTime * 1.5f;
-            }
-            else if (offset < 0.98f)
-            {
-                offset += deltaTime * 0.4f / returnTime;
-                shengbiaoDamageSpot.Get<ProjectileParent>().Speed = -6f;
-            }
+            var spot = new Entity("spot");
+            spot.Get<ProjectileParent>().Speed = 20f;
+            spot.SetLocalPosition(entity.GetPosition() + entity.Owner().Avatar().Read<FaceDirection>().Value);
+            spot.SetParent(entity);
+            entity.Get<ShengbiaoDamageSpot>().Value = spot;
         }
     }
 }

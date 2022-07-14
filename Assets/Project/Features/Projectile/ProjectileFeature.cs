@@ -23,6 +23,8 @@ namespace Project.Features.Projectile
             AddSystem<TrajectoryMovementSystem>();
             AddSystem<BoomerangMovementSystem>();
             AddSystem<ProjectileMovementSystem>();
+            AddSystem<ShengbiaoDamageSpotMovement>();
+            AddSystem<ShengbiaoProjectileMovementSystem>();
         }
 
         protected override void OnDeconstruct() {}
@@ -33,7 +35,7 @@ namespace Project.Features.Projectile
             gun.Read<ProjectileConfig>().Value.Apply(entity);
 
             entity.SetPosition(gun.GetPosition());
-            entity.Get<ProjectileDirection>().Value = gun.Read<WeaponAim>().Value.GetPosition() - gun.GetPosition();
+            gun.Get<WeaponAim>().Value.SetLocalPosition(Vector3.forward);
             entity.Get<Owner>().Value = gun.Read<Owner>().Value;
             entity.Set(new DamageSource());
             entity.Set(new ProjectileActive());
@@ -50,9 +52,9 @@ namespace Project.Features.Projectile
             
             if (gun.Has<ShengbiaoWeapon>())
             {
-                entity.Owner().Avatar().Get<Stun>().Value = gun.Read<ReloadTimeDefault>().Value;
+                gun.Read<ShengbiaoDamageSpot>().Value.Set(new ShengbiaoShot());
             }
-
+            
             if (Worlds.current.GetRandomValue() < gun.Read<CriticalHitModifier>().Value)
             {
                 entity.Set(new CriticalHit());

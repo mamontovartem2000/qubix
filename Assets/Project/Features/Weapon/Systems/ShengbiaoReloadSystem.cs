@@ -1,5 +1,8 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Events;
+using Project.Common.Utilities;
+using UnityEngine;
 
 namespace Project.Features.Weapon.Systems {
 
@@ -45,13 +48,15 @@ namespace Project.Features.Weapon.Systems {
         {
             ref var reload = ref entity.Get<ReloadTime>().Value;
             reload -= deltaTime;
-
+            
             if (reload > 0) return;
             
             entity.Remove<ReloadTime>();
-            entity.Get<ShengbiaoWeapon>().SpearSpeed = entity.Read<ProjectileConfig>().Value.Read<ProjectileSpeed>().Value;
+            entity.Read<ShengbiaoDamageSpot>().Value.SetLocalPosition(Vector3.zero);
+            entity.Read<ShengbiaoDamageSpot>().Value.Get<ProjectileParent>().Speed = 20f;
+            entity.Read<ShengbiaoDamageSpot>().Value.Remove<ShengbiaoShot>();
+            entity.Get<AmmoCapacity>().Value = entity.Read<AmmoCapacityDefault>().Value;
+            world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Owner());
         }
-    
     }
-    
 }

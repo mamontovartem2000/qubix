@@ -50,8 +50,6 @@ namespace Project.Features.Weapon.Systems
             entity.Remove<ReloadTime>();
             entity.Get<AmmoCapacity>().Value = entity.Read<AmmoCapacityDefault>().Value;
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Owner());
-            
-
         }
     }
 }

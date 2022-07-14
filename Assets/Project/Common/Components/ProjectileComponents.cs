@@ -67,6 +67,8 @@ namespace Project.Common.Components
 	
 	public struct MeleeProjectile : IComponent {}
 
+	public struct ShengbiaoProjectile : IComponent {}
+
 	public struct ProjectileActive : IComponent {}
 	
 	public struct Trajectory : IComponent

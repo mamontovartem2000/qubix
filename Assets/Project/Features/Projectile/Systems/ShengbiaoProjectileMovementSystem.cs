@@ -2,7 +2,7 @@
 using Project.Common.Components;
 using Project.Common.Utilities;
 
-namespace Project.Features.Weapon.Systems {
+namespace Project.Features.Projectile.Systems {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -14,9 +14,9 @@ namespace Project.Features.Weapon.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class ShengbiaoViewSystem : ISystemFilter {
+    public sealed class ShengbiaoProjectileMovementSystem : ISystemFilter {
         
-        private WeaponFeature feature;
+        private ProjectileFeature feature;
         
         public World world { get; set; }
         
@@ -35,27 +35,21 @@ namespace Project.Features.Weapon.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-ShengbiaoViewSystem")
-                .With<ShengbiaoWeapon>()
-                .With<ReloadTime>()
+            return Filter.Create("Filter-ShengbiaoProjectileMovementSystem")
+                .With<ShengbiaoProjectile>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var offset = ref entity.Get<ShengbiaoWeapon>().Offset;
-            var returnTime = entity.Read<ReloadTimeDefault>().Value - Consts.Weapons.SHENGBIAO_ATTACK_SECONDS;
-            var shengbiaoDamageSpot = entity.Read<ShengbiaoDamageSpot>().Value;
+            var shengbiaoDamageSpot = entity.Owner().Avatar().Read<WeaponEntities>().RightWeapon.Read<ShengbiaoDamageSpot>().Value;
+            
+            entity.SetPosition(shengbiaoDamageSpot.GetPosition());
 
-            if (entity.Read<ReloadTimeDefault>().Value - entity.Read<ReloadTime>().Value < Consts.Weapons.SHENGBIAO_ATTACK_SECONDS)
+            if (shengbiaoDamageSpot.Read<ProjectileParent>().Speed < 0f && shengbiaoDamageSpot.GetLocalPosition().z < 0f)
             {
-                offset -= deltaTime * 1.5f;
-            }
-            else if (offset < 0.98f)
-            {
-                offset += deltaTime * 0.4f / returnTime;
-                shengbiaoDamageSpot.Get<ProjectileParent>().Speed = -6f;
+                entity.Destroy();
             }
         }
     }

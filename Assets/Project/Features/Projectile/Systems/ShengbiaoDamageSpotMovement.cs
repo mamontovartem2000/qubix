@@ -1,8 +1,8 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Common.Utilities;
+using UnityEngine;
 
-namespace Project.Features.Weapon.Systems {
+namespace Project.Features.Projectile.Systems {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -14,9 +14,9 @@ namespace Project.Features.Weapon.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class ShengbiaoViewSystem : ISystemFilter {
+    public sealed class ShengbiaoDamageSpotMovement : ISystemFilter {
         
-        private WeaponFeature feature;
+        private ProjectileFeature feature;
         
         public World world { get; set; }
         
@@ -35,28 +35,27 @@ namespace Project.Features.Weapon.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-ShengbiaoViewSystem")
-                .With<ShengbiaoWeapon>()
-                .With<ReloadTime>()
+            return Filter.Create("Filter-ShengbiaoDamageSpotMovement")
+                .With<ProjectileParent>()
+                .With<ShengbiaoShot>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var offset = ref entity.Get<ShengbiaoWeapon>().Offset;
-            var returnTime = entity.Read<ReloadTimeDefault>().Value - Consts.Weapons.SHENGBIAO_ATTACK_SECONDS;
-            var shengbiaoDamageSpot = entity.Read<ShengbiaoDamageSpot>().Value;
+            ref var speed = ref entity.Get<ProjectileParent>().Speed;
+            
+            var newPosition = entity.GetLocalPosition() + Vector3.forward * (speed * deltaTime);
+            
+            entity.SetLocalPosition(newPosition);
 
-            if (entity.Read<ReloadTimeDefault>().Value - entity.Read<ReloadTime>().Value < Consts.Weapons.SHENGBIAO_ATTACK_SECONDS)
-            {
-                offset -= deltaTime * 1.5f;
-            }
-            else if (offset < 0.98f)
-            {
-                offset += deltaTime * 0.4f / returnTime;
-                shengbiaoDamageSpot.Get<ProjectileParent>().Speed = -6f;
-            }
+            Debug.Log(entity.GetLocalPosition());
+            
+            if (entity.GetLocalPosition().z >= 0f) return;
+            entity.SetLocalPosition(Vector3.zero);
+            entity.Get<ProjectileParent>().Speed = 20f;
+            entity.Remove<ShengbiaoShot>();
         }
     }
 }
