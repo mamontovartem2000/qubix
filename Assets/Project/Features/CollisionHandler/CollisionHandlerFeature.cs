@@ -41,7 +41,8 @@ namespace Project.Features.CollisionHandler
         
         protected override void InjectFilter(ref FilterBuilder builder)
         {
-            builder.WithoutShared<GamePaused>();
+            builder
+                .WithoutShared<GamePaused>();
         }
 
         protected override void OnDeconstruct() {}

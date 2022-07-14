@@ -74,6 +74,11 @@ namespace Project.Common.Components
 		public float Value;
 	}
 	
+	public struct BoomerangEffect : IComponent
+	{
+		public float Value;
+	}
+	
 	public struct Debuff : IComponent {}
 	
 	public struct Grenade : IComponent {}

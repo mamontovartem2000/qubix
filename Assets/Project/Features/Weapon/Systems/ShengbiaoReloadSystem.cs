@@ -1,8 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Common.Utilities;
 
-namespace Project.Features.Projectile.Systems {
+namespace Project.Features.Weapon.Systems {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -14,9 +13,9 @@ namespace Project.Features.Projectile.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class MeleeProjectileMovementSystem : ISystemFilter {
+    public sealed class ShengbiaoReloadSystem : ISystemFilter {
         
-        private ProjectileFeature feature;
+        private WeaponFeature feature;
         
         public World world { get; set; }
         
@@ -35,15 +34,22 @@ namespace Project.Features.Projectile.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-MeleeProjectileMovementSystem")
-                .With<MeleeProjectile>()
+            return Filter.Create("Filter-ShengbiaoReloadSystem")
+                .With<ReloadTime>()
+                .With<ShengbiaoWeapon>()
                 .Push();
             
         }
-
-        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
+    
+        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
         {
-            entity.SetPosition(entity.Read<MeleeDamageSpot>().Value.GetPosition());
+            ref var reload = ref entity.Get<ReloadTime>().Value;
+            reload -= deltaTime;
+
+            if (reload > 0) return;
+            
+            entity.Remove<ReloadTime>();
+            entity.Get<ShengbiaoWeapon>().SpearSpeed = entity.Read<ProjectileConfig>().Value.Read<ProjectileSpeed>().Value;
         }
     
     }

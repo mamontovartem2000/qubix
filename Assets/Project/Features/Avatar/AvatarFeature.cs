@@ -56,6 +56,12 @@ namespace Project.Features.Avatar
             _playerHealth = world.RegisterViewSource(PlayerHealthView);
         }
 
+        protected override void InjectFilter(ref FilterBuilder builder)
+        {
+            builder
+                .WithoutShared<GamePaused>();
+        }
+        
         protected override void OnDeconstruct() {}
 
         public Entity SpawnPlayerAvatar(Entity owner)

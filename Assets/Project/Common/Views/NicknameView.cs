@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Common.Utilities;
 
 namespace Project.Common.Views
 {
@@ -24,7 +25,7 @@ namespace Project.Common.Views
 
         public override void OnInitialize() 
         {
-            var player = entity.GetParent().Read<Owner>().Value.Read<PlayerTag>();
+            var player = entity.GetParent().Owner().Read<PlayerTag>();
 
             _nick.text = player.Nickname;
 

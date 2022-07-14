@@ -20,6 +20,8 @@ namespace Project.Features.Projectile
     {
         protected override void OnConstruct()
         {
+            AddSystem<TrajectoryMovementSystem>();
+            AddSystem<BoomerangMovementSystem>();
             AddSystem<ProjectileMovementSystem>();
         }
 
@@ -44,6 +46,11 @@ namespace Project.Features.Projectile
             if (gun.Has<EMPModifier>())
             {
                 entity.Set(new EMPModifier { LifeTime = gun.Read<EMPModifier>().LifeTime });
+            }
+            
+            if (gun.Has<ShengbiaoWeapon>())
+            {
+                entity.Owner().Avatar().Get<Stun>().Value = gun.Read<ReloadTimeDefault>().Value;
             }
 
             if (Worlds.current.GetRandomValue() < gun.Read<CriticalHitModifier>().Value)

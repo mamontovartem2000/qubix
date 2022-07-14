@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: Slasher_l
+  m_Name: Shengbiao_r
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
@@ -21,6 +21,8 @@ MonoBehaviour:
   - id: 4
   - id: 5
   - id: 6
+  - id: 7
+  - id: 8
   removeStructComponents: []
   templates: []
   references:
@@ -28,17 +30,17 @@ MonoBehaviour:
     00000000:
       type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 11400000, guid: be499b7cb3471ea41be89bcba8e16ba2, type: 2}
+        Value: {fileID: 11400000, guid: 70974fb8fe2c7ec44a5d5e6747e0de89, type: 2}
     00000001:
       type: {class: ViewModel, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: -2983682303780223491, guid: f0bde90e231d7d7498459313846775a8, type: 3}
+        Value: {fileID: -6074346316656577187, guid: a1fa5accd6f1d9c4aa457f18df042b8c, type: 3}
     00000002:
       type: {class: WeaponPosition, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value:
           x:
-            m_rawValue: -1503238528
+            m_rawValue: 1503238528
           y:
             m_rawValue: 0
           z:
@@ -46,14 +48,21 @@ MonoBehaviour:
     00000003:
       type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 1.5
+        Value: 1
     00000004:
-      type: {class: MeleeDelayDefault, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0.1
+        Value: 1
     00000005:
-      type: {class: MeleeWeapon, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}
     00000006:
       type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: event:/Weapons/Axe
+    00000007:
+      type: {class: SingleBullet, ns: Project.Common.Components, asm: Project.Common}
+    00000008:
+      type: {class: ShengbiaoWeapon, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Offset: 1
+        SpearSpeed: 12

@@ -35,6 +35,8 @@ namespace Project.Features.Weapon.Systems
             return Filter.Create("Filter-WeaponReloadSystem")
                 .With<ReloadTime>()
                 .Without<MeleeWeapon>()
+                .Without<LinearWeapon>()
+                .Without<ShengbiaoWeapon>()
                 .Push();
         }
         
@@ -46,11 +48,10 @@ namespace Project.Features.Weapon.Systems
             if (reload > 0) return;
             
             entity.Remove<ReloadTime>();
-
-            if (entity.Has<LinearWeapon>()) return;
-            
             entity.Get<AmmoCapacity>().Value = entity.Read<AmmoCapacityDefault>().Value;
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Owner());
+            
+
         }
     }
 }

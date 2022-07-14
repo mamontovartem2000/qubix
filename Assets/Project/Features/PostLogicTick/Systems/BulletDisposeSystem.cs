@@ -53,14 +53,11 @@ namespace Project.Features.PostLogicTick.Systems
 					collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);
 				}
 			}
-			else
-			{
-				_vfx.SpawnVFX(entity.Read<VFXConfig>().Value, owner.GetPosition());
-			}
 
 			if (owner.Has<DestructibleTag>())
 			{
 				owner.Get<PlayerHealth>().Value -= damage;
+				_vfx.SpawnVFX(entity.Read<VFXConfig>().Value, owner.GetPosition());
 			}
 			
 			entity.Destroy();

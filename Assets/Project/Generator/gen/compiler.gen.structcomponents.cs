@@ -19,6 +19,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvoidTeleport>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BlinkAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.BoomerangEffect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BridgeTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Collided>(false, true, false, false, false, false, false, false);
@@ -137,6 +138,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondLifeAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondLifeModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SelfTrigger>(true, false, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoWeapon>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Shotgun>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SingleBullet>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillAmount>(false, true, false, false, false, false, false, false);
@@ -194,6 +196,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvoidTeleport>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BlinkAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.BoomerangEffect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BridgeTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Collided>(false, true, false, false, false, false, false, false);
@@ -312,6 +315,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondLifeAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondLifeModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SelfTrigger>(true, false, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoWeapon>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Shotgun>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SingleBullet>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillAmount>(false, true, false, false, false, false, false, false);
@@ -364,6 +368,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.AvatarTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvoidTeleport>(false);
             structComponentsContainer.Validate<Project.Common.Components.BlinkAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.BoomerangEffect>(false);
             structComponentsContainer.Validate<Project.Common.Components.BridgeTile>(false);
             noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.BuffTrigger>(true);
             structComponentsContainer.Validate<Project.Common.Components.Collided>(false);
@@ -482,6 +487,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SecondLifeAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.SecondLifeModifier>(true);
             noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.SelfTrigger>(true);
+            structComponentsContainer.Validate<Project.Common.Components.ShengbiaoWeapon>(false);
             structComponentsContainer.Validate<Project.Common.Components.Shotgun>(false);
             structComponentsContainer.Validate<Project.Common.Components.SingleBullet>(true);
             structComponentsContainer.Validate<Project.Common.Components.SkillAmount>(false);
@@ -539,6 +545,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.AvatarTag>(true);
             entity.ValidateData<Project.Common.Components.AvoidTeleport>(false);
             entity.ValidateData<Project.Common.Components.BlinkAffect>(true);
+            entity.ValidateData<Project.Common.Components.BoomerangEffect>(false);
             entity.ValidateData<Project.Common.Components.BridgeTile>(false);
             entity.ValidateDataOneShot<Project.Common.Components.BuffTrigger>(true);
             entity.ValidateData<Project.Common.Components.Collided>(false);
@@ -657,6 +664,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SecondLifeAffect>(true);
             entity.ValidateData<Project.Common.Components.SecondLifeModifier>(true);
             entity.ValidateDataOneShot<Project.Common.Components.SelfTrigger>(true);
+            entity.ValidateData<Project.Common.Components.ShengbiaoWeapon>(false);
             entity.ValidateData<Project.Common.Components.Shotgun>(false);
             entity.ValidateData<Project.Common.Components.SingleBullet>(true);
             entity.ValidateData<Project.Common.Components.SkillAmount>(false);

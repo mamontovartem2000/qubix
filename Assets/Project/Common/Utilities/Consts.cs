@@ -19,6 +19,11 @@
             public const float DEFAULT_MOVEMENT_SPEED_MODIFIER = 1;
         }
 
+        public static class Weapons
+        {
+            public const float SHENGBIAO_ATTACK_SECONDS = 0.2f;
+        }
+
         public static class Scene
         {
             public const float MINE_BLINK_TIME = 0.15f;

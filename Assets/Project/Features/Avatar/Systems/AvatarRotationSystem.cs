@@ -33,6 +33,8 @@ namespace Project.Features.Avatar.Systems
             return Filter.Create("Filter-AvatarRotationSystem")
                 .With<AvatarTag>()
                 .With<FaceDirection>()
+                .Without<Stun>()
+                .Without<DashModifier>()
                 .Push();
         }
 
