@@ -38,18 +38,14 @@ namespace Project.Features.Avatar.Systems {
             
             return Filter.Create("Filter-SecondLifeSkillModifier")
                 .With<SecondLifeAffect>()
+                .With<PlayerDead>()
                 .Push();
-            
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var avatar = entity.Owner().Avatar();
-
-            if(!avatar.Has<PlayerDead>()) return;
-            
             avatar.Get<PlayerHealth>().Value = avatar.Read<PlayerHealthDefault>().Value * 0.3f;
-            avatar.Remove<PlayerDead>();
             _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar, 2f);
             avatar.Set<SecondLifeModifier>();
         }

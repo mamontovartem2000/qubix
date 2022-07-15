@@ -22,14 +22,20 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 #endif
     #endregion
 
-    public sealed class FlagRespawn : ISystemFilter
+    public sealed class FlagSpawnSystem : ISystemFilter
     {
         private FlagCaptureFeature feature;
         public World world { get; set; }
+        private Filter _spawnersFilter;
+
 
         void ISystemBase.OnConstruct()
         {
             this.GetFeature(out this.feature);
+
+            Filter.Create("Spawners-Filter")
+                .With<FlagSpawnerTag>()
+                .Push(ref _spawnersFilter);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -42,15 +48,22 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         Filter ISystemFilter.CreateFilter()
         {
             return Filter.Create("Filter-FlagRespawn")
-                .With<FlagSpawnerTag>()
+                .With<FlagTag>()
+                .With<FlagNeedRespawn>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
-        { 
+        {
+            foreach (var spawner in _spawnersFilter)
+            {
+                if (spawner.Read<TeamTag>().Value != entity.Read<TeamTag>().Value) continue;
 
+                SceneUtils.ModifyFree(entity.GetPosition(), true);
+                SceneUtils.ModifyFree(spawner.GetPosition(), false);
+                entity.Set(new FlagOnSpawn());
+                entity.SetPosition(spawner.GetPosition());
+            }          
         }
-
     }
-
 }

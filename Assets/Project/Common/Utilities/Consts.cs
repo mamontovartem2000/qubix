@@ -28,6 +28,7 @@
         {
             public const float MINE_BLINK_TIME = 0.15f;
             public const float HEAL_DISPENSER_VALUE = 15f;
+            public const float DESTRUCTIBLE_OBJ_HEALTH = 40f;
         }
 
         public static class Skills

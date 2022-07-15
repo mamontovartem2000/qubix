@@ -102,8 +102,7 @@ namespace Project.Modules.Network
             {
                 PlayerStats player = stats[i];
                 var playerId = builder.CreateString(player.PlayerId);
-                var playerTeam = builder.CreateString(player.Team.ToString());
-                var playerStats = TeamStats.CreateTeamStats(builder, player.Kills, player.Deaths, playerId, playerTeam);
+                var playerStats = TeamStats.CreateTeamStats(builder, player.Kills, player.Deaths, playerId, (byte)player.Team);
                 offsets[i] = playerStats;
             }
 

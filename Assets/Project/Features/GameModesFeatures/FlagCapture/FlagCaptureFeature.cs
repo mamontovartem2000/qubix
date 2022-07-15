@@ -13,6 +13,7 @@ namespace Project.Features.GameModesFeatures
     using FlagCapture.Systems;
     using FlagCapture.Markers;
     using ME.ECS.Views.Providers;
+    using Project.Common.Components;
 
     namespace FlagCapture.Components { }
     namespace FlagCapture.Modules { }
@@ -28,6 +29,7 @@ namespace Project.Features.GameModesFeatures
 
     public sealed class FlagCaptureFeature : Feature
     {
+        private const int FlagCount = 2;
         public MonoBehaviourView Flag;
         public ViewId FlagId;
 
@@ -35,16 +37,33 @@ namespace Project.Features.GameModesFeatures
         {
             FlagId = world.RegisterViewSource(Flag);
 
-            AddSystem<FlagRespawn>();
+            AddSystem<FlagSpawnSystem>();
+            AddSystem<CatchFlagSystem>();
             AddSystem<DropFlagSystem>();
-
         }
 
-        protected override void OnDeconstruct()
+        protected override void OnConstructLate() => SpawnStartFlags();
+
+        private void SpawnStartFlags()
         {
-
+            for (int i = 0; i < FlagCount; i++)
+            {
+                var flag = SpawnFlag(i + 1);
+                flag.Set<FlagNeedRespawn>();
+            }
         }
 
-    }
+        protected override void OnDeconstruct() { }
 
+        public Entity SpawnFlag(int team)
+        {
+            var entity = new Entity("Flag");
+            entity.Set(new FlagTag());
+            entity.Set(new CollisionDynamic());
+            entity.Set(new TeamTag { Value = team } );
+            entity.InstantiateView(FlagId);
+
+            return entity;
+        }
+    }
 }

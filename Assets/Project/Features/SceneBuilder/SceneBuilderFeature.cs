@@ -5,6 +5,7 @@ using ME.ECS.Transform;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Modules.Network;
+using System;
 using UnityEngine;
 
 namespace Project.Features.SceneBuilder
@@ -21,15 +22,11 @@ namespace Project.Features.SceneBuilder
         [SerializeField] private TextAsset _testObjects;
         [Header("Reworked Links")]
         
-        public bool UseMono;
-        
-        public ParticleViewSourceBase[] TileViewSources;
-        public MonoBehaviourView[] MonoViewSources;
-        
+        public ViewWithNumber[] MonoViewSources;
         public DataConfig[] PropsConfigs;
-        public MonoBehaviourView Billboard;
-        private ViewId[] _tileViewIds, _propsViewIds;
-        private ViewId _billboardId;
+        private DictionaryCopyable<int, ViewId> _tileViewIds;
+        private ViewId[] _propsViewIds;
+
         protected override void OnConstruct() => RegisterViews();
         protected override void OnConstructLate() => PrepareMaps();
         protected override void OnDeconstruct() { }
@@ -37,37 +34,17 @@ namespace Project.Features.SceneBuilder
         private void RegisterViews()
         {
             _propsViewIds = new ViewId[PropsConfigs.Length];
-            _billboardId = world.RegisterViewSource(Billboard);
+            _tileViewIds = new DictionaryCopyable<int, ViewId>();
 
-            if (UseMono)
+            foreach (var view in MonoViewSources)
             {
-                _tileViewIds = new ViewId[MonoViewSources.Length];
-
-                for (var i = 2; i < MonoViewSources.Length; i++)
-                {
-                    _tileViewIds[i] = world.RegisterViewSource(MonoViewSources[i]);
-                }
-                
-                for (int i = 1; i < PropsConfigs.Length; i++)
-                {
-                    if (PropsConfigs[i] != null) 
-                        _propsViewIds[i] = world.RegisterViewSource(PropsConfigs[i].Read<TileAlternativeView>().Value);
-                }
+                _tileViewIds.Add(view.Number, world.RegisterViewSource(view.TileView));
             }
-            else
-            {
-                _tileViewIds = new ViewId[TileViewSources.Length];
 
-                for (var i = 2; i < TileViewSources.Length; i++)
-                {
-                    _tileViewIds[i] = world.RegisterViewSource(TileViewSources[i]);
-                }
-                
-                for (int i = 1; i < PropsConfigs.Length; i++)
-                {
-                    if (PropsConfigs[i] != null) 
-                        _propsViewIds[i] = world.RegisterViewSource(PropsConfigs[i].Read<TileView>().Value);
-                }
+            for (int i = 1; i < PropsConfigs.Length; i++)
+            {
+                if (PropsConfigs[i] != null) 
+                    _propsViewIds[i] = world.RegisterViewSource(PropsConfigs[i].Read<TileAlternativeView>().Value);
             }
         }
         private void PrepareMaps()
@@ -111,88 +88,94 @@ namespace Project.Features.SceneBuilder
                 switch (tiles[i])
                 {
                     case 0:
-                    {
-                        freeMap[i] = 1;
-                        walkableMap[i] = 0;
-                        break;
-                    }
+                        {
+                            freeMap[i] = 1;
+                            walkableMap[i] = 0;
+                            break;
+                        }
                     case 1:
-                    {
-                        freeMap[i] = 1;
-                        walkableMap[i] = 1;
-                        break;
-                    }
+                        {
+                            freeMap[i] = 1;
+                            walkableMap[i] = 1;
+                            break;
+                        }
                     case 2:
-                    {
-                        entity = new Entity("Platform-Tile");
-                        freeMap[i] = 0;
-                        walkableMap[i] = 1;
-                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(1f,2f)});
-                        break;
-                    }
+                        {
+                            entity = new Entity("Platform-Tile");
+                            freeMap[i] = 0;
+                            walkableMap[i] = 1;
+                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
+                            break;
+                        }
                     case 8:
-                    {
-                        entity = new Entity("Dispencer-Tile");
-                        entity.Set(new DispenserTag {TimerDefault = 8, Timer = 8});
-                        freeMap[i] = 1;
-                        walkableMap[i] = 1;
-                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(1f,2f)});
-                        break;
-                    }
+                        {
+                            entity = new Entity("Dispencer-Tile");
+                            entity.Set(new DispenserTag { TimerDefault = 8, Timer = 8 });
+                            freeMap[i] = 1;
+                            walkableMap[i] = 1;
+                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
+                            break;
+                        }
                     case 9:
-                    {
-                        entity = new Entity("Portal-Tile");
-                        entity.Set(new PortalDispenserTag { TimerDefault = 0.5f, Timer = 0.5f});
-                        freeMap[i] = 1;
-                        walkableMap[i] = 1;
-                        portalMap.Add(i);
-                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(1f,2f)});
-                        break;
-                    }
+                        {
+                            entity = new Entity("Portal-Tile");
+                            entity.Set(new PortalDispenserTag { TimerDefault = 0.5f, Timer = 0.5f });
+                            freeMap[i] = 1;
+                            walkableMap[i] = 1;
+                            portalMap.Add(i);
+                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
+                            break;
+                        }
                     case 10:
-                    {
-                        entity = new Entity("Bridge-Tile");
-                        entity.Get<BridgeTile>().Value = true;
-                        freeMap[i] = 1;
-                        walkableMap[i] = 1;
-                        break;
-                    }
+                        {
+                            entity = new Entity("Bridge-Tile");
+                            entity.Get<BridgeTile>().Value = true;
+                            freeMap[i] = 1;
+                            walkableMap[i] = 1;
+                            break;
+                        }
                     case 11:
-                    {
-                        entity = new Entity("Bridge-Tile");
-                        entity.Get<BridgeTile>().Value = false;
-                        freeMap[i] = 1;
-                        walkableMap[i] = 1;
-                        break;
-                    }
+                        {
+                            entity = new Entity("Bridge-Tile");
+                            entity.Get<BridgeTile>().Value = false;
+                            freeMap[i] = 1;
+                            walkableMap[i] = 1;
+                            break;
+                        }
                     case 12:
-                    {
-                        entity = new Entity("bBoard");
-                        freeMap[i] = 1;
-                        walkableMap[i] = 0;
-                        entity.InstantiateView(_billboardId);
-                        entity.SetPosition(SceneUtils.IndexToPosition(i));
-                        
-                        entity = Entity.Empty;
-                        break;
-                    }
-                    case 13:
+                        {
+                            entity = new Entity("bBoard");
+                            freeMap[i] = 1;
+                            walkableMap[i] = 0;
+                            break;
+                        }
+                    case 101:
+                    case 102:
                         {
                             entity = new Entity("Flag_Spawn-Tile");
                             entity.Set(new FlagSpawnerTag());
                             freeMap[i] = 1;
                             walkableMap[i] = 1;
                             entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
+
+                            int team = 0;
+                            if (tiles[i] == 101)
+                                team = 1;
+                            else if (tiles[i] == 102)
+                                team = 2;
+
+                            entity.Set(new TeamTag { Value = team });
+
                             break;
                         }
                     default:
-                    {
-                        entity = new Entity("Platform-Tile");
-                        freeMap[i] = 0;
-                        walkableMap[i] = 1;
-                        entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(1f,2f)});
-                        break;
-                    }
+                        {
+                            entity = new Entity("Platform-Tile");
+                            freeMap[i] = 0;
+                            walkableMap[i] = 1;
+                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
+                            break;
+                        }
                 }
                 
                 if (entity == Entity.Empty) continue;
@@ -252,5 +235,12 @@ namespace Project.Features.SceneBuilder
                 SceneUtils.ModifyWalkable(SceneUtils.IndexToPosition(i), false);
             }
         }
+    }
+
+    [Serializable]
+    public struct ViewWithNumber
+    {
+        public int Number;
+        public MonoBehaviourView TileView;
     }
 }

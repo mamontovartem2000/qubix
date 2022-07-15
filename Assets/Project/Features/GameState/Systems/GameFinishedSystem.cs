@@ -74,7 +74,7 @@ namespace Project.Features.GameState.Systems
 
             foreach (var player in _playerFilter)
             {
-                if (player.Read<PlayerTag>().Team == winnerTeam)
+                if (player.Read<TeamTag>().Value == winnerTeam)
                     world.GetFeature<EventsFeature>().Victory.Execute(player);
                 else
                     world.GetFeature<EventsFeature>().Defeat.Execute(player);
@@ -115,38 +115,38 @@ namespace Project.Features.GameState.Systems
             return GetRandomWinner(mostHealthPlayers);
         }
 
-        private TeamTypes GetWinnerTeam()
+        private int GetWinnerTeam()
         {
             Team team1 = new Team();
             Team team2 = new Team();
 
-            GetTeamFullStats(team1, TeamTypes.blue);
-            GetTeamFullStats(team2, TeamTypes.red);
+            GetTeamFullStats(team1, 1);
+            GetTeamFullStats(team2, 2);
 
             if (team1.Kills > team2.Kills)
-                return TeamTypes.blue;
+                return 1;
             else if (team1.Kills < team2.Kills)
-                return TeamTypes.red;
+                return 2;
             
             if (team1.Damage > team2.Damage)
-                return TeamTypes.blue;
+                return 1;
             else if (team1.Damage < team2.Damage)
-                return TeamTypes.red;
+                return 2;
 
             if (team1.Deaths < team2.Deaths)
-                return TeamTypes.blue;
+                return 1;
             else if (team1.Deaths > team2.Deaths)
-                return TeamTypes.red;
+                return 2;
 
             //TODO: Add random
-            return TeamTypes.blue;
+            return 2;
         }
 
-        private void GetTeamFullStats(Team team, TeamTypes teamColor)
+        private void GetTeamFullStats(Team team, int teamNumber)
         {
             foreach (var player in _playerFilter)
             {
-                if (player.Read<PlayerTag>().Team != teamColor) continue;
+                if (player.Read<TeamTag>().Value != teamNumber) continue;
 
                 team.Kills += player.Read<PlayerScore>().Kills;
                 team.Deaths += player.Read<PlayerScore>().Deaths;
@@ -175,7 +175,7 @@ namespace Project.Features.GameState.Systems
             SystemMessages.SendEndGameStats(stats, winnerId);
         }
 
-        private void SendTeamGameResult(TeamTypes winnerTeam)
+        private void SendTeamGameResult(int winnerTeam)
         {
             List<PlayerStats> stats = new List<PlayerStats>();
 
@@ -184,13 +184,13 @@ namespace Project.Features.GameState.Systems
                 var kills = player.Read<PlayerScore>().Kills;
                 var deaths = player.Read<PlayerScore>().Deaths;
                 var id = player.Read<PlayerTag>().PlayerServerID;
-                var team = player.Read<PlayerTag>().Team;
+                var team = player.Read<TeamTag>().Value;
 
 
                 stats.Add(new PlayerStats() { Kills = (uint)kills, Deaths = (uint)deaths, PlayerId = id, Team = team });
             }
 
-            SystemMessages.SendTeamGameStats(stats, winnerTeam.ToString());
+            SystemMessages.SendTeamGameStats(stats, winnerTeam.ToString()); //TODO: need int
         }
 
         private List<Entity> GetPlayersWithMostKills()

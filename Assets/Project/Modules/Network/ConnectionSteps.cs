@@ -119,8 +119,7 @@ namespace Project.Modules.Network
 			if (joinResult.Value)
 			{
 				NetworkData.SlotInRoom = joinResult.Slot;
-				Enum.TryParse(joinResult.Team, out TeamTypes teamType);
-				NetworkData.Team = teamType;
+				NetworkData.Team = joinResult.Team;
 				NetworkEvents.LoadMap?.Invoke();
 				Debug.Log($"Join slot: {joinResult.Slot}, team {joinResult.Team};");
 			}

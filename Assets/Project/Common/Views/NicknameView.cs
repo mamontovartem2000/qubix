@@ -5,7 +5,6 @@ namespace Project.Common.Views
 {
     using ME.ECS.Views.Providers;
     using Project.Common.Components;
-    using Project.Modules.Network;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -25,22 +24,21 @@ namespace Project.Common.Views
 
         public override void OnInitialize() 
         {
-            var player = entity.GetParent().Owner().Read<PlayerTag>();
-
-            _nick.text = player.Nickname;
-
-            if (player.Team == TeamTypes.blue)
-            {
-                _nick.color = _blue;
-                Fill.color = _blue;
-                Back.color = _blue * 0.4f;
-
-            }
-            else if (player.Team == TeamTypes.red)
+            var player = entity.GetParent().Owner();
+            var team = player.Read<TeamTag>().Value;
+            _nick.text = player.Read<PlayerTag>().Nickname;
+    
+            if (team == 1)
             {
                 _nick.color = _red;
                 Fill.color = _red;
                 Back.color = _red * 0.4f;
+            }
+            else if(team == 2)
+            {
+                _nick.color = _blue;
+                Fill.color = _blue;
+                Back.color = _blue * 0.4f;
             }
         }
 

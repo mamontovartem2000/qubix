@@ -11,6 +11,7 @@ namespace Project.Common.Components
         public float Timer;
         public float TimerDefault;
     }
+
     public struct PortalDispenserTag : IComponent
     {
         public float Timer;

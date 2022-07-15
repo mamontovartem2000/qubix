@@ -45,7 +45,7 @@ namespace Project.Modules.Network
 			if (_roomSelected == false)
             {
 				_roomSelected = true;
-				var rnd = Random.Range(0f, 1f);
+				var rnd = Random.Range(0, 100000);
 				StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, "Player" + rnd, ConnectionSteps.ConnectWithoutCreateSocket));
 			}
             else

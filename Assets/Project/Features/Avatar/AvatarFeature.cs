@@ -151,7 +151,7 @@ namespace Project.Features.Avatar
 
             if (NetworkData.GameMode == GameModes.teambattle)
             {
-                pos = SceneUtils.GetTeamSpawnPosition(owner.Read<PlayerTag>().Team == TeamTypes.red ? redSpawnPoints : blueSpawnPoints);
+                pos = SceneUtils.GetTeamSpawnPosition(owner.Read<TeamTag>().Value == 1 ? redSpawnPoints : blueSpawnPoints);
             }
 
             if (pos == fp3.zero)

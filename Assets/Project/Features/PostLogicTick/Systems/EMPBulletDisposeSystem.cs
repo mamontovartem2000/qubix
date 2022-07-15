@@ -49,7 +49,7 @@ namespace Project.Features.PostLogicTick.Systems {
 
             if (!owner.Has<PlayerAvatar>()) return;
             
-            if (!NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team)) return;
+            if (from.Read<TeamTag>().Value == owner.Read<TeamTag>().Value) return;
             
             ref var skills = ref owner.Get<SkillEntities>();
             

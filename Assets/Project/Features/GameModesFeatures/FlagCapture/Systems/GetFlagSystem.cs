@@ -1,31 +1,28 @@
 ﻿using ME.ECS;
-using Project.Common.Components;
-using Project.Common.Utilities;
-using Project.Features.VFX;
-using Project.Modules.Network;
-using UnityEngine;
 
-namespace Project.Features.PostLogicTick.Systems {
+namespace Project.Features.GameModesFeatures.FlagCapture.Systems {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
     using Components; using Modules; using Systems; using Markers;
-    #pragma warning restore
-    
-    #if ECS_COMPILE_IL2CPP_OPTIONS
+    using Project.Common.Components;
+#pragma warning restore
+
+#if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
-    #endif
-    public sealed class FreezeBulletDisposeSystem : ISystemFilter {
+#endif
+    public sealed class GetFlagSystem : ISystemFilter {
         
-        private PostLogicTickFeature feature;
+        private FlagCaptureFeature feature;
+        
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
             this.GetFeature(out this.feature);
-
+            
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -37,24 +34,26 @@ namespace Project.Features.PostLogicTick.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-FreezeBulletDisposeSystem")
-                .With<ProjectileActive>()
+            return Filter.Create("Filter-GetFlagSystem")
+                .With<FlagTag>()
                 .With<Collided>()
-                .With<FreezeModifier>()
                 .Push();
-            
         }
-
-        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
+    
+        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
         {
-            if (entity.TryReadCollided(out var from, out var owner) == false) return;
+            //if (entity.TryReadCollided(out var from, out var owner) == false) return;
+            //var player = owner.Avatar();
 
-            if (!owner.Has<PlayerAvatar>()) return;
-            
-            if (from.Read<TeamTag>().Value == owner.Read<TeamTag>().Value) return;
+            //if (entity.Owner().Has<Spawned>())
+            //    entity.Owner().Remove<Spawned>();
 
-            owner.Avatar().Get<Freeze>().LifeTime = entity.Read<FreezeModifier>().LifeTime;
-            Debug.Log("Freeze");
+            //player.Set(new ApplyHeal { Value = Consts.Scene.HEAL_DISPENSER_VALUE }, ComponentLifetime.NotifyAllSystems);
+
+            //_vfx.SpawnVFX(VFXFeature.VFXType.TakeHealth, player.GetPosition(), player);
+            //entity.Destroy();
         }
+    
     }
+    
 }

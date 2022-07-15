@@ -57,7 +57,9 @@ namespace Project.Features.Player
 		{
 			var localId = nsap.ActorLocalID;
 			var player = new Entity("player_" + localId);
-			player.Set(new PlayerTag {PlayerLocalID = localId, PlayerServerID = nsap.ServerID, Nickname = nsap.Nickname, Team = nsap.Team });
+			player.Set(new PlayerTag {PlayerLocalID = localId, PlayerServerID = nsap.ServerID, Nickname = nsap.Nickname });
+			player.Set(new TeamTag { Value = nsap.Team });
+
 			world.GetFeature<EventsFeature>().TabulationAddPlayer.Execute(player);
 
 

@@ -59,8 +59,8 @@ namespace Project.Features.CollisionHandler
             entity.Get<FaceDirection>().Value = new fp3(1, 0, 0);
             
             return entity;
-        }
-        
+        }   
+
         public void SpawnMine()
         {
             var entity = new Entity("Mine");

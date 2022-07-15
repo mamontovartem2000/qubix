@@ -10,7 +10,7 @@ namespace Project.Modules.Network
         public static string FullJoinRequest;
         public static uint GameSeed;
         public static PlayerInfo[] PlayersInfo;
-        public static TeamTypes Team;
+        public static int Team;
         public static GameModes GameMode;
         public static BuildTypes BuildType;
         public static string FloorMap;
@@ -32,19 +32,8 @@ namespace Project.Modules.Network
             GameSeed = 1;
             FullJoinRequest = string.Empty;
             PlayersInfo = null;
-            Team = TeamTypes.Null;
+            Team = 0;
             BuildType = BuildTypes.ManualConnect;
-        }
-
-        public static bool FriendlyFireCheck(TeamTypes firstPlayer, TeamTypes secondPlayer)
-        {
-            if (GameMode == GameModes.deathmatch)
-                return true;
-
-            if (GameMode == GameModes.teambattle && firstPlayer != secondPlayer)
-                return true;
-            else
-                return false;
         }
 
         public static T CreateFromJSON<T>(string jsonString)
@@ -67,19 +56,12 @@ namespace Project.Modules.Network
         flagCapture
     }
 
-    public enum TeamTypes
-    {
-        Null,
-        red,
-        blue
-    }
-
     public struct PlayerStats
     {
         public uint Kills;
         public uint Deaths;
         public string PlayerId;
-        public TeamTypes Team;
+        public int Team;
     }
 
     public struct PlayerInfo

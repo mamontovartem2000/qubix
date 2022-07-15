@@ -45,7 +45,7 @@ namespace Project.Features.PostLogicTick.Systems
 
             if (owner.Has<PlayerAvatar>())
             {
-                if (NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team))
+                if (from.Read<TeamTag>().Value != owner.Read<TeamTag>().Value)
                 {
                     var player = owner.Avatar();
                     var collision = new Entity("collision");

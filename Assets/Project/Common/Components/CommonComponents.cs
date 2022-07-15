@@ -1,8 +1,6 @@
 ﻿using ME.ECS;
-using ME.ECS.Views.Providers;
-using UnityEngine;
 
-namespace Project.Common.Components 
+namespace Project.Common.Components
 {
     public struct ApplyDamage : IComponent
     {

@@ -46,7 +46,7 @@ namespace Project.Features.PostLogicTick.Systems
 			{
 				var player = owner.Avatar();
 				
-				if (NetworkData.FriendlyFireCheck(from.Read<PlayerTag>().Team, owner.Read<PlayerTag>().Team))
+				if (from.Read<TeamTag>().Value != owner.Read<TeamTag>().Value)
 				{
 					var collision = new Entity("collision");
 					collision.Get<LifeTimeLeft>().Value = Consts.Main.DEFAULT_LIFETIME;
