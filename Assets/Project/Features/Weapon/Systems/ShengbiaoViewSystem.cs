@@ -50,12 +50,12 @@ namespace Project.Features.Weapon.Systems {
 
             if (entity.Read<ReloadTimeDefault>().Value - entity.Read<ReloadTime>().Value < Consts.Weapons.SHENGBIAO_ATTACK_SECONDS)
             {
-                offset -= deltaTime * 1.5f;
+                offset -= deltaTime * 1f;
             }
             else if (offset < 0.98f)
             {
                 offset += deltaTime * 0.4f / returnTime;
-                shengbiaoDamageSpot.Get<ProjectileParent>().Speed = -6f;
+                shengbiaoDamageSpot.Get<ProjectileParent>().Speed = -8f;
             }
         }
     }

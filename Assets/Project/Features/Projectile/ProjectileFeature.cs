@@ -39,7 +39,8 @@ namespace Project.Features.Projectile
             entity.Get<Owner>().Value = gun.Read<Owner>().Value;
             entity.Set(new DamageSource());
             entity.Set(new ProjectileActive());
-
+            entity.Get<ProjectileDirection>().Value = gun.Read<WeaponAim>().Value.GetPosition() - gun.GetPosition();
+            
             if (gun.Has<StunModifier>())
             {
                 entity.Set(new StunModifier { Value = 1 });

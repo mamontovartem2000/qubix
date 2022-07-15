@@ -47,7 +47,7 @@ namespace Project.Features.Weapon.Systems {
         {
             var spot = new Entity("spot");
             spot.Get<ProjectileParent>().Speed = 20f;
-            spot.SetLocalPosition(entity.GetPosition() + entity.Owner().Avatar().Read<FaceDirection>().Value);
+            spot.SetLocalPosition(entity.GetPosition());
             spot.SetParent(entity);
             entity.Get<ShengbiaoDamageSpot>().Value = spot;
         }
