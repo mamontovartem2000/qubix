@@ -32,8 +32,8 @@
             public static class Mines
             {
                 public const int COUNT = 16;
-                public const int DAMAGE_MIN = 105;
-                public const int DAMAGE_MAX = 125;
+                public const int DAMAGE_MIN = 5;
+                public const int DAMAGE_MAX = 25;
                 public const float SPAWN_DELAY_DEFAULT = 3f;
                 public const float BLINK_TIME = 0.15f;
                 public const float BLINK_FREQUENCY_MIN = 3f;
@@ -47,6 +47,24 @@
             public const float INSTANT_RELOAD_TIME = 0.1f;
             public const int DASH_LENGTH = 3;
             public const float EMP_DURATION_DEFAULT = 2;
+        }
+        
+        public static class GameModes
+        {
+            public static class FlagCapture
+            {
+                public const int FLAG_COUNT = 2;
+                public const float DROPPED_FLAG_LIFETIME = 15f;
+                public const float FLAG_RESPAWN_TIME = 3f;
+                public const float FIRST_GAME_PHASE_TIME = 5 * 60f;
+                public const float SECOND_GAME_PHASE_TIME = 3 * 60f;
+                
+                public static class Buffs
+                {
+                    public const float HEALTH_REGENERATION_PERCENTAGE = 10f;
+                    public const float HEALING_TIME_INTERVAL = 10f;
+                }
+            }
         }
     }
 }

@@ -65,7 +65,7 @@ namespace Project.Features.Player
 
 			if (NetworkData.PlayersInfo == null) // Fake case
 			{
-				BullerConfig.Apply(player);
+				GoldHunterConfig.Apply(player);
 				return;
 			}
 

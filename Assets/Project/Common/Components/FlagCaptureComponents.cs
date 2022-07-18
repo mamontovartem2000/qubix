@@ -14,4 +14,9 @@ namespace Project.Common.Components
     public struct FlagNeedRespawn : IComponent { }
 
     public struct FlagOnSpawn : IComponent { }
+
+    public struct DroppedFlag : IComponent
+    {
+        public float WatingTime;
+    }
 }

@@ -58,9 +58,9 @@ namespace Project.Features.Avatar.Systems
             world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(entity);
             world.GetFeature<EventsFeature>().PlayerDeath.Execute(entity);      
 
-            SceneUtils.ModifyWalkable(entity.Read<PlayerMoveTarget>().Value, true);
+            SceneUtils.ModifyWalkable(avatar.Read<PlayerMoveTarget>().Value, true);
             
-            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, entity.GetPosition());
+            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar.GetPosition());
             entity.Remove<PlayerAvatar>();
             avatar.Destroy();
         }

@@ -1,6 +1,8 @@
-﻿using ME.ECS;
+﻿using Assets.Project.Common.Components;
+using ME.ECS;
+using Project.Common.Components;
 
-namespace Project.Features.GameModesFeatures.FlagCapture.Systems
+namespace Project.Features.Buffs.Systems
 {
     #region usage
 #pragma warning disable
@@ -12,7 +14,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
     using Modules;
     using Systems;
     using Markers;
-    using Project.Common.Components;
+
 #pragma warning restore
 
 #if ECS_COMPILE_IL2CPP_OPTIONS
@@ -22,41 +24,48 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 #endif
     #endregion
 
-    public sealed class DropFlagSystem : ISystemFilter
+    public sealed class HealingBuffSystem : ISystemFilter
     {
-        private FlagCaptureFeature _feature;
+        private BuffsFeature feature;
 
         public World world { get; set; }
 
         void ISystemBase.OnConstruct()
         {
-            this.GetFeature(out this._feature);
+            this.GetFeature(out this.feature);
         }
 
-        void ISystemBase.OnDeconstruct() { }
+        void ISystemBase.OnDeconstruct()
+        {
+        }
 
 #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;
 #endif
         Filter ISystemFilter.filter { get; set; }
+
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-DropFlagSystem")
-                .With<PlayerTag>()
-                .With<PlayerDead>()
-                .With<CarriesTheFlag>()
+            return Filter.Create("Filter-HealingBuffSystem")
+                .With<HealingBuff>()
                 .Push();
         }
 
-        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
+        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            Entity flag = _feature.SpawnFlag(entity.Read<CarriesTheFlag>().Team);
-            flag.Set(new DroppedFlag());
-            entity.Remove<CarriesTheFlag>();
-            var pos = entity.Read<PlayerDead>().DeathPosition;
-            flag.SetPosition(pos);
-            SceneUtils.ModifyFree(pos, false);
+            if (entity.Read<PlayerHealth>().Value == entity.Read<PlayerHealthDefault>().Value) return;
+
+            ref var buff = ref entity.Get<HealingBuff>();
+
+            buff.LastHealingTime += deltaTime;
+
+            if (buff.LastHealingTime > buff.TimeInterval)
+            {
+                buff.LastHealingTime = 0f;
+                var healValue = entity.Read<PlayerHealthDefault>().Value * buff.HealsPercent / 100f;
+                entity.Set(new ApplyHeal { Value = healValue}, ComponentLifetime.NotifyAllSystems);
+            }
         }
     }
 }

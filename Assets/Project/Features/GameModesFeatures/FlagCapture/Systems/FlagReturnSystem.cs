@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Common.Utilities;
 
 namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 {
@@ -22,15 +23,14 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 #endif
     #endregion
 
-    public sealed class DropFlagSystem : ISystemFilter
+    public sealed class FlagReturnSystem : ISystemFilter
     {
-        private FlagCaptureFeature _feature;
-
+        private FlagCaptureFeature feature;
         public World world { get; set; }
 
         void ISystemBase.OnConstruct()
         {
-            this.GetFeature(out this._feature);
+            this.GetFeature(out this.feature);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -42,21 +42,23 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-DropFlagSystem")
-                .With<PlayerTag>()
-                .With<PlayerDead>()
-                .With<CarriesTheFlag>()
+            return Filter.Create("Filter-FlagReturn")
+                .With<FlagTag>()
+                .With<DroppedFlag>()
                 .Push();
         }
 
-        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
+        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            Entity flag = _feature.SpawnFlag(entity.Read<CarriesTheFlag>().Team);
-            flag.Set(new DroppedFlag());
-            entity.Remove<CarriesTheFlag>();
-            var pos = entity.Read<PlayerDead>().DeathPosition;
-            flag.SetPosition(pos);
-            SceneUtils.ModifyFree(pos, false);
+            ref var time = ref entity.Get<DroppedFlag>().WatingTime;
+
+            time += deltaTime;
+
+            if (time > Consts.GameModes.FlagCapture.DROPPED_FLAG_LIFETIME)
+            {
+                entity.Set(new FlagNeedRespawn());
+                entity.Remove<DroppedFlag>();
+            }
         }
     }
 }
