@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 
 namespace Project.Features.CollisionHandler.Systems 
 {
@@ -14,6 +15,8 @@ namespace Project.Features.CollisionHandler.Systems
 
         private CollisionHandlerFeature _feature;
         private Filter _mineFilter;
+        private float _spawnDelay;
+        
         void ISystemBase.OnConstruct() 
         {
             this.GetFeature(out _feature);
@@ -27,15 +30,14 @@ namespace Project.Features.CollisionHandler.Systems
 
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
-            ref var time = ref _feature.MineSpawnDelay;
-
-            if (_mineFilter.Count >= _feature.MineCount) return;
+            if (_mineFilter.Count >= Consts.Scene.Mines.COUNT) return;
             
-            time -= deltaTime;
+            _spawnDelay -= deltaTime;
             
-            if(time > 0) return;
+            if (_spawnDelay > 0) return;
+            
             _feature.SpawnMine();
-            time = _feature.MineSpawnDelayDefault;
+            _spawnDelay = Consts.Scene.Mines.SPAWN_DELAY_DEFAULT;
         }
     }
 }

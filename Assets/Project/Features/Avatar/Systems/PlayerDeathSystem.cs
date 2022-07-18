@@ -34,34 +34,35 @@ namespace Project.Features.Avatar.Systems
         Filter ISystemFilter.CreateFilter() 
         {
             return Filter.Create("Filter-PlayerHealthSystem")
+                .With<PlayerTag>()
                 .With<PlayerDead>()
                 .WithoutShared<GameFinished>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
-        {           
-            var player = entity.Owner();
+        {
+            var avatar = entity.Avatar();
             
-            if (player.Has<DamagedBy>())
+            if (entity.Has<DamagedBy>())
             {
-                ref var enemy = ref player.Get<DamagedBy>().Value;
+                ref var enemy = ref entity.Get<DamagedBy>().Value;
                 enemy.Get<PlayerScore>().Kills += 1;
                 world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
                 world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(enemy);
                 world.GetFeature<EventsFeature>().TabulationScreenNewPlayerStats.Execute(enemy);
             }
             
-            player.Get<PlayerScore>().Deaths += 1;
+            entity.Get<PlayerScore>().Deaths += 1;
             
-            world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(player);
-            world.GetFeature<EventsFeature>().PlayerDeath.Execute(player);      
+            world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(entity);
+            world.GetFeature<EventsFeature>().PlayerDeath.Execute(entity);      
 
             SceneUtils.ModifyWalkable(entity.Read<PlayerMoveTarget>().Value, true);
             
-            _vfx.SpawnVFX(player.Read<VFXConfig>().Value, entity.GetPosition());
-            player.Remove<PlayerAvatar>();
-            entity.Destroy();
+            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, entity.GetPosition());
+            entity.Remove<PlayerAvatar>();
+            avatar.Destroy();
         }
     }
 }

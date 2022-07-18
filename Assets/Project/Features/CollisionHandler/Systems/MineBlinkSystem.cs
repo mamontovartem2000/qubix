@@ -43,7 +43,7 @@ namespace Project.Features.CollisionHandler.Systems
 			
 			if(time > 0) return;
 			
-			entity.Get<MineBlink>().Value = Consts.Scene.MINE_BLINK_TIME;
+			entity.Get<MineBlink>().Value = Consts.Scene.Mines.BLINK_TIME;
 			time = defaultTime;
 		}
 	}

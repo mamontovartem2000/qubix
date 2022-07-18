@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using UnityEngine;
 
 namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 {
@@ -50,6 +51,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
         {
+            Debug.Log("ssdaefwe");
             Entity flag = _feature.SpawnFlag(entity.Read<CarriesTheFlag>().Team);
             var pos = entity.Read<PlayerMoveTarget>().Value;
             flag.SetPosition(pos);

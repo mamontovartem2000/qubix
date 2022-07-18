@@ -3,6 +3,7 @@ using Project.Common.Components;
 using Project.Common.Events;
 using Project.Common.Utilities;
 using Project.Features.Player;
+using UnityEngine;
 
 namespace Project.Features.Avatar.Systems
 {
@@ -39,7 +40,6 @@ namespace Project.Features.Avatar.Systems
         // ReSharper disable Unity.PerformanceAnalysis
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            
             ref var apply = ref entity.Get<ApplyDamage>();
             var from = apply.ApplyFrom;
             var to = apply.ApplyTo;
@@ -67,7 +67,8 @@ namespace Project.Features.Avatar.Systems
 
             if (health <= 0)
             {
-                to.Set(new PlayerDead(), ComponentLifetime.NotifyAllSystems);
+                to.Owner().Set(new PlayerDead(), ComponentLifetime.NotifyAllSystems);
+                Debug.Log("dead");
                 dealtDamage += health;
                 health = 0;
             }

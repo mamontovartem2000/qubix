@@ -26,9 +26,19 @@
 
         public static class Scene
         {
-            public const float MINE_BLINK_TIME = 0.15f;
             public const float HEAL_DISPENSER_VALUE = 15f;
             public const float DESTRUCTIBLE_OBJ_HEALTH = 40f;
+
+            public static class Mines
+            {
+                public const int COUNT = 16;
+                public const int DAMAGE_MIN = 105;
+                public const int DAMAGE_MAX = 125;
+                public const float SPAWN_DELAY_DEFAULT = 3f;
+                public const float BLINK_TIME = 0.15f;
+                public const float BLINK_FREQUENCY_MIN = 3f;
+                public const float BLINK_FREQUENCY_MAX = 6f;
+            }
         }
 
         public static class Skills

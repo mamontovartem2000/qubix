@@ -62,7 +62,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
             }
             else
             {
-                player.Avatar().Set(new CarriesTheFlag { Team = entity.Read<TeamTag>().Value });
+                player.Set(new CarriesTheFlag { Team = entity.Read<TeamTag>().Value });
                 entity.Destroy();
             }
 

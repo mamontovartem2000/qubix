@@ -37,6 +37,7 @@ namespace Project.Features.Avatar.Systems {
         Filter ISystemFilter.CreateFilter() {
             
             return Filter.Create("Filter-SecondLifeSkillModifier")
+                .With<PlayerTag>()
                 .With<SecondLifeAffect>()
                 .With<PlayerDead>()
                 .Push();
@@ -44,7 +45,7 @@ namespace Project.Features.Avatar.Systems {
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var avatar = entity.Owner().Avatar();
+            var avatar = entity.Avatar();
             avatar.Get<PlayerHealth>().Value = avatar.Read<PlayerHealthDefault>().Value * 0.3f;
             _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar, 2f);
             avatar.Set<SecondLifeModifier>();
