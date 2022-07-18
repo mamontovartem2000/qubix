@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Common.Utilities;
 
 namespace Project.Features.GameModesFeatures
 {
@@ -29,27 +30,27 @@ namespace Project.Features.GameModesFeatures
 
     public sealed class FlagCaptureFeature : Feature
     {
-        private const int FlagCount = 2;
         public MonoBehaviourView Flag;
-        public ViewId FlagId;
+        private ViewId _flagId;
 
         protected override void OnConstruct()
         {
-            FlagId = world.RegisterViewSource(Flag);
+            _flagId = world.RegisterViewSource(Flag);
 
             AddSystem<FlagSpawnSystem>();
             AddSystem<CatchFlagSystem>();
             AddSystem<DropFlagSystem>();
+            AddSystem<FlagReturnSystem>();
         }
 
         protected override void OnConstructLate() => SpawnStartFlags();
 
         private void SpawnStartFlags()
         {
-            for (int i = 0; i < FlagCount; i++)
+            for (int i = 0; i < Consts.GameModes.FlagCapture.FLAG_COUNT; i++)
             {
                 var flag = SpawnFlag(i + 1);
-                flag.Set<FlagNeedRespawn>();
+                flag.Set(new FlagNeedRespawn(), ComponentLifetime.NotifyAllSystems);
             }
         }
 
@@ -61,7 +62,7 @@ namespace Project.Features.GameModesFeatures
             entity.Set(new FlagTag());
             entity.Set(new CollisionDynamic());
             entity.Set(new TeamTag { Value = team } );
-            entity.InstantiateView(FlagId);
+            entity.InstantiateView(_flagId);
 
             return entity;
         }

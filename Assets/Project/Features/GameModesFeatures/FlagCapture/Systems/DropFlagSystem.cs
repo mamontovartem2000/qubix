@@ -43,6 +43,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         Filter ISystemFilter.CreateFilter()
         {
             return Filter.Create("Filter-DropFlagSystem")
+                .With<PlayerTag>()
                 .With<PlayerDead>()
                 .With<CarriesTheFlag>()
                 .Push();
@@ -51,7 +52,9 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
         {
             Entity flag = _feature.SpawnFlag(entity.Read<CarriesTheFlag>().Team);
-            var pos = entity.Read<PlayerMoveTarget>().Value;
+            flag.Set(new DroppedFlag());
+            entity.Remove<CarriesTheFlag>();
+            var pos = entity.Read<PlayerDead>().DeathPosition;
             flag.SetPosition(pos);
             SceneUtils.ModifyFree(pos, false);
         }

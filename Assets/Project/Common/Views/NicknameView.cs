@@ -25,20 +25,25 @@ namespace Project.Common.Views
         public override void OnInitialize() 
         {
             var player = entity.GetParent().Owner();
-            var team = player.Read<TeamTag>().Value;
+            
             _nick.text = player.Read<PlayerTag>().Nickname;
-    
-            if (team == 1)
+
+            if (player.Has<TeamTag>())
             {
-                _nick.color = _red;
-                Fill.color = _red;
-                Back.color = _red * 0.4f;
-            }
-            else if(team == 2)
-            {
-                _nick.color = _blue;
-                Fill.color = _blue;
-                Back.color = _blue * 0.4f;
+                var team = player.Read<TeamTag>().Value;
+
+                if (team == 1)
+                {
+                    _nick.color = _red;
+                    Fill.color = _red;
+                    Back.color = _red * 0.4f;
+                }
+                else if (team == 2)
+                {
+                    _nick.color = _blue;
+                    Fill.color = _blue;
+                    Back.color = _blue * 0.4f;
+                }
             }
         }
 

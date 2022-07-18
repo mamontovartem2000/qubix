@@ -9,6 +9,7 @@ namespace ME.ECS {
             CoreComponentsInitializer.InitTypeId();
 
 
+            WorldUtilities.InitComponentTypeId<Assets.Project.Common.Components.HealingBuff>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ActivateSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacity>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacityDefault>(false, true, false, false, false, false, false, false);
@@ -43,6 +44,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DispenserTag>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DroppedFlag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMP>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPAffect>(true, true, false, false, false, false, false, false);
@@ -116,7 +118,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamaged>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamagedCounter>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDead>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDead>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealth>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthOverlay>(false, true, false, false, false, false, false, false);
@@ -198,6 +200,7 @@ namespace ME.ECS {
             CoreComponentsInitializer.InitTypeId();
 
 
+            WorldUtilities.InitComponentTypeId<Assets.Project.Common.Components.HealingBuff>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ActivateSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacity>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacityDefault>(false, true, false, false, false, false, false, false);
@@ -232,6 +235,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DispenserTag>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DroppedFlag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMP>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPAffect>(true, true, false, false, false, false, false, false);
@@ -305,7 +309,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamaged>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDamagedCounter>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDead>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerDead>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealth>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerHealthOverlay>(false, true, false, false, false, false, false, false);
@@ -382,6 +386,7 @@ namespace ME.ECS {
             CoreComponentsInitializer.Init(ref structComponentsContainer);
 
 
+            structComponentsContainer.Validate<Assets.Project.Common.Components.HealingBuff>(false);
             structComponentsContainer.Validate<Project.Common.Components.ActivateSkill>(true);
             structComponentsContainer.Validate<Project.Common.Components.AmmoCapacity>(false);
             structComponentsContainer.Validate<Project.Common.Components.AmmoCapacityDefault>(false);
@@ -416,6 +421,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.DestructibleTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.DestructibleView>(false);
             structComponentsContainer.Validate<Project.Common.Components.DispenserTag>(false);
+            structComponentsContainer.Validate<Project.Common.Components.DroppedFlag>(false);
             structComponentsContainer.Validate<Project.Common.Components.EffectTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.EMP>(false);
             structComponentsContainer.Validate<Project.Common.Components.EMPAffect>(true);
@@ -489,7 +495,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.PlayerConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerDamaged>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerDamagedCounter>(false);
-            structComponentsContainer.Validate<Project.Common.Components.PlayerDead>(true);
+            structComponentsContainer.Validate<Project.Common.Components.PlayerDead>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealth>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealthDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerHealthOverlay>(false);
@@ -571,6 +577,7 @@ namespace ME.ECS {
         public static void Init(Entity entity) {
 
 
+            entity.ValidateData<Assets.Project.Common.Components.HealingBuff>(false);
             entity.ValidateData<Project.Common.Components.ActivateSkill>(true);
             entity.ValidateData<Project.Common.Components.AmmoCapacity>(false);
             entity.ValidateData<Project.Common.Components.AmmoCapacityDefault>(false);
@@ -605,6 +612,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.DestructibleTag>(true);
             entity.ValidateData<Project.Common.Components.DestructibleView>(false);
             entity.ValidateData<Project.Common.Components.DispenserTag>(false);
+            entity.ValidateData<Project.Common.Components.DroppedFlag>(false);
             entity.ValidateData<Project.Common.Components.EffectTag>(true);
             entity.ValidateData<Project.Common.Components.EMP>(false);
             entity.ValidateData<Project.Common.Components.EMPAffect>(true);
@@ -678,7 +686,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.PlayerConfig>(false);
             entity.ValidateData<Project.Common.Components.PlayerDamaged>(false);
             entity.ValidateData<Project.Common.Components.PlayerDamagedCounter>(false);
-            entity.ValidateData<Project.Common.Components.PlayerDead>(true);
+            entity.ValidateData<Project.Common.Components.PlayerDead>(false);
             entity.ValidateData<Project.Common.Components.PlayerHealth>(false);
             entity.ValidateData<Project.Common.Components.PlayerHealthDefault>(false);
             entity.ValidateData<Project.Common.Components.PlayerHealthOverlay>(false);

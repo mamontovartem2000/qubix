@@ -32,7 +32,7 @@ namespace Project.Modules.Network
             GameSeed = 1;
             FullJoinRequest = string.Empty;
             PlayersInfo = null;
-            Team = 0;
+            Team = 1;
             BuildType = BuildTypes.ManualConnect;
         }
 

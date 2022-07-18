@@ -1,4 +1,5 @@
-﻿using ME.ECS;
+﻿using Assets.Project.Common.Components;
+using ME.ECS;
 
 namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 {
@@ -52,21 +53,25 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         {
             var player = entity.Read<Collided>().ApplyTo;
 
-            if (player.Has<PlayerTag>() == false) return;
+            if (player.Has<PlayerTag>() == false || player.Has<PlayerDead>()) return;
 
             if (player.Read<TeamTag>().Value == entity.Read<TeamTag>().Value)
             {
                 if (entity.Has<FlagOnSpawn>()) return;
 
+                entity.Remove<DroppedFlag>();
                 entity.Set(new FlagNeedRespawn(), ComponentLifetime.NotifyAllSystems);
             }
             else
             {
-                player.Avatar().Set(new CarriesTheFlag { Team = entity.Read<TeamTag>().Value });
+                player.Set(new CarriesTheFlag { Team = entity.Read<TeamTag>().Value });
+                player.Avatar().Set(new HealingBuff
+                {
+                    TimeInterval = Consts.GameModes.FlagCapture.Buffs.HEALING_TIME_INTERVAL,
+                    HealsPercent = Consts.GameModes.FlagCapture.Buffs.HEALTH_REGENERATION_PERCENTAGE
+                });
                 entity.Destroy();
             }
-
-            //_vfx.SpawnVFX(VFXFeature.VFXType.TakeHealth, player.GetPosition(), player);
         }
     }
 }
