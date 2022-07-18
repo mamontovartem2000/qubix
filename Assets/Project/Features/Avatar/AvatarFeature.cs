@@ -27,7 +27,9 @@ namespace Project.Features.Avatar
         {
             //(De-)spawn systems
             AddSystem<SpawnPlayerAvatarSystem>();
-
+            AddSystem<CyberVampyrHealSystem>();
+            AddSystem<SoftShieldApplyDamageSystem>();
+            
             //Damage systems
             AddSystem<ApplyHealSystem>();
             AddSystem<ApplyDamageSystem>();
@@ -45,7 +47,8 @@ namespace Project.Features.Avatar
             AddSystem<SlownessAfterTakeDamageSystem>();
             AddSystem<SlownessRemoveSystem>();
             AddSystem<StunLifeTimeSystem>();
-            AddSystem<ShieldApplyDamageSystem>();
+            AddSystem<HardShieldApplyDamageSystem>();
+            
 
             //Other
             AddSystem<BlinkIntensitySystem>();

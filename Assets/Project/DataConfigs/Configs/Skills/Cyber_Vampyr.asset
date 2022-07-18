@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: Slowness
+  m_Name: Cyber_Vampyr
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
@@ -21,11 +21,8 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: Slowness, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 70
-        LifeTime: 4
+        Value: 4
     00000001:
-      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 30
+      type: {class: CyberVampyrAffect, ns: Project.Common.Components, asm: Project.Common}

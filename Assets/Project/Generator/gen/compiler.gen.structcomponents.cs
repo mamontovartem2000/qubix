@@ -32,6 +32,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CriticalHit>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CriticalHitAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CriticalHitModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CyberVampyrAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CyberVampyrModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
@@ -137,6 +139,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RespawnTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RightWeaponShot>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ScytheThrowAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondaryDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondLifeAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondLifeModifier>(true, true, false, false, false, false, false, false);
@@ -157,6 +160,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Slowness>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SoftShieldAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SoftShieldModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPath>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnBullet>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
@@ -216,6 +221,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CriticalHit>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CriticalHitAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CriticalHitModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CyberVampyrAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CyberVampyrModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
@@ -321,6 +328,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RespawnTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RightWeaponShot>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ScytheThrowAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondaryDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondLifeAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondLifeModifier>(true, true, false, false, false, false, false, false);
@@ -341,6 +349,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillVFX>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Slowness>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SoftShieldAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SoftShieldModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPath>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnBullet>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
@@ -395,6 +405,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.CriticalHit>(false);
             structComponentsContainer.Validate<Project.Common.Components.CriticalHitAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.CriticalHitModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.CyberVampyrAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.CyberVampyrModifier>(true);
             structComponentsContainer.Validate<Project.Common.Components.DamagedBy>(false);
             structComponentsContainer.Validate<Project.Common.Components.DamageSource>(true);
             structComponentsContainer.Validate<Project.Common.Components.DashAffect>(true);
@@ -500,6 +512,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ReloadTimeDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.RespawnTime>(false);
             structComponentsContainer.Validate<Project.Common.Components.RightWeaponShot>(true);
+            structComponentsContainer.Validate<Project.Common.Components.ScytheThrowAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.SecondaryDamage>(false);
             structComponentsContainer.Validate<Project.Common.Components.SecondLifeAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.SecondLifeModifier>(true);
@@ -520,6 +533,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SkillTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillVFX>(false);
             structComponentsContainer.Validate<Project.Common.Components.Slowness>(false);
+            structComponentsContainer.Validate<Project.Common.Components.SoftShieldAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.SoftShieldModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.SoundPath>(false);
             structComponentsContainer.Validate<Project.Common.Components.SpawnBullet>(true);
             structComponentsContainer.Validate<Project.Common.Components.Spawned>(true);
@@ -579,6 +594,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.CriticalHit>(false);
             entity.ValidateData<Project.Common.Components.CriticalHitAffect>(true);
             entity.ValidateData<Project.Common.Components.CriticalHitModifier>(false);
+            entity.ValidateData<Project.Common.Components.CyberVampyrAffect>(true);
+            entity.ValidateData<Project.Common.Components.CyberVampyrModifier>(true);
             entity.ValidateData<Project.Common.Components.DamagedBy>(false);
             entity.ValidateData<Project.Common.Components.DamageSource>(true);
             entity.ValidateData<Project.Common.Components.DashAffect>(true);
@@ -684,6 +701,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ReloadTimeDefault>(false);
             entity.ValidateData<Project.Common.Components.RespawnTime>(false);
             entity.ValidateData<Project.Common.Components.RightWeaponShot>(true);
+            entity.ValidateData<Project.Common.Components.ScytheThrowAffect>(true);
             entity.ValidateData<Project.Common.Components.SecondaryDamage>(false);
             entity.ValidateData<Project.Common.Components.SecondLifeAffect>(true);
             entity.ValidateData<Project.Common.Components.SecondLifeModifier>(true);
@@ -704,6 +722,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SkillTag>(false);
             entity.ValidateData<Project.Common.Components.SkillVFX>(false);
             entity.ValidateData<Project.Common.Components.Slowness>(false);
+            entity.ValidateData<Project.Common.Components.SoftShieldAffect>(true);
+            entity.ValidateData<Project.Common.Components.SoftShieldModifier>(false);
             entity.ValidateData<Project.Common.Components.SoundPath>(false);
             entity.ValidateData<Project.Common.Components.SpawnBullet>(true);
             entity.ValidateData<Project.Common.Components.Spawned>(true);

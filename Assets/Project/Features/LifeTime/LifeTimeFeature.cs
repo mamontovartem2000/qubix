@@ -29,6 +29,7 @@ namespace Project.Features.LifeTime
             AddSystem<LinearLifeSystem>();
             AddSystem<LinearVisualLifeTimeSystem>();
             AddSystem<MeleeAimInitSystem>();
+            AddSystem<SoftShieldRemoveSystem>();
             // AddSystem<MeleeAimPositionSystem>();
             AddSystem<DestructibleHealthSystem>();
             AddSystem<AvoidTeleportLifeTimeSystem>();

@@ -38,6 +38,8 @@ namespace Project.Common.Components
 
 	public struct SecondLifeModifier : IComponent {}
 	
+	public struct CyberVampyrModifier : IComponent {}
+	
 	public struct EMP : IComponent
 	{
 		public float LifeTime;
@@ -61,6 +63,10 @@ namespace Project.Common.Components
 		public float Value;
 	}
 
+	public struct SoftShieldModifier : IComponent
+	{
+		public float LifeTime;
+	}
 	public struct LinearPowerModifier : IComponent
 	{
 		public float Damage;

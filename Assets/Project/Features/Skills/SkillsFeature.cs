@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Features.Skills.Systems.Bloodlov;
 using Project.Features.Skills.Systems.Buller;
 using Project.Features.Skills.Systems.GoldHunter;
 using Project.Features.Skills.Systems.Powerf;
@@ -44,6 +45,10 @@ namespace Project.Features.Skills
             AddSystem<SecondLifeSkillSystem>();
             AddSystem<CriticalHitSkillSystem>();
             AddSystem<FreezeStormSkillSystem>();
+            
+            //Bloodlov
+            AddSystem<SoftShieldSkillSystem>();
+            AddSystem<CyberVampyrSkillSystem>();
             
             //Universal
             AddSystem<GrenadeThrowSkillSystem>();
