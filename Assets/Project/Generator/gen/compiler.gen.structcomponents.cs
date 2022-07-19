@@ -36,7 +36,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CyberVampyrAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CyberVampyrModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Debuff>(true, true, false, false, false, false, false, false);
@@ -227,7 +226,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CyberVampyrAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CyberVampyrModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.DamageSource>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Debuff>(true, true, false, false, false, false, false, false);
@@ -413,7 +411,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.CyberVampyrAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.CyberVampyrModifier>(true);
             structComponentsContainer.Validate<Project.Common.Components.DamagedBy>(false);
-            structComponentsContainer.Validate<Project.Common.Components.DamageSource>(true);
             structComponentsContainer.Validate<Project.Common.Components.DashAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.DashModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.Debuff>(true);
@@ -604,7 +601,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.CyberVampyrAffect>(true);
             entity.ValidateData<Project.Common.Components.CyberVampyrModifier>(true);
             entity.ValidateData<Project.Common.Components.DamagedBy>(false);
-            entity.ValidateData<Project.Common.Components.DamageSource>(true);
             entity.ValidateData<Project.Common.Components.DashAffect>(true);
             entity.ValidateData<Project.Common.Components.DashModifier>(false);
             entity.ValidateData<Project.Common.Components.Debuff>(true);

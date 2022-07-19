@@ -19,7 +19,7 @@ namespace Project.Common.Utilities
         {
             entity.Get<SoundPath>().Value = path;
         
-            PlaySound(entity);
+            Worlds.current.GetFeature<EventsFeature>().PlaySound.Execute(entity);
         }
     }
 }

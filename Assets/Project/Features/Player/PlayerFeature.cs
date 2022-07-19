@@ -65,7 +65,7 @@ namespace Project.Features.Player
 
 			if (NetworkData.PlayersInfo == null) // Fake case
 			{
-				GoldHunterConfig.Apply(player);
+				BloodlovConfig.Apply(player);
 				return;
 			}
 

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: a_Shengbiao
+  m_Name: FlyingSkythe
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
@@ -20,6 +20,7 @@ MonoBehaviour:
   - id: 3
   - id: 4
   - id: 5
+  - id: 6
   removeStructComponents: []
   templates: []
   references:
@@ -27,20 +28,24 @@ MonoBehaviour:
     00000000:
       type: {class: ViewModel, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: -536419860255057633, guid: 70fe0c5a0f4457f45b78c2a8bc467e9b, type: 3}
+        Value: {fileID: 3462805736172149047, guid: 3cdd64c9a5f59f542a2fd4b41fa744f4, type: 3}
     00000001:
       type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 40
     00000002:
+      type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 10
+    00000003:
       type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 3.5
-    00000003:
-      type: {class: CollisionDynamic, ns: Project.Common.Components, asm: Project.Common}
+        Value: 10
     00000004:
+      type: {class: CollisionDynamic, ns: Project.Common.Components, asm: Project.Common}
+    00000005:
+      type: {class: ProjectileActive, ns: Project.Common.Components, asm: Project.Common}
+    00000006:
       type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 11400000, guid: dd40bd13da181e442b84eae343273551, type: 2}
-    00000005:
-      type: {class: ShengbiaoProjectile, ns: Project.Common.Components, asm: Project.Common}

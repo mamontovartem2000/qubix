@@ -94,6 +94,4 @@ namespace Project.Common.Components
 	}
 	
 	public struct LinearVisual : IComponent {}
-	
-	public struct DamageSource : IComponent {}
 }

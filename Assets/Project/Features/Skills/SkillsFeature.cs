@@ -47,6 +47,7 @@ namespace Project.Features.Skills
             AddSystem<FreezeStormSkillSystem>();
             
             //Bloodlov
+            AddSystem<ScytheThrowSkillSystem>();
             AddSystem<SoftShieldSkillSystem>();
             AddSystem<CyberVampyrSkillSystem>();
             

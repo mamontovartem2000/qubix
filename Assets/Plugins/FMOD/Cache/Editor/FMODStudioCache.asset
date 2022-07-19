@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9100203636173317279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Weapons/Minigun
+  m_EditorClassIdentifier: 
+  Path: event:/Weapons/Minigun
+  Guid:
+    Data1: 1305848044
+    Data2: 1149061262
+    Data3: 2042186416
+    Data4: -875800053
+  Banks:
+  - {fileID: -5910116475118719040}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 35
+  Length: 2000
 --- !u!114 &-9002949484503957811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,7 +42,7 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637909002158059051
+  lastModified: 637927179665942820
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -47,7 +74,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 25
   Length: 610
---- !u!114 &-8390639348983448616
+--- !u!114 &-8016359619697694356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,14 +84,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapon/Machinegun
+  m_Name: event:/Weapons/HitMarker
   m_EditorClassIdentifier: 
-  Path: event:/Weapon/Machinegun
+  Path: event:/Weapons/HitMarker
   Guid:
-    Data1: -2041103451
-    Data2: 1140834939
-    Data3: 1392832640
-    Data4: -509324319
+    Data1: 1189396657
+    Data2: 1302256882
+    Data3: -256267862
+    Data4: 755264869
   Banks:
   - {fileID: -5910116475118719040}
   IsStream: 0
@@ -72,8 +99,8 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
-  MaxDistance: 35
-  Length: 2200
+  MaxDistance: 80
+  Length: 130
 --- !u!114 &-7721975160762043263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +236,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 30
   Length: 440
---- !u!114 &-5979732334950576018
+--- !u!114 &-6488653694995882101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,14 +246,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapon/LaserSwordActivate
+  m_Name: event:/Weapons/SniperRifle
   m_EditorClassIdentifier: 
-  Path: event:/Weapon/LaserSwordActivate
+  Path: event:/Weapons/SniperRifle
   Guid:
-    Data1: 1473625532
-    Data2: 1190991828
-    Data3: -723584088
-    Data4: 1103659273
+    Data1: -804500030
+    Data2: 1099774518
+    Data3: -958062199
+    Data4: -1069070105
   Banks:
   - {fileID: -5910116475118719040}
   IsStream: 0
@@ -234,8 +261,8 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
-  MaxDistance: 25
-  Length: 1000
+  MaxDistance: 45
+  Length: 2000
 --- !u!114 &-5910116475118719040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,12 +278,12 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Weapons.bank
   Name: Weapons
   StudioPath: bank:/Weapons
-  lastModified: 637909002160109388
+  lastModified: 637927179667412861
   FileSizes:
   - Name: Desktop
-    Value: 428928
+    Value: 433504
   Exists: 1
---- !u!114 &-5650574390203303618
+--- !u!114 &-5740726541770597073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,41 +293,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapon/Axe
+  m_Name: event:/Weapons/HotFlamethower
   m_EditorClassIdentifier: 
-  Path: event:/Weapon/Axe
+  Path: event:/Weapons/HotFlamethower
   Guid:
-    Data1: 464507388
-    Data2: 1195054494
-    Data3: 915635385
-    Data4: 1581420627
-  Banks:
-  - {fileID: -5910116475118719040}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 20
-  Length: 700
---- !u!114 &-4802754903922065141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapon/LaserSword
-  m_EditorClassIdentifier: 
-  Path: event:/Weapon/LaserSword
-  Guid:
-    Data1: -757885378
-    Data2: 1108410243
-    Data3: 1739146155
-    Data4: 1720763795
+    Data1: 856752891
+    Data2: 1139920691
+    Data3: 234471590
+    Data4: -2059362040
   Banks:
   - {fileID: -5910116475118719040}
   IsStream: 1
@@ -308,8 +308,8 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
-  MaxDistance: 30
-  Length: 15092
+  MaxDistance: 35
+  Length: 8100
 --- !u!114 &-3854848288030805964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,11 +352,38 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Skills.bank
   Name: Skills
   StudioPath: bank:/Skills
-  lastModified: 637909002159339216
+  lastModified: 637927179666816031
   FileSizes:
   - Name: Desktop
-    Value: 212224
+    Value: 351136
   Exists: 1
+--- !u!114 &-3273932070467395770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Silen/EMPBullets
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Silen/EMPBullets
+  Guid:
+    Data1: -1412623916
+    Data2: 1152929426
+    Data3: -1531324235
+    Data4: 1293471099
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 30
+  Length: 1175
 --- !u!114 &-3173792611366176143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +411,33 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 30
   Length: 1000
+--- !u!114 &-3038560994970279870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Weapons/Machinegun
+  m_EditorClassIdentifier: 
+  Path: event:/Weapons/Machinegun
+  Guid:
+    Data1: -2041103451
+    Data2: 1140834939
+    Data3: 1392832640
+    Data4: -509324319
+  Banks:
+  - {fileID: -5910116475118719040}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 35
+  Length: 2200
 --- !u!114 &-2870578292105307003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,6 +492,33 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 20
   Length: 809
+--- !u!114 &-1209963778257896566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Weapons/Axe
+  m_EditorClassIdentifier: 
+  Path: event:/Weapons/Axe
+  Guid:
+    Data1: 464507388
+    Data2: 1195054494
+    Data3: 915635385
+    Data4: 1581420627
+  Banks:
+  - {fileID: -5910116475118719040}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 20
+  Length: 700
 --- !u!114 &-1058113600303767864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,11 +534,65 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Explosions.bank
   Name: Explosions
   StudioPath: bank:/Explosions
-  lastModified: 637909002158039044
+  lastModified: 637927179665922817
   FileSizes:
   - Name: Desktop
     Value: 123360
   Exists: 1
+--- !u!114 &-759334004467015240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Weapons/LaserSwordActivate
+  m_EditorClassIdentifier: 
+  Path: event:/Weapons/LaserSwordActivate
+  Guid:
+    Data1: 1473625532
+    Data2: 1190991828
+    Data3: -723584088
+    Data4: 1103659273
+  Banks:
+  - {fileID: -5910116475118719040}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 25
+  Length: 1000
+--- !u!114 &-314608953489312364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Weapons/FlameThrower
+  m_EditorClassIdentifier: 
+  Path: event:/Weapons/FlameThrower
+  Guid:
+    Data1: 1988551493
+    Data2: 1332667913
+    Data3: -88590949
+    Data4: 778604739
+  Banks:
+  - {fileID: -5910116475118719040}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 35
+  Length: 13720
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,21 +628,52 @@ MonoBehaviour:
   - {fileID: -6724463165044938226}
   - {fileID: -8401349043197460659}
   - {fileID: -6933964983626744232}
-  - {fileID: -4802754903922065141}
-  - {fileID: 3707379677358015337}
-  - {fileID: -8390639348983448616}
-  - {fileID: -5979732334950576018}
-  - {fileID: 8768255480366589872}
-  - {fileID: 422959067371869233}
-  - {fileID: 1733574920027641346}
-  - {fileID: -5650574390203303618}
+  - {fileID: 72571746078571565}
+  - {fileID: 8168629829034669805}
+  - {fileID: -3273932070467395770}
+  - {fileID: 5248358003855008198}
+  - {fileID: -314608953489312364}
+  - {fileID: -3038560994970279870}
+  - {fileID: -8016359619697694356}
+  - {fileID: -759334004467015240}
+  - {fileID: -6488653694995882101}
+  - {fileID: -9100203636173317279}
+  - {fileID: -5740726541770597073}
+  - {fileID: -1209963778257896566}
   EditorParameters: []
   MasterBanks:
   - {fileID: -9002949484503957811}
   StringsBanks:
   - {fileID: 134729716896531229}
-  cacheTime: 637909002160109388
+  cacheTime: 637927179667412861
   cacheVersion: 131591
+--- !u!114 &72571746078571565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Silen/EMPStrom
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Silen/EMPStrom
+  Guid:
+    Data1: -744760219
+    Data2: 1281537531
+    Data3: -2123270985
+    Data4: -1880665
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 30
+  Length: 6000
 --- !u!114 &134729716896531229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,10 +689,10 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637909002158069054
+  lastModified: 637927179665952823
   FileSizes:
   - Name: Desktop
-    Value: 2102
+    Value: 2296
   Exists: 1
 --- !u!114 &175175130361115837
 MonoBehaviour:
@@ -555,87 +721,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 30
   Length: 2059
---- !u!114 &422959067371869233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapon/Minigun
-  m_EditorClassIdentifier: 
-  Path: event:/Weapon/Minigun
-  Guid:
-    Data1: 1305848044
-    Data2: 1149061262
-    Data3: 2042186416
-    Data4: -875800053
-  Banks:
-  - {fileID: -5910116475118719040}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 35
-  Length: 2000
---- !u!114 &1733574920027641346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapon/HotFlamethower
-  m_EditorClassIdentifier: 
-  Path: event:/Weapon/HotFlamethower
-  Guid:
-    Data1: 856752891
-    Data2: 1139920691
-    Data3: 234471590
-    Data4: -2059362040
-  Banks:
-  - {fileID: -5910116475118719040}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 8100
---- !u!114 &3707379677358015337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapon/FlameThrower
-  m_EditorClassIdentifier: 
-  Path: event:/Weapon/FlameThrower
-  Guid:
-    Data1: 1988551493
-    Data2: 1332667913
-    Data3: -88590949
-    Data4: 778604739
-  Banks:
-  - {fileID: -5910116475118719040}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 35
-  Length: 13720
 --- !u!114 &4157160672658433609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,7 +763,7 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/VFX.bank
   Name: VFX
   StudioPath: bank:/VFX
-  lastModified: 637909002159539248
+  lastModified: 637927179667022782
   FileSizes:
   - Name: Desktop
     Value: 36704
@@ -710,6 +795,33 @@ MonoBehaviour:
   MinDistance: 0.1
   MaxDistance: 400
   Length: 533211
+--- !u!114 &5248358003855008198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Weapons/LaserSword
+  m_EditorClassIdentifier: 
+  Path: event:/Weapons/LaserSword
+  Guid:
+    Data1: -757885378
+    Data2: 1108410243
+    Data3: 1739146155
+    Data4: 1720763795
+  Banks:
+  - {fileID: -5910116475118719040}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 30
+  Length: 15092
 --- !u!114 &5463809685493878781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -725,7 +837,7 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637909002158919119
+  lastModified: 637927179666462856
   FileSizes:
   - Name: Desktop
     Value: 8275584
@@ -757,7 +869,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 20
   Length: 131813
---- !u!114 &8768255480366589872
+--- !u!114 &8168629829034669805
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -767,20 +879,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapon/SniperRifle
+  m_Name: event:/Skills/Silen/Dash
   m_EditorClassIdentifier: 
-  Path: event:/Weapon/SniperRifle
+  Path: event:/Skills/Silen/Dash
   Guid:
-    Data1: -804500030
-    Data2: 1099774518
-    Data3: -958062199
-    Data4: -1069070105
+    Data1: -652550503
+    Data2: 1292480251
+    Data3: 259777463
+    Data4: -1199686783
   Banks:
-  - {fileID: -5910116475118719040}
+  - {fileID: -3696928525799396931}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
-  MaxDistance: 35
-  Length: 2000
+  MaxDistance: 25
+  Length: 1123

@@ -37,7 +37,6 @@ namespace Project.Features.Projectile
             entity.SetPosition(gun.GetPosition());
             gun.Get<WeaponAim>().Value.SetLocalPosition(Vector3.forward);
             entity.Get<Owner>().Value = gun.Read<Owner>().Value;
-            entity.Set(new DamageSource());
             entity.Set(new ProjectileActive());
             entity.Get<ProjectileDirection>().Value = gun.Read<WeaponAim>().Value.GetPosition() - gun.GetPosition();
             
@@ -82,7 +81,6 @@ namespace Project.Features.Projectile
                 entity.SetPosition(gun.GetPosition());
                 entity.Get<ProjectileDirection>().Value = aimPoint.GetPosition() - gun.GetPosition();
                 entity.Get<Owner>().Value = gun.Read<Owner>().Value;
-                entity.Set(new DamageSource());
                 entity.Set(new ProjectileActive());
 
                 if (gun.Has<StunModifier>())

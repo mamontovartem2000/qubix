@@ -1,8 +1,9 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 using UnityEngine;
 
-namespace Project.Features.Projectile.Systems {
+namespace Project.Features.Skills.Systems.Bloodlov {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -14,9 +15,9 @@ namespace Project.Features.Projectile.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class ShengbiaoDamageSpotMovement : ISystemFilter {
+    public sealed class ScytheThrowSkillSystem : ISystemFilter {
         
-        private ProjectileFeature feature;
+        private SkillsFeature feature;
         
         public World world { get; set; }
         
@@ -35,26 +36,31 @@ namespace Project.Features.Projectile.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-ShengbiaoDamageSpotMovement")
-                .With<ProjectileParent>()
-                .With<ShengbiaoShot>()
+            return Filter.Create("Filter-SkyteBoomerangSkillSystem")
+                .With<ScytheThrowAffect>()
+                .With<ActivateSkill>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var speed = ref entity.Get<ProjectileParent>().Speed;
+            var avatar = entity.Owner(out var owner).Avatar();
+            if (avatar.IsAlive() == false) return;
             
-            var newPosition = entity.GetLocalPosition() + Vector3.forward * (speed * deltaTime);
+            var flyingSkythe = new Entity("flyingSkythe");
+            entity.Read<ProjectileConfig>().Value.Apply(flyingSkythe);
             
-            entity.SetLocalPosition(newPosition);
-
-            if (entity.GetLocalPosition().z >= 0f) return;
+            flyingSkythe.Set(new Owner{Value = entity.Read<Owner>().Value});
+            flyingSkythe.Get<ProjectileDirection>().Value = new Vector3(avatar.Read<FaceDirection>().Value.x * 1f, avatar.GetPosition().y, avatar.Read<FaceDirection>().Value.z * 1f) ;
+            flyingSkythe.SetPosition(avatar.GetPosition());
+			
+            entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             
-            entity.SetLocalPosition(Vector3.zero);
-            entity.Get<ProjectileParent>().Speed = 20f;
-            entity.Remove<ShengbiaoShot>();
+            SoundUtils.PlaySound(avatar, "event:/Skills/Buller/ThrowGrenade");
+			
+            var view = world.RegisterViewSource(flyingSkythe.Read<ViewModel>().Value);
+            flyingSkythe.InstantiateView(view);
         }
     }
 }

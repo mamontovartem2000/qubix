@@ -10,29 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: Scythe_Throw
+  m_Name: SlownessStorm
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
   - id: 0
   - id: 1
-  - id: 2
-  - id: 3
   removeStructComponents: []
   templates: []
   references:
     version: 1
     00000000:
-      type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: SecondaryDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 20
+        Value: {fileID: 11400000, guid: 3112e08ef4c1d8546a979c2126ce4b25, type: 2}
     00000001:
-      type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: ExplodeSquaredRadius, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 11400000, guid: 99164b465688fe540b5e1bb9563707ad, type: 2}
-    00000002:
-      type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 4
-    00000003:
-      type: {class: ScytheThrowAffect, ns: Project.Common.Components, asm: Project.Common}
+        Value: 25
