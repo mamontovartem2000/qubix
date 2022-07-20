@@ -23,7 +23,6 @@ namespace Project.Features.PostLogicTick
 			//Gun
 			AddSystem<BulletDisposeSystem>();
 			AddSystem<ShengbiaoBulletDisposeSystem>();
-			// AddSystem<LinearDisposeSystem>();
 			
 			//Bullet hit
 			AddSystem<BulletHitAvatarSystem>();
@@ -32,7 +31,6 @@ namespace Project.Features.PostLogicTick
 			
 			//Bullet destroy
 			AddSystem<BulletDestroySystem>();
-			// AddSystem<ShengbiaoBulletDestroySystem>();
 			AddSystem<LinearDestroySystem>();
 			
 			//World systems

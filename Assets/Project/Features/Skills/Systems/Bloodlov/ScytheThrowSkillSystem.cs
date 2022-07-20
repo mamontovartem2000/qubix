@@ -52,7 +52,7 @@ namespace Project.Features.Skills.Systems.Bloodlov {
             entity.Read<ProjectileConfig>().Value.Apply(flyingSkythe);
             
             flyingSkythe.Set(new Owner{Value = entity.Read<Owner>().Value});
-            flyingSkythe.Get<ProjectileDirection>().Value = new Vector3(avatar.Read<FaceDirection>().Value.x * 1f, avatar.GetPosition().y, avatar.Read<FaceDirection>().Value.z * 1f) ;
+            flyingSkythe.Get<ProjectileDirection>().Value = new Vector3(avatar.Read<FaceDirection>().Value.x * 1f, 0, avatar.Read<FaceDirection>().Value.z * 1f) ;
             flyingSkythe.SetPosition(avatar.GetPosition());
 			
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;

@@ -47,6 +47,7 @@ namespace Project.Features.PostLogicTick.Systems {
         {
             entity.Get<ProjectileDamage>().Value *= 2f;
             Debug.Log("CRIT!");
+            
         }
     }
 }

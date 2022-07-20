@@ -17,6 +17,8 @@ MonoBehaviour:
   - id: 0
   - id: 1
   - id: 2
+  - id: 3
+  - id: 4
   removeStructComponents: []
   templates: []
   references:
@@ -26,8 +28,16 @@ MonoBehaviour:
       data:
         Value: 20
     00000001:
+      type: {class: SkillDurationDefault, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 5
+    00000002:
       type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 4
-    00000002:
+    00000003:
+      type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: 53205d647b0332442988923b31a0eb92, type: 2}
+    00000004:
       type: {class: SoftShieldAffect, ns: Project.Common.Components, asm: Project.Common}

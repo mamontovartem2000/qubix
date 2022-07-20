@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
+using Project.Features.VFX;
 
 namespace Project.Features.Avatar.Systems {
 
@@ -17,13 +18,15 @@ namespace Project.Features.Avatar.Systems {
     public sealed class CyberVampyrHealSystem : ISystemFilter {
         
         private AvatarFeature feature;
-        
+        private VFXFeature _vfx;
+
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
             this.GetFeature(out this.feature);
-            
+            world.GetFeature(out _vfx);
+
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -47,9 +50,11 @@ namespace Project.Features.Avatar.Systems {
             var from = apply.ApplyFrom;
             var damage = apply.Damage;
             
-            if (!from.Avatar().IsAlive()) return;
+            if (!from.Avatar().IsAlive() || !from.Avatar().Has<CyberVampyrModifier>()) return;
 
             from.Avatar().Get<ApplyHeal>().Value += damage * 0.4f;
+            _vfx.SpawnVFX(from.Read<SkillEntities>().FourthSkill.Read<VFXConfig>().Value, from.Avatar(), 0.3f);
+            
         }
     }
 }

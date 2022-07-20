@@ -2,6 +2,7 @@
 using Project.Common.Components;
 using Project.Common.Utilities;
 using Project.Features.VFX;
+using UnityEngine;
 
 namespace Project.Features.CollisionHandler.Systems
 {
@@ -65,7 +66,8 @@ namespace Project.Features.CollisionHandler.Systems
                 
                 debuff.SetPosition(player.GetPosition());
             }
-            
+
+            Debug.Log(entity.Read<VFXConfig>().Value);
             _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, entity.GetPosition());
 
             entity.Destroy();

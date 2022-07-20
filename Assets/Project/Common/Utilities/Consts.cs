@@ -38,9 +38,9 @@
 
             public static class Mines
             {
-                public const int COUNT = 16;
-                public const int DAMAGE_MIN = 5;
-                public const int DAMAGE_MAX = 25;
+                public const int COUNT = 10;
+                public const int DAMAGE_MIN = 15;
+                public const int DAMAGE_MAX = 30;
                 public const float SPAWN_DELAY_DEFAULT = 3f;
                 public const float BLINK_TIME = 0.15f;
                 public const float BLINK_FREQUENCY_MIN = 3f;
