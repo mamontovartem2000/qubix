@@ -44,19 +44,7 @@ namespace Project.Features.Weapon.Systems {
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var offset = ref entity.Get<ShengbiaoWeapon>().Offset;
-            var returnTime = entity.Read<ReloadTimeDefault>().Value - Consts.Weapons.SHENGBIAO_ATTACK_SECONDS;
-            var shengbiaoDamageSpot = entity.Read<ShengbiaoDamageSpot>().Value;
-
-            if (entity.Read<ReloadTimeDefault>().Value - entity.Read<ReloadTime>().Value < Consts.Weapons.SHENGBIAO_ATTACK_SECONDS)
-            {
-                offset -= deltaTime * 1.2f;
-            }
-            else if (offset < 0.98f)
-            {
-                offset += deltaTime * 0.4f / returnTime;
-                shengbiaoDamageSpot.Get<ProjectileParent>().Speed = -8f;
-            }
+            entity.Get<ShengbiaoWeapon>().Offset -= deltaTime * entity.Read<ShengbiaoWeapon>().MoveRatio;
         }
     }
 }

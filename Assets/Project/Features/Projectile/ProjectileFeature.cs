@@ -55,7 +55,10 @@ namespace Project.Features.Projectile
             
             if (gun.Has<ShengbiaoWeapon>())
             {
-                gun.Read<ShengbiaoDamageSpot>().Value.Set(new ShengbiaoShot());
+                gun.Get<ShengbiaoShot>();
+                gun.Get<ShengbiaoWeapon>().MoveRatio = 1.4f;
+                gun.Read<ShengbiaoDamageSpot>().Value.Get<ProjectileParent>().Speed = 20f;
+                entity.Get<LifeTimeLeft>().Value = gun.Read<ReloadTimeDefault>().Value;
             }
             
             if (Worlds.current.GetRandomValue() < gun.Read<CriticalHitModifier>().Value)

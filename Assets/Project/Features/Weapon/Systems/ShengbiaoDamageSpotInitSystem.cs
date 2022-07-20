@@ -46,7 +46,7 @@ namespace Project.Features.Weapon.Systems {
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var spot = new Entity("spot");
-            spot.Get<ProjectileParent>().Speed = 20f;
+            spot.Get<ProjectileParent>();
             spot.SetLocalPosition(entity.GetPosition());
             spot.SetParent(entity);
             entity.Get<ShengbiaoDamageSpot>().Value = spot;

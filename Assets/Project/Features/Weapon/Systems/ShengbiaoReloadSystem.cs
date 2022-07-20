@@ -53,8 +53,8 @@ namespace Project.Features.Weapon.Systems {
             
             entity.Remove<ReloadTime>();
             entity.Read<ShengbiaoDamageSpot>().Value.SetLocalPosition(Vector3.zero);
-            entity.Read<ShengbiaoDamageSpot>().Value.Get<ProjectileParent>().Speed = 20f;
-            entity.Read<ShengbiaoDamageSpot>().Value.Remove<ShengbiaoShot>();
+            entity.Read<ShengbiaoDamageSpot>().Value.Get<ProjectileParent>().Speed = 0;
+            entity.Get<ShengbiaoWeapon>().MoveRatio = 0;
             entity.Get<AmmoCapacity>().Value = entity.Read<AmmoCapacityDefault>().Value;
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Owner());
         }

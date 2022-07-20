@@ -22,6 +22,7 @@
         public static class Weapons
         {
             public const float SHENGBIAO_ATTACK_SECONDS = 0.2f;
+            public const float SHENGBIAO_MIN_LENGHT = 1f;
         }
 
         public static class Scene

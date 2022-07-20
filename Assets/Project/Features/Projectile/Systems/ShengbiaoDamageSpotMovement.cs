@@ -37,24 +37,18 @@ namespace Project.Features.Projectile.Systems {
             
             return Filter.Create("Filter-ShengbiaoDamageSpotMovement")
                 .With<ProjectileParent>()
-                .With<ShengbiaoShot>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var speed = ref entity.Get<ProjectileParent>().Speed;
+            if (entity.GetParent().Has<ReloadTime>() == false) return;
             
+            var speed = entity.Read<ProjectileParent>().Speed;
             var newPosition = entity.GetLocalPosition() + Vector3.forward * (speed * deltaTime);
             
             entity.SetLocalPosition(newPosition);
-
-            if (entity.GetLocalPosition().z >= 0f) return;
-            
-            entity.SetLocalPosition(Vector3.zero);
-            entity.Get<ProjectileParent>().Speed = 20f;
-            entity.Remove<ShengbiaoShot>();
         }
     }
 }

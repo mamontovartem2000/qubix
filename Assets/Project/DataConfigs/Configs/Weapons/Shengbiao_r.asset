@@ -48,7 +48,7 @@ MonoBehaviour:
     00000003:
       type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0.8
+        Value: 0.6
     00000004:
       type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -65,3 +65,4 @@ MonoBehaviour:
       type: {class: ShengbiaoWeapon, ns: Project.Common.Components, asm: Project.Common}
       data:
         Offset: 1
+        MoveRatio: 0

@@ -15,9 +15,17 @@ namespace Project.Common.Components
     public struct MeleeDamageSpot : IComponent{public Entity Value;}
     public struct ShengbiaoDamageSpot : IComponent{public Entity Value;}
     public struct ProjectileParent : IComponent {public float Speed;}
-    public struct MeleeAimer : IComponent {};
-    public struct ShengbiaoShot : IComponent {};
-    public struct ShengbiaoWeapon : IComponent {public float Offset;}
+    public struct MeleeAimer : IComponent {}
+    public struct ShengbiaoShot : IComponent
+    {
+        public float Speed;
+    }
+
+    public struct ShengbiaoWeapon : IComponent
+    {
+        public float Offset;
+        public float MoveRatio;
+    }
     public struct ProjectileConfig : IComponent {public DataConfig Value;}
     public struct VFXConfig : IComponent {public DataConfig Value;}
     public struct ViewModel : IComponent {public MonoBehaviourViewBase Value;}

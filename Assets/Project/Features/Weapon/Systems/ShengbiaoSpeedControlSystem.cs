@@ -1,8 +1,10 @@
-﻿using ME.ECS;
+﻿using FlatBuffers;
+using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
+using UnityEngine;
 
-namespace Project.Features.Projectile.Systems {
+namespace Project.Features.Weapon.Systems {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -14,9 +16,9 @@ namespace Project.Features.Projectile.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class ShengbiaoProjectileMovementSystem : ISystemFilter {
+    public sealed class ShengbiaoSpeedControlSystem : ISystemFilter {
         
-        private ProjectileFeature feature;
+        private WeaponFeature feature;
         
         public World world { get; set; }
         
@@ -35,17 +37,21 @@ namespace Project.Features.Projectile.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-ShengbiaoProjectileMovementSystem")
-                .With<ShengbiaoProjectile>()
+            return Filter.Create("Filter-ShengbiaoSpeedControlSystem")
+                .With<ShengbiaoWeapon>()
+                .With<ShengbiaoShot>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var shengbiaoDamageSpot = entity.Owner().Avatar().Read<WeaponEntities>().RightWeapon.Read<ShengbiaoDamageSpot>().Value;
-            
-            entity.SetPosition(shengbiaoDamageSpot.GetPosition());
+            if (entity.Read<ReloadTimeDefault>().Value - entity.Read<ReloadTime>().Value < Consts.Weapons.SHENGBIAO_ATTACK_SECONDS) return;
+
+            var backwardsRatio =  (Consts.Weapons.SHENGBIAO_MIN_LENGHT - entity.Read<ShengbiaoWeapon>().Offset) / (entity.Read<ReloadTime>().Value);
+            entity.Get<ShengbiaoWeapon>().MoveRatio = -backwardsRatio;
+            entity.Read<ShengbiaoDamageSpot>().Value.Get<ProjectileParent>().Speed = -10f;
+            entity.Remove<ShengbiaoShot>();
         }
     }
 }

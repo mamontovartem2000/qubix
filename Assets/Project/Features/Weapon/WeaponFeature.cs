@@ -29,6 +29,7 @@ namespace Project.Features.Weapon
             AddSystem<MeleeFiringSystem>();
             AddSystem<ShengbiaoDamageSpotInitSystem>();
             AddSystem<ShengbiaoViewSystem>();
+            AddSystem<ShengbiaoSpeedControlSystem>();
 
             AddSystem<SingleBulletShotSystem>();
             AddSystem<ShotgunFiringSystem>();
