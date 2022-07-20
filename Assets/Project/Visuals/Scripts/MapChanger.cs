@@ -5,6 +5,7 @@ public class MapChanger : MonoBehaviour
 {
     public static MapChanger Changer;
 
+    [Header("Props")]
     [SerializeField] private Material[] _mainFloors;
     [SerializeField] private Material[] _extraObjects;
     [SerializeField] private Material[] _props;
@@ -15,6 +16,9 @@ public class MapChanger : MonoBehaviour
     [SerializeField] private Color[] _emissionColorPalletes;
     [SerializeField] private Color[] _bridgesColor;
     private float _emissionIntensity;
+
+    [Header("VFX")]
+    [SerializeField] private Material[] _bulletImpactsVFX;
 
     private void Awake()
     {
@@ -38,6 +42,7 @@ public class MapChanger : MonoBehaviour
                 ExtraChangeEmissionColors(4, 6, 5, 4, 4);
                 ChangeBridge(0, 7);
                 ChangeTriangleTile(1, 1, 3);
+                ChangeVFXEmissionColors(5);
                 break;
             case Maps.Neon:
                 _emissionIntensity = 6;
@@ -46,6 +51,7 @@ public class MapChanger : MonoBehaviour
                 ExtraChangeColors(20, 20, 4, 19, 30);
                 ExtraChangeEmissionColors(5, 5, 5, 5, 5);
                 ChangeTriangleTile(30, 8, 0);
+                ChangeVFXEmissionColors(5);
                 break;
             case Maps.Promo1:
                 _emissionIntensity = 3;
@@ -111,6 +117,11 @@ public class MapChanger : MonoBehaviour
         _extraObjects[2].SetColor("_EmissionColor", _emissionColorPalletes[c] * _emissionIntensity);
         _extraObjects[3].SetColor("_EmissionColor", _emissionColorPalletes[d] * _emissionIntensity);
         _extraObjects[4].SetColor("_EmissionColor", _emissionColorPalletes[e] * _emissionIntensity);
+    }
+
+    private void ChangeVFXEmissionColors(int a)
+    {
+        foreach (var item in _bulletImpactsVFX) item.SetColor("_EmissionColor", _emissionColorPalletes[a] * _emissionIntensity);
     }
 
     private void ChangeBridge(int number, int intensity)
