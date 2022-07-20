@@ -46,7 +46,7 @@ namespace Project.Features.CollisionHandler.Systems
 			{
 				var sPos = staticBag.ReadT0(index).ToVector3();
 				var sOwner = staticBag.ReadT1(index).Value;
-				var dist =  1f;
+				var dist =  0.8f;
 
 				for (int i = 0; i < dynamicBag.Length; i++)
 				{
@@ -64,9 +64,9 @@ namespace Project.Features.CollisionHandler.Systems
 					var dIndex = 0;
 
 					var tmp = ClosestPointToSegment(sPos.XZ(), dPos.XZ(), dModPos.XZ());
-
+					
 					dIndex = SceneUtils.BurstConvert(new fp3(tmp.x, 0, tmp.y), width);
-
+					
 					if (sIndex != dIndex) continue;
 
 					dynamicBag.Set(i, new Collided {ApplyTo = sOwner, ApplyFrom = dOwner});

@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using Project.Common.Components;
 using Project.Features.PostLogicTick.Systems;
 
 namespace Project.Features.PostLogicTick
@@ -12,22 +13,32 @@ namespace Project.Features.PostLogicTick
 	{
 		protected override void OnConstruct()
 		{
-			//Modifier systems
+			//Modifier
 			AddSystem<StormDisposeSystem>();
 			AddSystem<StunBulletDisposeSystem>();
 			AddSystem<EMPBulletDisposeSystem>();
 			AddSystem<FreezeBulletDisposeSystem>();
 			AddSystem<CritBulletDisposeSystem>();
 			
-			//Gun systems
+			//Gun
 			AddSystem<BulletDisposeSystem>();
-			AddSystem<LinearDisposeSystem>();
-			AddSystem<MeleeDisposeSystem>();
-
+			// AddSystem<LinearDisposeSystem>();
+			
+			//Bullet hit
+			AddSystem<BulletHitAvatarSystem>();
+			AddSystem<BulletHitDestructubleSystem>();
+			AddSystem<BulletHitNonDestructubleSystem>();
+			
+			//Bullet destroy
+			AddSystem<BulletDestroySystem>();
+			AddSystem<LinearDestroySystem>();
+			
 			//World systems
 			AddSystem<HealthDisposeSystem>();
 			AddSystem<MineDisposeSystem>();
 			AddSystem<PortalDisposeSystem>();
+
+			AddSystem<DestroyEntitySystem>();
 		}
 
 		protected override void OnDeconstruct() {}

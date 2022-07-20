@@ -43,8 +43,11 @@ namespace Project.Features.SceneBuilder
 
             for (int i = 1; i < PropsConfigs.Length; i++)
             {
-                if (PropsConfigs[i] != null) 
+                if (PropsConfigs[i] != null)
+                {
                     _propsViewIds[i] = world.RegisterViewSource(PropsConfigs[i].Read<TileAlternativeView>().Value);
+                }
+
             }
         }
         private void PrepareMaps()

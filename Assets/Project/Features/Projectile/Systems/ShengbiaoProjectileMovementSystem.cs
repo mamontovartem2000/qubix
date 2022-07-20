@@ -47,7 +47,7 @@ namespace Project.Features.Projectile.Systems {
             
             entity.SetPosition(shengbiaoDamageSpot.GetPosition());
 
-            if (shengbiaoDamageSpot.Read<ProjectileParent>().Speed < 0f && shengbiaoDamageSpot.GetLocalPosition().z < 0f)
+            if (shengbiaoDamageSpot.Read<ProjectileParent>().Speed < 0f && shengbiaoDamageSpot.GetLocalPosition().z <= 0f)
             {
                 entity.Destroy();
             }

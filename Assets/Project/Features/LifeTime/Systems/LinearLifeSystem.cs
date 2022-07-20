@@ -53,18 +53,18 @@ namespace Project.Features.LifeTime.Systems
             ref readonly var linIndex = ref entity.Read<LinearIndex>().Value;
             ref readonly var dir = ref avatar.Read<FaceDirection>().Value;
             
-            if (!entity.Has<LinearActive>())
-            {
-                avatar.Get<ReloadTime>().Value = avatar.Read<ReloadTimeDefault>().Value;
-                entity.Set(new LinearActive());
-            }
+            // if (!entity.Has<LinearActive>())
+            // {
+            //     avatar.Get<ReloadTime>().Value = avatar.Read<ReloadTimeDefault>().Value;
+            //     entity.Set(new LinearActive());
+            // }
 
             var linPos = avatar.GetPosition() + dir * linIndex;
             entity.SetPosition(linPos);
 
             if (!avatar.Read<WeaponEntities>().LeftWeapon.Has<LinearActive>())
             {
-                entity.Destroy();
+                entity.Set(new DestroyEntity());
             }
         }
     }

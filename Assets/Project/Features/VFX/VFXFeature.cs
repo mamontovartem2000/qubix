@@ -42,6 +42,8 @@ namespace Project.Features.VFX
 
 		public void SpawnVFX(DataConfig vfxConfig, Vector3 position)
 		{
+			if (vfxConfig == null) return;
+			
 			var fx = new Entity("vfx");
 			vfxConfig.Apply(fx);
 

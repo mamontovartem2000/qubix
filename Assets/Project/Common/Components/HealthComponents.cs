@@ -31,4 +31,6 @@ namespace Project.Common.Components
     {
         public float Value;
     }
+    
+    public struct Invulnerable : IComponent { }
 }

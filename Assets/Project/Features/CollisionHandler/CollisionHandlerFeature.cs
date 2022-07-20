@@ -66,6 +66,8 @@ namespace Project.Features.CollisionHandler
             entity.Get<MineBlinkTimerDefault>().Value = world.GetRandomRange(Consts.Scene.Mines.BLINK_FREQUENCY_MIN, Consts.Scene.Mines.BLINK_FREQUENCY_MAX);
             entity.Get<MineDamage>().Value = world.GetRandomRange(Consts.Scene.Mines.DAMAGE_MIN, Consts.Scene.Mines.DAMAGE_MAX);
             entity.Get<MineBlinkTimer>().Value = entity.Get<MineBlinkTimerDefault>().Value;
+
+            entity.Get<TeamTag>().Value = 0;
             
             entity.Set(new CollisionDynamic());
             entity.Get<Owner>().Value = new Entity("mineowner");

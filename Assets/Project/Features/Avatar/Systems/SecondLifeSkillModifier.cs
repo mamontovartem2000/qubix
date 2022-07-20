@@ -47,7 +47,7 @@ namespace Project.Features.Avatar.Systems {
         {
             var avatar = entity.Avatar();
             avatar.Get<PlayerHealth>().Value = avatar.Read<PlayerHealthDefault>().Value * 0.3f;
-            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar, 2f);
+            _vfx.SpawnVFX(avatar.Read<SkillEntities>().FirstSkill.Read<VFXConfig>().Value, avatar, 2f);
             avatar.Set<SecondLifeModifier>();
         }
     }

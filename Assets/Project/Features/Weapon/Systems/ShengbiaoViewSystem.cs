@@ -50,7 +50,7 @@ namespace Project.Features.Weapon.Systems {
 
             if (entity.Read<ReloadTimeDefault>().Value - entity.Read<ReloadTime>().Value < Consts.Weapons.SHENGBIAO_ATTACK_SECONDS)
             {
-                offset -= deltaTime * 1f;
+                offset -= deltaTime * 1.2f;
             }
             else if (offset < 0.98f)
             {

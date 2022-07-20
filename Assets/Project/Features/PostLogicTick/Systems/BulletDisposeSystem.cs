@@ -40,27 +40,8 @@ namespace Project.Features.PostLogicTick.Systems
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 			if (entity.TryReadCollided(out var from, out var owner) == false) return;
-			ref readonly var damage = ref entity.Read<ProjectileDamage>().Value;
 
-			if (owner.Has<PlayerAvatar>())
-			{
-				var player = owner.Avatar();
-				
-				if (from.Read<TeamTag>().Value != owner.Read<TeamTag>().Value)
-				{
-					var collision = new Entity("collision");
-					collision.Get<LifeTimeLeft>().Value = Consts.Main.DEFAULT_LIFETIME;
-					collision.Set(new ApplyDamage { ApplyTo = player, ApplyFrom = from, Damage = damage }, ComponentLifetime.NotifyAllSystems);
-				}
-			}
-
-			if (owner.Has<DestructibleTag>())
-			{
-				owner.Get<PlayerHealth>().Value -= damage;
-				_vfx.SpawnVFX(entity.Read<VFXConfig>().Value, owner.GetPosition());
-			}
-			
-			entity.Destroy();
+			owner.Set(new BulletHit {ApplyFrom = from, Bullet = entity}, ComponentLifetime.NotifyAllSystemsBelow);
 		}
 	}
 }

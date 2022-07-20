@@ -2,6 +2,8 @@
 using Project.Common.Components;
 using Project.Common.Events;
 using Project.Common.Utilities;
+using Project.Features.PostLogicTick;
+using Project.Features.PostLogicTick.Systems;
 using Project.Features.Projectile.Systems;
 using UnityEngine;
 
@@ -20,6 +22,7 @@ namespace Project.Features.Projectile
     {
         protected override void OnConstruct()
         {
+            //Bullet movement 
             AddSystem<TrajectoryMovementSystem>();
             AddSystem<BoomerangMovementSystem>();
             AddSystem<ProjectileMovementSystem>();
@@ -111,8 +114,9 @@ namespace Project.Features.Projectile
             {
                 var entity = new Entity("linear");
                 gun.Read<ProjectileConfig>().Value.Apply(entity);
-                entity.Get<Linear>();
-
+                entity.Set(new Linear());
+                entity.Set(new ProjectileActive());
+                
                 entity.Get<Owner>().Value = gun.Owner();
                 var currentDamage = gun.Read<LinearPowerModifier>().Damage;
                 

@@ -9,6 +9,12 @@ namespace Project.Common.Components
         public Entity ApplyFrom;
     }
 
+    public struct BulletHit : IComponent
+    {
+        public Entity ApplyFrom;
+        public Entity Bullet;
+    }
+
     public struct ApplyHeal : IComponent
     {
         public float Value;
@@ -19,7 +25,9 @@ namespace Project.Common.Components
     public struct RightWeaponShot : IComponent{}
     public struct SpeedModifier : IComponent {}
     public struct CollisionDynamic : IComponent {}
+    public struct DestroyEntity : IComponent {}
     public struct CollisionStatic : IComponent {}
+    public struct Enviroment : IComponent {}
     public struct Collided : IComponent
     {
         public Entity ApplyFrom;

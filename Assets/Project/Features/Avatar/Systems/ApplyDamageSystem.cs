@@ -45,11 +45,13 @@ namespace Project.Features.Avatar.Systems
             var to = apply.ApplyTo;
             var damage = apply.Damage;
             ref var health = ref to.Get<PlayerHealth>().Value;
-            
+
             if (to.Has<ForceShieldModifier>()) return;
             
             if (from.Has<PlayerAvatar>())
             {
+                if (from.Read<TeamTag>().Value == to.Read<TeamTag>().Value) return;
+                
                 to.Get<Owner>().Value.Set(new DamagedBy {Value = from});
                 from.Avatar().Get<PrivateSoundPath>().Value = "event:/Weapons/HitMarker";
                 Worlds.current.GetFeature<EventsFeature>().PlaySoundPrivate.Execute(from.Avatar());

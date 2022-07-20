@@ -23,6 +23,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BoomerangEffect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BridgeTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.BulletHit>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CarriesTheFlag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Collided>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CollisionDynamic>(true, true, false, false, false, false, false, false);
@@ -39,6 +40,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Debuff>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DestroyEntity>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleLifeTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleView>(false, true, false, false, false, false, false, false);
@@ -50,6 +52,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPEffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPStormAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Enviroment>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplodeSquaredRadius>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplosionSound>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, false, false, false, false, false, false);
@@ -76,6 +79,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealthDispenserTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Hover>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Invulnerable>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LeftWeaponShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, true, false, false, false, false, false, false);
@@ -111,6 +115,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Owner>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Pallette>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PenetrativeProjectile>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerArmor>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, true, false, false, false, false, false, false);
@@ -150,6 +155,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoWeapon>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Shotgun>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ShouldDestroy>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SingleBullet>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillConfig>(false, true, false, false, false, false, false, false);
@@ -213,6 +219,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BoomerangEffect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BridgeTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.BulletHit>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CarriesTheFlag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Collided>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CollisionDynamic>(true, true, false, false, false, false, false, false);
@@ -229,6 +236,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Debuff>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DestroyEntity>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleLifeTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleView>(false, true, false, false, false, false, false, false);
@@ -240,6 +248,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPEffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPStormAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Enviroment>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplodeSquaredRadius>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplosionSound>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FaceDirection>(false, true, false, false, false, false, false, false);
@@ -266,6 +275,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.HealthDispenserTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Hover>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.Invulnerable>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LeftWeaponShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, true, false, false, false, false, false, false);
@@ -301,6 +311,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Owner>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Pallette>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PenetrativeProjectile>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerArmor>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, true, false, false, false, false, false, false);
@@ -340,6 +351,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ShengbiaoWeapon>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Shotgun>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ShouldDestroy>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SingleBullet>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SkillConfig>(false, true, false, false, false, false, false, false);
@@ -398,6 +410,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.BoomerangEffect>(false);
             structComponentsContainer.Validate<Project.Common.Components.BridgeTile>(false);
             noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.BuffTrigger>(true);
+            structComponentsContainer.Validate<Project.Common.Components.BulletHit>(false);
             structComponentsContainer.Validate<Project.Common.Components.CarriesTheFlag>(false);
             structComponentsContainer.Validate<Project.Common.Components.Collided>(false);
             structComponentsContainer.Validate<Project.Common.Components.CollisionDynamic>(true);
@@ -414,6 +427,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.DashAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.DashModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.Debuff>(true);
+            structComponentsContainer.Validate<Project.Common.Components.DestroyEntity>(true);
             structComponentsContainer.Validate<Project.Common.Components.DestructibleLifeTime>(false);
             structComponentsContainer.Validate<Project.Common.Components.DestructibleTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.DestructibleView>(false);
@@ -425,6 +439,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.EMPEffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.EMPModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.EMPStormAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.Enviroment>(true);
             structComponentsContainer.Validate<Project.Common.Components.ExplodeSquaredRadius>(false);
             structComponentsContainer.Validate<Project.Common.Components.ExplosionSound>(false);
             structComponentsContainer.Validate<Project.Common.Components.FaceDirection>(false);
@@ -451,6 +466,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.HealthDispenserTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.Hover>(false);
             structComponentsContainer.Validate<Project.Common.Components.InstantReloadAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.Invulnerable>(true);
             structComponentsContainer.Validate<Project.Common.Components.LandMineAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.LeftWeaponShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeDefault>(false);
@@ -486,6 +502,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Owner>(false);
             structComponentsContainer.Validate<Project.Common.Components.Pallette>(true);
             structComponentsContainer.Validate<Project.Common.Components.PassiveSkill>(true);
+            structComponentsContainer.Validate<Project.Common.Components.PenetrativeProjectile>(true);
             structComponentsContainer.Validate<Project.Common.Components.PersonalTeleportAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.PlayerArmor>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerAvatar>(false);
@@ -525,6 +542,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ShengbiaoShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.ShengbiaoWeapon>(false);
             structComponentsContainer.Validate<Project.Common.Components.Shotgun>(false);
+            structComponentsContainer.Validate<Project.Common.Components.ShouldDestroy>(true);
             structComponentsContainer.Validate<Project.Common.Components.SingleBullet>(true);
             structComponentsContainer.Validate<Project.Common.Components.SkillAmount>(false);
             structComponentsContainer.Validate<Project.Common.Components.SkillConfig>(false);
@@ -588,6 +606,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.BoomerangEffect>(false);
             entity.ValidateData<Project.Common.Components.BridgeTile>(false);
             entity.ValidateDataOneShot<Project.Common.Components.BuffTrigger>(true);
+            entity.ValidateData<Project.Common.Components.BulletHit>(false);
             entity.ValidateData<Project.Common.Components.CarriesTheFlag>(false);
             entity.ValidateData<Project.Common.Components.Collided>(false);
             entity.ValidateData<Project.Common.Components.CollisionDynamic>(true);
@@ -604,6 +623,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.DashAffect>(true);
             entity.ValidateData<Project.Common.Components.DashModifier>(false);
             entity.ValidateData<Project.Common.Components.Debuff>(true);
+            entity.ValidateData<Project.Common.Components.DestroyEntity>(true);
             entity.ValidateData<Project.Common.Components.DestructibleLifeTime>(false);
             entity.ValidateData<Project.Common.Components.DestructibleTag>(true);
             entity.ValidateData<Project.Common.Components.DestructibleView>(false);
@@ -615,6 +635,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.EMPEffect>(true);
             entity.ValidateData<Project.Common.Components.EMPModifier>(false);
             entity.ValidateData<Project.Common.Components.EMPStormAffect>(true);
+            entity.ValidateData<Project.Common.Components.Enviroment>(true);
             entity.ValidateData<Project.Common.Components.ExplodeSquaredRadius>(false);
             entity.ValidateData<Project.Common.Components.ExplosionSound>(false);
             entity.ValidateData<Project.Common.Components.FaceDirection>(false);
@@ -641,6 +662,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.HealthDispenserTag>(true);
             entity.ValidateData<Project.Common.Components.Hover>(false);
             entity.ValidateData<Project.Common.Components.InstantReloadAffect>(true);
+            entity.ValidateData<Project.Common.Components.Invulnerable>(true);
             entity.ValidateData<Project.Common.Components.LandMineAffect>(true);
             entity.ValidateData<Project.Common.Components.LeftWeaponShot>(true);
             entity.ValidateData<Project.Common.Components.LifeTimeDefault>(false);
@@ -676,6 +698,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Owner>(false);
             entity.ValidateData<Project.Common.Components.Pallette>(true);
             entity.ValidateData<Project.Common.Components.PassiveSkill>(true);
+            entity.ValidateData<Project.Common.Components.PenetrativeProjectile>(true);
             entity.ValidateData<Project.Common.Components.PersonalTeleportAffect>(true);
             entity.ValidateData<Project.Common.Components.PlayerArmor>(false);
             entity.ValidateData<Project.Common.Components.PlayerAvatar>(false);
@@ -715,6 +738,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ShengbiaoShot>(true);
             entity.ValidateData<Project.Common.Components.ShengbiaoWeapon>(false);
             entity.ValidateData<Project.Common.Components.Shotgun>(false);
+            entity.ValidateData<Project.Common.Components.ShouldDestroy>(true);
             entity.ValidateData<Project.Common.Components.SingleBullet>(true);
             entity.ValidateData<Project.Common.Components.SkillAmount>(false);
             entity.ValidateData<Project.Common.Components.SkillConfig>(false);

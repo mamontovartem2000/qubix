@@ -90,7 +90,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6963335384901526779}
-  - component: {fileID: 6802779263229907568}
   - component: {fileID: 4619573818923134876}
   m_Layer: 8
   m_Name: Wall_Corner
@@ -114,39 +113,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6802779263229907568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7775865044357021249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28052540b51422b4bbcaf2084b255436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    items:
-    - itemData:
-        psSimulation:
-          particleItem:
-            particleSystem: {fileID: 0}
-          settings:
-            simulationType: 0
-            minSimulationTime: 0
-            minEndingTime: 0
-            halfEnding: 0
-          hasDefault: 0
-        psSource: {fileID: 0}
-        psRootSource: {fileID: 0}
-        mesh: {fileID: 5746812517656606546, guid: 4a092e82a1934234f910b553e11f1bf5, type: 3}
-        meshRenderer: {fileID: 3062902792706022979}
-        meshFilter: {fileID: 3062902792706022978}
-        material: {fileID: 2100000, guid: db4392691abd150438bdd2f79f1473bc, type: 2}
-        localPosition: {x: 0, y: -0.4, z: 0}
-        localRotation: {x: 0, y: 180, z: -0}
-        localScale: {x: 1, y: 1, z: 1}
 --- !u!114 &4619573818923134876
 MonoBehaviour:
   m_ObjectHideFlags: 0

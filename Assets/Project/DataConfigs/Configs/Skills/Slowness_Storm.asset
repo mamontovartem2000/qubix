@@ -17,6 +17,7 @@ MonoBehaviour:
   - id: 0
   - id: 1
   - id: 2
+  - id: 3
   removeStructComponents: []
   templates: []
   references:
@@ -26,8 +27,12 @@ MonoBehaviour:
       data:
         Value: 30
     00000001:
+      type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: 26fc415b5e050b641b9c3e7f7bc62480, type: 2}
+    00000002:
       type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 4
-    00000002:
+    00000003:
       type: {class: "FreezeStorm\u0410ffect", ns: Project.Common.Components, asm: Project.Common}
