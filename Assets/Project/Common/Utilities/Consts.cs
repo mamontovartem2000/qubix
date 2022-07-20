@@ -21,14 +21,20 @@
 
         public static class Weapons
         {
-            public const float SHENGBIAO_ATTACK_SECONDS = 0.2f;
-            public const float SHENGBIAO_MIN_LENGHT = 1f;
+            public static class Shengbiao
+            {
+                public const float ATTACK_SECONDS = 0.2f;
+                public const float MIN_LENGHT = 1f;
+                public const float RETURN_SPEED = -8f;
+                public const float SPEED = 20f;
+                public const float VISUAL_SPEED_RATIO = 1.4f;
+            }
         }
 
         public static class Scene
         {
             public const float HEAL_DISPENSER_VALUE = 15f;
-            public const float DESTRUCTIBLE_OBJ_HEALTH = 40f;
+            public const float DESTRUCTUBLE_OBJ_HEALTH = 35f;
 
             public static class Mines
             {

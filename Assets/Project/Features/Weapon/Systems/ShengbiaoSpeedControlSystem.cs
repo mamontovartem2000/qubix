@@ -46,11 +46,12 @@ namespace Project.Features.Weapon.Systems {
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<ReloadTimeDefault>().Value - entity.Read<ReloadTime>().Value < Consts.Weapons.SHENGBIAO_ATTACK_SECONDS) return;
+            if (entity.Read<ReloadTimeDefault>().Value - entity.Read<ReloadTime>().Value < Consts.Weapons.Shengbiao.ATTACK_SECONDS) return;
 
-            var backwardsRatio =  (Consts.Weapons.SHENGBIAO_MIN_LENGHT - entity.Read<ShengbiaoWeapon>().Offset) / (entity.Read<ReloadTime>().Value);
+            var backwardsRatio =  (Consts.Weapons.Shengbiao.MIN_LENGHT - entity.Read<ShengbiaoWeapon>().Offset) / (entity.Read<ReloadTime>().Value);
             entity.Get<ShengbiaoWeapon>().MoveRatio = -backwardsRatio;
-            entity.Read<ShengbiaoDamageSpot>().Value.Get<ProjectileParent>().Speed = -10f;
+            entity.Read<ShengbiaoDamageSpot>().Value.Get<ProjectileParent>().Speed = Consts.Weapons.Shengbiao.RETURN_SPEED;
+            entity.Read<ShengbiaoDamageSpot>().Value.Get<ProjectileParent>().Bullet.Remove<LastHitEntity>();
             entity.Remove<ShengbiaoShot>();
         }
     }

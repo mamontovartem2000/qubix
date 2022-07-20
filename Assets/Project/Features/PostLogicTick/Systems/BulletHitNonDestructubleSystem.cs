@@ -48,6 +48,7 @@ namespace Project.Features.PostLogicTick.Systems {
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             ref var bullet = ref entity.Get<BulletHit>().Bullet;
+            bullet.Set(new LastHitEntity {Value = entity});
             _vfx.SpawnVFX(bullet.Read<VFXConfig>().Value, bullet.GetPosition());
             bullet.Set(new ShouldDestroy(), ComponentLifetime.NotifyAllSystemsBelow);
         }

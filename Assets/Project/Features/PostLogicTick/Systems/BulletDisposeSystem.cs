@@ -32,8 +32,9 @@ namespace Project.Features.PostLogicTick.Systems
 		Filter ISystemFilter.CreateFilter()
 		{
 			return Filter.Create("Filter-BulletDisposeSystem")
-				.With<ProjectileActive>()
 				.With<Collided>()
+				.With<ProjectileActive>()
+				.Without<ShengbiaoProjectile>()
 				.Push();
 		}
 

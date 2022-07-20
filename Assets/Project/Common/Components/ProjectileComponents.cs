@@ -68,8 +68,11 @@ namespace Project.Common.Components
 	public struct MeleeProjectile : IComponent {}
 
 	public struct ShengbiaoProjectile : IComponent {}
-	
-	public struct PenetrativeProjectile : IComponent {}
+
+	public struct LastHitEntity : IComponent
+	{
+		public Entity Value;
+	}
 
 	public struct ProjectileActive : IComponent {}
 	

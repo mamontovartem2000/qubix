@@ -48,6 +48,7 @@ namespace Project.Features.PostLogicTick.Systems {
         {
             ref var bullet = ref entity.Get<BulletHit>().Bullet;
             entity.Get<PlayerHealth>().Value -= bullet.Read<ProjectileDamage>().Value;
+            bullet.Set(new LastHitEntity {Value = entity});
             _vfx.SpawnVFX(bullet.Read<VFXConfig>().Value, bullet.GetPosition());
             bullet.Set(new ShouldDestroy(), ComponentLifetime.NotifyAllSystemsBelow);
         }

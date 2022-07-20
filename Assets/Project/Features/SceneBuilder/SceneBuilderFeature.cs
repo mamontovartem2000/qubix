@@ -6,6 +6,7 @@ using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Modules.Network;
 using System;
+using Project.Common.Utilities;
 using UnityEngine;
 
 namespace Project.Features.SceneBuilder
@@ -226,11 +227,11 @@ namespace Project.Features.SceneBuilder
                 
                 if (entity.Has<DestructibleView>())
                 {
-                    entity.Get<PlayerHealth>().Value = 35;
+                    entity.Get<PlayerHealth>().Value = Consts.Scene.DESTRUCTUBLE_OBJ_HEALTH;
                     entity.Set(new DestructibleTag());
                 }
                 
-                entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(0f,4f)});
+                entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(0f, 4f)});
 
                 world.GetSharedData<MapComponents>().BlueTeamSpawnPoints = bluePool.innerArray;
                 world.GetSharedData<MapComponents>().RedTeamSpawnPoints = redPool.innerArray;

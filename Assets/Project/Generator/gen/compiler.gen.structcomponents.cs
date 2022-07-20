@@ -81,6 +81,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Invulnerable>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LastHitEntity>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LeftWeaponShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeLeft>(false, true, false, false, false, false, false, false);
@@ -115,7 +116,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Owner>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Pallette>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.PenetrativeProjectile>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerArmor>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, true, false, false, false, false, false, false);
@@ -277,6 +277,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Invulnerable>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LastHitEntity>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LeftWeaponShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeLeft>(false, true, false, false, false, false, false, false);
@@ -311,7 +312,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Owner>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Pallette>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PassiveSkill>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.PenetrativeProjectile>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PersonalTeleportAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerArmor>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PlayerAvatar>(false, true, false, false, false, false, false, false);
@@ -468,6 +468,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.InstantReloadAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.Invulnerable>(true);
             structComponentsContainer.Validate<Project.Common.Components.LandMineAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.LastHitEntity>(false);
             structComponentsContainer.Validate<Project.Common.Components.LeftWeaponShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeLeft>(false);
@@ -502,7 +503,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Owner>(false);
             structComponentsContainer.Validate<Project.Common.Components.Pallette>(true);
             structComponentsContainer.Validate<Project.Common.Components.PassiveSkill>(true);
-            structComponentsContainer.Validate<Project.Common.Components.PenetrativeProjectile>(true);
             structComponentsContainer.Validate<Project.Common.Components.PersonalTeleportAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.PlayerArmor>(false);
             structComponentsContainer.Validate<Project.Common.Components.PlayerAvatar>(false);
@@ -664,6 +664,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.InstantReloadAffect>(true);
             entity.ValidateData<Project.Common.Components.Invulnerable>(true);
             entity.ValidateData<Project.Common.Components.LandMineAffect>(true);
+            entity.ValidateData<Project.Common.Components.LastHitEntity>(false);
             entity.ValidateData<Project.Common.Components.LeftWeaponShot>(true);
             entity.ValidateData<Project.Common.Components.LifeTimeDefault>(false);
             entity.ValidateData<Project.Common.Components.LifeTimeLeft>(false);
@@ -698,7 +699,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Owner>(false);
             entity.ValidateData<Project.Common.Components.Pallette>(true);
             entity.ValidateData<Project.Common.Components.PassiveSkill>(true);
-            entity.ValidateData<Project.Common.Components.PenetrativeProjectile>(true);
             entity.ValidateData<Project.Common.Components.PersonalTeleportAffect>(true);
             entity.ValidateData<Project.Common.Components.PlayerArmor>(false);
             entity.ValidateData<Project.Common.Components.PlayerAvatar>(false);
