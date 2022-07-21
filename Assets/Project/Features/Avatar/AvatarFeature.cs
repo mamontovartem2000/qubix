@@ -49,7 +49,6 @@ namespace Project.Features.Avatar
             AddSystem<StunLifeTimeSystem>();
             AddSystem<HardShieldApplyDamageSystem>();
             
-
             //Other
             AddSystem<BlinkIntensitySystem>();
                 

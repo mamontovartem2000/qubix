@@ -1,6 +1,8 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
+using Project.Features.VFX;
+using UnityEngine;
 
 namespace Project.Features.Skills.Systems.Solaray {
 
@@ -17,13 +19,15 @@ namespace Project.Features.Skills.Systems.Solaray {
     public sealed class SecondLifeSkillSystem : ISystemFilter {
         
         private SkillsFeature feature;
-        
+        private VFXFeature _vfx;
+
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
             this.GetFeature(out this.feature);
-            
+            world.GetFeature(out _vfx);
+
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -48,6 +52,7 @@ namespace Project.Features.Skills.Systems.Solaray {
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             avatar.Remove<SecondLifeModifier>();
+            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar, 1);
         }
     }
 }

@@ -69,7 +69,7 @@ namespace Project.Features.Avatar.Systems
 
             if (health <= 0)
             {
-                to.Owner().Set(new PlayerDead { DeathPosition = to.Read<PlayerMoveTarget>().Value }, ComponentLifetime.NotifyAllSystems);
+                to.Owner().Set(new PlayerDead { DeathPosition = to.Read<PlayerMoveTarget>().Value }, ComponentLifetime.NotifyAllSystemsBelow);
                 dealtDamage += health;
                 health = 0;
             }

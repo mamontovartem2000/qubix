@@ -22,7 +22,7 @@ namespace Project.Features.CollisionHandler
             AddSystem<GridCollisionDetectionSystem>();
             AddSystem<GrenadeExplosionSystem>();
             AddSystem<SpawnMineSystem>();
-            AddSystem<NewHealthDispenserSystem>();
+            AddSystem<HealthDispenserSystem>();
             AddSystem<NewPortalDispenserSystem>();
             AddSystem<MineBlinkSystem>();
             AddSystem<MineBlinkLifeTime>();

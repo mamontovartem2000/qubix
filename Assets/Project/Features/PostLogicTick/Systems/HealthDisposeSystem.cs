@@ -40,12 +40,12 @@ namespace Project.Features.PostLogicTick.Systems
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 			if (entity.TryReadCollided(out var from, out var owner) == false) return;
-			var player = owner.Avatar();
+			var avatar = owner.Avatar();
 			
 			if (entity.Owner().Has<Spawned>())
 				entity.Owner().Remove<Spawned>();
 			
-			player.Set(new ApplyHeal{ Value = Consts.Scene.HEAL_DISPENSER_VALUE }, ComponentLifetime.NotifyAllSystems);
+			avatar.Set(new ApplyHeal{ Value = Consts.Scene.HEAL_DISPENSER_VALUE }, ComponentLifetime.NotifyAllSystems);
 
 			// _vfx.SpawnVFX(VFXFeature.VFXType.HealVFX, player.GetPosition(), player);
 			entity.Destroy();

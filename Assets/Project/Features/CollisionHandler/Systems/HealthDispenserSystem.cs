@@ -8,7 +8,7 @@ namespace Project.Features.CollisionHandler.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-    public sealed class NewHealthDispenserSystem : ISystemFilter
+    public sealed class HealthDispenserSystem : ISystemFilter
     {
         public World world { get; set; }
         

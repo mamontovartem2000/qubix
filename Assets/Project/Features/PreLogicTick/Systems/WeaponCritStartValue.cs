@@ -44,7 +44,5 @@ namespace Project.Features.PreLogicTick.Systems {
         {
             entity.Get<CriticalHitModifier>().Value = entity.Read<WeaponCritChanceDefault>().Value;
         }
-    
     }
-    
 }

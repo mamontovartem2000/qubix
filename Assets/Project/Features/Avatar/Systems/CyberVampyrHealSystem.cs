@@ -49,7 +49,7 @@ namespace Project.Features.Avatar.Systems {
             var apply = entity.Read<ApplyDamage>();
             var from = apply.ApplyFrom;
             var damage = apply.Damage;
-            
+
             if (!from.Avatar().IsAlive() || !from.Avatar().Has<CyberVampyrModifier>()) return;
 
             from.Avatar().Get<ApplyHeal>().Value += damage * 0.4f;

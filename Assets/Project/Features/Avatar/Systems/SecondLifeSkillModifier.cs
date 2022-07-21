@@ -2,6 +2,7 @@
 using Project.Common.Components;
 using Project.Common.Utilities;
 using Project.Features.VFX;
+using UnityEngine;
 
 namespace Project.Features.Avatar.Systems {
 
@@ -38,7 +39,6 @@ namespace Project.Features.Avatar.Systems {
             
             return Filter.Create("Filter-SecondLifeSkillModifier")
                 .With<PlayerTag>()
-                .With<SecondLifeAffect>()
                 .With<PlayerDead>()
                 .Push();
         }
@@ -46,9 +46,13 @@ namespace Project.Features.Avatar.Systems {
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var avatar = entity.Avatar();
-            avatar.Get<PlayerHealth>().Value = avatar.Read<PlayerHealthDefault>().Value * 0.3f;
-            _vfx.SpawnVFX(avatar.Read<SkillEntities>().FirstSkill.Read<VFXConfig>().Value, avatar, 2f);
-            avatar.Set<SecondLifeModifier>();
+            if (!entity.Read<SkillEntities>().SecondSkill.Has<SecondLifeAffect>()) return;
+            if (entity.Read<SkillEntities>().SecondSkill.Has<Cooldown>()) return;
+
+            entity.Remove<PlayerDead>();
+            avatar.Get<PlayerHealth>().Value = 40f;
+            _vfx.SpawnVFX(entity.Read<SkillEntities>().SecondSkill.Read<VFXConfig>().Value, avatar, 2f);
+            avatar.Set(new SecondLifeModifier());
         }
     }
 }

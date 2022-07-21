@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405215570555323232}
-  - component: {fileID: 3048146426036591094}
+  - component: {fileID: 3187493292419080622}
   m_Layer: 0
   m_Name: Plasmagun
   m_TagString: Untagged
@@ -113,7 +113,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3048146426036591094
+--- !u!114 &3187493292419080622
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1068564526654822874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e95e3c894e65eac4cbdc2a6b14f82332, type: 3}
+  m_Script: {fileID: 11500000, guid: 657038ccf4379e84483bc1ed9d19f547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystemSimulation:
@@ -141,4 +141,3 @@ MonoBehaviour:
     useCache: 0
     useCacheTimeout: 0
     cacheTimeout: 0
-  _anim: {fileID: 0}

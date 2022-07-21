@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
+using Project.Features.VFX;
 
 namespace Project.Features.Skills.Systems.Solaray {
 
@@ -17,13 +18,15 @@ namespace Project.Features.Skills.Systems.Solaray {
     public sealed class FreezeStormSkillSystem : ISystemFilter {
         
         private SkillsFeature feature;
-        
+        private VFXFeature _vfx;
+
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
             this.GetFeature(out this.feature);
-            
+            world.GetFeature(out _vfx);
+
         }
         
         void ISystemBase.OnDeconstruct() {}
