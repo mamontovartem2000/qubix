@@ -57,7 +57,6 @@ namespace Project.Features.PostLogicTick.Systems
             if (entity.TryReadCollided(out var from, out var owner) == false) return;
             entity.Remove<Collided>();
             if (owner == entity.Read<LastHitEntity>().Value) return;
-            Debug.Log("hit");
             owner.Set(new BulletHit {ApplyFrom = from, Bullet = entity}, ComponentLifetime.NotifyAllSystemsBelow);
         }
     }
