@@ -18,6 +18,7 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
+  - id: 4
   removeStructComponents: []
   templates: []
   references:
@@ -35,4 +36,8 @@ MonoBehaviour:
       data:
         Value: 3
     00000003:
+      type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: event:/Skills/Buller/ThrowGrenade
+    00000004:
       type: {class: GrenadeThrowAffect, ns: Project.Common.Components, asm: Project.Common}

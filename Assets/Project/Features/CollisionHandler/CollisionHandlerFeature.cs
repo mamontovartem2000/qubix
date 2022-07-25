@@ -19,13 +19,13 @@ namespace Project.Features.CollisionHandler
         
         protected override void OnConstruct()
         {
-            AddSystem<GridCollisionDetectionSystem>();
             AddSystem<GrenadeExplosionSystem>();
             AddSystem<SpawnMineSystem>();
             AddSystem<HealthDispenserSystem>();
             AddSystem<NewPortalDispenserSystem>();
             AddSystem<MineBlinkSystem>();
             AddSystem<MineBlinkLifeTime>();
+            AddSystem<GridCollisionDetectionSystem>();
 
             _portal = world.RegisterViewSource(Portal);
             _mine = world.RegisterViewSource(Mine);
@@ -49,7 +49,6 @@ namespace Project.Features.CollisionHandler
             entity.Get<ProjectileDirection>().Value = fp3.zero;
             entity.Get<Owner>().Value = owner;
             entity.Get<FaceDirection>().Value = new fp3(1, 0, 0);
-            
             return entity;
         }   
 

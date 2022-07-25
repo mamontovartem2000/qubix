@@ -36,7 +36,7 @@ namespace Project.Features.Projectile
         {
             var entity = new Entity("projectile");
             gun.Read<ProjectileConfig>().Value.Apply(entity);
-
+            
             entity.SetPosition(gun.GetPosition());
             gun.Get<WeaponAim>().Value.SetLocalPosition(Vector3.forward);
             entity.Get<Owner>().Value = gun.Read<Owner>().Value;
@@ -109,11 +109,11 @@ namespace Project.Features.Projectile
                 var view = world.RegisterViewSource(entity.Read<ViewModel>().Value);
                 entity.InstantiateView(view);
             }
-            
+
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(gun.Get<Owner>().Value);
         }
 
-        public void  SpawnLinear(Entity gun, int length, float delay)
+        public void SpawnLinear(Entity gun, int length, float delay)
         {
             for (int i = 1; i < length; i++)
             {
@@ -133,7 +133,9 @@ namespace Project.Features.Projectile
             var visual = new Entity("vis");
             visual.SetParent(gun);
             visual.Set(new LinearVisual());
-                
+            
+            SoundUtils.PlaySound(gun);
+
             visual.SetLocalPosition(new Vector3(-0.15f,0f, 0.5f));
             visual.SetLocalRotation(gun.GetLocalRotation());
 
@@ -148,6 +150,8 @@ namespace Project.Features.Projectile
             
             var bullet = new Entity("meleeBullet");
             gun.Read<ProjectileConfig>().Value.Apply(bullet);
+            SoundUtils.PlaySound(gun, gun.Read<SoundPath>().Value);
+            
             bullet.Set(new ProjectileActive());
             bullet.Set(new MeleeProjectile());
             bullet.SetPosition(gun.Get<MeleeDamageSpot>().Value.GetPosition());

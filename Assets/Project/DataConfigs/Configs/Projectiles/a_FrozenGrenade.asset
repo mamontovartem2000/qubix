@@ -33,7 +33,7 @@ MonoBehaviour:
     00000001:
       type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 6
+        Value: 7
     00000002:
       type: {class: LifeTimeLeft, ns: Project.Common.Components, asm: Project.Common}
       data:
@@ -51,7 +51,7 @@ MonoBehaviour:
     00000006:
       type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: event:/Explosions/Grenade
+        Value: event:/Explosions/FreezeGrenade
     00000007:
       type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
       data:

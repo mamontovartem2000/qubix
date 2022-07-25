@@ -106,28 +106,28 @@ namespace Project.Features.SceneBuilder
                     case 2:
                         {
                             entity = new Entity("Platform-Tile");
+                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
                             freeMap[i] = 0;
                             walkableMap[i] = 1;
-                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
                             break;
                         }
                     case 8:
                         {
                             entity = new Entity("Dispencer-Tile");
                             entity.Set(new DispenserTag { TimerDefault = 8, Timer = 8 });
+                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
                             freeMap[i] = 1;
                             walkableMap[i] = 1;
-                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
                             break;
                         }
                     case 9:
                         {
                             entity = new Entity("Portal-Tile");
                             entity.Set(new PortalDispenserTag { TimerDefault = 0.5f, Timer = 0.5f });
+                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
                             freeMap[i] = 1;
                             walkableMap[i] = 1;
                             portalMap.Add(i);
-                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
                             break;
                         }
                     case 10:
@@ -156,28 +156,27 @@ namespace Project.Features.SceneBuilder
                     case 101:
                     case 102:
                         {
-                            entity = new Entity("Flag_Spawn-Tile");
-                            entity.Set(new FlagSpawnerTag());
-                            freeMap[i] = 1;
-                            walkableMap[i] = 1;
-                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
-
                             int team = 0;
                             if (tiles[i] == 101)
                                 team = 1;
                             else if (tiles[i] == 102)
                                 team = 2;
-
+                            
+                            entity = new Entity("Flag_Spawn-Tile");
+                            entity.Set(new FlagSpawnerTag());
+                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
                             entity.Set(new TeamTag { Value = team });
-
+                            
+                            freeMap[i] = 1;
+                            walkableMap[i] = 1;
                             break;
                         }
                     default:
                         {
                             entity = new Entity("Platform-Tile");
+                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
                             freeMap[i] = 0;
                             walkableMap[i] = 1;
-                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
                             break;
                         }
                 }
@@ -231,7 +230,7 @@ namespace Project.Features.SceneBuilder
                     entity.Set(new DestructibleTag());
                 }
                 
-                entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(0f, 4f)});
+                entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(2f, 4f)});
 
                 world.GetSharedData<MapComponents>().BlueTeamSpawnPoints = bluePool.innerArray;
                 world.GetSharedData<MapComponents>().RedTeamSpawnPoints = redPool.innerArray;

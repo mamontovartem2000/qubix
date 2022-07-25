@@ -25,7 +25,8 @@ public class SoundPlayerScript : MonoBehaviour
     private void PlaySound(in Entity entity)
     {
         if (entity.IsAlive() == false) return;
-        
+        if (entity.Read<SoundPath>().Value == null) return;
+        Debug.Log(entity.Read<SoundPath>().Value);
         RuntimeManager.PlayOneShot(entity.Read<SoundPath>().Value, entity.GetPosition());
     }
     

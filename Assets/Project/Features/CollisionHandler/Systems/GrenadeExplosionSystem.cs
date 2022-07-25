@@ -66,11 +66,14 @@ namespace Project.Features.CollisionHandler.Systems
                 
                 debuff.SetPosition(player.GetPosition());
             }
+            
+            SoundUtils.PlaySound(entity, entity.Read<SoundPath>().Value);
 
-            Debug.Log(entity.Read<VFXConfig>().Value);
             _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, entity.GetPosition());
-
-            entity.Destroy();
+            
+            entity.Get<LifeTimeLeft>().Value = 0.1f;
+            entity.Get<ProjectileSpeed>().Value = 0;
+            entity.Remove<Grenade>();
         }
     }
 }

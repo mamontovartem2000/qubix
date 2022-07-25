@@ -59,9 +59,24 @@ namespace Project.Common.Components
 		public float Value;
 	}
 
+	public struct FreeMap : IComponent
+	{
+		public int Value;
+	}
+	
+	public struct WalkableMap : IComponent
+	{
+		public int Value;
+	}
+
 	public struct GlowTile : IComponent
 	{
 		public bool Direction;
+		public float Amount;
+	}
+
+	public struct GlowTileRandomAmount : IComponent
+	{
 		public float Amount;
 	}
 }

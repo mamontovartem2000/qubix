@@ -41,7 +41,7 @@ namespace Project.Features.PostLogicTick.Systems
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
 			if (entity.TryReadCollided(out var from, out var owner) == false) return;
-
+			entity.Get<ProjectileSpeed>().Value = 0;
 			owner.Set(new BulletHit {ApplyFrom = from, Bullet = entity}, ComponentLifetime.NotifyAllSystemsBelow);
 		}
 	}

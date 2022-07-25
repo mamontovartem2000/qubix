@@ -19,12 +19,15 @@ namespace Project.Features.PostLogicTick.Systems {
     #endif
     public sealed class FreezeBulletDisposeSystem : ISystemFilter {
         
-        private PostLogicTickFeature feature;
+        private PostLogicTickFeature feature;     
+        private VFXFeature _vfx;
+
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
             this.GetFeature(out this.feature);
+            world.GetFeature(out _vfx);
 
         }
         
@@ -54,7 +57,8 @@ namespace Project.Features.PostLogicTick.Systems {
             if (from.Read<TeamTag>().Value == owner.Read<TeamTag>().Value) return;
 
             owner.Avatar().Get<Freeze>().LifeTime = entity.Read<FreezeModifier>().LifeTime;
-            Debug.Log("Freeze");
+            SoundUtils.PlaySound(owner.Avatar(), "event:/VFX/FreezePlayer");
+            _vfx.SpawnVFX(entity.Read<FreezeModifier>().DataConfig.Read<VFXConfig>().Value, owner.Avatar(), 5);
         }
     }
 }

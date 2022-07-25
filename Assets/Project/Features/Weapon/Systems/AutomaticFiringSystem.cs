@@ -69,7 +69,7 @@ namespace Project.Features.Weapon.Systems
             
             ammo--;
             
-            Worlds.current.GetFeature<EventsFeature>().PlaySound.Execute(entity);
+            SoundUtils.PlaySound(entity);
 
             entity.Set(new SpawnBullet(), ComponentLifetime.NotifyAllSystems);
         }

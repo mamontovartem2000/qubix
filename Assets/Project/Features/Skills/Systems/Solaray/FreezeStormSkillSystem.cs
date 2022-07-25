@@ -55,7 +55,7 @@ namespace Project.Features.Skills.Systems.Solaray {
             effect.SetPosition(avatar.GetPosition());
             effect.Set(new GrenadeExplode());
             effect.Set(new Grenade());
-
+            
             entity.Read<ProjectileConfig>().Value.Apply(effect);
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
         }

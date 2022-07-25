@@ -51,7 +51,7 @@ namespace Project.Features.Skills.Systems.Universal
             grenade.Get<ProjectileDirection>().Value = new Vector3(avatar.Read<FaceDirection>().Value.x * 1f, grenade.Read<Trajectory>().Value, avatar.Read<FaceDirection>().Value.z * 1f) ;
             grenade.SetPosition(avatar.GetPosition());
 			
-			SoundUtils.PlaySound(avatar, "event:/Skills/Buller/ThrowGrenade");
+			SoundUtils.PlaySound(avatar, entity.Read<SoundPath>().Value);
 			
 			var view = world.RegisterViewSource(grenade.Read<ViewModel>().Value);
             grenade.InstantiateView(view);

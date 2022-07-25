@@ -52,6 +52,7 @@ namespace Project.Features.Skills.Systems.Solaray {
             
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             avatar.Remove<SecondLifeModifier>();
+            SoundUtils.PlaySound(avatar, entity.Read<SoundPath>().Value);
             _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar, 1);
         }
     }

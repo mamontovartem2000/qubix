@@ -44,7 +44,10 @@ namespace Project.Features.PostLogicTick.Systems {
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            entity.Destroy();
+            // entity.Destroy();
+            entity.Get<LifeTimeLeft>().Value = 0.2f;
+            entity.Remove<ProjectileSpeed>();
+            entity.Remove<ProjectileActive>();
         }
     }
 }

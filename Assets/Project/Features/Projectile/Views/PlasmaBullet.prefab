@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 186288292398744687}
   - component: {fileID: -3107003704974986196}
+  - component: {fileID: -4504039348270573316}
   m_Layer: 0
   m_Name: PlasmaBullet
   m_TagString: Untagged
@@ -63,6 +64,36 @@ MonoBehaviour:
     useCache: 0
     useCacheTimeout: 0
     cacheTimeout: 0
+--- !u!114 &-4504039348270573316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711010857564085973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1796597967
+      Data2: 1101564372
+      Data3: -626541182
+      Data4: -271612541
+    Path: event:/Weapon/PlasmaSword
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 30
 --- !u!1 &1322166274773343612
 GameObject:
   m_ObjectHideFlags: 0
