@@ -96,6 +96,11 @@ namespace Project.Features.Player
 						SolarayConfig.Apply(player);
 						break;
 					}
+				case "Bloodlov":
+					{
+						BloodlovConfig.Apply(player);
+						break;
+					}
 			}
 		}
 

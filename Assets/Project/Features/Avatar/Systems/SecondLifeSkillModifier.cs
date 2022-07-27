@@ -50,7 +50,7 @@ namespace Project.Features.Avatar.Systems {
             if (entity.Read<SkillEntities>().SecondSkill.Has<Cooldown>()) return;
 
             entity.Remove<PlayerDead>();
-            avatar.Get<PlayerHealth>().Value = 40f;
+            avatar.Get<PlayerHealth>().Value = 30f;
             _vfx.SpawnVFX(entity.Read<SkillEntities>().SecondSkill.Read<VFXConfig>().Value, avatar, 2f);
             avatar.Set(new SecondLifeModifier());
         }

@@ -22,6 +22,7 @@ MonoBehaviour:
   - id: 5
   - id: 6
   - id: 7
+  - id: 8
   removeStructComponents: []
   templates: []
   references:
@@ -53,6 +54,11 @@ MonoBehaviour:
       data:
         Value: event:/Explosions/FreezeGrenade
     00000007:
+      type: {class: ExplodeSquaredRadius, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 10
+    00000008:
       type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 11400000, guid: 5bf4b00b6ddcae8499aa330ee501a522, type: 2}
+        SecondaryValue: {fileID: 0}

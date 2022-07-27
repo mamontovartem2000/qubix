@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Features.PreLogicTick;
+using UnityEngine;
 
 namespace Project.Features.PostLogicTick.Systems {
 
@@ -46,6 +47,8 @@ namespace Project.Features.PostLogicTick.Systems {
         {
             // entity.Destroy();
             entity.Get<LifeTimeLeft>().Value = 0.2f;
+            // entity.SetPosition(new Vector3(entity.GetPosition().x, -0.8f, entity.GetPosition().z));
+            entity.DestroyAllViews();
             entity.Remove<ProjectileSpeed>();
             entity.Remove<ProjectileActive>();
         }

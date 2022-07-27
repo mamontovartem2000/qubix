@@ -63,9 +63,6 @@
 		<property name="minimumDistance">
 			<value>0</value>
 		</property>
-		<property name="maximumDistance">
-			<value>30</value>
-		</property>
 	</object>
 	<object class="MarkerTrack" id="{f519583f-9ba5-4100-b9c7-e1fbbe3ea60e}" />
 	<object class="GroupTrack" id="{11fa41d0-e43d-4dcf-9c08-3ecb5d2f7e81}">
@@ -82,6 +79,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{63b843fd-33ab-4309-a815-cd4722d0a989}">
+		<property name="volume">
+			<value>-1.5</value>
+		</property>
 		<relationship name="modulators">
 			<destination>{25049964-8cca-406f-a3f2-33d385f9ad52}</destination>
 		</relationship>
@@ -136,6 +136,12 @@
 		<property name="peakValue">
 			<value>-2.88888931</value>
 		</property>
+		<property name="decayTime">
+			<value>955.128174</value>
+		</property>
+		<property name="sustainValue">
+			<value>-16.7555561</value>
+		</property>
 		<property name="releaseTime">
 			<value>2615.38501</value>
 		</property>
@@ -161,9 +167,6 @@
 	<object class="SpatialiserEffect" id="{b3ca2d2c-83ef-4c93-b84e-6745333dcfc4}">
 		<property name="minimumDistance">
 			<value>0</value>
-		</property>
-		<property name="maximumDistance">
-			<value>30</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{8388e22a-5a78-4175-a855-cbb7e23ae0a9}" />

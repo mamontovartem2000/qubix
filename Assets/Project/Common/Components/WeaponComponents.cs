@@ -32,7 +32,12 @@ namespace Project.Common.Components
         public float MoveRatio;
     }
     public struct ProjectileConfig : IComponent {public DataConfig Value;}
-    public struct VFXConfig : IComponent {public DataConfig Value;}
+
+    public struct VFXConfig : IComponent
+    {
+        public DataConfig Value;
+        public DataConfig SecondaryValue;
+    }
     public struct ViewModel : IComponent {public MonoBehaviourViewBase Value;}
     public struct ReloadTime : IComponent {public float Value;}
     public struct ReloadTimeDefault : IComponent {public float Value;}

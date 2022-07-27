@@ -3,6 +3,7 @@ using Project.Common.Components;
 using Project.Common.Events;
 using Project.Common.Utilities;
 using Project.Features.Player;
+using Project.Features.VFX;
 using UnityEngine;
 
 namespace Project.Features.Avatar.Systems
@@ -16,11 +17,15 @@ namespace Project.Features.Avatar.Systems
     {
         public World world { get; set; }
         
-        private AvatarFeature _feature;
+        private AvatarFeature _feature;        
+        private VFXFeature _vfx;
 
-        void ISystemBase.OnConstruct() 
+
+        void ISystemBase.OnConstruct()
         {
             this.GetFeature(out _feature);
+            world.GetFeature(out _vfx);
+
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -50,9 +55,9 @@ namespace Project.Features.Avatar.Systems
             
             if (from.Has<PlayerAvatar>())
             {
-                if (from.Read<TeamTag>().Value == to.Read<TeamTag>().Value) return;
+                if (from.Read<TeamTag>().Value == to.Owner().Read<TeamTag>().Value) return;
                 
-                to.Get<Owner>().Value.Set(new DamagedBy {Value = from});
+                to.Owner().Set(new DamagedBy {Value = from});
                 from.Avatar().Get<PrivateSoundPath>().Value = "event:/Weapons/HitMarker";
                 Worlds.current.GetFeature<EventsFeature>().PlaySoundPrivate.Execute(from.Avatar());
             }
@@ -64,7 +69,8 @@ namespace Project.Features.Avatar.Systems
             }
 
             health -= damage;
-            
+            // _vfx.SpawnVFX(to.Owner().Read<VFXConfig>().SecondaryValue, to, 2);
+
             var dealtDamage = damage;
 
             if (health <= 0)

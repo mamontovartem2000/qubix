@@ -4883,9 +4883,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2521117778691127840}
-  - component: {fileID: 1018259563058588267}
+  - component: {fileID: 8177416248703866102}
   m_Layer: 0
-  m_Name: PlayerTakeDamage
+  m_Name: TakeDamageVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4906,7 +4906,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1018259563058588267
+--- !u!114 &8177416248703866102
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4915,7 +4915,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2521117778691127843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 657038ccf4379e84483bc1ed9d19f547, type: 3}
+  m_Script: {fileID: 11500000, guid: 79aad133ffb0fd046bcb11164adffffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystemSimulation:
