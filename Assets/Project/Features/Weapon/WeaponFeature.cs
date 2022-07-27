@@ -34,6 +34,8 @@ namespace Project.Features.Weapon
             AddSystem<SingleBulletShotSystem>();
             AddSystem<ShotgunFiringSystem>();
 
+            AddSystem<ModifierSetSystem>();
+            
             //Reload systems
             AddSystem<CooldownSystem>();
             AddSystem<LinearReloadSystem>();

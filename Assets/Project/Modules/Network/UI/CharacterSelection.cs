@@ -25,7 +25,7 @@ namespace Project.Modules.Network.UI
         private void OnEnable()
         {
             var rnd = Random.Range(0, PlayerCharacter.Length);
-            // rnd = 4;
+            rnd = 0;
             SelectCharacter(rnd);
         }
 

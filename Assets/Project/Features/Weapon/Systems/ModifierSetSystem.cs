@@ -1,7 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 
-namespace Project.Features.PreLogicTick.Systems {
+namespace Project.Features.Weapon.Systems {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -13,9 +13,9 @@ namespace Project.Features.PreLogicTick.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class WeaponCritStartValue : ISystemFilter {
+    public sealed class ModifierSetSystem : ISystemFilter {
         
-        private PreLogicTickFeature feature;
+        private WeaponFeature feature;
         
         public World world { get; set; }
         
@@ -34,15 +34,17 @@ namespace Project.Features.PreLogicTick.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-WeaponCritStartValue")
-                .With<WeaponCritChanceDefault>()
+            return Filter.Create("Filter-ModifierSetSystem")
+                .With<SpawnBullet>()
+                .With<ModifierConfig>()
+                .Without<Shotgun>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            entity.Get<CriticalHitModifier>().Value = entity.Read<WeaponCritChanceDefault>().Value;
+            entity.Read<ModifierConfig>().Value.Apply(entity.Read<SpawnBullet>().LastBullet);
         }
     }
 }

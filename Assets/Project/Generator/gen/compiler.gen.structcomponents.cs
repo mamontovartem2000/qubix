@@ -111,6 +111,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimerDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ModifierConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ModifiersCheck>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveInput>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
@@ -172,7 +173,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoftShieldAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoftShieldModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPath>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnBullet>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnBullet>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnedPortal>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
@@ -180,6 +181,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Storm>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Stun>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.StunEffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Tabulation>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
@@ -195,7 +197,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ViewModel>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WalkableMap>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponCritChanceDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
 
@@ -310,6 +311,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimerDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineDamage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ModifierConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ModifiersCheck>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveInput>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MoveSpeedAffect>(true, true, false, false, false, false, false, false);
@@ -371,7 +373,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoftShieldAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoftShieldModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPath>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnBullet>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnBullet>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnedPortal>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
@@ -379,6 +381,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Storm>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Stun>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.StunEffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Tabulation>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
@@ -394,7 +397,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ViewModel>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WalkableMap>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponCritChanceDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
 
@@ -504,6 +506,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.MineBlinkTimerDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.MineDamage>(false);
             structComponentsContainer.Validate<Project.Common.Components.MineTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.ModifierConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.ModifiersCheck>(false);
             structComponentsContainer.Validate<Project.Common.Components.MoveInput>(false);
             structComponentsContainer.Validate<Project.Common.Components.MoveSpeedAffect>(true);
@@ -565,7 +568,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SoftShieldAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.SoftShieldModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.SoundPath>(false);
-            structComponentsContainer.Validate<Project.Common.Components.SpawnBullet>(true);
+            structComponentsContainer.Validate<Project.Common.Components.SpawnBullet>(false);
             structComponentsContainer.Validate<Project.Common.Components.Spawned>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpawnedPortal>(false);
             structComponentsContainer.Validate<Project.Common.Components.SpeedModifier>(true);
@@ -573,6 +576,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Storm>(true);
             structComponentsContainer.Validate<Project.Common.Components.Stun>(false);
             structComponentsContainer.Validate<Project.Common.Components.StunAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.StunEffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.StunModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.Tabulation>(true);
             structComponentsContainer.Validate<Project.Common.Components.Targeted>(true);
@@ -588,7 +592,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ViewModel>(false);
             structComponentsContainer.Validate<Project.Common.Components.WalkableMap>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponAim>(false);
-            structComponentsContainer.Validate<Project.Common.Components.WeaponCritChanceDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponEntities>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponPosition>(false);
 
@@ -703,6 +706,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.MineBlinkTimerDefault>(false);
             entity.ValidateData<Project.Common.Components.MineDamage>(false);
             entity.ValidateData<Project.Common.Components.MineTag>(true);
+            entity.ValidateData<Project.Common.Components.ModifierConfig>(false);
             entity.ValidateData<Project.Common.Components.ModifiersCheck>(false);
             entity.ValidateData<Project.Common.Components.MoveInput>(false);
             entity.ValidateData<Project.Common.Components.MoveSpeedAffect>(true);
@@ -764,7 +768,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SoftShieldAffect>(true);
             entity.ValidateData<Project.Common.Components.SoftShieldModifier>(false);
             entity.ValidateData<Project.Common.Components.SoundPath>(false);
-            entity.ValidateData<Project.Common.Components.SpawnBullet>(true);
+            entity.ValidateData<Project.Common.Components.SpawnBullet>(false);
             entity.ValidateData<Project.Common.Components.Spawned>(true);
             entity.ValidateData<Project.Common.Components.SpawnedPortal>(false);
             entity.ValidateData<Project.Common.Components.SpeedModifier>(true);
@@ -772,6 +776,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Storm>(true);
             entity.ValidateData<Project.Common.Components.Stun>(false);
             entity.ValidateData<Project.Common.Components.StunAffect>(true);
+            entity.ValidateData<Project.Common.Components.StunEffect>(true);
             entity.ValidateData<Project.Common.Components.StunModifier>(false);
             entity.ValidateData<Project.Common.Components.Tabulation>(true);
             entity.ValidateData<Project.Common.Components.Targeted>(true);
@@ -787,7 +792,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ViewModel>(false);
             entity.ValidateData<Project.Common.Components.WalkableMap>(false);
             entity.ValidateData<Project.Common.Components.WeaponAim>(false);
-            entity.ValidateData<Project.Common.Components.WeaponCritChanceDefault>(false);
             entity.ValidateData<Project.Common.Components.WeaponEntities>(false);
             entity.ValidateData<Project.Common.Components.WeaponPosition>(false);
 

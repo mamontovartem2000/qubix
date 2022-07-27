@@ -48,7 +48,7 @@ namespace Project.Common.Components
 	public struct FreezeModifier : IComponent
 	{
 		public float LifeTime;
-		public DataConfig DataConfig;
+		public DataConfig VFXConfig;
 	}
 
 	public struct Linear : IComponent

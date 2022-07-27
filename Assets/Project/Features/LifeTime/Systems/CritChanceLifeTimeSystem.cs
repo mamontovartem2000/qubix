@@ -1,8 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Common.Utilities;
 
-namespace Project.Features.Modifiers.Systems {
+namespace Project.Features.LifeTime.Systems {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -14,15 +13,15 @@ namespace Project.Features.Modifiers.Systems {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class CriticalHitSkillModifier : ISystemFilter {
+    public sealed class CritChanceLifeTimeSystem : ISystemFilter {
         
-        private ModifiersFeature _feature;
+        private LifeTimeFeature feature;
         
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
-            this.GetFeature(out this._feature);
+            this.GetFeature(out this.feature);
             
         }
         
@@ -35,19 +34,21 @@ namespace Project.Features.Modifiers.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-CriticalHitSkillModifier")
+            return Filter.Create("Filter-CritChanceLifeTimeSystem")
                 .With<CriticalHitModifier>()
-                .With<EffectTag>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var avatar = entity.Owner().Avatar();
-            if (avatar.IsAlive() == false) return;
-            
-            avatar.Read<WeaponEntities>().RightWeapon.Get<CriticalHitModifier>().Value = entity.Read<CriticalHitModifier>().Value;
+            ref var lifeTime = ref entity.Get<CriticalHitModifier>().LifeTime;
+            lifeTime -= deltaTime;
+
+            if (lifeTime > 0) return;
+
+            entity.Remove<CriticalHitModifier>();
+            entity.Remove<ModifierConfig>();
         }
     }
 }

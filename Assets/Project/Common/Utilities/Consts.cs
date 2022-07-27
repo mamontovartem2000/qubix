@@ -29,6 +29,12 @@
                 public const float SPEED = 20f;
                 public const float VISUAL_SPEED_RATIO = 1.4f;
             }
+
+            public static class Modifiers
+            {
+                public const float CRIT_CHANCE = 0.3f;
+            }
+        
         }
 
         public static class Scene

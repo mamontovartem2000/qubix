@@ -49,8 +49,10 @@ namespace Project.Features.PostLogicTick.Systems {
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
+            if (Worlds.current.GetRandomValue() > entity.Read<CriticalHit>().Value) return;
             
             entity.Get<ProjectileDamage>().Value *= 2f;
+            Debug.Log("CRIT!");
         }
     }
 }

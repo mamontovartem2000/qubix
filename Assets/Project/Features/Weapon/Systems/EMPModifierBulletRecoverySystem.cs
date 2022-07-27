@@ -45,6 +45,7 @@ namespace Project.Features.Weapon.Systems {
         {
             entity.Get<AmmoCapacityDefault>().Value = entity.Read<EMPModifier>().AmmoCapacityDefault;
             entity.Remove<EMPModifier>();
+            entity.Remove<ModifierConfig>();
         }
     }
 }

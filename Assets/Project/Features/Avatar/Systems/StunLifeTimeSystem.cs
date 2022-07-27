@@ -34,11 +34,9 @@ namespace Project.Features.Avatar.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            entity.Get<Stun>().Value -= deltaTime;
-            entity.Read<WeaponEntities>().LeftWeapon.Remove<LeftWeaponShot>();
-            entity.Read<WeaponEntities>().LeftWeapon.Remove<LinearActive>();
-            entity.Read<WeaponEntities>().RightWeapon.Remove<RightWeaponShot>();
-            if (entity.Read<Stun>().Value > 0f) return;
+            entity.Get<Stun>().LifeTime -= deltaTime;
+            
+            if (entity.Read<Stun>().LifeTime > 0f) return;
 
             entity.Remove<Stun>();
         }

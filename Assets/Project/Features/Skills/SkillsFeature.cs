@@ -38,7 +38,7 @@ namespace Project.Features.Skills
             AddSystem<SelfHealSystem>();
             
             //Silen
-            AddSystem<EMPSkillSystem>();
+            AddSystem<EMPBulletsSkillSystem>();
             AddSystem<DashSystem>();
             
             //Solaray

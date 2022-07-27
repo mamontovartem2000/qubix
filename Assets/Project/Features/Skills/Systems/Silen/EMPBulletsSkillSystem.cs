@@ -15,7 +15,7 @@ namespace Project.Features.Skills.Systems.Silen {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class EMPSkillSystem : ISystemFilter {
+    public sealed class EMPBulletsSkillSystem : ISystemFilter {
         
         private SkillsFeature _feature;
         private VFXFeature _vfx;
@@ -51,14 +51,14 @@ namespace Project.Features.Skills.Systems.Silen {
             if (avatar.IsAlive() == false) return;
 			
             ref readonly var rightWeapon = ref avatar.Read<WeaponEntities>().RightWeapon;
-			
-            rightWeapon.Set(new EMPModifier{AmmoCapacityDefault = rightWeapon.Read<AmmoCapacityDefault>().Value, LifeTime = Consts.Skills.EMP_DURATION_DEFAULT});
 
+            rightWeapon.Get<ModifierConfig>().Value = entity.Read<ProjectileConfig>().Value;
+            
+            rightWeapon.Set( new EMPModifier { AmmoCapacityDefault = rightWeapon.Read<AmmoCapacityDefault>().Value } );
             rightWeapon.Get<AmmoCapacity>().Value = 0;
             rightWeapon.Get<AmmoCapacityDefault>().Value = 15;
             
-            rightWeapon.Get<ReloadTime>().Value = 
-                rightWeapon.Read<ReloadTimeDefault>().Value;
+            rightWeapon.Get<ReloadTime>().Value = rightWeapon.Read<ReloadTimeDefault>().Value;
             
             SoundUtils.PlaySound(avatar, "event:/Skills/Silen/EMPBullets");
             
@@ -68,7 +68,5 @@ namespace Project.Features.Skills.Systems.Silen {
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
             _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar.GetPosition());
         }
-    
     }
-    
 }

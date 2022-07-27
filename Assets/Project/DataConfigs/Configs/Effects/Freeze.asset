@@ -15,17 +15,12 @@ MonoBehaviour:
   sharedGroupId: 0
   structComponents:
   - id: 0
-  - id: 1
   removeStructComponents: []
   templates: []
   references:
     version: 1
     00000000:
-      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 20
-    00000001:
       type: {class: FreezeModifier, ns: Project.Common.Components, asm: Project.Common}
       data:
         LifeTime: 3
-        DataConfig: {fileID: 11400000, guid: 0e0063de217294743bf24385986023fc, type: 2}
+        VFXConfig: {fileID: 11400000, guid: 0e0063de217294743bf24385986023fc, type: 2}

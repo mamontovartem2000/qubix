@@ -16,7 +16,6 @@ namespace Project.Features.Modifiers {
 
         protected override void OnConstruct()
         {
-            AddSystem<CriticalHitSkillModifier>();
             AddSystem<SlownessModifier>();
             AddSystem<MovementSkillModifier>();
             AddSystem<DashSkillModifier>();
@@ -24,10 +23,9 @@ namespace Project.Features.Modifiers {
             AddSystem<LinearWeaponModifier>();
         }
 
-        protected override void OnDeconstruct() {
+        protected override void OnDeconstruct() 
+        {
             
         }
-
     }
-
 }

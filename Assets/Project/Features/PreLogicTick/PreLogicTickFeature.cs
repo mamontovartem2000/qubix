@@ -15,7 +15,6 @@ namespace Project.Features.PreLogicTick
         {
             AddSystem<PlayerMovementStartValue>();
             AddSystem<LinearStatsStartValue>();
-            AddSystem<WeaponCritStartValue>();
         }
 
         protected override void OnDeconstruct() {}

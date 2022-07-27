@@ -15,7 +15,6 @@ MonoBehaviour:
   sharedGroupId: 0
   structComponents:
   - id: 0
-  - id: 1
   removeStructComponents: []
   templates: []
   references:
@@ -24,8 +23,5 @@ MonoBehaviour:
       type: {class: EMPModifier, ns: Project.Common.Components, asm: Project.Common}
       data:
         LifeTime: 3
-        AmmoCapacityDefault: 1
-    00000001:
-      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
-      data:
-        Value: 30
+        AmmoCapacityDefault: 0
+        VFXConfig: {fileID: 0}

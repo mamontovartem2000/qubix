@@ -51,8 +51,9 @@ namespace Project.Features.Weapon.Systems
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            entity.Get<AmmoCapacityDefault>().Value = entity.Read<StunModifier>().Value;
+            entity.Get<AmmoCapacityDefault>().Value = entity.Read<StunModifier>().AmmoCapacityDefault;
             entity.Remove<StunModifier>();
+            entity.Remove<ModifierConfig>();
         }
     }
 }

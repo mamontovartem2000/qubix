@@ -51,8 +51,12 @@ namespace Project.Features.PostLogicTick.Systems
             if (from.Read<TeamTag>().Value == owner.Read<TeamTag>().Value) return;
             
             var player = owner.Avatar();
-            // _vfx.SpawnVFX(VFXFeature.VFXType.SkillStun, pos, player, entity.Read<StunModifier>().Value);
-            player.Set(new Stun {Value = entity.Read<StunModifier>().Value});
+            // _vfx.SpawnVFX(, pos, player, entity.Read<StunModifier>().Value);
+            
+            player.Set(new Stun {LifeTime = entity.Read<StunModifier>().LifeTime});
+            player.Read<WeaponEntities>().LeftWeapon.Remove<LeftWeaponShot>();
+            player.Read<WeaponEntities>().LeftWeapon.Remove<LinearActive>();
+            player.Read<WeaponEntities>().RightWeapon.Remove<RightWeaponShot>();
             player.Remove<DashModifier>();
         }
     }

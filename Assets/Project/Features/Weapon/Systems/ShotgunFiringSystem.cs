@@ -48,7 +48,5 @@ namespace Project.Features.Weapon.Systems {
         {
             _projectile.SpawnShotgunBullet(entity);
         }
-    
     }
-    
 }

@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Utilities;
+using Project.Modules.Network;
 
 namespace Project.Common.Views
 {
@@ -28,7 +29,7 @@ namespace Project.Common.Views
             
             _nick.text = player.Read<PlayerTag>().Nickname;
 
-            if (player.Has<TeamTag>())
+            if (NetworkData.GameMode == GameModes.deathmatch)
             {
                 var team = player.Read<TeamTag>().Value;
 
@@ -42,7 +43,7 @@ namespace Project.Common.Views
                 {
                     _nick.color = _blue;
                     Fill.color = _blue;
-                    Back.color = _blue * 0.4f;
+                    Back.color = _blue * 0.5f;
                 }
             }
         }

@@ -22,6 +22,7 @@ MonoBehaviour:
   - id: 5
   - id: 6
   - id: 7
+  - id: 8
   removeStructComponents: []
   templates: []
   references:
@@ -31,28 +32,32 @@ MonoBehaviour:
       data:
         Value: {fileID: -8512600830712622292, guid: dc72713185826c249b836588be368d46, type: 3}
     00000001:
+      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 30
+    00000002:
       type: {class: ProjectileSpeed, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 8
-    00000002:
-      type: {class: ProjectileActive, ns: Project.Common.Components, asm: Project.Common}
     00000003:
+      type: {class: ProjectileActive, ns: Project.Common.Components, asm: Project.Common}
+    00000004:
       type: {class: Trajectory, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 2
-    00000004:
+    00000005:
       type: {class: SecondaryDamage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 11400000, guid: 88ac7f5d7f6dbfb44a407a5d5b7373fc, type: 2}
-    00000005:
+    00000006:
       type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: event:/Explosions/Grenade
-    00000006:
+    00000007:
       type: {class: ExplodeSquaredRadius, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 10
-    00000007:
+    00000008:
       type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 11400000, guid: f79c7ac0eb108c542a0deb1bb614187b, type: 2}

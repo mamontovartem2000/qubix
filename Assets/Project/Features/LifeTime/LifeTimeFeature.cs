@@ -30,13 +30,12 @@ namespace Project.Features.LifeTime
             AddSystem<LinearVisualLifeTimeSystem>();
             AddSystem<MeleeAimInitSystem>();
             AddSystem<SoftShieldRemoveSystem>();
-            // AddSystem<MeleeAimPositionSystem>();
+            AddSystem<CritChanceLifeTimeSystem>();
             AddSystem<DestructibleHealthSystem>();
             AddSystem<AvoidTeleportLifeTimeSystem>();
             AddSystem<ShieldSkillLifetimeSystem>();
             AddSystem<SkillsUITimer>();
             AddSystem<FreezeLifeTimeSystem>();
-            AddSystem<CriticalHitLifeTimeSystem>();
         }
 
         protected override void OnDeconstruct() { }

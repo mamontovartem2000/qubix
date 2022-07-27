@@ -107,7 +107,6 @@ namespace Project.Features.Avatar
 
             weapon.SetParent(parent);
             weapon.SetLocalPosition(weapon.Read<WeaponPosition>().Value);
-            weapon.Set(new WeaponCritChanceDefault());
             
             var aim = new Entity("aim");
             aim.SetParent(weapon);

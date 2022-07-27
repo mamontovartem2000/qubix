@@ -13,8 +13,15 @@ MonoBehaviour:
   m_Name: Stun
   m_EditorClassIdentifier: 
   sharedGroupId: 0
-  structComponents: []
+  structComponents:
+  - id: 0
   removeStructComponents: []
   templates: []
   references:
     version: 1
+    00000000:
+      type: {class: StunModifier, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        AmmoCapacityDefault: 0
+        LifeTime: 3
+        VFXConfig: {fileID: 11400000, guid: bed207b9c94fc894a88b26e9468c8a70, type: 2}

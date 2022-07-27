@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Spear_Chain
+  m_Name: ShotgunMuzzleVFX
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _EMISSION _NORMALMAP _SPECULAR_SETUP
-  m_LightmapFlags: 2
+  m_ShaderKeywords: _SPECULAR_SETUP
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 3050
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -22,11 +22,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: ae22cb8b91ce1564fac949f9d0bf6032, type: 3}
+        m_Texture: {fileID: 2800000, guid: bc63624a84cdb55468c51eb67095cf9a, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 1, y: 0.99549264}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: c98cbc9056bb5fd419b524c09553db9a, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -46,9 +46,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ae22cb8b91ce1564fac949f9d0bf6032, type: 3}
+        m_Texture: {fileID: 2800000, guid: bc63624a84cdb55468c51eb67095cf9a, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: c599133fc00bea34d8d19578597e579b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -78,13 +82,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AlphaClip: 1
+    - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 0
-    - _Cutoff: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
@@ -92,12 +96,14 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _InvFade: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _QueueOffset: 50
+    - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0
+    - _ScrollSpeed: 2
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 5
@@ -107,10 +113,11 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.077609524, g: 0, b: 5.992157, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _TintColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &3071939965223055386
+--- !u!114 &6792850595961511521
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

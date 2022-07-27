@@ -49,14 +49,11 @@ namespace Project.Features.Skills.Systems.Solaray {
         {
             var avatar = entity.Owner(out var owner).Avatar();
             if (avatar.IsAlive() == false) return;
-			
-            var effect = new Entity("effect");
-            effect.Get<Owner>().Value = owner;
-            effect.Set(new EffectTag());
+            ref var rightWeapon = ref avatar.Get<WeaponEntities>().RightWeapon;
+            
+            rightWeapon.Get<ModifierConfig>().Value = entity.Read<ProjectileConfig>().Value;
+            rightWeapon.Get<CriticalHitModifier>().LifeTime = entity.Read<SkillDurationDefault>().Value;
 
-            var amount = entity.Read<SkillAmount>().Value / 100f;
-            effect.Get<CriticalHitModifier>().Value = amount;
-            effect.Get<CriticalHitModifier>().LifeTime = entity.Read<SkillDurationDefault>().Value;
             _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar, entity.Read<SkillDurationDefault>().Value);
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
         }

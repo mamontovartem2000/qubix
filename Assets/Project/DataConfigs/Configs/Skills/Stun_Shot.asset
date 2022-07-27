@@ -20,6 +20,7 @@ MonoBehaviour:
   - id: 3
   - id: 4
   - id: 5
+  - id: 6
   removeStructComponents: []
   templates: []
   references:
@@ -33,16 +34,21 @@ MonoBehaviour:
       data:
         Value: 1
     00000002:
+      type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: d41dd4a107848d341a92802a3a3e4c96, type: 2}
+    00000003:
       type: {class: SkillDurationDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 1
-    00000003:
+    00000004:
       type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 1
-    00000004:
+    00000005:
       type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 11400000, guid: fc95f86cdc2fcce48abfdff6a8dc3be9, type: 2}
-    00000005:
+        SecondaryValue: {fileID: 0}
+    00000006:
       type: {class: StunAffect, ns: Project.Common.Components, asm: Project.Common}

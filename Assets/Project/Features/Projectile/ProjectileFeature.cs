@@ -42,17 +42,9 @@ namespace Project.Features.Projectile
             entity.Get<Owner>().Value = gun.Read<Owner>().Value;
             entity.Set(new ProjectileActive());
             entity.Get<ProjectileDirection>().Value = gun.Read<WeaponAim>().Value.GetPosition() - gun.GetPosition();
-            
-            if (gun.Has<StunModifier>())
-            {
-                entity.Set(new StunModifier { Value = 1 });
-            }
 
-            if (gun.Has<EMPModifier>())
-            {
-                entity.Set(new EMPModifier { LifeTime = gun.Read<EMPModifier>().LifeTime });
-            }
-            
+            gun.Get<SpawnBullet>().LastBullet = entity;
+
             if (gun.Has<ShengbiaoWeapon>())
             {
                 gun.Get<ShengbiaoShot>();
@@ -62,12 +54,7 @@ namespace Project.Features.Projectile
 
                 entity.Get<LifeTimeLeft>().Value = gun.Read<ReloadTimeDefault>().Value;
             }
-            
-            if (Worlds.current.GetRandomValue() < gun.Read<CriticalHitModifier>().Value)
-            {
-                entity.Set(new CriticalHit());
-            }
-            
+
             var view = world.RegisterViewSource(entity.Read<ViewModel>().Value);
             entity.InstantiateView(view);
             
@@ -91,23 +78,10 @@ namespace Project.Features.Projectile
                 entity.Get<Owner>().Value = gun.Read<Owner>().Value;
                 entity.Set(new ProjectileActive());
 
-                if (gun.Has<StunModifier>())
-                {
-                    entity.Set(new StunModifier { Value = 1 });
-                }
-
-                if (gun.Has<EMPModifier>())
-                {
-                    entity.Set(new EMPModifier { LifeTime = gun.Read<EMPModifier>().LifeTime });
-                }
-                
-                if (Worlds.current.GetRandomValue() < gun.Read<CriticalHitModifier>().Value)
-                {
-                    entity.Set(new CriticalHit());
-                }
-
                 var view = world.RegisterViewSource(entity.Read<ViewModel>().Value);
                 entity.InstantiateView(view);
+                
+                if (gun.Has<ModifierConfig>()) gun.Read<ModifierConfig>().Value.Apply(entity);
             }
 
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(gun.Get<Owner>().Value);

@@ -51,8 +51,8 @@ namespace Project.Common.Components
     public struct WeaponPosition : IComponent {public fp3 Value;}
     public struct FiringCooldownModifier : IComponent {public float Value;}
     public struct SingleBullet : IComponent {}
-    public struct SpawnBullet : IComponent {}
-    public struct Shotgun : IComponent  { public int AmmoCount; }
+    public struct SpawnBullet : IComponent {public Entity LastBullet;}
+    public struct Shotgun : IComponent  {public int AmmoCount;}
     public struct SoundPath : IComponent {public string Value;}
     public struct PrivateSoundPath : IComponent {public string Value;}
 }

@@ -58,7 +58,7 @@ namespace Project.Features.PostLogicTick.Systems {
 
             owner.Avatar().Get<Freeze>().LifeTime = entity.Read<FreezeModifier>().LifeTime;
             SoundUtils.PlaySound(owner.Avatar(), "event:/VFX/FreezePlayer");
-            _vfx.SpawnVFX(entity.Read<FreezeModifier>().DataConfig, owner.Avatar(), 5);
+            _vfx.SpawnVFX(entity.Read<FreezeModifier>().VFXConfig, owner.Avatar(), 5);
         }
     }
 }

@@ -179,9 +179,8 @@ namespace Project.Features.Player.Systems
             ref readonly var rightWeapon = ref player.Avatar().Read<WeaponEntities>().RightWeapon;
             rightWeapon.Get<AmmoCapacity>().Value = 0;
 
-            rightWeapon.Get<ReloadTime>().Value = 
-                rightWeapon.Read<ReloadTimeDefault>().Value;
-			
+            rightWeapon.Set(new ModifiersCheck());
+            rightWeapon.Get<ReloadTime>().Value = rightWeapon.Read<ReloadTimeDefault>().Value;
             world.GetFeature<EventsFeature>().rightWeaponFired.Execute(player);
             world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(player);
 

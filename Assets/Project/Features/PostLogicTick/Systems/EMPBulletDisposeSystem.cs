@@ -61,7 +61,6 @@ namespace Project.Features.PostLogicTick.Systems {
             skills.SecondSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
             skills.ThirdSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
             skills.FourthSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
-            
         }
     }
 }
