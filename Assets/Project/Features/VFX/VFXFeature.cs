@@ -24,11 +24,12 @@ namespace Project.Features.VFX
 
 		protected override void OnDeconstruct() {}
 		
-		public void SpawnVFX(DataConfig vfxConfig, Entity parent, float lifeTime)
+		public Entity SpawnVFX(DataConfig vfxConfig, Entity parent, float lifeTime)
 		{
-			if(!parent.IsAlive()) return;
-			
 			var fx = new Entity("vfx");
+			
+			if(!parent.IsAlive()) return fx;
+			
 			vfxConfig.Apply(fx);
 
 			fx.Get<LifeTimeLeft>().Value = lifeTime;
@@ -38,6 +39,8 @@ namespace Project.Features.VFX
 			
 			var _viewId = world.RegisterViewSource(fx.Read<ViewModel>().Value);
 			fx.InstantiateView(_viewId);
+			
+			return fx;
 		}
 
 		public void SpawnVFX(DataConfig vfxConfig, Vector3 position)

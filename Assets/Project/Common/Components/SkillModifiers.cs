@@ -21,6 +21,7 @@ namespace Project.Common.Components
 	public struct Stun : IComponent
 	{
 		public float LifeTime;
+		public Entity VFXEntity;
 	}
 	
 	public struct StunEffect : IComponent {}

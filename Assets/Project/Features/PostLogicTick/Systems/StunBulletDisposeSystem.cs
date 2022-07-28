@@ -50,14 +50,22 @@ namespace Project.Features.PostLogicTick.Systems
             
             if (from.Read<TeamTag>().Value == owner.Read<TeamTag>().Value) return;
             
-            var player = owner.Avatar();
-            // _vfx.SpawnVFX(, pos, player, entity.Read<StunModifier>().Value);
+            var avatar = owner.Avatar();
             
-            player.Set(new Stun {LifeTime = entity.Read<StunModifier>().LifeTime});
-            player.Read<WeaponEntities>().LeftWeapon.Remove<LeftWeaponShot>();
-            player.Read<WeaponEntities>().LeftWeapon.Remove<LinearActive>();
-            player.Read<WeaponEntities>().RightWeapon.Remove<RightWeaponShot>();
-            player.Remove<DashModifier>();
+            if (avatar.Has<Stun>())
+            {
+                avatar.Read<Stun>().VFXEntity.Get<LifeTimeLeft>().Value = entity.Read<StunModifier>().LifeTime;
+            }
+            else
+            {
+                avatar.Get<Stun>().VFXEntity = _vfx.SpawnVFX(entity.Read<StunModifier>().VFXConfig, avatar, entity.Read<StunModifier>().LifeTime);
+            }
+            
+            avatar.Get<Stun>().LifeTime = entity.Read<StunModifier>().LifeTime;
+            avatar.Read<WeaponEntities>().LeftWeapon.Remove<LeftWeaponShot>();
+            avatar.Read<WeaponEntities>().LeftWeapon.Remove<LinearActive>();
+            avatar.Read<WeaponEntities>().RightWeapon.Remove<RightWeaponShot>();
+            avatar.Remove<DashModifier>();
         }
     }
 }

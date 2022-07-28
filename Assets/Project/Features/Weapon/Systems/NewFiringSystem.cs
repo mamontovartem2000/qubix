@@ -31,6 +31,7 @@ namespace Project.Features.Weapon.Systems
             return Filter.Create("Filter-NewFiringSystem")
                 .With<AvatarTag>()
                 .With<WeaponEntities>()
+                .Without<Stun>()
                 .Push();
         }
 
@@ -38,8 +39,6 @@ namespace Project.Features.Weapon.Systems
         {
             ref var weapon = ref entity.Get<WeaponEntities>();
 			
-            if(entity.Has<Stun>()) return;
-
             if (entity.Owner().Has<LeftWeaponShot>())
             {
                 weapon.LeftWeapon.Set(new LeftWeaponShot());
