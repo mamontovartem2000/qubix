@@ -50,6 +50,7 @@ namespace Project.Common.Components
 	public struct EMP : IComponent
 	{
 		public float LifeTime;
+		public Entity VFXEntity;
 	}
 
 	public struct EMPModifier : IComponent

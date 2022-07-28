@@ -52,11 +52,19 @@ namespace Project.Features.PostLogicTick.Systems {
             if (from.Read<TeamTag>().Value == owner.Read<TeamTag>().Value) return;
             
             ref var skills = ref owner.Get<SkillEntities>();
+            var avatar = owner.Avatar();
             
             world.GetFeature<EventsFeature>().EMPActive.Execute(owner);
 
-            // _vfx.SpawnVFX(VFXFeature.VFXType.EMP, owner.Avatar().GetPosition(), owner.Avatar(), entity.Read<EMPModifier>().LifeTime);
-            
+            if (avatar.Has<EMP>())
+            {
+                avatar.Read<EMP>().VFXEntity.Get<LifeTimeLeft>().Value = entity.Read<EMPModifier>().LifeTime;
+            }
+            else
+            {
+                avatar.Get<EMP>().VFXEntity = _vfx.SpawnVFX(entity.Read<EMPModifier>().VFXConfig, avatar, entity.Read<EMPModifier>().LifeTime);
+            }
+
             skills.FirstSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
             skills.SecondSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
             skills.ThirdSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
