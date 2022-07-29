@@ -16,10 +16,7 @@ namespace Project.Common.Components
         public string Nickname;
     }
 
-    public struct TeamTag : IComponent
-    {
-        public int Value;
-    }
+    public struct TeamTag : IComponent { public int Value; }
 
     public struct WeaponEntities : IComponent
     {
