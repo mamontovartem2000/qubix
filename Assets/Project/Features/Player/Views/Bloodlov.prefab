@@ -282,8 +282,13 @@ MonoBehaviour:
     useCache: 0
     useCacheTimeout: 0
     cacheTimeout: 0
-  Rends: []
-  Color: {r: 0, g: 0, b: 0, a: 0}
+  Rends:
+  - {fileID: 7070377049440507131}
+  - {fileID: 7070377050260254150}
+  - {fileID: 7070377050305760924}
+  - {fileID: 7070377049280765048}
+  - {fileID: 7070377049890086984}
+  Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
 --- !u!1 &7070377048727174794
 GameObject:
   m_ObjectHideFlags: 0

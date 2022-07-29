@@ -36,7 +36,6 @@ namespace Project.Features.Avatar
             AddSystem<SecondLifeReset>();
             
             //Visual health bar
-            AddSystem<BlinkHurtSystem>();
             AddSystem<PlayerHealthVisualSystem>();
 
             //Avatar control
@@ -48,9 +47,10 @@ namespace Project.Features.Avatar
             AddSystem<SlownessRemoveSystem>();
             AddSystem<StunLifeTimeSystem>();
             AddSystem<HardShieldApplyDamageSystem>();
-            
+
             //Other
-            AddSystem<BlinkIntensitySystem>();
+            // AddSystem<BlinkHurtSystem>();
+            // AddSystem<BlinkIntensitySystem>();
                 
             AddSystem<PlayerDeathSystem>();
             
@@ -81,7 +81,7 @@ namespace Project.Features.Avatar
             health.Get<Owner>().Value = owner;
             health.Get<PlayerHealthOverlay>().Value = entity.Get<PlayerHealth>().Value;
 
-            entity.Get<PlayerDamagedCounter>().Value = 0;
+            // entity.Get<PlayerDamagedCounter>().Value = 0;
 
             health.InstantiateView(_playerHealth);
 

@@ -11,29 +11,26 @@ namespace Project.Common.Views
         public MeshRenderer[] Rends;
         public Color Color;
 
-        public override void OnInitialize() {}
-        public override void OnDeInitialize() {}
+        public override void OnInitialize()
+        {
+        }
+
+        public override void OnDeInitialize()
+        {
+        }
+
         public override void ApplyState(float deltaTime, bool immediately)
         {
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetRotation();
 
-            if (entity.Has<PlayerDamaged>())
-            {
-                var intencity = Math.Min(entity.Read<PlayerDamagedCounter>().Value, 4);
 
-                foreach (var rend in Rends)
-                {
-                    rend.materials[0].EnableKeyword("_EMISSION");
-                    rend.material.SetColor("_EmissionColor", Color * intencity);
-                }
-            }
-            else
+            var intencity = 6 * (entity.Read<PlayerHealthDefault>().Value - entity.Read<PlayerHealth>().Value) /
+                            entity.Read<PlayerHealthDefault>().Value;
+
+            foreach (var rend in Rends)
             {
-                foreach (var rend in Rends)
-                {
-                    rend.materials[0].DisableKeyword("_EMISSION");
-                }
+                rend.material.SetColor("_EmissionColor", Color * intencity);
             }
         }
     }
