@@ -23,6 +23,7 @@ MonoBehaviour:
   - id: 6
   - id: 7
   - id: 8
+  - id: 9
   removeStructComponents: []
   templates: []
   references:
@@ -65,3 +66,8 @@ MonoBehaviour:
         Value: event:/Weapon/Machinegun
     00000008:
       type: {class: SingleBullet, ns: Project.Common.Components, asm: Project.Common}
+    00000009:
+      type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: f2dfc5ed85b29b64e852ad9f4acaff1b, type: 2}
+        SecondaryValue: {fileID: 0}

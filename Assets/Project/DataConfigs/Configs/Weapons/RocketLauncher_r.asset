@@ -22,6 +22,7 @@ MonoBehaviour:
   - id: 5
   - id: 6
   - id: 7
+  - id: 8
   removeStructComponents: []
   templates: []
   references:
@@ -47,16 +48,21 @@ MonoBehaviour:
     00000003:
       type: {class: ReloadTimeDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 3
     00000004:
       type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 1
     00000005:
       type: {class: AmmoCapacityDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 0
+        Value: 5
     00000006:
       type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}
     00000007:
       type: {class: SingleBullet, ns: Project.Common.Components, asm: Project.Common}
+    00000008:
+      type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: 2b42cb1c117518f448450473603868b3, type: 2}
+        SecondaryValue: {fileID: 0}

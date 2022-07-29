@@ -54,24 +54,26 @@ namespace Project.Features.Weapon.Systems
             
             var currentCooldown = entity.Read<CooldownDefault>().Value;
             
-            if (ammo - 1 > 0)
+            ammo--;
+            
+            if (ammo > 0)
             {
                 entity.Get<Cooldown>().Value = currentCooldown;
             }
             else
             {
-                entity.Set(new ModifiersCheck(), ComponentLifetime.NotifyAllSystems);
+                entity.Set(new ModifiersCheck(), ComponentLifetime.NotifyAllSystemsBelow);
 
                 entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;
                 world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Owner());
                 world.GetFeature<EventsFeature>().rightWeaponFired.Execute(entity.Owner());
             }
-            
-            ammo--;
+
+            _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, entity, 1);
             
             SoundUtils.PlaySound(entity);
 
-            entity.Set(new SpawnBullet(), ComponentLifetime.NotifyAllSystems);
+            entity.Set(new SpawnBullet(), ComponentLifetime.NotifyAllSystemsBelow);
         }
     }
 }

@@ -23,6 +23,7 @@ MonoBehaviour:
   - id: 6
   - id: 7
   - id: 8
+  - id: 9
   removeStructComponents: []
   templates: []
   references:
@@ -67,3 +68,8 @@ MonoBehaviour:
       type: {class: Shotgun, ns: Project.Common.Components, asm: Project.Common}
       data:
         AmmoCount: 7
+    00000009:
+      type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: c15e738a8405da64dbf94595a1b7d49c, type: 2}
+        SecondaryValue: {fileID: 0}
