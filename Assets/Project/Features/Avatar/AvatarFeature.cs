@@ -80,9 +80,6 @@ namespace Project.Features.Avatar
             health.SetParent(entity);
             health.Get<Owner>().Value = owner;
             health.Get<PlayerHealthOverlay>().Value = entity.Get<PlayerHealth>().Value;
-
-            // entity.Get<PlayerDamagedCounter>().Value = 0;
-
             health.InstantiateView(_playerHealth);
 
             entity.Get<WeaponEntities>().LeftWeapon = ConstructWeapon(owner.Read<PlayerConfig>().LeftWeaponConfig, entity);

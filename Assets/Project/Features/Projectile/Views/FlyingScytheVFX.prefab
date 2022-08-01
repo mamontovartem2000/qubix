@@ -4908,6 +4908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7755068611718882982}
   - component: {fileID: 3462805736172149047}
+  - component: {fileID: 4115868822946792711}
   m_Layer: 0
   m_Name: FlyingScytheVFX
   m_TagString: Untagged
@@ -4959,3 +4960,33 @@ MonoBehaviour:
     useCache: 0
     useCacheTimeout: 0
     cacheTimeout: 0
+--- !u!114 &4115868822946792711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7755068611718882983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 271613257
+      Data2: 1104494964
+      Data3: -554763853
+      Data4: -1586234946
+    Path: event:/Skills/Bloodlov/SkytheThrow
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 20

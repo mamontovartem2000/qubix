@@ -27,7 +27,7 @@ namespace Project.Features.VFX
 		public Entity SpawnVFX(DataConfig vfxConfig, Entity parent, float lifeTime)
 		{
 			var fx = new Entity("vfx");
-			
+
 			if(!parent.IsAlive()) return fx;
 			
 			vfxConfig.Apply(fx);

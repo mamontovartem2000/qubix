@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
+using UnityEngine;
 
 namespace Project.Features.Skills.Systems.Bloodlov {
 
@@ -43,10 +44,9 @@ namespace Project.Features.Skills.Systems.Bloodlov {
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var avatar = entity.Owner().Avatar();
-            if (!avatar.Has<CyberVampyrModifier>()) return;
+            if (entity.Owner().Avatar().Has<CyberVampyrModifier>()) return;
 
-            avatar.Set(new CyberVampyrModifier());
+            entity.Owner().Avatar().Set(new CyberVampyrModifier());
         }
     }
 }

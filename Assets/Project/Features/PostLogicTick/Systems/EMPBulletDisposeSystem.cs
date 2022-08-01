@@ -56,14 +56,14 @@ namespace Project.Features.PostLogicTick.Systems {
             
             world.GetFeature<EventsFeature>().EMPActive.Execute(owner);
 
-            if (avatar.Has<EMP>())
-            {
-                avatar.Read<EMP>().VFXEntity.Get<LifeTimeLeft>().Value = entity.Read<EMPModifier>().LifeTime;
-            }
-            else
-            {
-                avatar.Get<EMP>().VFXEntity = _vfx.SpawnVFX(entity.Read<EMPModifier>().VFXConfig, avatar, entity.Read<EMPModifier>().LifeTime);
-            }
+            // if (avatar.Has<EMP>()) 
+            // {
+            //     avatar.Read<EMP>().VFXEntity.Get<LifeTimeLeft>().Value = entity.Read<EMPModifier>().LifeTime;
+            // }
+            // else
+            // {
+            //     avatar.Get<EMP>().VFXEntity = _vfx.SpawnVFX(entity.Read<EMPModifier>().VFXConfig, avatar, entity.Read<EMPModifier>().LifeTime);
+            // }
 
             skills.FirstSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;
             skills.SecondSkill.Get<EMP>().LifeTime = entity.Read<EMPModifier>().LifeTime;

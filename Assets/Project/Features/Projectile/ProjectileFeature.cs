@@ -107,15 +107,14 @@ namespace Project.Features.Projectile
             var visual = new Entity("vis");
             visual.SetParent(gun);
             visual.Set(new LinearVisual());
-            
-            SoundUtils.PlaySound(gun);
-
             visual.SetLocalPosition(new Vector3(-0.15f,0f, 0.5f));
             visual.SetLocalRotation(gun.GetLocalRotation());
-
+            
             visual.InstantiateView(gun.Read<LinearPowerModifier>().Damage > 1.4f
                 ? world.RegisterViewSource(gun.Read<ProjectileConfig>().Value.Read<ProjectileAlternativeView>().Value)
                 : world.RegisterViewSource(gun.Read<ProjectileConfig>().Value.Read<ViewModel>().Value));
+            
+            SoundUtils.PlaySound(gun);
         }
 
         public void SpawnMelee(in Entity entity, Entity gun)

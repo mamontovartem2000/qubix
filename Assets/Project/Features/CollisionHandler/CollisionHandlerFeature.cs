@@ -20,7 +20,7 @@ namespace Project.Features.CollisionHandler
         protected override void OnConstruct()
         {
             AddSystem<GrenadeExplosionSystem>();
-            AddSystem<SpawnMineSystem>();
+            // AddSystem<SpawnMineSystem>();
             AddSystem<HealthDispenserSystem>();
             AddSystem<NewPortalDispenserSystem>();
             AddSystem<MineBlinkSystem>();

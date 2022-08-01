@@ -52,14 +52,14 @@ namespace Project.Features.PostLogicTick.Systems
             
             var avatar = owner.Avatar();
             
-            if (avatar.Has<Stun>())
-            {
-                avatar.Read<Stun>().VFXEntity.Get<LifeTimeLeft>().Value = entity.Read<StunModifier>().LifeTime;
-            }
-            else
-            {
-                avatar.Get<Stun>().VFXEntity = _vfx.SpawnVFX(entity.Read<StunModifier>().VFXConfig, avatar, entity.Read<StunModifier>().LifeTime);
-            }
+            // if (avatar.Has<Stun>())
+            // {
+            //     avatar.Read<Stun>().VFXEntity.Get<LifeTimeLeft>().Value = entity.Read<StunModifier>().LifeTime;
+            // }
+            // else
+            // {
+            //     avatar.Get<Stun>().VFXEntity = _vfx.SpawnVFX(entity.Read<StunModifier>().VFXConfig, avatar, entity.Read<StunModifier>().LifeTime);
+            // }
             
             avatar.Get<Stun>().LifeTime = entity.Read<StunModifier>().LifeTime;
             avatar.Read<WeaponEntities>().LeftWeapon.Remove<LeftWeaponShot>();

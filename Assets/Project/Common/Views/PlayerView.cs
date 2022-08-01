@@ -23,14 +23,13 @@ namespace Project.Common.Views
         {
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetRotation();
-
-
-            var intencity = 6 * (entity.Read<PlayerHealthDefault>().Value - entity.Read<PlayerHealth>().Value) /
+            
+            var intensity = 6 * (entity.Read<PlayerHealthDefault>().Value - entity.Read<PlayerHealth>().Value) /
                             entity.Read<PlayerHealthDefault>().Value;
 
             foreach (var rend in Rends)
             {
-                rend.material.SetColor("_EmissionColor", Color * intencity);
+                rend.material.SetColor("_EmissionColor", Color * intensity);
             }
         }
     }

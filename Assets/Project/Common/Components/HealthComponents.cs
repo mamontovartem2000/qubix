@@ -6,7 +6,7 @@ namespace Project.Common.Components
     {
         public float Value;
     }
-
+    
     public struct PlayerDead : IComponent
     {
         public fp3 DeathPosition;
