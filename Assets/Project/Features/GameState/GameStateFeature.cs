@@ -18,6 +18,7 @@ namespace Project.Features.GameState
             AddSystem<GameRunSystem>();
 	        AddSystem<GameFinishedSystem>();
             AddSystem<TimerStartSystem>();
+            //AddSystem<RunTimerSystem>();
         }
 
         protected override void OnDeconstruct() { }

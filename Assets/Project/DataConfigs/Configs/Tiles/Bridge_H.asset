@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: Flag
+  m_Name: Bridge_H
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
@@ -23,20 +23,19 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: TileRotation, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: FreeAndWalkableMap, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value:
-          x:
-            m_rawValue: 0
-          y:
-            m_rawValue: 0
-          z:
-            m_rawValue: 0
+        FreeMapValue: 1
+        WalkableMapValue: 1
     00000001:
-      type: {class: CollisionStatic, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: TileName, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: Bridge_H-Tile
     00000002:
       type: {class: TileAlternativeView, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: 4619573818923134876, guid: f42e0187619dfc14f9aa748458dcaa9b, type: 3}
+        Value: {fileID: -3464907218300655706, guid: f8da85df298d1864985bc9211030cebb, type: 3}
     00000003:
-      type: {class: Enviroment, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: BridgeTile, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        IsHorizontal: 1

@@ -26,12 +26,12 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 
     public sealed class CatchFlagSystem : ISystemFilter
     {
-        private FlagCaptureFeature feature;
+        private FlagCaptureFeature _feature;
         public World world { get; set; }
 
         void ISystemBase.OnConstruct()
         {
-            this.GetFeature(out this.feature);
+            this.GetFeature(out _feature);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -64,14 +64,22 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
             }
             else
             {
-                player.Set(new CarriesTheFlag { Team = entity.Read<TeamTag>().Value });
+                var playerFlag = _feature.SpawnFlagOnPlayer();
+                playerFlag.SetParent(player.Avatar());
+                playerFlag.SetLocalPosition(fp3.zero);
+                playerFlag.SetLocalRotation(fpquaternion.zero);
+                
+                player.Set(new CarriesTheFlag { Team = entity.Read<TeamTag>().Value, Flag = playerFlag});
                 player.Avatar().Set(new HealingBuff
                 {
                     TimeInterval = Consts.GameModes.FlagCapture.Buffs.HEALING_TIME_INTERVAL,
                     HealsPercent = Consts.GameModes.FlagCapture.Buffs.HEALTH_REGENERATION_PERCENTAGE
                 });
+                
                 entity.Destroy();
             }
         }
+        
+        
     }
 }

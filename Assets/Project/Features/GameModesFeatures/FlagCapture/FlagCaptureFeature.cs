@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using ME.ECS.Collections;
 using Project.Common.Utilities;
 
 namespace Project.Features.GameModesFeatures
@@ -31,30 +32,39 @@ namespace Project.Features.GameModesFeatures
     public sealed class FlagCaptureFeature : Feature
     {
         public MonoBehaviourView Flag;
-        private ViewId _flagId;
+        public MonoBehaviourView PlayerFlag;
 
+        private ViewId _flagId, _playerFlagId;
+        
         protected override void OnConstruct()
         {
             _flagId = world.RegisterViewSource(Flag);
+            _playerFlagId = world.RegisterViewSource(PlayerFlag);
 
             AddSystem<FlagSpawnSystem>();
+            AddSystem<SettingFlagSystem>();
             AddSystem<CatchFlagSystem>();
             AddSystem<DropFlagSystem>();
             AddSystem<FlagReturnSystem>();
+            AddSystem<EndGameSystem>();
         }
 
         protected override void OnConstructLate() => SpawnStartFlags();
-
+        protected override void OnDeconstruct() { }
+        
         private void SpawnStartFlags()
         {
+            DictionaryCopyable<int, int> score = new DictionaryCopyable<int, int>();
+            
             for (int i = 0; i < Consts.GameModes.FlagCapture.FLAG_COUNT; i++)
             {
+                score.Add(i + 1, 0);
                 var flag = SpawnFlag(i + 1);
                 flag.Set(new FlagNeedRespawn(), ComponentLifetime.NotifyAllSystems);
             }
+            
+            world.SetSharedData(new CapturedFlagsScore { Score = score });
         }
-
-        protected override void OnDeconstruct() { }
 
         public Entity SpawnFlag(int team)
         {
@@ -64,6 +74,13 @@ namespace Project.Features.GameModesFeatures
             entity.Set(new TeamTag { Value = team } );
             entity.InstantiateView(_flagId);
 
+            return entity;
+        }
+        
+        public Entity SpawnFlagOnPlayer()
+        {
+            var entity = new Entity("FlagOnPlayer");
+            entity.InstantiateView(_playerFlagId);
             return entity;
         }
     }

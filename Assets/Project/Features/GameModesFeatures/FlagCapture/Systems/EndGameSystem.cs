@@ -1,5 +1,5 @@
 ﻿using ME.ECS;
-using Project.Common.Utilities;
+using Project.Common.Components;
 
 namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 {
@@ -13,7 +13,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
     using Modules;
     using Systems;
     using Markers;
-    using Project.Common.Components;
+
 #pragma warning restore
 
 #if ECS_COMPILE_IL2CPP_OPTIONS
@@ -23,9 +23,10 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 #endif
     #endregion
 
-    public sealed class FlagReturnSystem : ISystemFilter
+    public sealed class EndGameSystem : ISystemFilter
     {
         private FlagCaptureFeature feature;
+
         public World world { get; set; }
 
         void ISystemBase.OnConstruct()
@@ -40,24 +41,19 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         int ISystemFilter.jobsBatchCount => 64;
 #endif
         Filter ISystemFilter.filter { get; set; }
+
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-FlagReturn")
-                .With<FlagTag>()
-                .With<DroppedFlag>()
+            return Filter.Create("Filter-EndGameSystem")
+                .With<EndOfGameStage>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var time = ref entity.Get<DroppedFlag>().WaitingTime;
-
-            time += deltaTime;
-
-            if (time > Consts.GameModes.FlagCapture.DROPPED_FLAG_LIFETIME)
+            if (world.HasSharedData<GameStageOne>())
             {
-                entity.Set(new FlagNeedRespawn());
-                entity.Remove<DroppedFlag>();
+                
             }
         }
     }

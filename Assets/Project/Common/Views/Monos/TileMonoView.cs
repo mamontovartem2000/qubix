@@ -33,8 +33,8 @@ namespace Project.Common.Views.Monos
 					_init = true;
 				}
 				
-				var intencity = entity.Read<GlowTile>().Amount;
-				mat.SetColor(EmissionColor, matColor * (intencity * 0.5f));
+				var intensity = entity.Read<GlowTile>().Amount;
+				mat.SetColor(EmissionColor, matColor * (intensity * 0.5f));
 			}
 		}
 	}

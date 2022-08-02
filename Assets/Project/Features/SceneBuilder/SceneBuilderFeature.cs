@@ -2,7 +2,6 @@
 using ME.ECS.Collections;
 using ME.ECS.DataConfigs;
 using ME.ECS.Transform;
-using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Modules.Network;
 using System;
@@ -23,34 +22,31 @@ namespace Project.Features.SceneBuilder
         [SerializeField] private TextAsset _testObjects;
         [Header("Reworked Links")]
         
-        public ViewWithNumber[] MonoViewSources;
-        public DataConfig[] PropsConfigs;
-        private DictionaryCopyable<int, ViewId> _tileViewIds;
-        private ViewId[] _propsViewIds;
+        public DataConfigWithId[] TilesConfigs;
+        public DataConfigWithId[] PropsConfigs;
+        private DictionaryCopyable<int, DataConfig> _tileConfigsDictionary;
+        private DictionaryCopyable<int, DataConfig> _propsConfigsDictionary;
 
-        protected override void OnConstruct() => RegisterViews();
+        protected override void OnConstruct() => ConfigsToDictionary();
         protected override void OnConstructLate() => PrepareMaps();
         protected override void OnDeconstruct() { }
 
-        private void RegisterViews()
+        private void ConfigsToDictionary()
         {
-            _propsViewIds = new ViewId[PropsConfigs.Length];
-            _tileViewIds = new DictionaryCopyable<int, ViewId>();
+            _tileConfigsDictionary = new DictionaryCopyable<int, DataConfig>();
+            _propsConfigsDictionary = new DictionaryCopyable<int, DataConfig>();
 
-            foreach (var view in MonoViewSources)
+            foreach (var tile in TilesConfigs)
             {
-                _tileViewIds.Add(view.Number, world.RegisterViewSource(view.TileView));
+                _tileConfigsDictionary.Add(tile.Id, tile.Config);
             }
-
-            for (int i = 1; i < PropsConfigs.Length; i++)
+            
+            foreach (var prop in PropsConfigs)
             {
-                if (PropsConfigs[i] != null)
-                {
-                    _propsViewIds[i] = world.RegisterViewSource(PropsConfigs[i].Read<TileAlternativeView>().Value);
-                }
-
+                _propsConfigsDictionary.Add(prop.Id, prop.Config);
             }
         }
+        
         private void PrepareMaps()
         {
             GameMapRemoteData floorMap = null;
@@ -78,172 +74,101 @@ namespace Project.Features.SceneBuilder
             world.SetSharedData(new MapInitialized());
         }
 
-        private void DrawMap(byte[] tiles)
+         private void DrawMap(byte[] tiles)
         {
             var freeMap = PoolArray<byte>.Spawn(tiles.Length);
             var walkableMap = PoolArray<byte>.Spawn(tiles.Length);
-
             ListCopyable<int> portalMap = new ListCopyable<int>();
 
             for (int i = 0; i < tiles.Length; i++)
             {
-                Entity entity = Entity.Empty;
+                var tileIndex = tiles[i];
+                var config = _tileConfigsDictionary[tileIndex];
                 
-                switch (tiles[i])
+                var mapsValues = config.Read<FreeAndWalkableMap>();
+                freeMap[i] = mapsValues.FreeMapValue;
+                walkableMap[i] = mapsValues.WalkableMapValue;
+                
+                if (tileIndex == 0 || tileIndex == 1) continue;
+
+                if (tileIndex == 9)
                 {
-                    case 0:
-                        {
-                            freeMap[i] = 1;
-                            walkableMap[i] = 0;
-                            break;
-                        }
-                    case 1:
-                        {
-                            freeMap[i] = 1;
-                            walkableMap[i] = 1;
-                            break;
-                        }
-                    case 2:
-                        {
-                            entity = new Entity("Platform-Tile");
-                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
-                            freeMap[i] = 0;
-                            walkableMap[i] = 1;
-                            break;
-                        }
-                    case 8:
-                        {
-                            entity = new Entity("Dispencer-Tile");
-                            entity.Set(new DispenserTag { TimerDefault = 8, Timer = 8 });
-                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
-                            freeMap[i] = 1;
-                            walkableMap[i] = 1;
-                            break;
-                        }
-                    case 9:
-                        {
-                            entity = new Entity("Portal-Tile");
-                            entity.Set(new PortalDispenserTag { TimerDefault = 0.5f, Timer = 0.5f });
-                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
-                            freeMap[i] = 1;
-                            walkableMap[i] = 1;
-                            portalMap.Add(i);
-                            break;
-                        }
-                    case 10:
-                        {
-                            entity = new Entity("Bridge-Tile");
-                            entity.Get<BridgeTile>().Value = true;
-                            freeMap[i] = 1;
-                            walkableMap[i] = 1;
-                            break;
-                        }
-                    case 11:
-                        {
-                            entity = new Entity("Bridge-Tile");
-                            entity.Get<BridgeTile>().Value = false;
-                            freeMap[i] = 1;
-                            walkableMap[i] = 1;
-                            break;
-                        }
-                    case 12:
-                        {
-                            entity = new Entity("bBoard");
-                            freeMap[i] = 1;
-                            walkableMap[i] = 0;
-                            break;
-                        }
-                    case 101:
-                    case 102:
-                        {
-                            int team = 0;
-                            if (tiles[i] == 101)
-                                team = 1;
-                            else if (tiles[i] == 102)
-                                team = 2;
-                            
-                            entity = new Entity("Flag_Spawn-Tile");
-                            entity.Set(new FlagSpawnerTag());
-                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
-                            entity.Set(new TeamTag { Value = team });
-                            
-                            freeMap[i] = 1;
-                            walkableMap[i] = 1;
-                            break;
-                        }
-                    default:
-                        {
-                            entity = new Entity("Platform-Tile");
-                            entity.Set(new GlowTile { Direction = false, Amount = world.GetRandomRange(1f, 2f) });
-                            freeMap[i] = 0;
-                            walkableMap[i] = 1;
-                            break;
-                        }
+                    portalMap.Add(i);
                 }
                 
-                if (entity == Entity.Empty) continue;
+                Entity entity = new Entity(config.Read<TileName>().Value);
+                config.Apply(entity);
+                
+                if (entity.Has<GlowTile>())
+                {
+                    ref var glow = ref entity.Get<GlowTile>();
+                    glow.Amount = world.GetRandomRange(glow.AmountRange.x, glow.AmountRange.y);
+                }
 
-                entity.InstantiateView(_tileViewIds[tiles[i]]);
+                var viewId = world.RegisterViewSource(config.Read<TileAlternativeView>().Value);
+                entity.InstantiateView(viewId);
                 entity.SetPosition(SceneUtils.IndexToPosition(i));
             }
-
+            
             world.GetSharedData<MapComponents>().FreeMap = freeMap;
             world.GetSharedData<MapComponents>().WalkableMap = walkableMap;
             world.GetSharedData<MapComponents>().PortalsMap = portalMap.innerArray;
         }
+         
+         private void DrawMapObjects(byte[] mapInBytes)
+         {
+             ListCopyable<int> redPool = new ListCopyable<int>(); //TODO: if empty, anyway has empty elements and count > 0
+             ListCopyable<int> bluePool = new ListCopyable<int>();
 
-        private void DrawMapObjects(byte[] mapInBytes)
-        {
-            ListCopyable<int> redPool = new ListCopyable<int>();
-            ListCopyable<int> bluePool = new ListCopyable<int>();
+             for (int i = 0; i < mapInBytes.Length; i++)
+             {
+                 var mapElement = mapInBytes[i];
 
-            for (int i = 0; i < mapInBytes.Length; i++)
-            {
-                var mapElement = mapInBytes[i];
+                 if (mapElement == 0)
+                     continue;
+                 
+                 if (mapElement == 101)
+                 {
+                     redPool.Add(i);
+                     continue;
+                 }
 
-                if (mapElement == 101)
-                {
-                    redPool.Add(i);
-                    continue;
-                }
+                 if (mapElement == 102)
+                 {
+                     bluePool.Add(i);
+                     continue;
+                 }
+                 
+                 var config = _propsConfigsDictionary[mapElement];
+                 var viewId = world.RegisterViewSource(config.Read<TileAlternativeView>().Value);
+                 var entity = new Entity("Prop");
 
-                if (mapElement == 102)
-                {
-                    bluePool.Add(i);
-                    continue;
-                }
+                 config.Apply(entity);
+                 entity.InstantiateView(viewId);
+                 entity.SetPosition(SceneUtils.IndexToPosition(i));
+                 entity.SetRotation(config.Read<Rotation>().value);
+                 entity.Get<Owner>().Value = entity;
                 
-                if (mapElement == 0) continue;
-                if (PropsConfigs[mapElement] == null) continue;
-
-                var entity = new Entity("Prop");
-
-                PropsConfigs[mapElement].Apply(entity);
-                entity.InstantiateView(_propsViewIds[mapElement]);
-                entity.SetPosition(SceneUtils.IndexToPosition(i));
-                entity.SetRotation(PropsConfigs[mapElement].Read<Rotation>().value);
-                entity.Get<Owner>().Value = entity;
+                 if (entity.Has<DestructibleView>())
+                 {
+                     entity.Get<PlayerHealth>().Value = Consts.Scene.DESTRUCTUBLE_OBJ_HEALTH;
+                     entity.Set(new DestructibleTag());
+                 }
                 
-                if (entity.Has<DestructibleView>())
-                {
-                    entity.Get<PlayerHealth>().Value = Consts.Scene.DESTRUCTUBLE_OBJ_HEALTH;
-                    entity.Set(new DestructibleTag());
-                }
-                
-                entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(2f, 4f)});
+                 entity.Set(new GlowTile {Direction = false, Amount = world.GetRandomRange(2f, 4f)});
 
-                world.GetSharedData<MapComponents>().BlueTeamSpawnPoints = bluePool.innerArray;
-                world.GetSharedData<MapComponents>().RedTeamSpawnPoints = redPool.innerArray;
+                 world.GetSharedData<MapComponents>().BlueTeamSpawnPoints = bluePool.innerArray;
+                 world.GetSharedData<MapComponents>().RedTeamSpawnPoints = redPool.innerArray;
 
-                SceneUtils.ModifyWalkable(SceneUtils.IndexToPosition(i), false);
-            }
-        }
+                 SceneUtils.ModifyWalkable(SceneUtils.IndexToPosition(i), false);
+             }
+         }
     }
 
     [Serializable]
-    public struct ViewWithNumber
+    public struct DataConfigWithId
     {
-        public int Number;
-        public MonoBehaviourView TileView;
+        public int Id;
+        public DataConfig Config;
     }
 }

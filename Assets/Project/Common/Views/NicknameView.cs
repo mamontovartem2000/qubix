@@ -29,7 +29,7 @@ namespace Project.Common.Views
             
             _nick.text = player.Read<PlayerTag>().Nickname;
 
-            if (NetworkData.GameMode == GameModes.deathmatch)
+            if (NetworkData.GameMode != GameModes.deathmatch)
             {
                 var team = player.Read<TeamTag>().Value;
 

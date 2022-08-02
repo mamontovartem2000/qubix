@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
+  m_Name: FlagSpawner_Blue
+  m_EditorClassIdentifier: 
+  sharedGroupId: 0
+  structComponents:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  - id: 4
+  - id: 5
+  removeStructComponents: []
+  templates: []
+  references:
+    version: 1
+    00000000:
+      type: {class: FreeAndWalkableMap, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        FreeMapValue: 1
+        WalkableMapValue: 1
+    00000001:
+      type: {class: TileName, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: Flag_Spawn_Blue-Tile
+    00000002:
+      type: {class: GlowTile, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Direction: 0
+        AmountRange: {x: 1, y: 2}
+        Amount: 0
+    00000003:
+      type: {class: TileAlternativeView, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 3446524670851130247, guid: 6bf1a182e2f7df146a93fdeec303a9dc, type: 3}
+    00000004:
+      type: {class: FlagSpawnerTag, ns: Project.Common.Components, asm: Project.Common}
+    00000005:
+      type: {class: TeamTag, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 2

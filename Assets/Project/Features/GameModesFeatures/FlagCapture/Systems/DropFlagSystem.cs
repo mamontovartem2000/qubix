@@ -49,14 +49,18 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
                 .Push();
         }
 
-        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
+        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            Entity flag = _feature.SpawnFlag(entity.Read<CarriesTheFlag>().Team);
-            flag.Set(new DroppedFlag());
-            entity.Remove<CarriesTheFlag>();
+            var carry = entity.Read<CarriesTheFlag>();
+            carry.Flag.Destroy();
+            
             var pos = entity.Read<PlayerDead>().DeathPosition;
+            Entity flag = _feature.SpawnFlag(carry.Team);
+            flag.Set(new DroppedFlag());
             flag.SetPosition(pos);
             SceneUtils.ModifyFree(pos, false);
+            
+            entity.Remove<CarriesTheFlag>();
         }
     }
 }

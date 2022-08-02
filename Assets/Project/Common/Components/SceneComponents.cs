@@ -24,7 +24,7 @@ namespace Project.Common.Components
 
 	public struct BridgeTile : IComponent
 	{
-		public bool Value;
+		public bool IsHorizontal;
 	}
 	
 	public struct Pallette : IComponent {}
@@ -51,7 +51,7 @@ namespace Project.Common.Components
 	
 	public struct MineBlinkTimerDefault : IComponent
 	{
-			public float Value;
+		public float Value;
 	}
 
 	public struct MineDamage : IComponent
@@ -59,24 +59,27 @@ namespace Project.Common.Components
 		public float Value;
 	}
 
-	public struct FreeMap : IComponent
+	public struct FreeAndWalkableMap : IComponent
 	{
-		public int Value;
+		public byte FreeMapValue;
+		public byte WalkableMapValue;
 	}
 	
-	public struct WalkableMap : IComponent
+	public struct TileName : IComponent
 	{
-		public int Value;
+		public string Value;
 	}
 
 	public struct GlowTile : IComponent
 	{
 		public bool Direction;
-		public float Amount;
+		public Vector2 AmountRange;
+		[HideInInspector] public float Amount;
 	}
 
 	public struct GlowTileRandomAmount : IComponent
 	{
 		public float Amount;
 	}
+	
 }

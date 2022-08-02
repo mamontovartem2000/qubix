@@ -24,6 +24,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BridgeTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BulletHit>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CapturedFlagsScore>(false, false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CarriesTheFlag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Collided>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CollisionDynamic>(true, true, false, false, false, false, false, false);
@@ -52,6 +53,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPEffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPStormAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EndOfGameStage>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Enviroment>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplodeSquaredRadius>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplosionSound>(false, true, false, false, false, false, false, false);
@@ -65,12 +67,15 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldModifier>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.FreeMap>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.FreeAndWalkableMap>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Freeze>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FreezeModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FreezeStormАffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameFinished>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GamePaused>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStageOne>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStageThree>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStageTwo>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameTimer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GlowTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GlowTileRandomAmount>(false, true, false, false, false, false, false, false);
@@ -188,6 +193,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileAlternativeView>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TileName>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileRotation>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
@@ -195,7 +201,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.VFXConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.VFXTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ViewModel>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WalkableMap>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
@@ -224,6 +229,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BridgeTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BulletHit>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.CapturedFlagsScore>(false, false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CarriesTheFlag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Collided>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.CollisionDynamic>(true, true, false, false, false, false, false, false);
@@ -252,6 +258,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPEffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPStormAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EndOfGameStage>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Enviroment>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplodeSquaredRadius>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplosionSound>(false, true, false, false, false, false, false, false);
@@ -265,12 +272,15 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldModifier>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.FreeMap>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.FreeAndWalkableMap>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Freeze>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FreezeModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FreezeStormАffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameFinished>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GamePaused>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStageOne>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStageThree>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStageTwo>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameTimer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GlowTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GlowTileRandomAmount>(false, true, false, false, false, false, false, false);
@@ -388,6 +398,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileAlternativeView>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TileName>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileRotation>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Trajectory>(false, true, false, false, false, false, false, false);
@@ -395,7 +406,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.VFXConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.VFXTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ViewModel>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.WalkableMap>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
@@ -419,6 +429,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.BridgeTile>(false);
             noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.BuffTrigger>(true);
             structComponentsContainer.Validate<Project.Common.Components.BulletHit>(false);
+            structComponentsContainer.ValidateCopyable<Project.Common.Components.CapturedFlagsScore>(false);
             structComponentsContainer.Validate<Project.Common.Components.CarriesTheFlag>(false);
             structComponentsContainer.Validate<Project.Common.Components.Collided>(false);
             structComponentsContainer.Validate<Project.Common.Components.CollisionDynamic>(true);
@@ -447,6 +458,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.EMPEffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.EMPModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.EMPStormAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.EndOfGameStage>(true);
             structComponentsContainer.Validate<Project.Common.Components.Enviroment>(true);
             structComponentsContainer.Validate<Project.Common.Components.ExplodeSquaredRadius>(false);
             structComponentsContainer.Validate<Project.Common.Components.ExplosionSound>(false);
@@ -460,12 +472,15 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.FlagTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.ForceShieldAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.ForceShieldModifier>(false);
-            structComponentsContainer.Validate<Project.Common.Components.FreeMap>(false);
+            structComponentsContainer.Validate<Project.Common.Components.FreeAndWalkableMap>(false);
             structComponentsContainer.Validate<Project.Common.Components.Freeze>(false);
             structComponentsContainer.Validate<Project.Common.Components.FreezeModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.FreezeStormАffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.GameFinished>(true);
             structComponentsContainer.Validate<Project.Common.Components.GamePaused>(true);
+            structComponentsContainer.Validate<Project.Common.Components.GameStageOne>(false);
+            structComponentsContainer.Validate<Project.Common.Components.GameStageThree>(false);
+            structComponentsContainer.Validate<Project.Common.Components.GameStageTwo>(false);
             structComponentsContainer.Validate<Project.Common.Components.GameTimer>(false);
             structComponentsContainer.Validate<Project.Common.Components.GlowTile>(false);
             structComponentsContainer.Validate<Project.Common.Components.GlowTileRandomAmount>(false);
@@ -583,6 +598,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.TeamTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.TeleportPlayer>(false);
             structComponentsContainer.Validate<Project.Common.Components.TileAlternativeView>(false);
+            structComponentsContainer.Validate<Project.Common.Components.TileName>(false);
             structComponentsContainer.Validate<Project.Common.Components.TileRotation>(false);
             structComponentsContainer.Validate<Project.Common.Components.TileView>(false);
             structComponentsContainer.Validate<Project.Common.Components.Trajectory>(false);
@@ -590,7 +606,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.VFXConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.VFXTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.ViewModel>(false);
-            structComponentsContainer.Validate<Project.Common.Components.WalkableMap>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponAim>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponEntities>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponPosition>(false);
@@ -619,6 +634,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.BridgeTile>(false);
             entity.ValidateDataOneShot<Project.Common.Components.BuffTrigger>(true);
             entity.ValidateData<Project.Common.Components.BulletHit>(false);
+            entity.ValidateDataCopyable<Project.Common.Components.CapturedFlagsScore>(false);
             entity.ValidateData<Project.Common.Components.CarriesTheFlag>(false);
             entity.ValidateData<Project.Common.Components.Collided>(false);
             entity.ValidateData<Project.Common.Components.CollisionDynamic>(true);
@@ -647,6 +663,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.EMPEffect>(true);
             entity.ValidateData<Project.Common.Components.EMPModifier>(false);
             entity.ValidateData<Project.Common.Components.EMPStormAffect>(true);
+            entity.ValidateData<Project.Common.Components.EndOfGameStage>(true);
             entity.ValidateData<Project.Common.Components.Enviroment>(true);
             entity.ValidateData<Project.Common.Components.ExplodeSquaredRadius>(false);
             entity.ValidateData<Project.Common.Components.ExplosionSound>(false);
@@ -660,12 +677,15 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.FlagTag>(true);
             entity.ValidateData<Project.Common.Components.ForceShieldAffect>(true);
             entity.ValidateData<Project.Common.Components.ForceShieldModifier>(false);
-            entity.ValidateData<Project.Common.Components.FreeMap>(false);
+            entity.ValidateData<Project.Common.Components.FreeAndWalkableMap>(false);
             entity.ValidateData<Project.Common.Components.Freeze>(false);
             entity.ValidateData<Project.Common.Components.FreezeModifier>(false);
             entity.ValidateData<Project.Common.Components.FreezeStormАffect>(true);
             entity.ValidateData<Project.Common.Components.GameFinished>(true);
             entity.ValidateData<Project.Common.Components.GamePaused>(true);
+            entity.ValidateData<Project.Common.Components.GameStageOne>(false);
+            entity.ValidateData<Project.Common.Components.GameStageThree>(false);
+            entity.ValidateData<Project.Common.Components.GameStageTwo>(false);
             entity.ValidateData<Project.Common.Components.GameTimer>(false);
             entity.ValidateData<Project.Common.Components.GlowTile>(false);
             entity.ValidateData<Project.Common.Components.GlowTileRandomAmount>(false);
@@ -783,6 +803,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.TeamTag>(false);
             entity.ValidateData<Project.Common.Components.TeleportPlayer>(false);
             entity.ValidateData<Project.Common.Components.TileAlternativeView>(false);
+            entity.ValidateData<Project.Common.Components.TileName>(false);
             entity.ValidateData<Project.Common.Components.TileRotation>(false);
             entity.ValidateData<Project.Common.Components.TileView>(false);
             entity.ValidateData<Project.Common.Components.Trajectory>(false);
@@ -790,7 +811,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.VFXConfig>(false);
             entity.ValidateData<Project.Common.Components.VFXTag>(true);
             entity.ValidateData<Project.Common.Components.ViewModel>(false);
-            entity.ValidateData<Project.Common.Components.WalkableMap>(false);
             entity.ValidateData<Project.Common.Components.WeaponAim>(false);
             entity.ValidateData<Project.Common.Components.WeaponEntities>(false);
             entity.ValidateData<Project.Common.Components.WeaponPosition>(false);

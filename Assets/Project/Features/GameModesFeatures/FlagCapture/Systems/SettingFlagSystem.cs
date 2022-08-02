@@ -1,5 +1,5 @@
 ﻿using ME.ECS;
-using Project.Common.Utilities;
+using Project.Common.Components;
 
 namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 {
@@ -13,7 +13,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
     using Modules;
     using Systems;
     using Markers;
-    using Project.Common.Components;
+
 #pragma warning restore
 
 #if ECS_COMPILE_IL2CPP_OPTIONS
@@ -23,9 +23,10 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 #endif
     #endregion
 
-    public sealed class FlagReturnSystem : ISystemFilter
+    public sealed class SettingFlagSystem : ISystemFilter
     {
         private FlagCaptureFeature feature;
+
         public World world { get; set; }
 
         void ISystemBase.OnConstruct()
@@ -40,24 +41,38 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         int ISystemFilter.jobsBatchCount => 64;
 #endif
         Filter ISystemFilter.filter { get; set; }
+
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-FlagReturn")
+            return Filter.Create("Filter-Setting")
                 .With<FlagTag>()
-                .With<DroppedFlag>()
+                .With<Collided>()
+                .With<FlagOnSpawn>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var time = ref entity.Get<DroppedFlag>().WaitingTime;
+            var player = entity.Read<Collided>().ApplyTo;
 
-            time += deltaTime;
-
-            if (time > Consts.GameModes.FlagCapture.DROPPED_FLAG_LIFETIME)
+            if (player == Entity.Empty) return;
+            if (player.Has<CarriesTheFlag>() == false) return;
+            
+            var playerTeam = player.Read<TeamTag>().Value;
+            
+            if (playerTeam == entity.Read<TeamTag>().Value)
             {
-                entity.Set(new FlagNeedRespawn());
-                entity.Remove<DroppedFlag>();
+                ref var score = ref world.GetSharedData<CapturedFlagsScore>().Score;
+                score[playerTeam] += 1;
+                
+                Entity newFlag = feature.SpawnFlag(player.Read<CarriesTheFlag>().Team);
+                newFlag.Set(new FlagNeedRespawn(), ComponentLifetime.NotifyAllSystems);
+                
+                var carry = player.Read<CarriesTheFlag>();
+                carry.Flag.Destroy();
+
+                player.Remove<CarriesTheFlag>();
+                entity.Remove<Collided>();
             }
         }
     }
