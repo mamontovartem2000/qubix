@@ -15,7 +15,7 @@ namespace Project.Features.Skills.Systems.Solaray {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class FreezeStormSkillSystem : ISystemFilter {
+    public sealed class StormSkillSystem : ISystemFilter {
         
         private SkillsFeature feature;
         private VFXFeature _vfx;

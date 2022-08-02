@@ -49,10 +49,11 @@ namespace Project.Features.Avatar.Systems
             var from = apply.ApplyFrom;
             var to = apply.ApplyTo;
             var damage = apply.Damage;
+            var dealtDamage = damage;
             ref var health = ref to.Get<PlayerHealth>().Value;
 
             if (to.Has<ForceShieldModifier>()) return;
-            
+
             if (from.Has<PlayerAvatar>())
             {
                 if (from.Read<TeamTag>().Value == to.Owner().Read<TeamTag>().Value) return;
@@ -62,18 +63,7 @@ namespace Project.Features.Avatar.Systems
                 Worlds.current.GetFeature<EventsFeature>().PlaySoundPrivate.Execute(from.Avatar());
             }
 
-            // if (health/apply.ApplyTo.Read<PlayerHealthDefault>().Value < 0.65f) // TODO: hueta move this
-            // {
-            //     
-            //     to.Get<PlayerDamagedCounter>().Value += 0.1f;
-            // }
-            
-            // to.Set(new PlayerDamaged { Value = 1f });
-            
             health -= damage;
-            // _vfx.SpawnVFX(to.Owner().Read<VFXConfig>().SecondaryValue, to, 2);
-
-            var dealtDamage = damage;
 
             if (health <= 0)
             {
@@ -86,7 +76,6 @@ namespace Project.Features.Avatar.Systems
             
             world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(from);
             world.GetFeature<EventsFeature>().TabulationScreenNewPlayerStats.Execute(from);
-
             world.GetFeature<EventsFeature>().HealthChanged.Execute(to.Owner());
         }
     }

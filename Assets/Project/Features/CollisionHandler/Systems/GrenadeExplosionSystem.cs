@@ -60,10 +60,11 @@ namespace Project.Features.CollisionHandler.Systems
                 var debuff = new Entity("debuff");
                 debuff.Get<Owner>().Value = entity.Read<Owner>().Value;
                 entity.Read<SecondaryDamage>().Value.Apply(debuff);
+                Debug.Log(entity.Read<SecondaryDamage>().Value);
                 debuff.Set(new ProjectileActive());
                 debuff.Set(new CollisionDynamic());
-                debuff.Set(new LifeTimeLeft { Value = 0.5f});
-                
+                debuff.Set(new LifeTimeLeft { Value = 0.3f});
+                // Debug.Log("hit");
                 debuff.SetPosition(player.GetPosition());
             }
             
