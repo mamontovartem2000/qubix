@@ -42,7 +42,7 @@ namespace Project.Features.Avatar.Systems {
         {
             entity.Get<Slowness>().LifeTime -= deltaTime;
            
-			if (entity.Read<Slowness>().LifeTime > 0f) return;
+            if (entity.Read<Slowness>().LifeTime > 0f) return;
 
 			entity.Remove<Slowness>();
         }

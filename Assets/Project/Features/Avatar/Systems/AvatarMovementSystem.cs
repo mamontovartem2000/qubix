@@ -69,8 +69,6 @@ namespace Project.Features.Avatar.Systems
 				currentSpeed *= Consts.Movement.LOCK_SPEED_RATIO;
 			}
 			
-			Debug.Log(currentSpeed);
-
 			var pos = entity.GetPosition();
 			var target = entity.Read<PlayerMoveTarget>().Value;
 			ref readonly var hover = ref entity.Read<Hover>().Amount;
