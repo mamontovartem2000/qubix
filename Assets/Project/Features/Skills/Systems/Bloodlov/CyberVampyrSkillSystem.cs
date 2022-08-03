@@ -44,6 +44,7 @@ namespace Project.Features.Skills.Systems.Bloodlov {
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
+            if (entity.Owner().Avatar().IsAlive() == false) return;
             if (entity.Owner().Avatar().Has<CyberVampyrModifier>()) return;
 
             entity.Owner().Avatar().Set(new CyberVampyrModifier());

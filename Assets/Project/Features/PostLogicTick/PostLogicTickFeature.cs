@@ -17,6 +17,7 @@ namespace Project.Features.PostLogicTick
 			AddSystem<StormDisposeSystem>();
 			AddSystem<StunBulletDisposeSystem>();
 			AddSystem<EMPBulletDisposeSystem>();
+			AddSystem<SlownessBulletDisposeSystem>();
 			AddSystem<FreezeBulletDisposeSystem>();
 			AddSystem<CritBulletDisposeSystem>();
 			
