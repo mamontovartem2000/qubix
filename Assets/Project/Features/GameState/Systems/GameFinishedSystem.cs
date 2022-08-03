@@ -37,6 +37,18 @@ namespace Project.Features.GameState.Systems
         {
             if (!world.HasSharedData<GameFinished>() || _finished) return;
 
+            if (NetworkData.IsLocalGame)
+            {
+                foreach (var player in _playerFilter)
+                {
+                    world.GetFeature<EventsFeature>().Victory.Execute(player);
+                }
+                
+                _finished = true;
+                NetworkEvents.DestroyWorld?.Invoke();
+                return;
+            }
+            
             switch (NetworkData.GameMode)
             {
                 case GameModes.deathmatch:

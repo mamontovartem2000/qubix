@@ -19,11 +19,18 @@ namespace Project.Features.GameState.Systems
 
 		void IAdvanceTick.AdvanceTick(in float deltaTime)
 		{
-			if (world.HasSharedData<MapInitialized>() && world.HasSharedData<GameStageOne>())
+			// if (world.HasSharedData<MapInitialized>() && world.HasSharedData<GameStageOne>())
+			// {
+			// 	Entity timerEntity = new Entity("Timer");
+			// 	timerEntity.Get<GameTimer>().Value = Consts.Main.GAME_TIMER_SECONDS;
+			// 	timerEntity.Set(new GameTimer { Value = world.GetSharedData<GameStageOne>().Time });
+			// 	world.RemoveSharedData<MapInitialized>();
+			// }
+			
+			if (world.HasSharedData<MapInitialized>())
 			{
 				Entity timerEntity = new Entity("Timer");
 				timerEntity.Get<GameTimer>().Value = Consts.Main.GAME_TIMER_SECONDS;
-				timerEntity.Set(new GameTimer { Value = world.GetSharedData<GameStageOne>().Time });
 				world.RemoveSharedData<MapInitialized>();
 			}
 		}

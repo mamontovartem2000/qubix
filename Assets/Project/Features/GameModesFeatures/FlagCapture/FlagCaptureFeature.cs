@@ -46,7 +46,7 @@ namespace Project.Features.GameModesFeatures
             AddSystem<CatchFlagSystem>();
             AddSystem<DropFlagSystem>();
             AddSystem<FlagReturnSystem>();
-            AddSystem<EndGameSystem>();
+            //AddSystem<EndGameSystem>();
         }
 
         protected override void OnConstructLate() => SpawnStartFlags();

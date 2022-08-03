@@ -15,6 +15,8 @@ namespace Project.Modules.Network
         public static BuildTypes BuildType;
         public static string FloorMap;
         public static string ObjectsMap;
+        public static bool IsLocalGame;
+
 
         public static void CloseNetwork()
         {
@@ -34,6 +36,7 @@ namespace Project.Modules.Network
             PlayersInfo = null;
             Team = 1;
             BuildType = BuildTypes.ManualConnect;
+            IsLocalGame = true;
         }
 
         public static T CreateFromJSON<T>(string jsonString)
