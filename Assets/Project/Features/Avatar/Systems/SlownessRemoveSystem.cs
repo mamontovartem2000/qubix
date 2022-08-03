@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Features.Avatar.Systems {
 
@@ -40,9 +41,9 @@ namespace Project.Features.Avatar.Systems {
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
         {
             entity.Get<Slowness>().LifeTime -= deltaTime;
-
+           
 			if (entity.Read<Slowness>().LifeTime > 0f) return;
-            
+
 			entity.Remove<Slowness>();
         }
     }

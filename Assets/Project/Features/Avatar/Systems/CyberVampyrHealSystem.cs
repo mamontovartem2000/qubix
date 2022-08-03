@@ -2,6 +2,7 @@
 using Project.Common.Components;
 using Project.Common.Utilities;
 using Project.Features.VFX;
+using UnityEngine;
 
 namespace Project.Features.Avatar.Systems {
 
@@ -52,7 +53,9 @@ namespace Project.Features.Avatar.Systems {
 
             if (!from.Avatar().IsAlive() || !from.Avatar().Has<CyberVampyrModifier>()) return;
 
-            from.Avatar().Get<ApplyHeal>().Value += damage * 0.4f;
+            from.Avatar().Set(new ApplyHeal {Value = damage * 0.4f}, ComponentLifetime.NotifyAllSystems);
+            // from.Avatar().Get<ApplyHeal>().Value += damage * 0.4f;
+            
             _vfx.SpawnVFX(from.Read<SkillEntities>().FourthSkill.Read<VFXConfig>().Value, from.Avatar(), 0.3f);
             
         }

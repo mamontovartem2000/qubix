@@ -25,7 +25,7 @@
             {
                 public const float ATTACK_SECONDS = 0.2f;
                 public const float MIN_LENGHT = 1f;
-                public const float RETURN_SPEED = -8f;
+                public const float RETURN_SPEED = -10f;
                 public const float SPEED = 20f;
                 public const float VISUAL_SPEED_RATIO = 1.4f;
             }

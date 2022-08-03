@@ -8,11 +8,11 @@ namespace Project.Common.Views.Monos {
     
     public class ShengbiaoWeaponMonoView : MonoBehaviourView {
         
-        public Material SpearChainMateial;
+        public Renderer SpearChainRenderer;
+        private Material SpearChainMaterial;
         public override bool applyStateJob => true;
 
         public override void OnInitialize() {
-            
         }
         
         public override void OnDeInitialize() {
@@ -27,9 +27,10 @@ namespace Project.Common.Views.Monos {
         {
             transform.position = entity.GetPosition();
             transform.rotation = entity.GetRotation();
-            SpearChainMateial.mainTextureOffset = new Vector2(1 , entity.Read<ShengbiaoWeapon>().Offset);
+            
+            SpearChainMaterial = SpearChainRenderer.materials[0];
+
+            SpearChainMaterial.mainTextureOffset = new Vector2(1 , entity.Read<ShengbiaoWeapon>().Offset);
         }
-        
     }
-    
 }
