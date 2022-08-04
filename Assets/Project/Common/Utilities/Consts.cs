@@ -40,7 +40,7 @@
         public static class Scene
         {
             public const float HEAL_DISPENSER_VALUE = 15f;
-            public const float DESTRUCTUBLE_OBJ_HEALTH = 35f;
+            public const float DESTRUCTUBLE_OBJ_HEALTH = 30f;
 
             public static class Mines
             {
