@@ -14,14 +14,15 @@ namespace Project.Features.CollisionHandler
     #endif
     public sealed class CollisionHandlerFeature : Feature
     {
-        public MonoBehaviourViewBase Portal, Mine, Health;
-        private ViewId _portal, _mine, _health;
+        public MonoBehaviourViewBase Portal, Mine, Health, SpikesAttack;
+        private ViewId _portal, _mine, _health, _spikesAttack;
         
         protected override void OnConstruct()
         {
             AddSystem<GrenadeExplosionSystem>();
             // AddSystem<SpawnMineSystem>();
             AddSystem<HealthDispenserSystem>();
+            AddSystem<SpikesDispenserSystem>();
             AddSystem<NewPortalDispenserSystem>();
             AddSystem<MineBlinkSystem>();
             AddSystem<MineBlinkLifeTime>();
@@ -30,6 +31,7 @@ namespace Project.Features.CollisionHandler
             _portal = world.RegisterViewSource(Portal);
             _mine = world.RegisterViewSource(Mine);
             _health = world.RegisterViewSource(Health);
+            _spikesAttack = world.RegisterViewSource(SpikesAttack);
         }
         
         protected override void InjectFilter(ref FilterBuilder builder)
@@ -46,6 +48,22 @@ namespace Project.Features.CollisionHandler
             entity.InstantiateView(_health);
             
             entity.Set(new CollisionDynamic());
+            entity.Get<ProjectileDirection>().Value = fp3.zero;
+            entity.Get<Owner>().Value = owner;
+            entity.Get<FaceDirection>().Value = new fp3(1, 0, 0);
+            return entity;
+        }
+        
+       public Entity SpawnSpikesAttack(Entity owner)
+        {
+            var entity = new Entity("Health");
+            entity.InstantiateView(_spikesAttack);
+
+            entity.Set(new ProjectileActive());
+            entity.Set(new CollisionDynamic());
+            entity.Set(new SpikesProjectileTag());
+            entity.Get<ProjectileDamage>().Value = Consts.Scene.SPIKES_DAMAGE;
+            entity.Get<LifeTimeLeft>().Value = Consts.Scene.SPIKES_LIFETIME;
             entity.Get<ProjectileDirection>().Value = fp3.zero;
             entity.Get<Owner>().Value = owner;
             entity.Get<FaceDirection>().Value = new fp3(1, 0, 0);
@@ -78,6 +96,7 @@ namespace Project.Features.CollisionHandler
             entity.Set(new PortalTag());
             entity.InstantiateView(_portal);
             
+            entity.SetPosition(owner.GetPosition());
             entity.Set(new CollisionDynamic());
             entity.Get<Owner>().Value = owner;
             

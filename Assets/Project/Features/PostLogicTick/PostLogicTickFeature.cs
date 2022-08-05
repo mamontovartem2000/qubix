@@ -33,6 +33,7 @@ namespace Project.Features.PostLogicTick
 			//Bullet destroy
 			AddSystem<BulletDestroySystem>();
 			AddSystem<LinearDestroySystem>();
+			AddSystem<SpikesDestroySystem>();
 			
 			//World systems
 			AddSystem<HealthDisposeSystem>();

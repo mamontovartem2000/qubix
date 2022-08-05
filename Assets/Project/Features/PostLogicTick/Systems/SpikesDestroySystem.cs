@@ -1,21 +1,22 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Features.PreLogicTick;
 using UnityEngine;
 
 namespace Project.Features.PostLogicTick.Systems {
 
     #pragma warning disable
-#pragma warning restore
+    using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
+    using Components; using Modules; using Systems; using Markers;
+    #pragma warning restore
     
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class BulletDestroySystem : ISystemFilter {
+    public sealed class SpikesDestroySystem : ISystemFilter {
         
-        private PreLogicTickFeature feature;
+        private PostLogicTickFeature feature;
         
         public World world { get; set; }
         
@@ -34,24 +35,18 @@ namespace Project.Features.PostLogicTick.Systems {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-BulletDestroySystem")
+            return Filter.Create("Filter-SpikesDestroySystem")
                 .With<ShouldDestroy>()
                 .With<ProjectileActive>()
-                .Without<Linear>()
-                .Without<ShengbiaoProjectile>()
-                .Without<SpikesProjectileTag>()
+                .With<SpikesProjectileTag>()
                 .Push();
             
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            // entity.Destroy();
-            entity.Get<LifeTimeLeft>().Value = 0.2f;
-            // entity.SetPosition(new Vector3(entity.GetPosition().x, -0.8f, entity.GetPosition().z));
-            entity.DestroyAllViews();
-            entity.Remove<ProjectileSpeed>();
             entity.Remove<ProjectileActive>();
+            entity.Remove<CollisionDynamic>();
         }
     }
 }

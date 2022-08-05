@@ -34,16 +34,8 @@ namespace Project.Features.CollisionHandler.Systems
 
 		void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
 		{
-			ref var dispenser = ref entity.Get<PortalDispenserTag>();
-			dispenser.Timer -= deltaTime;
-
-			if (dispenser.Timer > 0) return;
-			
-			var portal = _feature.SpawnPortal(entity);
-			portal.SetPosition(entity.GetPosition());
-
-			dispenser.Timer = dispenser.TimerDefault;
-			entity.Get<SpawnedPortal>().Value = portal;
+			_feature.SpawnPortal(entity);
+			entity.Set(new SpawnedPortal());
 		}
 	}
 }

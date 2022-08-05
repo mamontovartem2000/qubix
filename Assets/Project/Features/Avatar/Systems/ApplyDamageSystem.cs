@@ -57,7 +57,6 @@ namespace Project.Features.Avatar.Systems
             if (from.Has<PlayerAvatar>())
             {
                 if (from.Read<TeamTag>().Value == to.Owner().Read<TeamTag>().Value) return;
-                
                 to.Owner().Set(new DamagedBy {Value = from});
                 from.Avatar().Get<PrivateSoundPath>().Value = "event:/Weapons/HitMarker";
                 Worlds.current.GetFeature<EventsFeature>().PlaySoundPrivate.Execute(from.Avatar());

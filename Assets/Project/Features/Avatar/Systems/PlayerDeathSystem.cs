@@ -51,6 +51,7 @@ namespace Project.Features.Avatar.Systems
                 world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
                 world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(enemy);
                 world.GetFeature<EventsFeature>().TabulationScreenNewPlayerStats.Execute(enemy);
+                entity.Remove<DamagedBy>();
             }
             
             entity.Get<PlayerScore>().Deaths += 1;

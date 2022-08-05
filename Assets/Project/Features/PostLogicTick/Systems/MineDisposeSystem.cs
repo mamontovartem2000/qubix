@@ -40,9 +40,6 @@ namespace Project.Features.PostLogicTick.Systems
 		{
 			if (entity.TryReadCollided(out var from, out var owner) == false) return;
 			ref var player = ref owner.Get<PlayerAvatar>().Value;
-			
-			if (owner.Has<DamagedBy>())
-				owner.Remove<DamagedBy>();
 
 			var collision = new Entity("collision");
 			collision.Get<LifeTimeLeft>().Value = 2;

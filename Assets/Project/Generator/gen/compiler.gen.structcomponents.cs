@@ -180,8 +180,10 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPath>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnBullet>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnedPortal>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnedPortal>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpikesProjectileTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpikesTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StatsBuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Storm>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Stun>(false, true, false, false, false, false, false, false);
@@ -385,8 +387,10 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SoundPath>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnBullet>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Spawned>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnedPortal>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpawnedPortal>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SpeedModifier>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpikesProjectileTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.SpikesTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StatsBuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Storm>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Stun>(false, true, false, false, false, false, false, false);
@@ -585,8 +589,10 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.SoundPath>(false);
             structComponentsContainer.Validate<Project.Common.Components.SpawnBullet>(false);
             structComponentsContainer.Validate<Project.Common.Components.Spawned>(true);
-            structComponentsContainer.Validate<Project.Common.Components.SpawnedPortal>(false);
+            structComponentsContainer.Validate<Project.Common.Components.SpawnedPortal>(true);
             structComponentsContainer.Validate<Project.Common.Components.SpeedModifier>(true);
+            structComponentsContainer.Validate<Project.Common.Components.SpikesProjectileTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.SpikesTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.StatsBuff>(true);
             structComponentsContainer.Validate<Project.Common.Components.Storm>(true);
             structComponentsContainer.Validate<Project.Common.Components.Stun>(false);
@@ -790,8 +796,10 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.SoundPath>(false);
             entity.ValidateData<Project.Common.Components.SpawnBullet>(false);
             entity.ValidateData<Project.Common.Components.Spawned>(true);
-            entity.ValidateData<Project.Common.Components.SpawnedPortal>(false);
+            entity.ValidateData<Project.Common.Components.SpawnedPortal>(true);
             entity.ValidateData<Project.Common.Components.SpeedModifier>(true);
+            entity.ValidateData<Project.Common.Components.SpikesProjectileTag>(true);
+            entity.ValidateData<Project.Common.Components.SpikesTag>(false);
             entity.ValidateData<Project.Common.Components.StatsBuff>(true);
             entity.ValidateData<Project.Common.Components.Storm>(true);
             entity.ValidateData<Project.Common.Components.Stun>(false);

@@ -18,7 +18,6 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
-  - id: 4
   removeStructComponents: []
   templates: []
   references:
@@ -45,9 +44,6 @@ MonoBehaviour:
         Deaths: 0
         DealtDamage: 0
     00000003:
-      type: {class: DamagedBy, ns: Project.Common.Components, asm: Project.Common}
-      data: {}
-    00000004:
       type: {class: MoveInput, ns: Project.Common.Components, asm: Project.Common}
       data:
         Amount: 0

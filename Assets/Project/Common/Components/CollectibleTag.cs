@@ -11,6 +11,14 @@ namespace Project.Common.Components
         public float Timer;
         public float TimerDefault;
     }
+    
+    public struct SpikesTag : IComponent
+    {
+        public float Timer;
+        public float TimerDefault;
+    }
+    
+    public struct SpikesProjectileTag : IComponent {}
 
     public struct PortalDispenserTag : IComponent
     {
@@ -19,7 +27,8 @@ namespace Project.Common.Components
     }
     
     public struct Spawned : IComponent {}
-    public struct SpawnedPortal : IComponent {public Entity Value;}
+    
+    public struct SpawnedPortal : IComponent {}
 
     public struct PortalTag : IComponent { }
 

@@ -41,7 +41,8 @@
         {
             public const float HEAL_DISPENSER_VALUE = 15f;
             public const float DESTRUCTUBLE_OBJ_HEALTH = 30f;
-
+            public const float SPIKES_DAMAGE = 30F;
+            public const float SPIKES_LIFETIME = 1F;
             public static class Mines
             {
                 public const int COUNT = 10;
