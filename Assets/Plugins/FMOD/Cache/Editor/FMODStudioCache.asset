@@ -15,38 +15,11 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637943709299867366
+  lastModified: 637909002158059051
   FileSizes:
   - Name: Desktop
     Value: 1036
   Exists: 1
---- !u!114 &-8692994042699050456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapon/Shotgun
-  m_EditorClassIdentifier: 
-  Path: event:/Weapon/Shotgun
-  Guid:
-    Data1: 1631857169
-    Data2: 1209634917
-    Data3: -1490669151
-    Data4: 138547156
-  Banks:
-  - {fileID: -5910116475118719040}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 2000
 --- !u!114 &-8401349043197460659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +153,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
-  MaxDistance: 55
+  MaxDistance: 35
   Length: 0
 --- !u!114 &-6724463165044938226
 MonoBehaviour:
@@ -251,10 +224,10 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Weapons.bank
   Name: Weapons
   StudioPath: bank:/Weapons
-  lastModified: 637943709305645289
+  lastModified: 637909002160109388
   FileSizes:
   - Name: Desktop
-    Value: 491008
+    Value: 428928
   Exists: 1
 --- !u!114 &-5838694159782285996
 MonoBehaviour:
@@ -364,33 +337,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 20
   Length: 700
---- !u!114 &-4187007263613879070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Silen/EMPBullets
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Silen/EMPBullets
-  Guid:
-    Data1: -1412623916
-    Data2: 1152929426
-    Data3: -1531324235
-    Data4: 1293471099
-  Banks:
-  - {fileID: -3696928525799396931}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 1175
 --- !u!114 &-3910080030337613705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,65 +406,11 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Skills.bank
   Name: Skills
   StudioPath: bank:/Skills
-  lastModified: 637943709303654722
+  lastModified: 637909002159339216
   FileSizes:
   - Name: Desktop
-    Value: 521376
+    Value: 212224
   Exists: 1
---- !u!114 &-3482428103717287328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Silen/EMPStrom
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Silen/EMPStrom
-  Guid:
-    Data1: -744760219
-    Data2: 1281537531
-    Data3: -2123270985
-    Data4: -1880665
-  Banks:
-  - {fileID: -3696928525799396931}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 6000
---- !u!114 &-3380393846684353626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapon/PlasmaSword
-  m_EditorClassIdentifier: 
-  Path: event:/Weapon/PlasmaSword
-  Guid:
-    Data1: -1796597967
-    Data2: 1101564372
-    Data3: -626541182
-    Data4: -271612541
-  Banks:
-  - {fileID: -5910116475118719040}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 11687
 --- !u!114 &-3173792611366176143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,60 +465,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 45
   Length: 869
---- !u!114 &-1858694559136192872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Solaray/SecondLife
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Solaray/SecondLife
-  Guid:
-    Data1: 890835602
-    Data2: 1102188955
-    Data3: 43484348
-    Data4: 100674202
-  Banks:
-  - {fileID: -3696928525799396931}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 35
-  Length: 1828
---- !u!114 &-1775431772317412124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Solaray/FreezeGrenadeStart
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Solaray/FreezeGrenadeStart
-  Guid:
-    Data1: -1769844414
-    Data2: 1081985526
-    Data3: 1521168047
-    Data4: 1325616323
-  Banks:
-  - {fileID: -3696928525799396931}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 25
-  Length: 1500
 --- !u!114 &-1634420315023878760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,10 +534,10 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Explosions.bank
   Name: Explosions
   StudioPath: bank:/Explosions
-  lastModified: 637943709299848792
+  lastModified: 637909002158039044
   FileSizes:
   - Name: Desktop
-    Value: 154240
+    Value: 123360
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -744,52 +582,13 @@ MonoBehaviour:
   - {fileID: 6061845716968002839}
   - {fileID: -5397420393289786488}
   - {fileID: -4283640211757682584}
-  - {fileID: 5526021404306532683}
-  - {fileID: -1775431772317412124}
-  - {fileID: 4777007755731099228}
-  - {fileID: -3482428103717287328}
-  - {fileID: -1858694559136192872}
-  - {fileID: 6502986043369429788}
-  - {fileID: -4187007263613879070}
-  - {fileID: 7602104258386032381}
-  - {fileID: 10589491724338314}
-  - {fileID: -8692994042699050456}
-  - {fileID: -3380393846684353626}
-  - {fileID: 2612319386279144268}
   EditorParameters: []
   MasterBanks:
   - {fileID: -9002949484503957811}
   StringsBanks:
   - {fileID: 134729716896531229}
-  cacheTime: 637943709305645289
+  cacheTime: 637909002160109388
   cacheVersion: 131591
---- !u!114 &10589491724338314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/VFX/FreezePlayer
-  m_EditorClassIdentifier: 
-  Path: event:/VFX/FreezePlayer
-  Guid:
-    Data1: -908331735
-    Data2: 1186708623
-    Data3: 268115114
-    Data4: 1765192003
-  Banks:
-  - {fileID: 4703980774469302188}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 1097
 --- !u!114 &134729716896531229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -805,10 +604,10 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637943709299877369
+  lastModified: 637909002158069054
   FileSizes:
   - Name: Desktop
-    Value: 2696
+    Value: 2102
   Exists: 1
 --- !u!114 &175175130361115837
 MonoBehaviour:
@@ -864,33 +663,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 35
   Length: 2000
---- !u!114 &2612319386279144268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Weapon/HitMarker
-  m_EditorClassIdentifier: 
-  Path: event:/Weapon/HitMarker
-  Guid:
-    Data1: 1189396657
-    Data2: 1302256882
-    Data3: -256267862
-    Data4: 755264869
-  Banks:
-  - {fileID: -5910116475118719040}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 80
-  Length: 130
 --- !u!114 &2764628084875692266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -960,38 +732,11 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/VFX.bank
   Name: VFX
   StudioPath: bank:/VFX
-  lastModified: 637943709304427212
+  lastModified: 637909002159539248
   FileSizes:
   - Name: Desktop
-    Value: 56032
+    Value: 36704
   Exists: 1
---- !u!114 &4777007755731099228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Solaray/FreezeStorm
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Solaray/FreezeStorm
-  Guid:
-    Data1: 621956942
-    Data2: 1177970529
-    Data3: -1538491006
-    Data4: -672893963
-  Banks:
-  - {fileID: -3696928525799396931}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 35
-  Length: 1497
 --- !u!114 &5463809685493878781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,38 +752,11 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637943709300777629
+  lastModified: 637909002158919119
   FileSizes:
   - Name: Desktop
     Value: 8275584
   Exists: 1
---- !u!114 &5526021404306532683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Explosions/FreezeGrenade
-  m_EditorClassIdentifier: 
-  Path: event:/Explosions/FreezeGrenade
-  Guid:
-    Data1: -873455631
-    Data2: 1157694539
-    Data3: 1916851617
-    Data4: -1503933039
-  Banks:
-  - {fileID: -1058113600303767864}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 30
-  Length: 2000
 --- !u!114 &6061845716968002839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,57 +784,3 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 35
   Length: 2000
---- !u!114 &6502986043369429788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Silen/Dash
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Silen/Dash
-  Guid:
-    Data1: -652550503
-    Data2: 1292480251
-    Data3: 259777463
-    Data4: -1199686783
-  Banks:
-  - {fileID: -3696928525799396931}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 25
-  Length: 1123
---- !u!114 &7602104258386032381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Skills/Solaray/CriticalHit
-  m_EditorClassIdentifier: 
-  Path: event:/Skills/Solaray/CriticalHit
-  Guid:
-    Data1: 1679172564
-    Data2: 1330332577
-    Data3: -1378524283
-    Data4: 1217020023
-  Banks:
-  - {fileID: -3696928525799396931}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 20
-  Length: 10266

@@ -44,7 +44,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-Setting")
+            return Filter.Create("Filter-SettingFlagSystem")
                 .With<FlagTag>()
                 .With<Collided>()
                 .With<FlagOnSpawn>()

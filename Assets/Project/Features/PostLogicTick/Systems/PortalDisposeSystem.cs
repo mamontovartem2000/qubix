@@ -62,7 +62,7 @@ namespace Project.Features.PostLogicTick.Systems
 			SceneUtils.ModifyWalkable(player.GetPosition(), true);
 			SceneUtils.ModifyWalkable(pos, false);
 			
-			player.Get<AvoidTeleport>().Value = Consts.Main.AVOID_TELEPORT_SECONDS;
+			player.Get<AvoidTeleport>().Value = GameConsts.Main.AVOID_TELEPORT_SECONDS;
 
 			player.SetPosition(pos);
 			player.Get<PlayerMoveTarget>().Value = pos;

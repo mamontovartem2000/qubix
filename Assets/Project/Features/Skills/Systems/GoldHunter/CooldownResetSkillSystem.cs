@@ -55,7 +55,7 @@ namespace Project.Features.Skills.Systems.GoldHunter
 
 			entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
 			
-			_vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar, Consts.Main.DEFAULT_LIFETIME);
+			_vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar, GameConsts.Main.DEFAULT_LIFETIME);
 		}
 	}
 }

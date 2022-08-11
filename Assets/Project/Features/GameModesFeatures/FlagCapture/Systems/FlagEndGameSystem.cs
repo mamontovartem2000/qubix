@@ -1,5 +1,6 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using UnityEngine;
 
 namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 {
@@ -23,7 +24,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 #endif
     #endregion
 
-    public sealed class EndGameSystem : ISystemFilter
+    public sealed class FlagEndGameSystem : ISystem, IAdvanceTick, IUpdate
     {
         private FlagCaptureFeature feature;
 
@@ -36,24 +37,41 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 
         void ISystemBase.OnDeconstruct() { }
 
-#if !CSHARP_8_OR_NEWER
-        bool ISystemFilter.jobs => false;
-        int ISystemFilter.jobsBatchCount => 64;
-#endif
-        Filter ISystemFilter.filter { get; set; }
-
-        Filter ISystemFilter.CreateFilter()
+        void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
-            return Filter.Create("Filter-EndGameSystem")
-                .With<EndOfGameStage>()
-                .Push();
-        }
-
-        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
-        {
-            if (world.HasSharedData<GameStageOne>())
+            Debug.Log("asdfsdef");
+            if (!world.HasSharedData<EndOfGameStage>()) return;
+            
+            var stage = world.ReadSharedData<EndOfGameStage>().StageNumber;
+            var winTeam = GetWinTeamNumber();
+            
+            if (stage == 1)
             {
                 
+            }
+        }
+
+        void IUpdate.Update(in float deltaTime) { }
+
+
+        private int GetWinTeamNumber()
+        {
+            var score = world.ReadSharedData<CapturedFlagsScore>().Score;
+            
+            if (score[1] == score[2])
+            {
+                Debug.Log("Draw");
+                return 0;
+            }
+            else if (score[1] > score[2])
+            {
+                Debug.Log("First win");
+                return 1;
+            }
+            else
+            {
+                Debug.Log("Second win");
+                return 2;
             }
         }
     }

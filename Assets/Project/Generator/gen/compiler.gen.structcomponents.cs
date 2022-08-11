@@ -40,6 +40,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DeathmatchMode>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Debuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestroyEntity>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleLifeTime>(false, true, false, false, false, false, false, false);
@@ -53,7 +54,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPEffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPStormAffect>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.EndOfGameStage>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EndOfGameStage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Enviroment>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplodeSquaredRadius>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplosionSound>(false, true, false, false, false, false, false, false);
@@ -61,6 +62,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FiringCooldownModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagCaptureMode>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagNeedRespawn>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagOnSpawn>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagSpawnerTag>(true, true, false, false, false, false, false, false);
@@ -73,10 +75,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FreezeStormАffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameFinished>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GamePaused>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStageOne>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStageThree>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStageTwo>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameTimer>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameWithoutStages>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GlowTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GlowTileRandomAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Grenade>(true, true, false, false, false, false, false, false);
@@ -88,6 +89,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Invulnerable>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LastGameStage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LastHitEntity>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LeftWeaponShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, true, false, false, false, false, false, false);
@@ -192,6 +194,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Tabulation>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamDeathmatchMode>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileAlternativeView>(false, true, false, false, false, false, false, false);
@@ -247,6 +250,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DamagedBy>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DashModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DeathmatchMode>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Debuff>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestroyEntity>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleLifeTime>(false, true, false, false, false, false, false, false);
@@ -260,7 +264,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPEffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EMPStormAffect>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.EndOfGameStage>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.EndOfGameStage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Enviroment>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplodeSquaredRadius>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ExplosionSound>(false, true, false, false, false, false, false, false);
@@ -268,6 +272,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FiringCooldownModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagCaptureMode>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagNeedRespawn>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagOnSpawn>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagSpawnerTag>(true, true, false, false, false, false, false, false);
@@ -280,10 +285,9 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FreezeStormАffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameFinished>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GamePaused>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStageOne>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStageThree>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStageTwo>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameStage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GameTimer>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.GameWithoutStages>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GlowTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.GlowTileRandomAmount>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Grenade>(true, true, false, false, false, false, false, false);
@@ -295,6 +299,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Invulnerable>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LastGameStage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LastHitEntity>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LeftWeaponShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, true, false, false, false, false, false, false);
@@ -399,6 +404,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.StunModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Tabulation>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamDeathmatchMode>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileAlternativeView>(false, true, false, false, false, false, false, false);
@@ -449,6 +455,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.DamagedBy>(false);
             structComponentsContainer.Validate<Project.Common.Components.DashAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.DashModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.DeathmatchMode>(true);
             structComponentsContainer.Validate<Project.Common.Components.Debuff>(true);
             structComponentsContainer.Validate<Project.Common.Components.DestroyEntity>(true);
             structComponentsContainer.Validate<Project.Common.Components.DestructibleLifeTime>(false);
@@ -462,7 +469,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.EMPEffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.EMPModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.EMPStormAffect>(true);
-            structComponentsContainer.Validate<Project.Common.Components.EndOfGameStage>(true);
+            structComponentsContainer.Validate<Project.Common.Components.EndOfGameStage>(false);
             structComponentsContainer.Validate<Project.Common.Components.Enviroment>(true);
             structComponentsContainer.Validate<Project.Common.Components.ExplodeSquaredRadius>(false);
             structComponentsContainer.Validate<Project.Common.Components.ExplosionSound>(false);
@@ -470,6 +477,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.FireRateAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.FireRateModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.FiringCooldownModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.FlagCaptureMode>(true);
             structComponentsContainer.Validate<Project.Common.Components.FlagNeedRespawn>(true);
             structComponentsContainer.Validate<Project.Common.Components.FlagOnSpawn>(true);
             structComponentsContainer.Validate<Project.Common.Components.FlagSpawnerTag>(true);
@@ -482,10 +490,9 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.FreezeStormАffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.GameFinished>(true);
             structComponentsContainer.Validate<Project.Common.Components.GamePaused>(true);
-            structComponentsContainer.Validate<Project.Common.Components.GameStageOne>(false);
-            structComponentsContainer.Validate<Project.Common.Components.GameStageThree>(false);
-            structComponentsContainer.Validate<Project.Common.Components.GameStageTwo>(false);
+            structComponentsContainer.Validate<Project.Common.Components.GameStage>(false);
             structComponentsContainer.Validate<Project.Common.Components.GameTimer>(false);
+            structComponentsContainer.Validate<Project.Common.Components.GameWithoutStages>(false);
             structComponentsContainer.Validate<Project.Common.Components.GlowTile>(false);
             structComponentsContainer.Validate<Project.Common.Components.GlowTileRandomAmount>(false);
             structComponentsContainer.Validate<Project.Common.Components.Grenade>(true);
@@ -497,6 +504,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.InstantReloadAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.Invulnerable>(true);
             structComponentsContainer.Validate<Project.Common.Components.LandMineAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.LastGameStage>(false);
             structComponentsContainer.Validate<Project.Common.Components.LastHitEntity>(false);
             structComponentsContainer.Validate<Project.Common.Components.LeftWeaponShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeDefault>(false);
@@ -601,6 +609,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.StunModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.Tabulation>(true);
             structComponentsContainer.Validate<Project.Common.Components.Targeted>(true);
+            structComponentsContainer.Validate<Project.Common.Components.TeamDeathmatchMode>(true);
             structComponentsContainer.Validate<Project.Common.Components.TeamTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.TeleportPlayer>(false);
             structComponentsContainer.Validate<Project.Common.Components.TileAlternativeView>(false);
@@ -656,6 +665,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.DamagedBy>(false);
             entity.ValidateData<Project.Common.Components.DashAffect>(true);
             entity.ValidateData<Project.Common.Components.DashModifier>(false);
+            entity.ValidateData<Project.Common.Components.DeathmatchMode>(true);
             entity.ValidateData<Project.Common.Components.Debuff>(true);
             entity.ValidateData<Project.Common.Components.DestroyEntity>(true);
             entity.ValidateData<Project.Common.Components.DestructibleLifeTime>(false);
@@ -669,7 +679,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.EMPEffect>(true);
             entity.ValidateData<Project.Common.Components.EMPModifier>(false);
             entity.ValidateData<Project.Common.Components.EMPStormAffect>(true);
-            entity.ValidateData<Project.Common.Components.EndOfGameStage>(true);
+            entity.ValidateData<Project.Common.Components.EndOfGameStage>(false);
             entity.ValidateData<Project.Common.Components.Enviroment>(true);
             entity.ValidateData<Project.Common.Components.ExplodeSquaredRadius>(false);
             entity.ValidateData<Project.Common.Components.ExplosionSound>(false);
@@ -677,6 +687,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.FireRateAffect>(true);
             entity.ValidateData<Project.Common.Components.FireRateModifier>(false);
             entity.ValidateData<Project.Common.Components.FiringCooldownModifier>(false);
+            entity.ValidateData<Project.Common.Components.FlagCaptureMode>(true);
             entity.ValidateData<Project.Common.Components.FlagNeedRespawn>(true);
             entity.ValidateData<Project.Common.Components.FlagOnSpawn>(true);
             entity.ValidateData<Project.Common.Components.FlagSpawnerTag>(true);
@@ -689,10 +700,9 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.FreezeStormАffect>(true);
             entity.ValidateData<Project.Common.Components.GameFinished>(true);
             entity.ValidateData<Project.Common.Components.GamePaused>(true);
-            entity.ValidateData<Project.Common.Components.GameStageOne>(false);
-            entity.ValidateData<Project.Common.Components.GameStageThree>(false);
-            entity.ValidateData<Project.Common.Components.GameStageTwo>(false);
+            entity.ValidateData<Project.Common.Components.GameStage>(false);
             entity.ValidateData<Project.Common.Components.GameTimer>(false);
+            entity.ValidateData<Project.Common.Components.GameWithoutStages>(false);
             entity.ValidateData<Project.Common.Components.GlowTile>(false);
             entity.ValidateData<Project.Common.Components.GlowTileRandomAmount>(false);
             entity.ValidateData<Project.Common.Components.Grenade>(true);
@@ -704,6 +714,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.InstantReloadAffect>(true);
             entity.ValidateData<Project.Common.Components.Invulnerable>(true);
             entity.ValidateData<Project.Common.Components.LandMineAffect>(true);
+            entity.ValidateData<Project.Common.Components.LastGameStage>(false);
             entity.ValidateData<Project.Common.Components.LastHitEntity>(false);
             entity.ValidateData<Project.Common.Components.LeftWeaponShot>(true);
             entity.ValidateData<Project.Common.Components.LifeTimeDefault>(false);
@@ -808,6 +819,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.StunModifier>(false);
             entity.ValidateData<Project.Common.Components.Tabulation>(true);
             entity.ValidateData<Project.Common.Components.Targeted>(true);
+            entity.ValidateData<Project.Common.Components.TeamDeathmatchMode>(true);
             entity.ValidateData<Project.Common.Components.TeamTag>(false);
             entity.ValidateData<Project.Common.Components.TeleportPlayer>(false);
             entity.ValidateData<Project.Common.Components.TileAlternativeView>(false);

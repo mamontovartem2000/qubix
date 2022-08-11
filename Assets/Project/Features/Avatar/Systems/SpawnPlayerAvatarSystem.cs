@@ -44,7 +44,7 @@ namespace Project.Features.Avatar.Systems
             if (time <= 0)
             { 
                 entity.Get<PlayerAvatar>().Value = _feature.SpawnPlayerAvatar(entity);
-                entity.Get<RespawnTime>().Value = Consts.Main.RESPAWN_TIME;
+                entity.Get<RespawnTime>().Value = GameConsts.Main.RESPAWN_TIME;
             }
             
             if(entity.Has<SkillEntities>()) return;

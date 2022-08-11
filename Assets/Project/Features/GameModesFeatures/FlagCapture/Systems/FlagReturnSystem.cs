@@ -42,7 +42,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-FlagReturn")
+            return Filter.Create("Filter-FlagReturnSystem")
                 .With<FlagTag>()
                 .With<DroppedFlag>()
                 .Push();
@@ -54,7 +54,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 
             time += deltaTime;
 
-            if (time > Consts.GameModes.FlagCapture.DROPPED_FLAG_LIFETIME)
+            if (time > GameConsts.GameModes.FlagCapture.DROPPED_FLAG_LIFETIME)
             {
                 entity.Set(new FlagNeedRespawn());
                 entity.Remove<DroppedFlag>();

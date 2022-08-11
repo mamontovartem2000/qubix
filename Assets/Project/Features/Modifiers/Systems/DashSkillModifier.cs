@@ -46,12 +46,12 @@ namespace Project.Features.Modifiers.Systems {
             ref var speed = ref entity.Get<MoveSpeedModifier>().Value;
             speed *= 20;
             
-            if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= Consts.Movement.MIN_DISTANCE)
+            if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= GameConsts.Movement.MIN_DISTANCE)
             {
                 entity.SetPosition((Vector3)Vector3Int.CeilToInt(entity.Read<PlayerMoveTarget>().Value));
                 var newTarget = entity.GetPosition() + entity.Read<FaceDirection>().Value;
 
-                if (SceneUtils.IsWalkable(newTarget) && entity.Read<DashModifier>().Step <= Consts.Skills.DASH_LENGTH)
+                if (SceneUtils.IsWalkable(newTarget) && entity.Read<DashModifier>().Step <= GameConsts.Skills.DASH_LENGTH)
                 {
                     SceneUtils.ModifyWalkable(entity.Read<PlayerMoveTarget>().Value, true);
                     SceneUtils.ModifyWalkable(newTarget, false);

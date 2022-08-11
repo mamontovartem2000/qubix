@@ -46,7 +46,7 @@ namespace Project.Features.GameModesFeatures
             AddSystem<CatchFlagSystem>();
             AddSystem<DropFlagSystem>();
             AddSystem<FlagReturnSystem>();
-            //AddSystem<EndGameSystem>();
+            AddSystem<FlagEndGameSystem>();
         }
 
         protected override void OnConstructLate() => SpawnStartFlags();
@@ -54,9 +54,9 @@ namespace Project.Features.GameModesFeatures
         
         private void SpawnStartFlags()
         {
-            DictionaryCopyable<int, int> score = new DictionaryCopyable<int, int>();
+            var score = new DictionaryCopyable<int, int>();
             
-            for (int i = 0; i < Consts.GameModes.FlagCapture.FLAG_COUNT; i++)
+            for (int i = 0; i < GameConsts.GameModes.FlagCapture.FLAG_COUNT; i++)
             {
                 score.Add(i + 1, 0);
                 var flag = SpawnFlag(i + 1);
@@ -82,6 +82,11 @@ namespace Project.Features.GameModesFeatures
             var entity = new Entity("FlagOnPlayer");
             entity.InstantiateView(_playerFlagId);
             return entity;
+        }
+        
+        protected override void InjectFilter(ref FilterBuilder builder)
+        {
+            builder.WithShared<FlagCaptureMode>();
         }
     }
 }

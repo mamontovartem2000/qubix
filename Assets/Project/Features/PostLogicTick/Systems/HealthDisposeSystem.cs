@@ -45,7 +45,7 @@ namespace Project.Features.PostLogicTick.Systems
 			if (entity.Owner().Has<Spawned>())
 				entity.Owner().Remove<Spawned>();
 			
-			avatar.Set(new ApplyHeal{ Value = Consts.Scene.HEAL_DISPENSER_VALUE }, ComponentLifetime.NotifyAllSystems);
+			avatar.Set(new ApplyHeal{ Value = GameConsts.Scene.HEAL_DISPENSER_VALUE }, ComponentLifetime.NotifyAllSystems);
 
 			// _vfx.SpawnVFX(VFXFeature.VFXType.HealVFX, player.GetPosition(), player);
 			entity.Destroy();

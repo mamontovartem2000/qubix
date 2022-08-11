@@ -30,14 +30,14 @@ namespace Project.Features.CollisionHandler.Systems
 
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
-            if (_mineFilter.Count >= Consts.Scene.Mines.COUNT) return;
+            if (_mineFilter.Count >= GameConsts.Scene.Mines.COUNT) return;
             
             _spawnDelay -= deltaTime;
             
             if (_spawnDelay > 0) return;
             
             _feature.SpawnMine();
-            _spawnDelay = Consts.Scene.Mines.SPAWN_DELAY_DEFAULT;
+            _spawnDelay = GameConsts.Scene.Mines.SPAWN_DELAY_DEFAULT;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using Project.Common.Utilities;
 
 namespace Project.Features.GameState.Systems
 {
@@ -19,20 +18,25 @@ namespace Project.Features.GameState.Systems
 
 		void IAdvanceTick.AdvanceTick(in float deltaTime)
 		{
-			// if (world.HasSharedData<MapInitialized>() && world.HasSharedData<GameStageOne>())
-			// {
-			// 	Entity timerEntity = new Entity("Timer");
-			// 	timerEntity.Get<GameTimer>().Value = Consts.Main.GAME_TIMER_SECONDS;
-			// 	timerEntity.Set(new GameTimer { Value = world.GetSharedData<GameStageOne>().Time });
-			// 	world.RemoveSharedData<MapInitialized>();
-			// }
+			if (!world.HasSharedData<MapInitialized>()) return;
 			
-			if (world.HasSharedData<MapInitialized>())
+			if (world.HasSharedData<GameWithoutStages>())
 			{
-				Entity timerEntity = new Entity("Timer");
-				timerEntity.Get<GameTimer>().Value = Consts.Main.GAME_TIMER_SECONDS;
-				world.RemoveSharedData<MapInitialized>();
+				CreateGameTimer(world.ReadSharedData<GameWithoutStages>().Time);
 			}
+			else if (world.HasSharedData<GameStage>())
+			{
+				CreateGameTimer(world.ReadSharedData<GameStage>().Time);
+			}
+			else return;
+				
+			world.RemoveSharedData<MapInitialized>();
+		}
+		
+		private void CreateGameTimer(float time)
+		{
+			var timerEntity = new Entity("Timer");
+			timerEntity.Set(new GameTimer {Value = time});
 		}
 
 		void IUpdate.Update(in float deltaTime) { }

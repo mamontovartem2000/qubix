@@ -52,7 +52,7 @@ namespace Project.Features.Skills.Systems.Buller
 
 			rightWeapon.Get<FireRateModifier>().Value = 1;
 			rightWeapon.Get<AmmoCapacity>().Value = 0;
-			rightWeapon.Get<AmmoCapacityDefault>().Value = Consts.Skills.FIRE_RATE_SKILL_AMMO_CAPACITY;
+			rightWeapon.Get<AmmoCapacityDefault>().Value = GameConsts.Skills.FIRE_RATE_SKILL_AMMO_CAPACITY;
 			rightWeapon.Get<ReloadTime>().Value = rightWeapon.Get<ReloadTimeDefault>().Value;
 			
 			SoundUtils.PlaySound(avatar, "event:/Skills/Buller/OffenciveBurst");

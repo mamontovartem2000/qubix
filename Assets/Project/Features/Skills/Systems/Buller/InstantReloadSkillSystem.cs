@@ -47,7 +47,7 @@ namespace Project.Features.Skills.Systems.Buller
             ref var weapon = ref avatar.Get<WeaponEntities>();
 
             weapon.LeftWeapon.Get<AmmoCapacity>().Value = weapon.LeftWeapon.Read<AmmoCapacityDefault>().Value;
-            weapon.RightWeapon.Get<ReloadTime>().Value = Consts.Skills.INSTANT_RELOAD_TIME;
+            weapon.RightWeapon.Get<ReloadTime>().Value = GameConsts.Skills.INSTANT_RELOAD_TIME;
             
             world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Get<Owner>().Value);
             

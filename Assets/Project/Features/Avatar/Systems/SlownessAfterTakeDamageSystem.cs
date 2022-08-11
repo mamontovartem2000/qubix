@@ -49,7 +49,7 @@ namespace Project.Features.Avatar.Systems {
             
             if (to.Has<Slowness>() == false)
             {
-                to.Get<Slowness>().Value = Math.Min(damage / 100, Consts.Movement.SLOWNESS_RATIO);
+                to.Get<Slowness>().Value = Math.Min(damage / 100, GameConsts.Movement.SLOWNESS_RATIO);
             }
 
             to.Get<Slowness>().LifeTime = 2f;

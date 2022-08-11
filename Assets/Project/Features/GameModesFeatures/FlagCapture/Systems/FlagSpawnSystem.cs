@@ -47,7 +47,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-FlagRespawn")
+            return Filter.Create("Filter-FlagSpawnSystem")
                 .With<FlagTag>()
                 .With<FlagNeedRespawn>()
                 .Push();

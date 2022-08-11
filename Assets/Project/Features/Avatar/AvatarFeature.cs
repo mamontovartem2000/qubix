@@ -85,7 +85,7 @@ namespace Project.Features.Avatar
             entity.Get<WeaponEntities>().LeftWeapon = ConstructWeapon(owner.Read<PlayerConfig>().LeftWeaponConfig, entity);
             entity.Get<WeaponEntities>().RightWeapon = ConstructWeapon(owner.Read<PlayerConfig>().RightWeaponConfig, entity);
 
-            entity.Get<MoveSpeedModifier>().Value = Consts.Movement.DEFAULT_MOVEMENT_SPEED_MODIFIER;
+            entity.Get<MoveSpeedModifier>().Value = GameConsts.Movement.DEFAULT_MOVEMENT_SPEED_MODIFIER;
 
             SetAvatarPosition(owner, entity);
 

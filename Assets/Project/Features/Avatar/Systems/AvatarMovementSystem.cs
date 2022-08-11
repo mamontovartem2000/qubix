@@ -47,7 +47,7 @@ namespace Project.Features.Avatar.Systems
 			
 			if (input.Amount != 0)
 			{				
-				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= Consts.Movement.MIN_DISTANCE)
+				if ((entity.Read<PlayerMoveTarget>().Value - entity.GetPosition()).sqrMagnitude <= GameConsts.Movement.MIN_DISTANCE)
 				{
 					entity.SetPosition((Vector3)Vector3Int.CeilToInt(entity.Read<PlayerMoveTarget>().Value));
 					var newTarget = entity.GetPosition() + direction * input.Amount;
@@ -66,7 +66,7 @@ namespace Project.Features.Avatar.Systems
 
 			if (entity.Owner().Has<LockTarget>())
 			{
-				currentSpeed *= Consts.Movement.LOCK_SPEED_RATIO;
+				currentSpeed *= GameConsts.Movement.LOCK_SPEED_RATIO;
 			}
 			
 			var pos = entity.GetPosition();

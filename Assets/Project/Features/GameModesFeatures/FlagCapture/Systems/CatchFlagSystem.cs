@@ -43,7 +43,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-GetFlagSystem")
+            return Filter.Create("Filter-CatchFlagSystem")
                 .With<FlagTag>()
                 .With<Collided>()
                 .Push();
@@ -72,14 +72,12 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
                 player.Set(new CarriesTheFlag { Team = entity.Read<TeamTag>().Value, Flag = playerFlag});
                 player.Avatar().Set(new HealingBuff
                 {
-                    TimeInterval = Consts.GameModes.FlagCapture.Buffs.HEALING_TIME_INTERVAL,
-                    HealsPercent = Consts.GameModes.FlagCapture.Buffs.HEALTH_REGENERATION_PERCENTAGE
+                    TimeInterval = GameConsts.GameModes.FlagCapture.Buffs.HEALING_TIME_INTERVAL,
+                    HealsPercent = GameConsts.GameModes.FlagCapture.Buffs.HEALTH_REGENERATION_PERCENTAGE
                 });
                 
                 entity.Destroy();
             }
         }
-        
-        
     }
 }

@@ -34,9 +34,5 @@ namespace Project.Common.Components
         public Entity ApplyTo;
     }
     public struct PortalActive : IComponent {}
-    public struct GamePaused : IComponent {}
-    public struct GameFinished : IComponent { }
-    public struct GameTimer : IComponent { public float Value; }
-    public struct MapInitialized : IComponent {}
     public struct Tabulation : IComponent {}
 }

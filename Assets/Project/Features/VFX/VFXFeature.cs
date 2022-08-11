@@ -50,7 +50,7 @@ namespace Project.Features.VFX
 			var fx = new Entity("vfx");
 			vfxConfig.Apply(fx);
 
-			fx.Get<LifeTimeLeft>().Value = Consts.Main.DEFAULT_LIFETIME;
+			fx.Get<LifeTimeLeft>().Value = GameConsts.Main.DEFAULT_LIFETIME;
 			fx.SetPosition(position);
 
 			var _viewId = world.RegisterViewSource(fx.Read<ViewModel>().Value);

@@ -1,12 +1,13 @@
 ﻿namespace Project.Common.Utilities
 {
-    public static class Consts
+    public static class GameConsts
     {
         public static class Main
         {
             public const float RESPAWN_TIME = 3f;
             public const float AVOID_TELEPORT_SECONDS = 3f;
-            public const float GAME_TIMER_SECONDS = 150f;
+            public const float DEATHMATCH_TIMER = 150f;
+            public const float TEAM_DEATHMATCH_TIMER = 150f;
             public const float DEFAULT_LIFETIME = 4f;
         }
 

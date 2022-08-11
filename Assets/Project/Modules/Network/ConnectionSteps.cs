@@ -24,7 +24,7 @@ namespace Project.Modules.Network
 			SendJoinRequest();
 		}
 
-		public static void ProcessJoinRequest(string request)
+		private static void ProcessJoinRequest(string request)
 		{
 			string payloadBase64 = NetworkData.CreateFromJSON<JoinRequestData>(request).payload;
 			var payloadInBytes = Convert.FromBase64String(payloadBase64);
@@ -52,7 +52,7 @@ namespace Project.Modules.Network
 
         private static void GetMessage(byte[] bytes)
 		{
-			byte[] buffer = new byte[bytes.Length - 1];
+			var buffer = new byte[bytes.Length - 1];
 			Array.Copy(bytes, 1, buffer, 0, buffer.Length);
 
 			if (buffer.Length == 4)

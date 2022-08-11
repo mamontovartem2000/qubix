@@ -62,8 +62,8 @@ namespace Project.Features.CollisionHandler
             entity.Set(new ProjectileActive());
             entity.Set(new CollisionDynamic());
             entity.Set(new SpikesProjectileTag());
-            entity.Get<ProjectileDamage>().Value = Consts.Scene.SPIKES_DAMAGE;
-            entity.Get<LifeTimeLeft>().Value = Consts.Scene.SPIKES_LIFETIME;
+            entity.Get<ProjectileDamage>().Value = GameConsts.Scene.SPIKES_DAMAGE;
+            entity.Get<LifeTimeLeft>().Value = GameConsts.Scene.SPIKES_LIFETIME;
             entity.Get<ProjectileDirection>().Value = fp3.zero;
             entity.Get<Owner>().Value = owner;
             entity.Get<FaceDirection>().Value = new fp3(1, 0, 0);
@@ -80,8 +80,8 @@ namespace Project.Features.CollisionHandler
 
             SceneUtils.ModifyFree(entity.GetPosition(), false);
             entity.InstantiateView(_mine);
-            entity.Get<MineBlinkTimerDefault>().Value = world.GetRandomRange(Consts.Scene.Mines.BLINK_FREQUENCY_MIN, Consts.Scene.Mines.BLINK_FREQUENCY_MAX);
-            entity.Get<MineDamage>().Value = world.GetRandomRange(Consts.Scene.Mines.DAMAGE_MIN, Consts.Scene.Mines.DAMAGE_MAX);
+            entity.Get<MineBlinkTimerDefault>().Value = world.GetRandomRange(GameConsts.Scene.Mines.BLINK_FREQUENCY_MIN, GameConsts.Scene.Mines.BLINK_FREQUENCY_MAX);
+            entity.Get<MineDamage>().Value = world.GetRandomRange(GameConsts.Scene.Mines.DAMAGE_MIN, GameConsts.Scene.Mines.DAMAGE_MAX);
             entity.Get<MineBlinkTimer>().Value = entity.Get<MineBlinkTimerDefault>().Value;
 
             entity.Get<TeamTag>().Value = 0;

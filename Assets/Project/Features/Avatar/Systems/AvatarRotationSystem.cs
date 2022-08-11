@@ -59,7 +59,7 @@ namespace Project.Features.Avatar.Systems
             }
 
             var newRot = quaternion.LookRotation(dir, new float3(0, 1, 0));
-            entity.SetRotation(Quaternion.RotateTowards(rot, newRot, Consts.Movement.ROTATION_SPEED));
+            entity.SetRotation(Quaternion.RotateTowards(rot, newRot, GameConsts.Movement.ROTATION_SPEED));
 
         }
     }
