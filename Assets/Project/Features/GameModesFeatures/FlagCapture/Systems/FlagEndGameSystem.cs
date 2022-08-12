@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
-using UnityEngine;
+using Project.Common.Events;
+using Project.Common.Utilities;
 
 namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 {
@@ -26,53 +27,101 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 
     public sealed class FlagEndGameSystem : ISystem, IAdvanceTick, IUpdate
     {
-        private FlagCaptureFeature feature;
+        private FlagCaptureFeature _feature;
+        private Filter _playerFilter, _timerFilter;
 
         public World world { get; set; }
 
         void ISystemBase.OnConstruct()
         {
-            this.GetFeature(out this.feature);
+            this.GetFeature(out this._feature);
+            
+            Filter.Create("Player Filter")
+                .With<PlayerTag>()
+                .Push(ref _playerFilter);
+            
+            Filter.Create("Timer Filter")
+                .With<GameTimer>()
+                .Push(ref _timerFilter);
         }
 
         void ISystemBase.OnDeconstruct() { }
 
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
-            Debug.Log("asdfsdef");
+            if (world.HasSharedData<WinningTeam>())
+            {
+                var team = world.ReadSharedData<WinningTeam>().Team;
+                DisplayGameResults(team);
+                return;
+            }
+            
             if (!world.HasSharedData<EndOfGameStage>()) return;
             
             var stage = world.ReadSharedData<EndOfGameStage>().StageNumber;
-            var winTeam = GetWinTeamNumber();
             
             if (stage == 1)
             {
+                var winTeam = GetWinningTeamByFlagCount();
+
+                if (winTeam == 0)
+                {
+                    world.RemoveSharedData<EndOfGameStage>();
+                    world.SetSharedData(new MatchPoint());
+                    world.SetSharedData(new GameStage { StageNumber = 2, Time = GameConsts.GameModes.FlagCapture.SECOND_GAME_PHASE_TIME});
+                }
+                else
+                {
+                    DisplayGameResults(winTeam);
+                }
                 
+                return;
+            }
+
+            if (stage == 2)
+            {
+                //TODO: compare team kills
+                //TODO: random winner if kills equals
             }
         }
 
-        void IUpdate.Update(in float deltaTime) { }
-
-
-        private int GetWinTeamNumber()
+        private void DisplayGameResults(int winnerTeam)
         {
-            var score = world.ReadSharedData<CapturedFlagsScore>().Score;
-            
-            if (score[1] == score[2])
+            foreach (var player in _playerFilter)
             {
-                Debug.Log("Draw");
-                return 0;
+                if (player.Read<TeamTag>().Value == winnerTeam)
+                    world.GetFeature<EventsFeature>().Victory.Execute(player);
+                else
+                    world.GetFeature<EventsFeature>().Defeat.Execute(player);
             }
-            else if (score[1] > score[2])
+            
+            SetGameFinished();
+        }
+        
+        private int GetWinningTeamByFlagCount()
+        {
+            ref var score = ref world.GetSharedData<CapturedFlagsScore>().Score;
+
+            if (score[1] > score[2])
             {
-                Debug.Log("First win");
                 return 1;
             }
-            else
+            else if (score[2] > score[1])
             {
-                Debug.Log("Second win");
                 return 2;
             }
+
+            return 0;
         }
+
+        private void SetGameFinished()
+        {
+            world.GetFeature<EventsFeature>().OnGameFinished.Execute();
+            world.SetSharedData(new GameFinished());
+            world.SetSharedData(new GamePaused());
+        }
+        
+        void IUpdate.Update(in float deltaTime) { }
+
     }
 }

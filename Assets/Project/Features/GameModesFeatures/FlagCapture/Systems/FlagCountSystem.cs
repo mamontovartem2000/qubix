@@ -1,5 +1,8 @@
 ﻿using ME.ECS;
+using ME.ECS.Collections;
 using Project.Common.Components;
+using Project.Common.Utilities;
+using UnityEngine;
 
 namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 {
@@ -13,7 +16,6 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
     using Modules;
     using Systems;
     using Markers;
-
 #pragma warning restore
 
 #if ECS_COMPILE_IL2CPP_OPTIONS
@@ -23,7 +25,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 #endif
     #endregion
 
-    public sealed class SettingFlagSystem : ISystemFilter
+    public sealed class FlagCountSystem : ISystemFilter
     {
         private FlagCaptureFeature feature;
 
@@ -44,35 +46,50 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-SettingFlagSystem")
-                .With<FlagTag>()
-                .With<Collided>()
-                .With<FlagOnSpawn>()
+            return Filter.Create("Filter-FlagCountSystem")
+                .With<FlagCaptured>()
+                .WithoutShared<GameFinished>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var player = entity.Read<Collided>().ApplyTo;
+            var team = entity.Read<FlagCaptured>().Team;
 
-            if (player == Entity.Empty) return;
-            if (player.Has<CarriesTheFlag>() == false) return;
-            
-            var playerTeam = player.Read<TeamTag>().Value;
-            
-            if (playerTeam == entity.Read<TeamTag>().Value)
+            if (world.HasSharedData<MatchPoint>())
             {
-                feature.UpdateFlagScore(playerTeam);
-                
-                Entity newFlag = feature.SpawnFlag(player.Read<CarriesTheFlag>().Team);
-                newFlag.Set(new FlagNeedRespawn(), ComponentLifetime.NotifyAllSystems);
-                
-                var carry = player.Read<CarriesTheFlag>();
-                carry.Flag.Destroy();
-
-                player.Remove<CarriesTheFlag>();
-                entity.Remove<Collided>();
+                Debug.Log("Win in MatchPoint");
+                world.SetSharedData(new WinningTeam {Team = team}, ComponentLifetime.NotifyAllSystems);
+                return;
             }
+
+            ref var score = ref world.GetSharedData<CapturedFlagsScore>().Score;
+            score[team] += 1;
+
+            var winTeam = GetWinningTeamByFlagCount(score);
+            
+            if (winTeam == 0) return;
+            
+            world.SetSharedData(new WinningTeam { Team = winTeam }, ComponentLifetime.NotifyAllSystems);
+            entity.Destroy();
+        }
+        
+        private int GetWinningTeamByFlagCount(DictionaryCopyable<int, int> score)
+        {
+            var winCount = GameConsts.GameModes.FlagCapture.WIN_FLAG_COUNT;
+
+            if (score[1] == winCount)
+            {
+                Debug.Log($"Team 1 win. {winCount} flags collected");
+                return 1;
+            }
+            else if (score[2] == winCount)
+            {
+                Debug.Log($"Team 2 win. {winCount} flags collected");
+                return 2;
+            }
+
+            return 0;
         }
     }
 }

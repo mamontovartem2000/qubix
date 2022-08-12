@@ -38,25 +38,33 @@ namespace Project.Features.GameModesFeatures
         
         protected override void OnConstruct()
         {
+            if (!world.HasSharedData<FlagCaptureMode>()) return;
+            
             _flagId = world.RegisterViewSource(Flag);
             _playerFlagId = world.RegisterViewSource(PlayerFlag);
-
+            
             AddSystem<FlagSpawnSystem>();
             AddSystem<SettingFlagSystem>();
             AddSystem<CatchFlagSystem>();
             AddSystem<DropFlagSystem>();
             AddSystem<FlagReturnSystem>();
             AddSystem<FlagEndGameSystem>();
+            AddSystem<FlagCountSystem>();
         }
 
-        protected override void OnConstructLate() => SpawnStartFlags();
+        protected override void OnConstructLate()
+        {
+            if (world.HasSharedData<FlagCaptureMode>())
+                SpawnStartFlags();
+        }
+
         protected override void OnDeconstruct() { }
         
         private void SpawnStartFlags()
         {
             var score = new DictionaryCopyable<int, int>();
             
-            for (int i = 0; i < GameConsts.GameModes.FlagCapture.FLAG_COUNT; i++)
+            for (int i = 0; i < GameConsts.GameModes.FlagCapture.TEAM_FLAG_COUNT; i++)
             {
                 score.Add(i + 1, 0);
                 var flag = SpawnFlag(i + 1);
@@ -84,9 +92,11 @@ namespace Project.Features.GameModesFeatures
             return entity;
         }
         
-        protected override void InjectFilter(ref FilterBuilder builder)
+        public void UpdateFlagScore(int team)
         {
-            builder.WithShared<FlagCaptureMode>();
+            var entity = new Entity("UpdateFlagScore");
+            entity.Set(new FlagCaptured { Team = team }, ComponentLifetime.NotifyAllSystems);
+            //TODO: Replace to oneshot entity
         }
     }
 }

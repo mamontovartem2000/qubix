@@ -62,6 +62,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FiringCooldownModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagCaptured>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagCaptureMode>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagNeedRespawn>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagOnSpawn>(true, true, false, false, false, false, false, false);
@@ -106,6 +107,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapComponents>(false, false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapInitialized>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MatchPoint>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeAimer>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageSpot>(false, true, false, false, false, false, false, false);
@@ -154,6 +156,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RespawnTime>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ResultSent>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RightWeaponShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ScytheThrowAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondaryDamage>(false, true, false, false, false, false, false, false);
@@ -209,6 +212,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.WinningTeam>(false, true, false, false, false, false, false, false);
 
         }
 
@@ -272,6 +276,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FireRateModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FiringCooldownModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagCaptured>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagCaptureMode>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagNeedRespawn>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagOnSpawn>(true, true, false, false, false, false, false, false);
@@ -316,6 +321,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapComponents>(false, false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapInitialized>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MatchPoint>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeAimer>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MeleeDamageSpot>(false, true, false, false, false, false, false, false);
@@ -364,6 +370,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ReloadTimeDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RespawnTime>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ResultSent>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.RightWeaponShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ScytheThrowAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.SecondaryDamage>(false, true, false, false, false, false, false, false);
@@ -419,6 +426,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponAim>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponEntities>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.WeaponPosition>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.WinningTeam>(false, true, false, false, false, false, false, false);
 
             ComponentsInitializerWorld.Setup(ComponentsInitializerWorldGen.Init);
             CoreComponentsInitializer.Init(ref structComponentsContainer);
@@ -477,6 +485,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.FireRateAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.FireRateModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.FiringCooldownModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.FlagCaptured>(false);
             structComponentsContainer.Validate<Project.Common.Components.FlagCaptureMode>(true);
             structComponentsContainer.Validate<Project.Common.Components.FlagNeedRespawn>(true);
             structComponentsContainer.Validate<Project.Common.Components.FlagOnSpawn>(true);
@@ -521,6 +530,7 @@ namespace ME.ECS {
             structComponentsContainer.ValidateCopyable<Project.Common.Components.MapComponents>(false);
             structComponentsContainer.Validate<Project.Common.Components.MapConstruct>(false);
             structComponentsContainer.Validate<Project.Common.Components.MapInitialized>(true);
+            structComponentsContainer.Validate<Project.Common.Components.MatchPoint>(true);
             structComponentsContainer.Validate<Project.Common.Components.MeleeActive>(true);
             structComponentsContainer.Validate<Project.Common.Components.MeleeAimer>(true);
             structComponentsContainer.Validate<Project.Common.Components.MeleeDamageSpot>(false);
@@ -569,6 +579,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.ReloadTime>(false);
             structComponentsContainer.Validate<Project.Common.Components.ReloadTimeDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.RespawnTime>(false);
+            structComponentsContainer.Validate<Project.Common.Components.ResultSent>(true);
             structComponentsContainer.Validate<Project.Common.Components.RightWeaponShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.ScytheThrowAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.SecondaryDamage>(false);
@@ -624,6 +635,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.WeaponAim>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponEntities>(false);
             structComponentsContainer.Validate<Project.Common.Components.WeaponPosition>(false);
+            structComponentsContainer.Validate<Project.Common.Components.WinningTeam>(false);
 
         }
 
@@ -687,6 +699,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.FireRateAffect>(true);
             entity.ValidateData<Project.Common.Components.FireRateModifier>(false);
             entity.ValidateData<Project.Common.Components.FiringCooldownModifier>(false);
+            entity.ValidateData<Project.Common.Components.FlagCaptured>(false);
             entity.ValidateData<Project.Common.Components.FlagCaptureMode>(true);
             entity.ValidateData<Project.Common.Components.FlagNeedRespawn>(true);
             entity.ValidateData<Project.Common.Components.FlagOnSpawn>(true);
@@ -731,6 +744,7 @@ namespace ME.ECS {
             entity.ValidateDataCopyable<Project.Common.Components.MapComponents>(false);
             entity.ValidateData<Project.Common.Components.MapConstruct>(false);
             entity.ValidateData<Project.Common.Components.MapInitialized>(true);
+            entity.ValidateData<Project.Common.Components.MatchPoint>(true);
             entity.ValidateData<Project.Common.Components.MeleeActive>(true);
             entity.ValidateData<Project.Common.Components.MeleeAimer>(true);
             entity.ValidateData<Project.Common.Components.MeleeDamageSpot>(false);
@@ -779,6 +793,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.ReloadTime>(false);
             entity.ValidateData<Project.Common.Components.ReloadTimeDefault>(false);
             entity.ValidateData<Project.Common.Components.RespawnTime>(false);
+            entity.ValidateData<Project.Common.Components.ResultSent>(true);
             entity.ValidateData<Project.Common.Components.RightWeaponShot>(true);
             entity.ValidateData<Project.Common.Components.ScytheThrowAffect>(true);
             entity.ValidateData<Project.Common.Components.SecondaryDamage>(false);
@@ -834,6 +849,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.WeaponAim>(false);
             entity.ValidateData<Project.Common.Components.WeaponEntities>(false);
             entity.ValidateData<Project.Common.Components.WeaponPosition>(false);
+            entity.ValidateData<Project.Common.Components.WinningTeam>(false);
 
         }
 

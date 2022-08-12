@@ -5,6 +5,8 @@ namespace Project.Common.Components
     public struct GamePaused : IComponent {}
     
     public struct GameFinished : IComponent { }
+    
+    public struct ResultSent : IComponent { }
 
     public struct GameTimer : IComponent
     {
@@ -17,6 +19,13 @@ namespace Project.Common.Components
     {
         public float Time;
     }
+    
+    public struct WinningTeam : IComponent
+    {
+        public int Team;
+    }
+    
+    public struct MatchPoint : IComponent { }
     
     public struct GameStage : IComponent
     {

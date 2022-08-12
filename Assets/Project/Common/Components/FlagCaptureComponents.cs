@@ -17,6 +17,11 @@ namespace Project.Common.Components
 
     public struct FlagOnSpawn : IComponent { }
 
+    public struct FlagCaptured : IComponent
+    {
+        public int Team;
+    }
+
     public struct DroppedFlag : IComponent
     {
         public float WaitingTime;

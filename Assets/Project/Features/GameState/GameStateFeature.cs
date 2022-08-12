@@ -19,11 +19,16 @@ namespace Project.Features.GameState
 
         protected override void OnConstruct()
         {
+            InitGameMode();
+            
             AddSystem<GameRunSystem>();
-	        AddSystem<GameFinishedSystem>();
             AddSystem<TimerStartSystem>();
 
-            InitGameMode();
+            if (world.HasSharedData<DeathmatchMode>())
+                AddSystem<DM_EndGameSystem>();
+            
+            if (world.HasSharedData<TeamDeathmatchMode>())
+                AddSystem<TeamDM_EndGameSystem>();
         }
 
         private void InitGameMode()
@@ -31,17 +36,17 @@ namespace Project.Features.GameState
             switch (NetworkData.GameMode)
             {
                 case GameModes.deathmatch:
-                    world.SetSharedData(new DeathmatchMode(), ComponentLifetime.NotifyAllSystems);
+                    world.SetSharedData(new DeathmatchMode());
                     world.SetSharedData(new GameWithoutStages { Time = GameConsts.Main.DEATHMATCH_TIMER });
                     break;
                 
                 case GameModes.teambattle:
-                    world.SetSharedData(new TeamDeathmatchMode(), ComponentLifetime.NotifyAllSystems);
+                    world.SetSharedData(new TeamDeathmatchMode());
                     world.SetSharedData(new GameWithoutStages { Time = GameConsts.Main.TEAM_DEATHMATCH_TIMER});
                     break;
                 
                 case GameModes.flagCapture:
-                    world.SetSharedData(new FlagCaptureMode(), ComponentLifetime.NotifyAllSystems);
+                    world.SetSharedData(new FlagCaptureMode());
                     world.SetSharedData(new GameStage { StageNumber = 1, Time = GameConsts.GameModes.FlagCapture.FIRST_GAME_PHASE_TIME});
                     break;
                 

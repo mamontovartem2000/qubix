@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Project.Modules.Network
@@ -29,7 +30,7 @@ namespace Project.Modules.Network
 
         public static void SetFakeSettings()
         {
-            Info = new GameInfo() { server_url = "url", player_nickname = "Dev player", map_id = 1, game_mode = "deathmatch", player_id = "qwerty" };
+            Info = new GameInfo() { server_url = "url", player_nickname = "Dev player", map_id = 1, game_mode = "flagCapture", player_id = "qwerty" };
             SlotInRoom = 1;
             GameSeed = 1;
             FullJoinRequest = string.Empty;
@@ -37,6 +38,8 @@ namespace Project.Modules.Network
             Team = 1;
             BuildType = BuildTypes.ManualConnect;
             IsLocalGame = true;
+            Enum.TryParse(Info.game_mode, out GameModes gameMode);
+            GameMode = gameMode;
         }
 
         public static T CreateFromJSON<T>(string jsonString)

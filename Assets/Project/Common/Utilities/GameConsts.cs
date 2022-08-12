@@ -68,7 +68,8 @@
         {
             public static class FlagCapture
             {
-                public const int FLAG_COUNT = 2;
+                public const int TEAM_FLAG_COUNT = 2;
+                public const int WIN_FLAG_COUNT = 3;
                 public const float DROPPED_FLAG_LIFETIME = 15f;
                 public const float FLAG_RESPAWN_TIME = 3f;
                 public const float FIRST_GAME_PHASE_TIME = 5 * 60f;
