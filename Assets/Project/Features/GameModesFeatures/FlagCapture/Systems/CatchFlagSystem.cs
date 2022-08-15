@@ -53,21 +53,24 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         {
             var player = entity.Read<Collided>().ApplyTo;
 
-            if (player.Has<PlayerTag>() == false || player.Has<PlayerDead>()) return;
+            if (player.Has<PlayerTag>() == false) return;
 
             if (player.Read<TeamTag>().Value == entity.Read<TeamTag>().Value)
             {
-                if (entity.Has<FlagOnSpawn>()) return;
+                if (entity.Has<FlagOnSpawn>())
+                {
+                    entity.Remove<Collided>();
+                    return;
+                }
 
-                entity.Remove<DroppedFlag>();
-                entity.Set(new FlagNeedRespawn(), ComponentLifetime.NotifyAllSystems);
+                _feature.CreateFlagRespawnRequest(entity.Read<TeamTag>().Value, GameConsts.GameModes.FlagCapture.FLAG_RESPAWN_TIME);
             }
             else
             {
                 var playerFlag = _feature.SpawnFlagOnPlayer();
                 playerFlag.SetParent(player.Avatar());
                 playerFlag.SetLocalPosition(fp3.zero);
-                playerFlag.SetLocalRotation(fpquaternion.zero);
+                playerFlag.SetRotation(fpquaternion.zero);
                 
                 player.Set(new CarriesTheFlag { Team = entity.Read<TeamTag>().Value, Flag = playerFlag});
                 player.Avatar().Set(new HealingBuff
@@ -75,9 +78,10 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
                     TimeInterval = GameConsts.GameModes.FlagCapture.Buffs.HEALING_TIME_INTERVAL,
                     HealsPercent = GameConsts.GameModes.FlagCapture.Buffs.HEALTH_REGENERATION_PERCENTAGE
                 });
-                
-                entity.Destroy();
             }
+            
+            SceneUtils.ModifyFree(entity.GetPosition(), true);
+            entity.Destroy();
         }
     }
 }

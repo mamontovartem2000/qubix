@@ -56,8 +56,8 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 
             if (time > GameConsts.GameModes.FlagCapture.DROPPED_FLAG_LIFETIME)
             {
-                entity.Set(new FlagNeedRespawn());
-                entity.Remove<DroppedFlag>();
+                feature.CreateFlagRespawnRequest(entity.Read<TeamTag>().Value);
+                entity.Destroy();
             }
         }
     }

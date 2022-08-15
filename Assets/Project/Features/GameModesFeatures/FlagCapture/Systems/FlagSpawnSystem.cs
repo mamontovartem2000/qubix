@@ -48,22 +48,40 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         Filter ISystemFilter.CreateFilter()
         {
             return Filter.Create("Filter-FlagSpawnSystem")
-                .With<FlagTag>()
                 .With<FlagNeedRespawn>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) 
         {
+            ref var time = ref entity.Get<FlagNeedRespawn>().SpawnDelay;
+
+            if (time > 0f)
+            {
+                time -= deltaTime;
+                return;
+            }
+
+            var team = entity.Read<TeamTag>().Value;
+            var spawner = GetSpawnerByTeam(team);
+            SceneUtils.ModifyFree(spawner.GetPosition(), false);
+            
+            var flag = feature.SpawnFlag(team);
+            flag.Set(new FlagOnSpawn());
+            flag.SetPosition(spawner.GetPosition());
+                
+            entity.Destroy();
+        }
+
+        private Entity GetSpawnerByTeam(int team)
+        {
             foreach (var spawner in _spawnersFilter)
             {
-                if (spawner.Read<TeamTag>().Value != entity.Read<TeamTag>().Value) continue;
-
-                SceneUtils.ModifyFree(entity.GetPosition(), true);
-                SceneUtils.ModifyFree(spawner.GetPosition(), false);
-                entity.Set(new FlagOnSpawn());
-                entity.SetPosition(spawner.GetPosition());
-            }          
+                if (spawner.Read<TeamTag>().Value == team) 
+                    return spawner;
+            }
+            
+            return Entity.Empty;
         }
     }
 }

@@ -55,17 +55,14 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         {
             var player = entity.Read<Collided>().ApplyTo;
 
-            if (player == Entity.Empty) return;
-            if (player.Has<CarriesTheFlag>() == false) return;
+            if (!player.Has<CarriesTheFlag>()) return;
             
             var playerTeam = player.Read<TeamTag>().Value;
             
             if (playerTeam == entity.Read<TeamTag>().Value)
             {
                 feature.UpdateFlagScore(playerTeam);
-                
-                Entity newFlag = feature.SpawnFlag(player.Read<CarriesTheFlag>().Team);
-                newFlag.Set(new FlagNeedRespawn(), ComponentLifetime.NotifyAllSystems);
+                feature.CreateFlagRespawnRequest(player.Read<CarriesTheFlag>().Team);
                 
                 var carry = player.Read<CarriesTheFlag>();
                 carry.Flag.Destroy();

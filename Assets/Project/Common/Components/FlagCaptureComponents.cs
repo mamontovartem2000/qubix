@@ -13,7 +13,10 @@ namespace Project.Common.Components
         public Entity Flag;
     }
 
-    public struct FlagNeedRespawn : IComponent { }
+    public struct FlagNeedRespawn : IComponent
+    {
+        public float SpawnDelay;
+    }
 
     public struct FlagOnSpawn : IComponent { }
 

@@ -2,7 +2,7 @@
 using ME.ECS.Collections;
 using Project.Common.Utilities;
 
-namespace Project.Features.GameModesFeatures
+namespace Project.Features.GameModesFeatures.FlagCapture
 {
     #region usage
     using Components;
@@ -54,8 +54,9 @@ namespace Project.Features.GameModesFeatures
 
         protected override void OnConstructLate()
         {
-            if (world.HasSharedData<FlagCaptureMode>())
-                SpawnStartFlags();
+            if (!world.HasSharedData<FlagCaptureMode>()) return;
+
+            SpawnStartFlags();
         }
 
         protected override void OnDeconstruct() { }
@@ -64,11 +65,10 @@ namespace Project.Features.GameModesFeatures
         {
             var score = new DictionaryCopyable<int, int>();
             
-            for (int i = 0; i < GameConsts.GameModes.FlagCapture.TEAM_FLAG_COUNT; i++)
+            for (var i = 0; i < GameConsts.GameModes.FlagCapture.TEAM_FLAG_COUNT; i++)
             {
                 score.Add(i + 1, 0);
-                var flag = SpawnFlag(i + 1);
-                flag.Set(new FlagNeedRespawn(), ComponentLifetime.NotifyAllSystems);
+                CreateFlagRespawnRequest(i + 1, 1f);
             }
             
             world.SetSharedData(new CapturedFlagsScore { Score = score });
@@ -85,6 +85,14 @@ namespace Project.Features.GameModesFeatures
             return entity;
         }
         
+        public void CreateFlagRespawnRequest(int team, float spawnDelay = 0f)
+        {
+            var entity = new Entity("RespawnFlag");
+            entity.Set(new FlagNeedRespawn { SpawnDelay = spawnDelay });
+            entity.Set(new TeamTag { Value = team } );
+            //TODO: Replace to oneshot entity
+        }
+        
         public Entity SpawnFlagOnPlayer()
         {
             var entity = new Entity("FlagOnPlayer");
@@ -95,7 +103,7 @@ namespace Project.Features.GameModesFeatures
         public void UpdateFlagScore(int team)
         {
             var entity = new Entity("UpdateFlagScore");
-            entity.Set(new FlagCaptured { Team = team }, ComponentLifetime.NotifyAllSystems);
+            entity.Set(new FlagCaptured { Team = team });
             //TODO: Replace to oneshot entity
         }
     }

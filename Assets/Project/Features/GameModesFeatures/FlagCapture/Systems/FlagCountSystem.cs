@@ -55,7 +55,8 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var team = entity.Read<FlagCaptured>().Team;
-
+            entity.Destroy();
+            
             if (world.HasSharedData<MatchPoint>())
             {
                 Debug.Log("Win in MatchPoint");
@@ -71,7 +72,6 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
             if (winTeam == 0) return;
             
             world.SetSharedData(new WinningTeam { Team = winTeam }, ComponentLifetime.NotifyAllSystems);
-            entity.Destroy();
         }
         
         private int GetWinningTeamByFlagCount(DictionaryCopyable<int, int> score)
