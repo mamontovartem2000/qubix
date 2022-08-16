@@ -65,6 +65,12 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
             }
 
             ref var score = ref world.GetSharedData<CapturedFlagsScore>().Score;
+
+            if (score[1] == 0 && score[2] == 0)
+            {
+                feature.FirstCapturedFlag = team;
+            }
+            
             score[team] += 1;
 
             var winTeam = GetWinningTeamByFlagCount(score);

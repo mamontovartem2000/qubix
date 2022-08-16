@@ -33,6 +33,7 @@ namespace Project.Features
         public static bool IsFree(fp3 pos)
         {
             return Worlds.current.ReadSharedData<MapComponents>().FreeMap[PositionToIndex(pos)] == 0;
+            //TODO: Free is 1 or 0?
         }
         
         public static fp3 SafeCheckPosition(fp3 vec)

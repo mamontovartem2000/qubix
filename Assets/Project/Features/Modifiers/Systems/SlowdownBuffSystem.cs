@@ -1,8 +1,9 @@
 ﻿using Assets.Project.Common.Components;
 using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 
-namespace Project.Features.Buffs.Systems
+namespace Project.Features.Modifiers.Systems
 {
     #region usage
 #pragma warning disable
@@ -22,11 +23,12 @@ namespace Project.Features.Buffs.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
+
     #endregion
 
-    public sealed class HealingBuffSystem : ISystemFilter
+    public sealed class SlowdownBuffSystem : ISystemFilter
     {
-        private BuffsFeature feature;
+        private ModifiersFeature feature;
 
         public World world { get; set; }
 
@@ -35,9 +37,7 @@ namespace Project.Features.Buffs.Systems
             this.GetFeature(out this.feature);
         }
 
-        void ISystemBase.OnDeconstruct()
-        {
-        }
+        void ISystemBase.OnDeconstruct() { }
 
 #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
@@ -47,25 +47,18 @@ namespace Project.Features.Buffs.Systems
 
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-HealingBuffSystem")
-                .With<HealingBuff>()
+            return Filter.Create("Filter-SlowdownBuffSystem")
+                .With<SlowdownBuff>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            if (entity.Read<PlayerHealth>().Value == entity.Read<PlayerHealthDefault>().Value) return;
-
-            ref var buff = ref entity.Get<HealingBuff>();
-
-            buff.LastHealingTime += deltaTime;
-
-            if (buff.LastHealingTime > buff.TimeInterval)
-            {
-                buff.LastHealingTime = 0f;
-                var healValue = entity.Read<PlayerHealthDefault>().Value * buff.HealsPercent / 100f;
-                entity.Set(new ApplyHeal { Value = healValue}, ComponentLifetime.NotifyAllSystems);
-            }
+            var avatar = entity.Avatar();
+            if (avatar == Entity.Empty) return;
+            
+            var startSpeed = avatar.Read<PlayerMovementSpeed>().Value;
+            avatar.Get<MoveSpeedModifier>().Value -= startSpeed * entity.Read<SlowdownBuff>().PercentValue / 100f;
         }
     }
 }

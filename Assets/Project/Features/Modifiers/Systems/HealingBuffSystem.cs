@@ -1,7 +1,9 @@
-﻿using ME.ECS;
+﻿using Assets.Project.Common.Components;
+using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
 
-namespace Project.Features.GameModesFeatures.FlagCapture.Systems
+namespace Project.Features.Modifiers.Systems
 {
     #region usage
 #pragma warning disable
@@ -21,17 +23,18 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
+
     #endregion
 
-    public sealed class SettingFlagSystem : ISystemFilter
+    public sealed class HealingBuffSystem : ISystemFilter
     {
-        private FlagCaptureFeature _feature;
+        private ModifiersFeature feature;
 
         public World world { get; set; }
 
         void ISystemBase.OnConstruct()
         {
-            this.GetFeature(out this._feature);
+            this.GetFeature(out this.feature);
         }
 
         void ISystemBase.OnDeconstruct() { }
@@ -44,31 +47,24 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 
         Filter ISystemFilter.CreateFilter()
         {
-            return Filter.Create("Filter-SettingFlagSystem")
-                .With<FlagTag>()
-                .With<Collided>()
-                .With<FlagOnSpawn>()
+            return Filter.Create("Filter-HealingBuffSystem")
+                .With<PlayerTag>()
+                .With<HealingBuff>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var player = entity.Read<Collided>().ApplyTo;
+            var avatar = entity.Avatar();
+            ref var buff = ref entity.Get<HealingBuff>();
 
-            if (!player.Has<CarriesTheFlag>()) return;
-            
-            var playerTeam = player.Read<TeamTag>().Value;
-            
-            if (playerTeam == entity.Read<TeamTag>().Value)
+            buff.LastHealingTime += deltaTime;
+
+            if (buff.LastHealingTime > buff.TimeInterval)
             {
-                _feature.UpdateFlagScore(playerTeam);
-                _feature.CreateFlagRespawnRequest(player.Read<CarriesTheFlag>().Team);
-                
-                var carry = player.Read<CarriesTheFlag>();
-                carry.Flag.Destroy();
-                
-                _feature.RemoveFlagBearer.Apply(player);
-                entity.Remove<Collided>();
+                buff.LastHealingTime = 0f;
+                var healValue = avatar.Read<PlayerHealthDefault>().Value * buff.HealsPercent / 100f;
+                avatar.Set(new ApplyHeal {Value = healValue}, ComponentLifetime.NotifyAllSystems);
             }
         }
     }

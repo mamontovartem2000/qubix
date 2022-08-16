@@ -55,12 +55,12 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
             carry.Flag.Destroy();
             
             var pos = entity.Read<PlayerDead>().DeathPosition;
-            Entity flag = _feature.SpawnFlag(carry.Team);
+            var flag = _feature.SpawnFlag(carry.Team);
             flag.Set(new DroppedFlag());
             flag.SetPosition(pos);
             SceneUtils.ModifyFree(pos, false);
             
-            entity.Remove<CarriesTheFlag>();
+            _feature.RemoveFlagBearer.Apply(entity);
         }
     }
 }

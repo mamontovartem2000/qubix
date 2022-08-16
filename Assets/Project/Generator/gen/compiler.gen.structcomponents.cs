@@ -10,6 +10,7 @@ namespace ME.ECS {
 
 
             WorldUtilities.InitComponentTypeId<Assets.Project.Common.Components.HealingBuff>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Assets.Project.Common.Components.SlowdownBuff>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ActivateSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacity>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacityDefault>(false, true, false, false, false, false, false, false);
@@ -64,7 +65,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FiringCooldownModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagCaptured>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagCaptureMode>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagNeedRespawn>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagNeedRespawn>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagOnSpawn>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagSpawnerTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagTag>(true, true, false, false, false, false, false, false);
@@ -90,7 +91,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Invulnerable>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.LastGameStage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LastHitEntity>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LeftWeaponShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, true, false, false, false, false, false, false);
@@ -224,6 +224,7 @@ namespace ME.ECS {
 
 
             WorldUtilities.InitComponentTypeId<Assets.Project.Common.Components.HealingBuff>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Assets.Project.Common.Components.SlowdownBuff>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ActivateSkill>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacity>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AmmoCapacityDefault>(false, true, false, false, false, false, false, false);
@@ -278,7 +279,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FiringCooldownModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagCaptured>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagCaptureMode>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagNeedRespawn>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagNeedRespawn>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagOnSpawn>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagSpawnerTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagTag>(true, true, false, false, false, false, false, false);
@@ -304,7 +305,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.InstantReloadAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Invulnerable>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LandMineAffect>(true, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.LastGameStage>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LastHitEntity>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LeftWeaponShot>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LifeTimeDefault>(false, true, false, false, false, false, false, false);
@@ -433,6 +433,7 @@ namespace ME.ECS {
 
 
             structComponentsContainer.Validate<Assets.Project.Common.Components.HealingBuff>(false);
+            structComponentsContainer.Validate<Assets.Project.Common.Components.SlowdownBuff>(false);
             structComponentsContainer.Validate<Project.Common.Components.ActivateSkill>(true);
             structComponentsContainer.Validate<Project.Common.Components.AmmoCapacity>(false);
             structComponentsContainer.Validate<Project.Common.Components.AmmoCapacityDefault>(false);
@@ -487,7 +488,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.FiringCooldownModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.FlagCaptured>(false);
             structComponentsContainer.Validate<Project.Common.Components.FlagCaptureMode>(true);
-            structComponentsContainer.Validate<Project.Common.Components.FlagNeedRespawn>(true);
+            structComponentsContainer.Validate<Project.Common.Components.FlagNeedRespawn>(false);
             structComponentsContainer.Validate<Project.Common.Components.FlagOnSpawn>(true);
             structComponentsContainer.Validate<Project.Common.Components.FlagSpawnerTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.FlagTag>(true);
@@ -513,7 +514,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.InstantReloadAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.Invulnerable>(true);
             structComponentsContainer.Validate<Project.Common.Components.LandMineAffect>(true);
-            structComponentsContainer.Validate<Project.Common.Components.LastGameStage>(false);
             structComponentsContainer.Validate<Project.Common.Components.LastHitEntity>(false);
             structComponentsContainer.Validate<Project.Common.Components.LeftWeaponShot>(true);
             structComponentsContainer.Validate<Project.Common.Components.LifeTimeDefault>(false);
@@ -647,6 +647,7 @@ namespace ME.ECS {
 
 
             entity.ValidateData<Assets.Project.Common.Components.HealingBuff>(false);
+            entity.ValidateData<Assets.Project.Common.Components.SlowdownBuff>(false);
             entity.ValidateData<Project.Common.Components.ActivateSkill>(true);
             entity.ValidateData<Project.Common.Components.AmmoCapacity>(false);
             entity.ValidateData<Project.Common.Components.AmmoCapacityDefault>(false);
@@ -701,7 +702,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.FiringCooldownModifier>(false);
             entity.ValidateData<Project.Common.Components.FlagCaptured>(false);
             entity.ValidateData<Project.Common.Components.FlagCaptureMode>(true);
-            entity.ValidateData<Project.Common.Components.FlagNeedRespawn>(true);
+            entity.ValidateData<Project.Common.Components.FlagNeedRespawn>(false);
             entity.ValidateData<Project.Common.Components.FlagOnSpawn>(true);
             entity.ValidateData<Project.Common.Components.FlagSpawnerTag>(true);
             entity.ValidateData<Project.Common.Components.FlagTag>(true);
@@ -727,7 +728,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.InstantReloadAffect>(true);
             entity.ValidateData<Project.Common.Components.Invulnerable>(true);
             entity.ValidateData<Project.Common.Components.LandMineAffect>(true);
-            entity.ValidateData<Project.Common.Components.LastGameStage>(false);
             entity.ValidateData<Project.Common.Components.LastHitEntity>(false);
             entity.ValidateData<Project.Common.Components.LeftWeaponShot>(true);
             entity.ValidateData<Project.Common.Components.LifeTimeDefault>(false);

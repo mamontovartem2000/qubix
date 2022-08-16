@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: FlagCaptureFeature
   m_EditorClassIdentifier: 
   editorComment: 
-  Flag: {fileID: -4469786469331337740, guid: 299618592e09c034585671bf8a8e1183, type: 3}
-  PlayerFlag: {fileID: -2676993613806317091, guid: 848d0e00fabece649a9a0d398cc2c2b6, type: 3}
+  StandingFlag_Red: {fileID: 5872662103030252004, guid: c1b50d6146c7f1e458119428cdde6d7c, type: 3}
+  StandingFlag_Blue: {fileID: 5772399064237111663, guid: d8d8335b3f438a84fa7df0a9dacb00a4, type: 3}
+  PlayerFlag_Red: {fileID: -6443515750179099966, guid: 1b9a8e696057a2e42a600805d6d9df66, type: 3}
+  PlayerFlag_Blue: {fileID: -2676993613806317091, guid: 848d0e00fabece649a9a0d398cc2c2b6, type: 3}
+  FlagBearerFirstStage: {fileID: 11400000, guid: 4a3cdafb320308347b3ff9a3fbbd38a4, type: 2}
+  FlagBearerSecondStage: {fileID: 11400000, guid: ce056f095b3e26241bcf746cb95f4437, type: 2}
+  RemoveFlagBearer: {fileID: 11400000, guid: f2e185bd02e1b8747bd94289d5012a24, type: 2}
+  FirstCapturedFlag: 0

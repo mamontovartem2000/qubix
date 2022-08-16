@@ -24,9 +24,8 @@ namespace Project.Features.GameState.Systems
             this.GetFeature(out _feature);
         }
 
-        void ISystemBase.OnDeconstruct()
-        {
-        }
+        void ISystemBase.OnDeconstruct() { }
+        
 #if !CSHARP_8_OR_NEWER
         bool ISystemFilter.jobs => false;
         int ISystemFilter.jobsBatchCount => 64;

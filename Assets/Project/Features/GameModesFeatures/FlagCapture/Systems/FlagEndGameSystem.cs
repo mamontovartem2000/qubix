@@ -2,6 +2,7 @@
 using Project.Common.Components;
 using Project.Common.Events;
 using Project.Common.Utilities;
+using UnityEngine;
 
 namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 {
@@ -47,10 +48,12 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 
         void ISystemBase.OnDeconstruct() { }
 
+        //TODO: Send results to server
         void IAdvanceTick.AdvanceTick(in float deltaTime)
         {
             if (world.HasSharedData<WinningTeam>())
             {
+                Debug.Log("winning team");
                 var team = world.ReadSharedData<WinningTeam>().Team;
                 DisplayGameResults(team);
                 return;
@@ -59,6 +62,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
             if (!world.HasSharedData<EndOfGameStage>()) return;
             
             var stage = world.ReadSharedData<EndOfGameStage>().StageNumber;
+            world.RemoveSharedData<EndOfGameStage>();
             
             if (stage == 1)
             {
@@ -66,12 +70,15 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 
                 if (winTeam == 0)
                 {
-                    world.RemoveSharedData<EndOfGameStage>();
                     world.SetSharedData(new MatchPoint());
-                    world.SetSharedData(new GameStage { StageNumber = 2, Time = GameConsts.GameModes.FlagCapture.SECOND_GAME_PHASE_TIME});
+                    var newTime = GameConsts.GameModes.FlagCapture.SECOND_GAME_PHASE_TIME;
+                    world.SetSharedData(new GameStage { StageNumber = 2, Time = newTime});
+                    UpdatePlayersBuffs();
+                    UpdateTimer(newTime);
                 }
                 else
                 {
+                    Debug.Log("End first stage. Win by flag count");
                     DisplayGameResults(winTeam);
                 }
                 
@@ -80,8 +87,16 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 
             if (stage == 2)
             {
-                //TODO: compare team kills
-                //TODO: random winner if kills equals
+                var score = world.ReadSharedData<CapturedFlagsScore>().Score;
+
+                if (score[1] == 0 && score[2] == 0)
+                {
+                    ChoseWinningTeamByKills();
+                }
+                else
+                {
+                    DisplayGameResults(_feature.FirstCapturedFlag);
+                }
             }
         }
 
@@ -114,11 +129,54 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
             return 0;
         }
 
+        private void ChoseWinningTeamByKills()
+        {
+            var team1 = ResultUtils.GetTeamFullStats(_playerFilter, 1);
+            var team2 = ResultUtils.GetTeamFullStats(_playerFilter, 2);
+
+            if (team1.Kills > team2.Kills)
+            {
+                DisplayGameResults(1);
+                Debug.Log("Team 1 win by kills");
+            }
+            else if (team1.Kills < team2.Kills)
+            {
+                DisplayGameResults(2);
+                Debug.Log("Team 2 win by kills");
+            }
+            else
+            {
+                var rnd = world.GetRandomRange(1, 3);
+                Debug.Log($"Team {rnd} win by random");
+                DisplayGameResults(rnd);
+            }
+            //TODO: need refactoring for 3 and more teams
+        }
+
         private void SetGameFinished()
         {
             world.GetFeature<EventsFeature>().OnGameFinished.Execute();
             world.SetSharedData(new GameFinished());
             world.SetSharedData(new GamePaused());
+        }
+
+        private void UpdateTimer(float time)
+        {
+            foreach (var timer in _timerFilter)
+            {
+                timer.Get<GameTimer>().Value = time;
+                //TODO: Move to gamestate feature
+            }
+        }
+        
+        private void UpdatePlayersBuffs()
+        {
+            foreach (var player in _playerFilter)
+            {
+                if (player.Has<CarriesTheFlag>())
+                    _feature.FlagBearerSecondStage.Apply(player);
+                //TODO: Move to new system?
+            }
         }
         
         void IUpdate.Update(in float deltaTime) { }

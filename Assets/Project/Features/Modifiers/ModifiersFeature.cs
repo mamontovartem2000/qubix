@@ -2,11 +2,7 @@
 using Project.Features.Modifiers.Systems;
 
 namespace Project.Features.Modifiers {
-    namespace Modifiers.Components {}
-    namespace Modifiers.Modules {}
-    namespace Modifiers.Systems {}
-    namespace Modifiers.Markers {}
-    
+   
     #if ECS_COMPILE_IL2CPP_OPTIONS
     [Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.NullChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
@@ -19,13 +15,13 @@ namespace Project.Features.Modifiers {
             AddSystem<SlownessModifier>();
             AddSystem<MovementSkillModifier>();
             AddSystem<DashSkillModifier>();
+
+            AddSystem<HealingBuffSystem>();
+            AddSystem<SlowdownBuffSystem>();
             
             AddSystem<LinearWeaponModifier>();
         }
 
-        protected override void OnDeconstruct() 
-        {
-            
-        }
+        protected override void OnDeconstruct() { }
     }
 }

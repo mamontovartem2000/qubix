@@ -32,11 +32,6 @@ namespace Project.Common.Components
         public float Time;
         public int StageNumber;
     }
-    
-    public struct LastGameStage : IComponent
-    {
-        public float Time;
-    }
 
     public struct EndOfGameStage : IComponent
     {

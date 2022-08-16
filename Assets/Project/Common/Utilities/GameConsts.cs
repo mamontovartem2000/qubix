@@ -74,12 +74,6 @@
                 public const float FLAG_RESPAWN_TIME = 3f;
                 public const float FIRST_GAME_PHASE_TIME = 5 * 60f;
                 public const float SECOND_GAME_PHASE_TIME = 3 * 60f;
-                
-                public static class Buffs
-                {
-                    public const float HEALTH_REGENERATION_PERCENTAGE = 10f;
-                    public const float HEALING_TIME_INTERVAL = 10f;
-                }
             }
         }
     }

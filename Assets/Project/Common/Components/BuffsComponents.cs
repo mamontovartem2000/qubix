@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using UnityEngine;
 
 namespace Assets.Project.Common.Components {
 
@@ -6,7 +7,11 @@ namespace Assets.Project.Common.Components {
     {
         public float TimeInterval;
         public float HealsPercent;
-        public float LastHealingTime;
+        [HideInInspector] public float LastHealingTime;
     }
     
+    public struct SlowdownBuff : IComponent
+    {
+        public float PercentValue;
+    }
 }

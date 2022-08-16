@@ -38,6 +38,8 @@ namespace Project.Features.CollisionHandler.Systems
             dispenser.Timer -= deltaTime;
 
             if (dispenser.Timer > 0) return;
+            //if (!SceneUtils.IsFree(entity.GetPosition())) return;
+            //TODO: Need check for free cell
             
             var health = _feature.SpawnHealth(entity);
             health.SetPosition(entity.GetPosition());

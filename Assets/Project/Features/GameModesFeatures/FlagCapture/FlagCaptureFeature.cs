@@ -1,6 +1,8 @@
 ﻿using ME.ECS;
 using ME.ECS.Collections;
+using ME.ECS.DataConfigs;
 using Project.Common.Utilities;
+using UnityEngine;
 
 namespace Project.Features.GameModesFeatures.FlagCapture
 {
@@ -31,17 +33,20 @@ namespace Project.Features.GameModesFeatures.FlagCapture
 
     public sealed class FlagCaptureFeature : Feature
     {
-        public MonoBehaviourView Flag;
-        public MonoBehaviourView PlayerFlag;
+        public MonoBehaviourView StandingFlag_Red, StandingFlag_Blue, PlayerFlag_Red, PlayerFlag_Blue ;
+        public DataConfig FlagBearerFirstStage, FlagBearerSecondStage, RemoveFlagBearer;
 
-        private ViewId _flagId, _playerFlagId;
+        [HideInInspector] public int FirstCapturedFlag;
+        private ViewId _flagRedId, _flagBlueId, _playerFlagRedId, _playerFlagBlueId;
         
         protected override void OnConstruct()
         {
             if (!world.HasSharedData<FlagCaptureMode>()) return;
             
-            _flagId = world.RegisterViewSource(Flag);
-            _playerFlagId = world.RegisterViewSource(PlayerFlag);
+            _flagBlueId = world.RegisterViewSource(StandingFlag_Blue);
+            _flagRedId = world.RegisterViewSource(StandingFlag_Red);
+            _playerFlagBlueId = world.RegisterViewSource(PlayerFlag_Blue);
+            _playerFlagRedId = world.RegisterViewSource(PlayerFlag_Red);
             
             AddSystem<FlagSpawnSystem>();
             AddSystem<SettingFlagSystem>();
@@ -68,7 +73,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture
             for (var i = 0; i < GameConsts.GameModes.FlagCapture.TEAM_FLAG_COUNT; i++)
             {
                 score.Add(i + 1, 0);
-                CreateFlagRespawnRequest(i + 1, 1f);
+                CreateFlagRespawnRequest(i + 1, 0f);
             }
             
             world.SetSharedData(new CapturedFlagsScore { Score = score });
@@ -80,12 +85,16 @@ namespace Project.Features.GameModesFeatures.FlagCapture
             entity.Set(new FlagTag());
             entity.Set(new CollisionDynamic());
             entity.Set(new TeamTag { Value = team } );
-            entity.InstantiateView(_flagId);
+            
+            if (team == 1)
+                entity.InstantiateView(_flagRedId);
+            else if (team == 2)
+                entity.InstantiateView(_flagBlueId);
 
             return entity;
         }
         
-        public void CreateFlagRespawnRequest(int team, float spawnDelay = 0f)
+        public void CreateFlagRespawnRequest(int team, float spawnDelay = GameConsts.GameModes.FlagCapture.FLAG_RESPAWN_TIME)
         {
             var entity = new Entity("RespawnFlag");
             entity.Set(new FlagNeedRespawn { SpawnDelay = spawnDelay });
@@ -93,10 +102,15 @@ namespace Project.Features.GameModesFeatures.FlagCapture
             //TODO: Replace to oneshot entity
         }
         
-        public Entity SpawnFlagOnPlayer()
+        public Entity SpawnFlagOnPlayer(int team)
         {
             var entity = new Entity("FlagOnPlayer");
-            entity.InstantiateView(_playerFlagId);
+            
+            if (team == 1)
+                entity.InstantiateView(_playerFlagRedId);
+            else if (team == 2)
+                entity.InstantiateView(_playerFlagBlueId);
+            
             return entity;
         }
         

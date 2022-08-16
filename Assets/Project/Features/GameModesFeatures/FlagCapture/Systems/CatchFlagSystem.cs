@@ -1,5 +1,4 @@
-﻿using Assets.Project.Common.Components;
-using ME.ECS;
+﻿using ME.ECS;
 
 namespace Project.Features.GameModesFeatures.FlagCapture.Systems
 {
@@ -63,25 +62,36 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
                     return;
                 }
 
-                _feature.CreateFlagRespawnRequest(entity.Read<TeamTag>().Value, GameConsts.GameModes.FlagCapture.FLAG_RESPAWN_TIME);
+                _feature.CreateFlagRespawnRequest(entity.Read<TeamTag>().Value);
             }
             else
             {
-                var playerFlag = _feature.SpawnFlagOnPlayer();
-                playerFlag.SetParent(player.Avatar());
-                playerFlag.SetLocalPosition(fp3.zero);
-                playerFlag.SetRotation(fpquaternion.zero);
-                
-                player.Set(new CarriesTheFlag { Team = entity.Read<TeamTag>().Value, Flag = playerFlag});
-                player.Avatar().Set(new HealingBuff
-                {
-                    TimeInterval = GameConsts.GameModes.FlagCapture.Buffs.HEALING_TIME_INTERVAL,
-                    HealsPercent = GameConsts.GameModes.FlagCapture.Buffs.HEALTH_REGENERATION_PERCENTAGE
-                });
+                SetFlagOnPlayer(player, entity.Read<TeamTag>().Value);
             }
             
             SceneUtils.ModifyFree(entity.GetPosition(), true);
             entity.Destroy();
+        }
+
+        private void SetFlagOnPlayer(Entity player, int flagTeam)
+        {
+            var playerFlag = _feature.SpawnFlagOnPlayer(flagTeam);
+            playerFlag.SetParent(player.Avatar());
+            playerFlag.SetLocalPosition(fp3.zero);
+            playerFlag.SetRotation(player.Avatar().GetRotation());
+            
+            player.Set(new CarriesTheFlag { Team = flagTeam, Flag = playerFlag});
+            
+            var stage = world.ReadSharedData<GameStage>().StageNumber;
+
+            if (stage == 1)
+            {
+                _feature.FlagBearerFirstStage.Apply(player);
+            }
+            else if (stage == 2)
+            {
+                _feature.FlagBearerSecondStage.Apply(player);
+            }
         }
     }
 }

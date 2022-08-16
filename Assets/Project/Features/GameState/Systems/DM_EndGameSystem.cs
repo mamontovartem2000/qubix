@@ -2,6 +2,7 @@
 using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Events;
+using Project.Common.Utilities;
 using Project.Modules.Network;
 using UnityEngine;
 
@@ -68,10 +69,9 @@ namespace Project.Features.GameState.Systems
             SendGameResult(winner);
         }
 
-        
         private Entity GetWinnerEntity()
         {
-            var mostKillsPlayers = GetPlayersWithMostKills();
+            var mostKillsPlayers = ResultUtils.GetPlayersWithMostKills(_playerFilter);
 
             if (mostKillsPlayers.Count == 1)
             {
@@ -79,7 +79,7 @@ namespace Project.Features.GameState.Systems
                 return mostKillsPlayers[0];
             }
 
-            var mostDamagePlayer = GetPlayersWithMostDamage(mostKillsPlayers);
+            var mostDamagePlayer = ResultUtils.GetPlayersWithMostDamage(mostKillsPlayers);
 
             if (mostDamagePlayer.Count == 1)
             {
@@ -87,7 +87,7 @@ namespace Project.Features.GameState.Systems
                 return mostDamagePlayer[0];
             }
 
-            var mostHealthPlayers = GetPlayersWithMostHealth(mostDamagePlayer);
+            var mostHealthPlayers = ResultUtils.GetPlayersWithMostHealth(mostDamagePlayer);
 
             if (mostHealthPlayers.Count == 1)
             {
@@ -115,79 +115,6 @@ namespace Project.Features.GameState.Systems
             var winnerId = winner.Read<PlayerTag>().PlayerServerID;
 
             SystemMessages.SendEndGameStats(stats, winnerId);
-        }
-        
-        private List<Entity> GetPlayersWithMostKills()
-        {
-            var maxKills = int.MinValue;
-            List<Entity> winners = new List<Entity>();
-
-            foreach (var player in _playerFilter)
-            {
-                var kills = player.Read<PlayerScore>().Kills;
-
-                if (kills > maxKills)
-                {
-                    winners.Clear();
-                    winners.Add(player);
-                    maxKills = kills;
-                }
-                else if (kills == maxKills)
-                {
-                    winners.Add(player);
-                }
-            }
-
-            return winners;
-        }
-
-        private List<Entity> GetPlayersWithMostDamage(List<Entity> playersList)
-        {
-            var maxDamage = int.MinValue;
-            List<Entity> winners = new List<Entity>();
-
-            foreach (var player in playersList)
-            {
-                var dealtDamage = player.Read<PlayerScore>().DealtDamage;
-
-                if (dealtDamage > maxDamage)
-                {
-                    winners.Clear();
-                    winners.Add(player);
-                    maxDamage = (int)dealtDamage;
-                }
-                else if (dealtDamage == maxDamage)
-                {
-                    winners.Add(player);
-                }
-            }
-
-            return winners;
-        }
-
-        private List<Entity> GetPlayersWithMostHealth(List<Entity> playersList)
-        {
-            var maxHealth = float.MinValue;
-            List<Entity> winners = new List<Entity>();
-
-            foreach (var player in playersList)
-            {
-                if (!player.Read<PlayerAvatar>().Value.IsAlive()) continue;
-                var health = player.Read<PlayerAvatar>().Value.Read<PlayerHealth>().Value / player.Read<PlayerAvatar>().Value.Read<PlayerHealthDefault>().Value;
-
-                if (health > maxHealth)
-                {
-                    winners.Clear();
-                    winners.Add(player);
-                    maxHealth = health;
-                }
-                else if (health == maxHealth)
-                {
-                    winners.Add(player);
-                }
-            }
-
-            return winners;
         }
 
         private Entity GetRandomWinner(List<Entity> playersList)
