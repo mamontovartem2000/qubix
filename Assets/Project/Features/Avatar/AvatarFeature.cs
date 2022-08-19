@@ -146,13 +146,14 @@ namespace Project.Features.Avatar
             var blueSpawnPoints = world.ReadSharedData<MapComponents>().BlueTeamSpawnPoints;
             var pos = fp3.zero;
 
-            if (NetworkData.GameMode == GameModes.teambattle)
+            if (NetworkData.GameMode != GameModes.deathmatch)
             {
                 pos = SceneUtils.GetTeamSpawnPosition(owner.Read<TeamTag>().Value == 1 ? redSpawnPoints : blueSpawnPoints);
             }
-
-            if (pos == fp3.zero)
+            else
+            {
                 pos = SceneUtils.GetRandomPosition();
+            }
 
             entity.SetPosition(pos);
             SceneUtils.ModifyWalkable(entity.GetPosition(), false);

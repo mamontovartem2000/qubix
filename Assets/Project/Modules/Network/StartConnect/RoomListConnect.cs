@@ -17,8 +17,9 @@ namespace Project.Modules.Network
 			base.InitTemplate(_roomListScreen, BuildTypes.RoomsConnect);
 			NetworkEvents.GetRoomList += ShowRooms;
 			RoomPrefab.JoinRoom += SelectRoom;
-			ConnectionSteps.CreateSocketConnect("wss://dev.match.qubixinfinity.io/match");
-			// ConnectionSteps.CreateSocketConnect("ws://192.168.32.85:8001"); // Local connect for Ilusha
+			//ConnectionSteps.CreateSocketConnect("wss://dev.match.qubixinfinity.io/match");
+			ConnectionSteps.CreateSocketConnect("wss://flagmode.qubixinfinity.io/match");
+			//ConnectionSteps.CreateSocketConnect("ws://localhost:8001"); // Local connect for Ilusha
 		}
 
 		private void ShowRooms(RoomInfo[] obj)

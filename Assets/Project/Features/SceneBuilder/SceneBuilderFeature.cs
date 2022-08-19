@@ -71,6 +71,7 @@ namespace Project.Features.SceneBuilder
             DrawMap(floorMap.bytes);
             DrawMapObjects(objectsMap.bytes);
 
+            MapChanger.Changer.ChangeMap();
             world.SetSharedData(new MapInitialized());
         }
 
@@ -117,8 +118,8 @@ namespace Project.Features.SceneBuilder
          
          private void DrawMapObjects(byte[] mapInBytes)
          {
-             ListCopyable<int> redPool = new ListCopyable<int>(); //TODO: if empty, anyway has empty elements and count > 0
-             ListCopyable<int> bluePool = new ListCopyable<int>();
+             var redPool = new ListCopyable<int>(); //TODO: if empty, anyway has empty elements and count > 0
+             var bluePool = new ListCopyable<int>();
 
              for (int i = 0; i < mapInBytes.Length; i++)
              {
