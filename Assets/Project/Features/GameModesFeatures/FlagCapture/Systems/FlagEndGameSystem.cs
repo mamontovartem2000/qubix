@@ -2,6 +2,7 @@
 using Project.Common.Components;
 using Project.Common.Events;
 using Project.Common.Utilities;
+using Project.Modules.Network;
 using UnityEngine;
 
 namespace Project.Features.GameModesFeatures.FlagCapture.Systems
@@ -158,6 +159,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
             world.GetFeature<EventsFeature>().OnGameFinished.Execute();
             world.SetSharedData(new GameFinished());
             world.SetSharedData(new GamePaused());
+            NetworkEvents.DestroyWorld?.Invoke(); //TODO: Need add stats sending and remove this.
         }
 
         private void UpdateTimer(float time)

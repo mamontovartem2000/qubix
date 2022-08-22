@@ -27,7 +27,9 @@ public class MapChanger : MonoBehaviour
 
     public void ChangeMap()
     {
-        var map = (Maps)NetworkData.Info.map_id;
+        //var map = (Maps)NetworkData.Info.map_id;
+        var map = Maps.Promo4;
+        
         switch (map)
         {
             case Maps.Colizei:

@@ -35,13 +35,13 @@ namespace Project.Modules.Network
 
         public static IEnumerator LoadJoinRequest(string roomid, string playerId, Action<string> callback)
         {
-            //string url = "https://dev.match.qubixinfinity.io/match/test/join_request";
-            string url = "https://flagmode.qubixinfinity.io/match/test/join_request";
+            string url = "https://dev.match.qubixinfinity.io/match/test/join_request";
+            //string url = "https://flagmode.qubixinfinity.io/match/test/join_request";
             //string url = "http://localhost:8001/test/join_request"; // Local connect for Ilusha
 
             Player req = new Player() { room_id = roomid, player_id = playerId };
             string json = JsonUtility.ToJson(req);
-
+            Debug.Log("Send " + json);
             WWWForm formData = new WWWForm();
 
             UnityWebRequest request = UnityWebRequest.Post(url, formData);
@@ -56,6 +56,7 @@ namespace Project.Modules.Network
 
             yield return request.SendWebRequest();
 
+            Debug.Log(request.downloadHandler.text);
             callback(request.downloadHandler.text);
         }
     }

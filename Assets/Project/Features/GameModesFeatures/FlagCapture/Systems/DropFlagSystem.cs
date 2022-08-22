@@ -52,7 +52,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             var carry = entity.Read<CarriesTheFlag>();
-            carry.Flag.Destroy();
+            carry.Flag.Set(new DestroyEntity(), ComponentLifetime.NotifyAllSystemsBelow);
             
             var pos = entity.Read<PlayerDead>().DeathPosition;
             var flag = _feature.SpawnFlag(carry.Team);

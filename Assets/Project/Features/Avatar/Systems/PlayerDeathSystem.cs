@@ -63,7 +63,7 @@ namespace Project.Features.Avatar.Systems
             
             _vfx.SpawnVFX(entity.Read<VFXConfig>().Value, avatar.GetPosition());
             entity.Remove<PlayerAvatar>();
-            avatar.Destroy();
+            avatar.Set(new DestroyEntity(), ComponentLifetime.NotifyAllSystemsBelow);
         }
     }
 }
