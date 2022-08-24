@@ -28,7 +28,7 @@ public class MapChanger : MonoBehaviour
     public void ChangeMap()
     {
         //var map = (Maps)NetworkData.Info.map_id;
-        var map = Maps.Promo4;
+        var map = Maps.Neon;
         
         switch (map)
         {

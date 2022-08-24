@@ -17,8 +17,8 @@ namespace Project.Modules.Network
 			base.InitTemplate(_roomListScreen, BuildTypes.RoomsConnect);
 			NetworkEvents.GetRoomList += ShowRooms;
 			RoomPrefab.JoinRoom += SelectRoom;
-			ConnectionSteps.CreateSocketConnect("wss://dev.match.qubixinfinity.io/match");
-			//ConnectionSteps.CreateSocketConnect("wss://flagmode.qubixinfinity.io/match");
+			//ConnectionSteps.CreateSocketConnect("wss://dev.match.qubixinfinity.io/match");
+			ConnectionSteps.CreateSocketConnect("wss://flagmode.qubixinfinity.io/match");
 			//ConnectionSteps.CreateSocketConnect("ws://localhost:8001"); // Local connect for Ilusha
 		}
 
