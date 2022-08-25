@@ -112,12 +112,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5261031196867206139, guid: 97c18eb493fb54c44bdf5c9fef62619e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e8cf4aec039665f438fa32a99387f849, type: 2}
+    - target: {fileID: -4683669308469848369, guid: 97c18eb493fb54c44bdf5c9fef62619e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e8cf4aec039665f438fa32a99387f849, type: 2}
     - target: {fileID: 919132149155446097, guid: 97c18eb493fb54c44bdf5c9fef62619e, type: 3}
       propertyPath: m_Name
       value: qubix_VFX_PowerupCrystal_Vedin_001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97c18eb493fb54c44bdf5c9fef62619e, type: 3}
+--- !u!1 &4592286978827559228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 97c18eb493fb54c44bdf5c9fef62619e, type: 3}
+  m_PrefabInstance: {fileID: 3709415218844408941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3814764395189992326 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 97c18eb493fb54c44bdf5c9fef62619e, type: 3}
@@ -128,3 +141,22 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -4683669308469848369, guid: 97c18eb493fb54c44bdf5c9fef62619e, type: 3}
   m_PrefabInstance: {fileID: 3709415218844408941}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &3389109549269586408
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4592286978827559228}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e574cbe90da1e1e49994d128693e2cd2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

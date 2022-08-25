@@ -182,6 +182,5 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
         }
         
         void IUpdate.Update(in float deltaTime) { }
-
     }
 }

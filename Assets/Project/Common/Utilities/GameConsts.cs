@@ -19,6 +19,11 @@
             public const float SLOWNESS_RATIO = 0.8f;
             public const float DEFAULT_MOVEMENT_SPEED_MODIFIER = 1;
         }
+        
+        public static class MapBuffs
+        {
+            public const float POWER_UP_LIFETIME = 60f;
+        }
 
         public static class Weapons
         {

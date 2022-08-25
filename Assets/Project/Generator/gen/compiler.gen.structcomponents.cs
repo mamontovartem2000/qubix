@@ -145,6 +145,10 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PortalActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PortalDispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PortalTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PowerUpCrystalTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PowerUpNeedRespawn>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PowerUpTag>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PowerUpTileTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PrivateSoundPath>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileAlternativeView>(false, true, false, false, false, false, false, false);
@@ -359,6 +363,10 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PortalActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PortalDispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PortalTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PowerUpCrystalTag>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PowerUpNeedRespawn>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PowerUpTag>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.PowerUpTileTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.PrivateSoundPath>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileActive>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ProjectileAlternativeView>(false, true, false, false, false, false, false, false);
@@ -568,6 +576,10 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.PortalActive>(true);
             structComponentsContainer.Validate<Project.Common.Components.PortalDispenserTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.PortalTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.PowerUpCrystalTag>(true);
+            structComponentsContainer.Validate<Project.Common.Components.PowerUpNeedRespawn>(true);
+            structComponentsContainer.Validate<Project.Common.Components.PowerUpTag>(false);
+            structComponentsContainer.Validate<Project.Common.Components.PowerUpTileTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.PrivateSoundPath>(false);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileActive>(true);
             structComponentsContainer.Validate<Project.Common.Components.ProjectileAlternativeView>(false);
@@ -782,6 +794,10 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.PortalActive>(true);
             entity.ValidateData<Project.Common.Components.PortalDispenserTag>(false);
             entity.ValidateData<Project.Common.Components.PortalTag>(true);
+            entity.ValidateData<Project.Common.Components.PowerUpCrystalTag>(true);
+            entity.ValidateData<Project.Common.Components.PowerUpNeedRespawn>(true);
+            entity.ValidateData<Project.Common.Components.PowerUpTag>(false);
+            entity.ValidateData<Project.Common.Components.PowerUpTileTag>(true);
             entity.ValidateData<Project.Common.Components.PrivateSoundPath>(false);
             entity.ValidateData<Project.Common.Components.ProjectileActive>(true);
             entity.ValidateData<Project.Common.Components.ProjectileAlternativeView>(false);
