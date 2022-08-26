@@ -39,14 +39,14 @@ namespace Project.Features.MapBuffs.Systems.PowerUp
             return Filter.Create("Filter-PowerUpReturnFromDeadPlayerSystem")
                 .With<PlayerTag>()
                 .With<PlayerDead>()
-                .With<PowerUpTag>()
+                .With<PowerUpBuff>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
             feature.CreatePowerUpCrystalRespawnRequest();
-            entity.Remove<PowerUpTag>();
+            entity.Remove<PowerUpBuff>();
             Debug.Log("Dead power up");
         }
     }

@@ -23,6 +23,7 @@
         public static class MapBuffs
         {
             public const float POWER_UP_LIFETIME = 60f;
+            public const float POWER_UP_SPAWN_DELAY = 3f;
         }
 
         public static class Weapons

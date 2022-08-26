@@ -56,7 +56,8 @@ namespace Project.Features.MapBuffs.Systems.PowerUp
             if (entity.TryReadCollided(out var from, out var owner) == false) return;
 			
             entity.Owner().Remove<Spawned>();
-            feature.PowerUp.Apply(entity);
+            feature.PowerUp.Apply(owner);
+            owner.Set(new PowerUpBuff());
 
             entity.Destroy();
         }

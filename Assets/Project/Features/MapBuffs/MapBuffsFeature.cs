@@ -30,6 +30,8 @@ namespace Project.Features.MapBuffs
             AddSystem<PowerUpTimerSystem>();
             AddSystem<PowerUpCrystalSpawnSystem>();
             AddSystem<PowerUpCatch>();
+
+            CreatePowerUpCrystalRespawnRequest(); //TODO: Need count tiles on map and spawn in cycle
         }
 
         private void InitAllViews()

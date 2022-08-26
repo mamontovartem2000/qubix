@@ -1,6 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
+using UnityEngine;
 
 namespace Project.Features.MapBuffs.Systems.PowerUp
 {
@@ -38,20 +39,21 @@ namespace Project.Features.MapBuffs.Systems.PowerUp
         {
             return Filter.Create("Filter-PowerUpTimerSystem")
                 .With<PlayerTag>()
-                .With<PowerUpTag>()
+                .With<PowerUpBuff>()
                 .Push();
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            ref var time = ref entity.Get<PowerUpTag>().Time;
+            ref var time = ref entity.Get<PowerUpBuff>().Time;
             time += deltaTime;
 
             if (time >= GameConsts.MapBuffs.POWER_UP_LIFETIME)
             {
                 feature.CreatePowerUpCrystalRespawnRequest();
                 feature.RemovePowerUp.Apply(entity);
-                entity.Remove<PowerUpTag>();
+                entity.Remove<PowerUpBuff>();
+                Debug.Log("remove powerUp by timer");
             }
         }
     }

@@ -1,5 +1,7 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
+using Project.Common.Utilities;
+using UnityEngine;
 
 namespace Project.Features.MapBuffs.Systems.PowerUp
 {
@@ -48,6 +50,11 @@ namespace Project.Features.MapBuffs.Systems.PowerUp
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
+            ref var delay = ref entity.Get<PowerUpNeedRespawn>().Delay;
+            delay += deltaTime;
+
+            if (delay < GameConsts.MapBuffs.POWER_UP_SPAWN_DELAY) return;
+
             foreach (var tile in _powerUpTiles) //TODO: foreach is bad idea
             {
                 if (tile.Has<Spawned>()) continue;
@@ -63,7 +70,7 @@ namespace Project.Features.MapBuffs.Systems.PowerUp
         private Entity CreateNewPowerUpCrystal(Entity owner)
         {
             var entity = new Entity("PowerUp");
-            entity.Set(new PowerUpTag());
+            entity.Set(new PowerUpCrystalTag());
             entity.Set(new CollisionDynamic());
             entity.Set(new Owner() { Value = owner});
             entity.InstantiateView(feature.PowerUpView);

@@ -1,16 +1,20 @@
 ﻿using ME.ECS;
+using UnityEngine;
 
 namespace Project.Common.Components {
 
-    public struct PowerUpTag : IComponent
+    public struct PowerUpBuff : IComponent
     {
-        public float Time;
+        [HideInInspector] public float Time;
     }
     
     public struct PowerUpTileTag : IComponent { }
     
     public struct PowerUpCrystalTag : IComponent { }
-    
-    public struct PowerUpNeedRespawn : IComponent { }
+
+    public struct PowerUpNeedRespawn : IComponent
+    {
+        [HideInInspector] public float Delay;
+    }
     
 }
