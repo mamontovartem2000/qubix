@@ -18,8 +18,12 @@ namespace Project.Features.SceneBuilder
     public sealed class SceneBuilderFeature : Feature
     {
         [Header("General")] 
-        [SerializeField] private TextAsset _testFloor;
-        [SerializeField] private TextAsset _testObjects;
+        [SerializeField] private TextAsset _colizei;
+        [SerializeField] private TextAsset _colizei_obj;
+        [SerializeField] private TextAsset _neon;
+        [SerializeField] private TextAsset _neon_obj;
+        [SerializeField] private TextAsset _neon_flag;
+        [SerializeField] private TextAsset _neon_flag_obj;
         [Header("Reworked Links")]
         
         public DataConfigWithId[] TilesConfigs;
@@ -59,8 +63,25 @@ namespace Project.Features.SceneBuilder
             }
             else
             {
-                floorMap = new GameMapRemoteData(_testFloor);
-                objectsMap = new GameMapRemoteData(_testObjects);
+                if (NetworkData.Info.map_id == 1)
+                {
+                    floorMap = new GameMapRemoteData(_colizei);
+                    objectsMap = new GameMapRemoteData(_colizei_obj);
+                }
+                else if (NetworkData.Info.map_id == 2)
+                {
+                    if (NetworkData.GameMode == GameModes.flagCapture)
+                    {
+                        floorMap = new GameMapRemoteData(_neon_flag);
+                        objectsMap = new GameMapRemoteData(_neon_flag_obj);
+                    }
+                    else
+                    {
+                        floorMap = new GameMapRemoteData(_neon);
+                        objectsMap = new GameMapRemoteData(_neon_obj);
+                    }
+                }
+                
                 Debug.Log("Used Local Maps!!!");
             }    
 
