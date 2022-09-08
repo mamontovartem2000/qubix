@@ -62,7 +62,7 @@ namespace Project.Features.Weapon.Systems
             }
             else
             {
-                entity.Set(new ModifiersCheck(), ComponentLifetime.NotifyAllSystemsBelow);
+                entity.Set(new ModifiersCheck(), ComponentLifetime.NotifyAllSystems);
 
                 entity.Get<ReloadTime>().Value = entity.Read<ReloadTimeDefault>().Value;
                 world.GetFeature<EventsFeature>().RightWeaponDepleted.Execute(entity.Owner());

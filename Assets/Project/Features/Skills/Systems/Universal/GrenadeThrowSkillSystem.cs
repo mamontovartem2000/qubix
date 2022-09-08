@@ -47,8 +47,7 @@ namespace Project.Features.Skills.Systems.Universal
 			grenade.Set(new Owner{Value = entity.Read<Owner>().Value});
 			grenade.Set(new Grenade());
 			entity.Read<ProjectileConfig>().Value.Apply(grenade);
-			
-            grenade.Get<ProjectileDirection>().Value = new Vector3(avatar.Read<FaceDirection>().Value.x * 1f, grenade.Read<Trajectory>().Value, avatar.Read<FaceDirection>().Value.z * 1f) ;
+			grenade.Get<ProjectileDirection>().Value = new Vector3(avatar.Read<FaceDirection>().Value.x * 1f, grenade.Read<Trajectory>().Value, avatar.Read<FaceDirection>().Value.z * 1f) ;
             grenade.SetPosition(avatar.GetPosition());
 			
 			SoundUtils.PlaySound(avatar, entity.Read<SoundPath>().Value);
