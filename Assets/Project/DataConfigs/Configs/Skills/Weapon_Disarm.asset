@@ -10,24 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: m_Wreck
+  m_Name: Weapon_Disarm
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
   - id: 0
   - id: 1
   - id: 2
+  - id: 3
   removeStructComponents: []
   templates: []
   references:
     version: 1
     00000000:
-      type: {class: ViewModel, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: {fileID: -6965704404856696443, guid: 43a98838d9324794aaf6a5e061b815bf, type: 3}
+        Value: 40
     00000001:
-      type: {class: ProjectileDamage, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 25
+        Value: {fileID: 11400000, guid: 8b03c701bb919cc44b4688c4d3c1b979, type: 2}
     00000002:
-      type: {class: CollisionDynamic, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: 5
+    00000003:
+      type: {class: "FreezeStorm\u0410ffect", ns: Project.Common.Components, asm: Project.Common}

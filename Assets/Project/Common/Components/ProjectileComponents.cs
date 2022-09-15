@@ -51,6 +51,11 @@ namespace Project.Common.Components
 		public DataConfig VFXConfig;
 	}
 
+	public struct DisarmModifier : IComponent
+	{
+		public float LifeTime;
+	}
+
 	public struct Linear : IComponent
 	{
 		public float StartDelay;

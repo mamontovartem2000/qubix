@@ -47,6 +47,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleLifeTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleView>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DisarmModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DroppedFlag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, false, false, false, false, false, false);
@@ -265,6 +266,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleLifeTime>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DestructibleView>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.DisarmModifier>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DispenserTag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.DroppedFlag>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.EffectTag>(true, true, false, false, false, false, false, false);
@@ -478,6 +480,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.DestructibleLifeTime>(false);
             structComponentsContainer.Validate<Project.Common.Components.DestructibleTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.DestructibleView>(false);
+            structComponentsContainer.Validate<Project.Common.Components.DisarmModifier>(false);
             structComponentsContainer.Validate<Project.Common.Components.DispenserTag>(false);
             structComponentsContainer.Validate<Project.Common.Components.DroppedFlag>(false);
             structComponentsContainer.Validate<Project.Common.Components.EffectTag>(true);
@@ -696,6 +699,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.DestructibleLifeTime>(false);
             entity.ValidateData<Project.Common.Components.DestructibleTag>(true);
             entity.ValidateData<Project.Common.Components.DestructibleView>(false);
+            entity.ValidateData<Project.Common.Components.DisarmModifier>(false);
             entity.ValidateData<Project.Common.Components.DispenserTag>(false);
             entity.ValidateData<Project.Common.Components.DroppedFlag>(false);
             entity.ValidateData<Project.Common.Components.EffectTag>(true);

@@ -47,7 +47,7 @@ namespace Project.Features.Avatar
             AddSystem<SlownessRemoveSystem>();
             AddSystem<StunLifeTimeSystem>();
             AddSystem<HardShieldApplyDamageSystem>();
-
+            AddSystem<DisarmRemoveSystem>();
             //Other
             // AddSystem<BlinkHurtSystem>();
             // AddSystem<BlinkIntensitySystem>();

@@ -51,6 +51,9 @@ namespace Project.Features.Skills
             AddSystem<SoftShieldSkillSystem>();
             AddSystem<CyberVampyrSkillSystem>();
             
+            //Lomix
+            
+
             //Universal
             AddSystem<GrenadeThrowSkillSystem>();
             AddSystem<SphereAttackSkill>();
