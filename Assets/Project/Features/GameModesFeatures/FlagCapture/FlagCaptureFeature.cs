@@ -62,6 +62,7 @@ namespace Project.Features.GameModesFeatures.FlagCapture
             if (!world.HasSharedData<FlagCaptureMode>()) return;
 
             SpawnStartFlags();
+            FlagEvents.EnableFlagScoreDisplay();
         }
 
         protected override void OnDeconstruct() { }

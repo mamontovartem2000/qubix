@@ -73,6 +73,8 @@ namespace Project.Features.GameModesFeatures.FlagCapture.Systems
             
             score[team] += 1;
 
+            FlagEvents.UpdateFlagScore(score[1], score[2]);
+
             var winTeam = GetWinningTeamByFlagCount(score);
             
             if (winTeam == 0) return;
