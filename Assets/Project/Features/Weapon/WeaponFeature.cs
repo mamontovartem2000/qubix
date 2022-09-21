@@ -52,7 +52,7 @@ namespace Project.Features.Weapon
         protected override void InjectFilter(ref FilterBuilder builder)
         {
             builder
-                .Without<DisarmModifier>()
+                
                 .WithoutShared<GamePaused>();
         }
     }

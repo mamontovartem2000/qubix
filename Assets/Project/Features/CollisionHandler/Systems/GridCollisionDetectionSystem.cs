@@ -56,7 +56,8 @@ namespace Project.Features.CollisionHandler.Systems
 					var dir = dynamicBag.ReadT3(i).Value;
 
 					if (dOwner == sOwner) continue;
-
+					
+					
 					if (fpmath.distancesq(dPos, sPos) > dist) continue;
 
 					var sIndex = SceneUtils.BurstConvert(sPos,width);

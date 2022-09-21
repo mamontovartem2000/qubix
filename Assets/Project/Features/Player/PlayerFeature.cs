@@ -65,7 +65,7 @@ namespace Project.Features.Player
             
             if (NetworkData.PlayersInfo == null) // Fake case
             {
-                BullerConfig.Apply(player);
+                LomixConfig.Apply(player);
                 return;
             }
 
@@ -103,7 +103,7 @@ namespace Project.Features.Player
                 
                 case "Bloodlov":
                 {
-                    BloodlovConfig.Apply(player);
+                    LomixConfig.Apply(player);
                     break;
                 }
                 

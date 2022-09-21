@@ -20,6 +20,7 @@ namespace Project.Features.PostLogicTick
 			AddSystem<SlownessBulletDisposeSystem>();
 			AddSystem<FreezeBulletDisposeSystem>();
 			AddSystem<CritBulletDisposeSystem>();
+			AddSystem<WeaponDisarmAttachSystem>();
 			
 			//Gun
 			AddSystem<BulletDisposeSystem>();
@@ -29,7 +30,7 @@ namespace Project.Features.PostLogicTick
 			AddSystem<BulletHitAvatarSystem>();
 			AddSystem<BulletHitDestructubleSystem>();
 			AddSystem<BulletHitNonDestructubleSystem>();
-			
+
 			//Bullet destroy
 			AddSystem<BulletDestroySystem>();
 			AddSystem<LinearDestroySystem>();

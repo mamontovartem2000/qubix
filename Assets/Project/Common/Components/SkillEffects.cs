@@ -23,6 +23,8 @@ namespace Project.Common.Components
 	public struct ScytheThrowAffect : IComponent {}
 	public struct SoftShieldAffect : IComponent {}
 	public struct CyberVampyrAffect : IComponent {}
+	public struct MinePlantAffect : IComponent {}
+	public struct TeleportPlantAffect : IComponent {}
 
 	public struct VFXTag : IComponent {};
 }

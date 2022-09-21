@@ -120,6 +120,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimerDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineDamage>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MinePlantAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ModifierConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ModifiersCheck>(false, true, false, false, false, false, false, false);
@@ -204,6 +205,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamDeathmatchMode>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamTag>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlantAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileAlternativeView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileName>(false, true, false, false, false, false, false, false);
@@ -339,6 +341,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineBlinkTimerDefault>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineDamage>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.MinePlantAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MineTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ModifierConfig>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ModifiersCheck>(false, true, false, false, false, false, false, false);
@@ -423,6 +426,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamDeathmatchMode>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamTag>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlantAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileAlternativeView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileName>(false, true, false, false, false, false, false, false);
@@ -553,6 +557,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.MineBlinkTimer>(false);
             structComponentsContainer.Validate<Project.Common.Components.MineBlinkTimerDefault>(false);
             structComponentsContainer.Validate<Project.Common.Components.MineDamage>(false);
+            structComponentsContainer.Validate<Project.Common.Components.MinePlantAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.MineTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.ModifierConfig>(false);
             structComponentsContainer.Validate<Project.Common.Components.ModifiersCheck>(false);
@@ -637,6 +642,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Targeted>(true);
             structComponentsContainer.Validate<Project.Common.Components.TeamDeathmatchMode>(true);
             structComponentsContainer.Validate<Project.Common.Components.TeamTag>(false);
+            structComponentsContainer.Validate<Project.Common.Components.TeleportPlantAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.TeleportPlayer>(false);
             structComponentsContainer.Validate<Project.Common.Components.TileAlternativeView>(false);
             structComponentsContainer.Validate<Project.Common.Components.TileName>(false);
@@ -772,6 +778,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.MineBlinkTimer>(false);
             entity.ValidateData<Project.Common.Components.MineBlinkTimerDefault>(false);
             entity.ValidateData<Project.Common.Components.MineDamage>(false);
+            entity.ValidateData<Project.Common.Components.MinePlantAffect>(true);
             entity.ValidateData<Project.Common.Components.MineTag>(true);
             entity.ValidateData<Project.Common.Components.ModifierConfig>(false);
             entity.ValidateData<Project.Common.Components.ModifiersCheck>(false);
@@ -856,6 +863,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Targeted>(true);
             entity.ValidateData<Project.Common.Components.TeamDeathmatchMode>(true);
             entity.ValidateData<Project.Common.Components.TeamTag>(false);
+            entity.ValidateData<Project.Common.Components.TeleportPlantAffect>(true);
             entity.ValidateData<Project.Common.Components.TeleportPlayer>(false);
             entity.ValidateData<Project.Common.Components.TileAlternativeView>(false);
             entity.ValidateData<Project.Common.Components.TileName>(false);

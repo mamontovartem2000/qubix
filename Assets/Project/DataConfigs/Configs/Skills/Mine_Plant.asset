@@ -16,6 +16,7 @@ MonoBehaviour:
   structComponents:
   - id: 0
   - id: 1
+  - id: 2
   removeStructComponents: []
   templates: []
   references:
@@ -27,4 +28,6 @@ MonoBehaviour:
     00000001:
       type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 5
+        Value: 6
+    00000002:
+      type: {class: MinePlantAffect, ns: Project.Common.Components, asm: Project.Common}

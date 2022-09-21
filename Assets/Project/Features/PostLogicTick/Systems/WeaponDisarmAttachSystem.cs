@@ -1,11 +1,8 @@
 ﻿using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Utilities;
-using Project.Features.CollisionHandler;
-using Project.Features.CollisionHandler.Systems;
-using UnityEngine;
 
-namespace Project.Features.Skills.Systems.Lomix {
+namespace Project.Features.PostLogicTick.Systems {
 
     #pragma warning disable
     using Project.Components; using Project.Modules; using Project.Systems; using Project.Markers;
@@ -17,16 +14,16 @@ namespace Project.Features.Skills.Systems.Lomix {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class MinePlantSkillSystem : ISystemFilter {
+    public sealed class WeaponDisarmAttachSystem : ISystemFilter {
         
-        private SkillsFeature _feature;
-        private CollisionHandlerFeature _collisionHandlerFeature;
+        private PostLogicTickFeature _feature;
+        
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
             this.GetFeature(out this._feature);
-            world.GetFeature(out _collisionHandlerFeature);
+            
         }
         
         void ISystemBase.OnDeconstruct() {}
@@ -37,20 +34,23 @@ namespace Project.Features.Skills.Systems.Lomix {
         #endif
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
-            
-            return Filter.Create("Filter-MinePlantSkillSystem")
-                .With<MinePlantAffect>()
-                .With<ActivateSkill>()
+            return Filter.Create("Filter-WeaponDisarmAttachSystem")
+                .With<ProjectileActive>()
+                .With<Collided>()
+                .With<DisarmModifier>()
                 .Push();
-            
         }
 
         void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
         {
-            var mine = _collisionHandlerFeature.SpawnMine();
-            mine.SetPosition((Vector3)Vector3Int.RoundToInt(entity.Owner().Avatar().GetPosition()));
-            mine.Get<Owner>().Value = entity.Owner();
-            entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+            if (entity.TryReadCollided(out var from, out var owner) == false) return;
+
+            if (!owner.Has<PlayerAvatar>()) return;
+            
+            if (from.Read<TeamTag>().Value == owner.Read<TeamTag>().Value) return;
+            
+            var avatar = owner.Avatar();
+            avatar.Set(new DisarmModifier{LifeTime = entity.Read<DisarmModifier>().LifeTime});
         }
     }
 }

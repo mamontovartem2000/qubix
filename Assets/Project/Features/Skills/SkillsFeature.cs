@@ -3,6 +3,7 @@ using Project.Common.Components;
 using Project.Features.Skills.Systems.Bloodlov;
 using Project.Features.Skills.Systems.Buller;
 using Project.Features.Skills.Systems.GoldHunter;
+using Project.Features.Skills.Systems.Lomix;
 using Project.Features.Skills.Systems.Powerf;
 using Project.Features.Skills.Systems.Silen;
 using Project.Features.Skills.Systems.Solaray;
@@ -52,7 +53,7 @@ namespace Project.Features.Skills
             AddSystem<CyberVampyrSkillSystem>();
             
             //Lomix
-            
+            AddSystem<MinePlantSkillSystem>();
 
             //Universal
             AddSystem<GrenadeThrowSkillSystem>();

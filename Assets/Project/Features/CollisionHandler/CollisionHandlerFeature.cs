@@ -70,13 +70,11 @@ namespace Project.Features.CollisionHandler
             return entity;
         }   
 
-        public void SpawnMine()
+        public Entity SpawnMine()
         {
             var entity = new Entity("Mine");
 
             entity.Set(new MineTag());
-
-            entity.SetPosition(SceneUtils.GetRandomPosition());
 
             SceneUtils.ModifyFree(entity.GetPosition(), false);
             entity.InstantiateView(_mine);
@@ -84,10 +82,12 @@ namespace Project.Features.CollisionHandler
             entity.Get<MineDamage>().Value = world.GetRandomRange(GameConsts.Scene.Mines.DAMAGE_MIN, GameConsts.Scene.Mines.DAMAGE_MAX);
             entity.Get<MineBlinkTimer>().Value = entity.Get<MineBlinkTimerDefault>().Value;
 
-            entity.Get<TeamTag>().Value = 0;
+            // entity.Get<TeamTag>().Value = 0;
             
             entity.Set(new CollisionDynamic());
             entity.Get<Owner>().Value = new Entity("mineowner");
+
+            return entity;
         }
 
         public Entity SpawnPortal(Entity owner)

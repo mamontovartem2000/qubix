@@ -36,7 +36,9 @@ namespace Project.Features.CollisionHandler.Systems
             
             if (_spawnDelay > 0) return;
             
-            _feature.SpawnMine();
+            var mine = _feature.SpawnMine();
+            mine.Get<TeamTag>().Value = 0;
+            mine.SetPosition(SceneUtils.GetRandomPosition());
             _spawnDelay = GameConsts.Scene.Mines.SPAWN_DELAY_DEFAULT;
         }
     }

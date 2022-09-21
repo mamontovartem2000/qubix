@@ -39,7 +39,7 @@ namespace Project.Features.Weapon.Systems
         {
             ref var weapon = ref entity.Get<WeaponEntities>();
 			
-            if (entity.Owner().Has<LeftWeaponShot>())
+            if (entity.Owner().Has<LeftWeaponShot>() && !entity.Has<DisarmModifier>())
             {
                 weapon.LeftWeapon.Set(new LeftWeaponShot());
                 weapon.LeftWeapon.Set(new MeleeActive());
@@ -51,15 +51,14 @@ namespace Project.Features.Weapon.Systems
                
             }
 
-            if (entity.Owner().Has<RightWeaponShot>())
+            if (entity.Owner().Has<RightWeaponShot>() && !entity.Has<DisarmModifier>())
             {
                 weapon.RightWeapon.Set(new RightWeaponShot());
                 weapon.RightWeapon.Set(new MeleeActive());
             }
             else
             {
-                weapon.RightWeapon.Remove<RightWeaponShot>();                
-                
+                weapon.RightWeapon.Remove<RightWeaponShot>();
             }
         }
     }
