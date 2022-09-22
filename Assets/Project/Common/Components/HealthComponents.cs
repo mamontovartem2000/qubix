@@ -1,4 +1,5 @@
-﻿using ME.ECS;
+﻿using System;
+using ME.ECS;
 
 namespace Project.Common.Components 
 {   
@@ -10,6 +11,11 @@ namespace Project.Common.Components
     public struct PlayerDead : IComponent
     {
         public fp3 DeathPosition;
+    }
+    
+    public struct SpawnTime : IComponent
+    {
+        public DateTime Value;
     }
 
     public struct PlayerHealthOverlay : IComponent

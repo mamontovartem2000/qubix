@@ -47,9 +47,7 @@ namespace Project.Features.PostLogicTick.Systems {
             var collision = new Entity("collision");
             var bulletHit = entity.Read<BulletHit>();
             bulletHit.Bullet.Set(new LastHitEntity {Value = entity});
-            Debug.Log("hit");
             collision.Get<LifeTimeLeft>().Value = GameConsts.Main.DEFAULT_LIFETIME;
-            Debug.Log(bulletHit.Bullet.Read<ProjectileDamage>().Value);
             collision.Set(new ApplyDamage { ApplyTo = entity.Avatar(), ApplyFrom = bulletHit.ApplyFrom, Damage = bulletHit.Bullet.Read<ProjectileDamage>().Value }, 
                 ComponentLifetime.NotifyAllSystems);
             entity.Read<BulletHit>().Bullet.Set(new ShouldDestroy(), ComponentLifetime.NotifyAllSystemsBelow);

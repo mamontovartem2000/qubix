@@ -1,3 +1,5 @@
+using System;
+using ME.ECS.FiltersArchetype;
 using Project.Modules.Network;
 using UnityEngine;
 
@@ -28,6 +30,7 @@ public class MapChanger : MonoBehaviour
     public void ChangeMap()
     {
         var map = (Maps)NetworkData.Info.map_id;
+        Debug.Log("map: " + map);
         
         switch (map)
         {

@@ -17,8 +17,8 @@ namespace Project.Modules.Network
         public static string FloorMap;
         public static string ObjectsMap;
         public static bool IsLocalGame;
-
-
+        public static string LocalCharacter;
+        
         public static void CloseNetwork()
         {
             if (Connect != null)
@@ -30,7 +30,7 @@ namespace Project.Modules.Network
 
         public static void SetFakeSettings()
         {
-            Info = new GameInfo() { server_url = "url", player_nickname = "Dev player", map_id = 2, game_mode = "flagCapture", player_id = "qwerty" };
+            Info = new GameInfo() { server_url = "url", player_nickname = "Dev player", map_id = 1, game_mode = "deathmatch", player_id = "qwerty" };
             SlotInRoom = 1;
             GameSeed = 1;
             FullJoinRequest = string.Empty;
@@ -68,6 +68,15 @@ namespace Project.Modules.Network
         public uint Deaths;
         public string PlayerId;
         public int Team;
+    }
+    
+    public struct ExtendedPlayerStats
+    {
+        public string PlayerId;
+        public ushort Kills;
+        public ushort Deaths;
+        public ushort Damage;
+        public ushort AvgLifetime;
     }
 
     public struct PlayerInfo

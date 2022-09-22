@@ -65,17 +65,20 @@ namespace Project.Features.GameState.Systems
 
             if (team1.Kills > team2.Kills)
                 return 1;
-            else if (team1.Kills < team2.Kills)
+            
+            if (team1.Kills < team2.Kills)
                 return 2;
             
             if (team1.Damage > team2.Damage)
                 return 1;
-            else if (team1.Damage < team2.Damage)
+            
+            if (team1.Damage < team2.Damage)
                 return 2;
 
             if (team1.Deaths < team2.Deaths)
                 return 1;
-            else if (team1.Deaths > team2.Deaths)
+            
+            if (team1.Deaths > team2.Deaths)
                 return 2;
 
             //TODO: Add random
@@ -96,7 +99,7 @@ namespace Project.Features.GameState.Systems
                 stats.Add(new PlayerStats() { Kills = (uint)kills, Deaths = (uint)deaths, PlayerId = id, Team = team });
             }
 
-            SystemMessages.SendTeamGameStats(stats, winnerTeam.ToString()); //TODO: need int
+            GameStatsMessages.SendTeamGameStats(stats, winnerTeam.ToString()); //TODO: need int
         }
 
         void IUpdate.Update(in float deltaTime) { }

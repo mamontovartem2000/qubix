@@ -3,6 +3,8 @@ using ME.ECS;
 using Project.Common.Components;
 using Project.Common.Events;
 using Project.Common.Utilities;
+using Project.Features.Player;
+using Project.Features.Player.Systems;
 using Project.Modules.Network;
 using UnityEngine;
 
@@ -66,7 +68,8 @@ namespace Project.Features.GameState.Systems
             }
 
             Debug.Log("SendGameResult");
-            SendGameResult(winner);
+            //SendGameResult(winner.Read<PlayerTag>().PlayerServerID);
+            SendExtendedGameResult(winner.Read<PlayerTag>().PlayerServerID);
         }
 
         private Entity GetWinnerEntity()
@@ -99,9 +102,9 @@ namespace Project.Features.GameState.Systems
             return GetRandomWinner(mostHealthPlayers);
         }
         
-        private void SendGameResult(Entity winner)
+        private void SendGameResult(string winnerId)
         {
-            List<PlayerStats> stats = new List<PlayerStats>();
+            var stats = new List<PlayerStats>();
 
             foreach (var player in _playerFilter)
             {
@@ -112,9 +115,33 @@ namespace Project.Features.GameState.Systems
                 stats.Add(new PlayerStats() { Kills = (uint)kills, Deaths = (uint)deaths, PlayerId = id });
             }
 
-            var winnerId = winner.Read<PlayerTag>().PlayerServerID;
+            GameStatsMessages.SendEndGameStats(stats, winnerId);
+        }
+        
+        private void SendExtendedGameResult(string winnerId)
+        {
+            var localPlayerStats = new ExtendedPlayerStats();
+            
+            foreach (var player in _playerFilter)
+            {
+                if (player == Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.SlotInRoom))
+                {
+                    localPlayerStats = new ExtendedPlayerStats
+                    {
+                        Kills = (ushort)player.Read<PlayerScore>().Kills,
+                        Deaths = (ushort)player.Read<PlayerScore>().Deaths,
+                        PlayerId = player.Read<PlayerTag>().PlayerServerID,
+                        Damage = (ushort)Mathf.Round(player.Read<PlayerScore>().DealtDamage),
+                        AvgLifetime = (ushort)LifetimeStats.Stats.RoundedAverageLifetime()
+                    };
 
-            SystemMessages.SendEndGameStats(stats, winnerId);
+                    //Debug.Log($"PlayerId: {localPlayerStats.PlayerId}, Deaths: {localPlayerStats.Deaths}, Kills: {localPlayerStats.Kills}," +
+                    //          $" Damage: {localPlayerStats.Damage}, AvgLifetime: {localPlayerStats.AvgLifetime}, Character: {NetworkData.LocalCharacter}, winner: {winnerId}");
+                    break;
+                }
+            }
+            
+            GameStatsMessages.SendExtendedEndGameStats(localPlayerStats, winnerId);
         }
 
         private Entity GetRandomWinner(List<Entity> playersList)

@@ -1,4 +1,5 @@
-﻿using ME.ECS;
+﻿using System;
+using ME.ECS;
 using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
@@ -69,6 +70,7 @@ namespace Project.Features.Avatar
         {
             var entity = new Entity("avatar");
             owner.Read<PlayerConfig>().AvatarConfig.Apply(entity);
+            owner.Set(new SpawnTime { Value = DateTime.UtcNow });
 
             var view = world.RegisterViewSource(entity.Read<ViewModel>().Value);
             entity.InstantiateView(view);

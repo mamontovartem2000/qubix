@@ -2,7 +2,6 @@
 using FlatMessages;
 using ME.ECS;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ namespace Project.Modules.Network
     {
         public static byte[] SystemHashMessage(uint tick, int hash)
         {
-            FlatBufferBuilder builder = new FlatBufferBuilder(1);
+            var builder = new FlatBufferBuilder(1);
             var hashMess = SaveHash.CreateSaveHash(builder, tick, hash);
             var offset = SystemMessage.CreateSystemMessage(builder, GetTime(), Payload.SaveHash, hashMess.Value);
             builder.Finish(offset.Value);
@@ -28,7 +27,7 @@ namespace Project.Modules.Network
                     return;
             }
             
-            SystemMessage data = SystemMessage.GetRootAsSystemMessage(new ByteBuffer(bytes));
+            var data = SystemMessage.GetRootAsSystemMessage(new ByteBuffer(bytes));
 
             switch (data.PayloadType)
             {
@@ -56,61 +55,11 @@ namespace Project.Modules.Network
             }
         }
 
-        public static void SendEndGameStats(List<PlayerStats> stats, string winnerID)
-        {
-            FlatBufferBuilder builder = new FlatBufferBuilder(1);
-            var winner = builder.CreateString(winnerID);
-            Offset<Stats>[] offsets = new Offset<Stats>[stats.Count];
-
-            for (int i = 0; i < stats.Count; i++)
-            {
-                PlayerStats player = stats[i];
-                var playerId = builder.CreateString(player.PlayerId);
-                var playerStats = Stats.CreateStats(builder, player.Kills, player.Deaths, playerId);
-                offsets[i] = playerStats;
-            }
-
-            var statsArray = GameOver.CreateStatsVector(builder, offsets);
-            var hash = Worlds.currentWorld.GetModule<NetworkModule>().GetSyncHash();
-            var gameOver = GameOver.CreateGameOver(builder, winner, hash, statsArray);
-
-            var offset = SystemMessage.CreateSystemMessage(builder, GetTime(), Payload.GameOver, gameOver.Value);
-            builder.Finish(offset.Value);
-
-            var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
-            NetworkData.Connect.SendSystemMessage(ms);
-        }
-
         public static void PlayerJoinedWorld()
         {
-            FlatBufferBuilder builder = new FlatBufferBuilder(1);
+            var builder = new FlatBufferBuilder(1);
             var join = JoinedTheGame.CreateJoinedTheGame(builder, true);
             var offset = SystemMessage.CreateSystemMessage(builder, GetTime(), Payload.JoinedTheGame, join.Value);
-            builder.Finish(offset.Value);
-
-            var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
-            NetworkData.Connect.SendSystemMessage(ms);
-        }
-
-        public static void SendTeamGameStats(List<PlayerStats> stats, string winnerTeam)
-        {
-            FlatBufferBuilder builder = new FlatBufferBuilder(1);
-            var winner = builder.CreateString(winnerTeam);
-            Offset<TeamStats>[] offsets = new Offset<TeamStats>[stats.Count];
-
-            for (int i = 0; i < stats.Count; i++)
-            {
-                PlayerStats player = stats[i];
-                var playerId = builder.CreateString(player.PlayerId);
-                var playerStats = TeamStats.CreateTeamStats(builder, player.Kills, player.Deaths, playerId, (byte)player.Team);
-                offsets[i] = playerStats;
-            }
-
-            var statsArray = TeamGameOver.CreateStatsVector(builder, offsets);
-            var hash = Worlds.currentWorld.GetModule<NetworkModule>().GetSyncHash();
-            var gameOver = TeamGameOver.CreateTeamGameOver(builder, winner, hash, statsArray);
-
-            var offset = SystemMessage.CreateSystemMessage(builder, GetTime(), Payload.TeamGameOver, gameOver.Value);
             builder.Finish(offset.Value);
 
             var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
@@ -127,7 +76,7 @@ namespace Project.Modules.Network
         private static void GetReplayHash(ReplayFrom replayFrom)
         {
             Debug.Log("Replay! Call Sergo!");
-            uint ticks = replayFrom.LastTick;
+            var ticks = replayFrom.LastTick;
             Worlds.currentWorld.RewindTo(ticks);
         }
 

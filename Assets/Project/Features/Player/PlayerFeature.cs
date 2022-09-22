@@ -33,6 +33,7 @@ namespace Project.Features.Player
         {
             AddModule<PlayerConnectionModule>();
             AddSystem<HandleInputSystem>();
+            AddSystem<LifetimeStats>();
 
             PlayerInput = new PlayerInput();
             PlayerInput.Enable();
@@ -65,11 +66,14 @@ namespace Project.Features.Player
             
             if (NetworkData.PlayersInfo == null) // Fake case
             {
-                LomixConfig.Apply(player);
+                BullerConfig.Apply(player);
                 return;
             }
 
-            switch (NetworkData.PlayersInfo[localId].Character)
+            var character = NetworkData.PlayersInfo[localId].Character;
+            NetworkData.LocalCharacter = character;
+            
+            switch (character)
             {
                 case "Buller":
                 {
@@ -103,7 +107,7 @@ namespace Project.Features.Player
                 
                 case "Bloodlov":
                 {
-                    LomixConfig.Apply(player);
+                    BloodlovConfig.Apply(player);
                     break;
                 }
                 
@@ -145,8 +149,6 @@ namespace Project.Features.Player
             return Entity.Empty;
         }
 
-        protected override void OnDeconstruct()
-        {
-        }
+        protected override void OnDeconstruct() { }
     }
 }

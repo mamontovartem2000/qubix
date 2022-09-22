@@ -10,8 +10,8 @@ namespace Project.Modules.Network
         public static IEnumerator CreateRoom(int playerNumber, Action<string> callback)
         {
             string url = "https://dev.match.qubixinfinity.io/match/create_room";
-            Reqqq req = new Reqqq() { map_id = 1, player_scheme = new int[] { playerNumber, playerNumber }, lifetime = 60 * 5, game_mode = GameModes.teambattle.ToString() }; // teambattle
-            //Reqqq req = new Reqqq() { map_id = 1, player_scheme = new int[] { playerNumber }, lifetime = 60 * 5, game_mode = GameModes.deathmatch.ToString() }; // deathmatch
+            //Reqqq req = new Reqqq() { map_id = 1, player_scheme = new int[] { playerNumber, playerNumber }, lifetime = 60 * 5, game_mode = GameModes.teambattle.ToString() }; // teambattle
+            Reqqq req = new Reqqq() { map_id = 1, player_scheme = new int[] { playerNumber }, lifetime = 60 * 5, game_mode = GameModes.deathmatch.ToString() }; // deathmatch
 
             string json = JsonUtility.ToJson(req);
 
@@ -29,6 +29,7 @@ namespace Project.Modules.Network
 
             yield return request.SendWebRequest();
 
+            Debug.Log(request.downloadHandler.text);
             Room info = NetworkData.CreateFromJSON<Room>(request.downloadHandler.text);
             callback(info.id);
         }
