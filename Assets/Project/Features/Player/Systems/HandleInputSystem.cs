@@ -19,26 +19,22 @@ namespace Project.Features.Player.Systems
     public sealed class HandleInputSystem : ISystem, IUpdate
     {
         public World world { get; set; }
-
-        public NetworkModule Net;
-
         private PlayerFeature _feature;
 
+        private NetworkModule _net;
         private Filter _playerFilter;
-
         private RPCId _movement;
         private RPCId _mouseLeft, _mouseRight, _lockDirection;
         private RPCId _firstSkill, _secondSkill, _thirdSkill, _fourthSkill;
-        private RPCId _tabulation;
         private RPCId _reload;
         private RPCId _screenshot;
         void ISystemBase.OnConstruct()
         {
-            Net = world.GetModule<NetworkModule>();
+            _net = world.GetModule<NetworkModule>();
 
             this.GetFeature(out _feature);
-            Net.RegisterObject(this);
-            RegisterRPSs(Net);
+            _net.RegisterObject(this);
+            RegisterRPSs(_net);
 
             Filter.Create("Filter-Players")
                 .With<PlayerTag>()
@@ -57,11 +53,7 @@ namespace Project.Features.Player.Systems
             _fourthSkill = net.RegisterRPC(new Action<FourthSkillMarker>(FourthSkill_RPC).Method);
 
             _movement = net.RegisterRPC(new Action<MovementMarker>(Movement_RPC).Method);
-            
-            _tabulation = net.RegisterRPC(new Action<TabulationMarker>(TabKey_RPC).Method);
-            
             _reload = net.RegisterRPC(new Action<ReloadMarker>(Reload_RPC).Method);
-            
             _screenshot = net.RegisterRPC(new Action<ScreenshotMarker>(Screenshot_RPC).Method);
         }
 
@@ -69,24 +61,20 @@ namespace Project.Features.Player.Systems
 
         void IUpdate.Update(in float deltaTime)
         {
-            if (world.GetMarker(out MovementMarker move)) Net.RPC(this, _movement, move);
+            if (world.GetMarker(out MovementMarker move)) _net.RPC(this, _movement, move);
 
-            if (world.GetMarker(out MouseLeftMarker mlm)) Net.RPC(this, _mouseLeft, mlm);
-            if (world.GetMarker(out MouseRightMarker mrm)) Net.RPC(this, _mouseRight, mrm);
+            if (world.GetMarker(out MouseLeftMarker mlm)) _net.RPC(this, _mouseLeft, mlm);
+            if (world.GetMarker(out MouseRightMarker mrm)) _net.RPC(this, _mouseRight, mrm);
 
-            if (world.GetMarker(out LockDirectionMarker sm)) Net.RPC(this, _lockDirection, sm);
+            if (world.GetMarker(out LockDirectionMarker sm)) _net.RPC(this, _lockDirection, sm);
 
-            if (world.GetMarker(out FirstSkillMarker first)) Net.RPC(this, _firstSkill, first);
-            if (world.GetMarker(out SecondSkillMarker second)) Net.RPC(this, _secondSkill, second);
-            if (world.GetMarker(out ThirdSkillMarker third)) Net.RPC(this, _thirdSkill, third);
-            if (world.GetMarker(out FourthSkillMarker fourth)) Net.RPC(this, _fourthSkill, fourth);
+            if (world.GetMarker(out FirstSkillMarker first)) _net.RPC(this, _firstSkill, first);
+            if (world.GetMarker(out SecondSkillMarker second)) _net.RPC(this, _secondSkill, second);
+            if (world.GetMarker(out ThirdSkillMarker third)) _net.RPC(this, _thirdSkill, third);
+            if (world.GetMarker(out FourthSkillMarker fourth)) _net.RPC(this, _fourthSkill, fourth);
             
-            if (world.GetMarker(out TabulationMarker tm)) Net.RPC(this, _tabulation, tm);
-            
-            if (world.GetMarker(out ReloadMarker rm)) Net.RPC(this, _reload, rm);
-            
-            if (world.GetMarker(out ScreenshotMarker scrnm)) Net.RPC(this, _screenshot, scrnm);
-            
+            if (world.GetMarker(out ReloadMarker rm)) _net.RPC(this, _reload, rm);
+            if (world.GetMarker(out ScreenshotMarker scrnm)) _net.RPC(this, _screenshot, scrnm);
         }
 
         private void Movement_RPC(MovementMarker move)
@@ -150,25 +138,6 @@ namespace Project.Features.Player.Systems
                         player.Remove<LockTarget>();
                         break;
                     }
-            }
-        }
-        
-        private void TabKey_RPC(TabulationMarker tm)
-        {
-            var player = _feature.GetPlayerByID(world.GetModule<NetworkModule>().GetCurrentHistoryEvent().order);
-
-            switch (tm.State)
-            {
-                case InputState.Pressed:
-                {
-                    world.GetFeature<EventsFeature>().TabulationOn.Execute(player);
-                    break;
-                }
-                case InputState.Released:
-                {
-                    world.GetFeature<EventsFeature>().TabulationOff.Execute(player);
-                    break;
-                }
             }
         }
 

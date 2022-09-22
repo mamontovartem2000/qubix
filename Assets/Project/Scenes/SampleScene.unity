@@ -835,7 +835,7 @@ RectTransform:
   - {fileID: 605570022}
   - {fileID: 1914887466}
   - {fileID: 1488380170}
-  - {fileID: 1550250487}
+  - {fileID: 1693537031}
   - {fileID: 984670113}
   m_Father: {fileID: 5262982670439285215}
   m_RootOrder: 1
@@ -6545,7 +6545,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1550250487}
   m_Layer: 0
-  m_Name: TabInfo
+  m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6558,14 +6558,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550250486}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 349431834}
   - {fileID: 125489348}
-  m_Father: {fileID: 219487302}
-  m_RootOrder: 6
+  m_Father: {fileID: 1693537031}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7010,6 +7010,108 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690868112}
   m_CullTransparentMesh: 1
+--- !u!1 &1693537030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1693537031}
+  - component: {fileID: 1693537032}
+  m_Layer: 0
+  m_Name: TabInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1693537031
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693537030}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1550250487}
+  m_Father: {fileID: 219487302}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1693537032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693537030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf163dd67baca045b713161cb7f7986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tabulationScreen: {fileID: 1550250486}
+  _tabulationScreenAddPlayerEvent: {fileID: 11400000, guid: 6d7f1985afcce5d438e216c671d94942, type: 2}
+  _tabulationScreenNumbersChangedEvent: {fileID: 11400000, guid: 74d829a68772a214a88ac798cd81d0af, type: 2}
+  _tabulationScreenNewPlayerStats: {fileID: 11400000, guid: 03725f9c327d78343896af552e53376a, type: 2}
+  PlayerInTab:
+  - playerBlock: {fileID: 971124128}
+    nickname: {fileID: 503975139}
+    kill: {fileID: 425441221}
+    death: {fileID: 1058096473}
+    dealtDamage: {fileID: 1714593785}
+    idInTab: 0
+  - playerBlock: {fileID: 331417364}
+    nickname: {fileID: 331417363}
+    kill: {fileID: 331417362}
+    death: {fileID: 331417361}
+    dealtDamage: {fileID: 331417360}
+    idInTab: 1
+  - playerBlock: {fileID: 1039345601}
+    nickname: {fileID: 1039345600}
+    kill: {fileID: 1039345599}
+    death: {fileID: 1039345598}
+    dealtDamage: {fileID: 1039345597}
+    idInTab: 2
+  - playerBlock: {fileID: 1528219750}
+    nickname: {fileID: 1528219749}
+    kill: {fileID: 1528219748}
+    death: {fileID: 1528219747}
+    dealtDamage: {fileID: 1528219746}
+    idInTab: 3
+  - playerBlock: {fileID: 867056364}
+    nickname: {fileID: 867056363}
+    kill: {fileID: 867056362}
+    death: {fileID: 867056361}
+    dealtDamage: {fileID: 867056360}
+    idInTab: 4
+  - playerBlock: {fileID: 306746420}
+    nickname: {fileID: 306746419}
+    kill: {fileID: 306746418}
+    death: {fileID: 306746417}
+    dealtDamage: {fileID: 306746416}
+    idInTab: 5
+  - playerBlock: {fileID: 1408285724}
+    nickname: {fileID: 1408285723}
+    kill: {fileID: 1408285722}
+    death: {fileID: 1408285721}
+    dealtDamage: {fileID: 1408285720}
+    idInTab: 6
+  - playerBlock: {fileID: 112391075}
+    nickname: {fileID: 112391074}
+    kill: {fileID: 112391073}
+    death: {fileID: 112391072}
+    dealtDamage: {fileID: 112391071}
+    idInTab: 7
 --- !u!1 &1696474586
 GameObject:
   m_ObjectHideFlags: 0
@@ -10440,7 +10542,6 @@ GameObject:
   - component: {fileID: 5262982670439285207}
   - component: {fileID: 5262982670439285216}
   - component: {fileID: 5262982670439285217}
-  - component: {fileID: 5262982670439285218}
   - component: {fileID: 5262982670439285219}
   - component: {fileID: 5262982670439285221}
   - component: {fileID: 5262982670439285220}
@@ -10507,73 +10608,6 @@ MonoBehaviour:
   SecondSkillImage: {fileID: 1918256725}
   ThirdSkillImage: {fileID: 1112039387}
   FourthSkillImage: {fileID: 656698660}
---- !u!114 &5262982670439285218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5262982670439285214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf163dd67baca045b713161cb7f7986, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TabulationScreen: {fileID: 1550250486}
-  _tabulationScreenOnEvent: {fileID: 11400000, guid: 146737e44c612324480af115cb81cf07, type: 2}
-  _tabulationScreenOffEvent: {fileID: 11400000, guid: 64288dc7fecb600429f687030738604c, type: 2}
-  _tabulationScreenAddPlayerEvent: {fileID: 11400000, guid: 6d7f1985afcce5d438e216c671d94942, type: 2}
-  _tabulationScreenNumbersChangedEvent: {fileID: 11400000, guid: 74d829a68772a214a88ac798cd81d0af, type: 2}
-  _tabulationScreenNewPlayerStats: {fileID: 11400000, guid: 03725f9c327d78343896af552e53376a, type: 2}
-  PlayerInTab:
-  - playerBlock: {fileID: 971124128}
-    nickname: {fileID: 503975139}
-    kill: {fileID: 425441221}
-    death: {fileID: 1058096473}
-    dealtDamage: {fileID: 1714593785}
-    idInTab: 0
-  - playerBlock: {fileID: 331417364}
-    nickname: {fileID: 331417363}
-    kill: {fileID: 331417362}
-    death: {fileID: 331417361}
-    dealtDamage: {fileID: 331417360}
-    idInTab: 1
-  - playerBlock: {fileID: 1039345601}
-    nickname: {fileID: 1039345600}
-    kill: {fileID: 1039345599}
-    death: {fileID: 1039345598}
-    dealtDamage: {fileID: 1039345597}
-    idInTab: 2
-  - playerBlock: {fileID: 1528219750}
-    nickname: {fileID: 1528219749}
-    kill: {fileID: 1528219748}
-    death: {fileID: 1528219747}
-    dealtDamage: {fileID: 1528219746}
-    idInTab: 3
-  - playerBlock: {fileID: 867056364}
-    nickname: {fileID: 867056363}
-    kill: {fileID: 867056362}
-    death: {fileID: 867056361}
-    dealtDamage: {fileID: 867056360}
-    idInTab: 4
-  - playerBlock: {fileID: 306746420}
-    nickname: {fileID: 306746419}
-    kill: {fileID: 306746418}
-    death: {fileID: 306746417}
-    dealtDamage: {fileID: 306746416}
-    idInTab: 5
-  - playerBlock: {fileID: 1408285724}
-    nickname: {fileID: 1408285723}
-    kill: {fileID: 1408285722}
-    death: {fileID: 1408285721}
-    dealtDamage: {fileID: 1408285720}
-    idInTab: 6
-  - playerBlock: {fileID: 112391075}
-    nickname: {fileID: 112391074}
-    kill: {fileID: 112391073}
-    death: {fileID: 112391072}
-    dealtDamage: {fileID: 112391071}
-    idInTab: 7
 --- !u!114 &5262982670439285219
 MonoBehaviour:
   m_ObjectHideFlags: 0

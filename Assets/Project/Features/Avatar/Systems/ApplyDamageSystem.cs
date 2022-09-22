@@ -74,7 +74,6 @@ namespace Project.Features.Avatar.Systems
             from.Get<PlayerScore>().DealtDamage += dealtDamage;
             
             world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(from);
-            world.GetFeature<EventsFeature>().TabulationScreenNewPlayerStats.Execute(from);
             world.GetFeature<EventsFeature>().HealthChanged.Execute(to.Owner());
         }
     }

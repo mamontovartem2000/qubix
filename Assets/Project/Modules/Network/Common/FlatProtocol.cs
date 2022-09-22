@@ -31,6 +31,7 @@ public enum Payload : byte
   TeamGameOver = 17,
   SaveHash = 18,
   InvalidHash = 19,
+  NewStats = 20,
 };
 
 public struct JoinResult : IFlatbufferObject
@@ -663,6 +664,75 @@ public struct Stats : IFlatbufferObject
   }
 };
 
+public struct NewStats : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_2_0_0(); }
+  public static NewStats GetRootAsNewStats(ByteBuffer _bb) { return GetRootAsNewStats(_bb, new NewStats()); }
+  public static NewStats GetRootAsNewStats(ByteBuffer _bb, NewStats obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }
+  public NewStats __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public string Character { get { int o = __p.__offset(4); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetCharacterBytes() { return __p.__vector_as_span<byte>(4, 1); }
+#else
+  public ArraySegment<byte>? GetCharacterBytes() { return __p.__vector_as_arraysegment(4); }
+#endif
+  public byte[] GetCharacterArray() { return __p.__vector_as_array<byte>(4); }
+  public byte Kills { get { int o = __p.__offset(6); return o != 0 ? __p.bb.Get(o + __p.bb_pos) : (byte)0; } }
+  public ushort Damage { get { int o = __p.__offset(8); return o != 0 ? __p.bb.GetUshort(o + __p.bb_pos) : (ushort)0; } }
+  public byte Deaths { get { int o = __p.__offset(10); return o != 0 ? __p.bb.Get(o + __p.bb_pos) : (byte)0; } }
+  public string Id { get { int o = __p.__offset(12); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetIdBytes() { return __p.__vector_as_span<byte>(12, 1); }
+#else
+  public ArraySegment<byte>? GetIdBytes() { return __p.__vector_as_arraysegment(12); }
+#endif
+  public byte[] GetIdArray() { return __p.__vector_as_array<byte>(12); }
+  public byte Avglifetime { get { int o = __p.__offset(14); return o != 0 ? __p.bb.Get(o + __p.bb_pos) : (byte)0; } }
+  public string Winnerid { get { int o = __p.__offset(16); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetWinneridBytes() { return __p.__vector_as_span<byte>(16, 1); }
+#else
+  public ArraySegment<byte>? GetWinneridBytes() { return __p.__vector_as_arraysegment(16); }
+#endif
+  public byte[] GetWinneridArray() { return __p.__vector_as_array<byte>(16); }
+
+  public static Offset<FlatMessages.NewStats> CreateNewStats(FlatBufferBuilder builder,
+      StringOffset characterOffset = default(StringOffset),
+      byte kills = 0,
+      ushort damage = 0,
+      byte deaths = 0,
+      StringOffset idOffset = default(StringOffset),
+      byte avglifetime = 0,
+      StringOffset winneridOffset = default(StringOffset)) {
+    builder.StartTable(7);
+    NewStats.AddWinnerid(builder, winneridOffset);
+    NewStats.AddId(builder, idOffset);
+    NewStats.AddCharacter(builder, characterOffset);
+    NewStats.AddDamage(builder, damage);
+    NewStats.AddAvglifetime(builder, avglifetime);
+    NewStats.AddDeaths(builder, deaths);
+    NewStats.AddKills(builder, kills);
+    return NewStats.EndNewStats(builder);
+  }
+
+  public static void StartNewStats(FlatBufferBuilder builder) { builder.StartTable(7); }
+  public static void AddCharacter(FlatBufferBuilder builder, StringOffset characterOffset) { builder.AddOffset(0, characterOffset.Value, 0); }
+  public static void AddKills(FlatBufferBuilder builder, byte kills) { builder.AddByte(1, kills, 0); }
+  public static void AddDamage(FlatBufferBuilder builder, ushort damage) { builder.AddUshort(2, damage, 0); }
+  public static void AddDeaths(FlatBufferBuilder builder, byte deaths) { builder.AddByte(3, deaths, 0); }
+  public static void AddId(FlatBufferBuilder builder, StringOffset idOffset) { builder.AddOffset(4, idOffset.Value, 0); }
+  public static void AddAvglifetime(FlatBufferBuilder builder, byte avglifetime) { builder.AddByte(5, avglifetime, 0); }
+  public static void AddWinnerid(FlatBufferBuilder builder, StringOffset winneridOffset) { builder.AddOffset(6, winneridOffset.Value, 0); }
+  public static Offset<FlatMessages.NewStats> EndNewStats(FlatBufferBuilder builder) {
+    int o = builder.EndTable();
+    return new Offset<FlatMessages.NewStats>(o);
+  }
+};
+
 public struct TeamStats : IFlatbufferObject
 {
   private Table __p;
@@ -884,6 +954,7 @@ public struct SystemMessage : IFlatbufferObject
   public FlatMessages.TeamGameOver PayloadAsTeamGameOver() { return Payload<FlatMessages.TeamGameOver>().Value; }
   public FlatMessages.SaveHash PayloadAsSaveHash() { return Payload<FlatMessages.SaveHash>().Value; }
   public FlatMessages.InvalidHash PayloadAsInvalidHash() { return Payload<FlatMessages.InvalidHash>().Value; }
+  public FlatMessages.NewStats PayloadAsNewStats() { return Payload<FlatMessages.NewStats>().Value; }
 
   public static Offset<FlatMessages.SystemMessage> CreateSystemMessage(FlatBufferBuilder builder,
       uint timestamp = 0,

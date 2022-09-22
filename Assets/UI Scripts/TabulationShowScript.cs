@@ -1,27 +1,23 @@
-using DG.Tweening;
+using System;
 using ME.ECS;
 using Project.Common.Components;
-using Project.Features.Player;
-using Project.Modules.Network;
+using Project.Input.InputHandler.Markers;
+using Project.Input.InputHandler.Modules;
 using UnityEngine;
 using TMPro;
 
 public class TabulationShowScript : MonoBehaviour
 {
-    public GameObject TabulationScreen;
-    [SerializeField] private GlobalEvent _tabulationScreenOnEvent;
-    [SerializeField] private GlobalEvent _tabulationScreenOffEvent;
+    [SerializeField] private GameObject _tabulationScreen;
     [SerializeField] private GlobalEvent _tabulationScreenAddPlayerEvent;
     [SerializeField] private GlobalEvent _tabulationScreenNumbersChangedEvent;
-    [SerializeField] private GlobalEvent _tabulationScreenNewPlayerStats;
     public PlayerTab[] PlayerInTab;
-    private void Start() 
+    
+    private void Start()
     {
-        _tabulationScreenOnEvent.Subscribe(TabulationScreenON);
-        _tabulationScreenOffEvent.Subscribe(TabulationScreenOFF);
+        HandlePlayerInput.Tabulation += TabulationScreenSwitch;
         _tabulationScreenAddPlayerEvent.Subscribe(TabulationScreenAddPlayer);
         _tabulationScreenNumbersChangedEvent.Subscribe(TabulationScreenNumbersChanged);
-        _tabulationScreenNewPlayerStats.Subscribe(ChangeTabPosition);
     }
     
     private void TabulationScreenNumbersChanged(in Entity entity)
@@ -29,6 +25,8 @@ public class TabulationShowScript : MonoBehaviour
         PlayerInTab[entity.Read<PlayerTag>().PlayerLocalID].death.text = entity.Read<PlayerScore>().Deaths.ToString();
         PlayerInTab[entity.Read<PlayerTag>().PlayerLocalID].kill.text = entity.Read<PlayerScore>().Kills.ToString();
         PlayerInTab[entity.Read<PlayerTag>().PlayerLocalID].dealtDamage.text = (Mathf.Round(entity.Read<PlayerScore>().DealtDamage)).ToString();
+
+        ChangeTabPosition(entity);
     }
     
     private void TabulationScreenAddPlayer(in Entity entity)
@@ -41,21 +39,24 @@ public class TabulationShowScript : MonoBehaviour
         player.nickname.text = entity.Read<PlayerTag>().Nickname;
     }
     
-    private void TabulationScreenON(in Entity entity)
+    private void TabulationScreenSwitch(InputState input)
     {
-        if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.SlotInRoom)) return;
-        
-        TabulationScreen.SetActive(true);
+        switch (input)
+        {
+            case InputState.Pressed:
+            {
+                _tabulationScreen.SetActive(true);
+                break;
+            }
+            case InputState.Released:
+            {
+                _tabulationScreen.SetActive(false);
+                break;
+            }
+        }
     }
-    
-    private void TabulationScreenOFF(in Entity entity)
-    {
-        if(entity != Worlds.current.GetFeature<PlayerFeature>().GetPlayerByID(NetworkData.SlotInRoom)) return;
-        
-        TabulationScreen.SetActive(false);
-    }
-    
-    [System.Serializable]
+
+    [Serializable]
     public struct PlayerTab
     {
         public Transform playerBlock;
@@ -65,22 +66,21 @@ public class TabulationShowScript : MonoBehaviour
         public TextMeshProUGUI dealtDamage;
         public int idInTab;
     }
-    
-    public int GetEntityIdInTab(Entity entity)
+
+    private int GetEntityIdInTab(Entity entity)
     {
         return PlayerInTab[entity.Read<PlayerTag>().PlayerLocalID].idInTab;
     }
-    
-    public int GetPlayerById(int id)
+
+    private int GetPlayerById(int id)
     {
-        for (int i = 0; i < PlayerInTab.Length; i++)
+        for (var i = 0; i < PlayerInTab.Length; i++)
         {
             if (PlayerInTab[i].idInTab == id)
             {
                 return i;
             }
         }
-
         return 0;
     }
     
@@ -113,10 +113,8 @@ public class TabulationShowScript : MonoBehaviour
 
     private void OnDestroy() 
     {
-        _tabulationScreenOnEvent.Unsubscribe(TabulationScreenON);
-        _tabulationScreenOffEvent.Unsubscribe(TabulationScreenOFF);
+        HandlePlayerInput.Tabulation -= TabulationScreenSwitch;
         _tabulationScreenAddPlayerEvent.Unsubscribe(TabulationScreenAddPlayer);
         _tabulationScreenNumbersChangedEvent.Unsubscribe(TabulationScreenNumbersChanged);
-        _tabulationScreenNewPlayerStats.Unsubscribe(ChangeTabPosition);
     }
 }

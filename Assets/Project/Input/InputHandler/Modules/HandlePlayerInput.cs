@@ -1,8 +1,8 @@
-﻿using ME.ECS;
+﻿using System;
+using ME.ECS;
 using Project.Common.Components;
 using Project.Input.InputHandler.Markers;
 using Project.Modules.Network;
-using UnityEngine;
 
 namespace Project.Input.InputHandler.Modules
 {
@@ -18,6 +18,7 @@ namespace Project.Input.InputHandler.Modules
 
     public sealed class HandlePlayerInput : IModule, IUpdate
     {
+        public static Action<InputState> Tabulation;
         private PlayerInput _input;
         private InputHandlerFeature _feature;
 
@@ -51,8 +52,8 @@ namespace Project.Input.InputHandler.Modules
             _input.Player.Skill2.performed += ctx => world.AddMarker(new SecondSkillMarker {ActorID = NetworkData.SlotInRoom});
             _input.Player.Skill3.performed += ctx => world.AddMarker(new ThirdSkillMarker {ActorID = NetworkData.SlotInRoom});
             _input.Player.Skill4.performed += ctx => world.AddMarker(new FourthSkillMarker {ActorID = NetworkData.SlotInRoom});
-            _input.Player.Tabulation.performed += ctx => world.AddMarker(new TabulationMarker {State = InputState.Pressed});
-            _input.Player.Tabulation.canceled += ctx => world.AddMarker(new TabulationMarker {State = InputState.Released});
+            _input.Player.Tabulation.performed += ctx => Tabulation?.Invoke(InputState.Pressed);
+            _input.Player.Tabulation.canceled += ctx => Tabulation?.Invoke(InputState.Released);
 
             _input.Player.Screenshot.performed += ctx => world.AddMarker(new ScreenshotMarker());
             _input.Player.Reload.performed += ctx => world.AddMarker(new ReloadMarker());

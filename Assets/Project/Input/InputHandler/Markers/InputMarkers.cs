@@ -39,10 +39,6 @@ namespace Project.Input.InputHandler.Markers
     {
         public int ActorID;
     }
-    public struct TabulationMarker : IMarker
-    {
-        public InputState State;
-    }
     public struct ReloadMarker : IMarker {}
     public struct ScreenshotMarker : IMarker {}
     

@@ -11,7 +11,7 @@ namespace Project.Features.Avatar.Systems
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
 #endif
-    public sealed class PlayerDeathSystem : ISystemFilter 
+    public sealed class PlayerDeathSystem : ISystemFilter
     {
         public World world { get; set; }
         private VFXFeature _vfx;
@@ -50,7 +50,6 @@ namespace Project.Features.Avatar.Systems
                 enemy.Get<PlayerScore>().Kills += 1;
                 world.GetFeature<EventsFeature>().PlayerKill.Execute(enemy);
                 world.GetFeature<EventsFeature>().TabulationScreenNumbersChanged.Execute(enemy);
-                world.GetFeature<EventsFeature>().TabulationScreenNewPlayerStats.Execute(enemy);
                 entity.Remove<DamagedBy>();
             }
             
