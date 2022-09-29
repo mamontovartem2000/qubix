@@ -11,7 +11,7 @@ namespace Project.Common.Components
 	public struct SkillsResetAffect : IComponent {} 
 	public struct GrenadeThrowAffect : IComponent {}
 	public struct LandMineAffect : IComponent {} 
-	public struct BlinkAffect : IComponent {} 
+	public struct ForwardBlinkAffect : IComponent {} 
 	public struct DashAffect : IComponent {}
 	public struct LinearPowerAffect : IComponent {} 
 	public struct PersonalTeleportAffect : IComponent {} 
@@ -24,7 +24,7 @@ namespace Project.Common.Components
 	public struct SoftShieldAffect : IComponent {}
 	public struct CyberVampyrAffect : IComponent {}
 	public struct MinePlantAffect : IComponent {}
-	public struct TeleportPlantAffect : IComponent {}
-
+	public struct BackBlinkAffect : IComponent {}
+	public struct LomixBombAffect : IComponent {}
 	public struct VFXTag : IComponent {};
 }

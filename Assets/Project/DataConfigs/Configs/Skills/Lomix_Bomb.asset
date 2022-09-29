@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc534d6bbb574ce5845c38ef0fc025d, type: 3}
-  m_Name: Teleport_Plant
+  m_Name: Lomix_Bomb
   m_EditorClassIdentifier: 
   sharedGroupId: 0
   structComponents:
   - id: 0
   - id: 1
   - id: 2
+  - id: 3
   removeStructComponents: []
   templates: []
   references:
@@ -24,10 +25,14 @@ MonoBehaviour:
     00000000:
       type: {class: CooldownDefault, ns: Project.Common.Components, asm: Project.Common}
       data:
-        Value: 20
+        Value: 30
     00000001:
+      type: {class: ProjectileConfig, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: {fileID: 11400000, guid: e2f111ba05d977840bb2f30bce54bbf3, type: 2}
+    00000002:
       type: {class: SkillImage, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: 6
-    00000002:
-      type: {class: TeleportPlantAffect, ns: Project.Common.Components, asm: Project.Common}
+    00000003:
+      type: {class: LomixBombAffect, ns: Project.Common.Components, asm: Project.Common}

@@ -30,7 +30,7 @@ namespace Project.Features.Skills
             //Goldhunter
             AddSystem<StunSkillSystem>();
             AddSystem<CooldownResetSkillSystem>();
-            AddSystem<BlinkSkillSystem>();
+            AddSystem<ForwardBlinkSkillSystem>();
             
             //Powerf
             AddSystem<MovementSpeedSkillsSystem>();
@@ -54,6 +54,8 @@ namespace Project.Features.Skills
             
             //Lomix
             AddSystem<MinePlantSkillSystem>();
+            AddSystem<LomixBombSkillSystem>();
+            AddSystem<BackBlinkSkillSystem>();
 
             //Universal
             AddSystem<GrenadeThrowSkillSystem>();

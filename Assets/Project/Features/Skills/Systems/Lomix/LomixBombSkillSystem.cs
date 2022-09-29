@@ -1,4 +1,7 @@
 ﻿using ME.ECS;
+using Project.Common.Components;
+using Project.Common.Utilities;
+using UnityEngine;
 
 namespace Project.Features.Skills.Systems.Lomix {
 
@@ -12,15 +15,15 @@ namespace Project.Features.Skills.Systems.Lomix {
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false),
      Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute(Unity.IL2CPP.CompilerServices.Option.DivideByZeroChecks, false)]
     #endif
-    public sealed class TeleportPlantSkillSystem : ISystemFilter {
+    public sealed class LomixBombSkillSystem : ISystemFilter {
         
-        private SkillsFeature feature;
+        private SkillsFeature _feature;
         
         public World world { get; set; }
         
         void ISystemBase.OnConstruct() {
             
-            this.GetFeature(out this.feature);
+            this.GetFeature(out this._feature);
             
         }
         
@@ -33,12 +36,26 @@ namespace Project.Features.Skills.Systems.Lomix {
         Filter ISystemFilter.filter { get; set; }
         Filter ISystemFilter.CreateFilter() {
             
-            return Filter.Create("Filter-TeleportPlantSkillSystem").Push();
+            return Filter.Create("Filter-LomixBombSkillSystem")
+                .With<LomixBombAffect>()
+                .With<ActivateSkill>()
+                .Push();
             
         }
-    
-        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime) {}
-    
+
+        void ISystemFilter.AdvanceTick(in Entity entity, in float deltaTime)
+        {
+            var avatar = entity.Owner().Avatar();
+            if (avatar.IsAlive() == false) return;
+            
+            var mine = new Entity("lomixBomb");
+            entity.Read<ProjectileConfig>().Value.Apply(mine);
+            mine.Get<Owner>().Value = entity.Read<Owner>().Value;
+            mine.Set(new Grenade());
+            mine.SetPosition((Vector3)Vector3Int.RoundToInt(avatar.GetPosition()));
+            var view = world.RegisterViewSource(mine.Read<ViewModel>().Value);
+            mine.InstantiateView(view);
+            entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+        }
     }
-    
 }

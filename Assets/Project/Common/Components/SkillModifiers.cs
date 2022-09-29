@@ -77,8 +77,11 @@ namespace Project.Common.Components
 	{
 		public float LifeTime;
 	}
+	
 	public struct LinearPowerModifier : IComponent
 	{
 		public float Damage;
 	}
+	
+	public struct LomixBombModifier : IComponent {}
 }

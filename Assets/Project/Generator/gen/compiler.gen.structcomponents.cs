@@ -20,7 +20,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvoidTeleport>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.BlinkAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.BackBlinkAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BoomerangEffect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BridgeTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
@@ -72,6 +72,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ForwardBlinkAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FreeAndWalkableMap>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Freeze>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FreezeModifier>(false, true, false, false, false, false, false, false);
@@ -105,6 +106,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearVisual>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LockTarget>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LomixBombAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LomixBombModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapComponents>(false, false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapInitialized>(true, true, false, false, false, false, false, false);
@@ -206,7 +209,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamDeathmatchMode>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamTag>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlantAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileAlternativeView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileName>(false, true, false, false, false, false, false, false);
@@ -242,7 +244,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AutomaticWeapon>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvatarTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.AvoidTeleport>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.BlinkAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.BackBlinkAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BoomerangEffect>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BridgeTile>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.BuffTrigger>(true, false, false, false, false, false, false, true);
@@ -294,6 +296,7 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FlagTag>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.ForceShieldModifier>(false, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.ForwardBlinkAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FreeAndWalkableMap>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Freeze>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.FreezeModifier>(false, true, false, false, false, false, false, false);
@@ -327,6 +330,8 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearVisual>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LinearWeapon>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.LockTarget>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LomixBombAffect>(true, true, false, false, false, false, false, false);
+            WorldUtilities.InitComponentTypeId<Project.Common.Components.LomixBombModifier>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapComponents>(false, false, true, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapConstruct>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.MapInitialized>(true, true, false, false, false, false, false, false);
@@ -428,7 +433,6 @@ namespace ME.ECS {
             WorldUtilities.InitComponentTypeId<Project.Common.Components.Targeted>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamDeathmatchMode>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeamTag>(false, true, false, false, false, false, false, false);
-            WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlantAffect>(true, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TeleportPlayer>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileAlternativeView>(false, true, false, false, false, false, false, false);
             WorldUtilities.InitComponentTypeId<Project.Common.Components.TileName>(false, true, false, false, false, false, false, false);
@@ -459,7 +463,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.AutomaticWeapon>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvatarTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.AvoidTeleport>(false);
-            structComponentsContainer.Validate<Project.Common.Components.BlinkAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.BackBlinkAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.BoomerangEffect>(false);
             structComponentsContainer.Validate<Project.Common.Components.BridgeTile>(false);
             noStateStructComponentsContainer.ValidateOneShot<Project.Common.Components.BuffTrigger>(true);
@@ -511,6 +515,7 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.FlagTag>(true);
             structComponentsContainer.Validate<Project.Common.Components.ForceShieldAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.ForceShieldModifier>(false);
+            structComponentsContainer.Validate<Project.Common.Components.ForwardBlinkAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.FreeAndWalkableMap>(false);
             structComponentsContainer.Validate<Project.Common.Components.Freeze>(false);
             structComponentsContainer.Validate<Project.Common.Components.FreezeModifier>(false);
@@ -544,6 +549,8 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.LinearVisual>(true);
             structComponentsContainer.Validate<Project.Common.Components.LinearWeapon>(false);
             structComponentsContainer.Validate<Project.Common.Components.LockTarget>(true);
+            structComponentsContainer.Validate<Project.Common.Components.LomixBombAffect>(true);
+            structComponentsContainer.Validate<Project.Common.Components.LomixBombModifier>(true);
             structComponentsContainer.ValidateCopyable<Project.Common.Components.MapComponents>(false);
             structComponentsContainer.Validate<Project.Common.Components.MapConstruct>(false);
             structComponentsContainer.Validate<Project.Common.Components.MapInitialized>(true);
@@ -645,7 +652,6 @@ namespace ME.ECS {
             structComponentsContainer.Validate<Project.Common.Components.Targeted>(true);
             structComponentsContainer.Validate<Project.Common.Components.TeamDeathmatchMode>(true);
             structComponentsContainer.Validate<Project.Common.Components.TeamTag>(false);
-            structComponentsContainer.Validate<Project.Common.Components.TeleportPlantAffect>(true);
             structComponentsContainer.Validate<Project.Common.Components.TeleportPlayer>(false);
             structComponentsContainer.Validate<Project.Common.Components.TileAlternativeView>(false);
             structComponentsContainer.Validate<Project.Common.Components.TileName>(false);
@@ -681,7 +687,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.AutomaticWeapon>(true);
             entity.ValidateData<Project.Common.Components.AvatarTag>(true);
             entity.ValidateData<Project.Common.Components.AvoidTeleport>(false);
-            entity.ValidateData<Project.Common.Components.BlinkAffect>(true);
+            entity.ValidateData<Project.Common.Components.BackBlinkAffect>(true);
             entity.ValidateData<Project.Common.Components.BoomerangEffect>(false);
             entity.ValidateData<Project.Common.Components.BridgeTile>(false);
             entity.ValidateDataOneShot<Project.Common.Components.BuffTrigger>(true);
@@ -733,6 +739,7 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.FlagTag>(true);
             entity.ValidateData<Project.Common.Components.ForceShieldAffect>(true);
             entity.ValidateData<Project.Common.Components.ForceShieldModifier>(false);
+            entity.ValidateData<Project.Common.Components.ForwardBlinkAffect>(true);
             entity.ValidateData<Project.Common.Components.FreeAndWalkableMap>(false);
             entity.ValidateData<Project.Common.Components.Freeze>(false);
             entity.ValidateData<Project.Common.Components.FreezeModifier>(false);
@@ -766,6 +773,8 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.LinearVisual>(true);
             entity.ValidateData<Project.Common.Components.LinearWeapon>(false);
             entity.ValidateData<Project.Common.Components.LockTarget>(true);
+            entity.ValidateData<Project.Common.Components.LomixBombAffect>(true);
+            entity.ValidateData<Project.Common.Components.LomixBombModifier>(true);
             entity.ValidateDataCopyable<Project.Common.Components.MapComponents>(false);
             entity.ValidateData<Project.Common.Components.MapConstruct>(false);
             entity.ValidateData<Project.Common.Components.MapInitialized>(true);
@@ -867,7 +876,6 @@ namespace ME.ECS {
             entity.ValidateData<Project.Common.Components.Targeted>(true);
             entity.ValidateData<Project.Common.Components.TeamDeathmatchMode>(true);
             entity.ValidateData<Project.Common.Components.TeamTag>(false);
-            entity.ValidateData<Project.Common.Components.TeleportPlantAffect>(true);
             entity.ValidateData<Project.Common.Components.TeleportPlayer>(false);
             entity.ValidateData<Project.Common.Components.TileAlternativeView>(false);
             entity.ValidateData<Project.Common.Components.TileName>(false);
