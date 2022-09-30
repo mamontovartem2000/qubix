@@ -18,10 +18,9 @@ namespace Project.Modules.Network.UI
         private void Start()
         {
             NetworkEvents.SetTimer += SetTimer;
-
         }
 
-        public void SetTimer(TimeRemaining time)
+        private void SetTimer(TimeRemaining time)
         {
             if (_showOnlyLast10sec)
             {

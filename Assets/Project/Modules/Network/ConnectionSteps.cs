@@ -26,10 +26,10 @@ namespace Project.Modules.Network
 
 		private static void ProcessJoinRequest(string request)
 		{
-			string payloadBase64 = NetworkData.CreateFromJSON<JoinRequestData>(request).payload;
+			var payloadBase64 = NetworkData.CreateFromJSON<JoinRequestData>(request).payload;
 			var payloadInBytes = Convert.FromBase64String(payloadBase64);
 			var playerJson = Encoding.UTF8.GetString(payloadInBytes);
-			GameInfo info = NetworkData.CreateFromJSON<GameInfo>(playerJson);
+			var info = NetworkData.CreateFromJSON<GameInfo>(playerJson);
 			NetworkData.Info = info;
 			Enum.TryParse(info.game_mode, out GameModes gameMode);
 			NetworkData.GameMode = gameMode;
@@ -61,7 +61,7 @@ namespace Project.Modules.Network
 					return;
 			}
 
-			SystemMessage data = SystemMessage.GetRootAsSystemMessage(new ByteBuffer(buffer));
+			var data = SystemMessage.GetRootAsSystemMessage(new ByteBuffer(buffer));
 
 			switch (data.PayloadType)
 			{
@@ -94,13 +94,13 @@ namespace Project.Modules.Network
 
         private static void ShowRoomList(RoomList roomList)
         {
-			RoomInfo[] roomsInfo = new RoomInfo[roomList.RoomsLength];
+			var roomsInfo = new RoomInfo[roomList.RoomsLength];
 
-			for (int i = 0; i < roomList.RoomsLength; i++)
+			for (var i = 0; i < roomList.RoomsLength; i++)
 			{
 				var room = roomList.Rooms(i);
 
-				RoomInfo roomInfo = new RoomInfo() { Id = room.Value.Id, PlayersCount = room.Value.PlayersCount, MaxPlayersCount = room.Value.MaxPlayersCount };
+				var roomInfo = new RoomInfo() { Id = room.Value.Id, PlayersCount = room.Value.PlayersCount, MaxPlayersCount = room.Value.MaxPlayersCount };
 				roomsInfo[i] = roomInfo;
 			}
 
@@ -141,11 +141,10 @@ namespace Project.Modules.Network
 
 		private static void SetPlayerList(PlayerList playerList)
 		{
-			string debug = "Set Players: \n";
+			var debug = "Set Players: \n";
+			var playersInfo = new PlayerInfo[playerList.PlayersLength];
 
-			PlayerInfo[] playersInfo = new PlayerInfo[playerList.PlayersLength];
-
-			for (int i = 0; i < playerList.PlayersLength; i++)
+			for (var i = 0; i < playerList.PlayersLength; i++)
 			{
 				var player = playerList.Players(i);
 				var id = player.Value.Id;
@@ -154,7 +153,7 @@ namespace Project.Modules.Network
 				var character = player.Value.Character;
 				var icon = player.Value.Icon;
 
-				PlayerInfo playerInfo = new PlayerInfo() { Id = id, Slot = slot, Nickname = nick, Character = character, Icon = icon };
+				var playerInfo = new PlayerInfo() { Id = id, Slot = slot, Nickname = nick, Character = character, Icon = icon };
 				playersInfo[i] = playerInfo;
 				debug += $"Slot: {slot}, Id: {id}, Character: {character};\n";
 			}
@@ -173,7 +172,7 @@ namespace Project.Modules.Network
 
 		private static void SendJoinRequest()
 		{
-			FlatBufferBuilder builder = new FlatBufferBuilder(1);
+			var builder = new FlatBufferBuilder(1);
 			var mes = builder.CreateString(NetworkData.FullJoinRequest);
 
 			var type = NetworkData.BuildType == BuildTypes.Front_Hub ? 2 : 0;
@@ -188,7 +187,7 @@ namespace Project.Modules.Network
 
 		public static void ChangeRoomRequest(string roomId)
 		{
-			FlatBufferBuilder builder = new FlatBufferBuilder(1);
+			var builder = new FlatBufferBuilder(1);
 			var id = builder.CreateString(roomId);
 			var request = ChangeRoom.CreateChangeRoom(builder, id);
 			var offset = SystemMessage.CreateSystemMessage(builder, SystemMessages.GetTime(), Payload.ChangeRoom, request.Value);
@@ -201,7 +200,7 @@ namespace Project.Modules.Network
 
 		public static void SetCharacterRequest(string characterName)
 		{
-			FlatBufferBuilder builder = new FlatBufferBuilder(1);
+			var builder = new FlatBufferBuilder(1);
 			var id = builder.CreateString(NetworkData.Info.player_id);
 			var character = builder.CreateString(characterName);
 			var request = SetCharacter.CreateSetCharacter(builder, id, character);

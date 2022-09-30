@@ -50,7 +50,10 @@ namespace Project.Modules.Network
 				_objectToHide.SetActive(false);
             }
 
-			_select.gameObject.SetActive(true);
+			if (_select != null)
+			{
+				_select.gameObject.SetActive(true);
+			}
 		}
 
 		protected virtual void OnDestroy()

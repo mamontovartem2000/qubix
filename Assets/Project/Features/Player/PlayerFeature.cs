@@ -1,4 +1,5 @@
-﻿using ME.ECS;
+﻿using System;
+using ME.ECS;
 using ME.ECS.DataConfigs;
 using Project.Common.Components;
 using Project.Common.Events;
@@ -64,13 +65,29 @@ namespace Project.Features.Player
 
             world.GetFeature<EventsFeature>().TabulationAddPlayer.Execute(player);
             
-            if (NetworkData.PlayersInfo == null) // Fake case
+            if (NetworkData.PlayersInfo == null || NetworkData.Info.nfts_metadata == null) // Fake case
             {
                 LomixConfig.Apply(player);
                 return;
             }
 
-            var character = NetworkData.PlayersInfo[localId].Character;
+            var character = string.Empty;
+            
+            if (NetworkData.Info.nfts_metadata != null)
+            {
+                foreach (var nft in NetworkData.Info.nfts_metadata)
+                {
+                    if (nft.player_id != nsap.ServerID) continue;
+                    
+                    character = nft.name;
+                    break;
+                }
+            }
+            else
+            {
+                character = NetworkData.PlayersInfo[localId].Character;
+            }
+
             NetworkData.LocalCharacter = character;
             
             switch (character)
@@ -116,6 +133,10 @@ namespace Project.Features.Player
                     LomixConfig.Apply(player);
                     break;
                 }
+                
+                default:
+                    Debug.Log("Unknown avatar!");
+                    break;
             }
         }
 
