@@ -1,7 +1,6 @@
-﻿using Project.Modules.Network;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Project.Modules.Network
+namespace Project.Modules.Network.StartConnect
 {
     public class HubFrontConnect : ConnectTemplate
 	{
@@ -21,11 +20,6 @@ namespace Project.Modules.Network
 		{
 			Debug.Log("Get request: " + request);
 			ConnectionSteps.ConnectWithCreateSocket(request);
-		}
-
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
 		}
 	}
 }

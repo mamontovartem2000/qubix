@@ -52,7 +52,7 @@ namespace Project.Features.PostLogicTick.Systems
 			if (entity.TryReadCollided(out var from, out var owner) == false) return;
 			var player = owner.Avatar();
 
-			if (player.Has<AvoidTeleport>())
+			if (player == Entity.Empty || player.Has<AvoidTeleport>())
 			{
 				entity.Remove<Collided>();
 				return;

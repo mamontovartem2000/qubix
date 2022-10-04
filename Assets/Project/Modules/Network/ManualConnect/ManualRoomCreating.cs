@@ -9,61 +9,51 @@ namespace Project.Modules.Network
     {
         public static IEnumerator CreateRoom(int playerNumber, Action<string> callback)
         {
-            string url = "https://dev.match.qubixinfinity.io/match/create_room";
-            //Reqqq req = new Reqqq() { map_id = 1, player_scheme = new int[] { playerNumber, playerNumber }, lifetime = 60 * 5, game_mode = GameModes.teambattle.ToString() }; // teambattle
-            Reqqq req = new Reqqq() { map_id = 1, player_scheme = new int[] { playerNumber }, lifetime = 60 * 5, game_mode = GameModes.deathmatch.ToString() }; // deathmatch
+            // var roomRequest = new CreateRoomRequest()
+            // {
+            //     map_id = 1, player_scheme = new int[] {playerNumber, playerNumber}, lifetime = 60 * 5,
+            //     game_mode = GameModes.teambattle.ToString()
+            // }; // teambattle
 
-            string json = JsonUtility.ToJson(req);
+            var roomRequest = new CreateRoomRequest()
+            {
+                map_id = 1, player_scheme = new int[] {playerNumber}, lifetime = 60 * 5,
+                game_mode = GameModes.deathmatch.ToString()
+            }; // deathmatch
+            
+            var json = JsonUtility.ToJson(roomRequest);
 
-            WWWForm formData = new WWWForm();
-
-            UnityWebRequest request = UnityWebRequest.Post(url, formData);
-
-            byte[] postBytes = System.Text.Encoding.UTF8.GetBytes(json);
-
-            UploadHandler uploadHandler = new UploadHandlerRaw(postBytes);
-
+            using var request = UnityWebRequest.Post(URL.CreateRoom, new WWWForm());
+            var postBytes = System.Text.Encoding.UTF8.GetBytes(json);
+            var uploadHandler = new UploadHandlerRaw(postBytes);
             request.uploadHandler = uploadHandler;
-
             request.SetRequestHeader("Content-Type", "application/json; charset=UTF-8");
 
             yield return request.SendWebRequest();
 
-            Debug.Log(request.downloadHandler.text);
-            Room info = NetworkData.CreateFromJSON<Room>(request.downloadHandler.text);
+            var info = NetworkData.CreateFromJSON<Room>(request.downloadHandler.text);
             callback(info.id);
         }
 
-        public static IEnumerator LoadJoinRequest(string roomid, string playerId, Action<string> callback)
+        public static IEnumerator LoadJoinRequest(string roomId, string playerId, Action<string> callback)
         {
-            string url = "https://dev.match.qubixinfinity.io/match/test/join_request";
-            //string url = "https://flagmode.qubixinfinity.io/match/test/join_request";
-            //string url = "http://localhost:8001/test/join_request"; // Local connect for Ilusha
+            var req = new Player() { room_id = roomId, player_id = playerId };
+            var json = JsonUtility.ToJson(req);
 
-            Player req = new Player() { room_id = roomid, player_id = playerId };
-            string json = JsonUtility.ToJson(req);
-            Debug.Log("Send " + json);
-            WWWForm formData = new WWWForm();
-
-            UnityWebRequest request = UnityWebRequest.Post(url, formData);
-
-            byte[] postBytes = System.Text.Encoding.UTF8.GetBytes(json);
-
-            UploadHandler uploadHandler = new UploadHandlerRaw(postBytes);
-
+            using var request = UnityWebRequest.Post(URL.JoinRequest, new WWWForm());
+            var postBytes = System.Text.Encoding.UTF8.GetBytes(json);
+            var uploadHandler = new UploadHandlerRaw(postBytes);
             request.uploadHandler = uploadHandler;
-
             request.SetRequestHeader("Content-Type", "application/json; charset=UTF-8");
 
             yield return request.SendWebRequest();
 
-            Debug.Log(request.downloadHandler.text);
             callback(request.downloadHandler.text);
         }
     }
 
     [Serializable]
-    public class Reqqq
+    public class CreateRoomRequest
     {
         public int map_id;
         public int[] player_scheme;

@@ -1,17 +1,13 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Project.Modules.Network
+namespace Project.Modules.Network.StartConnect
 {
     public class ManualConnect : ConnectTemplate
 	{
 		[SerializeField] private GameObject _loginScreen;
 		[SerializeField] private TMP_InputField _playerNumber;
 		[SerializeField] private TMP_InputField _playerRoomID;
-		[SerializeField] private Button _joinReadyButton;
-		[SerializeField] private Button _hostReadyButton;
 		
 		[SerializeField] private TextMeshProUGUI _hostRoomID;
 		[SerializeField] private TMP_InputField _hostNick;
@@ -37,7 +33,7 @@ namespace Project.Modules.Network
 
 			if (LoginScreenCore.IsHost)
 			{
-				int num = Int32.Parse(_playerNumber.text);
+				var num = int.Parse(_playerNumber.text);
 				StartCoroutine(ManualRoomCreating.CreateRoom(num, GetManualJoinRequest));
 			}
 			else if (_playerRoomID.text != "")
@@ -46,15 +42,8 @@ namespace Project.Modules.Network
 
 		private void GetManualJoinRequest(string roomId)
 		{
-			_joinReadyButton.interactable = false;
-			_hostReadyButton.interactable = false;
 			_hostRoomID.text = roomId;
 			StartCoroutine(ManualRoomCreating.LoadJoinRequest(roomId, _nickname, ConnectionSteps.ConnectWithCreateSocket));
-		}	
-
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
 		}
 	}
 }

@@ -104,7 +104,6 @@ namespace Project.Modules.Network
 				roomsInfo[i] = roomInfo;
 			}
 
-			Debug.Log("Get room list");
 			NetworkEvents.GetRoomList?.Invoke(roomsInfo);
 		}
 
@@ -121,13 +120,13 @@ namespace Project.Modules.Network
 				NetworkData.SlotInRoom = joinResult.Slot;
 				NetworkData.Team = joinResult.Team;
 				NetworkEvents.LoadMap?.Invoke();
-				Debug.Log($"Join slot: {joinResult.Slot}, team {joinResult.Team};");
+				//Debug.Log($"Join slot: {joinResult.Slot}, team {joinResult.Team};");
 			}
 			else
 			{
 				//TODO: Show notif for user
 				//TODO: Close and clear connect
-				Debug.Log($"Join Error: {joinResult.Reason}");
+				Debug.LogError($"Join Error: {joinResult.Reason}");
 				NetworkData.CloseNetwork();
 				NetworkEvents.LoadMainMenuScene?.Invoke();
 			}
@@ -135,7 +134,6 @@ namespace Project.Modules.Network
 
 		private static void SetTimeRemaining(TimeRemaining timeRemaining)
 		{
-			Debug.Log("Set Time!");
 			NetworkEvents.SetTimer?.Invoke(timeRemaining);
 		}
 
@@ -159,7 +157,7 @@ namespace Project.Modules.Network
 			}
 
 			NetworkData.PlayersInfo = playersInfo;
-			Debug.Log(debug);
+			//Debug.Log(debug);
 		}
 
 		private static void SetStartGame(Start start)
@@ -182,7 +180,6 @@ namespace Project.Modules.Network
 
 			var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
 			NetworkData.Connect.SendSystemMessage(ms);
-			Debug.Log("Send JoinRequest");
 		}
 
 		public static void ChangeRoomRequest(string roomId)
@@ -195,7 +192,6 @@ namespace Project.Modules.Network
 
 			var ms = builder.DataBuffer.ToArray(builder.DataBuffer.Position, builder.Offset);
 			NetworkData.Connect.SendSystemMessage(ms);
-			Debug.Log("Change Room");
 		}
 
 		public static void SetCharacterRequest(string characterName)

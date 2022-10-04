@@ -1,5 +1,4 @@
-﻿using System;
-using ME.ECS;
+﻿using ME.ECS;
 using ME.ECS.DataConfigs;
 using Project.Common.Components;
 using Project.Common.Events;
@@ -65,9 +64,9 @@ namespace Project.Features.Player
 
             world.GetFeature<EventsFeature>().TabulationAddPlayer.Execute(player);
             
-            if (NetworkData.PlayersInfo == null || NetworkData.Info.nfts_metadata == null) // Fake case
+            if (NetworkData.PlayersInfo == null && NetworkData.Info.nfts_metadata == null) // Fake case
             {
-                LomixConfig.Apply(player);
+                GoldHunterConfig.Apply(player);
                 return;
             }
 

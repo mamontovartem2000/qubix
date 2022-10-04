@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,8 @@ namespace Project.Modules.Network.UI
         [SerializeField] private GameObject[] _skillDescriptions;
         public Character[] PlayerCharacter;
 
-        [System.Serializable] public struct Character
+        [Serializable]
+        public struct Character
         {
             public string name;
             public string characterDescription;
@@ -24,7 +26,7 @@ namespace Project.Modules.Network.UI
 
         private void OnEnable()
         {
-            var rnd = Random.Range(0, PlayerCharacter.Length);
+            var rnd = UnityEngine.Random.Range(0, PlayerCharacter.Length);
             SelectCharacter(rnd);
         }
 

@@ -1,44 +1,33 @@
+using Project.Modules.Network.UI;
 using UnityEngine;
 
-namespace Project.Modules.Network
+namespace Project.Modules.Network.StartConnect
 {
     public class RoomListConnect : ConnectTemplate
 	{
-		[SerializeField] private GameObject _roomListScreen;
+		[SerializeField] private RoomListContainer _roomListContainer;
 		[SerializeField] private GameObject _loadingPanel;
-		[SerializeField] private RoomPrefab[] _rooms;
 
 		private bool _roomListLoaded;
 		private bool _roomSelected;
-		private const int MaxRoomCount = 4; 
 
 		private void Start()
 		{
-			base.InitTemplate(_roomListScreen, BuildTypes.RoomsConnect);
-			NetworkEvents.GetRoomList += ShowRooms;
+			base.InitTemplate(_roomListContainer.gameObject, BuildTypes.RoomsConnect);
+			NetworkEvents.GetRoomList += HandleRoomsList;
 			RoomPrefab.JoinRoom += SelectRoom;
-			ConnectionSteps.CreateSocketConnect("wss://dev.match.qubixinfinity.io/match");
-			//ConnectionSteps.CreateSocketConnect("wss://flagmode.qubixinfinity.io/match");
-			//ConnectionSteps.CreateSocketConnect("ws://localhost:8001"); // Local connect for Ilusha
+			ConnectionSteps.CreateSocketConnect(URL.SocketConnect);
 		}
-
-		private void ShowRooms(RoomInfo[] obj)
+		
+		private void HandleRoomsList(RoomInfo[] rooms)
 		{
-			string text = "Rooms: \n";
-
-            for (int i = 0; i < MaxRoomCount; i++)
-            {
-				text += $"{obj[i].Id} {obj[i].PlayersCount} {obj[i].MaxPlayersCount}\n";
-				_rooms[i].UpdateRoomInfo(obj[i], i + 1, MaxRoomCount);
-			}
-
+			_roomListContainer.UpdateRoomsDisplay(rooms);
+			
 			if (_roomListLoaded == false)
-            {
+			{
 				_roomListLoaded = true;
 				ShowRoomList();
 			}
-
-			Debug.Log(text);
 		}
 
 		private void SelectRoom(string roomId)
@@ -58,13 +47,13 @@ namespace Project.Modules.Network
 		private void ShowRoomList()
 		{
 			_loadingPanel.SetActive(false);
-			_roomListScreen.SetActive(true);
+			_roomListContainer.gameObject.SetActive(true);
 		}
 
         protected override void OnDestroy()
         {
 			base.OnDestroy();
-			NetworkEvents.GetRoomList -= ShowRooms;
+			NetworkEvents.GetRoomList -= HandleRoomsList;
             RoomPrefab.JoinRoom -= SelectRoom;
         }
     }

@@ -1,48 +1,53 @@
-using Project.Modules.Network;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class LoadMapFiles : MonoBehaviour
+namespace Project.Modules.Network
 {
-    private void Awake()
+    public class LoadMapFiles : MonoBehaviour
     {
-        //TODO: Need to fix in WebGL and enable
-        //NetworkEvents.LoadMap += StartLoadMaps;
-    }
-
-    private void StartLoadMaps()
-    {
-        string fileName = ((Maps)NetworkData.Info.map_id).ToString();
-        string fileName2 = fileName + "_obj";
-
-        StartCoroutine(GetMapFile(fileName, fileName2));
-    }
-
-    public static IEnumerator GetMapFile(string fileName, string fileName2)
-    {
-        UnityWebRequest request = null, request2 = null;
-
-        if (fileName != string.Empty)
+        private void Awake()
         {
-            string url = $"https://d3rsf7561wj274.cloudfront.net/temp_maps/{fileName}.txt";
-            request = UnityWebRequest.Get(url);
+            //TODO: Need to fix in WebGL and enable
+            //NetworkEvents.LoadMap += StartLoadMaps;
+        }
+
+        private void StartLoadMaps()
+        {
+            var fileName = ((Maps)NetworkData.Info.map_id).ToString();
+            var fileName2 = fileName + "_obj";
+
+            StartCoroutine(GetMapFile(fileName, SetFloorMap));
+            StartCoroutine(GetMapFile(fileName2, SetObjectsMap));
+        }
+
+        private static IEnumerator GetMapFile(string fileName, Action<string> callback)
+        {
+            if (fileName != string.Empty)
+            {
+                Debug.LogError($"Map {fileName} can't be loaded!");
+                yield break;
+            }
+        
+            using var request = UnityWebRequest.Get(URL.MapFiles + fileName + ".txt");
             request.SetRequestHeader("Content-Type", "application/json; charset=UTF-8");
             yield return request.SendWebRequest();
+
+            Debug.Log($"Map {fileName} loaded!");
+            //TODO: Need handle exceptions
+        
+            callback(request.downloadHandler.text);
         }
 
-        if (fileName2 != string.Empty)
+        private static void SetFloorMap(string data)
         {
-            string url2 = $"https://d3rsf7561wj274.cloudfront.net/temp_maps/{fileName2}.txt";
-            request2 = UnityWebRequest.Get(url2);
-            request2.SetRequestHeader("Content-Type", "application/json; charset=UTF-8");
-            yield return request2.SendWebRequest();
+            NetworkData.FloorMap = data;
         }
-
-        NetworkData.FloorMap = request.downloadHandler.text;
-        NetworkData.ObjectsMap = request2.downloadHandler.text;
-
-        Debug.Log("Maps Loaded");
-        //TODO: Need handle exceptions
+    
+        private static void SetObjectsMap(string data)
+        {
+            NetworkData.ObjectsMap = data;
+        }
     }
 }
