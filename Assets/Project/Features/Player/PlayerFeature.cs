@@ -66,7 +66,7 @@ namespace Project.Features.Player
             
             if (NetworkData.PlayersInfo == null && NetworkData.Info.nfts_metadata == null) // Fake case
             {
-                GoldHunterConfig.Apply(player);
+                BloodlovConfig.Apply(player);
                 return;
             }
 
@@ -76,13 +76,13 @@ namespace Project.Features.Player
             {
                 foreach (var nft in NetworkData.Info.nfts_metadata)
                 {
-                    if (nft.player_id != nsap.ServerID) continue;
+                    if (nft.metadata.player_id != nsap.ServerID) continue;
                     
-                    character = nft.name;
+                    character = nft.metadata.name;
                     break;
                 }
             }
-            else
+            else if (NetworkData.PlayersInfo != null)
             {
                 character = NetworkData.PlayersInfo[localId].Character;
             }

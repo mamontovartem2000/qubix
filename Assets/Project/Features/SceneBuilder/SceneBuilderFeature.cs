@@ -82,7 +82,7 @@ namespace Project.Features.SceneBuilder
                     }
                 }
                 
-                Debug.Log("Used Local Maps!!!");
+                //Debug.Log("Used Local Maps!!!");
             }    
 
             var height = floorMap.bytes.Length / floorMap.offset;

@@ -40,7 +40,7 @@ namespace Project.Modules.Network
             {
                 // If there is no Internet connection:
                 // Unable to connect to the remote server
-                Debug.Log("Error! " + e);
+                Debug.LogError("Error! " + e);
                 ConnectError?.Invoke(e);
             };
 
@@ -56,8 +56,8 @@ namespace Project.Modules.Network
         {
             try
             {
-                byte[] type = new byte[1] { 0 };
-                byte[] result = type.Concat(message).ToArray();
+                var type = new byte[1] { 0 };
+                var result = type.Concat(message).ToArray();
                 _socket.Send(result);
             }
             catch
@@ -70,8 +70,8 @@ namespace Project.Modules.Network
         {
             try
             {
-                byte[] type = new byte[1] { 1 };
-                byte[] result = type.Concat(message).ToArray();
+                var type = new byte[1] { 1 };
+                var result = type.Concat(message).ToArray();
                 _socket.Send(result);
             }
             catch

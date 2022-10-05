@@ -96,9 +96,15 @@ namespace Project.Modules.Network
         //public int[] multiplayer_schema;
         //public string[] available_characters;
         public string player_id;
-        public NftMetadata[] nfts_metadata;
+        public Metadata[] nfts_metadata;
     }
-    
+
+    [Serializable]
+    public class Metadata
+    {
+        public NftMetadata metadata;
+    }
+
     [Serializable]
     public class NftMetadata
     {
