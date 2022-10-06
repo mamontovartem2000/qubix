@@ -50,7 +50,7 @@ namespace Project.Features.Skills.Systems.Lomix {
             var avatar = entity.Owner().Avatar();
             if (avatar.IsAlive() == false) return;
 
-            var nextPos = -avatar.Read<FaceDirection>().Value * 4 + (avatar.Read<PlayerMoveTarget>().Value);
+            var nextPos = -avatar.Read<FaceDirection>().Value * 5 + (avatar.Read<PlayerMoveTarget>().Value);
 
             if (!SceneUtils.IsWalkable(new fp3(nextPos.x, 0, nextPos.z))) return;
             

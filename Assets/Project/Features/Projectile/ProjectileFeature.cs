@@ -51,7 +51,6 @@ namespace Project.Features.Projectile
                 gun.Get<ShengbiaoWeapon>().MoveRatio = GameConsts.Weapons.Shengbiao.VISUAL_SPEED_RATIO;
                 gun.Read<ShengbiaoDamageSpot>().Value.Get<ProjectileParent>().Speed = GameConsts.Weapons.Shengbiao.SPEED;
                 gun.Read<ShengbiaoDamageSpot>().Value.Get<ProjectileParent>().Bullet = entity;
-
                 entity.Get<LifeTimeLeft>().Value = gun.Read<ReloadTimeDefault>().Value;
             }
 

@@ -51,6 +51,7 @@ namespace Project.Features.Skills.Systems.Lomix {
             mine.SetPosition((Vector3)Vector3Int.RoundToInt(entity.Owner().Avatar().GetPosition()));
             mine.Get<Owner>().Value = entity.Owner();
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;
+            SoundUtils.PlaySound(mine, "event:/Skills/Lomix/MinePlant");
         }
     }
 }

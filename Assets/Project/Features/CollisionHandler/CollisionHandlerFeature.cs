@@ -1,4 +1,5 @@
 ﻿using ME.ECS;
+using ME.ECS.DataConfigs;
 using ME.ECS.Views.Providers;
 using Project.Common.Components;
 using Project.Common.Utilities;
@@ -16,7 +17,7 @@ namespace Project.Features.CollisionHandler
     {
         public MonoBehaviourViewBase Portal, Mine, Health, SpikesAttack;
         private ViewId _portal, _mine, _health, _spikesAttack;
-        
+        [SerializeField] private DataConfig _explosionVFX;
         protected override void OnConstruct()
         {
             AddSystem<GrenadeExplosionSystem>();
@@ -81,7 +82,7 @@ namespace Project.Features.CollisionHandler
             entity.Get<MineBlinkTimerDefault>().Value = world.GetRandomRange(GameConsts.Scene.Mines.BLINK_FREQUENCY_MIN, GameConsts.Scene.Mines.BLINK_FREQUENCY_MAX);
             entity.Get<MineDamage>().Value = world.GetRandomRange(GameConsts.Scene.Mines.DAMAGE_MIN, GameConsts.Scene.Mines.DAMAGE_MAX);
             entity.Get<MineBlinkTimer>().Value = entity.Get<MineBlinkTimerDefault>().Value;
-
+            entity.Get<VFXConfig>().Value = _explosionVFX;
             // entity.Get<TeamTag>().Value = 0;
             
             entity.Set(new CollisionDynamic());

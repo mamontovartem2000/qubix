@@ -46,10 +46,13 @@ namespace Project.Features.PostLogicTick.Systems
 			
 			ref readonly var damage = ref entity.Read<MineDamage>().Value;
 			collision.Set(new ApplyDamage {ApplyTo = player, ApplyFrom = from, Damage = damage}, ComponentLifetime.NotifyAllSystems);
-
-			_vfx.SpawnVFX(entity.Read<VFXConfig>().Value, entity.GetPosition());
+			var sound = new Entity("lomixBombSound");
+			sound.SetPosition(entity.GetPosition());
+			sound.Get<LifeTimeLeft>().Value = 3;
+			SoundUtils.PlaySound(sound, "event:/Explosions/Grenade");
 			SceneUtils.ModifyFree(entity.GetPosition(), true);
-			
+			_vfx.SpawnVFX(entity.Read<VFXConfig>().Value, entity.GetPosition());
+
 			entity.Destroy();
 		}
 	}

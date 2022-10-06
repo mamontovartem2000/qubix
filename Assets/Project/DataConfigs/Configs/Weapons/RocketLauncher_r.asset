@@ -23,6 +23,7 @@ MonoBehaviour:
   - id: 6
   - id: 7
   - id: 8
+  - id: 9
   removeStructComponents: []
   templates: []
   references:
@@ -60,8 +61,12 @@ MonoBehaviour:
     00000006:
       type: {class: AutomaticWeapon, ns: Project.Common.Components, asm: Project.Common}
     00000007:
-      type: {class: SingleBullet, ns: Project.Common.Components, asm: Project.Common}
+      type: {class: SoundPath, ns: Project.Common.Components, asm: Project.Common}
+      data:
+        Value: event:/Weapon/RocketLauncher
     00000008:
+      type: {class: SingleBullet, ns: Project.Common.Components, asm: Project.Common}
+    00000009:
       type: {class: VFXConfig, ns: Project.Common.Components, asm: Project.Common}
       data:
         Value: {fileID: 11400000, guid: 2b42cb1c117518f448450473603868b3, type: 2}

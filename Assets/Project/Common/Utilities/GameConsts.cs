@@ -32,7 +32,7 @@
             {
                 public const float ATTACK_SECONDS = 0.2f;
                 public const float MIN_LENGHT = 1f;
-                public const float RETURN_SPEED = -10f;
+                public const float RETURN_SPEED = -3.5f;
                 public const float SPEED = 20f;
                 public const float VISUAL_SPEED_RATIO = 1.4f;
             }
@@ -53,8 +53,8 @@
             public static class Mines
             {
                 public const int COUNT = 10;
-                public const int DAMAGE_MIN = 15;
-                public const int DAMAGE_MAX = 30;
+                public const int DAMAGE_MIN = 30;
+                public const int DAMAGE_MAX = 40;
                 public const float SPAWN_DELAY_DEFAULT = 3f;
                 public const float BLINK_TIME = 0.15f;
                 public const float BLINK_FREQUENCY_MIN = 3f;

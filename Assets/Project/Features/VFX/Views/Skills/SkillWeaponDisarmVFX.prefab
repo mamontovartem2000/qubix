@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 8178337652133300420}
   - component: {fileID: 8178337652133300423}
   - component: {fileID: 8178337652133300422}
+  - component: {fileID: 1226335982675149313}
   m_Layer: 0
   m_Name: SkilleaponDisarmVFX
   m_TagString: Untagged
@@ -4959,3 +4960,33 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 655346179468603498, guid: f0cf6e5bf88b63645ab95feea59a4600, type: 3}
   m_Mesh3: {fileID: -3472929253601119381, guid: 67230443ed7a9eb4b866d0abd1182da7, type: 3}
   m_MaskInteraction: 0
+--- !u!114 &1226335982675149313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8178337652133300417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -822188495
+      Data2: 1212959128
+      Data3: 197656978
+      Data4: 1828804951
+    Path: event:/Skills/Lomix/Disarm
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

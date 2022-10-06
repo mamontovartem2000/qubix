@@ -53,6 +53,10 @@ namespace Project.Features.Skills.Systems.Lomix {
             mine.Get<Owner>().Value = entity.Read<Owner>().Value;
             mine.Set(new Grenade());
             mine.SetPosition((Vector3)Vector3Int.RoundToInt(avatar.GetPosition()));
+            var sound = new Entity("lomixBombSound");
+            sound.SetPosition(mine.GetPosition());
+            sound.Get<LifeTimeLeft>().Value = 5;
+            SoundUtils.PlaySound(sound, "event:/Skills/Lomix/LomixBombPlant");
             var view = world.RegisterViewSource(mine.Read<ViewModel>().Value);
             mine.InstantiateView(view);
             entity.Get<Cooldown>().Value = entity.Read<CooldownDefault>().Value;

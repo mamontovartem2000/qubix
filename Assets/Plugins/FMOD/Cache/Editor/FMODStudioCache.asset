@@ -15,11 +15,38 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637943709299867366
+  lastModified: 638006725332172287
   FileSizes:
   - Name: Desktop
     Value: 1036
   Exists: 1
+--- !u!114 &-8538745312310915310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Weapon/RocketLauncher
+  m_EditorClassIdentifier: 
+  Path: event:/Weapon/RocketLauncher
+  Guid:
+    Data1: -1729923894
+    Data2: 1108790037
+    Data3: -413825908
+    Data4: -201301191
+  Banks:
+  - {fileID: -5910116475118719040}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 35
+  Length: 2200
 --- !u!114 &-8401349043197460659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +128,33 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 35
   Length: 2000
+--- !u!114 &-7262800267712077237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Bloodlov/SlownessStorm
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Bloodlov/SlownessStorm
+  Guid:
+    Data1: -857479393
+    Data2: 1083568917
+    Data3: -1363871616
+    Data4: -1431522167
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 800
 --- !u!114 &-6984848707784197707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,10 +305,10 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Weapons.bank
   Name: Weapons
   StudioPath: bank:/Weapons
-  lastModified: 637943709305645289
+  lastModified: 638006725335140394
   FileSizes:
   - Name: Desktop
-    Value: 491008
+    Value: 560032
   Exists: 1
 --- !u!114 &-5838694159782285996
 MonoBehaviour:
@@ -337,6 +391,60 @@ MonoBehaviour:
   MinDistance: 0.1
   MaxDistance: 400
   Length: 533211
+--- !u!114 &-4637935693041522122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Lomix/Disarm
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Lomix/Disarm
+  Guid:
+    Data1: -822188495
+    Data2: 1212959128
+    Data3: 197656978
+    Data4: 1828804951
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1202
+--- !u!114 &-4289684333950873084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Bloodlov/SkytheThrow
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Bloodlov/SkytheThrow
+  Guid:
+    Data1: 271613257
+    Data2: 1104494964
+    Data3: -554763853
+    Data4: -1586234946
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 20
+  Length: 1959
 --- !u!114 &-4283640211757682584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,10 +568,10 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Skills.bank
   Name: Skills
   StudioPath: bank:/Skills
-  lastModified: 637943709303654722
+  lastModified: 638006725334359291
   FileSizes:
   - Name: Desktop
-    Value: 521376
+    Value: 847104
   Exists: 1
 --- !u!114 &-3173792611366176143
 MonoBehaviour:
@@ -546,6 +654,33 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 45
   Length: 869
+--- !u!114 &-1745552930238401261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Bloodlov/SoftShield
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Bloodlov/SoftShield
+  Guid:
+    Data1: 510269182
+    Data2: 1271717187
+    Data3: -1861796969
+    Data4: 1552718117
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 25
+  Length: 3813
 --- !u!114 &-1634420315023878760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,7 +750,7 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Explosions.bank
   Name: Explosions
   StudioPath: bank:/Explosions
-  lastModified: 637943709299848792
+  lastModified: 638006725332152278
   FileSizes:
   - Name: Desktop
     Value: 154240
@@ -702,12 +837,20 @@ MonoBehaviour:
   - {fileID: 1338857551537242799}
   - {fileID: 5842403144454935347}
   - {fileID: -3147350764716031372}
+  - {fileID: -7262800267712077237}
+  - {fileID: -4289684333950873084}
+  - {fileID: 6799207074224433926}
+  - {fileID: -1745552930238401261}
+  - {fileID: -8538745312310915310}
+  - {fileID: 6089615288464171295}
+  - {fileID: -4637935693041522122}
+  - {fileID: 5222833960608278892}
   EditorParameters: []
   MasterBanks:
   - {fileID: -9002949484503957811}
   StringsBanks:
   - {fileID: 134729716896531229}
-  cacheTime: 637943709305645289
+  cacheTime: 638006725335140394
   cacheVersion: 131591
 --- !u!114 &134729716896531229
 MonoBehaviour:
@@ -724,10 +867,10 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637943709299877369
+  lastModified: 638006725332182292
   FileSizes:
   - Name: Desktop
-    Value: 2696
+    Value: 3092
   Exists: 1
 --- !u!114 &175175130361115837
 MonoBehaviour:
@@ -1014,11 +1157,38 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/VFX.bank
   Name: VFX
   StudioPath: bank:/VFX
-  lastModified: 637943709304427212
+  lastModified: 638006725334580897
   FileSizes:
   - Name: Desktop
     Value: 56032
   Exists: 1
+--- !u!114 &5222833960608278892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Lomix/LomixBombPlant
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Lomix/LomixBombPlant
+  Guid:
+    Data1: -1495633076
+    Data2: 1133916475
+    Data3: -69855872
+    Data4: -1326367454
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 30
+  Length: 4000
 --- !u!114 &5463809685493878781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,7 +1204,7 @@ MonoBehaviour:
   Path: FMODAssets/qubix/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637943709300777629
+  lastModified: 638006725332684644
   FileSizes:
   - Name: Desktop
     Value: 8275584
@@ -1093,6 +1263,33 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 35
   Length: 2000
+--- !u!114 &6089615288464171295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Lomix/MinePlant
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Lomix/MinePlant
+  Guid:
+    Data1: -2106778802
+    Data2: 1250828246
+    Data3: 1903791039
+    Data4: -1264283212
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 20
+  Length: 1200
 --- !u!114 &6713092056034151031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1120,3 +1317,30 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 35
   Length: 1497
+--- !u!114 &6799207074224433926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Bloodlov/CyberVampyr
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Bloodlov/CyberVampyr
+  Guid:
+    Data1: -1837628173
+    Data2: 1173046185
+    Data3: -1082208123
+    Data4: 1704520507
+  Banks:
+  - {fileID: -3696928525799396931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 10
+  Length: 522
